@@ -3,11 +3,3 @@
 
 # Ignore Gradle build output directory
 build
-
-gradlew
-gradlew.bat
-gradle
-
-# Project build files (we don't want them in the repo, aren't we?)
-bin
-build
