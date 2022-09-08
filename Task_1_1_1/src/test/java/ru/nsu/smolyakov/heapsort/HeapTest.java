@@ -3,16 +3,13 @@ package ru.nsu.smolyakov.heapsort;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-// import java.util.ArrayList;
 import java.util.Arrays;
-// import java.util.Collections;
-// import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 
 class HeapTest {
@@ -50,7 +47,7 @@ class HeapTest {
     }
 
     @Test
-    void nullInputTest () {
+    void nullInputTest() {
         assertThrows(NullPointerException.class, () -> Heap.sort(null));
     }
 }
