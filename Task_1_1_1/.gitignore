@@ -3,3 +3,8 @@
 
 # Ignore Gradle build output directory
 build
+
+#unignore
+!gradlew
+!gradlew.bat
+!gradle
