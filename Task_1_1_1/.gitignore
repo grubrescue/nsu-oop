@@ -8,5 +8,6 @@ gradlew
 gradlew.bat
 gradle
 
-lib/bin
-lib/build
+# Project build files (we don't want them in the repo, aren't we?)
+bin
+build
