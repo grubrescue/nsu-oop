@@ -14,7 +14,10 @@ class PrimitivesArray {
     }
 }
 
-
+/**
+ * A class containing binary heap structure undernearth.
+ * Main reason why it exists is an array sorting method.
+ */
 public class Heap {
     private int[] heap;
     private int size;
@@ -74,7 +77,6 @@ public class Heap {
      * @param  arr  an input array 
      * @return      reference to the source and, accordingly, resulting array.
      */
-
     public static int[] sort (int[] arr) {  
         Heap heap = new Heap(arr);
 
