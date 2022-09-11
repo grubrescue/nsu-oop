@@ -1,12 +1,31 @@
 package ru.nsu.smolyakov.heapsort;
 
 /**
- * A class containing binary heap structure undernearth.
- * Main reason why it exists is an array sorting method.
+ * A class containing binary heap structure.
+ * Nevertheless, only the heapsort-required methods are implemented. 
  */
 public class Heap {
     private int[] heap;
     private int size;
+
+    /**
+     * Methods belong to this class are implemented only for the internal use,
+     * so all checks are skipped.
+     * Input parameters are guaranteed to be correct.
+     */
+    private class PrimitivesArray {
+        private static void swap(int[] arr, int i, int j) {
+            final int tmp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = tmp;
+        }
+        
+        private static void reverse(int[] arr) {
+            for (int i = 0; i < arr.length/2; i++) {
+                swap(arr, i, arr.length-i-1);
+            }
+        }
+    }
 
     private void siftDown(int parent) {
         final int leftSon = 2*parent+1;
@@ -58,7 +77,6 @@ public class Heap {
      * Method overrides source data.
      * 
      * The method is implemented with the use of binary heap data structure.
-     * 
      * 
      * @param  arr  an input array 
      * @return      reference to the source and, accordingly, resulting array.
