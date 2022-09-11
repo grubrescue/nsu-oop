@@ -13,7 +13,7 @@ public class Heap {
      * so all checks are skipped.
      * Input parameters are guaranteed to be correct.
      */
-    private class PrimitivesArray {
+    private static class PrimitivesArray {
         private static void swap(int[] arr, int i, int j) {
             final int tmp = arr[i];
             arr[i] = arr[j];
