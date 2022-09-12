@@ -1,4 +1,4 @@
-package ru.nsu.smolyakov.heapsort;
+package ru.nsu.fit.smolyakov.heapsort;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

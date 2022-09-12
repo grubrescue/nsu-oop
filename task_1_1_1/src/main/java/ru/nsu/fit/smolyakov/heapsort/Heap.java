@@ -1,4 +1,4 @@
-package ru.nsu.smolyakov.heapsort;
+package ru.nsu.fit.smolyakov.heapsort;
 
 /**
  * A class containing a binary heap structure.
