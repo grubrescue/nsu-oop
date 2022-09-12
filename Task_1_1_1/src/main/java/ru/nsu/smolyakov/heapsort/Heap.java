@@ -1,14 +1,14 @@
 package ru.nsu.smolyakov.heapsort;
 
 /**
- * A class containing binary heap structure.
- * Nevertheless, only the heapsort-required methods are implemented. 
+ * A class containing a binary heap structure.
+ * Nevertheless, only heapsort-required methods are implemented. 
  */
 public class Heap {
     private int[] heap;
     private int size;
 
-    /**
+    /*
      * Methods belong to this class are implemented only for the internal use,
      * so all checks are skipped.
      * Input parameters are guaranteed to be correct.
@@ -54,7 +54,7 @@ public class Heap {
 
     Heap(int[] arr) throws NullPointerException {
         if (arr == null) {
-            throw new NullPointerException("Input array have to exist");
+            throw new NullPointerException("Input array has to exist");
         }
 
         heap = arr;

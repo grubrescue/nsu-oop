@@ -38,12 +38,12 @@ class HeapTest {
     @EmptySource
     @MethodSource("inputArrays")
     void validInputTests(int[] arr) {
-        var anime = arr.clone();
+        var arrCopy = arr.clone();
 
         Arrays.sort(arr);
-        Heap.sort(anime);
+        Heap.sort(arrCopy);
         
-        assertArrayEquals(arr, anime);
+        assertArrayEquals(arr, arrCopy);
     }
 
     @Test
