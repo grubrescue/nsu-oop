@@ -57,3 +57,5 @@ jobs:
         uses: nikitasavinov/checkstyle-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          checkstyle_config: '.github/google_checks.xml'
+          reporter: 'github-pr-check'
