@@ -5,7 +5,3 @@
 build
 bin
 
-#unignore
-!gradlew
-!gradlew.bat
-!gradle

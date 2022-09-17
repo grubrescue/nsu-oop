@@ -1,14 +1,15 @@
 package ru.nsu.fit.smolyakov.heapsort;
 
 /**
- * A class containing a binary heap structure.
- * Nevertheless, only heapsort-required methods are implemented. 
+ * Contains a binary heap structure.
+ * Nevertheless, only heapsort-required methods are implemented 
+ * and the only public method is sort.
  */
 public class Heap {
     private int[] heap;
     private int size;
 
-    /*
+    /**
      * Methods belong to this class are implemented only for the internal use,
      * so all checks are skipped.
      * Input parameters are guaranteed to be correct.
@@ -52,7 +53,7 @@ public class Heap {
     }
 
 
-    Heap(int[] arr) throws NullPointerException {
+    private Heap(int[] arr) throws NullPointerException {
         if (arr == null) {
             throw new NullPointerException("Input array has to exist");
         }
@@ -62,7 +63,7 @@ public class Heap {
         buildHeap();
     }
 
-    int extractMin() {
+    private int extractMin() {
         int rootValue = heap[0];
 
         size--;
@@ -75,14 +76,22 @@ public class Heap {
     /**
      * Arranges an array in a non-descending order.
      * Method overrides source data.
-     * 
-     * The method is implemented with the use of binary heap data structure.
+     * <p>
+     * Sorting is implemented with the use of binary heap data structure.
      * 
      * @param  arr  an input array 
-     * @return      reference to the source and, accordingly, resulting array.
+     * @return      reference to the source and, accordingly, resulting array
+     * 
+     * @throws NullPointerException  if input array is null
      */
-    public static int[] sort(int[] arr) {  
-        Heap heap = new Heap(arr);
+    public static int[] sort(int[] arr) throws NullPointerException {
+        Heap heap;
+
+        try {
+            heap = new Heap(arr);
+        } catch (NullPointerException e) {
+            throw e;
+        }
 
         for (int i = 0; i < arr.length; i++) {
             heap.extractMin();
