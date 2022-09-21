@@ -9,7 +9,7 @@ Use ``-b`` to build, ``-r`` to build and run, ``-d`` to generate Javadoc, ``-h``
 By default, all output can be found in mybuild/ folder
 
 ### SUSv2????????????????????
-Script uses basic sh shell, so it should run on anything that at least a little POSIX compatible.
+Script uses basic sh, so it should run on anything that at least a little POSIX compatible.
 
 ### Problems
-Functionality to specify command line arguments is not yet implemented :(
+Functionality to specify command line arguments with run task is not yet implemented :(
