@@ -5,3 +5,5 @@
 build
 bin
 
+# Ignore mybuild.sh output directory
+mybuild

@@ -53,9 +53,9 @@ public class Heap {
     }
 
 
-    private Heap(int[] arr) throws NullPointerException {
+    private Heap(int[] arr) throws IllegalArgumentException {
         if (arr == null) {
-            throw new NullPointerException("Input array has to exist");
+            throw new IllegalArgumentException("Input array has to exist");
         }
 
         heap = arr;
@@ -82,14 +82,14 @@ public class Heap {
      * @param  arr  an input array 
      * @return      reference to the source and, accordingly, resulting array
      * 
-     * @throws NullPointerException  if input array is null
+     * @throws IllegalArgumentException  if input array is null
      */
-    public static int[] sort(int[] arr) throws NullPointerException {
+    public static int[] sort(int[] arr) throws IllegalArgumentException {
         Heap heap;
 
         try {
             heap = new Heap(arr);
-        } catch (NullPointerException e) {
+        } catch (IllegalArgumentException e) {
             throw e;
         }
 

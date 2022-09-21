@@ -48,6 +48,6 @@ class HeapTest {
 
     @Test
     void nullInputTest() {
-        assertThrows(NullPointerException.class, () -> Heap.sort(null));
+        assertThrows(IllegalArgumentException.class, () -> Heap.sort(null));
     }
 }
