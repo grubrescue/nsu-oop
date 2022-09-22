@@ -136,8 +136,15 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>public class <span class="typeNameLabel">Stack&lt;T&gt;</span>
 extends java.lang.Object
 implements java.lang.Cloneable</pre>
-<div class="block">An implementation of a stack data structure.
- дописать потом</div>
+<div class="block">An automatically-resizable implementation of a stack data structure.
+ Supports all basic stack methods, and permits all objects.
+ peek() and pop() returns Optional, so null-values are treated
+ as Optional.empty().</div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><code>Optional</code>, 
+<code>Cloneable</code></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -256,7 +263,7 @@ implements java.lang.Cloneable</pre>
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#pushStack(ru.nsu.fit.smolyakov.stack.Stack)">pushStack</a></span>&#8203;(<a href="Stack.html" title="class in ru.nsu.fit.smolyakov.stack">Stack</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;&nbsp;anotherStack)</code></th>
 <td class="colLast">
-<div class="block">Appends all elements of anotherStack to the top.</div>
+<div class="block">Appends all elements of anotherStack to the head of a stack.</div>
 </td>
 </tr>
 </table>
@@ -352,7 +359,7 @@ implements java.lang.Cloneable</pre>
 <div class="block">Returns an amount of elements in a stack.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>an amount of elements in a stack</dd>
+<dd>the amount of elements in the stack</dd>
 </dl>
 </li>
 </ul>
@@ -366,7 +373,7 @@ implements java.lang.Cloneable</pre>
 <div class="block">Returns true if a stack is empty.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>true if a stack contains no elements</dd>
+<dd>true if the stack contains no elements</dd>
 </dl>
 </li>
 </ul>
@@ -379,10 +386,13 @@ implements java.lang.Cloneable</pre>
 <li class="blockList">
 <h4>push</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;push&#8203;(<a href="Stack.html" title="type parameter in Stack">T</a>&nbsp;elem)</pre>
-<div class="block">Appends a single element to the top of the stack.</div>
+<div class="block">Appends a single element to the top of the stack.
+ Null-values are treated as Optional.empty().</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>elem</code> - an element to push</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><code>Optional</code></dd>
 </dl>
 </li>
 </ul>
@@ -394,8 +404,9 @@ implements java.lang.Cloneable</pre>
 <h4>pushStack</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;pushStack&#8203;(<a href="Stack.html" title="class in ru.nsu.fit.smolyakov.stack">Stack</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;&nbsp;anotherStack)
                throws java.lang.IllegalArgumentException</pre>
-<div class="block">Appends all elements of anotherStack to the top.
- An order of elements keeps unchanged.</div>
+<div class="block">Appends all elements of anotherStack to the head of a stack.
+ The last element of a stack will be followed by
+ the first element of anotherStack.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>anotherStack</code> - a stack to push</dd>
@@ -415,7 +426,8 @@ implements java.lang.Cloneable</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>an Optional with a present value 
-          if the stack is non-empty, 
+          if the stack is non-empty
+          and the value is non-null, 
           otherwise an empty Optional</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><code>Optional</code></dd>
@@ -433,7 +445,8 @@ implements java.lang.Cloneable</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>an Optional with a present value 
-          if the stack is non-empty, 
+          if the stack is non-empty
+          and the value is non-null, 
           otherwise an empty Optional</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><code>Optional</code></dd>
