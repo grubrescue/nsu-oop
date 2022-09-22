@@ -146,9 +146,14 @@ public class Stack<T> implements Cloneable {
      * the method is applied to the whole stack.
      * 
      * @param  elemAmount  an amount of elements to extract
-     * @return             a stack composed of extracted elements
+     * @return  a stack composed of extracted elements
+     * @throws IllegalArgumentException  if elemAmount is negative 
      */
-    public Stack<T> popStack(int elemAmount) {
+    public Stack<T> popStack(int elemAmount) throws IllegalArgumentException {
+        if(elemAmount < 0) {
+            throw new IllegalArgumentException("You can't take negative amount of elements");
+        }
+
         elemAmount = Math.min(size, elemAmount);
 
         var selectedRangeArr = Arrays.copyOfRange(arr, size-elemAmount, size);
