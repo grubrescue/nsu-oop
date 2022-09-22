@@ -1,15 +1,22 @@
 package ru.nsu.fit.smolyakov.stack;
 
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
- * An implementation of a stack data structure.
- * дописать потом
+ * An automatically-resizable implementation of a stack data structure.
+ * Supports all basic stack methods, and permits all objects.
+ * peek() and pop() returns Optional, so null-values are treated
+ * as Optional.empty().
+ * 
+ * @see  Optional 
+ * @see  Cloneable
  */
 public class Stack<T> implements Cloneable {
     private class Parameters {
+        private Parameters() {}; // As all methods are static,
+                                 // we don't need a constructor
+
         final static int INITIAL_CAPACITY = 8;
         final static int RESIZE_FACTOR = 2;
     }
@@ -56,14 +63,14 @@ public class Stack<T> implements Cloneable {
             throw new IllegalArgumentException("Input array can't be null");
         }
 
-        this.arr = Arrays.copyOf(initialArr, initialArr.length);
-        this.size = arr.length;
+        this.arr = Arrays.copyOf(initialArr, initialArr.length * Parameters.RESIZE_FACTOR);
+        this.size = initialArr.length;
     }
     
     /**
      * Returns an amount of elements in a stack.
      * 
-     * @return  an amount of elements in a stack
+     * @return  the amount of elements in the stack
      */
     public int count() {
         return size;
@@ -72,7 +79,7 @@ public class Stack<T> implements Cloneable {
     /**
      * Returns true if a stack is empty.
      * 
-     * @return  true if a stack contains no elements
+     * @return  true if the stack contains no elements
      */
     public boolean isEmpty() {
         return size == 0;
@@ -80,8 +87,10 @@ public class Stack<T> implements Cloneable {
 
     /**
      * Appends a single element to the top of the stack.
+     * Null-values are treated as Optional.empty().
      * 
      * @param  elem  an element to push
+     * @see    Optional
      */
     public void push(T elem) {
         if (size >= arr.length) {
@@ -91,8 +100,9 @@ public class Stack<T> implements Cloneable {
     }     
 
     /**
-     * Appends all elements of anotherStack to the top.
-     * An order of elements keeps unchanged.
+     * Appends all elements of anotherStack to the head of a stack.
+     * The last element of a stack will be followed by
+     * the first element of anotherStack.
      * 
      * @param  anotherStack  a stack to push
      * @throws IllegalArgumentException  if anotherStack is null
@@ -111,13 +121,14 @@ public class Stack<T> implements Cloneable {
      * Returns a value of a top element of a stack.
      * 
      * @return  an Optional with a present value 
-     *          if the stack is non-empty, 
+     *          if the stack is non-empty
+     *          and the value is non-null, 
      *          otherwise an empty Optional
      * @see     Optional
      */
     public Optional<T> peek() {
         if (size > 0) {
-            return Optional.of(arr[size-1]);
+            return Optional.ofNullable(arr[size-1]);
         } else {
             return Optional.empty();
         }
@@ -127,13 +138,14 @@ public class Stack<T> implements Cloneable {
      * Extracts a top element out of a stack.
      * 
      * @return  an Optional with a present value 
-     *          if the stack is non-empty, 
+     *          if the stack is non-empty
+     *          and the value is non-null, 
      *          otherwise an empty Optional
      * @see     Optional
      */
     public Optional<T> pop() {
         if (size > 0) {
-            return Optional.of(arr[--size]);
+            return Optional.ofNullable(arr[--size]);
         } else {
             return Optional.empty(); 
         }
@@ -206,7 +218,6 @@ public class Stack<T> implements Cloneable {
      * Returns a deep copy of this Stack instance.
      * 
      * @return  a deep copy of a stack
-     * 
      * @see     Cloneable
      */
     public Stack<T> clone() {

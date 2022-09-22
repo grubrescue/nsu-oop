@@ -24,9 +24,6 @@ class TestLists {
             List.of(
                 "1", "4", "0", "5", "d"
             )
-            // List.of(
-            //     null, null, null
-            // )
         );
     }
 
@@ -38,7 +35,6 @@ class TestLists {
         stack.push("3");
         stack.push("1");
         stack.push("1");
-
 
         return Stream.of(stack);
         // return someUsualLists()
@@ -52,14 +48,21 @@ class TestLists {
 
 class StackConstructorsTest {
     @Test
-    void specifiedCapacityConstructorTest() {
-        new Stack<Object>(100500);
+    void nonSpecifiedCapacityConstructorTest() {
+        new Stack<Integer>();
     }
 
 
     @Test
-    void nonSpecifiedCapacityConstructorTest() {
-        new Stack<Integer>();
+    void specifiedCapacityConstructorTest() {
+        new Stack<Object>(100500);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = { Integer.MIN_VALUE, -1, 0})
+    void incorrectCapacityConstructorTest(int capacity) {
+        assertThatThrownBy(() -> new Stack<>(capacity))
+        .isInstanceOf(IllegalArgumentException.class);
     }
 
 
@@ -81,17 +84,18 @@ class StackConstructorsTest {
     }
 
 
-    @ParameterizedTest
-    @ValueSource(ints = { Integer.MIN_VALUE, -1, 0})
-    void incorrectCapacityConstructorTest(int capacity) {
-        assertThatThrownBy(() -> new Stack<>(capacity))
+    @Test
+    void fromNullConstructorTest() {
+        assertThatThrownBy(() -> new Stack<>(null))
         .isInstanceOf(IllegalArgumentException.class);
     }
 }
 
 
+
 class OverloadedMethodsTest {
     @ParameterizedTest
+
     @MethodSource("ru.nsu.fit.smolyakov.stack.TestLists#someUsualLists")
     void equalsTest(List<String> list) {
         var someStack = new Stack<String>();
@@ -101,6 +105,26 @@ class OverloadedMethodsTest {
         list.stream().forEachOrdered(anotherStack::push);
 
         assertThat(someStack).isEqualTo(anotherStack);
+    }
+
+    @Test
+    void equalsNullAndEmptyTest() {
+        var someStack = new Stack<String>();
+        assertThat(someStack).isNotEqualTo(null);
+
+        var anotherStack = new Stack<String>();
+        assertThat(someStack).isEqualTo(anotherStack);
+
+        someStack.push(null);
+        assertThat(someStack).isNotEqualTo(anotherStack);
+
+        anotherStack.push(null);
+        assertThat(someStack).isEqualTo(anotherStack);
+    }
+
+    @Test
+    void equalsDifferentClass() {
+        assertThat(new Stack<String>()).isNotEqualTo(new Object());
     }
 
 
@@ -119,6 +143,11 @@ class StackMethodsTest {
     @BeforeEach
     void newStack() {
         stack = new Stack<>();
+    }
+
+    @Test
+    void nafs() {
+        stack.push(null);
     }
 
     
@@ -141,6 +170,11 @@ class StackMethodsTest {
         }
     }
 
+    @Test
+    void pushPopNullTest() {
+        stack.push(null);
+        assertThat(stack.pop()).isEqualTo(Optional.empty());
+    }
 
     @Test
     void isEmptyTest() {
@@ -174,7 +208,6 @@ class StackMethodsTest {
     void pushStackTest(Stack<String> anotherStack) {
         stack.pushStack(anotherStack);
         assertThat(stack).isEqualTo(anotherStack);
-        //maybe not a good test
     }
 
     @Test
@@ -198,7 +231,10 @@ class StackMethodsTest {
 
         stack.popStack(100500);
         assertThat(stack.count()).isEqualTo(0);
-        
+    }
+
+    @Test
+    void incorrectPopStackTest() {
         assertThatThrownBy(() -> stack.popStack(-9000))
         .isInstanceOf(IllegalArgumentException.class);
     }
