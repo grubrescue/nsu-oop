@@ -1,6 +1,7 @@
 package ru.nsu.fit.smolyakov.stack;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * An implementation of a stack data structure.
@@ -23,10 +24,10 @@ public class Stack<T> implements Cloneable {
      * Constructs an empty stack with the spectified initial capacity.
      * 
      * @param  capacity  the initial capacity of the stack
-     * @throws IllegalArgumentException  if capacity is a negative number
+     * @throws IllegalArgumentException  if capacity is not a positive number
      */
     public Stack(int capacity) throws IllegalArgumentException {
-        if (capacity < 0) {
+        if (capacity <= 0) {
             throw new IllegalArgumentException("Capacity can't be a negative number");
         }
 
@@ -47,11 +48,11 @@ public class Stack<T> implements Cloneable {
      * 
      * @param  initialArr  an array whose elements are used 
      *                     to construct a stack
-     * @throws NullPointerException  if initialArr is null
+     * @throws IllegalArgumentException  if initialArr is null
      */
-    public Stack(T[] initialArr) throws NullPointerException {
+    public Stack(T[] initialArr) throws IllegalArgumentException {
         if (initialArr == null) {
-            throw new NullPointerException("Input array has to exist");
+            throw new IllegalArgumentException("Input array can't be null");
         }
 
         this.arr = Arrays.copyOf(arr, arr.length);
@@ -93,11 +94,11 @@ public class Stack<T> implements Cloneable {
      * An order of elements keeps unchanged.
      * 
      * @param  anotherStack  a stack to push
-     * @throws NullPointerException  if anotherStack is null
+     * @throws IllegalArgumentException  if anotherStack is null
      */
-    public void pushStack(Stack<T> anotherStack) throws NullPointerException {
+    public void pushStack(Stack<T> anotherStack) throws IllegalArgumentException {
         if (anotherStack == null) {
-            throw new NullPointerException("anotherStack at least should be a stack");
+            throw new IllegalArgumentException("Stack can't be null");
         }
 
         for (T elem : anotherStack.arr) {
@@ -108,26 +109,32 @@ public class Stack<T> implements Cloneable {
     /**
      * Returns a value of a top element of a stack.
      * 
-     * @return  a value of a head of a stack
+     * @return  an Optional with a present value 
+     *          if the stack is non-empty, 
+     *          otherwise an empty Optional
+     * @see     Optional
      */
-    public T peek() {
+    public Optional<T> peek() {
         if (size > 0) {
-            return arr[size-1];
+            return Optional.of(arr[size-1]);
         } else {
-            return null;
+            return Optional.empty();
         }
     }
 
     /**
-     * Extracts a top element of a stack.
+     * Extracts a top element out of a stack.
      * 
-     * @return  the top element of the stack
+     * @return  an Optional with a present value 
+     *          if the stack is non-empty, 
+     *          otherwise an empty Optional
+     * @see     Optional
      */
-    public T pop() {
+    public Optional<T> pop() {
         if (size > 0) {
-            return arr[--size];
+            return Optional.of(arr[--size]);
         } else {
-            return null; //maybe exception/optional?
+            return Optional.empty(); 
         }
     }
 
@@ -190,12 +197,13 @@ public class Stack<T> implements Cloneable {
     /**
      * {@inheritDoc}
      * Returns a deep copy of this Stack instance.
+     * 
      * @return  a deep copy of a stack
      * 
-     * @see  Cloneable
+     * @see     Cloneable
      */
     public Object clone() {
-        var cloned = new Stack<T>(this.size);
+        var cloned = new Stack<T>(Math.max(this.size, Parameters.INITIAL_CAPACITY));
         System.arraycopy(this.arr, 0, cloned.arr, 0, this.size);
         cloned.size = this.size;
 
