@@ -207,7 +207,7 @@ public class Stack<T> implements Cloneable {
      * 
      * @see     Cloneable
      */
-    public Object clone() {
+    public Stack<T> clone() {
         var cloned = new Stack<T>(Math.max(this.size, Parameters.INITIAL_CAPACITY));
         System.arraycopy(this.arr, 0, cloned.arr, 0, this.size);
         cloned.size = this.size;

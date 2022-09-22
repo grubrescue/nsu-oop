@@ -29,9 +29,17 @@ class TestLists {
 
 
     static Stream<Stack<String>> someUsualStacks() {
-        return someUsualLists()
-            .map(List::toArray)
-            .map((arr) -> new Stack<String>((String[]) arr));
+        var stack = new Stack<String>();
+        stack.push("1");
+        stack.push("1");
+        stack.push("1");
+        stack.push("1");
+
+
+        return Stream.of(stack);
+        // return someUsualLists()
+        //     .map(List::toArray)
+        //     .map((arr) -> new Stack<String>((String[]) arr));
     }
 
     static String lonelyString = "haha steak is not empty haha";
@@ -89,7 +97,7 @@ class OverloadedMethodsTest {
     @ParameterizedTest
     @MethodSource("ru.nsu.fit.smolyakov.stack.TestLists#someUsualStacks")
     void cloneTest(Stack<String> someStack) {
-        var clonedStack = someStack.clone();
+        Stack<String> clonedStack = someStack.clone();
         assertThat(someStack).isEqualTo(clonedStack);
     }
 }
@@ -116,11 +124,11 @@ class StackMethodsTest {
             assertThat(stack.count()).isEqualTo(i+1);
         }
 
-        for (int i = list.size(); i > 0; --i) {
+        for (int i = list.size() - 1; i >= 0; i--) {
             var elem = list.get(i);
 
             assertThat(stack.pop().get()).isEqualTo(elem);
-            assertThat(stack.count()).isEqualTo(i+1);
+            assertThat(stack.count()).isEqualTo(i);
         }
     }
 
@@ -182,9 +190,4 @@ class StackMethodsTest {
         assertThatThrownBy(() -> stack.popStack(-9000))
         .isInstanceOf(IllegalArgumentException.class);
     }
-
-
-
-
-
 }
