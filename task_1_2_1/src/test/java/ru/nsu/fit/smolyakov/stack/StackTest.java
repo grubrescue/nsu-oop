@@ -24,6 +24,9 @@ class TestLists {
             List.of(
                 "1", "4", "0", "5", "d"
             )
+            // List.of(
+            //     null, null, null
+            // )
         );
     }
 
@@ -31,7 +34,8 @@ class TestLists {
     static Stream<Stack<String>> someUsualStacks() {
         var stack = new Stack<String>();
         stack.push("1");
-        stack.push("1");
+        stack.push("2");
+        stack.push("3");
         stack.push("1");
         stack.push("1");
 
@@ -62,8 +66,14 @@ class StackConstructorsTest {
     @ParameterizedTest
     @MethodSource("ru.nsu.fit.smolyakov.stack.TestLists#someUsualLists")
     void fromArrayConstructorTest(List<String> list) {
+        //(String[]) list.toArray()
+        var arr = new String[list.size()]; 
+        for (int i = 0; i < list.size(); i++) {
+            arr[i] = list.get(i);
+        }
+
         var stackToPush = new Stack<>();
-        var stackFromArray = new Stack<>((String[]) list.toArray());
+        var stackFromArray = new Stack<String>(arr);
 
         list.stream().forEachOrdered(stackToPush::push);
         assertThat(stackFromArray).isEqualTo(stackToPush);
@@ -104,8 +114,7 @@ class OverloadedMethodsTest {
 
 
 class StackMethodsTest {
-    Stack<String> stack;
-    
+    Stack<String> stack;    
 
     @BeforeEach
     void newStack() {
@@ -164,11 +173,14 @@ class StackMethodsTest {
     @MethodSource("ru.nsu.fit.smolyakov.stack.TestLists#someUsualStacks")
     void pushStackTest(Stack<String> anotherStack) {
         stack.pushStack(anotherStack);
-        stack.pushStack(anotherStack);
-
-        anotherStack.pushStack(anotherStack);
-
         assertThat(stack).isEqualTo(anotherStack);
+        //maybe not a good test
+    }
+
+    @Test
+    void pushStackNullArgTest() {
+        assertThatThrownBy(() -> stack.pushStack(null))
+        .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest

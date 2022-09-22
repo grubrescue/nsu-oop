@@ -1,6 +1,7 @@
 package ru.nsu.fit.smolyakov.stack;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -55,7 +56,7 @@ public class Stack<T> implements Cloneable {
             throw new IllegalArgumentException("Input array can't be null");
         }
 
-        this.arr = Arrays.copyOf(arr, arr.length);
+        this.arr = Arrays.copyOf(initialArr, initialArr.length);
         this.size = arr.length;
     }
     
@@ -101,8 +102,8 @@ public class Stack<T> implements Cloneable {
             throw new IllegalArgumentException("Stack can't be null");
         }
 
-        for (T elem : anotherStack.arr) {
-            push(elem);
+        for (int i = 0; i < anotherStack.size; i++) {
+            push(anotherStack.arr[i]);
         }
     }
     
@@ -150,8 +151,10 @@ public class Stack<T> implements Cloneable {
      * @throws IllegalArgumentException  if elemAmount is negative 
      */
     public Stack<T> popStack(int elemAmount) throws IllegalArgumentException {
-        if(elemAmount < 0) {
+        if (elemAmount < 0) {
             throw new IllegalArgumentException("You can't take negative amount of elements");
+        } else if (elemAmount == 0) {
+            return this.clone();
         }
 
         elemAmount = Math.min(size, elemAmount);
@@ -161,7 +164,6 @@ public class Stack<T> implements Cloneable {
 
         return new Stack<T>(selectedRangeArr);
     }
-
 
     /**
      * {@inheritDoc}
