@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.fit.smolyakov.heapsort","l":"Heap"},{"p":"ru.nsu.fit.smolyakov.heapsort","l":"Main"}]
