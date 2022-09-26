@@ -136,7 +136,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>public class <span class="typeNameLabel">Stack&lt;T&gt;</span>
 extends java.lang.Object
 implements java.lang.Cloneable</pre>
-<div class="block">An automatically-resizable implementation of a stack data structure.
+<div class="block">An automatically-resizable implementation of a stack (LIFO) data structure.
  Supports all basic stack methods, and permits all objects.
  peek() and pop() returns Optional, so null-values are treated
  as Optional.empty().</div>
@@ -209,13 +209,6 @@ implements java.lang.Cloneable</pre>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>int</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#count()">count</a></span>()</code></th>
-<td class="colLast">
-<div class="block">Returns an amount of elements in a stack.</div>
-</td>
-</tr>
-<tr id="i2" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(java.lang.Object&nbsp;obj)</code></th>
 <td class="colLast">
@@ -223,28 +216,28 @@ implements java.lang.Cloneable</pre>
  Compares the specified object with this stack for equality.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isEmpty()">isEmpty</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns true if a stack is empty.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#peek()">peek</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns a value of a top element of a stack.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#pop()">pop</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Extracts a top element out of a stack.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="Stack.html" title="class in ru.nsu.fit.smolyakov.stack">Stack</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#popStack(int)">popStack</a></span>&#8203;(int&nbsp;elemAmount)</code></th>
 <td class="colLast">
@@ -252,18 +245,25 @@ implements java.lang.Cloneable</pre>
  returns a stack consisting of them.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#push(T)">push</a></span>&#8203;(<a href="Stack.html" title="type parameter in Stack">T</a>&nbsp;elem)</code></th>
 <td class="colLast">
 <div class="block">Appends a single element to the top of the stack.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#pushStack(ru.nsu.fit.smolyakov.stack.Stack)">pushStack</a></span>&#8203;(<a href="Stack.html" title="class in ru.nsu.fit.smolyakov.stack">Stack</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;&nbsp;anotherStack)</code></th>
 <td class="colLast">
 <div class="block">Appends all elements of anotherStack to the head of a stack.</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#size()">size</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns an amount of elements in a stack.</div>
 </td>
 </tr>
 </table>
@@ -349,13 +349,13 @@ implements java.lang.Cloneable</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="count()">
+<a id="size()">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>count</h4>
-<pre class="methodSignature">public&nbsp;int&nbsp;count()</pre>
+<h4>size</h4>
+<pre class="methodSignature">public&nbsp;int&nbsp;size()</pre>
 <div class="block">Returns an amount of elements in a stack.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -462,10 +462,11 @@ implements java.lang.Cloneable</pre>
 <pre class="methodSignature">public&nbsp;<a href="Stack.html" title="class in ru.nsu.fit.smolyakov.stack">Stack</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;&nbsp;popStack&#8203;(int&nbsp;elemAmount)
                   throws java.lang.IllegalArgumentException</pre>
 <div class="block">Extracts elemAmount top elements from a stack and 
- returns a stack consisting of them.
+ returns a stack consisting of them. The order of
+ elements is preserved.
  <p>
  If the size of the stack is less than elemAmount, 
- the method is applied to the whole stack.</div>
+ the method is applied to <a href="#size()"><code>size()</code></a> elements.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>elemAmount</code> - an amount of elements to extract</dd>
