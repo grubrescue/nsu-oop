@@ -29,17 +29,9 @@ class TestLists {
 
 
     static Stream<Stack<String>> someUsualStacks() {
-        var stack = new Stack<String>();
-        stack.push("1");
-        stack.push("2");
-        stack.push("3");
-        stack.push("1");
-        stack.push("1");
-
-        return Stream.of(stack);
-        // return someUsualLists()
-        //     .map(List::toArray)
-        //     .map((arr) -> new Stack<String>((String[]) arr));
+        return someUsualLists()
+            .map((list) -> list.toArray(new String[list.size()]))
+            .map((arr) -> new Stack<String>(arr));
     }
 
     static String lonelyString = "haha steak is not empty haha";
@@ -59,7 +51,7 @@ class StackConstructorsTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = { Integer.MIN_VALUE, -1, 0})
+    @ValueSource(ints = { Integer.MIN_VALUE, -1, 0 })
     void incorrectCapacityConstructorTest(int capacity) {
         assertThatThrownBy(() -> new Stack<>(capacity))
         .isInstanceOf(IllegalArgumentException.class);
@@ -69,11 +61,7 @@ class StackConstructorsTest {
     @ParameterizedTest
     @MethodSource("ru.nsu.fit.smolyakov.stack.TestLists#someUsualLists")
     void fromArrayConstructorTest(List<String> list) {
-        //(String[]) list.toArray()
-        var arr = new String[list.size()]; 
-        for (int i = 0; i < list.size(); i++) {
-            arr[i] = list.get(i);
-        }
+        var arr = (String[]) list.toArray(new String[list.size()]);
 
         var stackToPush = new Stack<>();
         var stackFromArray = new Stack<String>(arr);
@@ -105,6 +93,17 @@ class OverloadedMethodsTest {
         list.stream().forEachOrdered(anotherStack::push);
 
         assertThat(someStack).isEqualTo(anotherStack);
+
+
+        someStack.pop();
+        someStack.push("value that anotherStack doesn't contain");
+        assertThat(someStack).isNotEqualTo(anotherStack);
+
+        someStack.pop(); // different size
+        assertThat(someStack).isNotEqualTo(anotherStack);
+
+        someStack.push(null);
+        assertThat(someStack).isNotEqualTo(anotherStack);
     }
 
     @Test
@@ -127,6 +126,12 @@ class OverloadedMethodsTest {
         assertThat(new Stack<String>()).isNotEqualTo(new Object());
     }
 
+    @Test 
+    void equalsTheSameObject() {
+        var stack = new Stack<Object>();
+        assertThat(stack).isEqualTo(stack);
+    }
+
 
     @ParameterizedTest
     @MethodSource("ru.nsu.fit.smolyakov.stack.TestLists#someUsualStacks")
@@ -144,35 +149,31 @@ class StackMethodsTest {
     void newStack() {
         stack = new Stack<>();
     }
-
-    @Test
-    void nafs() {
-        stack.push(null);
-    }
-
     
     @ParameterizedTest
     @MethodSource("ru.nsu.fit.smolyakov.stack.TestLists#someUsualLists")
-    void pushPeekCountPopUsualTest(List<String> list) {
+    void pushPeeksizePopUsualTest(List<String> list) {
         for (int i = 0; i < list.size(); i++) {
             var elem = list.get(i);
 
             stack.push(elem);
             assertThat(stack.peek().get()).isEqualTo(elem);
-            assertThat(stack.count()).isEqualTo(i+1);
+            assertThat(stack.size()).isEqualTo(i+1);
         }
 
         for (int i = list.size() - 1; i >= 0; i--) {
             var elem = list.get(i);
 
             assertThat(stack.pop().get()).isEqualTo(elem);
-            assertThat(stack.count()).isEqualTo(i);
+            assertThat(stack.size()).isEqualTo(i);
         }
     }
 
     @Test
-    void pushPopNullTest() {
+    void pushPeekPopNullTest() {
         stack.push(null);
+        assertThat(stack.peek()).isEqualTo(Optional.empty());
+        assertThat(stack.pop()).isEqualTo(Optional.empty());
         assertThat(stack.pop()).isEqualTo(Optional.empty());
     }
 
@@ -230,7 +231,7 @@ class StackMethodsTest {
         assertThat(stack).isEqualTo(anotherStack);
 
         stack.popStack(100500);
-        assertThat(stack.count()).isEqualTo(0);
+        assertThat(stack.size()).isEqualTo(0);
     }
 
     @Test

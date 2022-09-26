@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * An automatically-resizable implementation of a stack data structure.
+ * An automatically-resizable implementation of a stack (LIFO) data structure.
  * Supports all basic stack methods, and permits all objects.
  * peek() and pop() returns Optional, so null-values are treated
  * as Optional.empty().
@@ -14,14 +14,14 @@ import java.util.Optional;
  */
 public class Stack<T> implements Cloneable {
     private class Parameters {
-        private Parameters() {}; // As all methods are static,
+        private Parameters() {}; // As all fields are static constants,
                                  // we don't need a constructor
 
-        final static int INITIAL_CAPACITY = 8;
-        final static int RESIZE_FACTOR = 2;
+        private final static int INITIAL_CAPACITY = 8;
+        private final static int RESIZE_FACTOR = 2;
     }
 
-    private T[] arr;
+    private T[] arr; 
     private int size = 0;
 
     private void resize() {
@@ -72,7 +72,7 @@ public class Stack<T> implements Cloneable {
      * 
      * @return  the amount of elements in the stack
      */
-    public int count() {
+    public int size() {
         return size;
     }
 
@@ -153,10 +153,11 @@ public class Stack<T> implements Cloneable {
 
     /**
      * Extracts elemAmount top elements from a stack and 
-     * returns a stack consisting of them.
+     * returns a stack consisting of them. The order of
+     * elements is preserved.
      * <p>
      * If the size of the stack is less than elemAmount, 
-     * the method is applied to the whole stack.
+     * the method is applied to {@link #size()} elements.
      * 
      * @param  elemAmount  an amount of elements to extract
      * @return  a stack composed of extracted elements
