@@ -13,8 +13,8 @@ import java.util.Optional;
  * @see  Cloneable
  */
 public class Stack<T> implements Cloneable {
-    private final static int INITIAL_CAPACITY = 8;
-    private final static int RESIZE_FACTOR = 2;
+    private static final int INITIAL_CAPACITY = 8;
+    private static final int RESIZE_FACTOR = 2;
 
     private T[] arr; 
     private int size = 0;
@@ -139,7 +139,7 @@ public class Stack<T> implements Cloneable {
      */
     public Optional<T> peek() {
         if (size > 0) {
-            return Optional.ofNullable(arr[size-1]);
+            return Optional.ofNullable(arr[size - 1]);
         } else {
             return Optional.empty();
         }
@@ -166,8 +166,8 @@ public class Stack<T> implements Cloneable {
      * Extracts elemAmount top elements from a stack and 
      * returns a stack consisting of them. The order of
      * elements is preserved.
-     * <p>
-     * If the size of the stack is less than elemAmount, 
+     * 
+     * <p>If the size of the stack is less than elemAmount, 
      * the method is applied to {@link #size()} elements.
      * 
      * @param  elemAmount  an amount of elements to extract
@@ -183,8 +183,8 @@ public class Stack<T> implements Cloneable {
 
         elemAmount = Math.min(size, elemAmount);
 
-        var selectedRangeArr = Arrays.copyOfRange(arr, size-elemAmount, size);
-        Arrays.fill(arr, size-elemAmount, size, null);
+        var selectedRangeArr = Arrays.copyOfRange(arr, size - elemAmount, size);
+        Arrays.fill(arr, size - elemAmount, size, null);
         size -= elemAmount; 
 
         return new Stack<T>(selectedRangeArr);
@@ -215,8 +215,8 @@ public class Stack<T> implements Cloneable {
             }
 
             for (int i = 0; i < stack.size; i++) {
-                if (!(this.arr[i] == null && stack.arr[i] == null) &&
-                    !(this.arr[i] != null && this.arr[i].equals(stack.arr[i]))) {
+                if (!(this.arr[i] == null && stack.arr[i] == null) 
+                    && !(this.arr[i] != null && this.arr[i].equals(stack.arr[i]))) {
                     return false;
                 }
             }
