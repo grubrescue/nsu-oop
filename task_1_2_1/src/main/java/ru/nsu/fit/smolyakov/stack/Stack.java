@@ -13,19 +13,14 @@ import java.util.Optional;
  * @see  Cloneable
  */
 public class Stack<T> implements Cloneable {
-    private class Parameters {
-        private Parameters() {}; // As all fields are static constants,
-                                 // we don't need a constructor
-
-        private final static int INITIAL_CAPACITY = 8;
-        private final static int RESIZE_FACTOR = 2;
-    }
+    private final static int INITIAL_CAPACITY = 8;
+    private final static int RESIZE_FACTOR = 2;
 
     private T[] arr; 
     private int size = 0;
 
     private void resize() {
-        arr = Arrays.copyOf(arr, arr.length * Parameters.RESIZE_FACTOR);
+        ensureCapacity(arr.length * RESIZE_FACTOR);
     }
 
     /**
@@ -34,6 +29,7 @@ public class Stack<T> implements Cloneable {
      * @param  capacity  the initial capacity of the stack
      * @throws IllegalArgumentException  if capacity is not a positive number
      */
+    @SuppressWarnings("unchecked")
     public Stack(int capacity) throws IllegalArgumentException {
         if (capacity <= 0) {
             throw new IllegalArgumentException("Capacity can't be a negative number");
@@ -46,7 +42,7 @@ public class Stack<T> implements Cloneable {
      * Constructs an empty stack with the initial capacity of 8.
      */
     public Stack() {
-        this(Parameters.INITIAL_CAPACITY);
+        this(INITIAL_CAPACITY);
     }
 
     /**
@@ -63,8 +59,21 @@ public class Stack<T> implements Cloneable {
             throw new IllegalArgumentException("Input array can't be null");
         }
 
-        this.arr = Arrays.copyOf(initialArr, initialArr.length * Parameters.RESIZE_FACTOR);
+        this.arr = Arrays.copyOf(initialArr, initialArr.length * RESIZE_FACTOR);
         this.size = initialArr.length;
+    }
+
+    /**
+     * Increases the capacity of this {@code Stack} instance, 
+     * if necessary, to ensure that it can hold at least the number 
+     * of elements specified by the minimum capacity argument.
+     * 
+     * @param  capacity  the desired minimum capacity
+     */
+    public void ensureCapacity(int capacity) {
+        if (arr.length < capacity) {
+            arr = Arrays.copyOf(arr, capacity);
+        }
     }
     
     /**
@@ -102,7 +111,9 @@ public class Stack<T> implements Cloneable {
     /**
      * Appends all elements of anotherStack to the head of a stack.
      * The last element of a stack will be followed by
-     * the first element of anotherStack.
+     * the first element of {@code anotherStack}.
+     * 
+     * <p>{@code anotherStack} doesn't changed!
      * 
      * @param  anotherStack  a stack to push
      * @throws IllegalArgumentException  if anotherStack is null
@@ -112,9 +123,9 @@ public class Stack<T> implements Cloneable {
             throw new IllegalArgumentException("Stack can't be null");
         }
 
-        for (int i = 0; i < anotherStack.size; i++) {
-            push(anotherStack.arr[i]);
-        }
+        ensureCapacity(this.size + anotherStack.size);
+        System.arraycopy(anotherStack.arr, 0, this.arr, this.size, anotherStack.size);
+        this.size += anotherStack.size;
     }
     
     /**
@@ -173,13 +184,13 @@ public class Stack<T> implements Cloneable {
         elemAmount = Math.min(size, elemAmount);
 
         var selectedRangeArr = Arrays.copyOfRange(arr, size-elemAmount, size);
+        Arrays.fill(arr, size-elemAmount, size, null);
         size -= elemAmount; 
 
         return new Stack<T>(selectedRangeArr);
     }
 
     /**
-     * {@inheritDoc}
      * Compares the specified object with this stack for equality. 
      * Returns true if and only if the specified object is also a stack, 
      * both stacks have the same size, and all corresponding pairs 
@@ -215,14 +226,13 @@ public class Stack<T> implements Cloneable {
     }
     
     /**
-     * {@inheritDoc}
      * Returns a deep copy of this Stack instance.
      * 
      * @return  a deep copy of a stack
      * @see     Cloneable
      */
     public Stack<T> clone() {
-        var cloned = new Stack<T>(Math.max(this.size, Parameters.INITIAL_CAPACITY));
+        var cloned = new Stack<T>(Math.max(this.size, INITIAL_CAPACITY));
         System.arraycopy(this.arr, 0, cloned.arr, 0, this.size);
         cloned.size = this.size;
 
