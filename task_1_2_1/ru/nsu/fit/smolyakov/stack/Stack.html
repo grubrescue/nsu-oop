@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -204,40 +204,47 @@ implements java.lang.Cloneable</pre>
 <td class="colFirst"><code><a href="Stack.html" title="class in ru.nsu.fit.smolyakov.stack">Stack</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#clone()">clone</a></span>()</code></th>
 <td class="colLast">
-<div class="block">
- Returns a deep copy of this Stack instance.</div>
+<div class="block">Returns a deep copy of this Stack instance.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(java.lang.Object&nbsp;obj)</code></th>
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#ensureCapacity(int)">ensureCapacity</a></span>&#8203;(int&nbsp;capacity)</code></th>
 <td class="colLast">
-<div class="block">
- Compares the specified object with this stack for equality.</div>
+<div class="block">Increases the capacity of this <code>Stack</code> instance, 
+ if necessary, to ensure that it can hold at least the number 
+ of elements specified by the minimum capacity argument.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(java.lang.Object&nbsp;obj)</code></th>
+<td class="colLast">
+<div class="block">Compares the specified object with this stack for equality.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isEmpty()">isEmpty</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns true if a stack is empty.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#peek()">peek</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns a value of a top element of a stack.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#pop()">pop</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Extracts a top element out of a stack.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="Stack.html" title="class in ru.nsu.fit.smolyakov.stack">Stack</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#popStack(int)">popStack</a></span>&#8203;(int&nbsp;elemAmount)</code></th>
 <td class="colLast">
@@ -245,21 +252,21 @@ implements java.lang.Cloneable</pre>
  returns a stack consisting of them.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#push(T)">push</a></span>&#8203;(<a href="Stack.html" title="type parameter in Stack">T</a>&nbsp;elem)</code></th>
 <td class="colLast">
 <div class="block">Appends a single element to the top of the stack.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#pushStack(ru.nsu.fit.smolyakov.stack.Stack)">pushStack</a></span>&#8203;(<a href="Stack.html" title="class in ru.nsu.fit.smolyakov.stack">Stack</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;&nbsp;anotherStack)</code></th>
 <td class="colLast">
 <div class="block">Appends all elements of anotherStack to the head of a stack.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#size()">size</a></span>()</code></th>
 <td class="colLast">
@@ -349,6 +356,22 @@ implements java.lang.Cloneable</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a id="ensureCapacity(int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ensureCapacity</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;ensureCapacity&#8203;(int&nbsp;capacity)</pre>
+<div class="block">Increases the capacity of this <code>Stack</code> instance, 
+ if necessary, to ensure that it can hold at least the number 
+ of elements specified by the minimum capacity argument.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>capacity</code> - the desired minimum capacity</dd>
+</dl>
+</li>
+</ul>
 <a id="size()">
 <!--   -->
 </a>
@@ -406,7 +429,9 @@ implements java.lang.Cloneable</pre>
                throws java.lang.IllegalArgumentException</pre>
 <div class="block">Appends all elements of anotherStack to the head of a stack.
  The last element of a stack will be followed by
- the first element of anotherStack.</div>
+ the first element of <code>anotherStack</code>.
+ 
+ <p><code>anotherStack</code> doesn't changed!</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>anotherStack</code> - a stack to push</dd>
@@ -484,8 +509,7 @@ implements java.lang.Cloneable</pre>
 <li class="blockList">
 <h4>equals</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;equals&#8203;(java.lang.Object&nbsp;obj)</pre>
-<div class="block">
- Compares the specified object with this stack for equality. 
+<div class="block">Compares the specified object with this stack for equality. 
  Returns true if and only if the specified object is also a stack, 
  both stacks have the same size, and all corresponding pairs 
  of elements in the two lists are equal. 
@@ -508,8 +532,7 @@ implements java.lang.Cloneable</pre>
 <li class="blockList">
 <h4>clone</h4>
 <pre class="methodSignature">public&nbsp;<a href="Stack.html" title="class in ru.nsu.fit.smolyakov.stack">Stack</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;&nbsp;clone()</pre>
-<div class="block">
- Returns a deep copy of this Stack instance.</div>
+<div class="block">Returns a deep copy of this Stack instance.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>clone</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
