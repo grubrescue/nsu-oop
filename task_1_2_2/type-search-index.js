@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.fit.smolyakov.tree","l":"DFSIterator"},{"p":"ru.nsu.fit.smolyakov.tree","l":"Node"},{"p":"ru.nsu.fit.smolyakov.tree","l":"Tree"}]
