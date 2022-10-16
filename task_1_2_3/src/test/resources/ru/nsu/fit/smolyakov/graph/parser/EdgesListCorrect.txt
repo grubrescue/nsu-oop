@@ -1,0 +1,9 @@
+a b c d !nil
+
+# Commentary starts with #
+a -> b : 1
+b -> c : 5
+c -> a : 2
+c -> d : 4
+d -> c : 4
+d -> b : 0
