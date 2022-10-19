@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -242,20 +242,28 @@ implements java.util.Collection&lt;T&gt;</pre>
 </td>
 </tr>
 <tr id="i4" class="altColor">
+<td class="colFirst"><code>java.util.Iterator&lt;<a href="Tree.html" title="type parameter in Tree">T</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#bfsIterator()">bfsIterator</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns an iterator over the elements of 
+ this tree in breadth-first search order.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#clear()">clear</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Removes all nodes, except for auxiliary root node.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#contains(java.lang.Object)">contains</a></span>&#8203;(java.lang.Object&nbsp;obj)</code></th>
 <td class="colLast">
 <div class="block">Checks if <code>obj</code> is present in this tree.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#containsAll(java.util.Collection)">containsAll</a></span>&#8203;(java.util.Collection&lt;?&gt;&nbsp;collection)</code></th>
 <td class="colLast">
@@ -263,14 +271,22 @@ implements java.util.Collection&lt;T&gt;</pre>
  is present in this tree.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>java.util.Iterator&lt;<a href="Tree.html" title="type parameter in Tree">T</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#dfsIterator()">dfsIterator</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns an iterator over the elements of 
+ this tree in depth-first search order.</div>
+</td>
+</tr>
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(java.lang.Object&nbsp;obj)</code></th>
 <td class="colLast">
 <div class="block">Compares the specified object with this tree for equality.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hashCode()">hashCode</a></span>()</code></th>
 <td class="colLast">
@@ -278,29 +294,29 @@ implements java.util.Collection&lt;T&gt;</pre>
  this tree.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isEmpty()">isEmpty</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Checks if this tree has only empty root node.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>java.util.Iterator&lt;<a href="Tree.html" title="type parameter in Tree">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#iterator()">iterator</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns an iterator over the elements of 
- this tree in depth-first search order.</div>
+ this tree in breadth-first search order.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#remove(java.lang.Object)">remove</a></span>&#8203;(java.lang.Object&nbsp;obj)</code></th>
 <td class="colLast">
 <div class="block">Removes all elements of this tree equal to <code>obj</code>.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeAll(java.util.Collection)">removeAll</a></span>&#8203;(java.util.Collection&lt;?&gt;&nbsp;collection)</code></th>
 <td class="colLast">
@@ -308,7 +324,7 @@ implements java.util.Collection&lt;T&gt;</pre>
  elements contained in the specified <code>collection</code>.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#retainAll(java.util.Collection)">retainAll</a></span>&#8203;(java.util.Collection&lt;?&gt;&nbsp;collection)</code></th>
 <td class="colLast">
@@ -316,14 +332,14 @@ implements java.util.Collection&lt;T&gt;</pre>
  elements contained in the specified <code>collection</code>.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#size()">size</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns amount of elements in a tree, exclusive of auxiliary root node.</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>java.lang.Object[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toArray()">toArray</a></span>()</code></th>
 <td class="colLast">
@@ -331,7 +347,7 @@ implements java.util.Collection&lt;T&gt;</pre>
  sorted in a DFS order.</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>&lt;A&gt;&nbsp;A[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toArray(A%5B%5D)">toArray</a></span>&#8203;(A[]&nbsp;arr)</code></th>
 <td class="colLast">
@@ -611,15 +627,49 @@ implements java.util.Collection&lt;T&gt;</pre>
 <h4>iterator</h4>
 <pre class="methodSignature">public&nbsp;java.util.Iterator&lt;<a href="Tree.html" title="type parameter in Tree">T</a>&gt;&nbsp;iterator()</pre>
 <div class="block">Returns an iterator over the elements of 
- this tree in depth-first search order.
- Empty root node is not evolved.</div>
+ this tree in breadth-first search order.
+ Empty root node is not evolved.
+ 
+ <p>This method is a wrapper for <a href="#bfsIterator()"><code>bfsIterator()</code></a> method.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code>iterator</code>&nbsp;in interface&nbsp;<code>java.util.Collection&lt;<a href="Tree.html" title="type parameter in Tree">T</a>&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code>iterator</code>&nbsp;in interface&nbsp;<code>java.lang.Iterable&lt;<a href="Tree.html" title="type parameter in Tree">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
+<dd>an iterator over the elements in BFS order</dd>
+</dl>
+</li>
+</ul>
+<a id="dfsIterator()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>dfsIterator</h4>
+<pre class="methodSignature">public&nbsp;java.util.Iterator&lt;<a href="Tree.html" title="type parameter in Tree">T</a>&gt;&nbsp;dfsIterator()</pre>
+<div class="block">Returns an iterator over the elements of 
+ this tree in depth-first search order.
+ Empty root node is not evolved.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
 <dd>an iterator over the elements in DFS order</dd>
+</dl>
+</li>
+</ul>
+<a id="bfsIterator()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>bfsIterator</h4>
+<pre class="methodSignature">public&nbsp;java.util.Iterator&lt;<a href="Tree.html" title="type parameter in Tree">T</a>&gt;&nbsp;bfsIterator()</pre>
+<div class="block">Returns an iterator over the elements of 
+ this tree in breadth-first search order.
+ Empty root node is not evolved.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an iterator over the elements in BFS order</dd>
 </dl>
 </li>
 </ul>
