@@ -76,10 +76,6 @@ loadScripts(document, 'script');</script>
 </div>
 </div>
 <section class="class-description" id="class-description">
-<dl class="notes">
-<dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;V&gt;</code></dd>
-</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">AdjacencyMatrixGraph&lt;V&gt;</span>
 <span class="extends-implements">extends <a href="../AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph">AbstractGraph</a>&lt;V&gt;</span></div>
@@ -199,8 +195,6 @@ loadScripts(document, 'script');</script>
 <div class="block">Checks if a specified vertex exists.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../Graph.html#vertexExists(V)">vertexExists</a></code>&nbsp;in interface&nbsp;<code><a href="../Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>&gt;</code></dd>
-<dt>Specified by:</dt>
 <dd><code><a href="../AbstractGraph.html#vertexExists(V)">vertexExists</a></code>&nbsp;in class&nbsp;<code><a href="../AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph">AbstractGraph</a>&lt;<a href="AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>vertex</code> - a vertex to check</dd>
@@ -220,8 +214,6 @@ loadScripts(document, 'script');</script>
  If this edge doesn't exist, this method does nothing and 
  returns <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html#empty()" title="class or interface in java.util" class="external-link"><code>Optional.empty()</code></a>.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Graph.html#getEdge(V,V)">getEdge</a></code>&nbsp;in interface&nbsp;<code><a href="../Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>&gt;</code></dd>
 <dt>Specified by:</dt>
 <dd><code><a href="../AbstractGraph.html#getEdge(V,V)">getEdge</a></code>&nbsp;in class&nbsp;<code><a href="../AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph">AbstractGraph</a>&lt;<a href="AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
@@ -247,8 +239,6 @@ loadScripts(document, 'script');</script>
 <div class="block">Adds a single vertex to this graph (optional operation).</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../Graph.html#addVertex(V)">addVertex</a></code>&nbsp;in interface&nbsp;<code><a href="../Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>&gt;</code></dd>
-<dt>Specified by:</dt>
 <dd><code><a href="../AbstractGraph.html#addVertex(V)">addVertex</a></code>&nbsp;in class&nbsp;<code><a href="../AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph">AbstractGraph</a>&lt;<a href="AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>vertex</code> - a vertex to add</dd>
@@ -265,8 +255,6 @@ loadScripts(document, 'script');</script>
 <div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="../AbstractGraph.html#removeVertex(V)">AbstractGraph</a></code></span></div>
 <div class="block">Removes a single vertex from this graph, if it exists (optional operation).</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Graph.html#removeVertex(V)">removeVertex</a></code>&nbsp;in interface&nbsp;<code><a href="../Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>&gt;</code></dd>
 <dt>Specified by:</dt>
 <dd><code><a href="../AbstractGraph.html#removeVertex(V)">removeVertex</a></code>&nbsp;in class&nbsp;<code><a href="../AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph">AbstractGraph</a>&lt;<a href="AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
@@ -291,8 +279,6 @@ loadScripts(document, 'script');</script>
  this method returns <code>false</code>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../Graph.html#addEdge(ru.nsu.fit.smolyakov.graph.Edge)">addEdge</a></code>&nbsp;in interface&nbsp;<code><a href="../Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>&gt;</code></dd>
-<dt>Specified by:</dt>
 <dd><code><a href="../AbstractGraph.html#addEdge(ru.nsu.fit.smolyakov.graph.Edge)">addEdge</a></code>&nbsp;in class&nbsp;<code><a href="../AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph">AbstractGraph</a>&lt;<a href="AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>edge</code> - a new <a href="../Edge.html" title="class in ru.nsu.fit.smolyakov.graph"><code>Edge</code></a></dd>
@@ -313,8 +299,6 @@ loadScripts(document, 'script');</script>
  returns <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../Graph.html#removeEdge(V,V)">removeEdge</a></code>&nbsp;in interface&nbsp;<code><a href="../Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>&gt;</code></dd>
-<dt>Specified by:</dt>
 <dd><code><a href="../AbstractGraph.html#removeEdge(V,V)">removeEdge</a></code>&nbsp;in class&nbsp;<code><a href="../AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph">AbstractGraph</a>&lt;<a href="AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>from</code> - a vertex a new edge comes from</dd>
@@ -333,8 +317,6 @@ loadScripts(document, 'script');</script>
 <div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="../AbstractGraph.html#getAdjacentEdges(V)">AbstractGraph</a></code></span></div>
 <div class="block">Returns a set of all edges adjacent to specified vertice.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Graph.html#getAdjacentEdges(V)">getAdjacentEdges</a></code>&nbsp;in interface&nbsp;<code><a href="../Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>&gt;</code></dd>
 <dt>Specified by:</dt>
 <dd><code><a href="../AbstractGraph.html#getAdjacentEdges(V)">getAdjacentEdges</a></code>&nbsp;in class&nbsp;<code><a href="../AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph">AbstractGraph</a>&lt;<a href="AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
@@ -359,8 +341,6 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns a set of all vertices of this graph.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../Graph.html#getAllVertices()">getAllVertices</a></code>&nbsp;in interface&nbsp;<code><a href="../Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>&gt;</code></dd>
-<dt>Specified by:</dt>
 <dd><code><a href="../AbstractGraph.html#getAllVertices()">getAllVertices</a></code>&nbsp;in class&nbsp;<code><a href="../AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph">AbstractGraph</a>&lt;<a href="AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>&gt;</code></dd>
 <dt>Returns:</dt>
 <dd>a set of all vertices of this graph</dd>
@@ -380,8 +360,6 @@ loadScripts(document, 'script');</script>
 <div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="../AbstractGraph.html#clear()">AbstractGraph</a></code></span></div>
 <div class="block">Turns a graph into an empty state (optional operation).</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Graph.html#clear()">clear</a></code>&nbsp;in interface&nbsp;<code><a href="../Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>&gt;</code></dd>
 <dt>Specified by:</dt>
 <dd><code><a href="../AbstractGraph.html#clear()">clear</a></code>&nbsp;in class&nbsp;<code><a href="../AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph">AbstractGraph</a>&lt;<a href="AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>&gt;</code></dd>
 </dl>

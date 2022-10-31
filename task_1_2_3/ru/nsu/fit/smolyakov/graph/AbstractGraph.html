@@ -75,17 +75,12 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
-<dt>All Implemented Interfaces:</dt>
-<dd><code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;V&gt;</code></dd>
-</dl>
-<dl class="notes">
 <dt>Direct Known Subclasses:</dt>
 <dd><code><a href="adjacency_matrix/AdjacencyMatrixGraph.html" title="class in ru.nsu.fit.smolyakov.graph.adjacency_matrix">AdjacencyMatrixGraph</a></code>, <code><a href="incident_list/IncidentListGraph.html" title="class in ru.nsu.fit.smolyakov.graph.incident_list">IncidentListGraph</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">AbstractGraph&lt;V&gt;</span>
-<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;V&gt;</span></div>
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">This class provides a skeletal implementation of the graph data structure to minimize the effort 
  required to implement it. 
  
@@ -324,8 +319,6 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isEmpty</span>()</div>
 <div class="block">Checks if this graph contains at least one vertex.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Graph.html#isEmpty()">isEmpty</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Returns:</dt>
 <dd><code>true</code> if this graph is empty,
          <code>false</code> otherwise.</dd>
@@ -338,8 +331,6 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">verticesCount</span>()</div>
 <div class="block">Returns an amount of vertices in this graph.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Graph.html#verticesCount()">verticesCount</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Returns:</dt>
 <dd>amount of vertices</dd>
 </dl>
@@ -351,8 +342,6 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">edgesCount</span>()</div>
 <div class="block">Returns an amount of edges in this graph.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Graph.html#edgesCount()">edgesCount</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Returns:</dt>
 <dd>amount of edges</dd>
 </dl>
@@ -364,8 +353,6 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">vertexExists</span><wbr><span class="parameters">(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;vertex)</span></div>
 <div class="block">Checks if a specified vertex exists.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Graph.html#vertexExists(V)">vertexExists</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>vertex</code> - a vertex to check</dd>
 <dt>Returns:</dt>
@@ -381,8 +368,6 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
  <a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;to)</span></div>
 <div class="block">Checks if an edge between specified vertices exists.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Graph.html#edgeExists(V,V)">edgeExists</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>from</code> - a vertex a specified edge comes from</dd>
 <dd><code>to</code> - a vertex a specified edge comes to</dd>
@@ -404,8 +389,6 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
  <p>Default implementation uses a <a href="#getEdge(V,V)"><code>getEdge(V,V)</code></a>, so it might be 
  not very effective with some graph presentation methods.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Graph.html#getEdgeWeight(V,V)">getEdgeWeight</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>from</code> - a vertex a specified edge comes from</dd>
 <dd><code>to</code> - a vertex a specified edge comes to</dd>
@@ -430,8 +413,6 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
  If this edge doesn't exist, this method does nothing and 
  returns <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html#empty()" title="class or interface in java.util" class="external-link"><code>Optional.empty()</code></a>.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Graph.html#getEdge(V,V)">getEdge</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>from</code> - a vertex a specified edge comes from</dd>
 <dd><code>to</code> - a vertex a specified edge comes to</dd>
@@ -453,8 +434,6 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">addVertex</span><wbr><span class="parameters">(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;vertex)</span></div>
 <div class="block">Adds a single vertex to this graph (optional operation).</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Graph.html#addVertex(V)">addVertex</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>vertex</code> - a vertex to add</dd>
 <dt>Returns:</dt>
@@ -472,8 +451,6 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">removeVertex</span><wbr><span class="parameters">(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;vertex)</span></div>
 <div class="block">Removes a single vertex from this graph, if it exists (optional operation).</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Graph.html#removeVertex(V)">removeVertex</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>vertex</code> - a vertex to remove</dd>
 <dt>Returns:</dt>
@@ -499,8 +476,6 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
  <p>If a vertex specified by <code>from</code> or <code>to</code> doesn't exist,
  this method returns false.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Graph.html#addEdge(V,V,int)">addEdge</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>from</code> - a vertex a new edge comes from</dd>
 <dd><code>to</code> - a vertex a new edge comes to</dd>
@@ -526,8 +501,6 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
  <p>If a vertex specified by <code>from</code> or <code>to</code> doesn't exist,
  this method returns <code>false</code>.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Graph.html#addEdge(ru.nsu.fit.smolyakov.graph.Edge)">addEdge</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>edge</code> - a new <a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph"><code>Edge</code></a></dd>
 <dt>Returns:</dt>
@@ -548,8 +521,6 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
  If edge doesn't exist, this method does nothing and 
  returns <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a>.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Graph.html#removeEdge(V,V)">removeEdge</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>from</code> - a vertex a new edge comes from</dd>
 <dd><code>to</code> - a vertex a new edge comes to</dd>
@@ -577,8 +548,6 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
  <a href="#removeEdge(V,V)"><code>removeEdge(V,V)</code></a>, so it might be not very effective with some
  graph presentation methods.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Graph.html#reweightEdge(V,V,int)">reweightEdge</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>from</code> - a vertex a specified edge comes from</dd>
 <dd><code>to</code> - a vertex a specified edge comes to</dd>
@@ -605,8 +574,6 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
  <a href="#removeEdge(V,V)"><code>removeEdge(V,V)</code></a>, so it might be not very effective with some
  graph presentation methods.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Graph.html#reweightEdge(ru.nsu.fit.smolyakov.graph.Edge)">reweightEdge</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>edge</code> - an <a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph"><code>Edge</code></a> record containing new weight</dd>
 <dt>Returns:</dt>
@@ -631,8 +598,6 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;&gt;</span>&nbsp;<span class="element-name">getAdjacentEdges</span><wbr><span class="parameters">(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;vertex)</span></div>
 <div class="block">Returns a set of all edges adjacent to specified vertice.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Graph.html#getAdjacentEdges(V)">getAdjacentEdges</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>vertex</code> - a vertex which adjacent edges are returned</dd>
 <dt>Returns:</dt>
@@ -653,8 +618,6 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</span>&nbsp;<span class="element-name">getAllVertices</span>()</div>
 <div class="block">Returns a set of all vertices of this graph.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Graph.html#getAllVertices()">getAllVertices</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Returns:</dt>
 <dd>a set of all vertices of this graph</dd>
 <dt>See Also:</dt>
@@ -676,8 +639,6 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
  <a href="#getAdjacentEdges(V)"><code>getAdjacentEdges(V)</code></a>, so it might be not very effective with some
  graph presentation methods.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Graph.html#getAllEdges()">getAllEdges</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Returns:</dt>
 <dd>a set of all edges of this graph</dd>
 <dt>See Also:</dt>
@@ -695,8 +656,6 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">clear</span>()</div>
 <div class="block">Turns a graph into an empty state (optional operation).</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Graph.html#clear()">clear</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/UnsupportedOperationException.html" title="class or interface in java.lang" class="external-link">UnsupportedOperationException</a></code> - if this operation 
                                        is not supported by this graph</dd>
