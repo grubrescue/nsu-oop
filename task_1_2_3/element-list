@@ -1,3 +1,4 @@
 ru.nsu.fit.smolyakov.graph
 ru.nsu.fit.smolyakov.graph.adjacency_matrix
 ru.nsu.fit.smolyakov.graph.incident_list
+ru.nsu.fit.smolyakov.graph.parser
