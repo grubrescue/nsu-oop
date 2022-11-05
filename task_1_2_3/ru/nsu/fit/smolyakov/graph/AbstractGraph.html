@@ -339,6 +339,9 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <div class="block">A template for edges set constructor with specified
  set of vertices. It allows terminal vertices to exist.
  
+ <p>If one of edges specified in edges set is connected to nonexistant 
+ vertex, it won't be added.
+ 
  <p>Be sure that this method is called by inheritor of this class
  at the moment when graph is clear and <a href="#addVertex(V)"><code>addVertex(V)</code></a> and <a href="#addEdge(V,V,int)"><code>addEdge(V,V,int)</code></a> 
  methods are ready to use.</div>

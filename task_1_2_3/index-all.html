@@ -109,6 +109,12 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/fit/smolyakov/graph/adjacency_matrix/AdjacencyMatrixGraph.html#%3Cinit%3E(java.util.Set,java.util.Set)" class="member-name-link">AdjacencyMatrixGraph(Set&lt;V&gt;, Set&lt;Edge&lt;V&gt;&gt;)</a> - Constructor for class ru.nsu.fit.smolyakov.graph.adjacency_matrix.<a href="ru/nsu/fit/smolyakov/graph/adjacency_matrix/AdjacencyMatrixGraph.html" title="class in ru.nsu.fit.smolyakov.graph.adjacency_matrix">AdjacencyMatrixGraph</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/fit/smolyakov/graph/parser/AdjacencyMatrixParser.html" class="type-name-link" title="class in ru.nsu.fit.smolyakov.graph.parser">AdjacencyMatrixParser</a> - Class in <a href="ru/nsu/fit/smolyakov/graph/parser/package-summary.html">ru.nsu.fit.smolyakov.graph.parser</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/fit/smolyakov/graph/parser/AdjacencyMatrixParser.html#%3Cinit%3E(java.io.FileReader)" class="member-name-link">AdjacencyMatrixParser(FileReader)</a> - Constructor for class ru.nsu.fit.smolyakov.graph.parser.<a href="ru/nsu/fit/smolyakov/graph/parser/AdjacencyMatrixParser.html" title="class in ru.nsu.fit.smolyakov.graph.parser">AdjacencyMatrixParser</a></dt>
+<dd>
+<div class="block">Constructs an edges list parser for a specified <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/FileReader.html" title="class or interface in java.io" class="external-link"><code>FileReader</code></a> source.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:C">C</h2>
 <dl class="index">
@@ -152,6 +158,12 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/fit/smolyakov/graph/Graph.html#edgesCount()" class="member-name-link">edgesCount()</a> - Method in interface ru.nsu.fit.smolyakov.graph.<a href="ru/nsu/fit/smolyakov/graph/Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a></dt>
 <dd>
 <div class="block">Returns an amount of edges in this graph.</div>
+</dd>
+<dt><a href="ru/nsu/fit/smolyakov/graph/parser/EdgesListParser.html" class="type-name-link" title="class in ru.nsu.fit.smolyakov.graph.parser">EdgesListParser</a> - Class in <a href="ru/nsu/fit/smolyakov/graph/parser/package-summary.html">ru.nsu.fit.smolyakov.graph.parser</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/fit/smolyakov/graph/parser/EdgesListParser.html#%3Cinit%3E(java.io.FileReader)" class="member-name-link">EdgesListParser(FileReader)</a> - Constructor for class ru.nsu.fit.smolyakov.graph.parser.<a href="ru/nsu/fit/smolyakov/graph/parser/EdgesListParser.html" title="class in ru.nsu.fit.smolyakov.graph.parser">EdgesListParser</a></dt>
+<dd>
+<div class="block">Constructs an edges list parser for a specified <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/FileReader.html" title="class or interface in java.io" class="external-link"><code>FileReader</code></a> source.</div>
 </dd>
 <dt><a href="ru/nsu/fit/smolyakov/graph/AbstractGraph.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class ru.nsu.fit.smolyakov.graph.<a href="ru/nsu/fit/smolyakov/graph/AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph">AbstractGraph</a></dt>
 <dd>&nbsp;</dd>
@@ -241,6 +253,14 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns a weight of an edge connected to specified vertices.</div>
 </dd>
+<dt><a href="ru/nsu/fit/smolyakov/graph/parser/AdjacencyMatrixParser.html#getGraphSets()" class="member-name-link">getGraphSets()</a> - Method in class ru.nsu.fit.smolyakov.graph.parser.<a href="ru/nsu/fit/smolyakov/graph/parser/AdjacencyMatrixParser.html" title="class in ru.nsu.fit.smolyakov.graph.parser">AdjacencyMatrixParser</a></dt>
+<dd>
+<div class="block">Returns a set of vertices and a set of edges specified by input file.</div>
+</dd>
+<dt><a href="ru/nsu/fit/smolyakov/graph/parser/EdgesListParser.html#getGraphSets()" class="member-name-link">getGraphSets()</a> - Method in class ru.nsu.fit.smolyakov.graph.parser.<a href="ru/nsu/fit/smolyakov/graph/parser/EdgesListParser.html" title="class in ru.nsu.fit.smolyakov.graph.parser">EdgesListParser</a></dt>
+<dd>
+<div class="block">Returns a set of vertices and a set of edges specified by input file.</div>
+</dd>
 <dt><a href="ru/nsu/fit/smolyakov/graph/Graph.html" class="type-name-link" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="ru/nsu/fit/smolyakov/graph/Graph.html" title="type parameter in Graph">V</a>&gt; - Interface in <a href="ru/nsu/fit/smolyakov/graph/package-summary.html">ru.nsu.fit.smolyakov.graph</a></dt>
 <dd>
 <div class="block">This class provides a skeletal implementation of the graph data structure to minimize the effort 
@@ -272,10 +292,6 @@ loadScripts(document, 'script');</script>
 <div class="block">A template for edges set constructor with specified
  set of vertices.</div>
 </dd>
-<dt><a href="ru/nsu/fit/smolyakov/graph/parser/GraphParser.html" class="type-name-link" title="class in ru.nsu.fit.smolyakov.graph.parser">GraphParser</a> - Class in <a href="ru/nsu/fit/smolyakov/graph/parser/package-summary.html">ru.nsu.fit.smolyakov.graph.parser</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/fit/smolyakov/graph/parser/GraphParser.html#%3Cinit%3E()" class="member-name-link">GraphParser()</a> - Constructor for class ru.nsu.fit.smolyakov.graph.parser.<a href="ru/nsu/fit/smolyakov/graph/parser/GraphParser.html" title="class in ru.nsu.fit.smolyakov.graph.parser">GraphParser</a></dt>
-<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:H">H</h2>
 <dl class="index">
@@ -383,6 +399,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the value of the <code>to</code> record component.</div>
 </dd>
+<dt><a href="ru/nsu/fit/smolyakov/graph/parser/AdjacencyMatrixParser.html#toGraph()" class="member-name-link">toGraph()</a> - Method in class ru.nsu.fit.smolyakov.graph.parser.<a href="ru/nsu/fit/smolyakov/graph/parser/AdjacencyMatrixParser.html" title="class in ru.nsu.fit.smolyakov.graph.parser">AdjacencyMatrixParser</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/fit/smolyakov/graph/parser/EdgesListParser.html#toGraph()" class="member-name-link">toGraph()</a> - Method in class ru.nsu.fit.smolyakov.graph.parser.<a href="ru/nsu/fit/smolyakov/graph/parser/EdgesListParser.html" title="class in ru.nsu.fit.smolyakov.graph.parser">EdgesListParser</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/fit/smolyakov/graph/AbstractGraph.html#toIncidentList()" class="member-name-link">toIncidentList()</a> - Method in class ru.nsu.fit.smolyakov.graph.<a href="ru/nsu/fit/smolyakov/graph/AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph">AbstractGraph</a></dt>
 <dd>
 <div class="block">Turns this <a href="ru/nsu/fit/smolyakov/graph/AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph"><code>AbstractGraph</code></a> into <a href="ru/nsu/fit/smolyakov/graph/incident_list/IncidentListGraph.html" title="class in ru.nsu.fit.smolyakov.graph.incident_list"><code>IncidentListGraph</code></a>,
