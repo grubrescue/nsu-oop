@@ -86,21 +86,33 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">AbstractGraph&lt;V&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;V&gt;</span></div>
-<div class="block">This class provides a skeletal implementation of the graph data structure to minimize the effort 
- required to implement it. 
+<div class="block">This class provides a skeletal implementation of the <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph"><code>Graph</code></a> interface to minimize 
+ the effort required to implement it. 
  
- <p>Multigraphs are not supported! If a user attempts to use <a href="#addEdge(V,V,int)"><code>addEdge(V,V,int)</code></a> with multiple edges,
- it will return <code>false</code> and insert one that occurs first.
+ <p>This abstract class allows the programmer to choose between mutable and immutable
+ graph.
+ If he prefer the second, <a href="#clear()"><code>clear()</code></a>, <a href="#addVertex(V)"><code>addVertex(V)</code></a>, <a href="#addEdge(V,V,int)"><code>addEdge(V,V,int)</code></a>, <a href="#reweightEdge(V,V,int)"><code>reweightEdge(V,V,int)</code></a>, 
+ <a href="#removeVertex(V)"><code>removeVertex(V)</code></a>, <a href="#removeEdge(V,V)"><code>removeEdge(V,V)</code></a> are not required to implement and may throw 
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/UnsupportedOperationException.html" title="class or interface in java.lang" class="external-link"><code>UnsupportedOperationException</code></a>. However, all mutable methods reusing them will fail too.
  
- <p>This abstract class specification admits inherited classes to be immutable.
- It means that <a href="#clear()"><code>clear()</code></a>, <a href="#addVertex(V)"><code>addVertex(V)</code></a>, <a href="#addEdge(V,V,int)"><code>addEdge(V,V,int)</code></a>, <a href="#reweightEdge(V,V,int)"><code>reweightEdge(V,V,int)</code></a>, 
- <a href="#removeVertex(V)"><code>removeVertex(V)</code></a>, <a href="#removeEdge(V,V)"><code>removeEdge(V,V)</code></a> and all methods connected to them
- may throw <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/UnsupportedOperationException.html" title="class or interface in java.lang" class="external-link"><code>UnsupportedOperationException</code></a>.</div>
+ <p><a href="#vertexExists(V)"><code>vertexExists(V)</code></a>, <a href="#getEdge(V,V)"><code>getEdge(V,V)</code></a>, <a href="#getAdjacentEdges(V)"><code>getAdjacentEdges(V)</code></a> and <a href="#getAllVertices()"><code>getAllVertices()</code></a> must
+ be implemented anyway.
+ 
+ <p>This abstract class implementats of Dijksta's algorithm for <a href="#findShortestPaths(V)"><code>findShortestPaths(V)</code></a>
+ method, with all inherent limitations. If they are unacceptable for a programmer, he has to override it.
+ 
+ <p>Inherited classes are supposed to reuse <a href="#graphInstance()"><code>graphInstance()</code></a> methods for their constructors, as they 
+ cover all desired variants of operands describing a graph. It's not obligatorily, though.
+ 
+ <p>Many methods are implemented with reusing not numerous programmer-dependant methods, so in some cases 
+ they might be very ineffective.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list">
-<li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link"><code>Set</code></a></li>
+<li><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph"><code>Graph</code></a></li>
+<li><a href="adjacency_matrix/AdjacencyMatrixGraph.html" title="class in ru.nsu.fit.smolyakov.graph.adjacency_matrix"><code>AdjacencyMatrixGraph</code></a></li>
+<li><a href="incident_list/IncidentListGraph.html" title="class in ru.nsu.fit.smolyakov.graph.incident_list"><code>IncidentListGraph</code></a></li>
 </ul>
 </dd>
 </dl>
@@ -146,7 +158,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#addVertex(V)" class="member-name-link">addVertex</a><wbr>(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;vertex)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Adds a single vertex to this graph (optional operation).</div>
+<div class="block">Inserts a single vertex to this graph (optional operation).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#clear()" class="member-name-link">clear</a>()</code></div>
@@ -157,7 +169,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#edgeExists(V,V)" class="member-name-link">edgeExists</a><wbr>(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;from,
  <a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;to)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Checks if an edge between specified vertices exists.</div>
+<div class="block">Checks if an edge related to specified vertices exists.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#edgesCount()" class="member-name-link">edgesCount</a>()</code></div>
@@ -166,7 +178,9 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;obj)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Compares the specified Object with this graph for equality.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findShortestPaths(V)" class="member-name-link">findShortestPaths</a><wbr>(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;s)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -191,45 +205,47 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getEdge(V,V)" class="member-name-link">getEdge</a><wbr>(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;from,
  <a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;to)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Returns an edge record containing weight and vertices it connects.</div>
+<div class="block">Returns an <a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph"><code>Edge</code></a> record related to specified vertices.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link">OptionalInt</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getEdgeWeight(V,V)" class="member-name-link">getEdgeWeight</a><wbr>(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;from,
  <a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;to)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns a weight of an edge connected to specified vertices.</div>
+<div class="block">Returns a weight of an edge related to specified vertices.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#graphInstance()" class="member-name-link">graphInstance</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">A template for a no-args constructor, does nothing
- in default implementation.</div>
+ in a default implementation.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#graphInstance(java.util.List,java.lang.Integer%5B%5D%5B%5D)" class="member-name-link">graphInstance</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;&nbsp;verticesList,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>[][]&nbsp;matrix)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">A template for adjacency matrix constructor.</div>
+<div class="block">A template for an adjacency matrix constructor.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#graphInstance(java.util.Set)" class="member-name-link">graphInstance</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;&gt;&nbsp;edgesSet)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">A template for edges set constructor.</div>
+<div class="block">A template for an edges set constructor.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#graphInstance(java.util.Set,java.util.Set)" class="member-name-link">graphInstance</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;&nbsp;verticesSet,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;&gt;&nbsp;edgesSet)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">A template for edges set constructor with specified
+<div class="block">A template for an edges set constructor with a specified
  set of vertices.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the hash code value for this AbstractGraph.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isEmpty()" class="member-name-link">isEmpty</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Checks if this graph contains at least one vertex.</div>
+<div class="block">Returns if this graph contains at least one vertex.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link">OptionalInt</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeEdge(V,V)" class="member-name-link">removeEdge</a><wbr>(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;from,
@@ -240,7 +256,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeVertex(V)" class="member-name-link">removeVertex</a><wbr>(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;vertex)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Removes a single vertex from this graph, if it exists (optional operation).</div>
+<div class="block">Removes a single vertex from this graph, if one exists (optional operation).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link">OptionalInt</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reweightEdge(ru.nsu.fit.smolyakov.graph.Edge)" class="member-name-link">reweightEdge</a><wbr>(<a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;&nbsp;edge)</code></div>
@@ -257,7 +273,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph">AbstractGraph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#switchGraphRepresentation(ru.nsu.fit.smolyakov.graph.AbstractGraph)" class="member-name-link">switchGraphRepresentation</a><wbr>(<a href="AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph">AbstractGraph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;&nbsp;graph)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Turns this <a href="AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph"><code>AbstractGraph</code></a> into specified <a href="AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph"><code>AbstractGraph</code></a>.</div>
+<div class="block">Turns this <a href="AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph"><code>AbstractGraph</code></a> into a specified <a href="AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph"><code>AbstractGraph</code></a>.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="incident_list/IncidentListGraph.html" title="class in ru.nsu.fit.smolyakov.graph.incident_list">IncidentListGraph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toIncidentList()" class="member-name-link">toIncidentList</a>()</code></div>
@@ -268,7 +284,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#vertexExists(V)" class="member-name-link">vertexExists</a><wbr>(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;vertex)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Checks if a specified vertex exists.</div>
+<div class="block">Returns if a specified vertex exists.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#verticesCount()" class="member-name-link">verticesCount</a>()</code></div>
@@ -311,23 +327,26 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <h3>graphInstance</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">graphInstance</span>()</div>
 <div class="block">A template for a no-args constructor, does nothing
- in default implementation.</div>
+ in a default implementation.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="graphInstance(java.util.Set)">
 <h3>graphInstance</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">graphInstance</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;&gt;&nbsp;edgesSet)</span></div>
-<div class="block">A template for edges set constructor.
- As we don't specify a set of vertices, it is supposed that there is no 
+<div class="block">A template for an edges set constructor.
+ As a set of vertices is not specified, it's supposed that there is no 
  terminal vertices in this graph.
  
- <p>Be sure that this method is called by inheritor of this class
+ <p>Be sure that this method is called by the inheritor of this class
  at the moment when graph is clear and <a href="#addVertex(V)"><code>addVertex(V)</code></a> and <a href="#addEdge(V,V,int)"><code>addEdge(V,V,int)</code></a> 
  methods are ready to use.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>edgesSet</code> - a set of edges</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/UnsupportedOperationException.html" title="class or interface in java.lang" class="external-link">UnsupportedOperationException</a></code> - if this graph doesn't support this
+                                        representation or immutable</dd>
 </dl>
 </section>
 </li>
@@ -336,19 +355,22 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <h3>graphInstance</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">graphInstance</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;&nbsp;verticesSet,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;&gt;&nbsp;edgesSet)</span></div>
-<div class="block">A template for edges set constructor with specified
+<div class="block">A template for an edges set constructor with a specified
  set of vertices. It allows terminal vertices to exist.
  
- <p>If one of edges specified in edges set is connected to nonexistant 
+ <p>If one of edges specified in edges set is related to nonexistant 
  vertex, it won't be added.
  
- <p>Be sure that this method is called by inheritor of this class
+ <p>Be sure that this method is called by the inheritor of this class
  at the moment when graph is clear and <a href="#addVertex(V)"><code>addVertex(V)</code></a> and <a href="#addEdge(V,V,int)"><code>addEdge(V,V,int)</code></a> 
  methods are ready to use.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>verticesSet</code> - a set of vertices</dd>
 <dd><code>edgesSet</code> - a set of edges</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/UnsupportedOperationException.html" title="class or interface in java.lang" class="external-link">UnsupportedOperationException</a></code> - if this graph doesn't support this
+                                        representation or immutable</dd>
 </dl>
 </section>
 </li>
@@ -357,9 +379,9 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <h3>graphInstance</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">graphInstance</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;&nbsp;verticesList,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>[][]&nbsp;matrix)</span></div>
-<div class="block">A template for adjacency matrix constructor. Each vertex from 
- <code>verticesList</code> is mapped into index according to it's 
- position in the list, so the order in <code>verticesList</code> is significant.
+<div class="block">A template for an adjacency matrix constructor. Each vertex from specified
+ <code>verticesList</code> is mapped into an index according to its 
+ position in the list, so the order in <code>verticesList</code> is considerable.
  
  <p>Be sure that this method is called by inheritor of this class
  at the moment when graph is clear and <a href="#addVertex(V)"><code>addVertex(V)</code></a> and <a href="#addEdge(V,V,int)"><code>addEdge(V,V,int)</code></a> 
@@ -370,7 +392,9 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <dd><code>matrix</code> - an adjacency matrix</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if size of list is not equal to any of
-                               matrix dimensions</dd>
+                                  matrix dimensions</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/UnsupportedOperationException.html" title="class or interface in java.lang" class="external-link">UnsupportedOperationException</a></code> - if this graph doesn't support this
+                                        representation or immutable</dd>
 </dl>
 </section>
 </li>
@@ -399,11 +423,11 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <section class="detail" id="switchGraphRepresentation(ru.nsu.fit.smolyakov.graph.AbstractGraph)">
 <h3>switchGraphRepresentation</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph">AbstractGraph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</span>&nbsp;<span class="element-name">switchGraphRepresentation</span><wbr><span class="parameters">(<a href="AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph">AbstractGraph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;&nbsp;graph)</span></div>
-<div class="block">Turns this <a href="AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph"><code>AbstractGraph</code></a> into specified <a href="AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph"><code>AbstractGraph</code></a>.
+<div class="block">Turns this <a href="AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph"><code>AbstractGraph</code></a> into a specified <a href="AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph"><code>AbstractGraph</code></a>.
  
  <p>In default implementation specified <code>graph</code> will be cleared 
- by <a href="#clear()"><code>clear()</code></a> method if not clear already, respectively be sure it's correct one. 
- It's also very unoptimised, so it's highly recommended to override that.</div>
+ by <a href="#clear()"><code>clear()</code></a> method if not empty, respectively be sure it's correct one. 
+ It's also not optimised well, so it's highly recommended to override that.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>graph</code> - presentation to be turned into</dd>
@@ -413,7 +437,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/UnsupportedOperationException.html" title="class or interface in java.lang" class="external-link">UnsupportedOperationException</a></code> - if <a href="#clear()"><code>clear()</code></a>, <a href="#addVertex(V)"><code>addVertex(V)</code></a>
                                        or <a href="#addEdge(V,V,int)"><code>addEdge(V,V,int)</code></a> operations
                                        are not supported by the specified
-                                       graph.</dd>
+                                       graph</dd>
 </dl>
 </section>
 </li>
@@ -421,7 +445,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <section class="detail" id="isEmpty()">
 <h3>isEmpty</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isEmpty</span>()</div>
-<div class="block">Checks if this graph contains at least one vertex.</div>
+<div class="block">Returns if this graph contains at least one vertex.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Graph.html#isEmpty()">isEmpty</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
@@ -440,7 +464,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <dt>Specified by:</dt>
 <dd><code><a href="Graph.html#verticesCount()">verticesCount</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Returns:</dt>
-<dd>amount of vertices</dd>
+<dd>an amount of vertices</dd>
 </dl>
 </section>
 </li>
@@ -453,7 +477,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <dt>Specified by:</dt>
 <dd><code><a href="Graph.html#edgesCount()">edgesCount</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Returns:</dt>
-<dd>amount of edges</dd>
+<dd>an amount of edges</dd>
 </dl>
 </section>
 </li>
@@ -461,12 +485,12 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <section class="detail" id="vertexExists(V)">
 <h3 id="vertexExists(java.lang.Object)">vertexExists</h3>
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">vertexExists</span><wbr><span class="parameters">(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;vertex)</span></div>
-<div class="block">Checks if a specified vertex exists.</div>
+<div class="block">Returns if a specified vertex exists.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Graph.html#vertexExists(V)">vertexExists</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
-<dd><code>vertex</code> - a vertex to check</dd>
+<dd><code>vertex</code> - a specified vertex</dd>
 <dt>Returns:</dt>
 <dd><code>true</code> if a specified vertex exists, 
          <code>false</code> otherwise</dd>
@@ -478,7 +502,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <h3 id="edgeExists(java.lang.Object,java.lang.Object)">edgeExists</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">edgeExists</span><wbr><span class="parameters">(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;from,
  <a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;to)</span></div>
-<div class="block">Checks if an edge between specified vertices exists.</div>
+<div class="block">Checks if an edge related to specified vertices exists.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Graph.html#edgeExists(V,V)">edgeExists</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
@@ -486,7 +510,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <dd><code>from</code> - a vertex a specified edge comes from</dd>
 <dd><code>to</code> - a vertex a specified edge comes to</dd>
 <dt>Returns:</dt>
-<dd><code>true</code> if an edge between specified vertices exists, 
+<dd><code>true</code> if an edge related to specified vertices exists, 
          <code>false</code> otherwise</dd>
 </dl>
 </section>
@@ -496,12 +520,9 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <h3 id="getEdgeWeight(java.lang.Object,java.lang.Object)">getEdgeWeight</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link">OptionalInt</a></span>&nbsp;<span class="element-name">getEdgeWeight</span><wbr><span class="parameters">(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;from,
  <a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;to)</span></div>
-<div class="block">Returns a weight of an edge connected to specified vertices. 
- If this edge doesn't exist, this method does nothing and 
- returns <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a>.
- 
- <p>Default implementation uses a <a href="#getEdge(V,V)"><code>getEdge(V,V)</code></a>, so it might be 
- not very effective with some graph presentation methods.</div>
+<div class="block">Returns a weight of an edge related to specified vertices. 
+ If this edge doesn't exist, this method returns 
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Graph.html#getEdgeWeight(V,V)">getEdgeWeight</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
@@ -509,7 +530,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <dd><code>from</code> - a vertex a specified edge comes from</dd>
 <dd><code>to</code> - a vertex a specified edge comes to</dd>
 <dt>Returns:</dt>
-<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a> of old weight if an edge between specified 
+<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a> of old weight if an edge related to specified 
          vertices exists, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a> otherwise</dd>
 <dt>See Also:</dt>
 <dd>
@@ -525,9 +546,9 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <h3 id="getEdge(java.lang.Object,java.lang.Object)">getEdge</h3>
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;&gt;</span>&nbsp;<span class="element-name">getEdge</span><wbr><span class="parameters">(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;from,
  <a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;to)</span></div>
-<div class="block">Returns an edge record containing weight and vertices it connects. 
- If this edge doesn't exist, this method does nothing and 
- returns <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html#empty()" title="class or interface in java.util" class="external-link"><code>Optional.empty()</code></a>.</div>
+<div class="block">Returns an <a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph"><code>Edge</code></a> record related to specified vertices. 
+ If such edge doesn't exist, this method returns 
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html#empty()" title="class or interface in java.util" class="external-link"><code>Optional.empty()</code></a>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Graph.html#getEdge(V,V)">getEdge</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
@@ -535,12 +556,14 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <dd><code>from</code> - a vertex a specified edge comes from</dd>
 <dd><code>to</code> - a vertex a specified edge comes to</dd>
 <dt>Returns:</dt>
-<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link"><code>Optional</code></a> of an edge between specified 
-         vertices it it exists, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html#empty()" title="class or interface in java.util" class="external-link"><code>Optional.empty()</code></a> otherwise</dd>
+<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link"><code>Optional</code></a> of an edge related to specified 
+         vertices it it exists, 
+         <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html#empty()" title="class or interface in java.util" class="external-link"><code>Optional.empty()</code></a> otherwise</dd>
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list">
 <li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link"><code>Optional</code></a></li>
+<li><a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph"><code>Edge</code></a></li>
 </ul>
 </dd>
 </dl>
@@ -550,7 +573,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <section class="detail" id="addVertex(V)">
 <h3 id="addVertex(java.lang.Object)">addVertex</h3>
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">addVertex</span><wbr><span class="parameters">(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;vertex)</span></div>
-<div class="block">Adds a single vertex to this graph (optional operation).</div>
+<div class="block">Inserts a single vertex to this graph (optional operation).</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Graph.html#addVertex(V)">addVertex</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
@@ -566,7 +589,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <section class="detail" id="removeVertex(V)">
 <h3 id="removeVertex(java.lang.Object)">removeVertex</h3>
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">removeVertex</span><wbr><span class="parameters">(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;vertex)</span></div>
-<div class="block">Removes a single vertex from this graph, if it exists (optional operation).</div>
+<div class="block">Removes a single vertex from this graph, if one exists (optional operation).</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Graph.html#removeVertex(V)">removeVertex</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
@@ -586,11 +609,11 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
  int&nbsp;weight)</span></div>
 <div class="block">Adds a single edge to this graph (optional operation).
  
- <p>It's supposed that if this edge already exists, 
- this function won't insert a specified edge.
+ <p>If this edge already exists, 
+ this method does nothing and returns <code>false</code>. 
  
  <p>If a vertex specified by <code>from</code> or <code>to</code> doesn't exist,
- this method returns false.</div>
+ this method also returns <code>false</code>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Graph.html#addEdge(V,V,int)">addEdge</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
@@ -610,11 +633,11 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">addEdge</span><wbr><span class="parameters">(<a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;&nbsp;edge)</span></div>
 <div class="block">Adds a single edge to this graph (optional operation).
  
- <p>It's supposed that if this edge already exists, 
- this function won't insert a specified edge.
+ <p>If this edge already exists, 
+ this method does nothing and returns <code>false</code>. 
  
  <p>If a vertex specified by <code>from</code> or <code>to</code> doesn't exist,
- this method returns <code>false</code>.</div>
+ this method also returns <code>false</code>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Graph.html#addEdge(ru.nsu.fit.smolyakov.graph.Edge)">addEdge</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
@@ -641,9 +664,15 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <dd><code>from</code> - a vertex a new edge comes from</dd>
 <dd><code>to</code> - a vertex a new edge comes to</dd>
 <dt>Returns:</dt>
-<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a> of old weight if an edge between specified 
+<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a> of old weight if an edge related to specified 
          vertices exists, 
          <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a> otherwise</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a></li>
+</ul>
+</dd>
 </dl>
 </section>
 </li>
@@ -655,11 +684,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
  int&nbsp;newWeight)</span></div>
 <div class="block">Changes edge's weight to a specified one (optional operation).
  If edge doesn't exist, this method does nothing and 
- returns <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a>.
- 
- <p>Default implementation uses a composition of <a href="#addEdge(V,V,int)"><code>addEdge(V,V,int)</code></a> and 
- <a href="#removeEdge(V,V)"><code>removeEdge(V,V)</code></a>, so it might be not very effective with some
- graph presentation methods.</div>
+ returns <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Graph.html#reweightEdge(V,V,int)">reweightEdge</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
@@ -668,12 +693,15 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <dd><code>to</code> - a vertex a specified edge comes to</dd>
 <dd><code>newWeight</code> - a new weight of an edge</dd>
 <dt>Returns:</dt>
-<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a> of old weight if an edge between specified 
+<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a> of old weight if an edge related to specified 
          vertices exists, 
          <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a> otherwise</dd>
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/UnsupportedOperationException.html" title="class or interface in java.lang" class="external-link">UnsupportedOperationException</a></code> - if this operation 
-                                       is not supported by this graph</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a></li>
+</ul>
+</dd>
 </dl>
 </section>
 </li>
@@ -683,23 +711,16 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link">OptionalInt</a></span>&nbsp;<span class="element-name">reweightEdge</span><wbr><span class="parameters">(<a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;&nbsp;edge)</span></div>
 <div class="block">Changes edge's weight to a specified one (optional operation).
  If edge doesn't exist, this method does nothing and 
- returns <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a>.
- 
- <p>Default implementation uses a composition of <a href="#addEdge(V,V,int)"><code>addEdge(V,V,int)</code></a> and 
- <a href="#removeEdge(V,V)"><code>removeEdge(V,V)</code></a>, so it might be not very effective with some
- graph presentation methods.</div>
+ returns <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Graph.html#reweightEdge(ru.nsu.fit.smolyakov.graph.Edge)">reweightEdge</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>edge</code> - an <a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph"><code>Edge</code></a> record containing new weight</dd>
 <dt>Returns:</dt>
-<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a> of old weight, if an edge between specified 
+<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a> of old weight, if an edge related to specified 
          vertices exists, 
          <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a> otherwise</dd>
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/UnsupportedOperationException.html" title="class or interface in java.lang" class="external-link">UnsupportedOperationException</a></code> - if this operation 
-                                       is not supported by this graph</dd>
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list">
@@ -754,11 +775,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <section class="detail" id="getAllEdges()">
 <h3>getAllEdges</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;&gt;</span>&nbsp;<span class="element-name">getAllEdges</span>()</div>
-<div class="block">Returns a set of all edges of this graph.
- 
- <p>Default implementation uses a composition of <a href="#getAllVertices()"><code>getAllVertices()</code></a> and 
- <a href="#getAdjacentEdges(V)"><code>getAdjacentEdges(V)</code></a>, so it might be not very effective with some
- graph presentation methods.</div>
+<div class="block">Returns a set of all edges of this graph.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Graph.html#getAllEdges()">getAllEdges</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
@@ -790,11 +807,11 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</span>&nbsp;<span class="element-name">findShortestPaths</span><wbr><span class="parameters">(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&nbsp;s)</span></div>
 <div class="block">Finds shortest paths from specified vertex to all the rest.
  
- Implements Dijkstra shortest paths algorithm.
+ <p>Implements Dijkstra shortest paths algorithm.
  As it uses priority queue to always keep current shortest paths naturally sorted, 
  this implementation is asymtotically effective.
  
- Edges with negative weights are not allowed!</div>
+ Edges with negative weights are not allowed due to peculiarities of an algorithm!</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Graph.html#findShortestPaths(V)">findShortestPaths</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</code></dd>
@@ -820,9 +837,14 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <section class="detail" id="hashCode()">
 <h3>hashCode</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">hashCode</span>()</div>
+<div class="block">Returns the hash code value for this AbstractGraph.
+ Hash code is the same for equal graphs, even differently
+ represented.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
+<dt>Returns:</dt>
+<dd>the hash code for this graph</dd>
 </dl>
 </section>
 </li>
@@ -830,9 +852,18 @@ implements <a href="Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">
 <section class="detail" id="equals(java.lang.Object)">
 <h3>equals</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;obj)</span></div>
+<div class="block">Compares the specified Object with this graph for equality. 
+ Returns <code>true</code> if and only if the specified object is also
+ a graph, both graphs has similar sets of vertices and edges related
+ to them, herewith graphs may be representated differently.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>obj</code> - the object to be compared for equality with this graph</dd>
+<dt>Returns:</dt>
+<dd><code>true</code> if specified object is equal to this graph,
+         <code>false</code> otherwise</dd>
 </dl>
 </section>
 </li>

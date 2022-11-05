@@ -77,21 +77,25 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">Graph&lt;V&gt;</span></div>
-<div class="block">This class provides a skeletal implementation of the graph data structure to minimize the effort 
- required to implement it. 
+<div class="block">A graph, an abstraction describing the relationship between lines (called edges) and points
+ (called vertices). The user of this interface is able to change the graph, however he wants,
+ e.g. add/remove vertices/edges, reweight edges, or get vertices' relationship to other 
+ components of this structure.
  
- <p>Multigraphs are not supported! If a user attempts to use <a href="#addEdge(V,V,int)"><code>addEdge(V,V,int)</code></a> with multiple edges,
- it will return <code>false</code> and insert one that occurs first.
+ <p>Multigraphs are not supported! If a user attempts to use <a href="#addEdge(V,V,int)"><code>addEdge(V,V,int)</code></a> with the same vertices
+ more than one time, this method has to return <code>false</code> and insert one that occurs first.
  
- <p>This class specification admits inherited classes to be immutable.
+ <p>This interface specification admits inherited classes to be immutable.
  It means that <a href="#clear()"><code>clear()</code></a>, <a href="#addVertex(V)"><code>addVertex(V)</code></a>, <a href="#addEdge(V,V,int)"><code>addEdge(V,V,int)</code></a>, <a href="#reweightEdge(V,V,int)"><code>reweightEdge(V,V,int)</code></a>, 
- <a href="#removeVertex(V)"><code>removeVertex(V)</code></a>, <a href="#removeEdge(V,V)"><code>removeEdge(V,V)</code></a> and all methods connected to them
+ <a href="#removeVertex(V)"><code>removeVertex(V)</code></a>, <a href="#removeEdge(V,V)"><code>removeEdge(V,V)</code></a> and all methods reusing them
  may throw <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/UnsupportedOperationException.html" title="class or interface in java.lang" class="external-link"><code>UnsupportedOperationException</code></a>.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list">
-<li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link"><code>Set</code></a></li>
+<li><a href="AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph"><code>AbstractGraph</code></a></li>
+<li><a href="adjacency_matrix/AdjacencyMatrixGraph.html" title="class in ru.nsu.fit.smolyakov.graph.adjacency_matrix"><code>AdjacencyMatrixGraph</code></a></li>
+<li><a href="incident_list/IncidentListGraph.html" title="class in ru.nsu.fit.smolyakov.graph.incident_list"><code>IncidentListGraph</code></a></li>
 </ul>
 </dd>
 </dl>
@@ -124,7 +128,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#addVertex(V)" class="member-name-link">addVertex</a><wbr>(<a href="Graph.html" title="type parameter in Graph">V</a>&nbsp;vertex)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Adds a single vertex to this graph (optional operation).</div>
+<div class="block">Inserts a single vertex to this graph (optional operation).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#clear()" class="member-name-link">clear</a>()</code></div>
@@ -135,7 +139,7 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#edgeExists(V,V)" class="member-name-link">edgeExists</a><wbr>(<a href="Graph.html" title="type parameter in Graph">V</a>&nbsp;from,
  <a href="Graph.html" title="type parameter in Graph">V</a>&nbsp;to)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Checks if an edge between specified vertices exists.</div>
+<div class="block">Checks if an edge related to specified vertices exists.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#edgesCount()" class="member-name-link">edgesCount</a>()</code></div>
@@ -166,18 +170,18 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getEdge(V,V)" class="member-name-link">getEdge</a><wbr>(<a href="Graph.html" title="type parameter in Graph">V</a>&nbsp;from,
  <a href="Graph.html" title="type parameter in Graph">V</a>&nbsp;to)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Returns an edge record containing weight and vertices it connects.</div>
+<div class="block">Returns an <a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph"><code>Edge</code></a> record related to specified vertices.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link">OptionalInt</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getEdgeWeight(V,V)" class="member-name-link">getEdgeWeight</a><wbr>(<a href="Graph.html" title="type parameter in Graph">V</a>&nbsp;from,
  <a href="Graph.html" title="type parameter in Graph">V</a>&nbsp;to)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Returns a weight of an edge connected to specified vertices.</div>
+<div class="block">Returns a weight of an edge related to specified vertices.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#isEmpty()" class="member-name-link">isEmpty</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Checks if this graph contains at least one vertex.</div>
+<div class="block">Returns if this graph contains at least one vertex.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link">OptionalInt</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeEdge(V,V)" class="member-name-link">removeEdge</a><wbr>(<a href="Graph.html" title="type parameter in Graph">V</a>&nbsp;from,
@@ -188,7 +192,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeVertex(V)" class="member-name-link">removeVertex</a><wbr>(<a href="Graph.html" title="type parameter in Graph">V</a>&nbsp;vertex)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Removes a single vertex from this graph, if it exists (optional operation).</div>
+<div class="block">Removes a single vertex from this graph, if one exists (optional operation).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link">OptionalInt</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#reweightEdge(ru.nsu.fit.smolyakov.graph.Edge)" class="member-name-link">reweightEdge</a><wbr>(<a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="Graph.html" title="type parameter in Graph">V</a>&gt;&nbsp;edge)</code></div>
@@ -205,7 +209,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#vertexExists(V)" class="member-name-link">vertexExists</a><wbr>(<a href="Graph.html" title="type parameter in Graph">V</a>&nbsp;vertex)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Checks if a specified vertex exists.</div>
+<div class="block">Returns if a specified vertex exists.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#verticesCount()" class="member-name-link">verticesCount</a>()</code></div>
@@ -230,7 +234,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="isEmpty()">
 <h3>isEmpty</h3>
 <div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">isEmpty</span>()</div>
-<div class="block">Checks if this graph contains at least one vertex.</div>
+<div class="block">Returns if this graph contains at least one vertex.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd><code>true</code> if this graph is empty,
@@ -245,7 +249,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns an amount of vertices in this graph.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>amount of vertices</dd>
+<dd>an amount of vertices</dd>
 </dl>
 </section>
 </li>
@@ -256,7 +260,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns an amount of edges in this graph.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>amount of edges</dd>
+<dd>an amount of edges</dd>
 </dl>
 </section>
 </li>
@@ -264,10 +268,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="vertexExists(V)">
 <h3 id="vertexExists(java.lang.Object)">vertexExists</h3>
 <div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">vertexExists</span><wbr><span class="parameters">(<a href="Graph.html" title="type parameter in Graph">V</a>&nbsp;vertex)</span></div>
-<div class="block">Checks if a specified vertex exists.</div>
+<div class="block">Returns if a specified vertex exists.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>vertex</code> - a vertex to check</dd>
+<dd><code>vertex</code> - a specified vertex</dd>
 <dt>Returns:</dt>
 <dd><code>true</code> if a specified vertex exists, 
          <code>false</code> otherwise</dd>
@@ -279,13 +283,13 @@ loadScripts(document, 'script');</script>
 <h3 id="edgeExists(java.lang.Object,java.lang.Object)">edgeExists</h3>
 <div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">edgeExists</span><wbr><span class="parameters">(<a href="Graph.html" title="type parameter in Graph">V</a>&nbsp;from,
  <a href="Graph.html" title="type parameter in Graph">V</a>&nbsp;to)</span></div>
-<div class="block">Checks if an edge between specified vertices exists.</div>
+<div class="block">Checks if an edge related to specified vertices exists.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>from</code> - a vertex a specified edge comes from</dd>
 <dd><code>to</code> - a vertex a specified edge comes to</dd>
 <dt>Returns:</dt>
-<dd><code>true</code> if an edge between specified vertices exists, 
+<dd><code>true</code> if an edge related to specified vertices exists, 
          <code>false</code> otherwise</dd>
 </dl>
 </section>
@@ -295,15 +299,15 @@ loadScripts(document, 'script');</script>
 <h3 id="getEdgeWeight(java.lang.Object,java.lang.Object)">getEdgeWeight</h3>
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link">OptionalInt</a></span>&nbsp;<span class="element-name">getEdgeWeight</span><wbr><span class="parameters">(<a href="Graph.html" title="type parameter in Graph">V</a>&nbsp;from,
  <a href="Graph.html" title="type parameter in Graph">V</a>&nbsp;to)</span></div>
-<div class="block">Returns a weight of an edge connected to specified vertices. 
- If this edge doesn't exist, this method does nothing and 
- returns <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a>.</div>
+<div class="block">Returns a weight of an edge related to specified vertices. 
+ If this edge doesn't exist, this method returns 
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>from</code> - a vertex a specified edge comes from</dd>
 <dd><code>to</code> - a vertex a specified edge comes to</dd>
 <dt>Returns:</dt>
-<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a> of old weight if an edge between specified 
+<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a> of old weight if an edge related to specified 
          vertices exists, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a> otherwise</dd>
 <dt>See Also:</dt>
 <dd>
@@ -319,20 +323,22 @@ loadScripts(document, 'script');</script>
 <h3 id="getEdge(java.lang.Object,java.lang.Object)">getEdge</h3>
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="Graph.html" title="type parameter in Graph">V</a>&gt;&gt;</span>&nbsp;<span class="element-name">getEdge</span><wbr><span class="parameters">(<a href="Graph.html" title="type parameter in Graph">V</a>&nbsp;from,
  <a href="Graph.html" title="type parameter in Graph">V</a>&nbsp;to)</span></div>
-<div class="block">Returns an edge record containing weight and vertices it connects. 
- If this edge doesn't exist, this method does nothing and 
- returns <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html#empty()" title="class or interface in java.util" class="external-link"><code>Optional.empty()</code></a>.</div>
+<div class="block">Returns an <a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph"><code>Edge</code></a> record related to specified vertices. 
+ If such edge doesn't exist, this method returns 
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html#empty()" title="class or interface in java.util" class="external-link"><code>Optional.empty()</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>from</code> - a vertex a specified edge comes from</dd>
 <dd><code>to</code> - a vertex a specified edge comes to</dd>
 <dt>Returns:</dt>
-<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link"><code>Optional</code></a> of an edge between specified 
-         vertices it it exists, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html#empty()" title="class or interface in java.util" class="external-link"><code>Optional.empty()</code></a> otherwise</dd>
+<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link"><code>Optional</code></a> of an edge related to specified 
+         vertices it it exists, 
+         <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html#empty()" title="class or interface in java.util" class="external-link"><code>Optional.empty()</code></a> otherwise</dd>
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list">
 <li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link"><code>Optional</code></a></li>
+<li><a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph"><code>Edge</code></a></li>
 </ul>
 </dd>
 </dl>
@@ -342,7 +348,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="addVertex(V)">
 <h3 id="addVertex(java.lang.Object)">addVertex</h3>
 <div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">addVertex</span><wbr><span class="parameters">(<a href="Graph.html" title="type parameter in Graph">V</a>&nbsp;vertex)</span></div>
-<div class="block">Adds a single vertex to this graph (optional operation).</div>
+<div class="block">Inserts a single vertex to this graph (optional operation).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>vertex</code> - a vertex to add</dd>
@@ -359,7 +365,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="removeVertex(V)">
 <h3 id="removeVertex(java.lang.Object)">removeVertex</h3>
 <div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">removeVertex</span><wbr><span class="parameters">(<a href="Graph.html" title="type parameter in Graph">V</a>&nbsp;vertex)</span></div>
-<div class="block">Removes a single vertex from this graph, if it exists (optional operation).</div>
+<div class="block">Removes a single vertex from this graph, if one exists (optional operation).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>vertex</code> - a vertex to remove</dd>
@@ -380,11 +386,11 @@ loadScripts(document, 'script');</script>
  int&nbsp;weight)</span></div>
 <div class="block">Adds a single edge to this graph (optional operation).
  
- <p>It's supposed that if this edge already exists, 
- this function won't insert a specified edge.
+ <p>If this edge already exists, 
+ this method does nothing and returns <code>false</code>. 
  
  <p>If a vertex specified by <code>from</code> or <code>to</code> doesn't exist,
- this method returns false.</div>
+ this method also returns <code>false</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>from</code> - a vertex a new edge comes from</dd>
@@ -405,11 +411,11 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">addEdge</span><wbr><span class="parameters">(<a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="Graph.html" title="type parameter in Graph">V</a>&gt;&nbsp;edge)</span></div>
 <div class="block">Adds a single edge to this graph (optional operation).
  
- <p>It's supposed that if this edge already exists, 
- this function won't insert a specified edge.
+ <p>If this edge already exists, 
+ this method does nothing and returns <code>false</code>. 
  
  <p>If a vertex specified by <code>from</code> or <code>to</code> doesn't exist,
- this method returns <code>false</code>.</div>
+ this method also returns <code>false</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>edge</code> - a new <a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph"><code>Edge</code></a></dd>
@@ -435,12 +441,18 @@ loadScripts(document, 'script');</script>
 <dd><code>from</code> - a vertex a new edge comes from</dd>
 <dd><code>to</code> - a vertex a new edge comes to</dd>
 <dt>Returns:</dt>
-<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a> of old weight if an edge between specified 
+<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a> of old weight if an edge related to specified 
          vertices exists, 
          <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a> otherwise</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/UnsupportedOperationException.html" title="class or interface in java.lang" class="external-link">UnsupportedOperationException</a></code> - if this operation 
                                        is not supported by this graph</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a></li>
+</ul>
+</dd>
 </dl>
 </section>
 </li>
@@ -459,12 +471,18 @@ loadScripts(document, 'script');</script>
 <dd><code>to</code> - a vertex a specified edge comes to</dd>
 <dd><code>newWeight</code> - a new weight of an edge</dd>
 <dt>Returns:</dt>
-<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a> of old weight if an edge between specified 
+<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a> of old weight if an edge related to specified 
          vertices exists, 
          <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a> otherwise</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/UnsupportedOperationException.html" title="class or interface in java.lang" class="external-link">UnsupportedOperationException</a></code> - if this operation 
                                        is not supported by this graph</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a></li>
+</ul>
+</dd>
 </dl>
 </section>
 </li>
@@ -479,7 +497,7 @@ loadScripts(document, 'script');</script>
 <dt>Parameters:</dt>
 <dd><code>edge</code> - an <a href="Edge.html" title="class in ru.nsu.fit.smolyakov.graph"><code>Edge</code></a> record containing new weight</dd>
 <dt>Returns:</dt>
-<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a> of old weight, if an edge between specified 
+<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a> of old weight, if an edge related to specified 
          vertices exists, 
          <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a> otherwise</dd>
 <dt>Throws:</dt>

@@ -77,6 +77,24 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">AdjacencyMatrixParser</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Provides a parser for specified <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/FileReader.html" title="class or interface in java.io" class="external-link"><code>FileReader</code></a> containing graph specification
+ represented by an adjacency matrix.
+ 
+ <p><a href="#getGraphSets()"><code>getGraphSets()</code></a> method returns parsed data represented in Java collections.
+ 
+ <p><a href="#toGraph()"><code>toGraph()</code></a> method instanciates an 
+ <a href="../adjacency_matrix/AdjacencyMatrixGraph.html" title="class in ru.nsu.fit.smolyakov.graph.adjacency_matrix"><code>AdjacencyMatrixGraph</code></a>.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link"><code>Collection</code></a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link"><code>Set</code></a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Arrays.html" title="class or interface in java.util" class="external-link"><code>Arrays</code></a></li>
+<li><a href="../adjacency_matrix/AdjacencyMatrixGraph.html" title="class in ru.nsu.fit.smolyakov.graph.adjacency_matrix"><code>AdjacencyMatrixGraph</code></a></li>
+</ul>
+</dd>
+</dl>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -90,7 +108,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.io.FileReader)" class="member-name-link">AdjacencyMatrixParser</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/FileReader.html" title="class or interface in java.io" class="external-link">FileReader</a>&nbsp;source)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Constructs an edges list parser for a specified <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/FileReader.html" title="class or interface in java.io" class="external-link"><code>FileReader</code></a> source.</div>
+<div class="block">Constructs an adjacency matrix parser for a specified <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/FileReader.html" title="class or interface in java.io" class="external-link"><code>FileReader</code></a> source.</div>
 </div>
 </div>
 </section>
@@ -109,11 +127,15 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>[][]&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getGraphSets()" class="member-name-link">getGraphSets</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns a set of vertices and a set of edges specified by input file.</div>
+<div class="block">Returns a set of vertices and an adjacency matrix as a result of parsing.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../adjacency_matrix/AdjacencyMatrixGraph.html" title="class in ru.nsu.fit.smolyakov.graph.adjacency_matrix">AdjacencyMatrixGraph</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toGraph()" class="member-name-link">toGraph</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Instanciates an 
+ <a href="../adjacency_matrix/AdjacencyMatrixGraph.html" title="class in ru.nsu.fit.smolyakov.graph.adjacency_matrix"><code>AdjacencyMatrixGraph</code></a>
+ based on a result of parsing.</div>
+</div>
 </div>
 </div>
 </div>
@@ -138,17 +160,15 @@ loadScripts(document, 'script');</script>
                       throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/FileNotFoundException.html" title="class or interface in java.io" class="external-link">FileNotFoundException</a>,
 <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a>,
 <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/zip/DataFormatException.html" title="class or interface in java.util.zip" class="external-link">DataFormatException</a></span></div>
-<div class="block">Constructs an edges list parser for a specified <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/FileReader.html" title="class or interface in java.io" class="external-link"><code>FileReader</code></a> source.
+<div class="block">Constructs an adjacency matrix parser for a specified <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/FileReader.html" title="class or interface in java.io" class="external-link"><code>FileReader</code></a> source.
  
  <p>First line should contain whitespace-separated names of vertices belong to 
- graph which is being constructed. Remaining lines have to describe list of edges.
+ graph which is being constructed. Remaining lines have to contain an adjacency matrix.
  
  <p>For example:
  
  <p><code>a !nil c</code>
- 
  <p><code># Commentary starts with #</code>
- 
  <p><code>!nil    2    1</code>
  <p><code>   0    2    1</code>
  <p><code>1234    2 9000</code>
@@ -177,10 +197,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getGraphSets()">
 <h3>getGraphSets</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>[][]&gt;</span>&nbsp;<span class="element-name">getGraphSets</span>()</div>
-<div class="block">Returns a set of vertices and a set of edges specified by input file.</div>
+<div class="block">Returns a set of vertices and an adjacency matrix as a result of parsing.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>Map.Entry</code></a> of set of vertices and set of edges.</dd>
+<dd>a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link"><code>Map.Entry</code></a> of set of vertices and set of edges</dd>
 </dl>
 </section>
 </li>
@@ -188,6 +208,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="toGraph()">
 <h3>toGraph</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../adjacency_matrix/AdjacencyMatrixGraph.html" title="class in ru.nsu.fit.smolyakov.graph.adjacency_matrix">AdjacencyMatrixGraph</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">toGraph</span>()</div>
+<div class="block">Instanciates an 
+ <a href="../adjacency_matrix/AdjacencyMatrixGraph.html" title="class in ru.nsu.fit.smolyakov.graph.adjacency_matrix"><code>AdjacencyMatrixGraph</code></a>
+ based on a result of parsing.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>a new instance of <a href="../adjacency_matrix/AdjacencyMatrixGraph.html" title="class in ru.nsu.fit.smolyakov.graph.adjacency_matrix"><code>AdjacencyMatrixGraph</code></a></dd>
+</dl>
 </section>
 </li>
 </ul>

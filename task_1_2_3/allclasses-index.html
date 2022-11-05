@@ -61,25 +61,38 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/fit/smolyakov/graph/AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph">AbstractGraph</a>&lt;<a href="ru/nsu/fit/smolyakov/graph/AbstractGraph.html" title="type parameter in AbstractGraph">V</a>&gt;</div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">This class provides a skeletal implementation of the graph data structure to minimize the effort 
- required to implement it.</div>
+<div class="block">This class provides a skeletal implementation of the <a href="ru/nsu/fit/smolyakov/graph/Graph.html" title="interface in ru.nsu.fit.smolyakov.graph"><code>Graph</code></a> interface to minimize 
+ the effort required to implement it.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/fit/smolyakov/graph/adjacency_matrix/AdjacencyMatrixGraph.html" title="class in ru.nsu.fit.smolyakov.graph.adjacency_matrix">AdjacencyMatrixGraph</a>&lt;<a href="ru/nsu/fit/smolyakov/graph/adjacency_matrix/AdjacencyMatrixGraph.html" title="type parameter in AdjacencyMatrixGraph">V</a>&gt;</div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Mutable adjacency matrix graph representation which is not memory-effective
+ in most cases, but allows to operate with edges in a constant time.</div>
+</div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/fit/smolyakov/graph/parser/AdjacencyMatrixParser.html" title="class in ru.nsu.fit.smolyakov.graph.parser">AdjacencyMatrixParser</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Provides a parser for specified <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/FileReader.html" title="class or interface in java.io" class="external-link"><code>FileReader</code></a> containing graph specification
+ represented by an adjacency matrix.</div>
+</div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab4"><a href="ru/nsu/fit/smolyakov/graph/Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="ru/nsu/fit/smolyakov/graph/Edge.html" title="type parameter in Edge">V</a>&gt;</div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/fit/smolyakov/graph/parser/EdgesListParser.html" title="class in ru.nsu.fit.smolyakov.graph.parser">EdgesListParser</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab4">
+<div class="block">Stores a vertex this edge comes from, a vertex this edge comes to and 
+ a weight of this edge (or a distance between vertices).</div>
+</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/fit/smolyakov/graph/parser/EdgesSetParser.html" title="class in ru.nsu.fit.smolyakov.graph.parser">EdgesSetParser</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Provides a parser for specified <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/FileReader.html" title="class or interface in java.io" class="external-link"><code>FileReader</code></a> containing graph specification
+ represented by an edges set.</div>
+</div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="ru/nsu/fit/smolyakov/graph/Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="ru/nsu/fit/smolyakov/graph/Graph.html" title="type parameter in Graph">V</a>&gt;</div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
-<div class="block">This class provides a skeletal implementation of the graph data structure to minimize the effort 
- required to implement it.</div>
+<div class="block">A graph, an abstraction describing the relationship between lines (called edges) and points
+ (called vertices).</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/fit/smolyakov/graph/incident_list/IncidentListGraph.html" title="class in ru.nsu.fit.smolyakov.graph.incident_list">IncidentListGraph</a>&lt;<a href="ru/nsu/fit/smolyakov/graph/incident_list/IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;</div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Graph representation which in general appears the most asymptotically profitable.</div>
+<div class="block">Mutable incident list graph representation which in general 
+ appears the most asymptotically profitable and memory-efficient.</div>
 </div>
 </div>
 </div>

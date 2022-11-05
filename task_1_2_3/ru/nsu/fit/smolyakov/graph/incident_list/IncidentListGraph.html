@@ -83,7 +83,26 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">IncidentListGraph&lt;V&gt;</span>
 <span class="extends-implements">extends <a href="../AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph">AbstractGraph</a>&lt;V&gt;</span></div>
-<div class="block">Graph representation which in general appears the most asymptotically profitable.</div>
+<div class="block">Mutable incident list graph representation which in general 
+ appears the most asymptotically profitable and memory-efficient.
+ Implements all methods of <a href="../AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph"><code>AbstractGraph</code></a>.
+ 
+ <p>It's highly recommended to use this representation, unless the
+ graph is dense.
+ 
+ <p>Can be instanciated from a file input using 
+ <a href="../parser/EdgesSetParser.html" title="class in ru.nsu.fit.smolyakov.graph.parser"><code>EdgesSetParser</code></a>.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="../Graph.html" title="interface in ru.nsu.fit.smolyakov.graph"><code>Graph</code></a></li>
+<li><a href="../AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph"><code>AbstractGraph</code></a></li>
+<li><a href="../adjacency_matrix/AdjacencyMatrixGraph.html" title="class in ru.nsu.fit.smolyakov.graph.adjacency_matrix"><code>AdjacencyMatrixGraph</code></a></li>
+<li><a href="../parser/EdgesSetParser.html" title="class in ru.nsu.fit.smolyakov.graph.parser"><code>EdgesSetParser</code></a></li>
+</ul>
+</dd>
+</dl>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -96,15 +115,24 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">IncidentListGraph</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.util.List,java.lang.Integer%5B%5D%5B%5D)" class="member-name-link">IncidentListGraph</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;&nbsp;verticesSet,
+<div class="col-last even-row-color">
+<div class="block">A no-args constructor for an empty graph.</div>
+</div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.util.List,java.lang.Integer%5B%5D%5B%5D)" class="member-name-link">IncidentListGraph</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;&nbsp;verticesList,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>[][]&nbsp;matrix)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.Set)" class="member-name-link">IncidentListGraph</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;&gt;&nbsp;edgesList)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">An adjacency matrix constructor.</div>
+</div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.Set)" class="member-name-link">IncidentListGraph</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;&gt;&nbsp;edgesSet)</code></div>
+<div class="col-last even-row-color">
+<div class="block">An edges set constructor.</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.util.Set,java.util.Set)" class="member-name-link">IncidentListGraph</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;&nbsp;verticesSet,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;&gt;&nbsp;edgesSet)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">An edges set constructor with a specified
+ set of vertices.</div>
+</div>
 </div>
 </section>
 </li>
@@ -122,17 +150,17 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addEdge(ru.nsu.fit.smolyakov.graph.Edge)" class="member-name-link">addEdge</a><wbr>(<a href="../Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;&nbsp;edge)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Adds a single edge to this graph (optional operation).</div>
+<div class="block">Adds a single edge to this graph.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addVertex(V)" class="member-name-link">addVertex</a><wbr>(<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&nbsp;vertex)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Adds a single vertex to this graph (optional operation).</div>
+<div class="block">Inserts a single vertex to this graph.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#clear()" class="member-name-link">clear</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Turns a graph into an empty state (optional operation).</div>
+<div class="block">Turns a graph into an empty state.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAdjacentEdges(V)" class="member-name-link">getAdjacentEdges</a><wbr>(<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&nbsp;vertex)</code></div>
@@ -148,29 +176,29 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getEdge(V,V)" class="member-name-link">getEdge</a><wbr>(<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&nbsp;from,
  <a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&nbsp;to)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns an edge record containing weight and vertices it connects.</div>
+<div class="block">Returns an <a href="../Edge.html" title="class in ru.nsu.fit.smolyakov.graph"><code>Edge</code></a> record related to specified vertices.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link">OptionalInt</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeEdge(V,V)" class="member-name-link">removeEdge</a><wbr>(<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&nbsp;from,
  <a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&nbsp;to)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Removes a single edge from this graph (optional operation).</div>
+<div class="block">Removes a single edge from this graph.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeVertex(V)" class="member-name-link">removeVertex</a><wbr>(<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&nbsp;vertex)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Changes edge's weight to a specified one (optional operation).</div>
+<div class="block">Removes a single vertex from this graph, if one exists.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="IncidentListGraph.html" title="class in ru.nsu.fit.smolyakov.graph.incident_list">IncidentListGraph</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toIncidentList()" class="member-name-link">toIncidentList</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Does nothing, as this object is already an instance of 
+<div class="block">Returns this, as this object is already an instance of 
  <a href="IncidentListGraph.html" title="class in ru.nsu.fit.smolyakov.graph.incident_list"><code>IncidentListGraph</code></a>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#vertexExists(V)" class="member-name-link">vertexExists</a><wbr>(<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&nbsp;vertex)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Checks if a specified vertex exists.</div>
+<div class="block">Returns if a specified vertex exists.</div>
 </div>
 </div>
 </div>
@@ -196,12 +224,24 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>IncidentListGraph</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">IncidentListGraph</span>()</div>
+<div class="block">A no-args constructor for an empty graph.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(java.util.Set)">
 <h3>IncidentListGraph</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">IncidentListGraph</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;&gt;&nbsp;edgesList)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">IncidentListGraph</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;&gt;&nbsp;edgesSet)</span></div>
+<div class="block">An edges set constructor.
+ As a set of vertices is not specified, it's supposed that there is no 
+ terminal vertices in this graph.
+ 
+ <p>Be sure that this method is called by the inheritor of this class
+ at the moment when graph is clear and <a href="#addVertex(V)"><code>addVertex(V)</code></a> and <a href="#addEdge(ru.nsu.fit.smolyakov.graph.Edge)"><code>addEdge(ru.nsu.fit.smolyakov.graph.Edge&lt;V&gt;)</code></a> 
+ methods are ready to use.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>edgesSet</code> - a set of edges</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -209,13 +249,31 @@ loadScripts(document, 'script');</script>
 <h3>IncidentListGraph</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">IncidentListGraph</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;&nbsp;verticesSet,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;&gt;&nbsp;edgesSet)</span></div>
+<div class="block">An edges set constructor with a specified
+ set of vertices. It allows terminal vertices to exist.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>verticesSet</code> - a set of vertices</dd>
+<dd><code>edgesSet</code> - a set of edges</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(java.util.List,java.lang.Integer[][])">
 <h3>IncidentListGraph</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">IncidentListGraph</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;&nbsp;verticesSet,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">IncidentListGraph</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;&nbsp;verticesList,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>[][]&nbsp;matrix)</span></div>
+<div class="block">An adjacency matrix constructor. Each vertex from specified
+ <code>verticesList</code> is mapped into an index according to its 
+ position in the list, so the order in <code>verticesList</code> is considerable.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>verticesList</code> - an ordered list of vertices</dd>
+<dd><code>matrix</code> - an adjacency matrix</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if size of list is not equal to any of
+                                  matrix dimensions</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -230,7 +288,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="toIncidentList()">
 <h3>toIncidentList</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="IncidentListGraph.html" title="class in ru.nsu.fit.smolyakov.graph.incident_list">IncidentListGraph</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;</span>&nbsp;<span class="element-name">toIncidentList</span>()</div>
-<div class="block">Does nothing, as this object is already an instance of 
+<div class="block">Returns this, as this object is already an instance of 
  <a href="IncidentListGraph.html" title="class in ru.nsu.fit.smolyakov.graph.incident_list"><code>IncidentListGraph</code></a>.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
@@ -250,14 +308,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="vertexExists(V)">
 <h3 id="vertexExists(java.lang.Object)">vertexExists</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">vertexExists</span><wbr><span class="parameters">(<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&nbsp;vertex)</span></div>
-<div class="block">Checks if a specified vertex exists.</div>
+<div class="block">Returns if a specified vertex exists.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../Graph.html#vertexExists(V)">vertexExists</a></code>&nbsp;in interface&nbsp;<code><a href="../Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;</code></dd>
 <dt>Specified by:</dt>
 <dd><code><a href="../AbstractGraph.html#vertexExists(V)">vertexExists</a></code>&nbsp;in class&nbsp;<code><a href="../AbstractGraph.html" title="class in ru.nsu.fit.smolyakov.graph">AbstractGraph</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;</code></dd>
 <dt>Parameters:</dt>
-<dd><code>vertex</code> - a vertex to check</dd>
+<dd><code>vertex</code> - a specified vertex</dd>
 <dt>Returns:</dt>
 <dd><code>true</code> if a specified vertex exists, 
          <code>false</code> otherwise</dd>
@@ -269,9 +327,9 @@ loadScripts(document, 'script');</script>
 <h3 id="getEdge(java.lang.Object,java.lang.Object)">getEdge</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="../Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;&gt;</span>&nbsp;<span class="element-name">getEdge</span><wbr><span class="parameters">(<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&nbsp;from,
  <a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&nbsp;to)</span></div>
-<div class="block">Returns an edge record containing weight and vertices it connects. 
- If this edge doesn't exist, this method does nothing and 
- returns <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html#empty()" title="class or interface in java.util" class="external-link"><code>Optional.empty()</code></a>.</div>
+<div class="block">Returns an <a href="../Edge.html" title="class in ru.nsu.fit.smolyakov.graph"><code>Edge</code></a> record related to specified vertices. 
+ If such edge doesn't exist, this method returns 
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html#empty()" title="class or interface in java.util" class="external-link"><code>Optional.empty()</code></a>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../Graph.html#getEdge(V,V)">getEdge</a></code>&nbsp;in interface&nbsp;<code><a href="../Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;</code></dd>
@@ -281,12 +339,14 @@ loadScripts(document, 'script');</script>
 <dd><code>from</code> - a vertex a specified edge comes from</dd>
 <dd><code>to</code> - a vertex a specified edge comes to</dd>
 <dt>Returns:</dt>
-<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link"><code>Optional</code></a> of an edge between specified 
-         vertices it it exists, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html#empty()" title="class or interface in java.util" class="external-link"><code>Optional.empty()</code></a> otherwise</dd>
+<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link"><code>Optional</code></a> of an edge related to specified 
+         vertices it it exists, 
+         <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html#empty()" title="class or interface in java.util" class="external-link"><code>Optional.empty()</code></a> otherwise</dd>
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list">
 <li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link"><code>Optional</code></a></li>
+<li><a href="../Edge.html" title="class in ru.nsu.fit.smolyakov.graph"><code>Edge</code></a></li>
 </ul>
 </dd>
 </dl>
@@ -296,7 +356,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="addVertex(V)">
 <h3 id="addVertex(java.lang.Object)">addVertex</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">addVertex</span><wbr><span class="parameters">(<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&nbsp;vertex)</span></div>
-<div class="block">Adds a single vertex to this graph (optional operation).</div>
+<div class="block">Inserts a single vertex to this graph.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../Graph.html#addVertex(V)">addVertex</a></code>&nbsp;in interface&nbsp;<code><a href="../Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;</code></dd>
@@ -314,9 +374,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="removeVertex(V)">
 <h3 id="removeVertex(java.lang.Object)">removeVertex</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">removeVertex</span><wbr><span class="parameters">(<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&nbsp;vertex)</span></div>
-<div class="block">Changes edge's weight to a specified one (optional operation).
- If edge doesn't exist, this method does nothing and 
- returns <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a>.</div>
+<div class="block">Removes a single vertex from this graph, if one exists.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../Graph.html#removeVertex(V)">removeVertex</a></code>&nbsp;in interface&nbsp;<code><a href="../Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;</code></dd>
@@ -325,9 +383,8 @@ loadScripts(document, 'script');</script>
 <dt>Parameters:</dt>
 <dd><code>vertex</code> - a vertex to remove</dd>
 <dt>Returns:</dt>
-<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a> of old weight if an edge between specified 
-         vertices exists, 
-         <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a> otherwise</dd>
+<dd><code>true</code> if vertex successfully removed,
+         <code>false</code> if it's not presented in this graph.</dd>
 </dl>
 </section>
 </li>
@@ -335,13 +392,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="addEdge(ru.nsu.fit.smolyakov.graph.Edge)">
 <h3>addEdge</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">addEdge</span><wbr><span class="parameters">(<a href="../Edge.html" title="class in ru.nsu.fit.smolyakov.graph">Edge</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;&nbsp;edge)</span></div>
-<div class="block">Adds a single edge to this graph (optional operation).
+<div class="block">Adds a single edge to this graph.
  
- <p>It's supposed that if this edge already exists, 
- this function won't insert a specified edge.
+ <p>If this edge already exists, 
+ this method does nothing and returns <code>false</code>. 
  
  <p>If a vertex specified by <code>from</code> or <code>to</code> doesn't exist,
- this method returns <code>false</code>.</div>
+ this method also returns <code>false</code>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../Graph.html#addEdge(ru.nsu.fit.smolyakov.graph.Edge)">addEdge</a></code>&nbsp;in interface&nbsp;<code><a href="../Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;</code></dd>
@@ -360,7 +417,7 @@ loadScripts(document, 'script');</script>
 <h3 id="removeEdge(java.lang.Object,java.lang.Object)">removeEdge</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link">OptionalInt</a></span>&nbsp;<span class="element-name">removeEdge</span><wbr><span class="parameters">(<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&nbsp;from,
  <a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&nbsp;to)</span></div>
-<div class="block">Removes a single edge from this graph (optional operation).
+<div class="block">Removes a single edge from this graph.
  If edge doesn't exist, this method does nothing and 
  returns <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a>.</div>
 <dl class="notes">
@@ -372,9 +429,15 @@ loadScripts(document, 'script');</script>
 <dd><code>from</code> - a vertex a new edge comes from</dd>
 <dd><code>to</code> - a vertex a new edge comes to</dd>
 <dt>Returns:</dt>
-<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a> of old weight if an edge between specified 
+<dd><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a> of old weight if an edge related to specified 
          vertices exists, 
          <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link"><code>OptionalInt.empty()</code></a> otherwise</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link"><code>OptionalInt</code></a></li>
+</ul>
+</dd>
 </dl>
 </section>
 </li>
@@ -427,7 +490,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="clear()">
 <h3>clear</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">clear</span>()</div>
-<div class="block">Turns a graph into an empty state (optional operation).</div>
+<div class="block">Turns a graph into an empty state.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../Graph.html#clear()">clear</a></code>&nbsp;in interface&nbsp;<code><a href="../Graph.html" title="interface in ru.nsu.fit.smolyakov.graph">Graph</a>&lt;<a href="IncidentListGraph.html" title="type parameter in IncidentListGraph">V</a>&gt;</code></dd>
