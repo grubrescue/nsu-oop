@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.fit.smolyakov.substring_finder","l":"ByteSlicer"},{"p":"ru.nsu.fit.smolyakov.substring_finder","l":"Main"},{"p":"ru.nsu.fit.smolyakov.substring_finder","l":"SubstringFinder"}]
