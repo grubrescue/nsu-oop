@@ -90,32 +90,66 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </nav>
 </header>
 <main role="main">
-<div class="contentContainer"><a href="#I:B">B</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes</a>&nbsp;<a href="allpackages-index.html">All&nbsp;Packages</a><a id="I:B">
+<div class="contentContainer"><a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:K">K</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes</a>&nbsp;<a href="allpackages-index.html">All&nbsp;Packages</a><a id="I:A">
 <!--   -->
 </a>
-<h2 class="title">B</h2>
+<h2 class="title">A</h2>
 <dl>
-<dt><a href="ru/nsu/fit/smolyakov/substring_finder/ByteSlicer.html" title="class in ru.nsu.fit.smolyakov.substring_finder"><span class="typeNameLink">ByteSlicer</span></a> - Class in <a href="ru/nsu/fit/smolyakov/substring_finder/package-summary.html">ru.nsu.fit.smolyakov.substring_finder</a></dt>
+<dt><a href="ru/nsu/fit/smolyakov/substring_finder/AbstractSubstringFinder.html" title="class in ru.nsu.fit.smolyakov.substring_finder"><span class="typeNameLink">AbstractSubstringFinder</span></a> - Class in <a href="ru/nsu/fit/smolyakov/substring_finder/package-summary.html">ru.nsu.fit.smolyakov.substring_finder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/ByteSlicer.html#%3Cinit%3E(java.io.InputStream,int)">ByteSlicer(InputStream, int)</a></span> - Constructor for class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/ByteSlicer.html" title="class in ru.nsu.fit.smolyakov.substring_finder">ByteSlicer</a></dt>
-<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/AbstractSubstringFinder.html#%3Cinit%3E(java.io.InputStream,java.lang.String)">AbstractSubstringFinder(InputStream, String)</a></span> - Constructor for class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/AbstractSubstringFinder.html" title="class in ru.nsu.fit.smolyakov.substring_finder">AbstractSubstringFinder</a></dt>
+<dd>
+<div class="block">Constructs a new instance of <code>AbstractSubstringFinder</code>.</div>
+</dd>
+</dl>
+<a id="I:C">
+<!--   -->
+</a>
+<h2 class="title">C</h2>
+<dl>
+<dt><a href="ru/nsu/fit/smolyakov/substring_finder/CharSlicer.html" title="class in ru.nsu.fit.smolyakov.substring_finder"><span class="typeNameLink">CharSlicer</span></a> - Class in <a href="ru/nsu/fit/smolyakov/substring_finder/package-summary.html">ru.nsu.fit.smolyakov.substring_finder</a></dt>
+<dd>
+<div class="block">The <code>CharSlicer</code> class provides a fixed-size buffered sliding window
+ over a supplied text.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/CharSlicer.html#%3Cinit%3E(java.io.InputStreamReader,int)">CharSlicer(InputStreamReader, int)</a></span> - Constructor for class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/CharSlicer.html" title="class in ru.nsu.fit.smolyakov.substring_finder">CharSlicer</a></dt>
+<dd>
+<div class="block">Constructs a new <a href="ru/nsu/fit/smolyakov/substring_finder/CharSlicer.html" title="class in ru.nsu.fit.smolyakov.substring_finder"><code>CharSlicer</code></a> instance with a specified <code>InputStreamReader</code>
+ and <code>sliceLength</code>.</div>
+</dd>
 </dl>
 <a id="I:F">
 <!--   -->
 </a>
 <h2 class="title">F</h2>
 <dl>
-<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/SubstringFinder.html#findSubstring(java.io.InputStream,byte%5B%5D)">findSubstring(InputStream, byte[])</a></span> - Static method in class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/SubstringFinder.html" title="class in ru.nsu.fit.smolyakov.substring_finder">SubstringFinder</a></dt>
+<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/AbstractSubstringFinder.html#find()">find()</a></span> - Method in class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/AbstractSubstringFinder.html" title="class in ru.nsu.fit.smolyakov.substring_finder">AbstractSubstringFinder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/SubstringFinder.html#findSubstring(java.io.InputStream,java.lang.String)">findSubstring(InputStream, String)</a></span> - Static method in class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/SubstringFinder.html" title="class in ru.nsu.fit.smolyakov.substring_finder">SubstringFinder</a></dt>
+<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/KnuthMorrisPrattSubstringFinder.html#find()">find()</a></span> - Method in class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/KnuthMorrisPrattSubstringFinder.html" title="class in ru.nsu.fit.smolyakov.substring_finder">KnuthMorrisPrattSubstringFinder</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/NaiveSubstringFinder.html#find()">find()</a></span> - Method in class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/NaiveSubstringFinder.html" title="class in ru.nsu.fit.smolyakov.substring_finder">NaiveSubstringFinder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/SubstringPatternFinder.html#find()">find()</a></span> - Method in interface ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/SubstringPatternFinder.html" title="interface in ru.nsu.fit.smolyakov.substring_finder">SubstringPatternFinder</a></dt>
+<dd>
+<div class="block">Proceeds a search of a substring in a supplied text.</div>
+</dd>
 </dl>
 <a id="I:G">
 <!--   -->
 </a>
 <h2 class="title">G</h2>
 <dl>
-<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/ByteSlicer.html#get(int)">get(int)</a></span> - Method in class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/ByteSlicer.html" title="class in ru.nsu.fit.smolyakov.substring_finder">ByteSlicer</a></dt>
+<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/CharSlicer.html#get(int)">get(int)</a></span> - Method in class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/CharSlicer.html" title="class in ru.nsu.fit.smolyakov.substring_finder">CharSlicer</a></dt>
+<dd>
+<div class="block">Returns a slice character at a specified position.</div>
+</dd>
+</dl>
+<a id="I:H">
+<!--   -->
+</a>
+<h2 class="title">H</h2>
+<dl>
+<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/AbstractSubstringFinder.html#haystack">haystack</a></span> - Variable in class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/AbstractSubstringFinder.html" title="class in ru.nsu.fit.smolyakov.substring_finder">AbstractSubstringFinder</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <a id="I:I">
@@ -123,7 +157,19 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </a>
 <h2 class="title">I</h2>
 <dl>
-<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/ByteSlicer.html#iterator()">iterator()</a></span> - Method in class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/ByteSlicer.html" title="class in ru.nsu.fit.smolyakov.substring_finder">ByteSlicer</a></dt>
+<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/CharSlicer.html#iterator()">iterator()</a></span> - Method in class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/CharSlicer.html" title="class in ru.nsu.fit.smolyakov.substring_finder">CharSlicer</a></dt>
+<dd>
+<div class="block">Returns an iterator over this slice characters.</div>
+</dd>
+</dl>
+<a id="I:K">
+<!--   -->
+</a>
+<h2 class="title">K</h2>
+<dl>
+<dt><a href="ru/nsu/fit/smolyakov/substring_finder/KnuthMorrisPrattSubstringFinder.html" title="class in ru.nsu.fit.smolyakov.substring_finder"><span class="typeNameLink">KnuthMorrisPrattSubstringFinder</span></a> - Class in <a href="ru/nsu/fit/smolyakov/substring_finder/package-summary.html">ru.nsu.fit.smolyakov.substring_finder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/KnuthMorrisPrattSubstringFinder.html#%3Cinit%3E(java.io.InputStream,java.lang.String)">KnuthMorrisPrattSubstringFinder(InputStream, String)</a></span> - Constructor for class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/KnuthMorrisPrattSubstringFinder.html" title="class in ru.nsu.fit.smolyakov.substring_finder">KnuthMorrisPrattSubstringFinder</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <a id="I:M">
@@ -136,6 +182,18 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><a href="ru/nsu/fit/smolyakov/substring_finder/Main.html" title="class in ru.nsu.fit.smolyakov.substring_finder"><span class="typeNameLink">Main</span></a> - Class in <a href="ru/nsu/fit/smolyakov/substring_finder/package-summary.html">ru.nsu.fit.smolyakov.substring_finder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/Main.html#%3Cinit%3E()">Main()</a></span> - Constructor for class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/Main.html" title="class in ru.nsu.fit.smolyakov.substring_finder">Main</a></dt>
+<dd>&nbsp;</dd>
+</dl>
+<a id="I:N">
+<!--   -->
+</a>
+<h2 class="title">N</h2>
+<dl>
+<dt><a href="ru/nsu/fit/smolyakov/substring_finder/NaiveSubstringFinder.html" title="class in ru.nsu.fit.smolyakov.substring_finder"><span class="typeNameLink">NaiveSubstringFinder</span></a> - Class in <a href="ru/nsu/fit/smolyakov/substring_finder/package-summary.html">ru.nsu.fit.smolyakov.substring_finder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/NaiveSubstringFinder.html#%3Cinit%3E(java.io.InputStream,java.lang.String)">NaiveSubstringFinder(InputStream, String)</a></span> - Constructor for class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/NaiveSubstringFinder.html" title="class in ru.nsu.fit.smolyakov.substring_finder">NaiveSubstringFinder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/AbstractSubstringFinder.html#needle">needle</a></span> - Variable in class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/AbstractSubstringFinder.html" title="class in ru.nsu.fit.smolyakov.substring_finder">AbstractSubstringFinder</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <a id="I:R">
@@ -151,12 +209,31 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </a>
 <h2 class="title">S</h2>
 <dl>
-<dt><a href="ru/nsu/fit/smolyakov/substring_finder/SubstringFinder.html" title="class in ru.nsu.fit.smolyakov.substring_finder"><span class="typeNameLink">SubstringFinder</span></a> - Class in <a href="ru/nsu/fit/smolyakov/substring_finder/package-summary.html">ru.nsu.fit.smolyakov.substring_finder</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/SubstringFinder.html#%3Cinit%3E()">SubstringFinder()</a></span> - Constructor for class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/SubstringFinder.html" title="class in ru.nsu.fit.smolyakov.substring_finder">SubstringFinder</a></dt>
-<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/CharSlicer.html#shift()">shift()</a></span> - Method in class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/CharSlicer.html" title="class in ru.nsu.fit.smolyakov.substring_finder">CharSlicer</a></dt>
+<dd>
+<div class="block">Shifts the slice right by one character.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/CharSlicer.html#shift(int)">shift(int)</a></span> - Method in class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/CharSlicer.html" title="class in ru.nsu.fit.smolyakov.substring_finder">CharSlicer</a></dt>
+<dd>
+<div class="block">Shifts the slice right by a specified <code>amount</code> of characters.</div>
+</dd>
+<dt><a href="ru/nsu/fit/smolyakov/substring_finder/SubstringPatternFinder.html" title="interface in ru.nsu.fit.smolyakov.substring_finder"><span class="typeNameLink">SubstringPatternFinder</span></a> - Interface in <a href="ru/nsu/fit/smolyakov/substring_finder/package-summary.html">ru.nsu.fit.smolyakov.substring_finder</a></dt>
+<dd>
+<div class="block">An interface for classes whose purpose is to find a needle 
+ (specified substring) in a haystack (supplied text).</div>
+</dd>
 </dl>
-<a href="#I:B">B</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes</a>&nbsp;<a href="allpackages-index.html">All&nbsp;Packages</a></div>
+<a id="I:T">
+<!--   -->
+</a>
+<h2 class="title">T</h2>
+<dl>
+<dt><span class="memberNameLink"><a href="ru/nsu/fit/smolyakov/substring_finder/CharSlicer.html#toCharArray()">toCharArray()</a></span> - Method in class ru.nsu.fit.smolyakov.substring_finder.<a href="ru/nsu/fit/smolyakov/substring_finder/CharSlicer.html" title="class in ru.nsu.fit.smolyakov.substring_finder">CharSlicer</a></dt>
+<dd>
+<div class="block">Converts this <code>CharSlicer</code> to a new character array.</div>
+</dd>
+</dl>
+<a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:K">K</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes</a>&nbsp;<a href="allpackages-index.html">All&nbsp;Packages</a></div>
 </main>
 <footer role="contentinfo">
 <nav role="navigation">
