@@ -140,6 +140,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>public abstract class <span class="typeNameLabel">AbstractSubstringFinder</span>
 extends java.lang.Object
 implements <a href="SubstringPatternFinder.html" title="interface in ru.nsu.fit.smolyakov.substring_finder">SubstringPatternFinder</a></pre>
+<div class="block">A template for a class implementing <a href="SubstringPatternFinder.html" title="interface in ru.nsu.fit.smolyakov.substring_finder"><code>SubstringPatternFinder</code></a> interface.
+ 
+ <p>Provides protected <code>needle</code> and <code>haystack</code> fields, initialized by
+ <a href="#%3Cinit%3E(java.io.InputStream,java.lang.String)"><code>AbstractSubstringFinder(InputStream, String)</code></a>
+ constructor. First one is an array of chars to find in text, being converted from a <code>String</code>.
+ Second one is an instance of <a href="CharSlicer.html" title="class in ru.nsu.fit.smolyakov.substring_finder"><code>CharSlicer</code></a> class, which gives a programmer
+ functionality of a sliding window over the supplied text.</div>
 </li>
 </ul>
 </div>
@@ -163,12 +170,16 @@ implements <a href="SubstringPatternFinder.html" title="interface in ru.nsu.fit.
 <tr class="altColor">
 <td class="colFirst"><code>protected <a href="CharSlicer.html" title="class in ru.nsu.fit.smolyakov.substring_finder">CharSlicer</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#haystack">haystack</a></span></code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">A sliding window over the haystack where the needle have to be found.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected char[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#needle">needle</a></span></code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">A needle to find in a haystack.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -216,7 +227,7 @@ implements <a href="SubstringPatternFinder.html" title="interface in ru.nsu.fit.
 <td class="colFirst"><code>abstract java.util.List&lt;java.lang.Integer&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#find()">find</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Proceeds a search of a substring in a supplied text.</div>
+<div class="block">Finds a substring in a text.</div>
 </td>
 </tr>
 </table>
@@ -250,6 +261,9 @@ implements <a href="SubstringPatternFinder.html" title="interface in ru.nsu.fit.
 <li class="blockList">
 <h4>needle</h4>
 <pre>protected&nbsp;char[] needle</pre>
+<div class="block">A needle to find in a haystack.
+ Initialized by <a href="#%3Cinit%3E(java.io.InputStream,java.lang.String)"><code>AbstractSubstringFinder(InputStream, String)</code></a>
+ consttructor.</div>
 </li>
 </ul>
 <a id="haystack">
@@ -259,6 +273,9 @@ implements <a href="SubstringPatternFinder.html" title="interface in ru.nsu.fit.
 <li class="blockList">
 <h4>haystack</h4>
 <pre>protected&nbsp;<a href="CharSlicer.html" title="class in ru.nsu.fit.smolyakov.substring_finder">CharSlicer</a> haystack</pre>
+<div class="block">A sliding window over the haystack where the needle have to be found.
+ Initialized by <a href="#%3Cinit%3E(java.io.InputStream,java.lang.String)"><code>AbstractSubstringFinder(InputStream, String)</code></a>
+ consttructor.</div>
 </li>
 </ul>
 </li>
@@ -286,7 +303,9 @@ implements <a href="SubstringPatternFinder.html" title="interface in ru.nsu.fit.
 <dd><code>source</code> - a stream containing UTF-8-encoded text</dd>
 <dd><code>needleString</code> - a string to find in a text provided by <code>source</code>.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd>
+<dd><code>java.io.IOException</code> - if <code>source</code> is unavailable</dd>
+<dd><code>java.util.InputMismatchException</code> - if a <code>needleString</code> is longer than a text
+                                 supplied by a <code>source</code></dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="CharSlicer.html" title="class in ru.nsu.fit.smolyakov.substring_finder"><code>CharSlicer</code></a></dd>
 </dl>
@@ -310,13 +329,12 @@ implements <a href="SubstringPatternFinder.html" title="interface in ru.nsu.fit.
 <h4>find</h4>
 <pre class="methodSignature">public abstract&nbsp;java.util.List&lt;java.lang.Integer&gt;&nbsp;find()
                                                 throws java.io.IOException</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="SubstringPatternFinder.html#find()">SubstringPatternFinder</a></code></span></div>
-<div class="block">Proceeds a search of a substring in a supplied text.</div>
+<div class="block">Finds a substring in a text.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="SubstringPatternFinder.html#find()">find</a></code>&nbsp;in interface&nbsp;<code><a href="SubstringPatternFinder.html" title="interface in ru.nsu.fit.smolyakov.substring_finder">SubstringPatternFinder</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>a list of indices where the substring was found</dd>
+<dd>a list of occurences</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>java.io.IOException</code> - if a stream became impossible to read</dd>
 </dl>
