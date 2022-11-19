@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.fit.smolyakov.substringfinder"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.fit.smolyakov.substringfinder"},{"l":"ru.nsu.fit.smolyakov.substringfinder.implementation"}];updateSearchResults();
