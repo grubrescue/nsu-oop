@@ -1,0 +1,18 @@
+{
+  "university": "Ишимский педагогический институт им. П. П. Ершова филиал Тюменского государственного университета",
+  "name": "П.П. Ершов",
+  "recordBookNumber": 100500,
+  "speciality": "отжуманя прес качат бегит",
+  "currentSemesterNumber": 1,
+  "grades": [
+    {
+      "semesterNumber": 1,
+      "subjects": {
+        "Модели отчислений": {
+          "attestationForm": "exam",
+          "mark": "3"
+        }
+      }
+    }
+  ]
+}

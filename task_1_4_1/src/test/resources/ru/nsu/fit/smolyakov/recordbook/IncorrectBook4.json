@@ -1,0 +1,15 @@
+{
+  "university": "",
+  "name": "",
+  "recordBookNumber": 667,
+  "speciality": "",
+  "currentSemesterNumber": 2,
+  "grades": [
+    {
+      "semesterNumber": 1,
+      "subjects": {
+        "FORTRAN": "2"
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "university": "",
+  "name": "",
+  "recordBookNumber": 666,
+  "speciality": "",
+  "currentSemesterNumber": 2,
+  "grades": [
+    {
+      "semesterNumber": 2,
+      "subjects": {
+        "Haskell": {
+          "attestationForm": "exam",
+          "mark": "4"
+        }
+      }
+    }
+  ]
+}

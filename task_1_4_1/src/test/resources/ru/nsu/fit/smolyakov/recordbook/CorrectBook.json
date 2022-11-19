@@ -1,0 +1,87 @@
+{
+  "university": "Novosibirsk State University",
+  "name": "Smolyakov Pavel Evgenievich",
+  "recordBookNumber": 210634,
+  "speciality": "Информатика и вычислительная техника",
+  "currentSemesterNumber": 3,
+  "grades": [
+    {
+      "semesterNumber": 1,
+      "subjects": {
+        "Введение в алгебру и анализ": {
+          "attestationForm": "exam",
+          "mark": "4"
+        },
+        "Введение в дискретную математику и математическую логику": {
+          "attestationForm": "exam",
+          "mark": "4"
+        },
+        "Декларативное программирование": {
+          "attestationForm": "differentiatedCredit",
+          "mark": "5"
+        },
+        "Императивное программирование": {
+          "attestationForm": "differentiatedCredit",
+          "mark": "5"
+        },
+        "Иностранный язык": {
+          "attestationForm": "credit",
+          "mark": "pass"
+        },
+        "История": {
+          "attestationForm": "differentiatedCredit",
+          "mark": "5"
+        },
+        "Основы культуры речи": {
+          "attestationForm": "differentiatedCredit",
+          "mark": "5"
+        },
+        "Физическая культура и спорт": {
+          "attestationForm": "credit",
+          "mark": "pass"
+        },
+        "Цифровые платформы": {
+          "attestationForm": "credit",
+          "mark": "pass"
+        }
+      }
+    },
+    {
+      "semesterNumber": 2,
+      "subjects": {
+        "Введение в алгебру и анализ": {
+          "attestationForm": "exam",
+          "mark": "4"
+        },
+        "Введение в дискретную математику и математическую логику": {
+          "attestationForm": "exam",
+          "mark": "3"
+        },
+        "Декларативное программирование": {
+          "attestationForm": "differentiatedCredit",
+          "mark": "5"
+        },
+        "Императивное программирование": {
+          "attestationForm": "exam",
+          "mark": "5"
+        },
+        "Иностранный язык": {
+          "attestationForm": "differentiatedCredit",
+          "mark": "3"
+        },
+        "Измерительный практикум": {
+          "attestationForm": "credit",
+          "mark": "pass"
+        },
+        "Физическая культура и спорт": {
+          "attestationForm": "credit",
+          "mark": "pass"
+        },
+        "Цифровые платформы": {
+          "attestationForm": "differentiatedCredit",
+          "mark": "4"
+        }
+      }
+    }
+  ]
+}
