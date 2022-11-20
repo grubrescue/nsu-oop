@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.fit.smolyakov.recordbook"},{"l":"ru.nsu.fit.smolyakov.recordbook.internal"}];updateSearchResults();

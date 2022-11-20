@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ru.nsu.fit.smolyakov.recordbook.internal","l":"Mark"},{"p":"ru.nsu.fit.smolyakov.recordbook","l":"RecordBook"},{"p":"ru.nsu.fit.smolyakov.recordbook.internal","l":"SemesterGradesTable"}];updateSearchResults();
