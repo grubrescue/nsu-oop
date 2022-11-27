@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="../../../../../script-dir/jquery-ui.min.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../../jquery-ui.overrides.css" title="Style">
 <script type="text/javascript" src="../../../../../script.js"></script>
-<script type="text/javascript" src="../../../../../script-dir/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="../../../../../script-dir/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.min.js"></script>
 </head>
 <body class="class-declaration-page">
@@ -79,6 +79,27 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">RecordBook</span>
 <span class="extends-implements">extends <a href="internal/AcademicProgressEvaluator.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">AcademicProgressEvaluator</a></span></div>
+<div class="block">An immutable class which contains information about student's record book,
+ including <code>name</code>, <code>university</code>, <code>recordBookNumber</code> and <code>speciality</code>.
+ The main purpose of this class is to evaluate information about student's academic
+ performance (<a href="internal/AcademicProgressEvaluator.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>AcademicProgressEvaluator</code></a> is
+ responsible for this) and make some general conclusions about results of his study (e.g. 
+ <a href="#hasScholarshipNow()"><code>hasScholarshipNow()</code></a>, <a href="#diplomaGradePointAverage()"><code>diplomaGradePointAverage()</code></a>, <a href="#redDiplomaPossible()"><code>redDiplomaPossible()</code></a>,
+ <code>AcademicProgressEvaluator.currentSemesterNumber</code>).
+ 
+ <p>More local information about each semester grades or final grades may be recieved by 
+ <a href="internal/SemesterGradesTable.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>SemesterGradesTable</code></a> methods, whose instance is returned by 
+ respectively <code>AcademicProgressEvaluator.semesterGrades</code> and <code>AcademicProgressEvaluator.finalGrades</code>.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="internal/AcademicProgressEvaluator.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>AcademicProgressEvaluator</code></a></li>
+<li><a href="internal/Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>Mark</code></a></li>
+<li><a href="internal/SemesterGradesTable.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>SemesterGradesTable</code></a></li>
+</ul>
+</dd>
+</dl>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -94,29 +115,49 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#diplomaGPA()" class="member-name-link">diplomaGPA</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#diplomaGradePointAverage()" class="member-name-link">diplomaGradePointAverage</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the current grade point average of a diploma.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RecordBook.html" title="class in ru.nsu.fit.smolyakov.recordbook">RecordBook</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#fromJson(java.io.File)" class="member-name-link">fromJson</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;file)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Returns an instance of <a href="RecordBook.html" title="class in ru.nsu.fit.smolyakov.recordbook">RecordBook</a> corresponding to 
+ JSON data supplied by <code>file</code>.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasScholarshipNow()" class="member-name-link">hasScholarshipNow</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#krasniyDiplom()" class="member-name-link">krasniyDiplom</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#name()" class="member-name-link">name</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns if a student whose academic perfomance is reflected by
+ this record book is getting scholarship at current semester.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#recordbookNumber()" class="member-name-link">recordbookNumber</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#name()" class="member-name-link">name</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the name of a student.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#recordBookNumber()" class="member-name-link">recordBookNumber</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the serial number of this record book.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#redDiplomaPossible()" class="member-name-link">redDiplomaPossible</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns if a student whose academic perfomance is reflected by
+ this record book is able to graduate with a red diploma.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#speciality()" class="member-name-link">speciality</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the speciality of a student whose academic perfomance is reflected by
+ this record book.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#university()" class="member-name-link">university</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the name of university.</div>
+</div>
 </div>
 </div>
 </div>
@@ -144,11 +185,19 @@ loadScripts(document, 'script');</script>
                            throws <span class="exceptions">com.fasterxml.jackson.core.exc.StreamReadException,
 com.fasterxml.jackson.databind.DatabindException,
 <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
+<div class="block">Returns an instance of <a href="RecordBook.html" title="class in ru.nsu.fit.smolyakov.recordbook">RecordBook</a> corresponding to 
+ JSON data supplied by <code>file</code>.</div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>file</code> - a JSON file with record book information</dd>
+<dt>Returns:</dt>
+<dd>an instance of this class</dd>
 <dt>Throws:</dt>
-<dd><code>com.fasterxml.jackson.core.exc.StreamReadException</code></dd>
-<dd><code>com.fasterxml.jackson.databind.DatabindException</code></dd>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if <code>file</code> contains contradictory 
+                                  fields</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if <code>file</code> can't be accessed</dd>
+<dd><code>com.fasterxml.jackson.core.exc.StreamReadException</code> - if error during parsing occured</dd>
+<dd><code>com.fasterxml.jackson.databind.DatabindException</code> - if error during parsing occured</dd>
 </dl>
 </section>
 </li>
@@ -156,6 +205,7 @@ com.fasterxml.jackson.databind.DatabindException,
 <section class="detail" id="university()">
 <h3>university</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">university</span>()</div>
+<div class="block">Returns the name of university.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the university</dd>
@@ -166,6 +216,7 @@ com.fasterxml.jackson.databind.DatabindException,
 <section class="detail" id="name()">
 <h3>name</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">name</span>()</div>
+<div class="block">Returns the name of a student.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the name</dd>
@@ -173,12 +224,13 @@ com.fasterxml.jackson.databind.DatabindException,
 </section>
 </li>
 <li>
-<section class="detail" id="recordbookNumber()">
-<h3>recordbookNumber</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">recordbookNumber</span>()</div>
+<section class="detail" id="recordBookNumber()">
+<h3>recordBookNumber</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">recordBookNumber</span>()</div>
+<div class="block">Returns the serial number of this record book.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the recordbookNumber</dd>
+<dd>the number of this record book</dd>
 </dl>
 </section>
 </li>
@@ -186,6 +238,8 @@ com.fasterxml.jackson.databind.DatabindException,
 <section class="detail" id="speciality()">
 <h3>speciality</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">speciality</span>()</div>
+<div class="block">Returns the speciality of a student whose academic perfomance is reflected by
+ this record book.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the speciality</dd>
@@ -196,18 +250,40 @@ com.fasterxml.jackson.databind.DatabindException,
 <section class="detail" id="hasScholarshipNow()">
 <h3>hasScholarshipNow</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasScholarshipNow</span>()</div>
+<div class="block">Returns if a student whose academic perfomance is reflected by
+ this record book is getting scholarship at current semester.
+ 
+ Indeed, the result is <code>true</code> if there weren't "fail",
+ 2 or 3 marks in the previous semester, or this semester is first.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if a student gets scholarship</dd>
+</dl>
 </section>
 </li>
 <li>
-<section class="detail" id="diplomaGPA()">
-<h3>diplomaGPA</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">diplomaGPA</span>()</div>
+<section class="detail" id="diplomaGradePointAverage()">
+<h3>diplomaGradePointAverage</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">diplomaGradePointAverage</span>()</div>
+<div class="block">Returns the current grade point average of a diploma.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>current grade point average of a diploma</dd>
+</dl>
 </section>
 </li>
 <li>
-<section class="detail" id="krasniyDiplom()">
-<h3>krasniyDiplom</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">krasniyDiplom</span>()</div>
+<section class="detail" id="redDiplomaPossible()">
+<h3>redDiplomaPossible</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">redDiplomaPossible</span>()</div>
+<div class="block">Returns if a student whose academic perfomance is reflected by
+ this record book is able to graduate with a red diploma.
+ It means that at least 75% of final marks are fives or "passes" 
+ and all the rest are fours.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if red diploma is possible</dd>
+</dl>
 </section>
 </li>
 </ul>
