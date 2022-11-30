@@ -66,13 +66,22 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns an amount of marks in this semester.</div>
 </dd>
+<dt><a href="ru/nsu/fit/smolyakov/recordbook/internal/SemesterGradesTable.html#amountOfMarks(int)" class="member-name-link">amountOfMarks(int)</a> - Method in class ru.nsu.fit.smolyakov.recordbook.internal.<a href="ru/nsu/fit/smolyakov/recordbook/internal/SemesterGradesTable.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">SemesterGradesTable</a></dt>
+<dd>
+<div class="block">Returns an amount of marks equal to a specified valuation
+ (both differentiated credits and exams).</div>
+</dd>
 <dt><a href="ru/nsu/fit/smolyakov/recordbook/internal/SemesterGradesTable.html#amountOfMarks(ru.nsu.fit.smolyakov.recordbook.internal.Mark)" class="member-name-link">amountOfMarks(Mark)</a> - Method in class ru.nsu.fit.smolyakov.recordbook.internal.<a href="ru/nsu/fit/smolyakov/recordbook/internal/SemesterGradesTable.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">SemesterGradesTable</a></dt>
 <dd>
-<div class="block">Returns an amount of marks equal to a specified valuation.</div>
+<div class="block">Returns an amount of marks equal to a specified mark.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:C">C</h2>
 <dl class="index">
+<dt><a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html#credit()" class="member-name-link">credit()</a> - Method in class ru.nsu.fit.smolyakov.recordbook.internal.<a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a></dt>
+<dd>
+<div class="block">Returns if this mark is a credit.</div>
+</dd>
 <dt><a href="ru/nsu/fit/smolyakov/recordbook/internal/AcademicProgressEvaluator.html#currentSemesterNumber()" class="member-name-link">currentSemesterNumber()</a> - Method in class ru.nsu.fit.smolyakov.recordbook.internal.<a href="ru/nsu/fit/smolyakov/recordbook/internal/AcademicProgressEvaluator.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">AcademicProgressEvaluator</a></dt>
 <dd>
 <div class="block">Returns the current semester number.</div>
@@ -80,6 +89,10 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:D">D</h2>
 <dl class="index">
+<dt><a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html#differentiatedCredit()" class="member-name-link">differentiatedCredit()</a> - Method in class ru.nsu.fit.smolyakov.recordbook.internal.<a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a></dt>
+<dd>
+<div class="block">Returns if this mark is a differentiated credit.</div>
+</dd>
 <dt><a href="ru/nsu/fit/smolyakov/recordbook/RecordBook.html#diplomaGradePointAverage()" class="member-name-link">diplomaGradePointAverage()</a> - Method in class ru.nsu.fit.smolyakov.recordbook.<a href="ru/nsu/fit/smolyakov/recordbook/RecordBook.html" title="class in ru.nsu.fit.smolyakov.recordbook">RecordBook</a></dt>
 <dd>
 <div class="block">Returns the current grade point average of a diploma.</div>
@@ -90,6 +103,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class ru.nsu.fit.smolyakov.recordbook.internal.<a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a></dt>
 <dd>
 <div class="block">Compares this object to the specified object.</div>
+</dd>
+<dt><a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html#exam()" class="member-name-link">exam()</a> - Method in class ru.nsu.fit.smolyakov.recordbook.internal.<a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a></dt>
+<dd>
+<div class="block">Returns if this mark is an exam.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:F">F</h2>
@@ -130,11 +147,6 @@ loadScripts(document, 'script');</script>
 <div class="block">Provides a functionality to operate with marks specified
  at input JSON.</div>
 </dd>
-<dt><a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html#%3Cinit%3E(int)" class="member-name-link">Mark(int)</a> - Constructor for class ru.nsu.fit.smolyakov.recordbook.internal.<a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a></dt>
-<dd>
-<div class="block">Constructs an instance of <code>Mark</code> class based on 
- a specified <code>value</code>.</div>
-</dd>
 <dt><a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html#%3Cinit%3E(java.lang.String)" class="member-name-link">Mark(String)</a> - Constructor for class ru.nsu.fit.smolyakov.recordbook.internal.<a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a></dt>
 <dd>
 <div class="block">Constructs an instance of <code>Mark</code> class based on 
@@ -155,14 +167,9 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:O">O</h2>
 <dl class="index">
-<dt><a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html#of(int)" class="member-name-link">of(int)</a> - Static method in class ru.nsu.fit.smolyakov.recordbook.internal.<a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a></dt>
-<dd>
-<div class="block">Returns an instance of <code>Mark</code> class based on 
- a specified <code>value</code>.</div>
-</dd>
 <dt><a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html#of(java.lang.String)" class="member-name-link">of(String)</a> - Static method in class ru.nsu.fit.smolyakov.recordbook.internal.<a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a></dt>
 <dd>
-<div class="block">Returns an instance of <code>Mark</code> class based on 
+<div class="block">Constructs an instance of <code>Mark</code> class based on 
  a specified text representation.</div>
 </dd>
 </dl>
@@ -171,6 +178,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html#pass()" class="member-name-link">pass()</a> - Method in class ru.nsu.fit.smolyakov.recordbook.internal.<a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a></dt>
 <dd>
 <div class="block">Returns if the mark may be treated as pass.</div>
+</dd>
+<dt><a href="ru/nsu/fit/smolyakov/recordbook/internal/SemesterGradesTable.html#pass()" class="member-name-link">pass()</a> - Method in class ru.nsu.fit.smolyakov.recordbook.internal.<a href="ru/nsu/fit/smolyakov/recordbook/internal/SemesterGradesTable.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">SemesterGradesTable</a></dt>
+<dd>
+<div class="block">Returns if there weren't any negative marks in this semester.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:R">R</h2>
@@ -221,12 +232,17 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html#toString()" class="member-name-link">toString()</a> - Method in class ru.nsu.fit.smolyakov.recordbook.internal.<a href="ru/nsu/fit/smolyakov/recordbook/internal/Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a></dt>
 <dd>
 <div class="block">Returns a string representation of this mark,
- namely its numeric representation.</div>
+ namely its value and a type of attestation.</div>
 </dd>
 <dt><a href="ru/nsu/fit/smolyakov/recordbook/internal/SemesterGradesTable.html#toString()" class="member-name-link">toString()</a> - Method in class ru.nsu.fit.smolyakov.recordbook.internal.<a href="ru/nsu/fit/smolyakov/recordbook/internal/SemesterGradesTable.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">SemesterGradesTable</a></dt>
 <dd>
 <div class="block">Returns a string representation of this semester grades,
  namely a number of semester, each subject and mark for it.</div>
+</dd>
+<dt><a href="ru/nsu/fit/smolyakov/recordbook/RecordBook.html#toTextTable(java.io.PrintStream)" class="member-name-link">toTextTable(PrintStream)</a> - Method in class ru.nsu.fit.smolyakov.recordbook.<a href="ru/nsu/fit/smolyakov/recordbook/RecordBook.html" title="class in ru.nsu.fit.smolyakov.recordbook">RecordBook</a></dt>
+<dd>
+<div class="block">Writes a text representation of this <code>RecordBook</code> to a
+ specified <code>writer</code>.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:U">U</h2>

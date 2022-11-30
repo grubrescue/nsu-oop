@@ -84,7 +84,9 @@ loadScripts(document, 'script');</script>
  <p>Able to return current <code>semesterNo</code>, string representation by <a href="#toString()"><code>toString()</code></a> and 
  calculate <a href="#gradePointAverage()"><code>gradePointAverage()</code></a>. The copy of whole grades table may be instantiated by 
  <code>marks</code>. <a href="#amountOfMarks()"><code>amountOfMarks()</code></a> returns a total amount of marks, and
- <a href="#amountOfMarks()"><code>amountOfMarks()</code></a> returns an amount of marks equal to specified <a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>Mark</code></a>.</div>
+ <a href="#amountOfMarks(ru.nsu.fit.smolyakov.recordbook.internal.Mark)"><code>amountOfMarks(Mark)</code></a> and <a href="#amountOfMarks(int)"><code>amountOfMarks(int)</code></a> returns an amount of marks equal 
+ to specified <a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>Mark</code></a> and amount of marks with specified valuation (diff. credits
+ and exams only) respectively.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -105,20 +107,31 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns an amount of marks in this semester.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#amountOfMarks(ru.nsu.fit.smolyakov.recordbook.internal.Mark)" class="member-name-link">amountOfMarks</a><wbr>(<a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a>&nbsp;mark)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#amountOfMarks(int)" class="member-name-link">amountOfMarks</a><wbr>(int&nbsp;value)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns an amount of marks equal to a specified valuation.</div>
+<div class="block">Returns an amount of marks equal to a specified valuation
+ (both differentiated credits and exams).</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gradePointAverage()" class="member-name-link">gradePointAverage</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#amountOfMarks(ru.nsu.fit.smolyakov.recordbook.internal.Mark)" class="member-name-link">amountOfMarks</a><wbr>(<a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a>&nbsp;mark)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns an amount of marks equal to a specified mark.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gradePointAverage()" class="member-name-link">gradePointAverage</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns grade point average for this semester.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#marks()" class="member-name-link">marks</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#marks()" class="member-name-link">marks</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a map containing each subject reflected to
  its <a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>Mark</code></a>.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#pass()" class="member-name-link">pass</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns if there weren't any negative marks in this semester.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#semesterNo()" class="member-name-link">semesterNo</a>()</code></div>
@@ -186,12 +199,38 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="amountOfMarks(ru.nsu.fit.smolyakov.recordbook.internal.Mark)">
 <h3>amountOfMarks</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">amountOfMarks</span><wbr><span class="parameters">(<a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a>&nbsp;mark)</span></div>
-<div class="block">Returns an amount of marks equal to a specified valuation.</div>
+<div class="block">Returns an amount of marks equal to a specified mark.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>mark</code> - a specified valuation of a mark</dd>
+<dd><code>mark</code> - a specified mark</dd>
+<dt>Returns:</dt>
+<dd>an amount of marks equal to a specified mark</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="amountOfMarks(int)">
+<h3>amountOfMarks</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">amountOfMarks</span><wbr><span class="parameters">(int&nbsp;value)</span></div>
+<div class="block">Returns an amount of marks equal to a specified valuation
+ (both differentiated credits and exams).</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>value</code> - a specified valuation of a mark</dd>
 <dt>Returns:</dt>
 <dd>an amount of marks equal to a specified valuation</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="pass()">
+<h3>pass</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">pass</span>()</div>
+<div class="block">Returns if there weren't any negative marks in this semester.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if there weren't any negative marks in 
+                      this semester</dd>
 </dl>
 </section>
 </li>

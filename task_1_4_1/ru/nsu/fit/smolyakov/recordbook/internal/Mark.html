@@ -81,8 +81,10 @@ loadScripts(document, 'script');</script>
  at input JSON. 
  
  <p>Implements a <a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>Mark</code></a> constructor which assumes that 
- <code>String</code> parameter contains an integer value in 
- range of 2 and 5 or "pass" or "fail" literals, as well
+ <code>String</code> parameter contains comma-separated type of attestation
+ (<code>"exam"</code>, <code>"differentiated_credit"</code> or <code>"credit"</code>) 
+ and a value in range of 2 and 5 in first two cases or <code>"pass"</code> or 
+ <code>"fail"</code> string literal in a third one, as well
  as static <a href="#of(java.lang.String)"><code>of(java.lang.String)</code></a> method to construct an instance.
  
  <p>"pass" is treated as mark valued 5 and "fail" is treated as 2.</div>
@@ -106,13 +108,8 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int)" class="member-name-link">Mark</a><wbr>(int&nbsp;value)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">Mark</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;field)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Constructs an instance of <code>Mark</code> class based on 
- a specified <code>value</code>.</div>
-</div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">Mark</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;field)</code></div>
-<div class="col-last odd-row-color">
 <div class="block">Constructs an instance of <code>Mark</code> class based on 
  a specified text representation.</div>
 </div>
@@ -131,25 +128,34 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#credit()" class="member-name-link">credit</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns if this mark is a credit.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#differentiatedCredit()" class="member-name-link">differentiatedCredit</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns if this mark is a differentiated credit.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;obj)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Compares this object to the specified object.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#exam()" class="member-name-link">exam</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns a hash code for this <a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>Mark</code></a>.</div>
+<div class="block">Returns if this mark is an exam.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(int)" class="member-name-link">of</a><wbr>(int&nbsp;value)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Returns an instance of <code>Mark</code> class based on 
- a specified <code>value</code>.</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns a hash code for this <a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>Mark</code></a>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(java.lang.String)" class="member-name-link">of</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;field)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Returns an instance of <code>Mark</code> class based on 
+<div class="block">Constructs an instance of <code>Mark</code> class based on 
  a specified text representation.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
@@ -161,9 +167,9 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a string representation of this mark,
- namely its numeric representation.</div>
+ namely its value and a type of attestation.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link">OptionalInt</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#value()" class="member-name-link">value</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a numeric representation of this mark.</div>
@@ -186,35 +192,23 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(int)">
-<h3>Mark</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Mark</span><wbr><span class="parameters">(int&nbsp;value)</span></div>
-<div class="block">Constructs an instance of <code>Mark</code> class based on 
- a specified <code>value</code>. It is supposed to be in range of 2 and 5, 
- otherwise this method throws a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link"><code>NumberFormatException</code></a>.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>value</code> - a specified numeric representation of a mark</dd>
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></code> - if a <code>value</code> is out of supported range</dd>
-</dl>
-</section>
-</li>
-<li>
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>Mark</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Mark</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;field)</span></div>
 <div class="block">Constructs an instance of <code>Mark</code> class based on 
- a specified text representation. <code>field</code> is supposed to be an integer 
- in range of 2 and 5 or "pass" or "fail" string literal, otherwise this 
- method throws a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link"><code>NumberFormatException</code></a>.
+ a specified text representation. <code>field</code> is supposed to be a 
+ comma-separated type of attestation (<code>"exam"</code>, 
+ <code>"differentiated_credit"</code> or <code>"credit"</code>)
+ and a value in range of 2 and 5 in first two cases or <code>"pass"</code> or 
+ <code>"fail"</code> string literal in a third one, otherwise 
+ this method throws a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link"><code>IllegalArgumentException</code></a>.
  
- <p>"pass" is treated as mark valued 5 and "fail" is treated as 2.</div>
+ <p>Credits are not treated as valueable, just "pass" or "fail".</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>field</code> - a specified text representation of a mark</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></code> - if <code>field</code> has incorrect format</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if <code>field</code> has incorrect format</dd>
 </dl>
 </section>
 </li>
@@ -230,49 +224,34 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="of(java.lang.String)">
 <h3>of</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a></span>&nbsp;<span class="element-name">of</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;field)</span></div>
-<div class="block">Returns an instance of <code>Mark</code> class based on 
- a specified text representation. <code>field</code> is supposed to be an integer 
- in range of 2 and 5 or "pass" or "fail" string literal, otherwise this 
- method throws a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link"><code>NumberFormatException</code></a>.
+<div class="block">Constructs an instance of <code>Mark</code> class based on 
+ a specified text representation. <code>field</code> is supposed to be a 
+ comma-separated type of attestation (<code>"exam"</code>, 
+ <code>"differentiated_credit"</code> or <code>"credit"</code>)
+ and a value in range of 2 and 5 in first two cases or <code>"pass"</code> or 
+ <code>"fail"</code> string literal in a third one, otherwise 
+ this method throws a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link"><code>IllegalArgumentException</code></a>.
  
- <p>"pass" is treated as mark valued 5 and "fail" is treated as 2.</div>
+ <p>Credits are not treated as valueable, just "pass" or "fail".</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>field</code> - a specified text representation of a mark</dd>
 <dt>Returns:</dt>
-<dd>an instance of <code>Mark</code> class based on 
-         a specified text representation</dd>
+<dd>an instance of <code>Mark</code></dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></code> - if <code>field</code> has incorrect format</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="of(int)">
-<h3>of</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a></span>&nbsp;<span class="element-name">of</span><wbr><span class="parameters">(int&nbsp;value)</span></div>
-<div class="block">Returns an instance of <code>Mark</code> class based on 
- a specified <code>value</code>. It is supposed to be in range of 2 and 5, 
- otherwise this method throws a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link"><code>NumberFormatException</code></a>.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>value</code> - a specified numeric representation of a mark</dd>
-<dt>Returns:</dt>
-<dd>an instance of <code>Mark</code> class based on 
-         a specified text representation</dd>
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></code> - if a <code>value</code> is out of supported range</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if <code>field</code> has incorrect format</dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="value()">
 <h3>value</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">value</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link">OptionalInt</a></span>&nbsp;<span class="element-name">value</span>()</div>
 <div class="block">Returns a numeric representation of this mark.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>a numeric representation of this mark</dd>
+<dd>an <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html" title="class or interface in java.util" class="external-link">OptionalInt</a> of numeric representation 
+         of this mark, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/OptionalInt.html#empty()" title="class or interface in java.util" class="external-link">OptionalInt.empty()</a> otherwise</dd>
 </dl>
 </section>
 </li>
@@ -292,7 +271,7 @@ loadScripts(document, 'script');</script>
 <h3>toString</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
 <div class="block">Returns a string representation of this mark,
- namely its numeric representation.</div>
+ namely its value and a type of attestation.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
@@ -315,10 +294,44 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="credit()">
+<h3>credit</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">credit</span>()</div>
+<div class="block">Returns if this mark is a credit.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if this mark is a credit</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="differentiatedCredit()">
+<h3>differentiatedCredit</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">differentiatedCredit</span>()</div>
+<div class="block">Returns if this mark is a differentiated credit.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if this mark is a differentiated
+                      credit</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="exam()">
+<h3>exam</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">exam</span>()</div>
+<div class="block">Returns if this mark is an exam.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if this mark is an exam</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="equals(java.lang.Object)">
 <h3>equals</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;obj)</span></div>
-<div class="block">Compares this object to the specified object.  The result is
+<div class="block">Compares this object to the specified object. The result is
  <code>true</code> if and only if the argument is not
  <code>null</code> and is an <code>Mark</code> object that
  contains the same numeric representation of mark 

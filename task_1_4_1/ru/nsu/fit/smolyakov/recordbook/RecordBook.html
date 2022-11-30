@@ -153,9 +153,15 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the speciality of a student whose academic perfomance is reflected by
  this record book.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#university()" class="member-name-link">university</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toTextTable(java.io.PrintStream)" class="member-name-link">toTextTable</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;writer)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Writes a text representation of this <code>RecordBook</code> to a
+ specified <code>writer</code>.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#university()" class="member-name-link">university</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the name of university.</div>
 </div>
 </div>
@@ -283,6 +289,20 @@ com.fasterxml.jackson.databind.DatabindException,
 <dl class="notes">
 <dt>Returns:</dt>
 <dd><code>true</code> if red diploma is possible</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="toTextTable(java.io.PrintStream)">
+<h3>toTextTable</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">toTextTable</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;writer)</span></div>
+<div class="block">Writes a text representation of this <code>RecordBook</code> to a
+ specified <code>writer</code>.
+ 
+ <p>A length of the subjects name is limited to 60 characters.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>writer</code> - a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link"><code>PrintStream</code></a> to write the table to</dd>
 </dl>
 </section>
 </li>
