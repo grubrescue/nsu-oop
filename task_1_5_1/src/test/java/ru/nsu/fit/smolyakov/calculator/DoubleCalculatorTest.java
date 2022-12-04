@@ -24,7 +24,7 @@ class DoubleCalculatorTest {
     }
 
     @Test
-    void simplePlusMinusTests() {
+    void plusMinusMultiplyDivideTests() {
         assertThat(compute("+ 5 5")).isEqualTo(10);
         assertThat(compute("- 5 5")).isEqualTo(0);
         assertThat(compute("* 5 5")).isEqualTo(25);
@@ -39,7 +39,7 @@ class DoubleCalculatorTest {
     }
 
     @Test
-    void simpleTrigonometricalTests() {
+    void trigonometricalTests() {
         assertThat(compute("sin 0")).isEqualTo(0);
         assertThat(compute("cos 0")).isEqualTo(1);
         assertThat(compute("cos PI")).isCloseTo(-1, within(0.01));
@@ -51,5 +51,6 @@ class DoubleCalculatorTest {
     @Test
     void moreDifficultTests() {
         assertThat(compute("sin + - 1 2 1")).isEqualTo(0);
+        //TODO: more difficult tests :)
     }
 }

@@ -5,34 +5,33 @@ import java.util.Optional;
 import java.util.Scanner;
 import java.util.Stack;
 
-import ru.nsu.fit.smolyakov.caclulator.operandsupplier.OperandSupplier;
+import ru.nsu.fit.smolyakov.caclulator.operandparser.OperandParser;
 import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 import ru.nsu.fit.smolyakov.caclulator.operationsupplier.OperationSupplier;
 
-
 public class Calculator<T> {
     private OperationSupplier<T> operationSupplier;
-    private OperandSupplier<T> operandSupplier;
+    private OperandParser<T> operandParser;
 
     private Stack<Operation<T>> stack = new Stack<>();
 
     /**
      * 
      * @param operationSupplier
-     * @param operandSupplier
+     * @param operandParser
      * 
      */
     public Calculator(OperationSupplier<T> operationSupplier, 
-                      OperandSupplier<T> operandSupplier) {
+                      OperandParser<T> operandParser) {
         this.operationSupplier = Objects.requireNonNull(operationSupplier);
-        this.operandSupplier = Objects.requireNonNull(operandSupplier);
+        this.operandParser = Objects.requireNonNull(operandParser);
     }
 
 
     private String parseOperations(Scanner scanner) {
         while (scanner.hasNext()) {
             String operationString = scanner.next();
-            Optional<Operation<T>> operation = operationSupplier.operation(operationString);
+            Optional<Operation<T>> operation = operationSupplier.getByName(operationString);
 
             if (operation.isEmpty()) {
                 return operationString;
@@ -56,7 +55,7 @@ public class Calculator<T> {
 
             for (int i = 1; i < operation.arity(); i++) {
                 if (scanner.hasNext()) {
-                    operands[i] = operandSupplier.parse(scanner.next());
+                    operands[i] = operandParser.valueOf(scanner.next());
                 } else {
                     throw new IllegalArgumentException("not enough operands");
                 }
@@ -81,12 +80,12 @@ public class Calculator<T> {
         if (firstOperandString == null && !stack.isEmpty()) {
             throw new IllegalArgumentException("zero operands, but more than zero operations");
         } else if (firstOperandString == null) {
-            return null;
+            return null; // empty expression 
         }
 
         // throws NumberFormatException, if the first operand
         // has wrong number format
-        T firstOperand = operandSupplier.parse(firstOperandString); 
+        T firstOperand = operandParser.valueOf(firstOperandString); 
         return parseOperands(scanner, firstOperand);
     }
 }

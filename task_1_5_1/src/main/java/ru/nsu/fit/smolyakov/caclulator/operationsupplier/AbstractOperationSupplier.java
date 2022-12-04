@@ -15,7 +15,7 @@ public abstract class AbstractOperationSupplier<T> implements OperationSupplier<
     }
 
     @Override
-    public Optional<Operation<T>> operation(String name) {
+    public Optional<Operation<T>> getByName(String name) {
         return Optional.ofNullable(operationsMap.get(name));
     }
 }

@@ -1,10 +1,10 @@
-package ru.nsu.fit.smolyakov.caclulator.operandsupplier;
+package ru.nsu.fit.smolyakov.caclulator.operandparser;
 
-public class DoubleOperandSupplier implements OperandSupplier<Double> { 
-    public DoubleOperandSupplier() {}
+public class DoubleOperandParser implements OperandParser<Double> { 
+    public DoubleOperandParser() {}
 
     @Override
-    public Double parse(String operandString) throws NumberFormatException {
+    public Double valueOf(String operandString) throws NumberFormatException {
         if (operandString.equals("PI")) {
             return Math.PI;
         } else if (operandString.equals("E")) {

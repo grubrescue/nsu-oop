@@ -53,4 +53,9 @@ class CalculatorContractTest {
     void emptyExpression() {
         assertThat(calc.compute(new Scanner(""))).isNull();
     }
+
+    @Test
+    void justNumberExpression() {
+        assertThat(calc.compute(new Scanner("E"))).isEqualTo(Math.E);
+    }
 }

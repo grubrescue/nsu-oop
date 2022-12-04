@@ -13,11 +13,11 @@ public class Operation<T> {
     }
 
     public Operation(UnaryOperator<T> unaryOperator) {
-        this(1, ((arr) -> unaryOperator.apply(arr[0])));
+        this(1, ((arr) -> Objects.requireNonNull(unaryOperator).apply(arr[0])));
     }
 
     public Operation(BinaryOperator<T> binaryOperator) {
-        this(2, ((arr) -> binaryOperator.apply(arr[0], arr[1])));
+        this(2, ((arr) -> Objects.requireNonNull(binaryOperator).apply(arr[0], arr[1])));
     }
 
     public Operation(int arity, Function<T> nOperator) {
