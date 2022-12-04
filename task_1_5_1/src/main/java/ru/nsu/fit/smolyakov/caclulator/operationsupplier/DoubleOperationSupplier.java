@@ -12,7 +12,9 @@ public class DoubleOperationSupplier extends AbstractOperationSupplier<Double> {
             "*", new Operation<>((a, b) -> a * b),
             "/", new Operation<>((a, b) -> a / b),
             "sin", new Operation<>((a) -> Math.sin(a)),
-            "cos", new Operation<>((a) -> Math.cos(a))
+            "cos", new Operation<>((a) -> Math.cos(a)),
+            "to-deg", new Operation<>((a) -> Math.toDegrees(a)),
+            "to-rad", new Operation<>((a) -> Math.toRadians(a))
         );
 
     public DoubleOperationSupplier() {

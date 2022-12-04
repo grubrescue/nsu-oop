@@ -1,0 +1,56 @@
+package ru.nsu.fit.smolyakov.calculator;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import java.util.Scanner;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import ru.nsu.fit.smolyakov.caclulator.Calculator;
+import ru.nsu.fit.smolyakov.caclulator.DoubleCalculator;
+
+class CalculatorContractTest {
+    static Calculator<Double> calc;
+
+    @BeforeAll
+    static void init() {
+        calc = new DoubleCalculator();
+    }
+
+    @Test
+    void notEnoughOperands() {
+        assertThatThrownBy(() -> calc.compute(new Scanner("+ + 5 5")))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void tooManyOperands() {
+        assertThatThrownBy(() -> calc.compute(new Scanner("+ + 5 5 5 5")))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void noOperands() {
+        assertThatThrownBy(() -> calc.compute(new Scanner("+")))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void wrongSecondOperandFormat() {
+        assertThatThrownBy(() -> calc.compute(new Scanner("+ 0.54 ab0ba")))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void wrongFirstOperandFormat() {
+        assertThatThrownBy(() -> calc.compute(new Scanner("+ abba 6")))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void emptyExpression() {
+        assertThat(calc.compute(new Scanner(""))).isNull();
+    }
+}

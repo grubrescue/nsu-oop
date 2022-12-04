@@ -5,6 +5,12 @@ public class DoubleOperandSupplier implements OperandSupplier<Double> {
 
     @Override
     public Double parse(String operandString) throws NumberFormatException {
-        return Double.valueOf(operandString);
+        if (operandString.equals("PI")) {
+            return Math.PI;
+        } else if (operandString.equals("E")) {
+            return Math.E;
+        } else {
+            return Double.valueOf(operandString);
+        }
     }
 }

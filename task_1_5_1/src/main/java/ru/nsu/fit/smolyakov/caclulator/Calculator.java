@@ -1,5 +1,6 @@
 package ru.nsu.fit.smolyakov.caclulator;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.Stack;
@@ -8,27 +9,35 @@ import ru.nsu.fit.smolyakov.caclulator.operandsupplier.OperandSupplier;
 import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 import ru.nsu.fit.smolyakov.caclulator.operationsupplier.OperationSupplier;
 
+
 public class Calculator<T> {
     private OperationSupplier<T> operationSupplier;
     private OperandSupplier<T> operandSupplier;
 
     private Stack<Operation<T>> stack = new Stack<>();
 
+    /**
+     * 
+     * @param operationSupplier
+     * @param operandSupplier
+     * 
+     */
     public Calculator(OperationSupplier<T> operationSupplier, 
                       OperandSupplier<T> operandSupplier) {
-        this.operationSupplier = operationSupplier;
-        this.operandSupplier = operandSupplier;
+        this.operationSupplier = Objects.requireNonNull(operationSupplier);
+        this.operandSupplier = Objects.requireNonNull(operandSupplier);
     }
+
 
     private String parseOperations(Scanner scanner) {
         while (scanner.hasNext()) {
-            String op = scanner.next();
-            Optional<Operation<T>> parsedOperation = operationSupplier.operation(op);
+            String operationString = scanner.next();
+            Optional<Operation<T>> operation = operationSupplier.operation(operationString);
 
-            if (parsedOperation.isEmpty()) {
-                return op;
+            if (operation.isEmpty()) {
+                return operationString;
             } else {
-                stack.push(parsedOperation.get());
+                stack.push(operation.get());
             }
         }
 
@@ -38,7 +47,7 @@ public class Calculator<T> {
     @SuppressWarnings("unchecked")
     private T parseOperands(Scanner scanner, T value) throws NumberFormatException {
         T[] operands = (T[]) new Object[666]; // TODO remove magic numbers
-                                              // now 666 is max arity
+                                              // for now 666 is max arity
 
         operands[0] = value;
 
@@ -49,7 +58,7 @@ public class Calculator<T> {
                 if (scanner.hasNext()) {
                     operands[i] = operandSupplier.parse(scanner.next());
                 } else {
-                    throw new IllegalArgumentException("amount of operands is incorrect"); // TODO change
+                    throw new IllegalArgumentException("not enough operands");
                 }
             }
 
@@ -57,20 +66,27 @@ public class Calculator<T> {
         }
 
         if (scanner.hasNext()) {
-            throw new IllegalArgumentException("amount of operands is incorrect"); // TODO change
+            throw new IllegalArgumentException("too many operands");
         }
 
         return operands[0];
     }
 
-    public T calculate(Scanner scanner) {
+
+    public T compute(Scanner scanner) {
         stack.clear();
 
-        T firstOperand = operandSupplier.parse(parseOperations(scanner));
-        if (firstOperand == null) {
-            throw new IllegalArgumentException(); //TODO change type
+        String firstOperandString = parseOperations(scanner);
+
+        if (firstOperandString == null && !stack.isEmpty()) {
+            throw new IllegalArgumentException("zero operands, but more than zero operations");
+        } else if (firstOperandString == null) {
+            return null;
         }
 
+        // throws NumberFormatException, if the first operand
+        // has wrong number format
+        T firstOperand = operandSupplier.parse(firstOperandString); 
         return parseOperands(scanner, firstOperand);
     }
 }
