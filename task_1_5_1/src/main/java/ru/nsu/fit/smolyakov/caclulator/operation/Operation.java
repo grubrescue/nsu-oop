@@ -25,7 +25,7 @@ public class Operation<T> {
     final public T apply(T[] args) {
         if (args == null) {
             throw new IllegalArgumentException();
-        } else if (args.length != arity) {
+        } else if (args.length < arity) {
             throw new IllegalArgumentException();
         }
         return function.apply(args);
