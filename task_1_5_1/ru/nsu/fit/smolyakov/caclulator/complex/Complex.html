@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="../../../../../../script-dir/jquery-ui.min.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../../../jquery-ui.overrides.css" title="Style">
 <script type="text/javascript" src="../../../../../../script.js"></script>
-<script type="text/javascript" src="../../../../../../script-dir/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="../../../../../../script-dir/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="../../../../../../script-dir/jquery-ui.min.js"></script>
 </head>
 <body class="class-declaration-page">
@@ -79,9 +79,25 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">Complex</span>(double&nbsp;r, double&nbsp;i)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
-<div class="block">Class containing basic arithmetic operations on complex numbers.
+<div class="block">The <code>Complex</code> record obviously represents a complex number, which
+ is defined as an element of a number system that extends the real numbers 
+ with a specific element denoted <code>i</code>, called the imaginary unit and 
+ satisfying the equation <code>i^2 = -1</code>; every complex number can be 
+ expressed in the form <code>a+bi</code>, where <code>a, b ∈ R</code>. 
  
- <p></div>
+ <p>This implementation allows to perform some basic algebraical operations,
+ namely <a href="#add(ru.nsu.fit.smolyakov.caclulator.complex.Complex)"><code>add(Complex)</code></a>, <a href="#substract(ru.nsu.fit.smolyakov.caclulator.complex.Complex)"><code>substract(Complex)</code></a>, <a href="#multiply(ru.nsu.fit.smolyakov.caclulator.complex.Complex)"><code>multiply(Complex)</code></a>, 
+ <a href="#divide(ru.nsu.fit.smolyakov.caclulator.complex.Complex)"><code>divide(Complex)</code></a> and <a href="#negate()"><code>negate()</code></a>. Such trigonometric functions
+ as <a href="#sin()"><code>sin()</code></a> and <a href="#cos()"><code>cos()</code></a> are also provided.
+ 
+ <p><a href="#toString()"><code>toString()</code></a> represents an instance of this record as a string 
+ in format <code>a+bi</code>, where <code>a</code> is a real part of this complex 
+ number and <code>b</code> is an imaginary one.
+ 
+ <p><code>Complex</code> number can be initialized by the default auto-generated 
+ <a href="#%3Cinit%3E(double,double)"><code>Complex(double, double)</code></a> constructor or <a href="#valueOf(java.lang.String)"><code>valueOf(String)</code></a>
+ method, which argument has to represent an instance of this record the same 
+ way as it is done by <a href="#toString()"><code>toString()</code></a>.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -114,13 +130,21 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#add(ru.nsu.fit.smolyakov.caclulator.complex.Complex)" class="member-name-link">add</a><wbr>(<a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a>&nbsp;a)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns a result of addition of this complex number and
+ one specified by <code>a</code>.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#cos()" class="member-name-link">cos</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the trigonometric cosine of this complex number.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#divide(ru.nsu.fit.smolyakov.caclulator.complex.Complex)" class="member-name-link">divide</a><wbr>(<a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a>&nbsp;a)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns a result of dividing this complex 
+ number by one specified by <code>a</code>.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -138,10 +162,15 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#multiply(ru.nsu.fit.smolyakov.caclulator.complex.Complex)" class="member-name-link">multiply</a><wbr>(<a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a>&nbsp;a)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns a result of production of this complex number and 
+ one specified by <code>a</code>.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#negate()" class="member-name-link">negate</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns a negation of this complex number.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#r()" class="member-name-link">r</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -149,18 +178,29 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sin()" class="member-name-link">sin</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the trigonometric sine of this complex number.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#substract(ru.nsu.fit.smolyakov.caclulator.complex.Complex)" class="member-name-link">substract</a><wbr>(<a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a>&nbsp;a)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns a result of substraction of this complex number and
+ one specified by <code>a</code>.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns a string representation of this record class.</div>
+<div class="block">Returns a string representation of this <code>Complex</code> number with format 
+ <code>a+bi</code>, where <code>a</code> is a real part of this complex 
+ number and <code>b</code> is an imaginary one.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#valueOf(java.lang.String)" class="member-name-link">valueOf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;from)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Returns an instance of this record from a string representation 
+ formatted as <code>a+bi</code>, where <code>a</code> is a real part of this 
+ complex number and <code>b</code> is an imaginary one.</div>
+</div>
 </div>
 </div>
 </div>
@@ -203,40 +243,86 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="valueOf(java.lang.String)">
 <h3>valueOf</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></span>&nbsp;<span class="element-name">valueOf</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;from)</span></div>
+<div class="block">Returns an instance of this record from a string representation 
+ formatted as <code>a+bi</code>, where <code>a</code> is a real part of this 
+ complex number and <code>b</code> is an imaginary one.
+ 
+ <p>Either scientific form (<code>e</code>-notation) and constants are not supported 
+ for both real and imaginary parts, but integer and decimal floating-point 
+ numbers does.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>from</code> - a string-representation of this 
+               <code>Complex</code> number</dd>
+<dt>Returns:</dt>
+<dd>an instance of <code>Complex</code> number</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="negate()">
 <h3>negate</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></span>&nbsp;<span class="element-name">negate</span>()</div>
+<div class="block">Returns a negation of this complex number.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>a negation of this complex number</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="add(ru.nsu.fit.smolyakov.caclulator.complex.Complex)">
 <h3>add</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></span>&nbsp;<span class="element-name">add</span><wbr><span class="parameters">(<a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a>&nbsp;a)</span></div>
+<div class="block">Returns a result of addition of this complex number and
+ one specified by <code>a</code>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>a</code> - a specified complex number</dd>
+<dt>Returns:</dt>
+<dd>a result of addition</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="substract(ru.nsu.fit.smolyakov.caclulator.complex.Complex)">
 <h3>substract</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></span>&nbsp;<span class="element-name">substract</span><wbr><span class="parameters">(<a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a>&nbsp;a)</span></div>
+<div class="block">Returns a result of substraction of this complex number and
+ one specified by <code>a</code>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>a</code> - a specified complex number</dd>
+<dt>Returns:</dt>
+<dd>a result of substraction</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="multiply(ru.nsu.fit.smolyakov.caclulator.complex.Complex)">
 <h3>multiply</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></span>&nbsp;<span class="element-name">multiply</span><wbr><span class="parameters">(<a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a>&nbsp;a)</span></div>
+<div class="block">Returns a result of production of this complex number and 
+ one specified by <code>a</code>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>a</code> - a specified complex number</dd>
+<dt>Returns:</dt>
+<dd>a result of production</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="divide(ru.nsu.fit.smolyakov.caclulator.complex.Complex)">
 <h3>divide</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></span>&nbsp;<span class="element-name">divide</span><wbr><span class="parameters">(<a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a>&nbsp;a)</span></div>
+<div class="block">Returns a result of dividing this complex 
+ number by one specified by <code>a</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>a</code> - </dd>
+<dd><code>a</code> - a specified complex number</dd>
 <dt>Returns:</dt>
+<dd>a result of dividing</dd>
 </dl>
 </section>
 </li>
@@ -244,24 +330,49 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="sin()">
 <h3>sin</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></span>&nbsp;<span class="element-name">sin</span>()</div>
+<div class="block">Returns the trigonometric sine of this complex number.
+ Special cases:
+ <ul><li>If the argument is NaN or an infinity, then the
+ result is NaN.
+ <li>If the argument is zero, then the result is <code>1.0</code>.
+ </ul></div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the sine of this complex number</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="cos()">
 <h3>cos</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></span>&nbsp;<span class="element-name">cos</span>()</div>
+<div class="block">Returns the trigonometric cosine of this complex number.
+ Special cases:
+ <ul><li>If the argument is NaN or an infinity, then the
+ result is NaN.
+ <li>If the argument is zero, then the result is <code>1.0</code>.
+ </ul></div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the cosine of this complex number</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="toString()">
 <h3>toString</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
-<div class="block">Returns a string representation of this record class. The representation contains the name of the class, followed by the name and value of each of the record components.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
+<div class="block">Returns a string representation of this <code>Complex</code> number with format 
+ <code>a+bi</code>, where <code>a</code> is a real part of this complex 
+ number and <code>b</code> is an imaginary one.
+ 
+ <p>Both real and imaginary parts might have precision equal to
+ <code>14</code> or less.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html#toString()" title="class or interface in java.lang" class="external-link">toString</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></code></dd>
 <dt>Returns:</dt>
-<dd>a string representation of this object</dd>
+<dd>a string representation of this <code>Complex</code> number</dd>
 </dl>
 </section>
 </li>
