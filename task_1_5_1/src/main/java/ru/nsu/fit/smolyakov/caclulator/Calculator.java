@@ -10,7 +10,7 @@ import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 import ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider;
 
 public class Calculator<T> {
-    private OperationsProvider<T> operationSupplier;
+    private OperationsProvider<T> operationsProvider;
     private OperandParser<T> operandParser;
 
     private Stack<Operation<T>> stack = new Stack<>();
@@ -18,20 +18,20 @@ public class Calculator<T> {
 
     /**
      * 
-     * @param operationSupplier
+     * @param operationsProvider
      * @param operandParser
      * 
      */
-    public Calculator(OperationsProvider<T> operationSupplier, 
+    public Calculator(OperationsProvider<T> operationsProvider, 
                       OperandParser<T> operandParser) {
-        this.operationSupplier = Objects.requireNonNull(operationSupplier);
+        this.operationsProvider = Objects.requireNonNull(operationsProvider);
         this.operandParser = Objects.requireNonNull(operandParser);
     }
 
     private String parseOperations(Scanner scanner) {
         while (scanner.hasNext()) {
             String operationString = scanner.next();
-            Optional<Operation<T>> operation = operationSupplier.getByName(operationString);
+            Optional<Operation<T>> operation = operationsProvider.getByName(operationString);
 
             if (operation.isEmpty()) {
                 return operationString;
