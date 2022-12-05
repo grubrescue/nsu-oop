@@ -14,6 +14,7 @@ public class Calculator<T> {
     private OperandParser<T> operandParser;
 
     private Stack<Operation<T>> stack = new Stack<>();
+    private int maxArity = 1;
 
     /**
      * 
@@ -27,7 +28,6 @@ public class Calculator<T> {
         this.operandParser = Objects.requireNonNull(operandParser);
     }
 
-
     private String parseOperations(Scanner scanner) {
         while (scanner.hasNext()) {
             String operationString = scanner.next();
@@ -37,6 +37,7 @@ public class Calculator<T> {
                 return operationString;
             } else {
                 stack.push(operation.get());
+                maxArity = Integer.max(maxArity, stack.peek().arity());
             }
         }
 
@@ -45,9 +46,7 @@ public class Calculator<T> {
 
     @SuppressWarnings("unchecked")
     private T parseOperands(Scanner scanner, T value) throws NumberFormatException {
-        T[] operands = (T[]) new Object[666]; // TODO remove magic numbers
-                                              // for now 666 is max arity
-
+        T[] operands = (T[]) new Object[maxArity]; 
         operands[0] = value;
 
         while (!stack.empty()) {
@@ -73,6 +72,7 @@ public class Calculator<T> {
 
 
     public T compute(Scanner scanner) {
+        maxArity = 1;
         stack.clear();
 
         String firstOperandString = parseOperations(scanner);
