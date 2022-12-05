@@ -12,8 +12,11 @@ import java.util.regex.Pattern;
 public record Complex(double r, double i) {
     public static Complex valueOf(String from) {
         Pattern regexPattern = 
-            Pattern.compile("(?<real>-??\\d+)(?<imaginarySign>\\+|-)(?<imaginary>\\d+)i"); 
-            // TODO: floating-number digits parsing
+            Pattern.compile(
+                "(?<real>-??\\d+|-??\\d+\\.\\d+)"
+                + "(?<imaginarySign>\\+|-)"
+                + "(?<imaginary>\\d+|\\d+\\.\\d+)i"
+            ); 
 
         Matcher matcher = regexPattern.matcher(from);
         if (!matcher.matches()) {

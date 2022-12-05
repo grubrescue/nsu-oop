@@ -26,13 +26,18 @@ class ComplexCalculatorTest {
     }
 
     @Test
-    void someRepresentationTests() {
+    void valueOfTests() {
         assertThat(compute("")).isNull();
 
         assertThat(compute("2+3i")).isEqualTo(new Complex(2, 3));
         assertThat(compute("-2+3i")).isEqualTo(new Complex(-2, 3));
         assertThat(compute("2-3i")).isEqualTo(new Complex(2, -3));
         assertThat(compute("-2-3i")).isEqualTo(new Complex(-2, -3));
+
+        assertThat(compute("2.0+3i")).isEqualTo(new Complex(2, 3));
+        assertThat(compute("-2.0+3.0i")).isEqualTo(new Complex(-2, 3));
+        assertThat(compute("2-3.7i")).isEqualTo(new Complex(2, -3.7));
+        assertThat(compute("-2.5-3.6i")).isEqualTo(new Complex(-2.5, -3.6));
     }
 
     @Test
@@ -78,5 +83,17 @@ class ComplexCalculatorTest {
     void wrongComplexFormatTest() {
         assertThatThrownBy(() -> compute("2,3i"))
             .isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> compute("2+3"))
+            .isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> compute("2+3j"))
+            .isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> compute("2.+3i"))
+            .isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> compute("--2.0+3i"))
+            .isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> compute("2e5+3i"))
+            .isInstanceOf(NumberFormatException.class);       
+        assertThatThrownBy(() -> compute("2,5+3e4i"))
+            .isInstanceOf(NumberFormatException.class);   
     }
 }
