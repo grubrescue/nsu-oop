@@ -1,5 +1,7 @@
 package ru.nsu.fit.smolyakov.caclulator.complex;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -84,6 +86,28 @@ public record Complex(double r, double i) {
         return new Complex(
             Math.cos(r) * Math.cosh(i),
             - Math.sin(r) * Math.sinh(i)
+        );
+    }
+
+    /**
+     * max precision : 14. mention it!
+     */
+    @Override
+    public String toString() {
+        char imaginarySign;
+        if (i < 0) {
+            imaginarySign = '-';
+        } else {
+            imaginarySign = '+';
+        }
+
+        DecimalFormat decFormatter = new DecimalFormat("0.##############");
+        decFormatter.setRoundingMode(RoundingMode.DOWN);
+
+        return "%s%c%si".formatted(
+            decFormatter.format(r), 
+            imaginarySign, 
+            decFormatter.format(Math.abs(i))
         );
     }
 }

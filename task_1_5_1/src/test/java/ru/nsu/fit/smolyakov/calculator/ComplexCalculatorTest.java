@@ -1,7 +1,6 @@
 package ru.nsu.fit.smolyakov.calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.within;
 
 import java.util.Scanner;
@@ -26,7 +25,7 @@ class ComplexCalculatorTest {
     }
 
     @Test
-    void valueOfTests() {
+    void singularOperandTests() {
         assertThat(compute("")).isNull();
 
         assertThat(compute("2+3i")).isEqualTo(new Complex(2, 3));
@@ -77,23 +76,5 @@ class ComplexCalculatorTest {
     void cosTest() {
         assertThat(compute("cos 2+3i").r()).isCloseTo(-4.18963, within(0.001));
         assertThat(compute("cos 2+3i").i()).isCloseTo(-9.10923, within(0.001));
-    }
-
-    @Test
-    void wrongComplexFormatTest() {
-        assertThatThrownBy(() -> compute("2,3i"))
-            .isInstanceOf(NumberFormatException.class);
-        assertThatThrownBy(() -> compute("2+3"))
-            .isInstanceOf(NumberFormatException.class);
-        assertThatThrownBy(() -> compute("2+3j"))
-            .isInstanceOf(NumberFormatException.class);
-        assertThatThrownBy(() -> compute("2.+3i"))
-            .isInstanceOf(NumberFormatException.class);
-        assertThatThrownBy(() -> compute("--2.0+3i"))
-            .isInstanceOf(NumberFormatException.class);
-        assertThatThrownBy(() -> compute("2e5+3i"))
-            .isInstanceOf(NumberFormatException.class);       
-        assertThatThrownBy(() -> compute("2,5+3e4i"))
-            .isInstanceOf(NumberFormatException.class);   
     }
 }
