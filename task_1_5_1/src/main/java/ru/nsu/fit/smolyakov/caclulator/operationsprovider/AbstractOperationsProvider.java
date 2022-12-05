@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 
-public abstract class AbstractOperationsProvider<T> implements OperationProvider<T> {
+public abstract class AbstractOperationsProvider<T> implements OperationsProvider<T> {
     private Map<String, Operation<T>> operationsMap;
 
     protected AbstractOperationsProvider(Map<String, Operation<T>> operationToMethod) {

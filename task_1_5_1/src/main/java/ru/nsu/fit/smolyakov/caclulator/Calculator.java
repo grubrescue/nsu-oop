@@ -7,10 +7,10 @@ import java.util.Stack;
 
 import ru.nsu.fit.smolyakov.caclulator.operandparser.OperandParser;
 import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
-import ru.nsu.fit.smolyakov.caclulator.operationsupplier.OperationSupplier;
+import ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider;
 
 public class Calculator<T> {
-    private OperationSupplier<T> operationSupplier;
+    private OperationsProvider<T> operationSupplier;
     private OperandParser<T> operandParser;
 
     private Stack<Operation<T>> stack = new Stack<>();
@@ -22,7 +22,7 @@ public class Calculator<T> {
      * @param operandParser
      * 
      */
-    public Calculator(OperationSupplier<T> operationSupplier, 
+    public Calculator(OperationsProvider<T> operationSupplier, 
                       OperandParser<T> operandParser) {
         this.operationSupplier = Objects.requireNonNull(operationSupplier);
         this.operandParser = Objects.requireNonNull(operandParser);

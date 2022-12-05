@@ -1,11 +1,11 @@
 package ru.nsu.fit.smolyakov.caclulator;
 
 import ru.nsu.fit.smolyakov.caclulator.operandparser.DoubleOperandParser;
-import ru.nsu.fit.smolyakov.caclulator.operationsupplier.DoubleOperationSupplier;
+import ru.nsu.fit.smolyakov.caclulator.operationsprovider.DoubleOperationsProvider;
 
 public class DoubleCalculator extends Calculator<Double> {
     public DoubleCalculator() {
-        super(new DoubleOperationSupplier(), 
+        super(new DoubleOperationsProvider(), 
               new DoubleOperandParser());
     }
 }
