@@ -77,6 +77,12 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">OperationsProvider&lt;T&gt;</span></div>
+<div class="block">A provider interface for the <a href="../Calculator.html" title="class in ru.nsu.fit.smolyakov.caclulator"><code>Calculator</code></a>.
+ Provides only <a href="#getByName(java.lang.String)"><code>getByName(String)</code></a> method, which returns an 
+ <a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation"><code>Operation</code></a> by its name.
+ 
+ <p>As calculator treats everything as a function, is is supposed that
+ operands are returned as suppliers (0-arity functions).</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -91,7 +97,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a>&lt;<a href="OperationsProvider.html" title="type parameter in OperationsProvider">T</a>&gt;&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a>&lt;<a href="OperationsProvider.html" title="type parameter in OperationsProvider">T</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getByName(java.lang.String)" class="member-name-link">getByName</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 </div>
@@ -111,7 +117,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getByName(java.lang.String)">
 <h3>getByName</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a>&lt;<a href="OperationsProvider.html" title="type parameter in OperationsProvider">T</a>&gt;&gt;</span>&nbsp;<span class="element-name">getByName</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="member-signature"><span class="return-type"><a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a>&lt;<a href="OperationsProvider.html" title="type parameter in OperationsProvider">T</a>&gt;</span>&nbsp;<span class="element-name">getByName</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
 </section>
 </li>
 </ul>

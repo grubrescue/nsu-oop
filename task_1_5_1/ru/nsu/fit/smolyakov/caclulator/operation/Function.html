@@ -73,6 +73,11 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">Function&lt;T&gt;</span></div>
+<div class="block">Represents an operation upon list of operands of the same type, producing a result
+ of the same type as the operands.
+ 
+ <p>This is a <a href="package-summary.html">functional interface</a>
+ whose functional method is <a href="#apply(java.util.List)"><code>apply(List)</code></a>.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -88,8 +93,10 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="Function.html" title="type parameter in Function">T</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#apply(T%5B%5D)" class="member-name-link">apply</a><wbr>(<a href="Function.html" title="type parameter in Function">T</a>[]&nbsp;args)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#apply(java.util.List)" class="member-name-link">apply</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Function.html" title="type parameter in Function">T</a>&gt;&nbsp;args)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Applies this function to the given arguments.</div>
+</div>
 </div>
 </div>
 </div>
@@ -105,9 +112,16 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="apply(T[])">
-<h3 id="apply(java.lang.Object[])">apply</h3>
-<div class="member-signature"><span class="return-type"><a href="Function.html" title="type parameter in Function">T</a></span>&nbsp;<span class="element-name">apply</span><wbr><span class="parameters">(<a href="Function.html" title="type parameter in Function">T</a>[]&nbsp;args)</span></div>
+<section class="detail" id="apply(java.util.List)">
+<h3>apply</h3>
+<div class="member-signature"><span class="return-type"><a href="Function.html" title="type parameter in Function">T</a></span>&nbsp;<span class="element-name">apply</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Function.html" title="type parameter in Function">T</a>&gt;&nbsp;args)</span></div>
+<div class="block">Applies this function to the given arguments.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>args</code> - a list of specified arguments</dd>
+<dt>Returns:</dt>
+<dd>a result of an application</dd>
+</dl>
 </section>
 </li>
 </ul>
