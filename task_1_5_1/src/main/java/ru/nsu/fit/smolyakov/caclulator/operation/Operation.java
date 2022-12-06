@@ -63,7 +63,7 @@ public class Operation<T> {
      * Constructs an {@code Operation} instance from a specified {@code unaryOperator}.
      * An arity of instantiated operation will be equal to 1.
      * 
-     * @param supplier a function to represent
+     * @param unaryOperator a function to represent
      */
     public Operation(UnaryOperator<T> unaryOperator) {
         this(1, ((list) -> Objects.requireNonNull(unaryOperator).apply(list.get(0))));
@@ -73,7 +73,7 @@ public class Operation<T> {
      * Constructs an {@code Operation} instance from a specified {@code binaryOperator}.
      * An arity of instantiated operation will be equal to 2.
      * 
-     * @param supplier a function to represent
+     * @param binaryOperator a function to represent
      */
     public Operation(BinaryOperator<T> binaryOperator) {
         this(2, ((list) -> Objects.requireNonNull(binaryOperator).apply(list.get(0), list.get(1))));

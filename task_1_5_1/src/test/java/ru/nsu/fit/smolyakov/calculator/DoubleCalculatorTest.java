@@ -45,8 +45,12 @@ class DoubleCalculatorTest {
     static Stream<Arguments> moreDifficultTestsProvider() {
         return Stream.of(
             Arguments.of("- * / 15 - 7 + 1 1 3 + 2 + 1 1", 5),
-            Arguments.of("sin + - 1 2 1", 0)
+            Arguments.of("^ 2 - 3 * 2 2", 0.5),
+            Arguments.of("sin + - 1 2 1", 0),
+            Arguments.of("- * ^ ^ * 2 4 2 / 1 6 / 90 4 15", 30)
         );
+
+        
     } 
 
     @Test
@@ -57,6 +61,8 @@ class DoubleCalculatorTest {
 
         assertThat(compute("to-deg PI")).isCloseTo(180, within(0.01));
         assertThat(compute("to-rad 180")).isEqualTo(Math.PI);
+
+        assertThat(compute("sin to-rad - * ^ ^ * 2 4 2 / 1 6 / 90 4 15")).isCloseTo(0.5, within(0.01));
     }
 
     @ParameterizedTest
