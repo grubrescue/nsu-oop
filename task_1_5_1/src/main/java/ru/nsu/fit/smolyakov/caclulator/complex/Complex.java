@@ -25,7 +25,6 @@ import java.util.regex.Pattern;
  * {@link #Complex(double, double)} constructor or {@link #valueOf(String)}
  * method, which argument has to represent an instance of this record the same 
  * way as it is done by {@link #toString()}.
- * 
  */
 public record Complex(double r, double i) {
     /**
@@ -113,6 +112,9 @@ public record Complex(double r, double i) {
      * Returns a result of dividing this complex 
      * number by one specified by {@code a}.
      * 
+     * If {code a} equals {@code 0+0i}, then result
+     * is {@code NaN+NaNi}.
+     * 
      * @param  a  a specified complex number
      * @return    a result of dividing
      */
@@ -133,11 +135,6 @@ public record Complex(double r, double i) {
 
     /**
      * Returns the trigonometric sine of this complex number.
-     * Special cases:
-     * <ul><li>If the argument is NaN or an infinity, then the
-     * result is NaN.
-     * <li>If the argument is zero, then the result is {@code 1.0}.
-     * </ul>
      *
      * @return  the sine of this complex number
      */
@@ -145,16 +142,11 @@ public record Complex(double r, double i) {
         return new Complex(
             Math.sin(r) * Math.cosh(i),
             Math.cos(r) * Math.sinh(i)
-        ); // TODO: test special cases???
+        );
     }
 
     /**
      * Returns the trigonometric cosine of this complex number.
-     * Special cases:
-     * <ul><li>If the argument is NaN or an infinity, then the
-     * result is NaN.
-     * <li>If the argument is zero, then the result is {@code 1.0}.
-     * </ul>
      *
      * @return  the cosine of this complex number
      */
@@ -162,7 +154,7 @@ public record Complex(double r, double i) {
         return new Complex(
             Math.cos(r) * Math.cosh(i),
             - Math.sin(r) * Math.sinh(i)
-        ); // TODO: test special cases???
+        );
     }
 
     /**
@@ -192,5 +184,38 @@ public record Complex(double r, double i) {
             imaginarySign, 
             decFormatter.format(Math.abs(i))
         );
+    }
+
+    /** 
+     * Compares this object against the specified object. The result
+     * is {@code true} if and only if the argument is not
+     * {@code null} and is a {@code Complex} object that
+     * represents a complex number that has both real and 
+     * imaginary parts equal to this {@Complex} ones 
+     * with 10^-8 precision.
+     * 
+     * @param o an object to compare to
+     * @return  true if this {@code Complex} is equal
+     *          to specified {@code o}
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        } else if (o == this) {
+            return true;
+        } else if (o instanceof Complex other) {
+            var eps = 1e-8;
+
+            return Math.abs(this.i - other.i) < eps
+                && Math.abs(this.r - other.r) < eps
+
+                || Double.isNaN(this.i)
+                && Double.isNaN(this.r)
+                && Double.isNaN(other.i)
+                && Double.isNaN(other.r);
+        } else {
+            return false;
+        }
     }
 }

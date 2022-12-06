@@ -9,6 +9,13 @@ import ru.nsu.fit.smolyakov.caclulator.operandparser.OperandParser;
 import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 import ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider;
 
+/**
+ * A class providing functionality to 
+ * 
+ * @see ru.nsu.fit.smolyakov.caclulator.operation.Operation
+ * @see ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider
+ * @see ru.nsu.fit.smolyakov.caclulator.operandparser.OperandParser
+ */
 public class Calculator<T> {
     private OperationsProvider<T> operationsProvider;
     private OperandParser<T> operandParser;

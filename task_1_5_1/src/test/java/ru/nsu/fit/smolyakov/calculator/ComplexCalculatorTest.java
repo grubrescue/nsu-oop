@@ -70,11 +70,15 @@ class ComplexCalculatorTest {
     void sinTest() {
         assertThat(compute("sin 2+3i").r()).isCloseTo(9.1545, within(0.001));
         assertThat(compute("sin 2+3i").i()).isCloseTo(-4.16891, within(0.001));
+
+        assertThat(compute("sin 0+0i")).isEqualTo(Complex.valueOf("0+0i"));
     }
 
     @Test
     void cosTest() {
         assertThat(compute("cos 2+3i").r()).isCloseTo(-4.18963, within(0.001));
         assertThat(compute("cos 2+3i").i()).isCloseTo(-9.10923, within(0.001));
+
+        assertThat(compute("cos 0+0i")).isEqualTo(Complex.valueOf("1+0i"));
     }
 }
