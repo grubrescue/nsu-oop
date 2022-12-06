@@ -3,7 +3,6 @@ package ru.nsu.fit.smolyakov.caclulator.operationsprovider;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
 import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 
@@ -14,8 +13,16 @@ public abstract class AbstractOperationsProvider<T> implements OperationsProvide
         this.operationsMap = new HashMap<>(Objects.requireNonNull(operationToMethod));
     }
 
-    @Override
-    public Optional<Operation<T>> getByName(String name) {
-        return Optional.ofNullable(operationsMap.get(name));
+    protected abstract T operandValue(String name) throws NumberFormatException;
+
+    // TODO maybe IllegalArgumentException would suit better
+    @Override 
+    public Operation<T> getByName(String name) throws NumberFormatException {
+        var mappedOperation = operationsMap.get(name);
+        if (mappedOperation == null) {
+            return new Operation<>(() -> operandValue(name));
+        } else {
+            return mappedOperation;
+        }
     }
 }

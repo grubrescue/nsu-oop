@@ -14,10 +14,17 @@ public class DoubleOperationsProvider extends AbstractOperationsProvider<Double>
             "sin", new Operation<>((a) -> Math.sin(a)),
             "cos", new Operation<>((a) -> Math.cos(a)),
             "to-deg", new Operation<>((a) -> Math.toDegrees(a)),
-            "to-rad", new Operation<>((a) -> Math.toRadians(a))
+            "to-rad", new Operation<>((a) -> Math.toRadians(a)),
+            "PI", new Operation<>(() -> Math.PI),
+            "E", new Operation<>(() -> Math.E)
         );
 
     public DoubleOperationsProvider() {
         super(operationsMap);
+    }
+
+    @Override
+    protected Double operandValue(String name) throws NumberFormatException {
+        return Double.valueOf(name);
     }
 }

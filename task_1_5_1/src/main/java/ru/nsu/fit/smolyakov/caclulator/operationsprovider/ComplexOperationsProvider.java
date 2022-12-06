@@ -19,4 +19,9 @@ public class ComplexOperationsProvider extends AbstractOperationsProvider<Comple
     public ComplexOperationsProvider() {
         super(operationsMap);
     }
+
+    @Override
+    protected Complex operandValue(String name) throws NumberFormatException {
+        return Complex.valueOf(name);
+    }
 }

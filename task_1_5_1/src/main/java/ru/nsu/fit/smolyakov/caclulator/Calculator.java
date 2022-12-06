@@ -1,11 +1,9 @@
 package ru.nsu.fit.smolyakov.caclulator;
 
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Scanner;
 import java.util.Stack;
 
-import ru.nsu.fit.smolyakov.caclulator.operandparser.OperandParser;
 import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 import ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider;
 
@@ -18,10 +16,8 @@ import ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider;
  */
 public class Calculator<T> {
     private OperationsProvider<T> operationsProvider;
-    private OperandParser<T> operandParser;
 
     private Stack<Operation<T>> stack = new Stack<>();
-    private int maxArity = 1;
 
     /**
      * 
@@ -29,70 +25,40 @@ public class Calculator<T> {
      * @param operandParser
      * 
      */
-    public Calculator(OperationsProvider<T> operationsProvider, 
-                      OperandParser<T> operandParser) {
+    public Calculator(OperationsProvider<T> operationsProvider) {
         this.operationsProvider = Objects.requireNonNull(operationsProvider);
-        this.operandParser = Objects.requireNonNull(operandParser);
     }
 
-    private String parseOperations(Scanner scanner) {
-        while (scanner.hasNext()) {
-            String operationString = scanner.next();
-            Optional<Operation<T>> operation = operationsProvider.getByName(operationString);
+    private T curryStackOperations() {
+        while (!stack.empty() && stack.peek().arity() == 0) {
+            T peekValue = stack.pop().apply();
 
-            if (operation.isEmpty()) {
-                return operationString;
+            if (!stack.empty()) {
+                stack.peek().curry(peekValue); // TODO catch exception or not?
             } else {
-                stack.push(operation.get());
-                maxArity = Integer.max(maxArity, stack.peek().arity());
+                return peekValue;
             }
         }
 
         return null;
     }
 
-    @SuppressWarnings("unchecked")
-    private T parseOperands(Scanner scanner, T value) throws NumberFormatException {
-        T[] operands = (T[]) new Object[maxArity]; 
-        operands[0] = value;
-
-        while (!stack.empty()) {
-            Operation<T> operation = stack.pop();
-
-            for (int i = 1; i < operation.arity(); i++) {
-                if (scanner.hasNext()) {
-                    operands[i] = operandParser.valueOf(scanner.next());
-                } else {
-                    throw new IllegalArgumentException("not enough operands");
-                }
-            }
-
-            operands[0] = operation.apply(operands);
-        }
-
-        if (scanner.hasNext()) {
-            throw new IllegalArgumentException("too many operands");
-        }
-
-        return operands[0];
-    }
-
-
     public T compute(Scanner scanner) {
-        maxArity = 1;
+        T result = null;
         stack.clear();
 
-        String firstOperandString = parseOperations(scanner);
-
-        if (firstOperandString == null && !stack.isEmpty()) {
-            throw new IllegalArgumentException("zero operands, but more than zero operations");
-        } else if (firstOperandString == null) {
-            return null; // empty expression 
+        while (scanner.hasNext()) {
+            String currentWord = scanner.next();
+            var operation = operationsProvider.getByName(currentWord);
+                
+            stack.push(operation);
+            result = curryStackOperations();
         }
 
-        // throws NumberFormatException, if the first operand
-        // has wrong number format
-        T firstOperand = operandParser.valueOf(firstOperandString); 
-        return parseOperands(scanner, firstOperand);
+        if (stack.isEmpty()) {
+            return result;
+        } else {
+            throw new IllegalArgumentException("not enough operands");
+        }
     }
 }
