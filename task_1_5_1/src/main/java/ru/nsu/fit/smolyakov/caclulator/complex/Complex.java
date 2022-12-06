@@ -191,7 +191,7 @@ public record Complex(double r, double i) {
      * is {@code true} if and only if the argument is not
      * {@code null} and is a {@code Complex} object that
      * represents a complex number that has both real and 
-     * imaginary parts equal to this {@Complex} ones 
+     * imaginary parts equal to this {@code Complex} ones 
      * with 10^-8 precision.
      * 
      * @param o an object to compare to
