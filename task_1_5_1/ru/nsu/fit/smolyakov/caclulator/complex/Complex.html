@@ -145,10 +145,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns a result of dividing this complex 
  number by one specified by <code>a</code>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Indicates whether some other object is "equal to" this one.</div>
+<div class="block">Compares this object against the specified object.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
@@ -317,7 +317,10 @@ loadScripts(document, 'script');</script>
 <h3>divide</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></span>&nbsp;<span class="element-name">divide</span><wbr><span class="parameters">(<a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a>&nbsp;a)</span></div>
 <div class="block">Returns a result of dividing this complex 
- number by one specified by <code>a</code>.</div>
+ number by one specified by <code>a</code>.
+ 
+ If {code a} equals <code>0+0i</code>, then result
+ is <code>NaN+NaNi</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>a</code> - a specified complex number</dd>
@@ -330,12 +333,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="sin()">
 <h3>sin</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></span>&nbsp;<span class="element-name">sin</span>()</div>
-<div class="block">Returns the trigonometric sine of this complex number.
- Special cases:
- <ul><li>If the argument is NaN or an infinity, then the
- result is NaN.
- <li>If the argument is zero, then the result is <code>1.0</code>.
- </ul></div>
+<div class="block">Returns the trigonometric sine of this complex number.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the sine of this complex number</dd>
@@ -346,12 +344,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="cos()">
 <h3>cos</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></span>&nbsp;<span class="element-name">cos</span>()</div>
-<div class="block">Returns the trigonometric cosine of this complex number.
- Special cases:
- <ul><li>If the argument is NaN or an infinity, then the
- result is NaN.
- <li>If the argument is zero, then the result is <code>1.0</code>.
- </ul></div>
+<div class="block">Returns the trigonometric cosine of this complex number.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the cosine of this complex number</dd>
@@ -377,6 +370,27 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="equals(java.lang.Object)">
+<h3>equals</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</span></div>
+<div class="block">Compares this object against the specified object. The result
+ is <code>true</code> if and only if the argument is not
+ <code>null</code> and is a <code>Complex</code> object that
+ represents a complex number that has both real and 
+ imaginary parts equal to this <code>Complex</code> ones 
+ with 10^-8 precision.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>o</code> - an object to compare to</dd>
+<dt>Returns:</dt>
+<dd>true if this <code>Complex</code> is equal
+          to specified <code>o</code></dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="hashCode()">
 <h3>hashCode</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">hashCode</span>()</div>
@@ -386,21 +400,6 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></code></dd>
 <dt>Returns:</dt>
 <dd>a hash code value for this object</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="equals(java.lang.Object)">
-<h3>equals</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</span></div>
-<div class="block">Indicates whether some other object is "equal to" this one. The objects are equal if the other object is of the same class and if all the record components are equal. All components in this record class are compared with '=='.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></code></dd>
-<dt>Parameters:</dt>
-<dd><code>o</code> - the object with which to compare</dd>
-<dt>Returns:</dt>
-<dd><code>true</code> if this object is the same as the <code>o</code> argument; <code>false</code> otherwise.</dd>
 </dl>
 </section>
 </li>
