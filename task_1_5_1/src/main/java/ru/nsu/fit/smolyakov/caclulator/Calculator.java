@@ -12,7 +12,6 @@ import ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider;
  * 
  * @see ru.nsu.fit.smolyakov.caclulator.operation.Operation
  * @see ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider
- * @see ru.nsu.fit.smolyakov.caclulator.operandparser.OperandParser
  */
 public class Calculator<T> {
     private OperationsProvider<T> operationsProvider;
@@ -22,7 +21,6 @@ public class Calculator<T> {
     /**
      * 
      * @param operationsProvider
-     * @param operandParser
      * 
      */
     public Calculator(OperationsProvider<T> operationsProvider) {
@@ -32,7 +30,7 @@ public class Calculator<T> {
     // returns non-null if everything is calculated
     private T curryStackOperations() {
         while (!stack.empty() && stack.peek().arity() == 0) {
-            T peekValue = stack.pop().apply();
+            T peekValue = stack.pop().get();
 
             if (!stack.empty()) {
                 stack.peek().curry(peekValue); // TODO catch exception or not?
@@ -51,7 +49,7 @@ public class Calculator<T> {
         while (scanner.hasNext() && result == null) {
             String currentWord = scanner.next();
             var operation = operationsProvider.getByName(currentWord);
-                
+            
             stack.push(operation);
             result = curryStackOperations();
         }
@@ -60,7 +58,7 @@ public class Calculator<T> {
             throw new IllegalArgumentException("too many operands");
         } else if (!stack.isEmpty()) {
             throw new IllegalArgumentException("lack of operands");
-        } else {
+        } else { // TODO problema
             return result;
         }
     }

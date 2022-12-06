@@ -4,9 +4,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
 
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import ru.nsu.fit.smolyakov.caclulator.Calculator;
 import ru.nsu.fit.smolyakov.caclulator.DoubleCalculator;
@@ -23,19 +27,27 @@ class DoubleCalculatorTest {
         return calc.compute(new Scanner(what));
     }
 
-    @Test
-    void plusMinusMultiplyDivideTests() {
-        assertThat(compute("+ 5 5")).isEqualTo(10);
-        assertThat(compute("- 5 5")).isEqualTo(0);
-        assertThat(compute("* 5 5")).isEqualTo(25);
-        assertThat(compute("/ 5 5")).isEqualTo(1);
+    static Stream<Arguments> plusMinusMultiplyDivideTestsProvider() {
+        return Stream.of(
+            Arguments.of("+ 5 5", 10), 
+            Arguments.of("- 5 5", 0), 
+            Arguments.of("* 5 5", 25), 
+            Arguments.of("/ 5 5", 1), 
 
-        assertThat(compute("+ 0 0")).isEqualTo(0);
-        assertThat(compute("* 5 0")).isEqualTo(0);
-        assertThat(compute("/ -5 0")).isEqualTo(Double.NEGATIVE_INFINITY);
-        assertThat(compute("* 0 5")).isEqualTo(0);
-        assertThat(compute("/ 0 5")).isEqualTo(0);
-    }
+            Arguments.of("+ 0 0", 0), 
+            Arguments.of("* 5 0", 0), 
+            Arguments.of("/ -5 0", Double.NEGATIVE_INFINITY), 
+            Arguments.of("* 0 5", 0), 
+            Arguments.of("/ 0 5", 0)
+        );
+    } 
+
+    static Stream<Arguments> moreDifficultTestsProvider() {
+        return Stream.of(
+            Arguments.of("- * / 15 - 7 + 1 1 3 + 2 + 1 1", 5),
+            Arguments.of("sin + - 1 2 1", 0)
+        );
+    } 
 
     @Test
     void trigonometricalTests() {
@@ -47,9 +59,10 @@ class DoubleCalculatorTest {
         assertThat(compute("to-rad 180")).isEqualTo(Math.PI);
     }
 
-    @Test
-    void moreDifficultTests() {
-        assertThat(compute("sin + - 1 2 1")).isEqualTo(0);
-        //TODO: more difficult tests :)
+    @ParameterizedTest
+    @MethodSource({"plusMinusMultiplyDivideTestsProvider",
+                   "moreDifficultTestsProvider"})
+    void allOtherTests(String expr, double res) {
+        assertThat(compute(expr)).isEqualTo(res);
     }
 }
