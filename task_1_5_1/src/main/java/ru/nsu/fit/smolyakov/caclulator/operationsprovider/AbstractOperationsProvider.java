@@ -22,7 +22,7 @@ public abstract class AbstractOperationsProvider<T> implements OperationsProvide
         if (mappedOperation == null) {
             return new Operation<>(() -> operandValue(name));
         } else {
-            return mappedOperation;
+            return mappedOperation.uncurriedCopy();
         }
     }
 }

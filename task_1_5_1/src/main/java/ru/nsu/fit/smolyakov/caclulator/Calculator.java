@@ -29,6 +29,7 @@ public class Calculator<T> {
         this.operationsProvider = Objects.requireNonNull(operationsProvider);
     }
 
+    // returns non-null if everything is calculated
     private T curryStackOperations() {
         while (!stack.empty() && stack.peek().arity() == 0) {
             T peekValue = stack.pop().apply();
@@ -47,7 +48,7 @@ public class Calculator<T> {
         T result = null;
         stack.clear();
 
-        while (scanner.hasNext()) {
+        while (scanner.hasNext() && result == null) {
             String currentWord = scanner.next();
             var operation = operationsProvider.getByName(currentWord);
                 
@@ -55,10 +56,12 @@ public class Calculator<T> {
             result = curryStackOperations();
         }
 
-        if (stack.isEmpty()) {
-            return result;
+        if (scanner.hasNext()) {
+            throw new IllegalArgumentException("too many operands");
+        } else if (!stack.isEmpty()) {
+            throw new IllegalArgumentException("lack of operands");
         } else {
-            throw new IllegalArgumentException("not enough operands");
+            return result;
         }
     }
 }

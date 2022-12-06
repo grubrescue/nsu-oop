@@ -32,7 +32,6 @@ class DoubleCalculatorTest {
 
         assertThat(compute("+ 0 0")).isEqualTo(0);
         assertThat(compute("* 5 0")).isEqualTo(0);
-        assertThat(compute("/ 5 0")).isEqualTo(Double.POSITIVE_INFINITY);
         assertThat(compute("/ -5 0")).isEqualTo(Double.NEGATIVE_INFINITY);
         assertThat(compute("* 0 5")).isEqualTo(0);
         assertThat(compute("/ 0 5")).isEqualTo(0);

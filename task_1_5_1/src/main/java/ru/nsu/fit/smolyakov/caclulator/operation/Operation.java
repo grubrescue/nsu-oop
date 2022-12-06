@@ -41,13 +41,13 @@ public class Operation<T> {
     // @SafeVarargs // question
     public T apply(List<T> args) {
         if (args == null) {
-            throw new IllegalStateException();
+            throw new IllegalArgumentException();
         } 
 
         curriedArgs.addAll(args);
         
         if (curriedArgs.size() != initialArity) {
-            throw new IllegalStateException();
+            throw new IllegalArgumentException();
         }
 
         return function.apply(curriedArgs);
@@ -59,16 +59,30 @@ public class Operation<T> {
      */
     public T apply() {
         if (arity() > 0) {
-            throw new IllegalStateException("function require arguments!");
+            throw new IllegalArgumentException("function require arguments!");
         }
         return function.apply(curriedArgs);
     }
 
     public void curry(T arg) {
         if (arity() < 1) {
-            throw new IllegalStateException("function doesn't take args already");
+            throw new IllegalArgumentException("function doesn't take args already");
         }
 
         curriedArgs.add(arg);
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    
+    @Override
+    public String toString() {
+        return "Operation [function=" + function + ", initialArity=" + initialArity + ", curriedArgs=" + curriedArgs
+                + "]";
+    }
+
+    public Operation<T> uncurriedCopy() {
+        return new Operation<>(initialArity, function);
     }
 }
