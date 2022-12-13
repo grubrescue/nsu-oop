@@ -77,15 +77,15 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SemesterGradesTable</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">An immutable class which takes the responsibility of storing data of all the marks of a 
- specified semester. May be instatiated only by <a href="AcademicProgressEvaluator.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>AcademicProgressEvaluator</code></a>, and, 
+<div class="block">An immutable class which takes the responsibility of storing data of all the grades of a 
+ specified semester. May be instatiated only by <a href="GradeBookDataParser.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>GradeBookDataParser</code></a>, and, 
  accordingly, <a href="../RecordBook.html" title="class in ru.nsu.fit.smolyakov.recordbook"><code>RecordBook</code></a>. 
  
- <p>Able to return current <code>semesterNo</code>, string representation by <a href="#toString()"><code>toString()</code></a> and 
+ <p>Able to return current <code>semesterNumber</code>, string representation by <a href="#toString()"><code>toString()</code></a> and 
  calculate <a href="#gradePointAverage()"><code>gradePointAverage()</code></a>. The copy of whole grades table may be instantiated by 
- <code>marks</code>. <a href="#amountOfMarks()"><code>amountOfMarks()</code></a> returns a total amount of marks, and
- <a href="#amountOfMarks(ru.nsu.fit.smolyakov.recordbook.internal.Mark)"><code>amountOfMarks(Mark)</code></a> and <a href="#amountOfMarks(int)"><code>amountOfMarks(int)</code></a> returns an amount of marks equal 
- to specified <a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>Mark</code></a> and amount of marks with specified valuation (diff. credits
+ <code>grades</code>. <a href="#amountOfGrades()"><code>amountOfGrades()</code></a> returns a total amount of grades, and
+ <a href="#amountOfGrades(ru.nsu.fit.smolyakov.recordbook.internal.Mark)"><code>amountOfGrades(Mark)</code></a> and <a href="#amountOfGrades(int)"><code>amountOfGrades(int)</code></a> returns an amount of grades equal 
+ to specified <a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>Mark</code></a> and amount of grades with specified valuation (diff. credits
  and exams only) respectively.</div>
 </section>
 <section class="summary">
@@ -102,25 +102,37 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#amountOfDifferentiatedMarks()" class="member-name-link">amountOfDifferentiatedMarks</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#amountOfDifferentiatedGrades()" class="member-name-link">amountOfDifferentiatedGrades</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns an amount of differentiated marks.</div>
+<div class="block">Returns an amount of differentiated grades.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#amountOfMarks()" class="member-name-link">amountOfMarks</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#amountOfGrades()" class="member-name-link">amountOfGrades</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns an amount of marks in this semester.</div>
+<div class="block">Returns an amount of grades in this semester.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#amountOfMarks(int)" class="member-name-link">amountOfMarks</a><wbr>(int&nbsp;value)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#amountOfGrades(int)" class="member-name-link">amountOfGrades</a><wbr>(int&nbsp;value)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns an amount of marks equal to a specified valuation
+<div class="block">Returns an amount of grades equal to a specified valuation
  (both differentiated credits and exams).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#amountOfMarks(ru.nsu.fit.smolyakov.recordbook.internal.Mark)" class="member-name-link">amountOfMarks</a><wbr>(<a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a>&nbsp;mark)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#amountOfGrades(ru.nsu.fit.smolyakov.recordbook.internal.Mark)" class="member-name-link">amountOfGrades</a><wbr>(<a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a>&nbsp;mark)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns an amount of marks equal to a specified mark.</div>
+<div class="block">Returns an amount of grades equal to a specified mark.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSemesterNumber()" class="member-name-link">getSemesterNumber</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the number of semester to which this <code>SemesterGradesTable</code>
+ is related.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSubjectMark(java.lang.String)" class="member-name-link">getSubjectMark</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;subjectName)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns a <a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>Mark</code></a> for a subject specified by 
+ <code>subjectName</code>.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gradePointAverage()" class="member-name-link">gradePointAverage</a>()</code></div>
@@ -128,27 +140,15 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns grade point average for this semester.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#marks()" class="member-name-link">marks</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#grades()" class="member-name-link">grades</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a map containing each subject reflected to
  its <a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>Mark</code></a>.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#pass()" class="member-name-link">pass</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isPass()" class="member-name-link">isPass</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns if there weren't any negative marks in this semester.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#semesterNo()" class="member-name-link">semesterNo</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the number of semester to which this <code>SemesterGradesTable</code>
- is related.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#subjectMark(java.lang.String)" class="member-name-link">subjectMark</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;subjectName)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns a <a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>Mark</code></a> for a subject specified by 
- <code>subjectName</code>.</div>
+<div class="block">Returns if there weren't any negative grades in this semester.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -174,21 +174,21 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="semesterNo()">
-<h3>semesterNo</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">semesterNo</span>()</div>
+<section class="detail" id="getSemesterNumber()">
+<h3>getSemesterNumber</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getSemesterNumber</span>()</div>
 <div class="block">Returns the number of semester to which this <code>SemesterGradesTable</code>
  is related.
  
  <p>If this table is one with final grades, returns current semester number
- (determined by <a href="AcademicProgressEvaluator.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>AcademicProgressEvaluator</code></a>).</div>
+ (determined by <a href="GradeBookDataParser.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>GradeBookDataParser</code></a>).</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the semesterNo</dd>
+<dd>the semesterNumber</dd>
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list">
-<li><a href="AcademicProgressEvaluator.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>AcademicProgressEvaluator</code></a></li>
+<li><a href="GradeBookDataParser.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>GradeBookDataParser</code></a></li>
 <li><a href="../RecordBook.html" title="class in ru.nsu.fit.smolyakov.recordbook"><code>RecordBook</code></a></li>
 </ul>
 </dd>
@@ -196,64 +196,64 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="amountOfMarks()">
-<h3>amountOfMarks</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">amountOfMarks</span>()</div>
-<div class="block">Returns an amount of marks in this semester.</div>
+<section class="detail" id="amountOfGrades()">
+<h3>amountOfGrades</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">amountOfGrades</span>()</div>
+<div class="block">Returns an amount of grades in this semester.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>an amount of marks</dd>
+<dd>an amount of grades</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="amountOfMarks(ru.nsu.fit.smolyakov.recordbook.internal.Mark)">
-<h3>amountOfMarks</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">amountOfMarks</span><wbr><span class="parameters">(<a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a>&nbsp;mark)</span></div>
-<div class="block">Returns an amount of marks equal to a specified mark.</div>
+<section class="detail" id="amountOfGrades(ru.nsu.fit.smolyakov.recordbook.internal.Mark)">
+<h3>amountOfGrades</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">amountOfGrades</span><wbr><span class="parameters">(<a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a>&nbsp;mark)</span></div>
+<div class="block">Returns an amount of grades equal to a specified mark.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>mark</code> - a specified mark</dd>
 <dt>Returns:</dt>
-<dd>an amount of marks equal to a specified mark</dd>
+<dd>an amount of grades equal to a specified mark</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="amountOfMarks(int)">
-<h3>amountOfMarks</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">amountOfMarks</span><wbr><span class="parameters">(int&nbsp;value)</span></div>
-<div class="block">Returns an amount of marks equal to a specified valuation
+<section class="detail" id="amountOfGrades(int)">
+<h3>amountOfGrades</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">amountOfGrades</span><wbr><span class="parameters">(int&nbsp;value)</span></div>
+<div class="block">Returns an amount of grades equal to a specified valuation
  (both differentiated credits and exams).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>value</code> - a specified valuation of a mark</dd>
 <dt>Returns:</dt>
-<dd>an amount of marks equal to a specified valuation</dd>
+<dd>an amount of grades equal to a specified valuation</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="pass()">
-<h3>pass</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">pass</span>()</div>
-<div class="block">Returns if there weren't any negative marks in this semester.</div>
+<section class="detail" id="isPass()">
+<h3>isPass</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isPass</span>()</div>
+<div class="block">Returns if there weren't any negative grades in this semester.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd><code>true</code> if there weren't any negative marks in 
+<dd><code>true</code> if there weren't any negative grades in 
                       this semester</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="marks()">
-<h3>marks</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a>&gt;</span>&nbsp;<span class="element-name">marks</span>()</div>
+<section class="detail" id="grades()">
+<h3>grades</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a>&gt;</span>&nbsp;<span class="element-name">grades</span>()</div>
 <div class="block">Returns a map containing each subject reflected to
  its <a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>Mark</code></a>.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>a map containing all subjects and marks for them</dd>
+<dd>a map containing all subjects and grades for them</dd>
 </dl>
 </section>
 </li>
@@ -269,13 +269,13 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="amountOfDifferentiatedMarks()">
-<h3>amountOfDifferentiatedMarks</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">amountOfDifferentiatedMarks</span>()</div>
-<div class="block">Returns an amount of differentiated marks.</div>
+<section class="detail" id="amountOfDifferentiatedGrades()">
+<h3>amountOfDifferentiatedGrades</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">amountOfDifferentiatedGrades</span>()</div>
+<div class="block">Returns an amount of differentiated grades.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>an amount of differentiated marks</dd>
+<dd>an amount of differentiated grades</dd>
 </dl>
 </section>
 </li>
@@ -294,9 +294,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="subjectMark(java.lang.String)">
-<h3>subjectMark</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a>&gt;</span>&nbsp;<span class="element-name">subjectMark</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;subjectName)</span></div>
+<section class="detail" id="getSubjectMark(java.lang.String)">
+<h3>getSubjectMark</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">Mark</a>&gt;</span>&nbsp;<span class="element-name">getSubjectMark</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;subjectName)</span></div>
 <div class="block">Returns a <a href="Mark.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>Mark</code></a> for a subject specified by 
  <code>subjectName</code>.</div>
 <dl class="notes">
