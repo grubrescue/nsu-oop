@@ -1,16 +1,15 @@
 package ru.nsu.fit.smolyakov.calculator;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.within;
-
-import java.util.Scanner;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import ru.nsu.fit.smolyakov.caclulator.Calculator;
 import ru.nsu.fit.smolyakov.caclulator.ComplexCalculator;
 import ru.nsu.fit.smolyakov.caclulator.complex.Complex;
+
+import java.util.Scanner;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 
 class ComplexCalculatorTest {
     static Calculator<Complex> calc;
