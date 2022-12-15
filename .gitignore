@@ -11,3 +11,6 @@ gradle/
 
 # Ignore vscode cache directory
 .vscode/
+
+# Ignore IDEA cache directory
+.idea/
