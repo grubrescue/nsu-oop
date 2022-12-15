@@ -75,6 +75,10 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>T</code> - a type of operands</dd>
+</dl>
+<dl class="notes">
 <dt>All Implemented Interfaces:</dt>
 <dd><code><a href="OperationsProvider.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider">OperationsProvider</a>&lt;T&gt;</code></dd>
 </dl>
@@ -86,6 +90,29 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">AbstractOperationsProvider&lt;T&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="OperationsProvider.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider">OperationsProvider</a>&lt;T&gt;</span></div>
+<div class="block">Just one variant of <a href="OperationsProvider.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider"><code>OperationsProvider</code></a> interface implementation,
+ that is responsible for providing operations for
+ <a href="../Calculator.html" title="class in ru.nsu.fit.smolyakov.caclulator"><code>Calculator</code></a>.
+
+ <p>As calculator treats everything as a function, it is supposed that
+ operands are returned as suppliers (0-arity functions).
+
+ <p>Successor classes have to call <a href="#%3Cinit%3E(java.util.Map)"><code>AbstractOperationsProvider(Map)</code></a>
+ constructor, with a map from method names to <a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation"><code>Operation</code></a> methods.
+ Functionality can be also widened by using <a href="#insertOperation(java.lang.String,ru.nsu.fit.smolyakov.caclulator.operation.Operation)"><code>insertOperation(String, Operation)</code></a>
+ method. Another requirement for inheritors is to provide an implementation for
+ <a href="#parseAsOperand(java.lang.String)"><code>parseAsOperand(String)</code></a>.
+
+ <p>This class appears to be mutable, so changing of one leads to changing of behaviour of
+ an associated <a href="../Calculator.html" title="class in ru.nsu.fit.smolyakov.caclulator"><code>Calculator</code></a>.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="../Calculator.html" title="class in ru.nsu.fit.smolyakov.caclulator"><code>Calculator</code></a></li>
+</ul>
+</dd>
+</dl>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -118,19 +145,19 @@ implements <a href="OperationsProvider.html" title="interface in ru.nsu.fit.smol
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addOperation(java.lang.String,ru.nsu.fit.smolyakov.caclulator.operation.Operation)" class="member-name-link">addOperation</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
- <a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a>&lt;<a href="AbstractOperationsProvider.html" title="type parameter in AbstractOperationsProvider">T</a>&gt;&nbsp;operation)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a>&lt;<a href="AbstractOperationsProvider.html" title="type parameter in AbstractOperationsProvider">T</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getByName(java.lang.String)" class="member-name-link">getByName</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Inserts a new <a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation"><code>Operation</code></a> into this <code>OperationsProvider</code>.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a>&lt;<a href="AbstractOperationsProvider.html" title="type parameter in AbstractOperationsProvider">T</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getByName(java.lang.String)" class="member-name-link">getByName</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a copy of <a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation"><code>Operation</code></a> associated with specified <code>name</code>.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#insertOperation(java.lang.String,ru.nsu.fit.smolyakov.caclulator.operation.Operation)" class="member-name-link">insertOperation</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
+ <a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a>&lt;<a href="AbstractOperationsProvider.html" title="type parameter in AbstractOperationsProvider">T</a>&gt;&nbsp;operation)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Inserts a new <a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation"><code>Operation</code></a> into this <code>OperationsProvider</code>.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract <a href="AbstractOperationsProvider.html" title="type parameter in AbstractOperationsProvider">T</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#operandValue(java.lang.String)" class="member-name-link">operandValue</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;operandString)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#parseAsOperand(java.lang.String)" class="member-name-link">parseAsOperand</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;operandString)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Converts <code>operandString</code> into operand value type (<code>T</code>).</div>
 </div>
@@ -172,10 +199,10 @@ implements <a href="OperationsProvider.html" title="interface in ru.nsu.fit.smol
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="operandValue(java.lang.String)">
-<h3>operandValue</h3>
-<div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type"><a href="AbstractOperationsProvider.html" title="type parameter in AbstractOperationsProvider">T</a></span>&nbsp;<span class="element-name">operandValue</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;operandString)</span>
-                           throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></span></div>
+<section class="detail" id="parseAsOperand(java.lang.String)">
+<h3>parseAsOperand</h3>
+<div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type"><a href="AbstractOperationsProvider.html" title="type parameter in AbstractOperationsProvider">T</a></span>&nbsp;<span class="element-name">parseAsOperand</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;operandString)</span>
+                             throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></span></div>
 <div class="block">Converts <code>operandString</code> into operand value type (<code>T</code>).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -195,7 +222,7 @@ implements <a href="OperationsProvider.html" title="interface in ru.nsu.fit.smol
                              throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></span></div>
 <div class="block">Returns a copy of <a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation"><code>Operation</code></a> associated with specified <code>name</code>.
  If there is no such operators, then <code>name</code> is parsed
- by <a href="#operandValue(java.lang.String)"><code>operandValue(String)</code></a> method.</div>
+ by <a href="#parseAsOperand(java.lang.String)"><code>parseAsOperand(String)</code></a> method.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="OperationsProvider.html#getByName(java.lang.String)">getByName</a></code>&nbsp;in interface&nbsp;<code><a href="OperationsProvider.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider">OperationsProvider</a>&lt;<a href="AbstractOperationsProvider.html" title="type parameter in AbstractOperationsProvider">T</a>&gt;</code></dd>
@@ -211,9 +238,9 @@ implements <a href="OperationsProvider.html" title="interface in ru.nsu.fit.smol
 </section>
 </li>
 <li>
-<section class="detail" id="addOperation(java.lang.String,ru.nsu.fit.smolyakov.caclulator.operation.Operation)">
-<h3>addOperation</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">addOperation</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
+<section class="detail" id="insertOperation(java.lang.String,ru.nsu.fit.smolyakov.caclulator.operation.Operation)">
+<h3>insertOperation</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">insertOperation</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
  <a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a>&lt;<a href="AbstractOperationsProvider.html" title="type parameter in AbstractOperationsProvider">T</a>&gt;&nbsp;operation)</span></div>
 <div class="block">Inserts a new <a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation"><code>Operation</code></a> into this <code>OperationsProvider</code>.
 

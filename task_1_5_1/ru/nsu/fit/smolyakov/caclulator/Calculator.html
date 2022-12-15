@@ -75,13 +75,19 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>T</code> - a type of operands</dd>
+</dl>
+<dl class="notes">
 <dt>Direct Known Subclasses:</dt>
 <dd><code><a href="ComplexCalculator.html" title="class in ru.nsu.fit.smolyakov.caclulator">ComplexCalculator</a></code>, <code><a href="DoubleCalculator.html" title="class in ru.nsu.fit.smolyakov.caclulator">DoubleCalculator</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Calculator&lt;T&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">A class providing functionality to</div>
+<div class="block">A calculator for a prefix notation with a generic type of operands and
+ a set of operations provided by <a href="operationsprovider/OperationsProvider.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider"><code>OperationsProvider</code></a>. As one
+ specifies, operands are also treated as zero arguments functions.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -103,7 +109,10 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider)" class="member-name-link">Calculator</a><wbr>(<a href="operationsprovider/OperationsProvider.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider">OperationsProvider</a>&lt;<a href="Calculator.html" title="type parameter in Calculator">T</a>&gt;&nbsp;operationsProvider)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Constructs an instance of a calculator associated with
+ a specified <code>operationProvider</code>.</div>
+</div>
 </div>
 </section>
 </li>
@@ -120,7 +129,10 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Calculator.html" title="type parameter in Calculator">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#compute(java.util.Scanner)" class="member-name-link">compute</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html" title="class or interface in java.util" class="external-link">Scanner</a>&nbsp;scanner)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Calculates an arithmetic expression in a prefix notation
+ provided by <code>scanner</code>.</div>
+</div>
 </div>
 </div>
 </div>
@@ -142,9 +154,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider)">
 <h3>Calculator</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Calculator</span><wbr><span class="parameters">(<a href="operationsprovider/OperationsProvider.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider">OperationsProvider</a>&lt;<a href="Calculator.html" title="type parameter in Calculator">T</a>&gt;&nbsp;operationsProvider)</span></div>
+<div class="block">Constructs an instance of a calculator associated with
+ a specified <code>operationProvider</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>operationsProvider</code> - </dd>
+<dd><code>operationsProvider</code> - a specified <a href="operationsprovider/OperationsProvider.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider">OperationsProvider</a></dd>
 </dl>
 </section>
 </li>
@@ -160,6 +174,17 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="compute(java.util.Scanner)">
 <h3>compute</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Calculator.html" title="type parameter in Calculator">T</a></span>&nbsp;<span class="element-name">compute</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html" title="class or interface in java.util" class="external-link">Scanner</a>&nbsp;scanner)</span></div>
+<div class="block">Calculates an arithmetic expression in a prefix notation
+ provided by <code>scanner</code>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>scanner</code> - a specified <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html" title="class or interface in java.util" class="external-link">Scanner</a></dd>
+<dt>Returns:</dt>
+<dd>a result of computation</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if an expression provided
+      by <code>scanner</code> has incorrect format</dd>
+</dl>
 </section>
 </li>
 </ul>

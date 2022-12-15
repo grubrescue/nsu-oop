@@ -75,6 +75,18 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">DoubleCalculator</span>
 <span class="extends-implements">extends <a href="Calculator.html" title="class in ru.nsu.fit.smolyakov.caclulator">Calculator</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>&gt;</span></div>
+<div class="block">A calculator for a prefix notation with <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link"><code>Double</code></a> operands and a
+ set of operations provided by <a href="operationsprovider/DoubleOperationsProvider.html" title="class in ru.nsu.fit.smolyakov.caclulator.operationsprovider"><code>DoubleOperationsProvider</code></a>. As one
+ specifies, operands are also treated as zero arguments functions.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation"><code>Operation</code></a></li>
+<li><a href="operationsprovider/DoubleOperationsProvider.html" title="class in ru.nsu.fit.smolyakov.caclulator.operationsprovider"><code>DoubleOperationsProvider</code></a></li>
+</ul>
+</dd>
+</dl>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -87,7 +99,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">DoubleCalculator</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Constructs an instance of <code>DoubleCalculator</code>.</div>
+</div>
 </div>
 </section>
 </li>
@@ -116,6 +130,9 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>DoubleCalculator</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">DoubleCalculator</span>()</div>
+<div class="block">Constructs an instance of <code>DoubleCalculator</code>.
+ Indeed, resulted class is just the same as one created this way:
+ <code>new Calculator&lt;Double&gt;(new DoubleOperationsProvider())</code>.</div>
 </section>
 </li>
 </ul>
