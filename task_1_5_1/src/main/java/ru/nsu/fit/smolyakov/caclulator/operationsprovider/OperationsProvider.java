@@ -11,6 +11,7 @@ import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
  * <p>As calculator treats everything as a function, it is supposed that
  * operands are returned as suppliers (0-arity functions).
  *
+ * @param <T> a type of operands
  * @see ru.nsu.fit.smolyakov.caclulator.operation.Function
  * @see Operation
  */

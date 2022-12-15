@@ -32,6 +32,8 @@ import java.util.function.UnaryOperator;
  * <p>{@link #get()} method allows to get the value supplied by 0-arity function.
  * (So, the only way to get a value from the function represented by this class is by
  * using consistent currying).
+ *
+ * @param <T> a type of operands
  */
 public class Operation<T> {
     private final Function<T> function;

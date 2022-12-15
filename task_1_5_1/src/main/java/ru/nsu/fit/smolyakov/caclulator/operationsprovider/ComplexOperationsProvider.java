@@ -6,6 +6,12 @@ import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * An implementation of {@link OperationsProvider} with {@link Complex}
+ * as a type of operands and minimal set of operations.
+ * Namely, "+", "-", "*", "/", "sin" and "cos" operations with
+ * obvious meanings are available.
+ */
 public class ComplexOperationsProvider extends AbstractOperationsProvider<Complex> {
     private static final Map<String, Operation<Complex>> operationsMap =
             Map.of(
@@ -18,9 +24,7 @@ public class ComplexOperationsProvider extends AbstractOperationsProvider<Comple
             );
 
     /**
-     * Constructs an instance of {@code ComplexOperationProvider} with a minimum set
-     * of operations. Namely, "+", "-", "*", "/", "sin" and "cos" operations with
-     * obvious meanings are available.
+     * Constructs an instance of {@code ComplexOperationProvider}.
      */
     public ComplexOperationsProvider() {
         super(operationsMap);
@@ -37,7 +41,7 @@ public class ComplexOperationsProvider extends AbstractOperationsProvider<Comple
      *                               match operand pattern
      */
     @Override
-    protected Complex operandValue(String operandString) throws NumberFormatException {
+    protected Complex parseAsOperand(String operandString) throws NumberFormatException {
         return Complex.valueOf(Objects.requireNonNull(operandString));
     }
 }

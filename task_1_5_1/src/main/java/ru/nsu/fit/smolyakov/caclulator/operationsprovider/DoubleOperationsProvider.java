@@ -6,6 +6,16 @@ import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * An implementation of {@link OperationsProvider} with {@link Double} as a
+ * type of operand and a set of basic arithmetic operations, such as
+ * "+", "-", "*", "/", "^" with obvious meanings, some trigonometrical
+ * operations - "sin" and "cos" - and "to-deg" and "to-rad", providing conversion
+ * from radians to degree and backwards.
+ *
+ * <p>This provider also contains {@link Math#PI} and {@link Math#E} constants,
+ * also represented as suppliers.
+ */
 public class DoubleOperationsProvider extends AbstractOperationsProvider<Double> {
     private static final Map<String, Operation<Double>> operationsMap =
             Map.ofEntries(
@@ -23,13 +33,7 @@ public class DoubleOperationsProvider extends AbstractOperationsProvider<Double>
             );
 
     /**
-     * Constructs an instance of {@code ComplexOperationProvider} with a set
-     * of basic arithmetic operations, such as "+", "-", "*", "/", "^" with
-     * obvious meanings, some trigonometrical operations - "sin" and "cos" -
-     * and "to-deg" and "to-rad", providing conversion from radians to degree and
-     * backwards.
-     *
-     * <p>This provider also contains "PI" and "E" constants.
+     * Constructs an instance of {@code ComplexOperationProvider}.
      */
     public DoubleOperationsProvider() {
         super(operationsMap);
@@ -46,7 +50,7 @@ public class DoubleOperationsProvider extends AbstractOperationsProvider<Double>
      *                               match operand pattern
      */
     @Override
-    protected Double operandValue(String operandString) throws NumberFormatException {
+    protected Double parseAsOperand(String operandString) throws NumberFormatException {
         return Double.valueOf(Objects.requireNonNull(operandString));
     }
 }

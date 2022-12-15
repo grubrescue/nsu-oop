@@ -8,10 +8,14 @@ import java.util.Scanner;
 import java.util.Stack;
 
 /**
- * A class providing functionality to
+ * A calculator for a prefix notation with a generic type of operands and
+ * a set of operations provided by {@link OperationsProvider}. As one
+ * specifies, operands are also treated as zero arguments functions.
  *
  * @see ru.nsu.fit.smolyakov.caclulator.operation.Operation
  * @see ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider
+ *
+ * @param <T> a type of operands
  */
 public class Calculator<T> {
     private final OperationsProvider<T> operationsProvider;
@@ -19,7 +23,10 @@ public class Calculator<T> {
     private final Stack<Operation<T>> stack = new Stack<>();
 
     /**
-     * @param operationsProvider
+     * Constructs an instance of a calculator associated with
+     * a specified {@code operationProvider}.
+     *
+     * @param operationsProvider a specified {@linkplain OperationsProvider}
      */
     public Calculator(OperationsProvider<T> operationsProvider) {
         this.operationsProvider = Objects.requireNonNull(operationsProvider);
@@ -40,7 +47,21 @@ public class Calculator<T> {
         return null;
     }
 
+    /**
+     * Calculates an arithmetic expression in a prefix notation
+     * provided by {@code scanner}.
+     *
+     * @param  scanner a specified {@linkplain Scanner}
+     * @return a result of computation
+     *
+     * @throws IllegalArgumentException if an expression provided
+     *      by {@code scanner} has incorrect format
+     */
     public T compute(Scanner scanner) {
+        if (scanner == null) {
+            throw new NullPointerException("scanner is null");
+        }
+
         T result = null;
         stack.clear();
 

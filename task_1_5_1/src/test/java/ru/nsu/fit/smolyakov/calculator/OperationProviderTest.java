@@ -1,10 +1,8 @@
 package ru.nsu.fit.smolyakov.calculator;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.fit.smolyakov.caclulator.Calculator;
-import ru.nsu.fit.smolyakov.caclulator.DoubleCalculator;
 import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 import ru.nsu.fit.smolyakov.caclulator.operationsprovider.DoubleOperationsProvider;
 
@@ -31,18 +29,18 @@ class OperationProviderTest {
         assertThatThrownBy(() -> compute("anime"))
                 .isInstanceOf(IllegalArgumentException.class);
 
-        provider.addOperation("anime", new Operation<Double>(() -> 666.666));
+        provider.insertOperation("anime", new Operation<Double>(() -> 666.666));
         assertThat(compute("anime")).isEqualTo(666.666);
     }
 
     @Test
     void addOperationTestNameExists() {
-        assertThat(provider.addOperation("-", new Operation<Double>(() -> 0d))).isFalse();
+        assertThat(provider.insertOperation("-", new Operation<Double>(() -> 0d))).isFalse();
     }
 
     @Test
     void addOperationTestNameIsDouble() {
-        assertThatThrownBy(() -> provider.addOperation("0.67", new Operation<Double>(() -> 0.66)))
+        assertThatThrownBy(() -> provider.insertOperation("0.67", new Operation<Double>(() -> 0.66)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

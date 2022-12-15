@@ -8,6 +8,8 @@ import java.util.List;
  *
  * <p>This is a <a href="package-summary.html">functional interface</a>
  * whose functional method is {@link #apply(List)}.
+ *
+ * @param <T> a type of operands
  */
 public interface Function<T> {
     /**

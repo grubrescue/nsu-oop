@@ -6,6 +6,26 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Just one variant of {@link OperationsProvider} interface implementation,
+ * that is responsible for providing operations for
+ * {@link ru.nsu.fit.smolyakov.caclulator.Calculator}.
+ *
+ * <p>As calculator treats everything as a function, it is supposed that
+ * operands are returned as suppliers (0-arity functions).
+ *
+ * <p>Successor classes have to call {@link #AbstractOperationsProvider(Map)}
+ * constructor, with a map from method names to {@link Operation} methods.
+ * Functionality can be also widened by using {@link #insertOperation(String, Operation)}
+ * method. Another requirement for inheritors is to provide an implementation for
+ * {@link #parseAsOperand(String)}.
+ *
+ * <p>This class appears to be mutable, so changing of one leads to changing of behaviour of
+ * an associated {@link ru.nsu.fit.smolyakov.caclulator.Calculator}.
+ *
+ * @param <T> a type of operands
+ * @see ru.nsu.fit.smolyakov.caclulator.Calculator
+ */
 public abstract class AbstractOperationsProvider<T> implements OperationsProvider<T> {
     private final Map<String, Operation<T>> operationsMap;
 
@@ -27,12 +47,12 @@ public abstract class AbstractOperationsProvider<T> implements OperationsProvide
      * @throws NumberFormatException if {@code operandString} doesn't
      *                               match operand pattern
      */
-    protected abstract T operandValue(String operandString) throws NumberFormatException;
+    protected abstract T parseAsOperand(String operandString) throws NumberFormatException;
 
     /**
      * Returns a copy of {@link Operation} associated with specified {@code name}.
      * If there is no such operators, then {@code name} is parsed
-     * by {@link #operandValue(String)} method.
+     * by {@link #parseAsOperand(String)} method.
      *
      * @param  name a name of an operation
      * @return an operation associated with {@code name}
@@ -44,7 +64,7 @@ public abstract class AbstractOperationsProvider<T> implements OperationsProvide
     public final Operation<T> getByName(String name) throws NumberFormatException {
         var mappedOperation = operationsMap.get(name);
         if (mappedOperation == null) {
-            return new Operation<>(() -> operandValue(name));
+            return new Operation<>(() -> parseAsOperand(name));
         } else {
             return mappedOperation.uncurriedCopy();
         }
@@ -63,7 +83,7 @@ public abstract class AbstractOperationsProvider<T> implements OperationsProvide
      * @throws IllegalArgumentException if operation matches the operand
      *                                  pattern
      */
-    public boolean addOperation(String name, Operation<T> operation) {
+    public boolean insertOperation(String name, Operation<T> operation) {
         if (name == null) {
             throw new NullPointerException("name can't be null");
         } else if (operation == null) {
@@ -71,7 +91,7 @@ public abstract class AbstractOperationsProvider<T> implements OperationsProvide
         }
 
         try {
-            operandValue(name);
+            parseAsOperand(name);
         } catch (NumberFormatException e) {
             return Objects.isNull(operationsMap.putIfAbsent(name, operation));
         }
