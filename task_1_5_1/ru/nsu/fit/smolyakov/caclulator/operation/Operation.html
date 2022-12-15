@@ -78,27 +78,27 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Operation&lt;T&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">Represents an operation upon operands of the same type, producing a result
- of the same type as the operands. Implemented for internal use with 
+ of the same type as the operands. Implemented for internal use with
  <a href="../Calculator.html" title="class in ru.nsu.fit.smolyakov.caclulator"><code>Calculator</code></a>.
- 
- <p>This class imposes some restrictions preventing possible mistakes while 
- applying a function, whose amount of arguments might be not clear. Futhermore, 
+
+ <p>This class imposes some restrictions preventing possible mistakes while
+ applying a function, whose amount of arguments might be not clear. Furthermore,
  default <code>apply</code> (or <code>compute</code>) method doesn't exist, as it
  is not used by <code>Calculator</code>.
- 
- <p>Implements currying by eponymous <a href="#curry(T)"><code>curry(T)</code></a> method. 
- Currying is the technique of translating the evaluation of a function that takes multiple 
- arguments into evaluating a sequence of functions, each with a single argument. 
- For example, currying a function <code>f</code> that takes three arguments creates a nested 
+
+ <p>Implements currying by eponymous <a href="#curry(T)"><code>curry(T)</code></a> method.
+ Currying is the technique of translating the evaluation of a function that takes multiple
+ arguments into evaluating a sequence of functions, each with a single argument.
+ For example, currying a function <code>f</code> that takes three arguments creates a nested
  unary function g, so that <code>f(a, b, c)</code> is equal to <code>g(a)(b)(c)</code>.
- Although this operation is destructive, a new instance of initial state of 
+ Although this operation is destructive, a new instance of initial state of
  this <code>Operation</code> can be created by <a href="#uncurriedCopy()"><code>uncurriedCopy()</code></a>.
- 
+
  <p>Allows the user to get <a href="#arity()"><code>arity()</code></a> of the current (respectively, curried) function.
- One strictly should be non-negative number, and this fact is checked by both methods and 
- mutable methods. 
- 
- <p><a href="#get()"><code>get()</code></a> method allows to get the value supplied by 0-arity function. 
+ One strictly should be non-negative number, and this fact is checked by both methods and
+ mutable methods.
+
+ <p><a href="#get()"><code>get()</code></a> method allows to get the value supplied by 0-arity function.
  (So, the only way to get a value from the function represented by this class is by
  using consistent currying).</div>
 </section>

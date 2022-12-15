@@ -77,12 +77,22 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">OperationsProvider&lt;T&gt;</span></div>
-<div class="block">A provider interface for the <a href="../Calculator.html" title="class in ru.nsu.fit.smolyakov.caclulator"><code>Calculator</code></a>.
- Provides only <a href="#getByName(java.lang.String)"><code>getByName(String)</code></a> method, which returns an 
+<div class="block">An interface responsible for providing operations for
+ <a href="../Calculator.html" title="class in ru.nsu.fit.smolyakov.caclulator"><code>Calculator</code></a>.
+ Contains only <a href="#getByName(java.lang.String)"><code>getByName(String)</code></a> method, which returns an
  <a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation"><code>Operation</code></a> by its name.
- 
- <p>As calculator treats everything as a function, is is supposed that
+
+ <p>As calculator treats everything as a function, it is supposed that
  operands are returned as suppliers (0-arity functions).</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="../operation/Function.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operation"><code>Function</code></a></li>
+<li><a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation"><code>Operation</code></a></li>
+</ul>
+</dd>
+</dl>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -99,7 +109,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a>&lt;<a href="OperationsProvider.html" title="type parameter in OperationsProvider">T</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getByName(java.lang.String)" class="member-name-link">getByName</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns an <a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation"><code>Operation</code></a> associated with specified <code>name</code>.</div>
+</div>
 </div>
 </div>
 </div>
@@ -118,6 +130,19 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getByName(java.lang.String)">
 <h3>getByName</h3>
 <div class="member-signature"><span class="return-type"><a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a>&lt;<a href="OperationsProvider.html" title="type parameter in OperationsProvider">T</a>&gt;</span>&nbsp;<span class="element-name">getByName</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="block">Returns an <a href="../operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation"><code>Operation</code></a> associated with specified <code>name</code>.
+ If there is no such operators, then <code>name</code> is parsed
+ according to operand pattern.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>name</code> - a name of an operation</dd>
+<dt>Returns:</dt>
+<dd>an operation associated with <code>name</code></dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></code> - if  name is either
+      not connected to any operation and doesn't match
+      the format of operand</dd>
+</dl>
 </section>
 </li>
 </ul>
