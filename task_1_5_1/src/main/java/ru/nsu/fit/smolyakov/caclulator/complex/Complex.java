@@ -2,6 +2,7 @@ package ru.nsu.fit.smolyakov.caclulator.complex;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -158,32 +159,31 @@ public record Complex(double r, double i) {
     }
 
     /**
-     * Returns a string representation of this {@code Complex} number with format
-     * {@code a+bi}, where {@code a} is a real part of this complex
-     * number and {@code b} is an imaginary one.
+     * Returns a hash code for this {@code Complex}. This implementation
+     * assumes numbers to be equal when they difference within 10^-8.
      *
-     * <p>Both real and imaginary parts might have precision equal to
-     * {@code 14} or less.
-     *
-     * @return a string representation of this {@code Complex} number
+     * @return  a hash code value for this object.
      */
     @Override
-    public String toString() {
-        char imaginarySign;
-        if (i < 0) {
-            imaginarySign = '-';
-        } else {
-            imaginarySign = '+';
+    public int hashCode() {
+        double eps = 1e-8;
+
+        var newR = (int) r;
+        var newI = (int) i;
+
+        if (r + eps >= newR + 1) {
+            newR++;
+        } else if (r - eps <= newR - 1) {
+            newR--;
         }
 
-        DecimalFormat decFormatter = new DecimalFormat("0.##############");
-        decFormatter.setRoundingMode(RoundingMode.DOWN);
+        if (i + eps >= newI + 1) {
+            newI++;
+        } else if (i - eps <= newI - 1) {
+            newI--;
+        }
 
-        return "%s%c%si".formatted(
-                decFormatter.format(r),
-                imaginarySign,
-                decFormatter.format(Math.abs(i))
-        );
+        return Objects.hash(newR, newI);
     }
 
     /**
@@ -217,5 +217,34 @@ public record Complex(double r, double i) {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Returns a string representation of this {@code Complex} number with format
+     * {@code a+bi}, where {@code a} is a real part of this complex
+     * number and {@code b} is an imaginary one.
+     *
+     * <p>Both real and imaginary parts might have precision equal to
+     * {@code 14} or less.
+     *
+     * @return a string representation of this {@code Complex} number
+     */
+    @Override
+    public String toString() {
+        char imaginarySign;
+        if (i < 0) {
+            imaginarySign = '-';
+        } else {
+            imaginarySign = '+';
+        }
+
+        DecimalFormat decFormatter = new DecimalFormat("0.##############");
+        decFormatter.setRoundingMode(RoundingMode.DOWN);
+
+        return "%s%c%si".formatted(
+                decFormatter.format(r),
+                imaginarySign,
+                decFormatter.format(Math.abs(i))
+        );
     }
 }
