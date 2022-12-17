@@ -42,7 +42,7 @@ public abstract class AbstractOperationsProvider<T> implements OperationsProvide
     /**
      * Converts {@code operandString} into operand value type ({@code T}).
      *
-     * @param  operandString a string representation of operand
+     * @param operandString a string representation of operand
      * @return an instance of class {@code T}
      * @throws NumberFormatException if {@code operandString} doesn't
      *                               match operand pattern
@@ -54,11 +54,11 @@ public abstract class AbstractOperationsProvider<T> implements OperationsProvide
      * If there is no such operators, then {@code name} is parsed
      * by {@link #parseAsOperand(String)} method.
      *
-     * @param  name a name of an operation
+     * @param name a name of an operation
      * @return an operation associated with {@code name}
      * @throws NumberFormatException if {@code} name is either
-     *      not connected to any operation and doesn't match
-     *      the format of operand
+     *                               not connected to any operation and doesn't match
+     *                               the format of operand
      */
     @Override
     public final Operation<T> getByName(String name) throws NumberFormatException {
@@ -75,11 +75,10 @@ public abstract class AbstractOperationsProvider<T> implements OperationsProvide
      *
      * <p>A {@code name} is not allowed to match the format of operand.
      *
-     * @param  name      a specified operation name
-     * @param  operation a specified operation
+     * @param name      a specified operation name
+     * @param operation a specified operation
      * @return true if operation is added successfully,
-     *         false if one already exists
-     *
+     * false if one already exists
      * @throws IllegalArgumentException if operation matches the operand
      *                                  pattern
      */

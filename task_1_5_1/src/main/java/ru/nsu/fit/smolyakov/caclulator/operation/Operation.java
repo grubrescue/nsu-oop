@@ -115,7 +115,7 @@ public class Operation<T> {
      * Translated this function into one curried with specified {@code arg}.
      * Arity is decreased by 1.
      *
-     * @param  arg an argument of transformation
+     * @param arg an argument of transformation
      * @throws IllegalStateException if arity is not a positive number
      */
     public void curry(T arg) {

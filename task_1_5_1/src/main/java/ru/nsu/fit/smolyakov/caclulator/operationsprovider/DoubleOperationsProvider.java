@@ -1,6 +1,5 @@
 package ru.nsu.fit.smolyakov.caclulator.operationsprovider;
 
-import ru.nsu.fit.smolyakov.caclulator.complex.Complex;
 import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 
 import java.util.Map;
@@ -47,7 +46,7 @@ public class DoubleOperationsProvider extends AbstractOperationsProvider<Double>
      *
      * <p>Complex operands pattern is described in {@link Double#valueOf(String)}.
      *
-     * @param  operandString a string representation of operand
+     * @param operandString a string representation of operand
      * @return a {@link Double} number corresponding to {@code operandString}
      * @throws NumberFormatException if {@code operandString} doesn't
      *                               match operand pattern

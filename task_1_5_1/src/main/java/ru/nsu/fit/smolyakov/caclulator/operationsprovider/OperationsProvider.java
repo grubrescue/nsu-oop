@@ -21,11 +21,11 @@ public interface OperationsProvider<T> {
      * If there is no such operators, then {@code name} is parsed
      * according to operand pattern.
      *
-     * @param  name a name of an operation
+     * @param name a name of an operation
      * @return an operation associated with {@code name}
      * @throws NumberFormatException if {@code} name is either
-     *      not connected to any operation and doesn't match
-     *      the format of operand
+     *                               not connected to any operation and doesn't match
+     *                               the format of operand
      */
     Operation<T> getByName(String name);
 }

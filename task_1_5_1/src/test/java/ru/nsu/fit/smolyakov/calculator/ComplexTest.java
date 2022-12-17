@@ -58,12 +58,12 @@ class ComplexTest {
 
     @Test
     void equalsTest() {
-        assertThat(new Complex(-0,  -0).hashCode()).isEqualTo(new Complex(0, 0).hashCode());
-        assertThat(new Complex(-3.49999999999,  -0).hashCode()).isEqualTo(new Complex(-3.5, 0).hashCode());
-        assertThat(new Complex(-3.99999999999,  -0).hashCode()).isEqualTo(new Complex(-4, 0).hashCode());
+        assertThat(new Complex(-0, -0).hashCode()).isEqualTo(new Complex(0, 0).hashCode());
+        assertThat(new Complex(-3.49999999999, -0).hashCode()).isEqualTo(new Complex(-3.5, 0).hashCode());
+        assertThat(new Complex(-3.99999999999, -0).hashCode()).isEqualTo(new Complex(-4, 0).hashCode());
 
-        assertThat(new Complex(-0,  -0)).isEqualTo(new Complex(0, 0));
-        assertThat(new Complex(-3.49999999999,  -0)).isEqualTo(new Complex(-3.5, 0));
-        assertThat(new Complex(-3.99999999999,  -0)).isEqualTo(new Complex(-4, 0));
+        assertThat(new Complex(-0, -0)).isEqualTo(new Complex(0, 0));
+        assertThat(new Complex(-3.49999999999, -0)).isEqualTo(new Complex(-3.5, 0));
+        assertThat(new Complex(-3.99999999999, -0)).isEqualTo(new Complex(-4, 0));
     }
 }

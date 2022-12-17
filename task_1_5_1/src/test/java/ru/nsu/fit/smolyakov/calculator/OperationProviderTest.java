@@ -14,6 +14,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 class OperationProviderTest {
     private DoubleOperationsProvider provider;
     private Calculator<Double> calc;
+
     @BeforeEach
     void init() {
         provider = new DoubleOperationsProvider();

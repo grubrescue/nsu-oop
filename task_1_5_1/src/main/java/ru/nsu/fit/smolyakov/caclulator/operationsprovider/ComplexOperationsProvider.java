@@ -35,7 +35,7 @@ public class ComplexOperationsProvider extends AbstractOperationsProvider<Comple
      *
      * <p>Complex operands pattern is described in {@link Complex#valueOf(String)}.
      *
-     * @param  operandString a string representation of operand
+     * @param operandString a string representation of operand
      * @return a {@link Complex} number corresponding to {@code operandString}
      * @throws NumberFormatException if {@code operandString} doesn't
      *                               match operand pattern

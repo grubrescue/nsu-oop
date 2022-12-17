@@ -162,7 +162,7 @@ public record Complex(double r, double i) {
      * Returns a hash code for this {@code Complex}. This implementation
      * assumes numbers to be equal when they difference within 10^-8.
      *
-     * @return  a hash code value for this object.
+     * @return a hash code value for this object.
      */
     @Override
     public int hashCode() {
