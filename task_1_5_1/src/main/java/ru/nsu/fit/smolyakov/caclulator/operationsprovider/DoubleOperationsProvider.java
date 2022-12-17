@@ -29,7 +29,10 @@ public class DoubleOperationsProvider extends AbstractOperationsProvider<Double>
                     Map.entry("to-rad", new Operation<>(Math::toRadians)),
                     Map.entry("PI", new Operation<>(() -> Math.PI)),
                     Map.entry("E", new Operation<>(() -> Math.E)),
-                    Map.entry("^", new Operation<>(Math::pow))
+                    Map.entry("^", new Operation<>(Math::pow)),
+                    Map.entry("ln", new Operation<>(Math::log)),
+                    Map.entry("lg", new Operation<>(Math::log10)),
+                    Map.entry("sqrt", new Operation<>(Math::sqrt))
             );
 
     /**

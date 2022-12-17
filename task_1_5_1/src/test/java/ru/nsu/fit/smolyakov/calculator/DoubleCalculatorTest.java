@@ -26,7 +26,7 @@ class DoubleCalculatorTest {
         return calc.compute(new Scanner(what));
     }
 
-    static Stream<Arguments> plusMinusMultiplyDivideTestsProvider() {
+    static Stream<Arguments> basicTestsProvider() {
         return Stream.of(
                 Arguments.of("+ 5 5", 10),
                 Arguments.of("- 5 5", 0),
@@ -37,7 +37,14 @@ class DoubleCalculatorTest {
                 Arguments.of("* 5 0", 0),
                 Arguments.of("/ -5 0", Double.NEGATIVE_INFINITY),
                 Arguments.of("* 0 5", 0),
-                Arguments.of("/ 0 5", 0)
+                Arguments.of("/ 0 5", 0),
+
+                Arguments.of("ln E", 1),
+                Arguments.of("ln ^ E 2", 2),
+                Arguments.of("lg 10", 1),
+                Arguments.of("lg 0.01", -2),
+                Arguments.of("sqrt 16", 4),
+                Arguments.of("sqrt 1", 1)
         );
     }
 
@@ -48,8 +55,6 @@ class DoubleCalculatorTest {
                 Arguments.of("sin + - 1 2 1", 0),
                 Arguments.of("- * ^ ^ * 2 4 2 / 1 6 / 90 4 15", 30)
         );
-
-
     }
 
     @Test
@@ -65,7 +70,7 @@ class DoubleCalculatorTest {
     }
 
     @ParameterizedTest
-    @MethodSource({"plusMinusMultiplyDivideTestsProvider",
+    @MethodSource({"basicTestsProvider",
             "moreDifficultTestsProvider"})
     void allOtherTests(String expr, double res) {
         assertThat(compute(expr)).isEqualTo(res);
