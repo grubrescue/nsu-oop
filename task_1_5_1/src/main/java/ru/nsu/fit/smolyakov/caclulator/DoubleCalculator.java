@@ -14,7 +14,9 @@ public class DoubleCalculator extends Calculator<Double> {
     /**
      * Constructs an instance of {@code DoubleCalculator}.
      * Indeed, resulted class is just the same as one created this way:
-     * {@code new Calculator<Double>(new DoubleOperationsProvider())}.
+     * <blockquote><pre>
+     * new Calculator<Double>(new DoubleOperationsProvider())
+     * </pre></blockquote>
      */
     public DoubleCalculator() {
         super(new DoubleOperationsProvider());
