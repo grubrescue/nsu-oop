@@ -16,7 +16,7 @@ public class ComplexCalculator extends Calculator<Complex> {
      * Constructs an instance of {@code ComplexCalculator}.
      * Indeed, resulted class is just the same as one created this way:
      * <blockquote><pre>
-     * new Calculator&lt;Complex&gt;(new ComplexOperationsProvider())}
+     * new Calculator&lt;Complex&gt;(new ComplexOperationsProvider())
      * </pre></blockquote>
      */
     public ComplexCalculator() {
