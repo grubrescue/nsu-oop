@@ -112,7 +112,7 @@ public class Operation<T> {
     }
 
     /**
-     * Translated this function into one curried with specified {@code arg}.
+     * Translates this function into one curried with specified {@code arg}.
      * Arity is decreased by 1.
      *
      * @param arg an argument of transformation
