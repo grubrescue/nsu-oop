@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.fit.smolyakov.diary.core"},{"l":"ru.nsu.fit.smolyakov.diary.executable"}];updateSearchResults();
