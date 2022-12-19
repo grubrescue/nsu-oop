@@ -8,15 +8,11 @@ import java.util.stream.Stream;
 
 public class Diary {
     private final SortedSet<Entry> entries
-            = new TreeSet<Entry>(Comparator.comparing(Entry::date)); // TODO think about container here
+            = new TreeSet<Entry>(Comparator.comparing(Entry::date)); // TODO maybe arraylist will suit better?
 
     // TODO [de]serialization
-    public Diary(SortedSet<Entry> entries) {
+    public Diary(Collection<Entry> entries) {
         this.entries.addAll(Objects.requireNonNull(entries));
-    }
-
-    private Diary(Stream<Entry> entryStream) {
-        this.entries.addAll(entryStream.toList()); // TODO once again, maybe there is a better way
     }
 
     // query builder
@@ -27,25 +23,26 @@ public class Diary {
             this.entries = entries;
         }
 
-        public Query til(LocalDateTime date) {
-            restrictions = restrictions.and((x) -> x.til(date));
+        public Query after(LocalDateTime date) {
+            restrictions = restrictions.and((entry) -> entry.after(date));
             return this;
         }
 
-        public Query until(LocalDateTime date) {
-            restrictions = restrictions.and((x) -> x.until(date));
+        public Query before(LocalDateTime date) {
+            restrictions = restrictions.and((entry) -> entry.before(date));
             return this;
         }
 
         public Query contains(String keyword) {
-            restrictions = restrictions.and((x) -> x.contains(keyword));
+            restrictions = restrictions.and((entry) -> entry.contains(keyword));
             return this;
         }
 
         public Diary select() {
             return new Diary(
                 entries.stream()
-                        .filter(restrictions) // TODO maybe there is a better way
+                        .filter(restrictions)
+                        .toList() // TODO maybe there is a better way
             );
         }
     }
@@ -53,4 +50,13 @@ public class Diary {
     public Query query() {
         return new Query(this.entries);
     }
+
+
+    @Override
+    public String toString() {
+        return "Diary{" +
+                "entries=" + entries +
+                '}';
+    }
+
 }
