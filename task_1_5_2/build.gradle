@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'jacoco'
+    id 'application'
 }
 
 repositories {
@@ -8,7 +9,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'commons-cli:commons-cli:1.5.0'
+    implementation 'info.picocli:picocli:4.7.0'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.14.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
 
@@ -16,6 +17,8 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.1'
     testImplementation 'org.assertj:assertj-core:3.23.1'
 }
+
+mainClassName = 'ru.nsu.fit.smolyakov.diary.executable.Main'
 
 test {
     useJUnitPlatform()

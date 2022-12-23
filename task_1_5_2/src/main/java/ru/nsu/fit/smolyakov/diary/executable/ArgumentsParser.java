@@ -1,18 +1,32 @@
 package ru.nsu.fit.smolyakov.diary.executable;
 
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
+import picocli.CommandLine;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
+import picocli.CommandLine.Parameters;
 
-public class ArgumentsParser {
-    void a() {
-        Option opt = Option.builder("opt")
-                .argName("n")
-                .hasArg()
-                .desc("n")
-                .build();
+import ru.nsu.fit.smolyakov.diary.core.Diary;
 
-        Options options = new Options();
-        options.addOption(opt);
-        // TODO everything
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.concurrent.Callable;
+
+@Command(
+        name = "diary",
+        mixinStandardHelpOptions = true,
+        description = "Saves your thoughts.",
+        subcommands = {
+                ListParser.class,
+                AddParser.class,
+                RmParser.class
+        }
+)
+class ArgumentsParser implements Runnable {
+
+    @Override
+    public void run() {
+
     }
+
+
 }
