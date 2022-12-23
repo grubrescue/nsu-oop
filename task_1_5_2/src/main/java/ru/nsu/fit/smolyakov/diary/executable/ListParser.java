@@ -20,13 +20,13 @@ class ListParser implements Runnable  {
             names = "--after",
             description = "Filter"
     )
-    OffsetDateTime after;
+    OffsetDateTime after = null;
 
     @CommandLine.Option(
             names = "--before",
             description = "Filter"
     )
-    OffsetDateTime before;
+    OffsetDateTime before = null;
 
     @CommandLine.Option(
             names = "--keywords",

@@ -22,11 +22,8 @@ import java.util.concurrent.Callable;
         }
 )
 class ArgumentsParser implements Runnable {
-
     @Override
     public void run() {
 
     }
-
-
 }

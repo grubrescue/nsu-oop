@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,11 +26,15 @@ public class Diary {
     }
 
     public static Diary fromJson(File file) throws IOException {
-        return new ObjectMapper().readValue(file, Diary.class);
+        return new ObjectMapper()
+                .registerModule(new JavaTimeModule())
+                .readValue(file, Diary.class);
     }
 
     public void toJson(File file) throws  IOException {
-        new ObjectMapper().writeValue(file, this);
+        new ObjectMapper()
+                .registerModule(new JavaTimeModule())
+                .writeValue(file, this);
     }
 
 

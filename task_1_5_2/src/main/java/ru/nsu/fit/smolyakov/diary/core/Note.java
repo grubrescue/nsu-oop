@@ -1,6 +1,7 @@
 package ru.nsu.fit.smolyakov.diary.core;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
@@ -16,9 +17,14 @@ import java.time.format.DateTimeFormatter;
  * @param date
  */
 public record Note(
-        @JsonProperty("heading") String heading,
-        @JsonProperty("text") String contents,
-        @JsonProperty("date") OffsetDateTime date
+        @JsonProperty("heading")
+        String heading,
+
+        @JsonProperty("text")
+        String contents,
+
+        @JsonProperty("date")
+        OffsetDateTime date
 ) {
     /**
      * Creates a new instance of {@code Note} with a specified
