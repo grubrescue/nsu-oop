@@ -7,6 +7,7 @@ import picocli.CommandLine.Parameters;
 
 import ru.nsu.fit.smolyakov.diary.core.Diary;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -16,6 +17,7 @@ import java.util.concurrent.Callable;
         mixinStandardHelpOptions = true,
         description = "Saves your thoughts.",
         subcommands = {
+                CreateParser.class,
                 ListParser.class,
                 AddParser.class,
                 RmParser.class

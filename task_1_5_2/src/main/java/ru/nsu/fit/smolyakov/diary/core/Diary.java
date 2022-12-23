@@ -1,7 +1,9 @@
 package ru.nsu.fit.smolyakov.diary.core;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,10 +12,13 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.function.Predicate;
 
+/**
+ *
+ */
 public class Diary {
     private final List<Note> notes
             = new ArrayList<Note>();
@@ -21,49 +26,82 @@ public class Diary {
     // TODO [de]serialization
 
     @JsonCreator
+    public Diary() {}
+
+    /**
+     *
+     * @param notes
+     */
+    @JsonCreator
     public Diary(@JsonProperty("notes") List<Note> notes) {
         this.notes.addAll(Objects.requireNonNull(notes));
     }
 
+    /**
+     *
+     * @param file
+     * @return
+     * @throws IOException
+     */
     public static Diary fromJson(File file) throws IOException {
-        return new ObjectMapper()
-                .registerModule(new JavaTimeModule())
-                .readValue(file, Diary.class);
+//        if (file.exists()) {
+            return new ObjectMapper()
+                    .registerModule(new JavaTimeModule())
+                    .readValue(file, Diary.class);
+//        } else {
+//            return null;
+//        }
     }
 
+    /**
+     *
+     * @param file
+     * @throws IOException
+     */
     public void toJson(File file) throws  IOException {
         new ObjectMapper()
                 .registerModule(new JavaTimeModule())
+                .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
                 .writeValue(file, this);
     }
 
 
-    // query builder
+    /**
+     *
+     */
     public static class Query {
         private final List<Note> notes;
         private Predicate<Note> restrictions = ((note) -> true);
         private Query(List<Note> notes) {
-            this.notes = notes;
+            this.notes = Objects.requireNonNull(notes);
         }
 
-        public Query after(OffsetDateTime date) {
-            restrictions = restrictions.and((note) -> note.after(date));
+        public Query after(ZonedDateTime date) {
+            if (date != null) {
+                restrictions = restrictions.and((note) -> note.after(date));
+            }
             return this;
         }
 
-        public Query before(OffsetDateTime date) {
-            restrictions = restrictions.and((note) -> note.before(date));
+        public Query before(ZonedDateTime date) {
+            if (date != null) {
+                restrictions = restrictions.and((note) -> note.before(date));
+            }
             return this;
         }
 
         public Query contains(String keyword) {
-            restrictions = restrictions.and((note) -> note.contains(keyword));
+            if (keyword != null) {
+                restrictions = restrictions.and((note) -> note.contains(keyword));
+            }
             return this;
         }
 
         public Query contains(List<String> keywordsList) {
-            keywordsList
-                    .forEach((keyword) -> restrictions = restrictions.and((note) -> note.contains(keyword)));
+            if (keywordsList != null) {
+                keywordsList
+                        .forEach((keyword) -> restrictions = restrictions.and((note) -> note.contains(keyword)));
+            }
             return this;
         }
 
@@ -90,8 +128,24 @@ public class Diary {
     }
 
     @Override
+    public int hashCode() {
+        return notes.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Diary other) {
+            return notes.equals(other.notes);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
+        var stringBuilder = new StringBuilder();
         notes.forEach(stringBuilder::append);
         return stringBuilder.toString();
     }

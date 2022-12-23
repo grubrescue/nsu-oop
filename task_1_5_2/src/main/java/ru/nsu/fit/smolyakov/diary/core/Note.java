@@ -4,8 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
+import java.time.ZonedDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
@@ -24,19 +25,22 @@ public record Note(
         String contents,
 
         @JsonProperty("date")
-        OffsetDateTime date
+//        @JsonFormat(
+//                pattern = DateTimeFormatter.ISO_ZONED_DATE_TIME.getDecimalStyle()
+//        )
+        ZonedDateTime date
 ) {
     /**
      * Creates a new instance of {@code Note} with a specified
      * {@code heading} and {@code contents} and current date of creation
-     * (latter is provided by {@link OffsetDateTime#now()}).
+     * (latter is provided by {@link ZonedDateTime#now()}).
      *
      * @param  heading  a string literal that specifies a heading of an entry
      * @param  contents a string literal that specifies a text of an entry
      * @return a new instance of {@code Note}
      */
     public static Note create(String heading, String contents) {
-        return new Note(heading, contents, OffsetDateTime.now());
+        return new Note(heading, contents, ZonedDateTime.now(Clock.systemDefaultZone()));
     }
 
     /**
@@ -59,7 +63,7 @@ public record Note(
      * @return {@code true} if this {@code Note} was created
      *         after a specified {@code date}.
      */
-    public boolean after(OffsetDateTime date) {
+    public boolean after(ZonedDateTime date) {
         return this.date.isAfter(date);
     }
 
@@ -71,7 +75,7 @@ public record Note(
      * @return {@code true} if this {@code Note} was created
      *         before a specified {@code date}.
      */
-    public boolean before(OffsetDateTime date) {
+    public boolean before(ZonedDateTime date) {
         return this.date.isBefore(date);
     }
 

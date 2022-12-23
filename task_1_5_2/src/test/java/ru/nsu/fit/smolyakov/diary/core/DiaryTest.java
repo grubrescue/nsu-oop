@@ -10,7 +10,7 @@ public class DiaryTest {
     void serializeTest() throws IOException {
         File file = new File("src/test/resources/Diary1.json");
         var diary = Diary.fromJson(file);
-        System.out.println(diary.toString());
+//        System.out.println(diary.toString());
 
 //        diary.toJson(file);
     }

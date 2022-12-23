@@ -4,7 +4,7 @@ import picocli.CommandLine;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.OffsetDateTime;
+import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,25 +16,31 @@ import ru.nsu.fit.smolyakov.diary.core.Diary;
         description = "Lists entries"
 )
 class ListParser implements Runnable  {
+    @CommandLine.Parameters(
+            index = "0",
+            description = "File."
+    )
+    private File file;
+
     @CommandLine.Option(
             names = "--after",
             description = "Filter"
     )
-    OffsetDateTime after = null;
+    private ZonedDateTime after = null;
 
     @CommandLine.Option(
             names = "--before",
             description = "Filter"
     )
-    OffsetDateTime before = null;
+    private ZonedDateTime before = null;
 
     @CommandLine.Option(
-            names = "--keywords",
+            names = "-k, --keywords",
             description = "Filter"
     )
-    String keywords = null;
+    private String keywords = null;
 
-    List<String> keywordsSplit(String keywords) {
+    private List<String> keywordsSplit(String keywords) {
         if (keywords == null) {
             return null;
         }
@@ -46,7 +52,7 @@ class ListParser implements Runnable  {
         Diary diary;
 
         try {
-            diary = Diary.fromJson(new File("aboba"));
+            diary = Diary.fromJson(file);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
