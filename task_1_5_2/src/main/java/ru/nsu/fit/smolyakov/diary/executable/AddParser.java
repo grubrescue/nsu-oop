@@ -7,18 +7,18 @@ import java.time.LocalDateTime;
 @CommandLine.Command(
         name = "add",
         mixinStandardHelpOptions = true,
-        description = "Inserts entries"
+        description = "Inserts entries."
 )
 class AddParser implements Runnable  {
     @CommandLine.Parameters(
             index = "0",
-            description = "Heading"
+            description = "Heading."
     )
     private String heading;
 
     @CommandLine.Parameters(
             index = "1",
-            description = "Contents"
+            description = "Contents."
     )
     private String contents;
 

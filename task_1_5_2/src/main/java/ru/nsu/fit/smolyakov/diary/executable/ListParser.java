@@ -4,7 +4,7 @@ import picocli.CommandLine;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,13 +20,13 @@ class ListParser implements Runnable  {
             names = "--after",
             description = "Filter"
     )
-    LocalDateTime after;
+    OffsetDateTime after;
 
     @CommandLine.Option(
             names = "--before",
             description = "Filter"
     )
-    LocalDateTime before;
+    OffsetDateTime before;
 
     @CommandLine.Option(
             names = "--keywords",

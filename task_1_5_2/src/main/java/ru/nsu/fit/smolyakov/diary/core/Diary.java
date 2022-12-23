@@ -1,5 +1,7 @@
 package ru.nsu.fit.smolyakov.diary.core;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,83 +9,85 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Diary {
-    private final List<Entry> entries
-            = new ArrayList<Entry>(); // TODO maybe arraylist will suit better?
+    private final List<Note> notes
+            = new ArrayList<Note>();
 
     // TODO [de]serialization
-    public Diary(Collection<Entry> entries) {
-        this.entries.addAll(Objects.requireNonNull(entries));
+
+    @JsonCreator
+    public Diary(@JsonProperty("notes") List<Note> notes) {
+        this.notes.addAll(Objects.requireNonNull(notes));
     }
 
-    public static Diary fromJson(File file) throws StreamReadException,
-            DatabindException,
-            IOException {
+    public static Diary fromJson(File file) throws IOException {
         return new ObjectMapper().readValue(file, Diary.class);
     }
 
+    public void toJson(File file) throws  IOException {
+        new ObjectMapper().writeValue(file, this);
+    }
+
+
     // query builder
     public static class Query {
-        private final List<Entry> entries;
-        private Predicate<Entry> restrictions = ((entry) -> true);
-        private Query(List<Entry> entries) {
-            this.entries = entries;
+        private final List<Note> notes;
+        private Predicate<Note> restrictions = ((note) -> true);
+        private Query(List<Note> notes) {
+            this.notes = notes;
         }
 
-        public Query after(LocalDateTime date) {
-            restrictions = restrictions.and((entry) -> entry.after(date));
+        public Query after(OffsetDateTime date) {
+            restrictions = restrictions.and((note) -> note.after(date));
             return this;
         }
 
-        public Query before(LocalDateTime date) {
-            restrictions = restrictions.and((entry) -> entry.before(date));
+        public Query before(OffsetDateTime date) {
+            restrictions = restrictions.and((note) -> note.before(date));
             return this;
         }
 
         public Query contains(String keyword) {
-            restrictions = restrictions.and((entry) -> entry.contains(keyword));
+            restrictions = restrictions.and((note) -> note.contains(keyword));
             return this;
         }
 
         public Query contains(List<String> keywordsList) {
             keywordsList
-                    .forEach((keyword) -> restrictions = restrictions.and((entry) -> entry.contains(keyword)));
-            // TODO, maybe we can't change predicate like this
+                    .forEach((keyword) -> restrictions = restrictions.and((note) -> note.contains(keyword)));
             return this;
         }
 
         public Diary select() {
             return new Diary(
-                entries.stream()
+                notes.stream()
                         .filter(restrictions)
-                        .sorted(Comparator.comparing(Entry::date))
+                        .sorted(Comparator.comparing(Note::date))
                         .toList() // TODO maybe there is a better way
             );
         }
     }
 
     public Query query() {
-        return new Query(this.entries);
+        return new Query(this.notes);
     }
 
     public boolean remove(String heading) {
-        return true; //TODO
+        return notes.removeIf((note) -> note.heading().equals(heading));
     }
 
     public boolean insert(String heading, String contents) {
-        return true; //TODO
+        return notes.add(Note.create(heading, contents));
     }
-
 
     @Override
     public String toString() {
-        return "Diary{" +
-                "entries=" + entries +
-                '}';
+        StringBuilder stringBuilder = new StringBuilder();
+        notes.forEach(stringBuilder::append);
+        return stringBuilder.toString();
     }
 }
