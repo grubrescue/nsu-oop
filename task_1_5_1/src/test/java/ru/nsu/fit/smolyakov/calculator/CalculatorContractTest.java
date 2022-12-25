@@ -21,31 +21,31 @@ class CalculatorContractTest {
     @Test
     void notEnoughOperands() {
         assertThatThrownBy(() -> calc.compute(new Scanner("+ + 5 5")))
-                .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void tooManyOperands() {
         assertThatThrownBy(() -> calc.compute(new Scanner("+ + 5 5 5 5")))
-                .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void noOperands() {
         assertThatThrownBy(() -> calc.compute(new Scanner("+")))
-                .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void wrongSecondOperandFormat() {
         assertThatThrownBy(() -> calc.compute(new Scanner("+ 0.54 ab0ba")))
-                .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void wrongFirstOperandFormat() {
         assertThatThrownBy(() -> calc.compute(new Scanner("+ abba 6")))
-                .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

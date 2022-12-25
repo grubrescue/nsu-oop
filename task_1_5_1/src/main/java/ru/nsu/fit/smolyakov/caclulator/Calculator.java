@@ -51,7 +51,7 @@ public class Calculator<T> {
      * Calculates an arithmetic expression in a prefix notation
      * provided by {@code inputStream}.
      *
-     * @param  inputStream a specified {@linkplain InputStream}
+     * @param inputStream a specified {@linkplain InputStream}
      * @return a result of computation
      * @throws IllegalArgumentException if an expression provided
      *                                  by {@code inputStream} has incorrect format
@@ -64,7 +64,7 @@ public class Calculator<T> {
      * Calculates an arithmetic expression in a prefix notation
      * provided by {@code scanner}.
      *
-     * @param  scanner a specified {@linkplain Scanner}
+     * @param scanner a specified {@linkplain Scanner}
      * @return a result of computation
      * @throws IllegalArgumentException if an expression provided
      *                                  by {@code scanner} has incorrect format

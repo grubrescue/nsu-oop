@@ -43,11 +43,11 @@ public record Complex(double r, double i) {
      */
     public static Complex valueOf(String from) {
         Pattern regexPattern =
-                Pattern.compile(
-                        "(?<real>-??\\d+|-??\\d+\\.\\d+)"
-                                + "(?<imaginarySign>[+\\-])"
-                                + "(?<imaginary>\\d+|\\d+\\.\\d+)i"
-                );
+            Pattern.compile(
+                "(?<real>-??\\d+|-??\\d+\\.\\d+)"
+                    + "(?<imaginarySign>[+\\-])"
+                    + "(?<imaginary>\\d+|\\d+\\.\\d+)i"
+            );
 
         Matcher matcher = regexPattern.matcher(from);
         if (!matcher.matches()) {
@@ -104,8 +104,8 @@ public record Complex(double r, double i) {
      */
     public Complex multiply(Complex a) {
         return new Complex(
-                this.r * a.r - this.i * a.i,
-                this.r * a.i + this.i * a.r
+            this.r * a.r - this.i * a.i,
+            this.r * a.i + this.i * a.r
         );
     }
 
@@ -125,11 +125,11 @@ public record Complex(double r, double i) {
         }
 
         double rTmp =
-                (this.r * a.r + this.i * a.i)
-                        / (a.r * a.r + a.i * a.i);
+            (this.r * a.r + this.i * a.i)
+                / (a.r * a.r + a.i * a.i);
         double iTmp =
-                (a.r * this.i - this.r * a.i)
-                        / (a.r * a.r + a.i * a.i);
+            (a.r * this.i - this.r * a.i)
+                / (a.r * a.r + a.i * a.i);
 
         return new Complex(rTmp, iTmp);
     }
@@ -141,8 +141,8 @@ public record Complex(double r, double i) {
      */
     public Complex sin() {
         return new Complex(
-                Math.sin(r) * Math.cosh(i),
-                Math.cos(r) * Math.sinh(i)
+            Math.sin(r) * Math.cosh(i),
+            Math.cos(r) * Math.sinh(i)
         );
     }
 
@@ -153,8 +153,8 @@ public record Complex(double r, double i) {
      */
     public Complex cos() {
         return new Complex(
-                Math.cos(r) * Math.cosh(i),
-                -Math.sin(r) * Math.sinh(i)
+            Math.cos(r) * Math.cosh(i),
+            -Math.sin(r) * Math.sinh(i)
         );
     }
 
@@ -232,12 +232,12 @@ public record Complex(double r, double i) {
             double eps = 1e-8;
 
             return Math.abs(this.i - other.i) < eps
-                    && Math.abs(this.r - other.r) < eps
+                && Math.abs(this.r - other.r) < eps
 
-                    || Double.isNaN(this.i)
-                    && Double.isNaN(this.r)
-                    && Double.isNaN(other.i)
-                    && Double.isNaN(other.r);
+                || Double.isNaN(this.i)
+                && Double.isNaN(this.r)
+                && Double.isNaN(other.i)
+                && Double.isNaN(other.r);
         } else {
             return false;
         }
@@ -266,9 +266,9 @@ public record Complex(double r, double i) {
         decFormatter.setRoundingMode(RoundingMode.DOWN);
 
         return "%s%c%si".formatted(
-                decFormatter.format(r),
-                imaginarySign,
-                decFormatter.format(Math.abs(i))
+            decFormatter.format(r),
+            imaginarySign,
+            decFormatter.format(Math.abs(i))
         );
     }
 }

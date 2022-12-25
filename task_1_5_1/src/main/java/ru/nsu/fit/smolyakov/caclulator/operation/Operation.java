@@ -44,9 +44,10 @@ public class Operation<T> {
     private final List<T> curriedArgs = new LinkedList<>();
 
     /**
-     * Constructs an {@code Operation} instance from a specified {@code supplier}.
+     * Constructs an {@code Operation} instance as a supplier for a specified {@code value}.
      * An arity of instantiated operation will be equal to 0.
      *
+     * @param value a value to be supplied by this operation
      */
     public Operation(T value) {
         this(0, ((list) -> value));
@@ -97,6 +98,31 @@ public class Operation<T> {
         } else {
             throw new IllegalArgumentException("arity should be more than zero");
         }
+    }
+
+    /**
+     * Turns a Double operation into Complex one, so it takes
+     * Complex operands without imaginary part.
+     *
+     * @param op Double operation
+     * @return a Complex operation
+     */
+    public static Operation<Complex> liftToComplex(Operation<Double> op) {
+        return new Operation<>(
+            op.arity(),
+            (list) -> {
+                var doublesList =
+                    list.stream()
+                        .map(Complex::toDouble)
+                        .toList();
+
+                var doubleRes =
+                    op.getFunction()
+                        .apply(doublesList);
+
+                return new Complex(doubleRes, 0);
+            }
+        );
     }
 
     /**
@@ -154,30 +180,5 @@ public class Operation<T> {
      */
     public Function<T> getFunction() {
         return function;
-    }
-
-    /**
-     * Turns a Double operation into Complex one, so it takes
-     * Complex operands
-     *
-     * @param  op Double operation
-     * @return a Complex operation
-     */
-    public static Operation<Complex> liftToComplex(Operation<Double> op) {
-        return new Operation<>(
-            op.arity(),
-            (list) -> {
-                var doublesList =
-                    list.stream()
-                        .map(Complex::toDouble)
-                        .toList();
-
-                var doubleRes =
-                    op.getFunction()
-                        .apply(doublesList);
-
-                return new Complex(doubleRes, 0);
-            }
-        );
     }
 }

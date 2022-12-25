@@ -6,14 +6,14 @@ import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * An implementation of {@link OperationsProvider} with {@link Complex}
  * as a type of operands and minimal set of operations.
  * Namely, "+", "-", "*", "/", "sin" and "cos" operations with
- * obvious meanings are available.
+ * obvious meanings are available. Operations from
+ * {@link DoubleOperationsProvider} are available and working
+ * correctly if operand imaginary part is 0.
  */
 public class ComplexOperationsProvider extends AbstractOperationsProvider<Complex> {
     private static final Map<String, Operation<Complex>> operationsMap;

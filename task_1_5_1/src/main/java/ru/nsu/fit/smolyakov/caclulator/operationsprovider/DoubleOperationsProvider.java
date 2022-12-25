@@ -17,22 +17,22 @@ import java.util.Objects;
  */
 public class DoubleOperationsProvider extends AbstractOperationsProvider<Double> {
     private static final Map<String, Operation<Double>> operationsMap =
-            Map.ofEntries(
-                    Map.entry("+", new Operation<>((a, b) -> a + b)),
-                    Map.entry("-", new Operation<>((a, b) -> a - b)),
-                    Map.entry("*", new Operation<>((a, b) -> a * b)),
-                    Map.entry("/", new Operation<>((a, b) -> a / b)),
-                    Map.entry("sin", new Operation<>(Math::sin)),
-                    Map.entry("cos", new Operation<>(Math::cos)),
-                    Map.entry("to-deg", new Operation<>(Math::toDegrees)),
-                    Map.entry("to-rad", new Operation<>(Math::toRadians)),
-                    Map.entry("PI", new Operation<>(() -> Math.PI)),
-                    Map.entry("E", new Operation<>(() -> Math.E)),
-                    Map.entry("^", new Operation<>(Math::pow)),
-                    Map.entry("ln", new Operation<>(Math::log)),
-                    Map.entry("lg", new Operation<>(Math::log10)),
-                    Map.entry("sqrt", new Operation<>(Math::sqrt))
-            );
+        Map.ofEntries(
+            Map.entry("+", new Operation<>((a, b) -> a + b)),
+            Map.entry("-", new Operation<>((a, b) -> a - b)),
+            Map.entry("*", new Operation<>((a, b) -> a * b)),
+            Map.entry("/", new Operation<>((a, b) -> a / b)),
+            Map.entry("sin", new Operation<>(Math::sin)),
+            Map.entry("cos", new Operation<>(Math::cos)),
+            Map.entry("to-deg", new Operation<>(Math::toDegrees)),
+            Map.entry("to-rad", new Operation<>(Math::toRadians)),
+            Map.entry("PI", new Operation<>(() -> Math.PI)),
+            Map.entry("E", new Operation<>(() -> Math.E)),
+            Map.entry("^", new Operation<>(Math::pow)),
+            Map.entry("ln", new Operation<>(Math::log)),
+            Map.entry("lg", new Operation<>(Math::log10)),
+            Map.entry("sqrt", new Operation<>(Math::sqrt))
+        );
 
     /**
      * Constructs an instance of {@code ComplexOperationProvider}.

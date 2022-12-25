@@ -99,6 +99,11 @@ public abstract class AbstractOperationsProvider<T> implements OperationsProvide
         throw new IllegalArgumentException("specified name matches the operands pattern");
     }
 
+    /**
+     * Returns an operations map.
+     *
+     * @return an operations map
+     */
     public Map<String, Operation<T>> getOperationsMap() {
         return Map.copyOf(operationsMap);
     }

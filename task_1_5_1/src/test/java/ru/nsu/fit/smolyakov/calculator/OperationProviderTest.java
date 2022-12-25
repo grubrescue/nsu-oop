@@ -28,7 +28,7 @@ class OperationProviderTest {
     @Test
     void addOperationTestAllOk() {
         assertThatThrownBy(() -> compute("anime"))
-                .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class);
 
         provider.insertOperation("anime", new Operation<Double>(() -> 666.666));
         assertThat(compute("anime")).isEqualTo(666.666);
@@ -42,6 +42,6 @@ class OperationProviderTest {
     @Test
     void addOperationTestNameIsDouble() {
         assertThatThrownBy(() -> provider.insertOperation("0.67", new Operation<Double>(() -> 0.66)))
-                .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class);
     }
 }
