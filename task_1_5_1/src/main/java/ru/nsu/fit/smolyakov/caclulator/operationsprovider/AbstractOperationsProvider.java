@@ -27,6 +27,7 @@ import java.util.Objects;
  * @see ru.nsu.fit.smolyakov.caclulator.Calculator
  */
 public abstract class AbstractOperationsProvider<T> implements OperationsProvider<T> {
+
     private final Map<String, Operation<T>> operationsMap;
 
     /**
@@ -96,5 +97,9 @@ public abstract class AbstractOperationsProvider<T> implements OperationsProvide
         }
 
         throw new IllegalArgumentException("specified name matches the operands pattern");
+    }
+
+    public Map<String, Operation<T>> getOperationsMap() {
+        return Map.copyOf(operationsMap);
     }
 }

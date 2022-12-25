@@ -1,5 +1,7 @@
 package ru.nsu.fit.smolyakov.caclulator.operation;
 
+import ru.nsu.fit.smolyakov.caclulator.complex.Complex;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -152,5 +154,30 @@ public class Operation<T> {
      */
     public Function<T> getFunction() {
         return function;
+    }
+
+    /**
+     * Turns a Double operation into Complex one, so it takes
+     * Complex operands
+     *
+     * @param  op Double operation
+     * @return a Complex operation
+     */
+    public static Operation<Complex> liftToComplex(Operation<Double> op) {
+        return new Operation<>(
+            op.arity(),
+            (list) -> {
+                var doublesList =
+                    list.stream()
+                        .map(Complex::toDouble)
+                        .toList();
+
+                var doubleRes =
+                    op.getFunction()
+                        .apply(doublesList);
+
+                return new Complex(doubleRes, 0);
+            }
+        );
     }
 }

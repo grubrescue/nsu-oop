@@ -8,8 +8,7 @@ import ru.nsu.fit.smolyakov.caclulator.complex.Complex;
 
 import java.util.Scanner;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.within;
+import static org.assertj.core.api.Assertions.*;
 
 class ComplexCalculatorTest {
     static Calculator<Complex> calc;
@@ -79,5 +78,16 @@ class ComplexCalculatorTest {
         assertThat(compute("cos 2+3i").i()).isCloseTo(-9.10923, within(0.001));
 
         assertThat(compute("cos 0+0i")).isEqualTo(Complex.valueOf("1+0i"));
+    }
+
+    @Test
+    void doubleAndComplexTest() {
+        assertThat(compute("cos PI")).isEqualTo(Complex.valueOf("-1+0i"));
+        assertThat(compute("- 5+0i 3")).isEqualTo(Complex.valueOf("2+0i"));
+        assertThat(compute("^ 2+0i 3")).isEqualTo(Complex.valueOf("8+0i"));
+        assertThat(compute("lg 100+0i")).isEqualTo(Complex.valueOf("2+0i"));
+
+        assertThatThrownBy(() -> compute("ln 100+5i"))
+            .isInstanceOf(ArithmeticException.class);
     }
 }
