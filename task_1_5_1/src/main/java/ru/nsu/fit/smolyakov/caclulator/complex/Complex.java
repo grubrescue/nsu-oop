@@ -159,6 +159,30 @@ public record Complex(double r, double i) {
     }
 
     /**
+     * Return {@code true} if this complex number is real,
+     * so its imaginary part is equal to 0.
+     *
+     * @return {@code true} if this complex number is real
+     */
+    public boolean isReal() {
+        return i == 0;
+    }
+
+    /**
+     * Return this {@code Complex} number as a double, if imaginary part
+     * is equal to 0.
+     *
+     * @return this number as a double
+     * @throws ArithmeticException if this number is not real
+     */
+    public double toDouble() {
+        if (i != 0) {
+            throw new ArithmeticException("this complex number is not real");
+        }
+        return r;
+    }
+
+    /**
      * Returns a hash code for this {@code Complex}. This implementation
      * assumes numbers to be equal when they difference within 10^-8.
      *
