@@ -49,7 +49,7 @@ loadScripts(document, 'script');</script>
 <div class="header">
 <h1>Index</h1>
 </div>
-<a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a>
+<a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a>
 <h2 class="title" id="I:A">A</h2>
 <dl class="index">
 <dt><a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/AbstractOperationsProvider.html" class="type-name-link" title="class in ru.nsu.fit.smolyakov.caclulator.operationsprovider">AbstractOperationsProvider</a>&lt;<a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/AbstractOperationsProvider.html" title="type parameter in AbstractOperationsProvider">T</a>&gt; - Class in <a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/package-summary.html">ru.nsu.fit.smolyakov.caclulator.operationsprovider</a></dt>
@@ -197,6 +197,14 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns an <a href="ru/nsu/fit/smolyakov/caclulator/operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation"><code>Operation</code></a> associated with specified <code>name</code>.</div>
 </dd>
+<dt><a href="ru/nsu/fit/smolyakov/caclulator/operation/Operation.html#getFunction()" class="member-name-link">getFunction()</a> - Method in class ru.nsu.fit.smolyakov.caclulator.operation.<a href="ru/nsu/fit/smolyakov/caclulator/operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a></dt>
+<dd>
+<div class="block">Returns a <a href="ru/nsu/fit/smolyakov/caclulator/operation/Function.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operation"><code>Function</code></a> associated with this <code>Operation</code>.</div>
+</dd>
+<dt><a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/AbstractOperationsProvider.html#getOperationsMap()" class="member-name-link">getOperationsMap()</a> - Method in class ru.nsu.fit.smolyakov.caclulator.operationsprovider.<a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/AbstractOperationsProvider.html" title="class in ru.nsu.fit.smolyakov.caclulator.operationsprovider">AbstractOperationsProvider</a></dt>
+<dd>
+<div class="block">Returns an operations map.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:H">H</h2>
 <dl class="index">
@@ -214,6 +222,19 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/AbstractOperationsProvider.html#insertOperation(java.lang.String,ru.nsu.fit.smolyakov.caclulator.operation.Operation)" class="member-name-link">insertOperation(String, Operation&lt;T&gt;)</a> - Method in class ru.nsu.fit.smolyakov.caclulator.operationsprovider.<a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/AbstractOperationsProvider.html" title="class in ru.nsu.fit.smolyakov.caclulator.operationsprovider">AbstractOperationsProvider</a></dt>
 <dd>
 <div class="block">Inserts a new <a href="ru/nsu/fit/smolyakov/caclulator/operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation"><code>Operation</code></a> into this <code>OperationsProvider</code>.</div>
+</dd>
+<dt><a href="ru/nsu/fit/smolyakov/caclulator/complex/Complex.html#isReal()" class="member-name-link">isReal()</a> - Method in record class ru.nsu.fit.smolyakov.caclulator.complex.<a href="ru/nsu/fit/smolyakov/caclulator/complex/Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></dt>
+<dd>
+<div class="block">Return <code>true</code> if this complex number is real,
+ so its imaginary part is equal to 0.</div>
+</dd>
+</dl>
+<h2 class="title" id="I:L">L</h2>
+<dl class="index">
+<dt><a href="ru/nsu/fit/smolyakov/caclulator/operation/Operation.html#liftToComplex(ru.nsu.fit.smolyakov.caclulator.operation.Operation)" class="member-name-link">liftToComplex(Operation&lt;Double&gt;)</a> - Static method in class ru.nsu.fit.smolyakov.caclulator.operation.<a href="ru/nsu/fit/smolyakov/caclulator/operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a></dt>
+<dd>
+<div class="block">Turns a Double operation into Complex one, so it takes
+ Complex operands without imaginary part.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:M">M</h2>
@@ -254,6 +275,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/fit/smolyakov/caclulator/operation/Operation.html#%3Cinit%3E(java.util.function.UnaryOperator)" class="member-name-link">Operation(UnaryOperator&lt;T&gt;)</a> - Constructor for class ru.nsu.fit.smolyakov.caclulator.operation.<a href="ru/nsu/fit/smolyakov/caclulator/operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a></dt>
 <dd>
 <div class="block">Constructs an <code>Operation</code> instance from a specified <code>unaryOperator</code>.</div>
+</dd>
+<dt><a href="ru/nsu/fit/smolyakov/caclulator/operation/Operation.html#%3Cinit%3E(T)" class="member-name-link">Operation(T)</a> - Constructor for class ru.nsu.fit.smolyakov.caclulator.operation.<a href="ru/nsu/fit/smolyakov/caclulator/operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a></dt>
+<dd>
+<div class="block">Constructs an <code>Operation</code> instance as a supplier for a specified <code>value</code>.</div>
 </dd>
 <dt><a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/OperationsProvider.html" class="type-name-link" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider">OperationsProvider</a>&lt;<a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/OperationsProvider.html" title="type parameter in OperationsProvider">T</a>&gt; - Interface in <a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/package-summary.html">ru.nsu.fit.smolyakov.caclulator.operationsprovider</a></dt>
 <dd>
@@ -305,6 +330,11 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:T">T</h2>
 <dl class="index">
+<dt><a href="ru/nsu/fit/smolyakov/caclulator/complex/Complex.html#toDouble()" class="member-name-link">toDouble()</a> - Method in record class ru.nsu.fit.smolyakov.caclulator.complex.<a href="ru/nsu/fit/smolyakov/caclulator/complex/Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></dt>
+<dd>
+<div class="block">Return this <code>Complex</code> number as a double, if imaginary part
+ is equal to 0.</div>
+</dd>
 <dt><a href="ru/nsu/fit/smolyakov/caclulator/complex/Complex.html#toString()" class="member-name-link">toString()</a> - Method in record class ru.nsu.fit.smolyakov.caclulator.complex.<a href="ru/nsu/fit/smolyakov/caclulator/complex/Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></dt>
 <dd>
 <div class="block">Returns a string representation of this <code>Complex</code> number with format
@@ -328,7 +358,7 @@ loadScripts(document, 'script');</script>
  complex number and <code>b</code> is an imaginary one.</div>
 </dd>
 </dl>
-<a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a></main>
+<a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a></main>
 </div>
 </div>
 </body>

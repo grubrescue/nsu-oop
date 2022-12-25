@@ -134,6 +134,10 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color">
 <div class="block">Constructs an <code>Operation</code> instance from a specified <code>unaryOperator</code>.</div>
 </div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(T)" class="member-name-link">Operation</a><wbr>(<a href="Operation.html" title="type parameter in Operation">T</a>&nbsp;value)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Constructs an <code>Operation</code> instance as a supplier for a specified <code>value</code>.</div>
+</div>
 </div>
 </section>
 </li>
@@ -142,7 +146,7 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel">
 <div class="summary-table three-column-summary" aria-labelledby="method-summary-table-tab0">
 <div class="table-header col-first">Modifier and Type</div>
@@ -163,6 +167,17 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a value supplied by this <code>Operation</code>, if
  one is a supplier.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Function.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operation">Function</a>&lt;<a href="Operation.html" title="type parameter in Operation">T</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFunction()" class="member-name-link">getFunction</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns a <a href="Function.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operation"><code>Function</code></a> associated with this <code>Operation</code>.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a>&lt;<a href="../complex/Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#liftToComplex(ru.nsu.fit.smolyakov.caclulator.operation.Operation)" class="member-name-link">liftToComplex</a><wbr>(<a href="Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>&gt;&nbsp;op)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Turns a Double operation into Complex one, so it takes
+ Complex operands without imaginary part.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a>&lt;<a href="Operation.html" title="type parameter in Operation">T</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#uncurriedCopy()" class="member-name-link">uncurriedCopy</a>()</code></div>
@@ -186,6 +201,18 @@ loadScripts(document, 'script');</script>
 <section class="constructor-details" id="constructor-detail">
 <h2>Constructor Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="&lt;init&gt;(T)">
+<h3 id="&lt;init&gt;(java.lang.Object)">Operation</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Operation</span><wbr><span class="parameters">(<a href="Operation.html" title="type parameter in Operation">T</a>&nbsp;value)</span></div>
+<div class="block">Constructs an <code>Operation</code> instance as a supplier for a specified <code>value</code>.
+ An arity of instantiated operation will be equal to 0.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>value</code> - a value to be supplied by this operation</dd>
+</dl>
+</section>
+</li>
 <li>
 <section class="detail" id="&lt;init&gt;(java.util.function.Supplier)">
 <h3>Operation</h3>
@@ -247,6 +274,20 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="liftToComplex(ru.nsu.fit.smolyakov.caclulator.operation.Operation)">
+<h3>liftToComplex</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a>&lt;<a href="../complex/Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a>&gt;</span>&nbsp;<span class="element-name">liftToComplex</span><wbr><span class="parameters">(<a href="Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation">Operation</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>&gt;&nbsp;op)</span></div>
+<div class="block">Turns a Double operation into Complex one, so it takes
+ Complex operands without imaginary part.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>op</code> - Double operation</dd>
+<dt>Returns:</dt>
+<dd>a Complex operation</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="arity()">
 <h3>arity</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">arity</span>()</div>
@@ -294,6 +335,17 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>an uncurried copy of this <code>Operation</code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getFunction()">
+<h3>getFunction</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Function.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operation">Function</a>&lt;<a href="Operation.html" title="type parameter in Operation">T</a>&gt;</span>&nbsp;<span class="element-name">getFunction</span>()</div>
+<div class="block">Returns a <a href="Function.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operation"><code>Function</code></a> associated with this <code>Operation</code>.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>a function associated with this <code>Operation</code></dd>
 </dl>
 </section>
 </li>
