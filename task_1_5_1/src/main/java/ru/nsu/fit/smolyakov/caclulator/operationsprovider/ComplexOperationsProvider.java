@@ -1,6 +1,8 @@
 package ru.nsu.fit.smolyakov.caclulator.operationsprovider;
 
 import ru.nsu.fit.smolyakov.caclulator.complex.Complex;
+import ru.nsu.fit.smolyakov.caclulator.operation.ComplexOperation;
+import ru.nsu.fit.smolyakov.caclulator.operation.DoubleOperation;
 import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 
 import java.util.Map;
@@ -13,16 +15,17 @@ import java.util.Objects;
  * obvious meanings are available.
  */
 public class ComplexOperationsProvider extends AbstractOperationsProvider<Complex> {
-    private static final DoubleOperationsProvider doubleOperationsProvider =
-            new DoubleOperationsProvider();
+    private static final DoubleOperationsProvider doubleOperationsProvider
+        = new DoubleOperationsProvider();
+    
     private static final Map<String, Operation<Complex>> operationsMap =
             Map.of(
-                    "+", new Operation<>(Complex::add),
-                    "-", new Operation<>(Complex::subtract),
-                    "*", new Operation<>(Complex::multiply),
-                    "/", new Operation<>(Complex::divide),
-                    "sin", new Operation<>(Complex::sin),
-                    "cos", new Operation<>(Complex::cos)
+                    "+", new ComplexOperation(Complex::add),
+                    "-", new ComplexOperation(Complex::subtract),
+                    "*", new ComplexOperation(Complex::multiply),
+                    "/", new ComplexOperation(Complex::divide),
+                    "sin", new ComplexOperation(Complex::sin),
+                    "cos", new ComplexOperation(Complex::cos)
             );
 
     /**
@@ -46,4 +49,10 @@ public class ComplexOperationsProvider extends AbstractOperationsProvider<Comple
     protected Complex parseAsOperand(String operandString) throws NumberFormatException {
         return Complex.valueOf(Objects.requireNonNull(operandString));
     }
+
+    @Override
+    public Operation<Complex> getByName(String name) throws NumberFormatException {
+
+    }
+
 }
