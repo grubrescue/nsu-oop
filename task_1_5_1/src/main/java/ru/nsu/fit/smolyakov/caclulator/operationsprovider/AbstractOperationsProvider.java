@@ -61,7 +61,7 @@ public abstract class AbstractOperationsProvider<T> implements OperationsProvide
      *                               the format of operand
      */
     @Override
-    public final Operation<T> getByName(String name) throws NumberFormatException {
+    public Operation<T> getByName(String name) throws NumberFormatException {
         var mappedOperation = operationsMap.get(name);
         if (mappedOperation == null) {
             return new Operation<>(() -> parseAsOperand(name));

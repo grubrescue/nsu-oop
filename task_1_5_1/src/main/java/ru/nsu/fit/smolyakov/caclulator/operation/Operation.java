@@ -45,6 +45,15 @@ public class Operation<T> {
      * Constructs an {@code Operation} instance from a specified {@code supplier}.
      * An arity of instantiated operation will be equal to 0.
      *
+     */
+    public Operation(T value) {
+        this(0, ((list) -> value));
+    }
+
+    /**
+     * Constructs an {@code Operation} instance from a specified {@code supplier}.
+     * An arity of instantiated operation will be equal to 0.
+     *
      * @param supplier a function to represent
      */
     public Operation(Supplier<T> supplier) {
@@ -134,5 +143,14 @@ public class Operation<T> {
      */
     public Operation<T> uncurriedCopy() {
         return new Operation<>(initialArity, function);
+    }
+
+    /**
+     * Returns a {@link Function} associated with this {@code Operation}.
+     *
+     * @return a function associated with this {@code Operation}
+     */
+    public Function<T> getFunction() {
+        return function;
     }
 }

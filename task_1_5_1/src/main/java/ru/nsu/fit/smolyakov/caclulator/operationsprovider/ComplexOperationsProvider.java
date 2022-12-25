@@ -13,6 +13,8 @@ import java.util.Objects;
  * obvious meanings are available.
  */
 public class ComplexOperationsProvider extends AbstractOperationsProvider<Complex> {
+    private static final DoubleOperationsProvider doubleOperationsProvider =
+            new DoubleOperationsProvider();
     private static final Map<String, Operation<Complex>> operationsMap =
             Map.of(
                     "+", new Operation<>(Complex::add),
