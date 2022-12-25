@@ -3,6 +3,7 @@ package ru.nsu.fit.smolyakov.caclulator;
 import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 import ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider;
 
+import java.io.InputStream;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.Stack;
@@ -48,9 +49,22 @@ public class Calculator<T> {
 
     /**
      * Calculates an arithmetic expression in a prefix notation
+     * provided by {@code inputStream}.
+     *
+     * @param  inputStream a specified {@linkplain InputStream}
+     * @return a result of computation
+     * @throws IllegalArgumentException if an expression provided
+     *                                  by {@code inputStream} has incorrect format
+     */
+    public T compute(InputStream inputStream) {
+        return compute(new Scanner(Objects.requireNonNull(inputStream)));
+    }
+
+    /**
+     * Calculates an arithmetic expression in a prefix notation
      * provided by {@code scanner}.
      *
-     * @param scanner a specified {@linkplain Scanner}
+     * @param  scanner a specified {@linkplain Scanner}
      * @return a result of computation
      * @throws IllegalArgumentException if an expression provided
      *                                  by {@code scanner} has incorrect format
