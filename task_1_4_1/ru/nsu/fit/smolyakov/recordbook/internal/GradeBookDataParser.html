@@ -81,15 +81,15 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">GradeBookDataParser</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">An immutable abstract class which takes the responsibility of parsing the most important 
- record book data from Json (e.g. <a href="SemesterGradesTable.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>SemesterGradesTable</code></a> of all semesters) 
- and storing them in an approptiate way. 
- 
+<div class="block">An immutable abstract class which takes the responsibility of parsing the most important
+ record book data from Json (e.g. <a href="SemesterGradesTable.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>SemesterGradesTable</code></a> of all semesters)
+ and storing them in an approptiate way.
+
  <p>Designed for an internal use with a main <a href="../RecordBook.html" title="class in ru.nsu.fit.smolyakov.recordbook"><code>RecordBook</code></a>
- class, so provides a limited functionality. Namely, it's a protected 
+ class, so provides a limited functionality. Namely, it's a protected
  <a href="GradeBookDataParser.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>GradeBookDataParser</code></a> constructor which arranges the parsed data,
- a <code>currentSemesterNumber</code> method returning an obvious value, 
- and <code>allSemestersGrades</code> and <code>finalGradesTable</code> each returning 
+ a <code>currentSemesterNumber</code> method returning an obvious value,
+ and <code>allSemestersGrades</code> and <code>finalGradesTable</code> each returning
  a corresponding instance of <a href="SemesterGradesTable.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>SemesterGradesTable</code></a>.</div>
 <dl class="notes">
 <dt>See Also:</dt>
@@ -172,7 +172,7 @@ loadScripts(document, 'script');</script>
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="SemesterGradesTable.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">SemesterGradesTable</a>&gt;&nbsp;gradesList)</span></div>
 <div class="block">Does all the job structuring the information about academic performance
  during all semesters.
- 
+
  <p>Propertied as ready to be parsed by Jackson.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -180,10 +180,10 @@ loadScripts(document, 'script');</script>
 <dd><code>gradesList</code> - a list of <a href="SemesterGradesTable.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>SemesterGradesTable</code></a> instances</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if <code>gradesList</code> is empty,
-     some of <code>gradesList</code> tables includes contradictory 
-     number of semester, or the total amount of tables in 
-     <code>gradesList</code> is not equal to <code>currentSemesterNumber</code>,
-     which also must be more than one</dd>
+                                  some of <code>gradesList</code> tables includes contradictory
+                                  number of semester, or the total amount of tables in
+                                  <code>gradesList</code> is not equal to <code>currentSemesterNumber</code>,
+                                  which also must be more than one</dd>
 </dl>
 </section>
 </li>

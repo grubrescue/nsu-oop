@@ -80,15 +80,15 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">RecordBook</span>
 <span class="extends-implements">extends <a href="internal/GradeBookDataParser.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal">GradeBookDataParser</a></span></div>
 <div class="block">An immutable class which contains information about student's record book,
- including <code>name</code>, <code>university</code>, <code>recordBookNumber</code> and <code>speciality</code>.
+ including <a href="#getName()"><code>getName()</code></a>, <a href="#getUniversity()"><code>getUniversity()</code></a>, <a href="#getRecordBookNumber()"><code>getRecordBookNumber()</code></a> and <a href="#getSpeciality()"><code>getSpeciality()</code></a>.
  The main purpose of this class is to evaluate information about student's academic
  performance (<a href="internal/GradeBookDataParser.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>GradeBookDataParser</code></a> is
- responsible for this) and make some general conclusions about results of his study (e.g. 
+ responsible for this) and make some general conclusions about results of his study (e.g.
  <a href="#hasScholarshipNow()"><code>hasScholarshipNow()</code></a>, <a href="#diplomaGradePointAverage()"><code>diplomaGradePointAverage()</code></a>, <a href="#isRedDiplomaPossible()"><code>isRedDiplomaPossible()</code></a>,
  <a href="internal/GradeBookDataParser.html#getCurrentSemesterNumber()"><code>GradeBookDataParser.getCurrentSemesterNumber()</code></a>).
- 
- <p>More local information about each semester grades or final grades may be recieved by 
- <a href="internal/SemesterGradesTable.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>SemesterGradesTable</code></a> methods, whose instance is returned by 
+
+ <p>More local information about each semester grades or final grades may be recieved by
+ <a href="internal/SemesterGradesTable.html" title="class in ru.nsu.fit.smolyakov.recordbook.internal"><code>SemesterGradesTable</code></a> methods, whose instance is returned by
  respectively <a href="internal/GradeBookDataParser.html#getSemesterGradesTable(int)"><code>GradeBookDataParser.getSemesterGradesTable(int)</code></a> and <a href="internal/GradeBookDataParser.html#getFinalGradesTable()"><code>GradeBookDataParser.getFinalGradesTable()</code></a>.</div>
 <dl class="notes">
 <dt>See Also:</dt>
@@ -122,7 +122,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RecordBook.html" title="class in ru.nsu.fit.smolyakov.recordbook">RecordBook</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#fromJson(java.io.File)" class="member-name-link">fromJson</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;file)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Returns an instance of <a href="RecordBook.html" title="class in ru.nsu.fit.smolyakov.recordbook">RecordBook</a> corresponding to 
+<div class="block">Returns an instance of <a href="RecordBook.html" title="class in ru.nsu.fit.smolyakov.recordbook">RecordBook</a> corresponding to
  JSON data supplied by <code>file</code>.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
@@ -197,7 +197,7 @@ loadScripts(document, 'script');</script>
                            throws <span class="exceptions">com.fasterxml.jackson.core.exc.StreamReadException,
 com.fasterxml.jackson.databind.DatabindException,
 <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
-<div class="block">Returns an instance of <a href="RecordBook.html" title="class in ru.nsu.fit.smolyakov.recordbook">RecordBook</a> corresponding to 
+<div class="block">Returns an instance of <a href="RecordBook.html" title="class in ru.nsu.fit.smolyakov.recordbook">RecordBook</a> corresponding to
  JSON data supplied by <code>file</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -205,7 +205,7 @@ com.fasterxml.jackson.databind.DatabindException,
 <dt>Returns:</dt>
 <dd>an instance of this class</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if <code>file</code> contains contradictory 
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if <code>file</code> contains contradictory
                                   fields</dd>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if <code>file</code> can't be accessed</dd>
 <dd><code>com.fasterxml.jackson.core.exc.StreamReadException</code> - if error during parsing occured</dd>
@@ -264,7 +264,7 @@ com.fasterxml.jackson.databind.DatabindException,
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasScholarshipNow</span>()</div>
 <div class="block">Returns if a student whose academic perfomance is reflected by
  this record book is getting scholarship at current semester.
- 
+
  <p>Indeed, the result is <code>true</code> if there weren't "fail",
  2 or 3 grades in the previous semester, or this semester is first.</div>
 <dl class="notes">
@@ -279,8 +279,8 @@ com.fasterxml.jackson.databind.DatabindException,
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasIncreasedScholarshipNow</span>()</div>
 <div class="block">Returns if a student whose academic perfomance is reflected by
  this record book is getting increased scholarship at current semester.
- 
- <p>Indeed, the result is <code>true</code> if the only grades this student 
+
+ <p>Indeed, the result is <code>true</code> if the only grades this student
  achieved previous semester were fives and passes or this semester
  is first.</div>
 <dl class="notes">
@@ -306,7 +306,7 @@ com.fasterxml.jackson.databind.DatabindException,
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isRedDiplomaPossible</span>()</div>
 <div class="block">Returns if a student whose academic perfomance is reflected by
  this record book is able to graduate with a red diploma.
- It means that at least 75% of final grades are fives or "passes" 
+ It means that at least 75% of final grades are fives or "passes"
  and all the rest are fours.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -320,7 +320,7 @@ com.fasterxml.jackson.databind.DatabindException,
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">toTextTable</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;writer)</span></div>
 <div class="block">Writes a text representation of this <code>RecordBook</code> to a
  specified <code>writer</code>.
- 
+
  <p>A length of the subjects name is limited to 60 characters,
  if one is bigger then its ending will be cut.</div>
 <dl class="notes">
