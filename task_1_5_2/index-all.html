@@ -53,7 +53,10 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:A">A</h2>
 <dl class="index">
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Diary.Query.html#after(java.time.ZonedDateTime)" class="member-name-link">after(ZonedDateTime)</a> - Method in class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Filters out notes that are created after a specified <code>date</code>
+ and returns this instance.</div>
+</dd>
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Note.html#after(java.time.ZonedDateTime)" class="member-name-link">after(ZonedDateTime)</a> - Method in record class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Note.html" title="class in ru.nsu.fit.smolyakov.diary.core">Note</a></dt>
 <dd>
 <div class="block">Returns <code>true</code> if this <code>Note</code> was created
@@ -63,7 +66,10 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:B">B</h2>
 <dl class="index">
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Diary.Query.html#before(java.time.ZonedDateTime)" class="member-name-link">before(ZonedDateTime)</a> - Method in class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Filters out notes that are created before a specified <code>date</code>
+ and returns this instance.</div>
+</dd>
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Note.html#before(java.time.ZonedDateTime)" class="member-name-link">before(ZonedDateTime)</a> - Method in record class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Note.html" title="class in ru.nsu.fit.smolyakov.diary.core">Note</a></dt>
 <dd>
 <div class="block">Returns <code>true</code> if this <code>Note</code> was created
@@ -73,17 +79,23 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:C">C</h2>
 <dl class="index">
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Diary.Query.html#contains(java.lang.String)" class="member-name-link">contains(String)</a> - Method in class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Filters out notes that doesn't contain a specified <code>keyword</code>
+ or one of other that had been specified before and returns this instance.</div>
+</dd>
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Note.html#contains(java.lang.String)" class="member-name-link">contains(String)</a> - Method in record class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Note.html" title="class in ru.nsu.fit.smolyakov.diary.core">Note</a></dt>
 <dd>
 <div class="block">Returns <code>true</code> if this <code>Note</code> heading contains
  a specified <code>keyword</code>.</div>
 </dd>
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Diary.Query.html#contains(java.util.List)" class="member-name-link">contains(List&lt;String&gt;)</a> - Method in class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/fit/smolyakov/diary/core/Note.html#contents()" class="member-name-link">contents()</a> - Method in record class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Note.html" title="class in ru.nsu.fit.smolyakov.diary.core">Note</a></dt>
 <dd>
-<div class="block">Returns the value of the <a href="./ru/nsu/fit/smolyakov/diary/core/Note.html#param-contents"><code>contents</code></a> record component.</div>
+<div class="block">Filters out notes that doesn't contain at least one keyword from specified <code>keyword</code>
+ or one of other that had been specified before and returns this instance.</div>
+</dd>
+<dt><a href="ru/nsu/fit/smolyakov/diary/core/Diary.html#count()" class="member-name-link">count()</a> - Method in class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Diary.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary</a></dt>
+<dd>
+<div class="block">Returns an amount of notes in this <code>Diary</code>.</div>
 </dd>
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Note.html#create(java.lang.String,java.lang.String)" class="member-name-link">create(String, String)</a> - Static method in record class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Note.html" title="class in ru.nsu.fit.smolyakov.diary.core">Note</a></dt>
 <dd>
@@ -99,18 +111,21 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the value of the <a href="./ru/nsu/fit/smolyakov/diary/core/Note.html#param-date"><code>date</code></a> record component.</div>
 </dd>
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Diary.html" class="type-name-link" title="class in ru.nsu.fit.smolyakov.diary.core">Diary</a> - Class in <a href="ru/nsu/fit/smolyakov/diary/core/package-summary.html">ru.nsu.fit.smolyakov.diary.core</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">A class providing some basic interface to operate with a diary, stored in
+ an external Json-file (see <a href="ru/nsu/fit/smolyakov/diary/core/Diary.html#toJson(java.io.File)"><code>Diary.toJson(File)</code></a>, <a href="ru/nsu/fit/smolyakov/diary/core/Diary.html#fromJson(java.io.File)"><code>Diary.fromJson(File)</code></a>.</div>
+</dd>
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Diary.html#%3Cinit%3E()" class="member-name-link">Diary()</a> - Constructor for class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Diary.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/fit/smolyakov/diary/core/Diary.html#%3Cinit%3E(java.util.List)" class="member-name-link">Diary(List&lt;Note&gt;)</a> - Constructor for class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Diary.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructs an empty <code>Diary</code>.</div>
+</dd>
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Diary.Query.html" class="type-name-link" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a> - Class in <a href="ru/nsu/fit/smolyakov/diary/core/package-summary.html">ru.nsu.fit.smolyakov.diary.core</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Gives a functionality to filter notes that belong to the outer <code>Diary</code>.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:E">E</h2>
 <dl class="index">
-<dt><a href="ru/nsu/fit/smolyakov/diary/core/Diary.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Diary.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Note.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Note.html" title="class in ru.nsu.fit.smolyakov.diary.core">Note</a></dt>
 <dd>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
@@ -119,12 +134,13 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:F">F</h2>
 <dl class="index">
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Diary.html#fromJson(java.io.File)" class="member-name-link">fromJson(File)</a> - Static method in class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Diary.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructs a <code>Diary</code> instance according to the data
+ specified by a specified Json-formatted <code>file</code>.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:H">H</h2>
 <dl class="index">
-<dt><a href="ru/nsu/fit/smolyakov/diary/core/Diary.html#hashCode()" class="member-name-link">hashCode()</a> - Method in class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Diary.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Note.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Note.html" title="class in ru.nsu.fit.smolyakov.diary.core">Note</a></dt>
 <dd>
 <div class="block">Returns a hash code value for this object.</div>
@@ -137,22 +153,29 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:I">I</h2>
 <dl class="index">
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Diary.html#insert(java.lang.String,java.lang.String)" class="member-name-link">insert(String, String)</a> - Method in class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Diary.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a new <code>Note</code> and inserts it in this <code>Diary</code>.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:M">M</h2>
 <dl class="index">
 <dt><a href="ru/nsu/fit/smolyakov/diary/executable/Main.html#main(java.lang.String%5B%5D)" class="member-name-link">main(String[])</a> - Static method in class ru.nsu.fit.smolyakov.diary.executable.<a href="ru/nsu/fit/smolyakov/diary/executable/Main.html" title="class in ru.nsu.fit.smolyakov.diary.executable">Main</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Parses command line arguments and processes the
+ specified job.</div>
+</dd>
 <dt><a href="ru/nsu/fit/smolyakov/diary/executable/Main.html" class="type-name-link" title="class in ru.nsu.fit.smolyakov.diary.executable">Main</a> - Class in <a href="ru/nsu/fit/smolyakov/diary/executable/package-summary.html">ru.nsu.fit.smolyakov.diary.executable</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/fit/smolyakov/diary/executable/Main.html#%3Cinit%3E()" class="member-name-link">Main()</a> - Constructor for class ru.nsu.fit.smolyakov.diary.executable.<a href="ru/nsu/fit/smolyakov/diary/executable/Main.html" title="class in ru.nsu.fit.smolyakov.diary.executable">Main</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">A <code>Main</code> class containing only one <a href="ru/nsu/fit/smolyakov/diary/executable/Main.html#main(java.lang.String%5B%5D)"><code>method</code></a> with
+ the obvious meaning.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:N">N</h2>
 <dl class="index">
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Note.html" class="type-name-link" title="class in ru.nsu.fit.smolyakov.diary.core">Note</a> - Record Class in <a href="ru/nsu/fit/smolyakov/diary/core/package-summary.html">ru.nsu.fit.smolyakov.diary.core</a></dt>
 <dd>
-<div class="block">An entry class</div>
+<div class="block">A note class providing a basic functionality to handle small writings with
+ a specified <a href="ru/nsu/fit/smolyakov/diary/core/Note.html#heading()"><code>heading()</code></a> and <a href="ru/nsu/fit/smolyakov/diary/core/Note.html#text()"><code>text()</code></a>.</div>
 </dd>
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Note.html#%3Cinit%3E(java.lang.String,java.lang.String,java.time.ZonedDateTime)" class="member-name-link">Note(String, String, ZonedDateTime)</a> - Constructor for record class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Note.html" title="class in ru.nsu.fit.smolyakov.diary.core">Note</a></dt>
 <dd>
@@ -162,12 +185,16 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:Q">Q</h2>
 <dl class="index">
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Diary.html#query()" class="member-name-link">query()</a> - Method in class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Diary.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns a new <a href="ru/nsu/fit/smolyakov/diary/core/Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core"><code>Diary.Query</code></a> instance associated with this <code>Diary</code>.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:R">R</h2>
 <dl class="index">
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Diary.html#remove(java.lang.String)" class="member-name-link">remove(String)</a> - Method in class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Diary.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Removes all notes that match a specified <code>heading</code>.</div>
+</dd>
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/package-summary.html">ru.nsu.fit.smolyakov.diary.core</a> - package ru.nsu.fit.smolyakov.diary.core</dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/fit/smolyakov/diary/executable/package-summary.html">ru.nsu.fit.smolyakov.diary.executable</a> - package ru.nsu.fit.smolyakov.diary.executable</dt>
@@ -176,17 +203,28 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:S">S</h2>
 <dl class="index">
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Diary.Query.html#select()" class="member-name-link">select()</a> - Method in class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Processes the query and returns a new instance of a <a href="ru/nsu/fit/smolyakov/diary/core/Diary.html" title="class in ru.nsu.fit.smolyakov.diary.core"><code>Diary</code></a>.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:T">T</h2>
 <dl class="index">
+<dt><a href="ru/nsu/fit/smolyakov/diary/core/Note.html#text()" class="member-name-link">text()</a> - Method in record class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Note.html" title="class in ru.nsu.fit.smolyakov.diary.core">Note</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./ru/nsu/fit/smolyakov/diary/core/Note.html#param-text"><code>text</code></a> record component.</div>
+</dd>
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Diary.html#toJson(java.io.File)" class="member-name-link">toJson(File)</a> - Method in class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Diary.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Serializes this <code>Diary</code> instance to a specified
+ Json-formatted <code>file</code>.</div>
+</dd>
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Diary.html#toString()" class="member-name-link">toString()</a> - Method in class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Diary.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns a pretty <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link"><code>String</code></a> representation of all entries of this <code>Diary</code>.</div>
+</dd>
 <dt><a href="ru/nsu/fit/smolyakov/diary/core/Note.html#toString()" class="member-name-link">toString()</a> - Method in record class ru.nsu.fit.smolyakov.diary.core.<a href="ru/nsu/fit/smolyakov/diary/core/Note.html" title="class in ru.nsu.fit.smolyakov.diary.core">Note</a></dt>
 <dd>
-<div class="block">Returns a string representation of this record class.</div>
+<div class="block">Returns a pretty representation of this note.</div>
 </dd>
 </dl>
 <a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:Q">Q</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a></main>

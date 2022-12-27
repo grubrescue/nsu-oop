@@ -81,6 +81,12 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public static class </span><span class="element-name type-name-label">Diary.Query</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Gives a functionality to filter notes that belong to the outer <code>Diary</code>.
+ Time of creation restrictions are provided by <a href="#after(java.time.ZonedDateTime)"><code>after(ZonedDateTime)</code></a> and
+ <a href="#before(java.time.ZonedDateTime)"><code>before(ZonedDateTime)</code></a>, and checks for keywords being contained in
+ a note title are done by <a href="#contains(java.lang.String)"><code>contains(String)</code></a> and <a href="#contains(java.util.List)"><code>contains(List)</code></a>.
+
+ <p>Can be instantiated only by <a href="Diary.html#query()"><code>Diary.query()</code></a> method of the outer class.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -97,19 +103,33 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#after(java.time.ZonedDateTime)" class="member-name-link">after</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/ZonedDateTime.html" title="class or interface in java.time" class="external-link">ZonedDateTime</a>&nbsp;date)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Filters out notes that are created after a specified <code>date</code>
+ and returns this instance.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#before(java.time.ZonedDateTime)" class="member-name-link">before</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/ZonedDateTime.html" title="class or interface in java.time" class="external-link">ZonedDateTime</a>&nbsp;date)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Filters out notes that are created before a specified <code>date</code>
+ and returns this instance.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#contains(java.lang.String)" class="member-name-link">contains</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;keyword)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Filters out notes that doesn't contain a specified <code>keyword</code>
+ or one of other that had been specified before and returns this instance.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#contains(java.util.List)" class="member-name-link">contains</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;keywordsList)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Filters out notes that doesn't contain at least one keyword from specified <code>keyword</code>
+ or one of other that had been specified before and returns this instance.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Diary.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#select()" class="member-name-link">select</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Processes the query and returns a new instance of a <a href="Diary.html" title="class in ru.nsu.fit.smolyakov.diary.core"><code>Diary</code></a>.</div>
+</div>
 </div>
 </div>
 </div>
@@ -131,30 +151,67 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="after(java.time.ZonedDateTime)">
 <h3>after</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a></span>&nbsp;<span class="element-name">after</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/ZonedDateTime.html" title="class or interface in java.time" class="external-link">ZonedDateTime</a>&nbsp;date)</span></div>
+<div class="block">Filters out notes that are created after a specified <code>date</code>
+ and returns this instance.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>date</code> - a specified date</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="before(java.time.ZonedDateTime)">
 <h3>before</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a></span>&nbsp;<span class="element-name">before</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/ZonedDateTime.html" title="class or interface in java.time" class="external-link">ZonedDateTime</a>&nbsp;date)</span></div>
+<div class="block">Filters out notes that are created before a specified <code>date</code>
+ and returns this instance.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>date</code> - a specified date</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="contains(java.lang.String)">
 <h3>contains</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a></span>&nbsp;<span class="element-name">contains</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;keyword)</span></div>
+<div class="block">Filters out notes that doesn't contain a specified <code>keyword</code>
+ or one of other that had been specified before and returns this instance.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>keyword</code> - a specified keyword</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="contains(java.util.List)">
 <h3>contains</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a></span>&nbsp;<span class="element-name">contains</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;keywordsList)</span></div>
+<div class="block">Filters out notes that doesn't contain at least one keyword from specified <code>keyword</code>
+ or one of other that had been specified before and returns this instance.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>keywordsList</code> - a specified keyword</dd>
+<dt>Returns:</dt>
+<dd>this</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="select()">
 <h3>select</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Diary.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary</a></span>&nbsp;<span class="element-name">select</span>()</div>
+<div class="block">Processes the query and returns a new instance of a <a href="Diary.html" title="class in ru.nsu.fit.smolyakov.diary.core"><code>Diary</code></a>.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the processed instance</dd>
+</dl>
 </section>
 </li>
 </ul>
