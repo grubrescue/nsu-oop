@@ -8,8 +8,8 @@ import picocli.CommandLine;
  */
 public class Main {
     /**
-     * Parses command line arguments and does the
-     * job specified by them.
+     * Parses command line arguments and processes the
+     * specified job.
      *
      * @param args diary commands
      */

@@ -9,23 +9,23 @@ import java.io.IOException;
 @CommandLine.Command(
     name = "add",
     mixinStandardHelpOptions = true,
-    description = "Inserts entries."
+    description = "Inserts entries to the specified diary."
 )
 class AddParser implements Runnable {
     @CommandLine.Parameters(
         index = "0",
-        description = "File."
+        description = "a specified Json-file associated with diary"
     )
     private File file;
     @CommandLine.Parameters(
         index = "1",
-        description = "Heading."
+        description = "a title of a note"
     )
     private String heading;
 
     @CommandLine.Parameters(
         index = "2",
-        description = "Contents."
+        description = "a text of a note"
     )
     private String contents;
 

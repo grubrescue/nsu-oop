@@ -11,30 +11,33 @@ import java.util.List;
 @CommandLine.Command(
     name = "list",
     mixinStandardHelpOptions = true,
-    description = "Lists entries"
+    description = "Lists notes from a specified diary."
 )
 class ListParser implements Runnable {
     @CommandLine.Parameters(
         index = "0",
-        description = "File."
+        description = "a specified Json-file associated with diary"
     )
     private File file;
 
     @CommandLine.Option(
         names = "--after",
-        description = "Filter"
+        description = "show notes created after a specified date, " +
+            "formatted according to \"yyyy-MM-dd'T'HH:mm:ssZZZ\" pattern"
     )
     private ZonedDateTime after = null;
 
     @CommandLine.Option(
         names = "--before",
-        description = "Filter"
+        description = "show notes created before a specified date, " +
+            "formatted according to \"yyyy-MM-dd'T'HH:mm:ssZZZ\" pattern"
     )
     private ZonedDateTime before = null;
 
     @CommandLine.Option(
         names = "--keywords",
-        description = "Filter",
+        description = "show notes containing specified keywords " +
+            "in a comma-separated format",
         split = ",",
         arity = "1..*"
     )
@@ -59,5 +62,4 @@ class ListParser implements Runnable {
                 .toString()
         );
     }
-
 }

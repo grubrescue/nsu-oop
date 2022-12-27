@@ -9,12 +9,12 @@ import java.io.IOException;
 @CommandLine.Command(
     name = "create",
     mixinStandardHelpOptions = true,
-    description = "Creates new diary."
+    description = "Creates new diary book."
 )
 class CreateParser implements Runnable {
     @CommandLine.Parameters(
         index = "0",
-        description = "File."
+        description = "a specified Json-file associated with diary"
     )
     private File file;
 

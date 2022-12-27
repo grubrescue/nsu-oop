@@ -9,18 +9,18 @@ import java.io.IOException;
 @CommandLine.Command(
     name = "rm",
     mixinStandardHelpOptions = true,
-    description = "Removes entry"
+    description = "Removes entry from a specified diary."
 )
 class RmParser implements Runnable {
     @CommandLine.Parameters(
         index = "0",
-        description = "File."
+        description = "a specified Json-file associated with diary"
     )
     private File file;
 
     @CommandLine.Parameters(
         index = "1",
-        description = "Heading"
+        description = "a title of a note"
     )
     private String heading;
 

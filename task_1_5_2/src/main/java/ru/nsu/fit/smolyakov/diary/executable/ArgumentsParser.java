@@ -7,7 +7,7 @@ import picocli.CommandLine.Model.CommandSpec;
 @Command(
     name = "diary",
     mixinStandardHelpOptions = true,
-    description = "Saves your thoughts.",
+    description = "Does the job digitalizing your thoughts.",
     subcommands = {
         CreateParser.class,
         ListParser.class,
