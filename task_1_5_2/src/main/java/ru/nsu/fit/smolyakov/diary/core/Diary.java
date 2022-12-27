@@ -20,10 +20,17 @@ import java.util.function.Predicate;
  *
  */
 public class Diary {
+    private final static ObjectMapper mapper;
+
+    static {
+        mapper =
+            new ObjectMapper()
+                .registerModule(new JavaTimeModule())
+                .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+    }
+
     private final List<Note> notes
             = new ArrayList<Note>();
-
-    // TODO [de]serialization
 
     @JsonCreator
     public Diary() {}
@@ -44,13 +51,7 @@ public class Diary {
      * @throws IOException
      */
     public static Diary fromJson(File file) throws IOException {
-//        if (file.exists()) {
-            return new ObjectMapper()
-                    .registerModule(new JavaTimeModule())
-                    .readValue(file, Diary.class);
-//        } else {
-//            return null;
-//        }
+        return mapper.readValue(file, Diary.class);
     }
 
     /**
@@ -59,10 +60,7 @@ public class Diary {
      * @throws IOException
      */
     public void toJson(File file) throws  IOException {
-        new ObjectMapper()
-                .registerModule(new JavaTimeModule())
-                .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
-                .writeValue(file, this);
+        mapper.writeValue(file, this);
     }
 
 
