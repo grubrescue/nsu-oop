@@ -5,28 +5,27 @@ import ru.nsu.fit.smolyakov.diary.core.Diary;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 @CommandLine.Command(
-        name = "add",
-        mixinStandardHelpOptions = true,
-        description = "Inserts entries."
+    name = "add",
+    mixinStandardHelpOptions = true,
+    description = "Inserts entries."
 )
-class AddParser implements Runnable  {
+class AddParser implements Runnable {
     @CommandLine.Parameters(
-            index = "0",
-            description = "File."
+        index = "0",
+        description = "File."
     )
     private File file;
     @CommandLine.Parameters(
-            index = "1",
-            description = "Heading."
+        index = "1",
+        description = "Heading."
     )
     private String heading;
 
     @CommandLine.Parameters(
-            index = "2",
-            description = "Contents."
+        index = "2",
+        description = "Contents."
     )
     private String contents;
 
@@ -39,11 +38,9 @@ class AddParser implements Runnable  {
             throw new RuntimeException(e);
         }
 
-        if (diary.insert(heading, contents)) {
-            System.out.println("Removal successful!");
-        } else {
-            System.out.println("No such note");
-        }
+        diary.insert(heading, contents);
+
+        System.err.printf("Inserted \"%s\".", heading);
 
         try {
             diary.toJson(file);

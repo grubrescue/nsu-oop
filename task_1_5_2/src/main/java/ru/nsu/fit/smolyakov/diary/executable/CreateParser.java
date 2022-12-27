@@ -5,17 +5,16 @@ import ru.nsu.fit.smolyakov.diary.core.Diary;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 @CommandLine.Command(
-        name = "create",
-        mixinStandardHelpOptions = true,
-        description = "Creates new diary."
+    name = "create",
+    mixinStandardHelpOptions = true,
+    description = "Creates new diary."
 )
-class CreateParser implements Runnable  {
+class CreateParser implements Runnable {
     @CommandLine.Parameters(
-            index = "0",
-            description = "File."
+        index = "0",
+        description = "File."
     )
     private File file;
 
@@ -23,11 +22,12 @@ class CreateParser implements Runnable  {
     public void run() {
         try {
             if (file.createNewFile()) {
-                System.out.println("Creation successful!");
                 Diary diary = new Diary();
                 diary.toJson(file);
+
+                System.err.printf("New diary created in %s.", file.getPath());
             } else {
-                System.out.println("Creation unsuccessful!");
+                System.err.printf("%s already exists!", file.getPath());
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
