@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
@@ -23,6 +25,7 @@ import java.util.function.Predicate;
  */
 public class Diary {
     private final static ObjectMapper mapper;
+    private final static ObjectWriter writer;
 
     static {
         mapper = new ObjectMapper()
@@ -31,6 +34,10 @@ public class Diary {
                 PropertyAccessor.FIELD,
                 JsonAutoDetect.Visibility.ANY
             );
+
+        writer = mapper
+            .writer()
+            .withDefaultPrettyPrinter();
     }
 
     private final List<Note> notes
@@ -62,7 +69,7 @@ public class Diary {
      * @throws IOException
      */
     public void toJson(File file) throws IOException {
-        mapper.writeValue(file, this);
+        writer.writeValue(file, this);
     }
 
     public Query query() {

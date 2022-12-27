@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  * An entry class
  *
  * @param heading
- * @param contents
+ * @param text
  * @param date
  */
 public record Note(
@@ -23,7 +23,7 @@ public record Note(
 
     @JsonProperty("date")
     @JsonFormat(
-//                pattern = DateTimeFormatter.ISO_ZONED_DATE_TIME
+        pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
     )
     ZonedDateTime date
 ) {
