@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -60,7 +59,8 @@ public class Diary {
      * Constructs an empty {@code Diary}.
      */
     @JsonCreator
-    public Diary() {}
+    public Diary() {
+    }
 
     @JsonCreator
     private Diary(@JsonProperty("notes") List<Note> notes) {
@@ -71,10 +71,10 @@ public class Diary {
      * Constructs a {@code Diary} instance according to the data
      * specified by a specified Json-formatted {@code file}.
      *
-     * @param  file a Json-file to deserialize
+     * @param file a Json-file to deserialize
      * @return a {@code Diary} instance
      * @throws IOException if {@code file} doesn't exist, unavailable
-     *      or has an incorrect format
+     *                     or has an incorrect format
      */
     public static Diary fromJson(File file) throws IOException {
         return mapper.readValue(file, Diary.class);
@@ -84,9 +84,9 @@ public class Diary {
      * Serializes this {@code Diary} instance to a specified
      * Json-formatted {@code file}.
      *
-     * @param  file a Json-file to serialize to
+     * @param file a Json-file to serialize to
      * @throws IOException if {@code file} doesn't exist or
-     *      unavailable
+     *                     unavailable
      */
     public void toJson(File file) throws IOException {
         writer.writeValue(file, this);
@@ -104,7 +104,7 @@ public class Diary {
     /**
      * Removes all notes that match a specified {@code heading}.
      *
-     * @param  heading a title
+     * @param heading a title
      * @return {@code true} if at least one note was removed
      */
     public boolean remove(String heading) {
@@ -114,7 +114,7 @@ public class Diary {
     /**
      * Creates a new {@code Note} and inserts it in this {@code Diary}.
      *
-     * @param heading title
+     * @param heading  title
      * @param contents text
      */
     public void insert(String heading, String contents) {
@@ -136,9 +136,8 @@ public class Diary {
      * {@code true} if and only if the specified object is also a diary and both
      * lists have the same notes.
      *
-     * @param  o the object to be compared for equality with this {@code Diary}
+     * @param o the object to be compared for equality with this {@code Diary}
      * @return {@code true} if the specified object is equal to this {@code Diary}
-     *
      * @see Note#equals(Object)
      */
     @Override
@@ -189,7 +188,7 @@ public class Diary {
          * Filters out notes that are created after a specified {@code date}
          * and returns this instance.
          *
-         * @param  date a specified date
+         * @param date a specified date
          * @return this
          */
         public Query after(ZonedDateTime date) {
@@ -203,7 +202,7 @@ public class Diary {
          * Filters out notes that are created before a specified {@code date}
          * and returns this instance.
          *
-         * @param  date a specified date
+         * @param date a specified date
          * @return this
          */
         public Query before(ZonedDateTime date) {
@@ -217,7 +216,7 @@ public class Diary {
          * Filters out notes that doesn't contain a specified {@code keyword}
          * or one of other that had been specified before and returns this instance.
          *
-         * @param  keyword a specified keyword
+         * @param keyword a specified keyword
          * @return this
          */
         public Query contains(String keyword) {
@@ -231,7 +230,7 @@ public class Diary {
          * Filters out notes that doesn't contain at least one keyword from specified {@code keyword}
          * or one of other that had been specified before and returns this instance.
          *
-         * @param  keywordsList a specified keyword
+         * @param keywordsList a specified keyword
          * @return this
          */
         public Query contains(List<String> keywordsList) {

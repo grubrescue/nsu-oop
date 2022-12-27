@@ -17,9 +17,8 @@ import java.time.format.DateTimeFormatter;
  * representing this note acceptably for a {@link Diary}.
  *
  * @param heading a title
- * @param text contents
- * @param date a date of creation
- *
+ * @param text    contents
+ * @param date    a date of creation
  * @see Diary
  * @see ZonedDateTime
  */
@@ -91,10 +90,10 @@ public record Note(
      * Returns a pretty representation of this note.
      * An example of a format is presented below.
      * <code>
-     *     <br/>Heading: title
-     *     <br/>Text: contents
-     *     <br/>------------
-     *     <br/>Date: Tue, 27 Dec 2022 22:21:52 +0700
+     * <br/>Heading: title
+     * <br/>Text: contents
+     * <br/>------------
+     * <br/>Date: Tue, 27 Dec 2022 22:21:52 +0700
      * </code>
      *
      * @return a pretty representation of this note
