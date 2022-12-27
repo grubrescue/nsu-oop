@@ -11,7 +11,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.function.Predicate;
@@ -23,10 +25,12 @@ public class Diary {
     private final static ObjectMapper mapper;
 
     static {
-        mapper =
-            new ObjectMapper()
-                .registerModule(new JavaTimeModule())
-                .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+        mapper = new ObjectMapper()
+            .registerModule(new JavaTimeModule())
+            .setVisibility(
+                PropertyAccessor.FIELD,
+                JsonAutoDetect.Visibility.ANY
+            );
     }
 
     private final List<Note> notes
@@ -69,28 +73,32 @@ public class Diary {
      */
     public static class Query {
         private final List<Note> notes;
-        private Predicate<Note> restrictions = ((note) -> true);
+        private Predicate<Note> hasKeywords = ((note) -> true);
+        private ZonedDateTime after =
+                Instant.ofEpochMilli(Long.MIN_VALUE).atZone(ZoneOffset.UTC);
+        private ZonedDateTime before =
+                Instant.ofEpochMilli(Long.MAX_VALUE).atZone(ZoneOffset.UTC);
         private Query(List<Note> notes) {
             this.notes = Objects.requireNonNull(notes);
         }
 
         public Query after(ZonedDateTime date) {
-            if (date != null) {
-                restrictions = restrictions.and((note) -> note.after(date));
+            if (date != null && date.isAfter(this.after)) {
+                after = date;
             }
             return this;
         }
 
         public Query before(ZonedDateTime date) {
-            if (date != null) {
-                restrictions = restrictions.and((note) -> note.before(date));
+            if (date != null && date.isBefore(this.before)) {
+                after = date;
             }
             return this;
         }
 
         public Query contains(String keyword) {
             if (keyword != null) {
-                restrictions = restrictions.and((note) -> note.contains(keyword));
+                hasKeywords = hasKeywords.or((note) -> note.contains(keyword));
             }
             return this;
         }
@@ -98,7 +106,12 @@ public class Diary {
         public Query contains(List<String> keywordsList) {
             if (keywordsList != null) {
                 keywordsList
-                        .forEach((keyword) -> restrictions = restrictions.and((note) -> note.contains(keyword)));
+                        .forEach((keyword) ->
+                            hasKeywords =
+                                    hasKeywords.or(
+                                            (note) -> note.contains(keyword)
+                                    )
+                        );
             }
             return this;
         }
@@ -106,7 +119,8 @@ public class Diary {
         public Diary select() {
             return new Diary(
                 notes.stream()
-                        .filter(restrictions)
+                        .filter(hasKeywords)
+                        .filter((entry) -> entry.date().isBefore(before))
                         .sorted(Comparator.comparing(Note::date))
                         .toList() // TODO maybe there is a better way
             );

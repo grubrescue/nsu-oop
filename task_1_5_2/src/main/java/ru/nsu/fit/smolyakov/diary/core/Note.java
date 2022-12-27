@@ -22,12 +22,12 @@ public record Note(
         String heading,
 
         @JsonProperty("text")
-        String contents,
+        String text,
 
         @JsonProperty("date")
-//        @JsonFormat(
-//                pattern = DateTimeFormatter.ISO_ZONED_DATE_TIME.getDecimalStyle()
-//        )
+        @JsonFormat(
+//                pattern = DateTimeFormatter.ISO_ZONED_DATE_TIME
+        )
         ZonedDateTime date
 ) {
     /**
@@ -59,7 +59,7 @@ public record Note(
      * Returns {@code true} if this {@code Note} was created
      * after a specified {@code date}.
      *
-     * @param  date a specified {@code LocalDateTime}
+     * @param  date a specified {@link ZonedDateTime}
      * @return {@code true} if this {@code Note} was created
      *         after a specified {@code date}.
      */
@@ -71,7 +71,7 @@ public record Note(
      * Returns {@code true} if this {@code Note} was created
      * before a specified {@code date}.
      *
-     * @param  date a specified {@code LocalDateTime}
+     * @param  date a specified {@link ZonedDateTime}
      * @return {@code true} if this {@code Note} was created
      *         before a specified {@code date}.
      */
@@ -94,7 +94,7 @@ public record Note(
                 """
                 .formatted(
                         heading,
-                        contents,
+                        text,
                         date.format(DateTimeFormatter.RFC_1123_DATE_TIME)
                 );
     }

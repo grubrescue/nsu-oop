@@ -36,16 +36,11 @@ class ListParser implements Runnable  {
 
     @CommandLine.Option(
             names = "-k, --keywords",
-            description = "Filter"
+            description = "Filter",
+            split = ",",
+            arity = "1..*"
     )
-    private String keywords = null;
-
-    private List<String> keywordsSplit(String keywords) {
-        if (keywords == null) {
-            return null;
-        }
-        return Arrays.asList(keywords.split(","));
-    }
+    private List<String> keywords = null;
 
     @Override
     public void run() {
@@ -59,11 +54,11 @@ class ListParser implements Runnable  {
 
         var query = diary.query();
         System.out.println(
-                query.after(after)
-                        .before(before)
-                        .contains(keywordsSplit(keywords))
-                        .select()
-                        .toString()
+            query.after(after)
+                    .before(before)
+                    .contains(keywords)
+                    .select()
+                    .toString()
         );
     }
 
