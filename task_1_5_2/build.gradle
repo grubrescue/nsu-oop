@@ -34,7 +34,7 @@ jacocoTestReport {
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
-                    "ru/nsu/fit/smolyakov/diary/executable/ListParser.class"
+                    "ru/nsu/fit/smolyakov/diary/executable/*"
             ])
         }))
     }
