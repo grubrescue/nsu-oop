@@ -122,6 +122,15 @@ public class Diary {
     }
 
     /**
+     * Returns an amount of notes in this {@code Diary}.
+     *
+     * @return an amount of notes
+     */
+    public int count() {
+        return notes.size();
+    }
+
+    /**
      * Returns the hash code value for this {@code Diary}.
      *
      * @return the hash code value
