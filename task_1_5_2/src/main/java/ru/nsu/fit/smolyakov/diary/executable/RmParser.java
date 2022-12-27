@@ -34,9 +34,9 @@ class RmParser implements Runnable {
         }
 
         if (diary.remove(heading)) {
-            System.err.printf("Removed an entry with heading \"%s\".", heading);
+            System.err.printf("Removed an entry with heading \"%s\".\n", heading);
         } else {
-            System.err.printf("Cannot find an entry with heading \"%s\".", heading);
+            System.err.printf("Cannot find an entry with heading \"%s\".\n", heading);
         }
 
         try {

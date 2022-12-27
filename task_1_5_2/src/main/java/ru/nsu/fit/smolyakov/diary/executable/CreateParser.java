@@ -25,9 +25,9 @@ class CreateParser implements Runnable {
                 Diary diary = new Diary();
                 diary.toJson(file);
 
-                System.err.printf("New diary created in %s.", file.getPath());
+                System.err.printf("New diary created in %s.\n", file.getPath());
             } else {
-                System.err.printf("%s already exists!", file.getPath());
+                System.err.printf("%s already exists!\n", file.getPath());
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

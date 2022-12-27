@@ -40,7 +40,7 @@ class AddParser implements Runnable {
 
         diary.insert(heading, contents);
 
-        System.err.printf("Inserted \"%s\".", heading);
+        System.err.printf("Inserted \"%s\".\n", heading);
 
         try {
             diary.toJson(file);
