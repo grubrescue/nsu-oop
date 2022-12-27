@@ -8,11 +8,20 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * An entry class
+ * A note class providing a basic functionality to handle small writings with
+ * a specified {@link #heading()} and {@link #text()}. Designed to be instantiated
+ * and usually instantiated internally by {@link Diary}.
  *
- * @param heading
- * @param text
- * @param date
+ * <p>The contract consists of filtering predicates, such as {@link #contains(String)},
+ * {@link #after(ZonedDateTime)}and {@link #before(ZonedDateTime)}, and {@link #toString()},
+ * representing this note acceptably for a {@link Diary}.
+ *
+ * @param heading a title
+ * @param text contents
+ * @param date a date of creation
+ *
+ * @see Diary
+ * @see ZonedDateTime
  */
 public record Note(
     @JsonProperty("heading")
@@ -42,7 +51,9 @@ public record Note(
 
     /**
      * Returns {@code true} if this {@code Note} heading contains
-     * a specified {@code keyword}.
+     * a specified {@code keyword}. Keyword is treated as a sequence of
+     * characters, so this method doesn't search for words but for
+     * the occurrence of one.
      *
      * @param keyword a string to be found in the heading of this {@code Note}
      * @return {@code true} if this {@code Note} heading contains
@@ -77,7 +88,16 @@ public record Note(
     }
 
     /**
-     * @return
+     * Returns a pretty representation of this note.
+     * An example of a format is presented below.
+     * <code>
+     *     <br/>Heading: title
+     *     <br/>Text: contents
+     *     <br/>------------
+     *     <br/>Date: Tue, 27 Dec 2022 22:21:52 +0700
+     * </code>
+     *
+     * @return a pretty representation of this note
      */
     @Override
     public String toString() {

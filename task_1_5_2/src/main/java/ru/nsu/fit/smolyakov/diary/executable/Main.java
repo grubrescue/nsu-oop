@@ -7,6 +7,7 @@ import picocli.CommandLine;
  * the obvious meaning.
  */
 public class Main {
+    private Main() {}
     /**
      * Parses command line arguments and processes the
      * specified job.
