@@ -131,36 +131,6 @@ public class Diary {
     }
 
     /**
-     * Returns the hash code value for this {@code Diary}.
-     *
-     * @return the hash code value
-     */
-    @Override
-    public int hashCode() {
-        return notes.hashCode();
-    }
-
-    /**
-     * Compares the specified object with this {@code Diary} for equality. Returns
-     * {@code true} if and only if the specified object is also a diary and both
-     * lists have the same notes.
-     *
-     * @param o the object to be compared for equality with this {@code Diary}
-     * @return {@code true} if the specified object is equal to this {@code Diary}
-     * @see Note#equals(Object)
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        } else if (o instanceof Diary other) {
-            return notes.equals(other.notes);
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Returns a pretty {@link String} representation of all entries of this {@code Diary}.
      * Depends on a {@link Note#toString()} method.
      *
@@ -185,9 +155,9 @@ public class Diary {
         private final List<Note> notes;
         private List<String> keywordsList = new ArrayList<>();
         private ZonedDateTime after =
-            Instant.MIN.atZone(ZoneOffset.UTC);
+            Instant.EPOCH.atZone(ZoneOffset.UTC);
         private ZonedDateTime before =
-            Instant.MAX.atZone(ZoneOffset.UTC);
+            Instant.ofEpochMilli(Long.MAX_VALUE).atZone(ZoneOffset.UTC);
 
         private Query(List<Note> notes) {
             this.notes = Objects.requireNonNull(notes);
