@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -33,7 +34,9 @@ public class Diary {
             .setVisibility(
                 PropertyAccessor.FIELD,
                 JsonAutoDetect.Visibility.ANY
-            );
+            )
+            .disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE);
+
 
         writer = mapper
             .writer()
@@ -112,7 +115,7 @@ public class Diary {
      */
     public static class Query {
         private final List<Note> notes;
-        private Predicate<Note> hasKeywords = ((note) -> false);
+        private List<String> keywordsList = new ArrayList<>();
         private ZonedDateTime after =
             Instant.ofEpochMilli(Long.MIN_VALUE).atZone(ZoneOffset.UTC);
         private ZonedDateTime before =
@@ -137,29 +140,26 @@ public class Diary {
         }
 
         public Query contains(String keyword) {
-            if (keyword != null) {
-                hasKeywords = hasKeywords.or((note) -> note.contains(keyword));
+            if (keywordsList != null) {
+                this.keywordsList.add(keyword);
             }
             return this;
         }
 
         public Query contains(List<String> keywordsList) {
             if (keywordsList != null) {
-                keywordsList
-                    .forEach((keyword) ->
-                        hasKeywords =
-                            hasKeywords.or(
-                                (note) -> note.contains(keyword)
-                            )
-                    );
+                this.keywordsList.addAll(keywordsList);
             }
             return this;
         }
 
         public Diary select() {
+            Predicate<Note> keywordsFilter =
+                (note) -> keywordsList.isEmpty() || (keywordsList.stream().anyMatch(note::contains));
+
             return new Diary(
                 notes.stream()
-                    .filter(hasKeywords)
+                    .filter(keywordsFilter)
                     .filter((entry) -> entry.date().isBefore(before))
                     .filter((entry) -> entry.date().isAfter(after))
                     .sorted(Comparator.comparing(Note::date))
