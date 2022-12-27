@@ -11,7 +11,7 @@ import java.io.IOException;
     mixinStandardHelpOptions = true,
     description = "Inserts entries to the specified diary."
 )
-class AddParser implements Runnable {
+class AddCommand implements Runnable {
     @CommandLine.Parameters(
         index = "0",
         description = "a specified Json-file associated with diary"

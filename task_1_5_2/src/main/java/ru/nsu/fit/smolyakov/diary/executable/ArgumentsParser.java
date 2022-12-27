@@ -9,10 +9,10 @@ import picocli.CommandLine.Model.CommandSpec;
     mixinStandardHelpOptions = true,
     description = "Does the job digitalizing your thoughts.",
     subcommands = {
-        CreateParser.class,
-        ListParser.class,
-        AddParser.class,
-        RmParser.class
+        CreateCommand.class,
+        ListCommand.class,
+        AddCommand.class,
+        RmCommand.class
     }
 )
 class ArgumentsParser implements Runnable {

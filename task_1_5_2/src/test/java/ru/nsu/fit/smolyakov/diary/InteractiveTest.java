@@ -1,24 +1,20 @@
 package ru.nsu.fit.smolyakov.diary;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.fit.smolyakov.diary.core.Diary;
-import ru.nsu.fit.smolyakov.diary.core.Note;
 import ru.nsu.fit.smolyakov.diary.executable.Main;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.Instant;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class InteractiveTest {
     static final String filename = "src/test/resources/diary.json";
     static File file;
+
     @BeforeAll
     static void init() {
         file = new File("src/test/resources/diary.json");

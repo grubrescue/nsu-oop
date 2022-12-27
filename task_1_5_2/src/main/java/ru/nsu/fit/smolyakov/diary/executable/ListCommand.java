@@ -13,7 +13,7 @@ import java.util.List;
     mixinStandardHelpOptions = true,
     description = "Lists notes from a specified diary."
 )
-class ListParser implements Runnable {
+class ListCommand implements Runnable {
     @CommandLine.Parameters(
         index = "0",
         description = "a specified Json-file associated with diary"

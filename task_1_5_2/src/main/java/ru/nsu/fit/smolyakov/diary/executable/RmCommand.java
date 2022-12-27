@@ -11,7 +11,7 @@ import java.io.IOException;
     mixinStandardHelpOptions = true,
     description = "Removes entry from a specified diary."
 )
-class RmParser implements Runnable {
+class RmCommand implements Runnable {
     @CommandLine.Parameters(
         index = "0",
         description = "a specified Json-file associated with diary"

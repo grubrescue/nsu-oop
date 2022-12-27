@@ -1,6 +1,5 @@
 package ru.nsu.fit.smolyakov.diary;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import ru.nsu.fit.smolyakov.diary.core.Note;
 
@@ -20,7 +19,7 @@ class NoteTest {
             "hello nsu from 2022",
             "Irtegov still has the same tasks for unix course in 2038",
             time
-    );
+        );
 
     @Test
     void toStringTest() {
@@ -31,7 +30,7 @@ class NoteTest {
                     Text: Irtegov still has the same tasks for unix course in 2038
                     ------------
                     Date: Mon, 18 Jan 2038 19:14:07 -0800
-                    
+                                        
                     """
             );
     }
