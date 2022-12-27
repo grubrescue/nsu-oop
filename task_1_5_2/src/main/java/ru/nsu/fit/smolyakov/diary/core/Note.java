@@ -94,6 +94,7 @@ public record Note(
      * <br/>Text: contents
      * <br/>------------
      * <br/>Date: Tue, 27 Dec 2022 22:21:52 +0700
+     * <br/>
      * </code>
      *
      * @return a pretty representation of this note
@@ -105,7 +106,7 @@ public record Note(
             Text: %s
             ------------
             Date: %s
-                            
+                        
             """
             .formatted(
                 heading,

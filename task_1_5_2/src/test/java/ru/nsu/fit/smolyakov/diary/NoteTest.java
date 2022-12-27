@@ -1,29 +1,54 @@
 package ru.nsu.fit.smolyakov.diary;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import ru.nsu.fit.smolyakov.diary.executable.Main;
+import ru.nsu.fit.smolyakov.diary.core.Note;
 
-import java.io.File;
-import java.io.PrintStream;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class NoteTest {
+class NoteTest {
+    static ZonedDateTime time =
+        Instant.EPOCH
+            .plusSeconds((long) Integer.MAX_VALUE)
+            .atZone(ZoneId.of("America/Los_Angeles"));
+    static Note note
+        = new Note(
+            "hello nsu from 2022",
+            "Irtegov still has the same tasks for unix course in 2038",
+            time
+    );
+
     @Test
-    void interactive() {
-        var file = new File("diary.json");
-        assertThat(file).doesNotExist();
-
-        Main.main(new String[]{"create", "diary.json"});
-        assertThat(file).exists();
-
-        Main.main(new String[]{"add", "diary.json", "title", "wow"});
-        Main.main(new String[]{"add", "diary.json", "another title", "wooow!!"});
-        Main.main(new String[]{"add", "diary.json", "and this is heading", "why???"});
-        Main.main(new String[]{"add", "diary.json", "segmentation", "fault"});
-        Main.main(new String[]{"add", "diary.json", "segmentation", "fault"});
-
-        file.delete();
+    void toStringTest() {
+        assertThat(note.toString())
+            .isEqualTo(
+                """
+                    Heading: hello nsu from 2022
+                    Text: Irtegov still has the same tasks for unix course in 2038
+                    ------------
+                    Date: Mon, 18 Jan 2038 19:14:07 -0800
+                    
+                    """
+            );
     }
 
+    @Test
+    void beforeTest() {
+        assertThat(note.before(time.minusYears(20)))
+            .isFalse();
+        assertThat(note.before(time.plusYears(20)))
+            .isTrue();
+    }
+
+    @Test
+    void afterTest() {
+        assertThat(note.after(time.plusNanos(20)))
+            .isFalse();
+        assertThat(note.after(time.minusNanos(20)))
+            .isTrue();
+    }
 }

@@ -29,6 +29,16 @@ test {
 }
 
 jacocoTestReport {
+    dependsOn test
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    "ru/nsu/fit/smolyakov/diary/executable/ListParser.class"
+            ])
+        }))
+    }
+
     reports {
         xml.required = true
         html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
