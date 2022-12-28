@@ -1,10 +1,10 @@
 package ru.nsu.fit.smolyakov.caclulator.operationsprovider;
 
-import ru.nsu.fit.smolyakov.caclulator.complex.Complex;
-import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
-
 import java.util.Map;
 import java.util.Objects;
+
+import ru.nsu.fit.smolyakov.caclulator.complex.Complex;
+import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 
 /**
  * An implementation of {@link OperationsProvider} with {@link Double} as a

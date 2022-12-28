@@ -1,8 +1,8 @@
 package ru.nsu.fit.smolyakov.caclulator.operationsprovider;
 
-import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
-
 import java.util.Optional;
+
+import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 
 /**
  * An interface responsible for providing operations for

@@ -1,15 +1,16 @@
 package ru.nsu.fit.smolyakov.calculator;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+
 import ru.nsu.fit.smolyakov.caclulator.complex.Complex;
-
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ComplexTest {
     static Stream<Arguments> complexStringsProvider() {
@@ -59,8 +60,10 @@ class ComplexTest {
     @Test
     void equalsTest() {
         assertThat(new Complex(-0, -0).hashCode()).isEqualTo(new Complex(0, 0).hashCode());
-        assertThat(new Complex(-3.49999999999, -0).hashCode()).isEqualTo(new Complex(-3.5, 0).hashCode());
-        assertThat(new Complex(-3.99999999999, -0).hashCode()).isEqualTo(new Complex(-4, 0).hashCode());
+        assertThat(new Complex(-3.49999999999, -0).hashCode())
+            .isEqualTo(new Complex(-3.5, 0).hashCode());
+        assertThat(new Complex(-3.99999999999, -0).hashCode())
+            .isEqualTo(new Complex(-4, 0).hashCode());
 
         assertThat(new Complex(-0, -0)).isEqualTo(new Complex(0, 0));
         assertThat(new Complex(-3.49999999999, -0)).isEqualTo(new Complex(-3.5, 0));

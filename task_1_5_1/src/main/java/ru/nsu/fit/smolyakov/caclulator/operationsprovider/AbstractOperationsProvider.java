@@ -1,10 +1,10 @@
 package ru.nsu.fit.smolyakov.caclulator.operationsprovider;
 
-import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 
 /**
  * Just one variant of {@link OperationsProvider} interface implementation,

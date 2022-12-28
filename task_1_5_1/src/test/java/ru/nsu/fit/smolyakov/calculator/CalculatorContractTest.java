@@ -1,15 +1,16 @@
 package ru.nsu.fit.smolyakov.calculator;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import ru.nsu.fit.smolyakov.caclulator.ComplexCalculator;
-import ru.nsu.fit.smolyakov.caclulator.exceptions.IllegalOperationsAmountException;
-import ru.nsu.fit.smolyakov.caclulator.exceptions.UnknownOperationException;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Scanner;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import ru.nsu.fit.smolyakov.caclulator.ComplexCalculator;
+import ru.nsu.fit.smolyakov.caclulator.exceptions.IllegalOperationsAmountException;
+import ru.nsu.fit.smolyakov.caclulator.exceptions.UnknownOperationException;
 
 class CalculatorContractTest {
     static ComplexCalculator calc;

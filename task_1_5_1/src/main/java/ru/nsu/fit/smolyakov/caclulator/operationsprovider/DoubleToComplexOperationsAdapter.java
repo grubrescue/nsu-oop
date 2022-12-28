@@ -1,9 +1,9 @@
 package ru.nsu.fit.smolyakov.caclulator.operationsprovider;
 
+import java.util.Objects;
+
 import ru.nsu.fit.smolyakov.caclulator.complex.Complex;
 import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
-
-import java.util.Objects;
 
 class DoubleToComplexOperationsAdapter implements OperationsProvider<Complex> {
     private final DoubleOperationsProvider provider;

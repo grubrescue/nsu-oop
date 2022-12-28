@@ -1,16 +1,17 @@
 package ru.nsu.fit.smolyakov.calculator;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+
+import java.util.Scanner;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import ru.nsu.fit.smolyakov.caclulator.Calculator;
 import ru.nsu.fit.smolyakov.caclulator.exceptions.UnknownOperationException;
 import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 import ru.nsu.fit.smolyakov.caclulator.operationsprovider.DoubleOperationsProvider;
-
-import java.util.Scanner;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class OperationProviderTest {
     private DoubleOperationsProvider provider;

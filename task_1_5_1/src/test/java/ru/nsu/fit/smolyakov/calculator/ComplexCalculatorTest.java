@@ -1,16 +1,17 @@
 package ru.nsu.fit.smolyakov.calculator;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import ru.nsu.fit.smolyakov.caclulator.Calculator;
-import ru.nsu.fit.smolyakov.caclulator.ComplexCalculator;
-import ru.nsu.fit.smolyakov.caclulator.complex.Complex;
-
-import java.util.Scanner;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.within;
+
+import java.util.Scanner;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import ru.nsu.fit.smolyakov.caclulator.Calculator;
+import ru.nsu.fit.smolyakov.caclulator.ComplexCalculator;
+import ru.nsu.fit.smolyakov.caclulator.complex.Complex;
 
 class ComplexCalculatorTest {
     static Calculator<Complex> calc;
@@ -63,7 +64,8 @@ class ComplexCalculatorTest {
         assertThat(compute("/ 2+3i 3+2i").i()).isCloseTo(0.38461, within(0.001));
 
         assertThat(compute("/ -5-5i -6-2i")).isEqualTo(new Complex(1, 0.5));
-        assertThat(compute("/ 2+3i 0+0i")).isEqualTo(new Complex(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY));
+        assertThat(compute("/ 2+3i 0+0i"))
+            .isEqualTo(new Complex(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY));
     }
 
     @Test

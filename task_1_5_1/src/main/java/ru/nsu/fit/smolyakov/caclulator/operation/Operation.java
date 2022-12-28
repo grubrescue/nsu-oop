@@ -1,13 +1,13 @@
 package ru.nsu.fit.smolyakov.caclulator.operation;
 
-import ru.nsu.fit.smolyakov.caclulator.complex.Complex;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.BinaryOperator;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
+
+import ru.nsu.fit.smolyakov.caclulator.complex.Complex;
 
 /**
  * Represents an operation upon operands of the same type, producing a result

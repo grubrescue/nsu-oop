@@ -1,10 +1,5 @@
 package ru.nsu.fit.smolyakov.caclulator;
 
-import ru.nsu.fit.smolyakov.caclulator.exceptions.IllegalOperationsAmountException;
-import ru.nsu.fit.smolyakov.caclulator.exceptions.UnknownOperationException;
-import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
-import ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider;
-
 import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,6 +7,11 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.Stack;
+
+import ru.nsu.fit.smolyakov.caclulator.exceptions.IllegalOperationsAmountException;
+import ru.nsu.fit.smolyakov.caclulator.exceptions.UnknownOperationException;
+import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
+import ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider;
 
 /**
  * A calculator for a prefix notation with a generic type of operands and
@@ -66,7 +66,7 @@ public class Calculator<T> {
             T peekValue = stack.pop().get();
 
             if (!stack.empty()) {
-                stack.peek().curry(peekValue); // TODO catch exception or not?
+                stack.peek().curry(peekValue);
             } else {
                 return peekValue;
             }
