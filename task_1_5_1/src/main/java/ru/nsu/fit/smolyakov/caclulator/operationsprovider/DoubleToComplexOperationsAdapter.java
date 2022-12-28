@@ -3,10 +3,7 @@ package ru.nsu.fit.smolyakov.caclulator.operationsprovider;
 import ru.nsu.fit.smolyakov.caclulator.complex.Complex;
 import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
 class DoubleToComplexOperationsAdapter implements OperationsProvider<Complex> {
     private final DoubleOperationsProvider provider;

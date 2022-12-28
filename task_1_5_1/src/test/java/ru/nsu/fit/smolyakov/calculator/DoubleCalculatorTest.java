@@ -1,11 +1,9 @@
 package ru.nsu.fit.smolyakov.calculator;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import ru.nsu.fit.smolyakov.caclulator.Calculator;
 import ru.nsu.fit.smolyakov.caclulator.ComplexCalculator;
 
 import java.util.Scanner;

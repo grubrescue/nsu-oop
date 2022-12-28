@@ -2,7 +2,6 @@ package ru.nsu.fit.smolyakov.calculator;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import ru.nsu.fit.smolyakov.caclulator.Calculator;
 import ru.nsu.fit.smolyakov.caclulator.ComplexCalculator;
 import ru.nsu.fit.smolyakov.caclulator.exceptions.IllegalOperationsAmountException;
 import ru.nsu.fit.smolyakov.caclulator.exceptions.UnknownOperationException;
