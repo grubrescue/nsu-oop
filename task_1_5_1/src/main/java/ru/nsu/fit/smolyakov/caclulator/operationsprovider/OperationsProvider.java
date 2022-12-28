@@ -2,6 +2,8 @@ package ru.nsu.fit.smolyakov.caclulator.operationsprovider;
 
 import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 
+import java.util.Optional;
+
 /**
  * An interface responsible for providing operations for
  * {@link ru.nsu.fit.smolyakov.caclulator.Calculator}.
@@ -28,4 +30,21 @@ public interface OperationsProvider<T> {
      *                               the format of operand
      */
     Operation<T> getByName(String name);
+
+    /**
+     * Returns an {@link Optional} of an {@link Operation} associated with
+     * specified {@code name}. If there is no such operators, then {@code name}
+     * is parsed according to operand pattern.
+     *
+     * @param name a name of an operation
+     * @return an {@link Optional} of an operation associated with {@code name} if one exists,
+     *      {@link Optional#empty()} otherwise
+     */
+    default Optional<Operation<T>> getOptionalByName(String name) {
+        try {
+            return Optional.ofNullable(getByName(name));
+        } catch (NumberFormatException e){
+            return Optional.empty();
+        }
+    }
 }

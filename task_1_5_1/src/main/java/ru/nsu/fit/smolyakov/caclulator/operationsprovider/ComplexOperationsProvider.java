@@ -16,10 +16,8 @@ import java.util.Objects;
  * correctly if operand imaginary part is 0.
  */
 public class ComplexOperationsProvider extends AbstractOperationsProvider<Complex> {
-    private static final Map<String, Operation<Complex>> operationsMap;
-
-    static {
-        var complexMap = Map.of(
+    private static final Map<String, Operation<Complex>> operationsMap =
+        Map.of(
             "+", new Operation<>(Complex::add),
             "-", new Operation<>(Complex::subtract),
             "*", new Operation<>(Complex::multiply),
@@ -27,14 +25,6 @@ public class ComplexOperationsProvider extends AbstractOperationsProvider<Comple
             "sin", new Operation<>(Complex::sin),
             "cos", new Operation<>(Complex::cos)
         );
-
-        operationsMap = new HashMap<>(complexMap);
-
-        new DoubleOperationsProvider()
-            .getOperationsMap()
-            .entrySet()
-            .forEach((entry) -> operationsMap.putIfAbsent(entry.getKey(), Operation.liftToComplex(entry.getValue())));
-    }
 
     /**
      * Constructs an instance of {@code ComplexOperationProvider}.

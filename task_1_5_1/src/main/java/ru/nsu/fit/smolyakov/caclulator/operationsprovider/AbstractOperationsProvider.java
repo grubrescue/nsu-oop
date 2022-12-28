@@ -5,6 +5,7 @@ import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Just one variant of {@link OperationsProvider} interface implementation,
@@ -104,7 +105,7 @@ public abstract class AbstractOperationsProvider<T> implements OperationsProvide
      *
      * @return an operations map
      */
-    public Map<String, Operation<T>> getOperationsMap() {
+    Map<String, Operation<T>> getOperationsMap() {
         return Map.copyOf(operationsMap);
     }
 }
