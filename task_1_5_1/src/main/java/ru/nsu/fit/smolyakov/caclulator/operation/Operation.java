@@ -88,13 +88,13 @@ public class Operation<T> {
      * whose arity is specified by {@code arity}.
      *
      * @param arity     a specified arity
-     * @param nOperator a function to represent
+     * @param operator a function to represent
      * @throws IllegalArgumentException if arity is a negative number
      */
-    public Operation(int arity, Function<T> nOperator) {
+    public Operation(int arity, Function<T> operator) {
         if (arity >= 0) {
             this.initialArity = arity;
-            this.function = Objects.requireNonNull(nOperator);
+            this.function = Objects.requireNonNull(operator);
         } else {
             throw new IllegalArgumentException("arity should be more than zero");
         }

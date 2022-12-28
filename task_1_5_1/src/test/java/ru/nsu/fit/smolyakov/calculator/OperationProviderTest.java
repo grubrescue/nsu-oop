@@ -42,7 +42,9 @@ class OperationProviderTest {
 
     @Test
     void addOperationTestNameIsDouble() {
-        assertThatThrownBy(() -> provider.insertOperation("0.67", new Operation<Double>(() -> 0.66)))
+        assertThatThrownBy(() -> {
+            provider.insertOperation("0.67", new Operation<Double>(() -> 0.66));
+        })
             .isInstanceOf(IllegalArgumentException.class);
     }
 }

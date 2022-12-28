@@ -6,7 +6,12 @@ import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 import ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider;
 
 import java.io.InputStream;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Scanner;
+import java.util.Stack;
 
 /**
  * A calculator for a prefix notation with a generic type of operands and

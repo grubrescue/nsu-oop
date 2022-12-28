@@ -38,7 +38,7 @@ public interface OperationsProvider<T> {
      *
      * @param name a name of an operation
      * @return an {@link Optional} of an operation associated with {@code name} if one exists,
-     * {@link Optional#empty()} otherwise
+     *      {@link Optional#empty()} otherwise
      */
     default Optional<Operation<T>> getOptionalByName(String name) {
         try {

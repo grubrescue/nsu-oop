@@ -112,8 +112,8 @@ public record Complex(double r, double i) {
     /**
      * Returns a result of dividing this complex
      * number by one specified by {@code a}.
-     * <p>
-     * If {code a} equals {@code 0+0i}, then result
+     *
+     * <p>If {code a} equals {@code 0+0i}, then result
      * is {@code NaN+NaNi}.
      *
      * @param a a specified complex number
@@ -124,14 +124,14 @@ public record Complex(double r, double i) {
             return new Complex(this.r / 0, this.i / 0);
         }
 
-        double rTmp =
+        double realTmp =
             (this.r * a.r + this.i * a.i)
                 / (a.r * a.r + a.i * a.i);
-        double iTmp =
+        double imagTmp =
             (a.r * this.i - this.r * a.i)
                 / (a.r * a.r + a.i * a.i);
 
-        return new Complex(rTmp, iTmp);
+        return new Complex(realTmp, imagTmp);
     }
 
     /**
@@ -220,7 +220,7 @@ public record Complex(double r, double i) {
      *
      * @param o an object to compare to
      * @return true if this {@code Complex} is equal
-     * to specified {@code o}
+     *      to specified {@code o}
      */
     @Override
     public boolean equals(Object o) {

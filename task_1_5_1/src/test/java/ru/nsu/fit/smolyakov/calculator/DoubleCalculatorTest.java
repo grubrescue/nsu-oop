@@ -60,7 +60,8 @@ class DoubleCalculatorTest {
         assertThat(compute("to-deg PI")).isCloseTo(180, within(0.01));
         assertThat(compute("to-rad 180")).isEqualTo(Math.PI);
 
-        assertThat(compute("sin to-rad - * ^ ^ * 2 4 2 / 1 6 / 90 4 15")).isCloseTo(0.5, within(0.01));
+        assertThat(compute("sin to-rad - * ^ ^ * 2 4 2 / 1 6 / 90 4 15"))
+            .isCloseTo(0.5, within(0.01));
     }
 
     @ParameterizedTest

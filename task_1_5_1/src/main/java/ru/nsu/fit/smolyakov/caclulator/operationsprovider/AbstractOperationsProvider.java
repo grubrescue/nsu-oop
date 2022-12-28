@@ -80,7 +80,7 @@ public abstract class AbstractOperationsProvider<T> implements OperationsProvide
      * @param name      a specified operation name
      * @param operation a specified operation
      * @return true if operation is added successfully,
-     * false if one already exists
+     *      false if one already exists
      * @throws IllegalArgumentException if operation matches the operand
      *                                  pattern
      */
