@@ -9,6 +9,17 @@ import ru.nsu.fit.smolyakov.caclulator.operationsprovider.DoubleOperationsProvid
  * set of operations provided by {@link ComplexOperationsProvider}. As one
  * specifies, operands are also treated as zero arguments functions.
  *
+ * <p>Also, a set of operation for {@link Double} are provided. For that,
+ * {@link DoubleOperationsProvider} with its own set of operations and
+ * operand pattern and {@link DoubleOperationsProvider#adapterToComplex()}
+ * converter are used.
+ *
+ * <p>As an order of providers is important, firstly lexemes are treated as
+ * if they belong to complex numbers; if latter is false, then implementation
+ * assumes they are double. E.g., this situation happens, when an operation,
+ * which is undefined in {@link ComplexOperationsProvider}, exists in
+ * {@link DoubleOperationsProvider}.
+ *
  * @see ru.nsu.fit.smolyakov.caclulator.operation.Operation
  * @see ru.nsu.fit.smolyakov.caclulator.operationsprovider.ComplexOperationsProvider
  */

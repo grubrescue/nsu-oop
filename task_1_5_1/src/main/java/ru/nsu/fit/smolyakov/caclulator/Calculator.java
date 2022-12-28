@@ -13,6 +13,15 @@ import java.util.*;
  * a set of operations provided by {@link OperationsProvider}. As one
  * specifies, operands are also treated as zero arguments functions.
  *
+ * <p>The main calculating methods are {@link #compute(Scanner)} and
+ * {@link #compute(InputStream)} alias. Throws inheritors of
+ * {@link ru.nsu.fit.smolyakov.caclulator.exceptions.CalculatorException}
+ * if input expression is incorrect.
+ *
+ * <p>Allows to be extended by {@link #insertProvider(OperationsProvider)},
+ * Detailed information of providers priority is contained in the description
+ * of that method.
+ *
  * @param <T> a type of operands
  * @see ru.nsu.fit.smolyakov.caclulator.operation.Operation
  * @see ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider
@@ -33,6 +42,15 @@ public class Calculator<T> {
         insertProvider(operationsProvider);
     }
 
+    /**
+     * Inserts an {@link OperationsProvider} in this {@code Calculator}.
+     *
+     * <p>As an order of providers is important, specified {@code operationsProvider}
+     * has higher priority than providers inserted earlier. So, this provider's
+     * lexemes overrides ones previously defined.
+     *
+     * @param operationsProvider a provider to insert
+     */
     public void insertProvider(OperationsProvider<T> operationsProvider) {
         this.operationsProviderList.add(0, Objects.requireNonNull(operationsProvider));
     }
@@ -97,10 +115,6 @@ public class Calculator<T> {
 
             if (operation.isEmpty()) {
                 throw new UnknownOperationException();
-            }
-
-            if (operation.get().arity() == 0) {
-                System.err.println(operation.get().get());
             }
 
             stack.push(operation.get());
