@@ -1,12 +1,12 @@
 package ru.nsu.fit.smolyakov.caclulator;
 
+import ru.nsu.fit.smolyakov.caclulator.exceptions.IllegalOperationsAmountException;
+import ru.nsu.fit.smolyakov.caclulator.exceptions.UnknownOperationException;
 import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 import ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider;
 
 import java.io.InputStream;
-import java.util.Objects;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * A calculator for a prefix notation with a generic type of operands and
@@ -18,7 +18,8 @@ import java.util.Stack;
  * @see ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider
  */
 public class Calculator<T> {
-    private final OperationsProvider<T> operationsProvider;
+    private final List<OperationsProvider<T>> operationsProviderList
+        = new LinkedList<>();
 
     private final Stack<Operation<T>> stack = new Stack<>();
 
@@ -29,7 +30,11 @@ public class Calculator<T> {
      * @param operationsProvider a specified {@linkplain OperationsProvider}
      */
     public Calculator(OperationsProvider<T> operationsProvider) {
-        this.operationsProvider = Objects.requireNonNull(operationsProvider);
+        insertProvider(operationsProvider);
+    }
+
+    public void insertProvider(OperationsProvider<T> operationsProvider) {
+        this.operationsProviderList.add(0, Objects.requireNonNull(operationsProvider));
     }
 
     // returns non-null if everything is calculated
@@ -79,16 +84,33 @@ public class Calculator<T> {
 
         while (scanner.hasNext() && result == null) {
             String currentWord = scanner.next();
-            var operation = operationsProvider.getByName(currentWord);
 
-            stack.push(operation);
+            Optional<Operation<T>> operation =
+                Optional.empty();
+
+            for (var provider : operationsProviderList) {
+                operation = provider.getOptionalByName(currentWord);
+                if (operation.isPresent()) {
+                    break;
+                }
+            }
+
+            if (operation.isEmpty()) {
+                throw new UnknownOperationException();
+            }
+
+            if (operation.get().arity() == 0) {
+                System.err.println(operation.get().get());
+            }
+
+            stack.push(operation.get());
             result = curryStackOperations();
         }
 
         if (scanner.hasNext()) {
-            throw new IllegalArgumentException("too many operands");
+            throw new IllegalOperationsAmountException("too many tokens");
         } else if (!stack.isEmpty()) {
-            throw new IllegalArgumentException("lack of operands");
+            throw new IllegalOperationsAmountException("lack of tokens");
         } else {
             return result;
         }

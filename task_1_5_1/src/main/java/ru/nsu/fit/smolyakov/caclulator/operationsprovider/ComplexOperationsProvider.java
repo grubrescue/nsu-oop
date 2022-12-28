@@ -45,10 +45,6 @@ public class ComplexOperationsProvider extends AbstractOperationsProvider<Comple
      */
     @Override
     protected Complex parseAsOperand(String operandString) throws NumberFormatException {
-        try {
-            return new Complex(Double.parseDouble(Objects.requireNonNull(operandString)), 0);
-        } catch (NumberFormatException e) {
-            return Complex.valueOf(Objects.requireNonNull(operandString));
-        }
+        return Complex.valueOf(Objects.requireNonNull(operandString));
     }
 }

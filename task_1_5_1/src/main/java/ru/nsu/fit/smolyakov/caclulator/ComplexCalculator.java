@@ -2,6 +2,7 @@ package ru.nsu.fit.smolyakov.caclulator;
 
 import ru.nsu.fit.smolyakov.caclulator.complex.Complex;
 import ru.nsu.fit.smolyakov.caclulator.operationsprovider.ComplexOperationsProvider;
+import ru.nsu.fit.smolyakov.caclulator.operationsprovider.DoubleOperationsProvider;
 
 /**
  * A calculator for a prefix notation with {@link Complex} operands and a
@@ -20,6 +21,7 @@ public class ComplexCalculator extends Calculator<Complex> {
      * </pre></blockquote>
      */
     public ComplexCalculator() {
-        super(new ComplexOperationsProvider());
+        super(new DoubleOperationsProvider().adapterToComplex());
+        insertProvider(new ComplexOperationsProvider());
     }
 }

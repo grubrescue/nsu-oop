@@ -8,14 +8,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public class DoubleToComplexOperationsAdapter implements OperationsProvider<Complex> {
+class DoubleToComplexOperationsAdapter implements OperationsProvider<Complex> {
     private final DoubleOperationsProvider provider;
 
-    /**
-     *
-     * @param provider
-     */
-    public DoubleToComplexOperationsAdapter(DoubleOperationsProvider provider) {
+    DoubleToComplexOperationsAdapter(DoubleOperationsProvider provider) {
         this.provider = Objects.requireNonNull(provider);
     }
 

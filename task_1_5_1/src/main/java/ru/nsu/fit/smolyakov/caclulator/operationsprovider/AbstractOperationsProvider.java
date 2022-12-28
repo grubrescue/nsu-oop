@@ -66,7 +66,8 @@ public abstract class AbstractOperationsProvider<T> implements OperationsProvide
     public Operation<T> getByName(String name) throws NumberFormatException {
         var mappedOperation = operationsMap.get(name);
         if (mappedOperation == null) {
-            return new Operation<>(() -> parseAsOperand(name));
+            var parsedName = parseAsOperand(name);
+            return new Operation<>(() -> parsedName);
         } else {
             return mappedOperation.uncurriedCopy();
         }

@@ -234,10 +234,8 @@ public record Complex(double r, double i) {
             return Math.abs(this.i - other.i) < eps
                 && Math.abs(this.r - other.r) < eps
 
-                || Double.isNaN(this.i)
-                && Double.isNaN(this.r)
-                && Double.isNaN(other.i)
-                && Double.isNaN(other.r);
+                || Double.compare(this.r, other.r) == 0
+                && Double.compare(this.i, other.i) == 0;
         } else {
             return false;
         }

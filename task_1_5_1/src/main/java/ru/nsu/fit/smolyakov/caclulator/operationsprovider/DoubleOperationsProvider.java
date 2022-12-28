@@ -1,5 +1,6 @@
 package ru.nsu.fit.smolyakov.caclulator.operationsprovider;
 
+import ru.nsu.fit.smolyakov.caclulator.complex.Complex;
 import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 
 import java.util.Map;
@@ -54,5 +55,17 @@ public class DoubleOperationsProvider extends AbstractOperationsProvider<Double>
     @Override
     protected Double parseAsOperand(String operandString) throws NumberFormatException {
         return Double.valueOf(Objects.requireNonNull(operandString));
+    }
+
+    /**
+     * Returns an adapter to use this {@code OperationsProvider} as {@link Complex} one.
+     * Thus, operations are limited to use only complex numbers without an imaginary part.
+     *
+     * <p>Double operands are also parsed as complex without imaginary part.
+     *
+     * @return an adapter for this {@code OperationsProvider}
+     */
+    public OperationsProvider<Complex> adapterToComplex() {
+        return new DoubleToComplexOperationsAdapter(this);
     }
 }
