@@ -120,9 +120,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#parseAsOperand(java.lang.String)" class="member-name-link">parseAsOperand</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;operandString)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="OperationsProvider.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider">OperationsProvider</a>&lt;<a href="../complex/Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#adapterToComplex()" class="member-name-link">adapterToComplex</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns an adapter to use this <code>OperationsProvider</code> as <a href="../complex/Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex"><code>Complex</code></a> one.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#parseAsOperand(java.lang.String)" class="member-name-link">parseAsOperand</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;operandString)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Converts <code>operandString</code> into <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link"><code>Double</code></a>.</div>
 </div>
 </div>
@@ -130,10 +135,13 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-ru.nsu.fit.smolyakov.caclulator.operationsprovider.AbstractOperationsProvider">Methods inherited from class&nbsp;ru.nsu.fit.smolyakov.caclulator.operationsprovider.<a href="AbstractOperationsProvider.html" title="class in ru.nsu.fit.smolyakov.caclulator.operationsprovider">AbstractOperationsProvider</a></h3>
-<code><a href="AbstractOperationsProvider.html#getByName(java.lang.String)">getByName</a>, <a href="AbstractOperationsProvider.html#getOperationsMap()">getOperationsMap</a>, <a href="AbstractOperationsProvider.html#insertOperation(java.lang.String,ru.nsu.fit.smolyakov.caclulator.operation.Operation)">insertOperation</a></code></div>
+<code><a href="AbstractOperationsProvider.html#getByName(java.lang.String)">getByName</a>, <a href="AbstractOperationsProvider.html#insertOperation(java.lang.String,ru.nsu.fit.smolyakov.caclulator.operation.Operation)">insertOperation</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider">Methods inherited from interface&nbsp;ru.nsu.fit.smolyakov.caclulator.operationsprovider.<a href="OperationsProvider.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider">OperationsProvider</a></h3>
+<code><a href="OperationsProvider.html#getOptionalByName(java.lang.String)">getOptionalByName</a></code></div>
 </section>
 </li>
 </ul>
@@ -178,6 +186,20 @@ loadScripts(document, 'script');</script>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></code> - if <code>operandString</code> doesn't
                                match operand pattern</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="adapterToComplex()">
+<h3>adapterToComplex</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="OperationsProvider.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider">OperationsProvider</a>&lt;<a href="../complex/Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a>&gt;</span>&nbsp;<span class="element-name">adapterToComplex</span>()</div>
+<div class="block">Returns an adapter to use this <code>OperationsProvider</code> as <a href="../complex/Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex"><code>Complex</code></a> one.
+ Thus, operations are limited to use only complex numbers without an imaginary part.
+
+ <p>Double operands are also parsed as complex without imaginary part.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>an adapter for this <code>OperationsProvider</code></dd>
 </dl>
 </section>
 </li>

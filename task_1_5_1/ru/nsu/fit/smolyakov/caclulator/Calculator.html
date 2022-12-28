@@ -80,14 +80,23 @@ loadScripts(document, 'script');</script>
 </dl>
 <dl class="notes">
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="ComplexCalculator.html" title="class in ru.nsu.fit.smolyakov.caclulator">ComplexCalculator</a></code>, <code><a href="DoubleCalculator.html" title="class in ru.nsu.fit.smolyakov.caclulator">DoubleCalculator</a></code></dd>
+<dd><code><a href="ComplexCalculator.html" title="class in ru.nsu.fit.smolyakov.caclulator">ComplexCalculator</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Calculator&lt;T&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">A calculator for a prefix notation with a generic type of operands and
  a set of operations provided by <a href="operationsprovider/OperationsProvider.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider"><code>OperationsProvider</code></a>. As one
- specifies, operands are also treated as zero arguments functions.</div>
+ specifies, operands are also treated as zero arguments functions.
+
+ <p>The main calculating methods are <a href="#compute(java.util.Scanner)"><code>compute(Scanner)</code></a> and
+ <a href="#compute(java.io.InputStream)"><code>compute(InputStream)</code></a> alias. Throws inheritors of
+ <a href="exceptions/CalculatorException.html" title="class in ru.nsu.fit.smolyakov.caclulator.exceptions"><code>CalculatorException</code></a>
+ if input expression is incorrect.
+
+ <p>Allows to be extended by <a href="#insertProvider(ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider)"><code>insertProvider(OperationsProvider)</code></a>,
+ Detailed information of providers priority is contained in the description
+ of that method.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -139,6 +148,11 @@ loadScripts(document, 'script');</script>
 <div class="block">Calculates an arithmetic expression in a prefix notation
  provided by <code>scanner</code>.</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#insertProvider(ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider)" class="member-name-link">insertProvider</a><wbr>(<a href="operationsprovider/OperationsProvider.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider">OperationsProvider</a>&lt;<a href="Calculator.html" title="type parameter in Calculator">T</a>&gt;&nbsp;operationsProvider)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Inserts an <a href="operationsprovider/OperationsProvider.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider"><code>OperationsProvider</code></a> in this <code>Calculator</code>.</div>
+</div>
 </div>
 </div>
 </div>
@@ -176,6 +190,21 @@ loadScripts(document, 'script');</script>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="insertProvider(ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider)">
+<h3>insertProvider</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">insertProvider</span><wbr><span class="parameters">(<a href="operationsprovider/OperationsProvider.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider">OperationsProvider</a>&lt;<a href="Calculator.html" title="type parameter in Calculator">T</a>&gt;&nbsp;operationsProvider)</span></div>
+<div class="block">Inserts an <a href="operationsprovider/OperationsProvider.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider"><code>OperationsProvider</code></a> in this <code>Calculator</code>.
+
+ <p>As an order of providers is important, specified <code>operationsProvider</code>
+ has higher priority than providers inserted earlier. So, this provider's
+ lexemes overrides ones previously defined.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>operationsProvider</code> - a provider to insert</dd>
+</dl>
+</section>
+</li>
 <li>
 <section class="detail" id="compute(java.io.InputStream)">
 <h3>compute</h3>

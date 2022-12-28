@@ -49,7 +49,7 @@ loadScripts(document, 'script');</script>
 <div class="header">
 <h1>Index</h1>
 </div>
-<a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a>
+<a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a><span class="vertical-separator">|</span><a href="serialized-form.html">Serialized&nbsp;Form</a>
 <h2 class="title" id="I:A">A</h2>
 <dl class="index">
 <dt><a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/AbstractOperationsProvider.html" class="type-name-link" title="class in ru.nsu.fit.smolyakov.caclulator.operationsprovider">AbstractOperationsProvider</a>&lt;<a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/AbstractOperationsProvider.html" title="type parameter in AbstractOperationsProvider">T</a>&gt; - Class in <a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/package-summary.html">ru.nsu.fit.smolyakov.caclulator.operationsprovider</a></dt>
@@ -62,6 +62,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Constructs an <code>OperationProvider</code> with mappings from operation name
  to <a href="ru/nsu/fit/smolyakov/caclulator/operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation"><code>Operation</code></a> instance provided by <code>operationsMap</code>.</div>
+</dd>
+<dt><a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/DoubleOperationsProvider.html#adapterToComplex()" class="member-name-link">adapterToComplex()</a> - Method in class ru.nsu.fit.smolyakov.caclulator.operationsprovider.<a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/DoubleOperationsProvider.html" title="class in ru.nsu.fit.smolyakov.caclulator.operationsprovider">DoubleOperationsProvider</a></dt>
+<dd>
+<div class="block">Returns an adapter to use this <code>OperationsProvider</code> as <a href="ru/nsu/fit/smolyakov/caclulator/complex/Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex"><code>Complex</code></a> one.</div>
 </dd>
 <dt><a href="ru/nsu/fit/smolyakov/caclulator/complex/Complex.html#add(ru.nsu.fit.smolyakov.caclulator.complex.Complex)" class="member-name-link">add(Complex)</a> - Method in record class ru.nsu.fit.smolyakov.caclulator.complex.<a href="ru/nsu/fit/smolyakov/caclulator/complex/Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></dt>
 <dd>
@@ -88,6 +92,18 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Constructs an instance of a calculator associated with
  a specified <code>operationProvider</code>.</div>
+</dd>
+<dt><a href="ru/nsu/fit/smolyakov/caclulator/exceptions/CalculatorException.html" class="type-name-link" title="class in ru.nsu.fit.smolyakov.caclulator.exceptions">CalculatorException</a> - Exception in <a href="ru/nsu/fit/smolyakov/caclulator/exceptions/package-summary.html">ru.nsu.fit.smolyakov.caclulator.exceptions</a></dt>
+<dd>
+<div class="block">Thrown to indicate that calculator appears to be in some inappropriate state.</div>
+</dd>
+<dt><a href="ru/nsu/fit/smolyakov/caclulator/exceptions/CalculatorException.html#%3Cinit%3E()" class="member-name-link">CalculatorException()</a> - Constructor for exception ru.nsu.fit.smolyakov.caclulator.exceptions.<a href="ru/nsu/fit/smolyakov/caclulator/exceptions/CalculatorException.html" title="class in ru.nsu.fit.smolyakov.caclulator.exceptions">CalculatorException</a></dt>
+<dd>
+<div class="block">Constructs a <code>CalculatorException</code> with no detail message.</div>
+</dd>
+<dt><a href="ru/nsu/fit/smolyakov/caclulator/exceptions/CalculatorException.html#%3Cinit%3E(java.lang.String)" class="member-name-link">CalculatorException(String)</a> - Constructor for exception ru.nsu.fit.smolyakov.caclulator.exceptions.<a href="ru/nsu/fit/smolyakov/caclulator/exceptions/CalculatorException.html" title="class in ru.nsu.fit.smolyakov.caclulator.exceptions">CalculatorException</a></dt>
+<dd>
+<div class="block">Constructs a <code>CalculatorException</code> with a detail message.</div>
 </dd>
 <dt><a href="ru/nsu/fit/smolyakov/caclulator/complex/Complex.html" class="type-name-link" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a> - Record Class in <a href="ru/nsu/fit/smolyakov/caclulator/complex/package-summary.html">ru.nsu.fit.smolyakov.caclulator.complex</a></dt>
 <dd>
@@ -145,15 +161,6 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns a result of dividing this complex
  number by one specified by <code>a</code>.</div>
 </dd>
-<dt><a href="ru/nsu/fit/smolyakov/caclulator/DoubleCalculator.html" class="type-name-link" title="class in ru.nsu.fit.smolyakov.caclulator">DoubleCalculator</a> - Class in <a href="ru/nsu/fit/smolyakov/caclulator/package-summary.html">ru.nsu.fit.smolyakov.caclulator</a></dt>
-<dd>
-<div class="block">A calculator for a prefix notation with <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link"><code>Double</code></a> operands and a
- set of operations provided by <a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/DoubleOperationsProvider.html" title="class in ru.nsu.fit.smolyakov.caclulator.operationsprovider"><code>DoubleOperationsProvider</code></a>.</div>
-</dd>
-<dt><a href="ru/nsu/fit/smolyakov/caclulator/DoubleCalculator.html#%3Cinit%3E()" class="member-name-link">DoubleCalculator()</a> - Constructor for class ru.nsu.fit.smolyakov.caclulator.<a href="ru/nsu/fit/smolyakov/caclulator/DoubleCalculator.html" title="class in ru.nsu.fit.smolyakov.caclulator">DoubleCalculator</a></dt>
-<dd>
-<div class="block">Constructs an instance of <code>DoubleCalculator</code>.</div>
-</dd>
 <dt><a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/DoubleOperationsProvider.html" class="type-name-link" title="class in ru.nsu.fit.smolyakov.caclulator.operationsprovider">DoubleOperationsProvider</a> - Class in <a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/package-summary.html">ru.nsu.fit.smolyakov.caclulator.operationsprovider</a></dt>
 <dd>
 <div class="block">An implementation of <a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/OperationsProvider.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider"><code>OperationsProvider</code></a> with <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link"><code>Double</code></a> as a
@@ -201,9 +208,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns a <a href="ru/nsu/fit/smolyakov/caclulator/operation/Function.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operation"><code>Function</code></a> associated with this <code>Operation</code>.</div>
 </dd>
-<dt><a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/AbstractOperationsProvider.html#getOperationsMap()" class="member-name-link">getOperationsMap()</a> - Method in class ru.nsu.fit.smolyakov.caclulator.operationsprovider.<a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/AbstractOperationsProvider.html" title="class in ru.nsu.fit.smolyakov.caclulator.operationsprovider">AbstractOperationsProvider</a></dt>
+<dt><a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/OperationsProvider.html#getOptionalByName(java.lang.String)" class="member-name-link">getOptionalByName(String)</a> - Method in interface ru.nsu.fit.smolyakov.caclulator.operationsprovider.<a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/OperationsProvider.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider">OperationsProvider</a></dt>
 <dd>
-<div class="block">Returns an operations map.</div>
+<div class="block">Returns an <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link"><code>Optional</code></a> of an <a href="ru/nsu/fit/smolyakov/caclulator/operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation"><code>Operation</code></a> associated with
+ specified <code>name</code>.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:H">H</h2>
@@ -219,9 +227,25 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the value of the <code>i</code> record component.</div>
 </dd>
+<dt><a href="ru/nsu/fit/smolyakov/caclulator/exceptions/IllegalOperationsAmountException.html" class="type-name-link" title="class in ru.nsu.fit.smolyakov.caclulator.exceptions">IllegalOperationsAmountException</a> - Exception in <a href="ru/nsu/fit/smolyakov/caclulator/exceptions/package-summary.html">ru.nsu.fit.smolyakov.caclulator.exceptions</a></dt>
+<dd>
+<div class="block">Thrown to indicate that calculator received incorrect amount of lexemes on input.</div>
+</dd>
+<dt><a href="ru/nsu/fit/smolyakov/caclulator/exceptions/IllegalOperationsAmountException.html#%3Cinit%3E()" class="member-name-link">IllegalOperationsAmountException()</a> - Constructor for exception ru.nsu.fit.smolyakov.caclulator.exceptions.<a href="ru/nsu/fit/smolyakov/caclulator/exceptions/IllegalOperationsAmountException.html" title="class in ru.nsu.fit.smolyakov.caclulator.exceptions">IllegalOperationsAmountException</a></dt>
+<dd>
+<div class="block">Constructs a <code>IllegalOperationsAmountException</code> with no detail message.</div>
+</dd>
+<dt><a href="ru/nsu/fit/smolyakov/caclulator/exceptions/IllegalOperationsAmountException.html#%3Cinit%3E(java.lang.String)" class="member-name-link">IllegalOperationsAmountException(String)</a> - Constructor for exception ru.nsu.fit.smolyakov.caclulator.exceptions.<a href="ru/nsu/fit/smolyakov/caclulator/exceptions/IllegalOperationsAmountException.html" title="class in ru.nsu.fit.smolyakov.caclulator.exceptions">IllegalOperationsAmountException</a></dt>
+<dd>
+<div class="block">Constructs a <code>IllegalOperationsAmountException</code> with a detail message.</div>
+</dd>
 <dt><a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/AbstractOperationsProvider.html#insertOperation(java.lang.String,ru.nsu.fit.smolyakov.caclulator.operation.Operation)" class="member-name-link">insertOperation(String, Operation&lt;T&gt;)</a> - Method in class ru.nsu.fit.smolyakov.caclulator.operationsprovider.<a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/AbstractOperationsProvider.html" title="class in ru.nsu.fit.smolyakov.caclulator.operationsprovider">AbstractOperationsProvider</a></dt>
 <dd>
 <div class="block">Inserts a new <a href="ru/nsu/fit/smolyakov/caclulator/operation/Operation.html" title="class in ru.nsu.fit.smolyakov.caclulator.operation"><code>Operation</code></a> into this <code>OperationsProvider</code>.</div>
+</dd>
+<dt><a href="ru/nsu/fit/smolyakov/caclulator/Calculator.html#insertProvider(ru.nsu.fit.smolyakov.caclulator.operationsprovider.OperationsProvider)" class="member-name-link">insertProvider(OperationsProvider&lt;T&gt;)</a> - Method in class ru.nsu.fit.smolyakov.caclulator.<a href="ru/nsu/fit/smolyakov/caclulator/Calculator.html" title="class in ru.nsu.fit.smolyakov.caclulator">Calculator</a></dt>
+<dd>
+<div class="block">Inserts an <a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/OperationsProvider.html" title="interface in ru.nsu.fit.smolyakov.caclulator.operationsprovider"><code>OperationsProvider</code></a> in this <code>Calculator</code>.</div>
 </dd>
 <dt><a href="ru/nsu/fit/smolyakov/caclulator/complex/Complex.html#isReal()" class="member-name-link">isReal()</a> - Method in record class ru.nsu.fit.smolyakov.caclulator.complex.<a href="ru/nsu/fit/smolyakov/caclulator/complex/Complex.html" title="class in ru.nsu.fit.smolyakov.caclulator.complex">Complex</a></dt>
 <dd>
@@ -311,6 +335,8 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/fit/smolyakov/caclulator/complex/package-summary.html">ru.nsu.fit.smolyakov.caclulator.complex</a> - package ru.nsu.fit.smolyakov.caclulator.complex</dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/fit/smolyakov/caclulator/exceptions/package-summary.html">ru.nsu.fit.smolyakov.caclulator.exceptions</a> - package ru.nsu.fit.smolyakov.caclulator.exceptions</dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/fit/smolyakov/caclulator/operation/package-summary.html">ru.nsu.fit.smolyakov.caclulator.operation</a> - package ru.nsu.fit.smolyakov.caclulator.operation</dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/fit/smolyakov/caclulator/operationsprovider/package-summary.html">ru.nsu.fit.smolyakov.caclulator.operationsprovider</a> - package ru.nsu.fit.smolyakov.caclulator.operationsprovider</dt>
@@ -348,6 +374,18 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns an uncurried copy of this <code>Operation</code>.</div>
 </dd>
+<dt><a href="ru/nsu/fit/smolyakov/caclulator/exceptions/UnknownOperationException.html" class="type-name-link" title="class in ru.nsu.fit.smolyakov.caclulator.exceptions">UnknownOperationException</a> - Exception in <a href="ru/nsu/fit/smolyakov/caclulator/exceptions/package-summary.html">ru.nsu.fit.smolyakov.caclulator.exceptions</a></dt>
+<dd>
+<div class="block">Thrown to indicate that calculator received an unknown lexeme on input.</div>
+</dd>
+<dt><a href="ru/nsu/fit/smolyakov/caclulator/exceptions/UnknownOperationException.html#%3Cinit%3E()" class="member-name-link">UnknownOperationException()</a> - Constructor for exception ru.nsu.fit.smolyakov.caclulator.exceptions.<a href="ru/nsu/fit/smolyakov/caclulator/exceptions/UnknownOperationException.html" title="class in ru.nsu.fit.smolyakov.caclulator.exceptions">UnknownOperationException</a></dt>
+<dd>
+<div class="block">Constructs a <code>UnknownOperationException</code> with no detail message.</div>
+</dd>
+<dt><a href="ru/nsu/fit/smolyakov/caclulator/exceptions/UnknownOperationException.html#%3Cinit%3E(java.lang.String)" class="member-name-link">UnknownOperationException(String)</a> - Constructor for exception ru.nsu.fit.smolyakov.caclulator.exceptions.<a href="ru/nsu/fit/smolyakov/caclulator/exceptions/UnknownOperationException.html" title="class in ru.nsu.fit.smolyakov.caclulator.exceptions">UnknownOperationException</a></dt>
+<dd>
+<div class="block">Constructs a <code>UnknownOperationException</code> with a detail message.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:V">V</h2>
 <dl class="index">
@@ -358,7 +396,7 @@ loadScripts(document, 'script');</script>
  complex number and <code>b</code> is an imaginary one.</div>
 </dd>
 </dl>
-<a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a></main>
+<a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a><span class="vertical-separator">|</span><a href="serialized-form.html">Serialized&nbsp;Form</a></main>
 </div>
 </div>
 </body>
