@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import ru.nsu.fit.smolyakov.caclulator.Calculator;
 import ru.nsu.fit.smolyakov.caclulator.ComplexCalculator;
+import ru.nsu.fit.smolyakov.caclulator.exceptions.IllegalOperationsAmountException;
+import ru.nsu.fit.smolyakov.caclulator.exceptions.UnknownOperationException;
 
 import java.util.Scanner;
 
@@ -21,31 +23,31 @@ class CalculatorContractTest {
     @Test
     void notEnoughOperands() {
         assertThatThrownBy(() -> calc.compute(new Scanner("+ + 5 5")))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalOperationsAmountException.class);
     }
 
     @Test
     void tooManyOperands() {
         assertThatThrownBy(() -> calc.compute(new Scanner("+ + 5 5 5 5")))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalOperationsAmountException.class);
     }
 
     @Test
     void noOperands() {
         assertThatThrownBy(() -> calc.compute(new Scanner("+")))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalOperationsAmountException.class);
     }
 
     @Test
     void wrongSecondOperandFormat() {
         assertThatThrownBy(() -> calc.compute(new Scanner("+ 0.54 ab0ba")))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(UnknownOperationException.class);
     }
 
     @Test
     void wrongFirstOperandFormat() {
         assertThatThrownBy(() -> calc.compute(new Scanner("+ abba 6")))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(UnknownOperationException.class);
     }
 
     @Test

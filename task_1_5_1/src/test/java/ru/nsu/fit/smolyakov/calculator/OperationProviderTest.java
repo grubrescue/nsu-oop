@@ -3,6 +3,7 @@ package ru.nsu.fit.smolyakov.calculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.fit.smolyakov.caclulator.Calculator;
+import ru.nsu.fit.smolyakov.caclulator.exceptions.UnknownOperationException;
 import ru.nsu.fit.smolyakov.caclulator.operation.Operation;
 import ru.nsu.fit.smolyakov.caclulator.operationsprovider.DoubleOperationsProvider;
 
@@ -28,7 +29,7 @@ class OperationProviderTest {
     @Test
     void addOperationTestAllOk() {
         assertThatThrownBy(() -> compute("anime"))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(UnknownOperationException.class);
 
         provider.insertOperation("anime", new Operation<Double>(() -> 666.666));
         assertThat(compute("anime")).isEqualTo(666.666);
