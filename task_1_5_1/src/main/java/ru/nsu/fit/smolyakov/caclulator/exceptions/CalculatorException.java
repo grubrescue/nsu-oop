@@ -13,6 +13,8 @@ public class CalculatorException extends RuntimeException {
 
     /**
      * Constructs a {@code CalculatorException} with a detail message.
+     *
+     * @param message message
      */
     public CalculatorException(String message) {
         super(message);

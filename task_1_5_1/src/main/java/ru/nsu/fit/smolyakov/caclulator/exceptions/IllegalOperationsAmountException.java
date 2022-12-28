@@ -13,6 +13,8 @@ public class IllegalOperationsAmountException extends CalculatorException {
 
     /**
      * Constructs a {@code IllegalOperationsAmountException} with a detail message.
+     *
+     * @param message message
      */
     public IllegalOperationsAmountException(String message) {
         super(message);

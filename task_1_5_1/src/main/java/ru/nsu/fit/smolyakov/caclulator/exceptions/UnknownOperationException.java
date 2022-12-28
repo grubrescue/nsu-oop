@@ -13,6 +13,8 @@ public class UnknownOperationException extends CalculatorException {
 
     /**
      * Constructs a {@code UnknownOperationException} with a detail message.
+     *
+     * @param message message
      */
     public UnknownOperationException(String message) {
         super(message);
