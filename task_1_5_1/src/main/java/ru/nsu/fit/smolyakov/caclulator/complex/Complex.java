@@ -121,7 +121,7 @@ public record Complex(double r, double i) {
      */
     public Complex divide(Complex a) {
         if (a.r == 0 && a.i == 0) {
-            return new Complex(Double.NaN, Double.NaN);
+            return new Complex(this.r / 0, this.i / 0);
         }
 
         double rTmp =

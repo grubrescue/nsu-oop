@@ -61,7 +61,7 @@ class ComplexCalculatorTest {
         assertThat(compute("/ 2+3i 3+2i").i()).isCloseTo(0.38461, within(0.001));
 
         assertThat(compute("/ -5-5i -6-2i")).isEqualTo(new Complex(1, 0.5));
-        assertThat(compute("/ 2+3i 0+0i")).isEqualTo(new Complex(Double.NaN, Double.NaN));
+        assertThat(compute("/ 2+3i 0+0i")).isEqualTo(new Complex(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY));
     }
 
     @Test

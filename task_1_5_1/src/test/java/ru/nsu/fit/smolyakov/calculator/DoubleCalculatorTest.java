@@ -6,7 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import ru.nsu.fit.smolyakov.caclulator.Calculator;
-import ru.nsu.fit.smolyakov.caclulator.DoubleCalculator;
+import ru.nsu.fit.smolyakov.caclulator.ComplexCalculator;
 
 import java.util.Scanner;
 import java.util.stream.Stream;
@@ -15,15 +15,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
 
 class DoubleCalculatorTest {
-    static Calculator<Double> calc;
-
-    @BeforeAll
-    static void init() {
-        calc = new DoubleCalculator();
-    }
+    static ComplexCalculator calc
+        = new ComplexCalculator();
 
     static Double compute(String what) {
-        return calc.compute(new Scanner(what));
+        return calc.compute(new Scanner(what)).r();
     }
 
     static Stream<Arguments> basicTestsProvider() {
