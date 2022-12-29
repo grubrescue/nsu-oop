@@ -84,7 +84,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Gives a functionality to filter notes that belong to the outer <code>Diary</code>.
  Time of creation restrictions are provided by <a href="#after(java.time.ZonedDateTime)"><code>after(ZonedDateTime)</code></a> and
  <a href="#before(java.time.ZonedDateTime)"><code>before(ZonedDateTime)</code></a>, and checks for keywords being contained in
- a note title are done by <a href="#contains(java.lang.String)"><code>contains(String)</code></a> and <a href="#contains(java.util.List)"><code>contains(List)</code></a>.
+ a note title are done by <a href="#containsInHeading(java.lang.String)"><code>containsInHeading(String)</code></a> and <a href="#containsInHeading(java.util.List)"><code>containsInHeading(List)</code></a>.
 
  <p>Can be instantiated only by <a href="Diary.html#query()"><code>Diary.query()</code></a> method of the outer class.</div>
 </section>
@@ -114,13 +114,13 @@ loadScripts(document, 'script');</script>
  and returns this instance.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#contains(java.lang.String)" class="member-name-link">contains</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;keyword)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#containsInHeading(java.lang.String)" class="member-name-link">containsInHeading</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;keyword)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Filters out notes that doesn't contain a specified <code>keyword</code>
  or one of other that had been specified before and returns this instance.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#contains(java.util.List)" class="member-name-link">contains</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;keywordsList)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#containsInHeading(java.util.List)" class="member-name-link">containsInHeading</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;keywordsList)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Filters out notes that doesn't contain at least one keyword from specified <code>keyword</code>
  or one of other that had been specified before and returns this instance.</div>
@@ -176,9 +176,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="contains(java.lang.String)">
-<h3>contains</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a></span>&nbsp;<span class="element-name">contains</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;keyword)</span></div>
+<section class="detail" id="containsInHeading(java.lang.String)">
+<h3>containsInHeading</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a></span>&nbsp;<span class="element-name">containsInHeading</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;keyword)</span></div>
 <div class="block">Filters out notes that doesn't contain a specified <code>keyword</code>
  or one of other that had been specified before and returns this instance.</div>
 <dl class="notes">
@@ -190,9 +190,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="contains(java.util.List)">
-<h3>contains</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a></span>&nbsp;<span class="element-name">contains</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;keywordsList)</span></div>
+<section class="detail" id="containsInHeading(java.util.List)">
+<h3>containsInHeading</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Diary.Query.html" title="class in ru.nsu.fit.smolyakov.diary.core">Diary.Query</a></span>&nbsp;<span class="element-name">containsInHeading</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;keywordsList)</span></div>
 <div class="block">Filters out notes that doesn't contain at least one keyword from specified <code>keyword</code>
  or one of other that had been specified before and returns this instance.</div>
 <dl class="notes">

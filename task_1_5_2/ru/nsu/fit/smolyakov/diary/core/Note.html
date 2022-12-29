@@ -89,7 +89,7 @@ loadScripts(document, 'script');</script>
  a specified <a href="#heading()"><code>heading()</code></a> and <a href="#text()"><code>text()</code></a>. Designed to be instantiated
  and usually instantiated internally by <a href="Diary.html" title="class in ru.nsu.fit.smolyakov.diary.core"><code>Diary</code></a>.
 
- <p>The contract consists of filtering predicates, such as <a href="#contains(java.lang.String)"><code>contains(String)</code></a>,
+ <p>The contract consists of filtering predicates, such as <a href="#containsInHeading(java.lang.String)"><code>containsInHeading(String)</code></a>,
  <a href="#after(java.time.ZonedDateTime)"><code>after(ZonedDateTime)</code></a>and <a href="#before(java.time.ZonedDateTime)"><code>before(ZonedDateTime)</code></a>, and <a href="#toString()"><code>toString()</code></a>,
  representing this note acceptably for a <a href="Diary.html" title="class in ru.nsu.fit.smolyakov.diary.core"><code>Diary</code></a>.</div>
 <dl class="notes">
@@ -145,9 +145,9 @@ loadScripts(document, 'script');</script>
  before a specified <code>date</code>.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#contains(java.lang.String)" class="member-name-link">contains</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;keyword)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#containsInHeading(java.lang.String)" class="member-name-link">containsInHeading</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;keyword)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns <code>true</code> if this <code>Note</code> heading contains
+<div class="block">Returns <code>true</code> if this <code>Note</code> heading containsInHeading
  a specified <code>keyword</code>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Note.html" title="class in ru.nsu.fit.smolyakov.diary.core">Note</a></code></div>
@@ -246,10 +246,10 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="contains(java.lang.String)">
-<h3>contains</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">contains</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;keyword)</span></div>
-<div class="block">Returns <code>true</code> if this <code>Note</code> heading contains
+<section class="detail" id="containsInHeading(java.lang.String)">
+<h3>containsInHeading</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">containsInHeading</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;keyword)</span></div>
+<div class="block">Returns <code>true</code> if this <code>Note</code> heading containsInHeading
  a specified <code>keyword</code>. Keyword is treated as a sequence of
  characters, so this method doesn't search for words but for
  the occurrence of one.</div>
@@ -257,7 +257,7 @@ loadScripts(document, 'script');</script>
 <dt>Parameters:</dt>
 <dd><code>keyword</code> - a string to be found in the heading of this <code>Note</code></dd>
 <dt>Returns:</dt>
-<dd><code>true</code> if this <code>Note</code> heading contains
+<dd><code>true</code> if this <code>Note</code> heading containsInHeading
  a specified <code>keyword</code>.</dd>
 </dl>
 </section>
