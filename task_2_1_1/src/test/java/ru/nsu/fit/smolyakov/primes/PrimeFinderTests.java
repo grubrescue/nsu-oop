@@ -3,6 +3,8 @@ package ru.nsu.fit.smolyakov.primes;
 import org.junit.jupiter.api.Test;
 import ru.nsu.fit.smolyakov.primes.*;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class PrimeFinderTests {
 //    private static final int REPEATION_TIMES = 4;
     private static final TestUtil<int[]> testUtil = new TestUtil<>();
@@ -14,6 +16,12 @@ public class PrimeFinderTests {
     private static PrimeFinder parallelThreadsPrimeFinder
         = new ParallelThreadsPrimeFinder(Runtime.getRuntime().availableProcessors());
 
+    @Test
+    void correctnessTest() {
+        assertThat(sequentialStreamPrimeFinder.find(arr)).isTrue();
+        assertThat(parallelStreamPrimeFinder.find(arr)).isTrue();
+        assertThat(parallelThreadsPrimeFinder.find(arr)).isTrue();
+    }
 
     @Test
     void timeMeasureTest() {
