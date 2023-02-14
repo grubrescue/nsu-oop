@@ -34,7 +34,7 @@ public class ParallelThreadsNonPrimeFinder extends NonPrimeFinder {
 
 
     public void threadTask(
-        final List<Thread> threadsList,
+        final Thread parentThread,
         final IntArrayIterator iter,
         final AtomicBoolean foundFlag
     ) {
@@ -45,7 +45,7 @@ public class ParallelThreadsNonPrimeFinder extends NonPrimeFinder {
                 if (iter.hasNext()) {
                     number = iter.next();
                 } else {
-                    Thread.currentThread().interrupt();
+//                    Thread.currentThread().interrupt();
                     return;
                 }
             }
@@ -53,7 +53,6 @@ public class ParallelThreadsNonPrimeFinder extends NonPrimeFinder {
             if (!Util.isPrime(number)) {
                 synchronized (this) {
                     foundFlag.set(true);
-                    threadsList.forEach(Thread::interrupt);
                 }
                 return;
             }
@@ -68,8 +67,18 @@ public class ParallelThreadsNonPrimeFinder extends NonPrimeFinder {
         AtomicBoolean foundFlag = new AtomicBoolean(false);
 
         for (int threadId = 0; threadId < amountOfThreads; threadId++) {
-            threadsList.add(new Thread(() -> threadTask(threadsList, iter, foundFlag)));
+            threadsList.add(new Thread(() -> threadTask(Thread.currentThread(), iter, foundFlag)));
         }
+
+        synchronized (foundFlag) {
+            try {
+                foundFlag.wait();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        threadsList.forEach(Thread::interrupt);
 
         return foundFlag.get();
     }
