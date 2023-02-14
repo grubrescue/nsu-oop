@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'jacoco'
-    id 'me.champeau.gradle.jmh' version '0.5.3'
+    id 'me.champeau.jmh' version '0.6.8'
 }
 
 repositories {
@@ -16,7 +16,6 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.1'
     testImplementation 'org.assertj:assertj-core:3.23.1'
 
-    jmhImplementation 'me.champeau.gradle:jmh-gradle-plugin:0.5.3'
     jmhImplementation 'org.openjdk.jmh:jmh-core:1.36'
     jmhImplementation 'org.openjdk.jmh:jmh-generator-annprocess:1.36'
     jmhImplementation 'org.openjdk.jmh:jmh-generator-bytecode:1.36'

@@ -13,7 +13,7 @@ public class PrimeFinderTests {
         assertThat(TestSources.sequentialStreamNonPrimeFinder.find(TestSources.smallArray)).isFalse();
         assertThat(TestSources.sequentialStreamNonPrimeFinder.find(TestSources.largeArray)).isFalse();
     }
-//
+
     @Test
     void parallelStreamNonPrimeFinderTest() {
         assertThat(TestSources.parallelStreamNonPrimeFinder.find(TestSources.smallestArray)).isTrue();

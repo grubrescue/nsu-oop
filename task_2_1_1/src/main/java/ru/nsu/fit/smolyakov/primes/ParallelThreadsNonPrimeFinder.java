@@ -53,6 +53,7 @@ public class ParallelThreadsNonPrimeFinder extends NonPrimeFinder {
             if (!Util.isPrime(number)) {
                 synchronized (this) {
                     foundFlag.set(true);
+                    parentThread.notify();
                 }
                 return;
             }
