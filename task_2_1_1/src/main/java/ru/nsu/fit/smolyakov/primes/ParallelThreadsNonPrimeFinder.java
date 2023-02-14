@@ -2,9 +2,29 @@ package ru.nsu.fit.smolyakov.primes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PrimitiveIterator;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ParallelThreadsNonPrimeFinder extends NonPrimeFinder {
+    private static class IntArrayIterator implements PrimitiveIterator.OfInt {
+        private int i = -1;
+        private final int[] arr;
+
+        public IntArrayIterator(int[] arr) {
+            this.arr = arr;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return i < arr.length;
+        }
+
+        @Override
+        public int nextInt() {
+            return arr[i++];
+        }
+    }
+
     private final int amountOfThreads;
 
     public ParallelThreadsNonPrimeFinder(int amountOfThreads) {
@@ -12,26 +32,45 @@ public class ParallelThreadsNonPrimeFinder extends NonPrimeFinder {
         this.amountOfThreads = amountOfThreads;
     }
 
+
+    public void threadTask(
+        final List<Thread> threadsList,
+        final IntArrayIterator iter,
+        final AtomicBoolean foundFlag
+    ) {
+        while (true) {
+            final int number;
+
+            synchronized (iter) {
+                if (iter.hasNext()) {
+                    number = iter.next();
+                } else {
+                    Thread.currentThread().interrupt();
+                    return;
+                }
+            }
+
+            if (!Util.isPrime(number)) {
+                synchronized (this) {
+                    foundFlag.set(true);
+                    threadsList.forEach(Thread::interrupt);
+                }
+                return;
+            }
+        }
+    }
+
     @Override
     public boolean find(int[] arr) {
-        AtomicBoolean foundPrime = new AtomicBoolean(false);
         List<Thread> threadsList = new ArrayList<>();
 
+        final var iter = new IntArrayIterator(arr);
+        AtomicBoolean foundFlag = new AtomicBoolean(false);
+
         for (int threadId = 0; threadId < amountOfThreads; threadId++) {
-            int finalThreadId = threadId;
-            threadsList.add(
-                new Thread(
-                    () -> {
-                        for (int i = finalThreadId; i < arr.length; i += amountOfThreads) {
-                            if (!Util.isPrime(arr[i])) {
-                                foundPrime.set(true);
-                            }
-                        }
-                    }
-                    )
-            );
+            threadsList.add(new Thread(() -> threadTask(threadsList, iter, foundFlag)));
         }
 
-        return foundPrime.get();
+        return foundFlag.get();
     }
 }
