@@ -24,7 +24,7 @@ dependencies {
 test {
     useJUnitPlatform()
     dependsOn cleanTest
-//    testLogging.showStandardStreams = true
+    testLogging.showStandardStreams = true
     finalizedBy jacocoTestReport
 }
 
