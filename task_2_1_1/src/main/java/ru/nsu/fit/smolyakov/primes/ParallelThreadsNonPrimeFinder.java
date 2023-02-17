@@ -32,36 +32,40 @@ public class ParallelThreadsNonPrimeFinder extends NonPrimeFinder {
 
     @Override
     public boolean find(int[] arr) {
-        List<Thread> threadsList = new ArrayList<>();
+        if (arr == null) {
+            throw new IllegalArgumentException();
+        }
 
-        final var realAmountOfThreads = Integer.min(amountOfThreads, Integer.max(arr.length/4, 1));
+        List<Thread> threadsList = new ArrayList<>();
 
         final AtomicInteger iter = new AtomicInteger(0);
         final var currentThread = Thread.currentThread();
+        currentThread.setPriority(Thread.MAX_PRIORITY);
 
-        for (int threadId = 0; threadId < realAmountOfThreads - 1; threadId++) {
+        for (int threadId = 0; threadId < amountOfThreads - 1; threadId++) {
             threadsList.add(new Thread(() -> threadTask(currentThread, arr, iter)));
         }
 
-        threadsList.add(new Thread(() -> {
-            threadTask(currentThread, arr, iter);
+        threadsList.add(
+            new Thread(() -> {
+                threadTask(currentThread, arr, iter);
 
-            for (int threadId = 0; threadId < realAmountOfThreads - 1; threadId++) {
-                var thread = threadsList.get(threadId);
-                try {
-                    thread.join();
-                } catch (InterruptedException e) {
-                    return;
+                for (int threadId = 0; threadId < amountOfThreads - 1; threadId++) {
+                    var thread = threadsList.get(threadId);
+                    try {
+                        thread.join();
+                    } catch (InterruptedException e) {
+                        return;
+                    }
                 }
             }
-        }));
-
-        threadsList.forEach(Thread::start);
+        )
+        );
 
         boolean res = false;
-
         try {
-            threadsList.get(realAmountOfThreads - 1).join();
+            threadsList.forEach(Thread::start);
+            threadsList.get(amountOfThreads - 1).join();
         } catch (InterruptedException e) {
             res = true;
             threadsList.forEach(Thread::interrupt);

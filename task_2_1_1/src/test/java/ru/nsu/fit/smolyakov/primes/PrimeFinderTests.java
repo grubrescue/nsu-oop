@@ -1,6 +1,7 @@
 package ru.nsu.fit.smolyakov.primes;
 
 
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,7 +22,7 @@ public class PrimeFinderTests {
         assertThat(TestSources.parallelStreamNonPrimeFinder.find(TestSources.largeArrayTrue)).isTrue();
     }
 
-    @Test
+    @RepeatedTest(30)
     void parallelThreadsNonPrimeFinderTest() {
         assertThat(TestSources.parallelThreadsNonPrimeFinder.find(TestSources.smallestArrayTrue)).isTrue();
         assertThat(TestSources.parallelThreadsNonPrimeFinder.find(TestSources.smallArrayFalse)).isFalse();
