@@ -7,25 +7,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ParallelThreadsNonPrimeFinder extends NonPrimeFinder {
-    private static class IntArrayIterator implements PrimitiveIterator.OfInt {
-        private int i = -1;
-        private final int[] arr;
-
-        public IntArrayIterator(int[] arr) {
-            this.arr = arr;
-        }
-
-        @Override
-        public boolean hasNext() {
-            return i < arr.length;
-        }
-
-        @Override
-        public int nextInt() {
-            return arr[i++];
-        }
-    }
-
     private final int amountOfThreads;
 
     public ParallelThreadsNonPrimeFinder(int amountOfThreads) {
@@ -37,7 +18,7 @@ public class ParallelThreadsNonPrimeFinder extends NonPrimeFinder {
         this.amountOfThreads = amountOfThreads;
     }
 
-    void threadTask(Thread predecessor, Thread prev, int[] arr, AtomicInteger iter) {
+    void threadTask(Thread predecessor, int[] arr, AtomicInteger iter) {
         int i = iter.getAndIncrement();
         while (i < arr.length) {
             if (!Util.isPrime(arr[i])) {
@@ -47,40 +28,44 @@ public class ParallelThreadsNonPrimeFinder extends NonPrimeFinder {
 
             i = iter.getAndIncrement();
         }
-
-        try {
-            if (prev != null) {
-                prev.join();
-            }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
     public boolean find(int[] arr) {
         List<Thread> threadsList = new ArrayList<>();
-        var realAmountOfThreads = Integer.min(amountOfThreads, Integer.max(arr.length/4, 1));
 
-        AtomicInteger iter = new AtomicInteger(0);
+        final var realAmountOfThreads = Integer.min(amountOfThreads, Integer.max(arr.length/4, 1));
 
-        for (int threadId = 0; threadId < realAmountOfThreads; threadId++) {
-            final var currentThread = Thread.currentThread();
-            threadsList.add(new Thread(() -> threadTask(currentThread, null, arr, iter)));
+        final AtomicInteger iter = new AtomicInteger(0);
+        final var currentThread = Thread.currentThread();
+
+        for (int threadId = 0; threadId < realAmountOfThreads - 1; threadId++) {
+            threadsList.add(new Thread(() -> threadTask(currentThread, arr, iter)));
         }
+
+        threadsList.add(new Thread(() -> {
+            threadTask(currentThread, arr, iter);
+
+            for (int threadId = 0; threadId < realAmountOfThreads - 1; threadId++) {
+                var thread = threadsList.get(threadId);
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    return;
+                }
+            }
+        }));
 
         threadsList.forEach(Thread::start);
 
         boolean res = false;
 
         try {
-            threadsList.get(0).join();
+            threadsList.get(realAmountOfThreads - 1).join();
         } catch (InterruptedException e) {
-            System.err.println("asdf");
             res = true;
+            threadsList.forEach(Thread::interrupt);
         }
-
-        threadsList.forEach(Thread::interrupt);
 
         return res;
     }
