@@ -22,6 +22,7 @@ public class PrimeFinderTests {
         assertThat(TestSources.parallelStreamNonPrimeFinder.find(TestSources.largeArrayTrue)).isTrue();
     }
 
+    @Test
     void parallelThreadsNonPrimeFinderTest() {
         assertThat(TestSources.parallelThreadsNonPrimeFinder.find(TestSources.smallestArrayTrue)).isTrue();
         assertThat(TestSources.parallelThreadsNonPrimeFinder.find(TestSources.smallArrayFalse)).isFalse();
