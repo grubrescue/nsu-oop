@@ -2,10 +2,12 @@ package ru.nsu.fit.smolyakov.primes;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
-public class TestSources {
+public class JmhSources {
     private static int[] scanArray(File file) {
         try (Scanner scanner = new Scanner(file)){
             int arraySize = scanner.nextInt();
@@ -21,14 +23,20 @@ public class TestSources {
         }
     }
 
-    public static final int[] smallestArray = scanArray(new File("smallerdata.txt"));
-    public static final int[] smallArray = scanArray(new File("smalldata.txt"));
-    public static final int[] largeArray = scanArray(new File("largedata.txt"));
+    public static final int[] smallestArrayTrue = scanArray(new File("src/test/resources/smallerdata_true.txt"));
+    public static final int[] smallArrayFalse = scanArray(new File("src/test/resources/smalldata_false.txt"));
+    public static final int[] largeArrayTrue = scanArray(new File("src/test/resources/largedata_true.txt"));
 
     public static final NonPrimeFinder sequentialStreamNonPrimeFinder
         = new SequentialStreamNonPrimeFinder();
     public static final NonPrimeFinder parallelStreamNonPrimeFinder
         = new ParallelStreamNonPrimeFinder();
-    public static final NonPrimeFinder parallelThreadsNonPrimeFinder
-        = new ParallelThreadsNonPrimeFinder(Runtime.getRuntime().availableProcessors());
+    public static final List<NonPrimeFinder> parallelThreadsNonPrimeFindersList
+        = new ArrayList<>();
+
+    static {
+        for (int i = 1; i <= 13; i++) {
+            parallelThreadsNonPrimeFindersList.add(new ParallelThreadsNonPrimeFinder(i));
+        }
+    }
 }

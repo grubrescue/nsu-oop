@@ -21,9 +21,9 @@ public class TestSources {
         }
     }
 
-    public static final int[] smallestArray = scanArray(new File("smallerdata.txt"));
-    public static final int[] smallArray = scanArray(new File("smalldata.txt"));
-    public static final int[] largeArray = scanArray(new File("largedata.txt"));
+    public static final int[] smallestArrayTrue = scanArray(new File("src/test/resources/smallerdata_true.txt"));
+    public static final int[] smallArrayFalse = scanArray(new File("src/test/resources/smalldata_false.txt"));
+    public static final int[] largeArrayTrue = scanArray(new File("src/test/resources/largedata_true.txt"));
 
     public static final NonPrimeFinder sequentialStreamNonPrimeFinder
         = new SequentialStreamNonPrimeFinder();
