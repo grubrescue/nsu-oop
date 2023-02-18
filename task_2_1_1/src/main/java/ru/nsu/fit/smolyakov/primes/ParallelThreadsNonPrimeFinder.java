@@ -49,7 +49,7 @@ public class ParallelThreadsNonPrimeFinder implements NonPrimeFinder {
     @Override
     public boolean containsNonPrime(int[] arr) {
         if (arr == null) {
-            throw new IllegalArgumentException();
+            throw new NullPointerException();
         }
 
         List<Thread> threadsList = new ArrayList<>();
