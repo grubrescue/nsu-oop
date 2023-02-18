@@ -70,14 +70,22 @@ loadScripts(document, 'script');</script>
 <h1 title="Class ParallelThreadsNonPrimeFinder" class="title">Class ParallelThreadsNonPrimeFinder</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance"><a href="NonPrimeFinder.html" title="class in ru.nsu.fit.smolyakov.primes">ru.nsu.fit.smolyakov.primes.NonPrimeFinder</a>
 <div class="inheritance">ru.nsu.fit.smolyakov.primes.ParallelThreadsNonPrimeFinder</div>
 </div>
-</div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>All Implemented Interfaces:</dt>
+<dd><code><a href="NonPrimeFinder.html" title="interface in ru.nsu.fit.smolyakov.primes">NonPrimeFinder</a></code></dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ParallelThreadsNonPrimeFinder</span>
-<span class="extends-implements">extends <a href="NonPrimeFinder.html" title="class in ru.nsu.fit.smolyakov.primes">NonPrimeFinder</a></span></div>
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
+implements <a href="NonPrimeFinder.html" title="interface in ru.nsu.fit.smolyakov.primes">NonPrimeFinder</a></span></div>
+<div class="block">One of multiple implementations of <a href="NonPrimeFinder.html" title="interface in ru.nsu.fit.smolyakov.primes"><code>NonPrimeFinder</code></a>.
+ This one uses self-written algorithm with only use of basic
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Thread.html" title="class or interface in java.lang" class="external-link"><code>Thread</code></a> methods and <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/atomic/AtomicInteger.html" title="class or interface in java.util.concurrent.atomic" class="external-link"><code>AtomicInteger</code></a> variables,
+ without <code>synchronized</code> blocks and mutexes/semaphores,
+ so performance might be not surprisingly great.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -90,7 +98,11 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int)" class="member-name-link">ParallelThreadsNonPrimeFinder</a><wbr>(int&nbsp;amountOfThreads)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates an instance of <code>ParallelThreadsNonPrimeFinder</code>
+ with a specified <code>amountOfThreads</code> that will be
+ created by <a href="#containsNonPrime(int%5B%5D)"><code>containsNonPrime(int[])</code></a>.</div>
+</div>
 </div>
 </section>
 </li>
@@ -106,8 +118,11 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#find(int%5B%5D)" class="member-name-link">find</a><wbr>(int[]&nbsp;arr)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#containsNonPrime(int%5B%5D)" class="member-name-link">containsNonPrime</a><wbr>(int[]&nbsp;arr)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns if a specified <code>arr</code> contains at
+ least one non-prime number.</div>
+</div>
 </div>
 </div>
 </div>
@@ -129,6 +144,16 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(int)">
 <h3>ParallelThreadsNonPrimeFinder</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ParallelThreadsNonPrimeFinder</span><wbr><span class="parameters">(int&nbsp;amountOfThreads)</span></div>
+<div class="block">Creates an instance of <code>ParallelThreadsNonPrimeFinder</code>
+ with a specified <code>amountOfThreads</code> that will be
+ created by <a href="#containsNonPrime(int%5B%5D)"><code>containsNonPrime(int[])</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>amountOfThreads</code> - a specified amount of threads
+                        that will be used by
+                        <a href="#containsNonPrime(int%5B%5D)"><code>containsNonPrime(int[])</code></a>
+                        method.</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -140,12 +165,19 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="find(int[])">
-<h3>find</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">find</span><wbr><span class="parameters">(int[]&nbsp;arr)</span></div>
+<section class="detail" id="containsNonPrime(int[])">
+<h3>containsNonPrime</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">containsNonPrime</span><wbr><span class="parameters">(int[]&nbsp;arr)</span></div>
+<div class="block">Returns if a specified <code>arr</code> contains at
+ least one non-prime number.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="NonPrimeFinder.html#find(int%5B%5D)">find</a></code>&nbsp;in class&nbsp;<code><a href="NonPrimeFinder.html" title="class in ru.nsu.fit.smolyakov.primes">NonPrimeFinder</a></code></dd>
+<dd><code><a href="NonPrimeFinder.html#containsNonPrime(int%5B%5D)">containsNonPrime</a></code>&nbsp;in interface&nbsp;<code><a href="NonPrimeFinder.html" title="interface in ru.nsu.fit.smolyakov.primes">NonPrimeFinder</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>arr</code> - a specified array of <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link"><code>Integer</code></a> primitives</dd>
+<dt>Returns:</dt>
+<dd><code>true</code> if a specified <code>arr</code>
+ contains at least one non-prime number</dd>
 </dl>
 </section>
 </li>

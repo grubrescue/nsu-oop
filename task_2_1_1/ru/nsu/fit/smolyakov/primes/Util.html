@@ -76,6 +76,9 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Util</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Contains static utility method <a href="#isPrime(int)"><code>isPrime(int)</code></a>,
+ shared between all implementations of
+ <a href="NonPrimeFinder.html" title="interface in ru.nsu.fit.smolyakov.primes"><code>NonPrimeFinder</code></a>.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -105,7 +108,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#isPrime(int)" class="member-name-link">isPrime</a><wbr>(int&nbsp;number)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Returns if the specified <code>number</code> is prime.</div>
+</div>
 </div>
 </div>
 </div>
@@ -141,6 +146,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="isPrime(int)">
 <h3>isPrime</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isPrime</span><wbr><span class="parameters">(int&nbsp;number)</span></div>
+<div class="block">Returns if the specified <code>number</code> is prime.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>number</code> - a number</dd>
+<dt>Returns:</dt>
+<dd><code>true</code> if the specified <code>number</code>
+ is prime.</dd>
+</dl>
 </section>
 </li>
 </ul>
