@@ -11,9 +11,9 @@ public interface NonPrimeFinder {
      * Returns if a specified {@code arr} contains at
      * least one non-prime number.
      *
-     * @param  arr a specified array of {@link Integer} primitives
+     * @param arr a specified array of {@link Integer} primitives
      * @return {@code true} if a specified {@code arr}
-     *      contains at least one non-prime number
+     * contains at least one non-prime number
      * @throws NullPointerException if {@code arr} is null
      */
     boolean containsNonPrime(int[] arr);

@@ -3,14 +3,13 @@ package ru.nsu.fit.smolyakov.primes;
 
 import org.openjdk.jmh.annotations.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 @BenchmarkMode({Mode.SingleShotTime})
 @Warmup(iterations = 10)
 @Measurement(iterations = 10)
 @State(Scope.Benchmark)
 public class PrimeFinderSmallestBench {
     private static int[] source = TestSources.smallArrayFalse;
+
     @Benchmark
     public void sequentialStreamNonPrimeFinderBench() {
         JmhSources.sequentialStreamNonPrimeFinder.containsNonPrime(source);

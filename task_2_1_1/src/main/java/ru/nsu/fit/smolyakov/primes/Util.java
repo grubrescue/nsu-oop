@@ -8,9 +8,10 @@ package ru.nsu.fit.smolyakov.primes;
 public class Util {
     /**
      * Returns if the specified {@code number} is prime.
+     *
      * @param number a number
      * @return {@code true} if the specified {@code number}
-     *      is prime.
+     * is prime.
      */
     public static boolean isPrime(int number) {
         if (number <= 1) {

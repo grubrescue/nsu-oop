@@ -75,7 +75,7 @@ public class ParallelThreadsNonPrimeFinder implements NonPrimeFinder {
                     }
                 }
             }
-        )
+            )
         );
 
         boolean res = false;
