@@ -1,0 +1,55 @@
+Benchmark                          (amountOfCores)  Mode  Cnt   Score    Error  Units
+ParallelStreamBench.largeTest                  N/A    ss   10   2.112 ±  0.474   s/op
+ParallelStreamBench.smallTest                  N/A    ss   10   0.001 ±  0.001   s/op
+ParallelStreamBench.smallerTest                N/A    ss   10  ≈ 10⁻⁴            s/op
+ParallelThreadsBench.largeTest                   1    ss   10  13.038 ±  0.037   s/op
+ParallelThreadsBench.largeTest                   2    ss   10   6.542 ±  0.017   s/op
+ParallelThreadsBench.largeTest                   3    ss   10   4.367 ±  0.014   s/op
+ParallelThreadsBench.largeTest                   4    ss   10   3.277 ±  0.012   s/op
+ParallelThreadsBench.largeTest                   5    ss   10   2.627 ±  0.023   s/op
+ParallelThreadsBench.largeTest                   6    ss   10   2.187 ±  0.012   s/op
+ParallelThreadsBench.largeTest                   7    ss   10   2.190 ±  0.037   s/op
+ParallelThreadsBench.largeTest                   8    ss   10   2.189 ±  0.028   s/op
+ParallelThreadsBench.largeTest                   9    ss   10   2.179 ±  0.024   s/op
+ParallelThreadsBench.largeTest                  10    ss   10   2.175 ±  0.007   s/op
+ParallelThreadsBench.largeTest                  11    ss   10   2.172 ±  0.006   s/op
+ParallelThreadsBench.largeTest                  12    ss   10   2.172 ±  0.003   s/op
+ParallelThreadsBench.largeTest                  13    ss   10   2.171 ±  0.002   s/op
+ParallelThreadsBench.largeTest                  14    ss   10   2.172 ±  0.003   s/op
+ParallelThreadsBench.largeTest                  15    ss   10   2.172 ±  0.003   s/op
+ParallelThreadsBench.largeTest                  16    ss   10   2.172 ±  0.002   s/op
+ParallelThreadsBench.smallTest                   1    ss   10   0.007 ±  0.004   s/op
+ParallelThreadsBench.smallTest                   2    ss   10   0.003 ±  0.001   s/op
+ParallelThreadsBench.smallTest                   3    ss   10   0.003 ±  0.001   s/op
+ParallelThreadsBench.smallTest                   4    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallTest                   5    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallTest                   6    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallTest                   7    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallTest                   8    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallTest                   9    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallTest                  10    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallTest                  11    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallTest                  12    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallTest                  13    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallTest                  14    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallTest                  15    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallTest                  16    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallerTest                 1    ss   10  ≈ 10⁻⁴            s/op
+ParallelThreadsBench.smallerTest                 2    ss   10  ≈ 10⁻⁴            s/op
+ParallelThreadsBench.smallerTest                 3    ss   10  ≈ 10⁻⁴            s/op
+ParallelThreadsBench.smallerTest                 4    ss   10  ≈ 10⁻³            s/op
+ParallelThreadsBench.smallerTest                 5    ss   10  ≈ 10⁻³            s/op
+ParallelThreadsBench.smallerTest                 6    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallerTest                 7    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallerTest                 8    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallerTest                 9    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallerTest                10    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallerTest                11    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallerTest                12    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallerTest                13    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallerTest                14    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallerTest                15    ss   10   0.001 ±  0.001   s/op
+ParallelThreadsBench.smallerTest                16    ss   10   0.001 ±  0.001   s/op
+SequentialStreamBench.largeTest                N/A    ss   10  13.028 ±  0.051   s/op
+SequentialStreamBench.smallTest                N/A    ss   10   0.004 ±  0.001   s/op
+SequentialStreamBench.smallerTest              N/A    ss   10  ≈ 10⁻⁵            s/op
