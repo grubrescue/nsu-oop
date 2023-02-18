@@ -2,23 +2,36 @@ package ru.nsu.fit.smolyakov.primes;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.PrimitiveIterator;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class ParallelThreadsNonPrimeFinder extends NonPrimeFinder {
+/**
+ * One of multiple implementations of {@link NonPrimeFinder}.
+ * This one uses self-written algorithm with only use of basic
+ * {@link Thread} methods and {@link AtomicInteger} variables,
+ * without {@code synchronized} blocks and mutexes/semaphores,
+ * so performance might be not surprisingly great.
+ */
+public class ParallelThreadsNonPrimeFinder implements NonPrimeFinder {
     private final int amountOfThreads;
 
+    /**
+     * Creates an instance of {@code ParallelThreadsNonPrimeFinder}
+     * with a specified {@code amountOfThreads} that will be
+     * created by {@link #containsNonPrime(int[])}.
+     *
+     * @param amountOfThreads a specified amount of threads
+     *                        that will be used by
+     *                        {@link #containsNonPrime(int[])}
+     *                        method.
+     */
     public ParallelThreadsNonPrimeFinder(int amountOfThreads) {
-        super();
-
-        if (amountOfThreads <= 0) {
+        if (amountOfThreads < 1) {
             throw new IllegalArgumentException();
         }
         this.amountOfThreads = amountOfThreads;
     }
 
-    void threadTask(Thread predecessor, int[] arr, AtomicInteger iter) {
+    private void threadTask(Thread predecessor, int[] arr, AtomicInteger iter) {
         int i = iter.getAndIncrement();
         while (i < arr.length) {
             if (!Util.isPrime(arr[i])) {
@@ -30,8 +43,11 @@ public class ParallelThreadsNonPrimeFinder extends NonPrimeFinder {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean find(int[] arr) {
+    public boolean containsNonPrime(int[] arr) {
         if (arr == null) {
             throw new IllegalArgumentException();
         }

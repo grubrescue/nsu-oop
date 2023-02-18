@@ -13,13 +13,13 @@ public class PrimeFinderSmallestBench {
     private static int[] source = TestSources.smallArrayFalse;
     @Benchmark
     public void sequentialStreamNonPrimeFinderBench() {
-        JmhSources.sequentialStreamNonPrimeFinder.find(source);
+        JmhSources.sequentialStreamNonPrimeFinder.containsNonPrime(source);
 
     }
 
     @Benchmark
     public void parallelStreamNonPrimeFinderBench() {
-        JmhSources.parallelStreamNonPrimeFinder.find(source);
+        JmhSources.parallelStreamNonPrimeFinder.containsNonPrime(source);
     }
 
 //    @Param({"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"})
@@ -27,6 +27,6 @@ public class PrimeFinderSmallestBench {
 //
 //    @Benchmark
 //    public void parallelThreadsNonPrimeFinderBench() {
-//        JmhSources.parallelThreadsNonPrimeFindersList.get(amountOfCores).find(source);
+//        JmhSources.parallelThreadsNonPrimeFindersList.get(amountOfCores).containsNonPrime(source);
 //    }
 }
