@@ -3,9 +3,9 @@ package ru.nsu.fit.smolyakov.primes;
 
 import org.openjdk.jmh.annotations.*;
 
-@BenchmarkMode({Mode.SingleShotTime})
-@Warmup(iterations = 2)
-@Measurement(iterations = 2)
+@BenchmarkMode({Mode.Throughput})
+@Warmup(iterations = 5)
+@Measurement(iterations = 5)
 public class ParallelStreamBench {
     @Benchmark
     public void smallerTest() {
