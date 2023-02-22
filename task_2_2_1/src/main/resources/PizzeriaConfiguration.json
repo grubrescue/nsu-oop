@@ -1,0 +1,29 @@
+{
+    "name": "ВКУСНАЯ ШАУРМА",
+    "orderQueue": {
+        "capacity": 3
+    },
+    "warehouse": {
+        "capacity": 2
+    },
+    "bakers": [
+        {
+            "id": 1,
+            "cookingTimeMillis": 6
+        },
+        {
+            "id": 2,
+            "cookingTimeMillis": 9
+        }
+    ],
+    "deliveryBoys": [
+        {
+            "id": 1,
+            "trunkCapacity": 2
+        },
+        {
+            "id": 2,
+            "trunkCapacity": 5
+        }
+    ]
+}
