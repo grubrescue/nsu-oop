@@ -1,6 +1,7 @@
 package ru.nsu.fit.smolyakov.pizzeria;
 
 import ru.nsu.fit.smolyakov.pizzeria.entity.Order;
+import ru.nsu.fit.smolyakov.pizzeria.entity.OrderDescription;
 import ru.nsu.fit.smolyakov.pizzeria.worker.Baker;
 import ru.nsu.fit.smolyakov.pizzeria.worker.DeliveryBoy;
 import ru.nsu.fit.smolyakov.pizzeria.worker.OrderQueue;
@@ -20,7 +21,12 @@ public class PizzeriaImpl implements Pizzeria {
     }
 
     @Override
-    public void makeOrder(Order order) {
+    public void makeOrder(OrderDescription orderDescription) {
+
+    }
+
+    @Override
+    public void stop() {
 
     }
 
