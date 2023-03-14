@@ -1,6 +1,6 @@
-package ru.nsu.fit.smolyakov.pizzeria.printers;
+package ru.nsu.fit.smolyakov.pizzeria.pizzeria.printer;
 
-import ru.nsu.fit.smolyakov.pizzeria.entity.Order;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 
 public class OrderStatusPrinterImpl implements OrderStatusPrinter {
     private static final String format

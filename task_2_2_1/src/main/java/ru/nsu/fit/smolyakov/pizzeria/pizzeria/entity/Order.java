@@ -1,4 +1,4 @@
-package ru.nsu.fit.smolyakov.pizzeria.entity;
+package ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity;
 
 public class Order {
     private final int id;
@@ -40,7 +40,7 @@ public class Order {
 
         private final String caption;
 
-        private Status(String caption) {
+        Status(String caption) {
             this.caption = caption;
         }
 
