@@ -1,7 +1,6 @@
 package ru.nsu.fit.smolyakov.pizzeria.entity;
 
 public class Order {
-
     private final int id;
     private final OrderDescription orderDescription;
     private Status status = Status.CREATED;
@@ -12,7 +11,7 @@ public class Order {
         this.orderDescription = orderDescription;
     }
 
-    public Order create(int id, OrderDescription orderDescription) {
+    public static Order create(int id, OrderDescription orderDescription) {
         return new Order(id, Status.CREATED, orderDescription);
     }
 

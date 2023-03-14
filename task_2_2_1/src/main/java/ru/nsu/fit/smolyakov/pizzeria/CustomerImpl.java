@@ -3,8 +3,8 @@ package ru.nsu.fit.smolyakov.pizzeria;
 import ru.nsu.fit.smolyakov.pizzeria.entity.OrderDescription;
 
 public class CustomerImpl implements Customer {
-    private OrderDescription orderDescription;
-    private Pizzeria pizzeria;
+    private final OrderDescription orderDescription;
+    private final Pizzeria pizzeria;
 
     public CustomerImpl(OrderDescription orderDescription, Pizzeria pizzeria) {
         this.orderDescription = orderDescription;
@@ -13,6 +13,6 @@ public class CustomerImpl implements Customer {
 
     @Override
     public void order() {
-
+        pizzeria.makeOrder(orderDescription);
     }
 }

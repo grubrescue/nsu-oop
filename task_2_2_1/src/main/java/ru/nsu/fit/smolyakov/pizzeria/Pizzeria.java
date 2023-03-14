@@ -5,8 +5,7 @@ import ru.nsu.fit.smolyakov.pizzeria.entity.OrderDescription;
 
 public interface Pizzeria {
     void start();
-
-    void makeOrder(OrderDescription orderDescription);
-
+    boolean makeOrder(OrderDescription orderDescription);
+    void printOrderStatus(Order order);
     void stop();
 }
