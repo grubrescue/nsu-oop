@@ -33,7 +33,7 @@ public class ParallelThreadsNonPrimeFinder implements NonPrimeFinder {
 
     private void threadTask(Thread predecessor, int[] arr, AtomicInteger iter) {
         int i = iter.getAndIncrement();
-        while (i < arr.length) {
+        while (!Thread.interrupted() && i < arr.length) {
             if (!Util.isPrime(arr[i])) {
                 predecessor.interrupt();
                 return;
