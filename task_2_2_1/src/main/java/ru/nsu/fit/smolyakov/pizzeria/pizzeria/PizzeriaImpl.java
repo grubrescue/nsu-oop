@@ -2,17 +2,13 @@ package ru.nsu.fit.smolyakov.pizzeria.pizzeria;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.OrderDescription;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.baker.Baker;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.deliveryboy.DeliveryBoy;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.orderqueue.OrderQueue;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.orderqueue.OrderQueueImpl;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.warehouse.Warehouse;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.warehouse.WarehouseImpl;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.baker.Baker;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.deliveryboy.DeliveryBoy;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue.OrderQueue;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.warehouse.Warehouse;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -24,8 +20,6 @@ public class PizzeriaImpl implements PizzeriaOrderService,
                                      PizzeriaEmployeeService,
                                      PizzeriaOwnerService {
     private final static ObjectMapper objectMapper = new ObjectMapper();
-
-    private final ExecutorService threadPool = Executors.newScheduledThreadPool(8);
     private final Logger logger = Logger.getLogger("pizzeria");
 
     private final OrderQueue orderQueue;
@@ -81,7 +75,7 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     }
 
     @Override
-    public synchronized void submitTask(Runnable task) {
+    public synchronized void logTask(Runnable task) {
         threadPool.submit(task);
     }
 
