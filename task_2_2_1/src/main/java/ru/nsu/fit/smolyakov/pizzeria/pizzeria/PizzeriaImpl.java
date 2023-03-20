@@ -2,16 +2,15 @@ package ru.nsu.fit.smolyakov.pizzeria.pizzeria;
 
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.OrderDescription;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.printer.OrderStatusPrinter;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.printer.OrderStatusPrinterImpl;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.worker.Baker;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.worker.DeliveryBoy;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.worker.OrderQueue;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.worker.Warehouse;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.worker.baker.Baker;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.worker.deliveryboy.DeliveryBoy;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.worker.orderqueue.OrderQueue;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.worker.warehouse.Warehouse;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Logger;
 
 public class PizzeriaImpl implements PizzeriaOrderService,
                                      PizzeriaEmployeeService,
@@ -22,7 +21,7 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     private final List<DeliveryBoy> deliveryBoyList;
 
     private final ExecutorService threadPool = Executors.newScheduledThreadPool(8);
-    private final OrderStatusPrinter orderStatusPrinter = new OrderStatusPrinterImpl();
+    private final Logger logger = Logger.getLogger("pizzeria");
 
     private boolean working = false;
     private int orderId = 0;
@@ -52,11 +51,6 @@ public class PizzeriaImpl implements PizzeriaOrderService,
             );
             return true;
         }
-    }
-
-    @Override
-    public void printOrderStatus(Order order) {
-        orderStatusPrinter.print(order);
     }
 
     @Override

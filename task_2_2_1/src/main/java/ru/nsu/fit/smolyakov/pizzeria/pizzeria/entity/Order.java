@@ -1,6 +1,24 @@
 package ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity;
 
 public class Order {
+    public enum Status {
+        CREATED("Created"),
+        BEING_BAKED("Being baked"),
+        WAITING_FOR_DELIVERY("Waiting for delivery"),
+        IN_DELIVERY("In delivery"),
+        DONE("Delivered");
+
+        private final String caption;
+
+        Status(String caption) {
+            this.caption = caption;
+        }
+
+        public String getCaption() {
+            return caption;
+        }
+    }
+
     private final int id;
     private final OrderDescription orderDescription;
     private Status status = Status.CREATED;
@@ -29,23 +47,5 @@ public class Order {
 
     public OrderDescription getOrderDescription() {
         return orderDescription;
-    }
-
-    public enum Status {
-        CREATED("Created"),
-        BEING_BAKED("Being baked"),
-        WAITING_FOR_DELIVERY("Waiting for delivery"),
-        IN_DELIVERY("In delivery"),
-        DONE("Delivered");
-
-        private final String caption;
-
-        Status(String caption) {
-            this.caption = caption;
-        }
-
-        public String getCaption() {
-            return caption;
-        }
     }
 }
