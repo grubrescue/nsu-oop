@@ -1,4 +1,4 @@
-package ru.nsu.fit.smolyakov.pizzeria.pizzeria.worker.baker;
+package ru.nsu.fit.smolyakov.pizzeria.pizzeria.baker;
 
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 

@@ -2,10 +2,10 @@ package ru.nsu.fit.smolyakov.pizzeria.pizzeria;
 
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.OrderDescription;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.worker.baker.Baker;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.worker.deliveryboy.DeliveryBoy;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.worker.orderqueue.OrderQueue;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.worker.warehouse.Warehouse;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.baker.Baker;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.deliveryboy.DeliveryBoy;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.orderqueue.OrderQueue;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.warehouse.Warehouse;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;

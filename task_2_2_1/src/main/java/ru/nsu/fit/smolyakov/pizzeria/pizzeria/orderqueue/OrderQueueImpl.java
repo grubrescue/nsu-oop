@@ -1,4 +1,4 @@
-package ru.nsu.fit.smolyakov.pizzeria.pizzeria.worker.orderqueue;
+package ru.nsu.fit.smolyakov.pizzeria.pizzeria.orderqueue;
 
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 
