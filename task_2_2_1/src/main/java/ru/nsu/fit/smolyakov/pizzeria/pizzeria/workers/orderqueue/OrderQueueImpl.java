@@ -1,39 +1,52 @@
 package ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaEmployeeService;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaStatusPrinterService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
+import ru.nsu.fit.smolyakov.pizzeria.util.ConsumerProducerQueue;
 
 public class OrderQueueImpl implements OrderQueue {
     private boolean working = false;
+    private final ConsumerProducerQueue<Order> consumerProducerQueue;
 
     @JsonManagedReference
-    private PizzeriaEmployeeService pizzeriaEmployeeService;
+    private PizzeriaStatusPrinterService pizzeriaStatusPrinterService;
+
+    @JsonCreator
+    public OrderQueueImpl(int capacity) {
+        this.consumerProducerQueue = new ConsumerProducerQueue<>(capacity);
+    }
 
     @Override
-    public synchronized boolean acceptOrder(Order order) {
+    public void put(Order order) {
         if (!working) {
-            return false;
-        } else {
-            pizzeriaEmployeeService.submitTask(
+            return;
+        }
 
-            );
-            return true;
+        try {
+            consumerProducerQueue.put(order);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
-    public synchronized Order giveOrderToBaker() {
-        return null;
+    public Order take() {
+        try {
+            return consumerProducerQueue.take();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public void start() {
+    public synchronized void start() {
         working = true;
     }
 
     @Override
-    public void stop() {
+    public synchronized void stop() {
         working = false;
     }
 }

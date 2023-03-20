@@ -2,7 +2,7 @@ package ru.nsu.fit.smolyakov.pizzeria.customer;
 
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.OrderDescription;
-import ru.nsu.fit.smolyakov.pizzeria.util.TaskExecutor;
+import ru.nsu.fit.smolyakov.pizzeria.util.TasksExecutor;
 
 public class FrequentCustomerImpl implements FrequentCustomer {
     private final OrderDescription orderDescription;
@@ -17,8 +17,6 @@ public class FrequentCustomerImpl implements FrequentCustomer {
         this.frequencyMillis = frequencyMillis;
     }
 
-
-
     @Override
     public void order() {
         pizzeriaOrderService.makeOrder(orderDescription);
@@ -29,6 +27,7 @@ public class FrequentCustomerImpl implements FrequentCustomer {
         Runnable task =
             () -> {
                 for (int i = 0; i < times; i++) {
+                    System.err.printf("I ordered pizza after %d millis!%n%n", frequencyMillis);
                     order();
                     try {
                         Thread.sleep(frequencyMillis);
@@ -38,6 +37,6 @@ public class FrequentCustomerImpl implements FrequentCustomer {
                 }
             };
 
-        TaskExecutor.INSTANCE.execute(task);
+        TasksExecutor.INSTANCE.execute(task);
     }
 }

@@ -1,6 +1,12 @@
 package ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity;
 
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService;
+
 public class Order {
+    public PizzeriaOrderService getPizzeriaOrderService() {
+        return pizzeriaOrderService;
+    }
+
     public enum Status {
         CREATED("Created"),
         BEING_BAKED("Being baked"),
@@ -19,18 +25,25 @@ public class Order {
         }
     }
 
+    private final PizzeriaOrderService pizzeriaOrderService;
     private final int id;
     private final OrderDescription orderDescription;
     private Status status = Status.CREATED;
 
-    public Order(int id, Status status, OrderDescription orderDescription) {
+    public Order(PizzeriaOrderService pizzeriaOrderService,
+                 int id,
+                 Status status,
+                 OrderDescription orderDescription) {
+        this.pizzeriaOrderService = pizzeriaOrderService;
         this.status = status;
         this.id = id;
         this.orderDescription = orderDescription;
     }
 
-    public static Order create(int id, OrderDescription orderDescription) {
-        return new Order(id, Status.CREATED, orderDescription);
+    public static Order create(PizzeriaOrderService pizzeriaOrderService,
+                               int id,
+                               OrderDescription orderDescription) {
+        return new Order(pizzeriaOrderService, id, Status.CREATED, orderDescription);
     }
 
     public Status getStatus() {

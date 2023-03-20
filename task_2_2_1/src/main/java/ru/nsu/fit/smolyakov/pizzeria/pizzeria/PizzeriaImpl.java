@@ -6,21 +6,25 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.OrderDescription;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.baker.Baker;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.deliveryboy.DeliveryBoy;
+import ru.nsu.fit.smolyakov.pizzeria.PizzeriaDeliveryBoyService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue.OrderQueue;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.warehouse.Warehouse;
+import ru.nsu.fit.smolyakov.pizzeria.util.Logger;
+import ru.nsu.fit.smolyakov.pizzeria.util.TasksExecutor;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.logging.Logger;
+
 
 public class PizzeriaImpl implements PizzeriaOrderService,
-                                     PizzeriaEmployeeService,
-                                     PizzeriaOwnerService {
+    PizzeriaStatusPrinterService,
+                                     PizzeriaOwnerService,
+                                     PizzeriaBakerService,
+                                     PizzeriaDeliveryBoyService {
     private final static ObjectMapper objectMapper = new ObjectMapper();
-    private final Logger logger = Logger.getLogger("pizzeria");
+
+    private final String pizzeriaName;
 
     private final OrderQueue orderQueue;
     private final Warehouse warehouse;
@@ -31,17 +35,19 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     private int orderId = 0;
 
     @JsonCreator
-    private PizzeriaImpl(OrderQueue orderQueue,
+    private PizzeriaImpl(String pizzeriaName,
+                         OrderQueue orderQueue,
                          Warehouse warehouse,
                          List<Baker> bakerList,
                          List<DeliveryBoy> deliveryBoyList) {
+        this.pizzeriaName = pizzeriaName;
         this.orderQueue = orderQueue;
         this.warehouse = warehouse;
         this.bakerList = bakerList;
         this.deliveryBoyList = deliveryBoyList;
     }
 
-    public PizzeriaImpl fromJson(InputStream stream) {
+    public static PizzeriaImpl fromJson(InputStream stream) {
         try {
             return objectMapper.readValue(stream, PizzeriaImpl.class);
         } catch (IOException e) {
@@ -49,12 +55,24 @@ public class PizzeriaImpl implements PizzeriaOrderService,
         }
     }
 
-    public PizzeriaImpl fromJson(String resourceName) {
-        return fromJson(this.getClass().getResourceAsStream(resourceName));
+    public static PizzeriaImpl fromJson(String resourceName) {
+        return fromJson(PizzeriaImpl.class.getResourceAsStream(resourceName));
     }
 
-    public PizzeriaImpl fromJson() {
+    public static PizzeriaImpl fromJson() {
         return fromJson("PizzeriaConfiguration.json");
+    }
+
+    @Override
+    public synchronized boolean makeOrder(OrderDescription orderDescription) {
+        if (!working) {
+            return false;
+        }
+
+        TasksExecutor.INSTANCE.execute(() ->
+            orderQueue.put(Order.create(orderId++, orderDescription))
+        );
+        return true;
     }
 
     @Override
@@ -63,24 +81,32 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     }
 
     @Override
-    public synchronized boolean makeOrder(OrderDescription orderDescription) {
-        if (!working) {
-            return false;
-        } else {
-            submitTask(() ->
-                orderQueue.acceptOrder(Order.create(orderId++, orderDescription))
-            );
-            return true;
-        }
-    }
-
-    @Override
-    public synchronized void logTask(Runnable task) {
-        threadPool.submit(task);
+    public boolean isWorking() {
+        return working;
     }
 
     @Override
     public synchronized void stop() {
         working = false;
+    }
+
+    @Override
+    public void printStatus(Order order) {
+        Logger.INSTANCE.info();
+    }
+
+    @Override
+    public Warehouse getWarehouse() {
+        return warehouse;
+    }
+
+    @Override
+    public OrderQueue getOrderQueue() {
+        return orderQueue;
+    }
+
+    @Override
+    public String getPizzeriaName() {
+        return pizzeriaName;
     }
 }

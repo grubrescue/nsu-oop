@@ -1,15 +1,14 @@
 package ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.baker;
 
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaBakerService;
 
 public class BakerImpl implements Baker {
-    @Override
-    public void acceptOrderFromQueue() {
-
-    }
+    @JsonManagedReference
+    private PizzeriaBakerService pizzeriaBakerService;
 
     @Override
-    public Order putOrderToWarehouse() {
-        return null;
+    public void cook() {
+
     }
 }
