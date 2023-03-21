@@ -10,13 +10,11 @@ import java.util.List;
 public class WarehouseImpl implements Warehouse {
     @JsonManagedReference
     private PizzeriaStatusPrinterService pizzeriaStatusPrinterService;
-
     private final ConsumerProducerQueue<Order> consumerProducerQueue;
 
     public WarehouseImpl(int capacity) {
         this.consumerProducerQueue = new ConsumerProducerQueue<>(capacity);
     }
-
 
     @Override
     public void put(Order order) {
@@ -29,6 +27,10 @@ public class WarehouseImpl implements Warehouse {
 
     @Override
     public List<Order> takeMultiple(int maxAmount) {
-        return null;
+        try {
+            return consumerProducerQueue.takeMultiple(maxAmount);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

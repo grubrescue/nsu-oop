@@ -6,10 +6,9 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.OrderDescription;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.baker.Baker;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.deliveryboy.DeliveryBoy;
-import ru.nsu.fit.smolyakov.pizzeria.PizzeriaDeliveryBoyService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue.OrderQueue;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.warehouse.Warehouse;
-import ru.nsu.fit.smolyakov.pizzeria.util.Logger;
+import ru.nsu.fit.smolyakov.pizzeria.util.PizeriaLogger;
 import ru.nsu.fit.smolyakov.pizzeria.util.TasksExecutor;
 
 import java.io.IOException;
@@ -18,7 +17,7 @@ import java.util.List;
 
 
 public class PizzeriaImpl implements PizzeriaOrderService,
-    PizzeriaStatusPrinterService,
+                                     PizzeriaStatusPrinterService,
                                      PizzeriaOwnerService,
                                      PizzeriaBakerService,
                                      PizzeriaDeliveryBoyService {
@@ -70,7 +69,7 @@ public class PizzeriaImpl implements PizzeriaOrderService,
         }
 
         TasksExecutor.INSTANCE.execute(() ->
-            orderQueue.put(Order.create(orderId++, orderDescription))
+            orderQueue.put(Order.create(this, orderId++, orderDescription))
         );
         return true;
     }
@@ -92,7 +91,7 @@ public class PizzeriaImpl implements PizzeriaOrderService,
 
     @Override
     public void printStatus(Order order) {
-        Logger.INSTANCE.info();
+        PizeriaLogger.INSTANCE.info(order);
     }
 
     @Override

@@ -2,8 +2,6 @@ package ru.nsu.fit.smolyakov.pizzeria.util;
 
 import org.junit.jupiter.api.Test;
 
-import static java.lang.Thread.sleep;
-
 public class ProducerConsumerQueueTest {
     @Test
     public void threadTest() throws InterruptedException {
@@ -18,14 +16,14 @@ public class ProducerConsumerQueueTest {
                     throw new RuntimeException(e);
                 }
             }
-            }
+        }
         );
 
         var producer = new Thread(() -> {
             for (int i = 0; i < 19; i++) {
                 try {
                     shop.put(i);
-                    System.err.println("put " + i  + "\n");
+                    System.err.println("put " + i + "\n");
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

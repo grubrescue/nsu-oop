@@ -7,8 +7,8 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.util.ConsumerProducerQueue;
 
 public class OrderQueueImpl implements OrderQueue {
-    private boolean working = false;
     private final ConsumerProducerQueue<Order> consumerProducerQueue;
+    private boolean working = false;
 
     @JsonManagedReference
     private PizzeriaStatusPrinterService pizzeriaStatusPrinterService;

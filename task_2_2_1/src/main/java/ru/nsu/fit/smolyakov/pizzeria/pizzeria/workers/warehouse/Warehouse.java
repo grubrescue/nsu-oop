@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface Warehouse {
     void put(Order order);
+
     List<Order> takeMultiple(int maxAmount);
 }
