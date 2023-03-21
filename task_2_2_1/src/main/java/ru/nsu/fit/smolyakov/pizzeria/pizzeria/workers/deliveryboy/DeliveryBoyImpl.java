@@ -20,12 +20,12 @@ public class DeliveryBoyImpl implements DeliveryBoy {
             () -> {
                 var warehouse = pizzeriaDeliveryBoyService.getWarehouse();
 
-                var orderList = warehouse.takeMultiple(trunkCapacity);
+                var orderQueue = warehouse.takeMultiple(trunkCapacity);
 
-                orderList.forEach(order -> order.setStatus(Order.Status.IN_DELIVERY));
-                orderList.forEach(order -> pizzeriaDeliveryBoyService.printStatus(order));
+                orderQueue.forEach(order -> order.setStatus(Order.Status.IN_DELIVERY));
+                orderQueue.forEach(order -> pizzeriaDeliveryBoyService.printStatus(order));
 
-                orderList.forEach(
+                orderQueue.forEach(
                     order -> {
                         try {
                             Thread.sleep(order.getOrderDescription().address().deliveryTime());

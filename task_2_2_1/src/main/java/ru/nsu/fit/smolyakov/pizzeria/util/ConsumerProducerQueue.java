@@ -32,7 +32,7 @@ public class ConsumerProducerQueue<T> {
         return polledValue;
     }
 
-    public synchronized List<T> takeMultiple(int amount) throws InterruptedException {
+    public synchronized Queue<T> takeMultiple(int amount) throws InterruptedException {
         if (amount < 1) {
             throw new IllegalArgumentException("amount should be at least 1");
         }
@@ -42,13 +42,13 @@ public class ConsumerProducerQueue<T> {
         }
 
         amount = Integer.min(amount, queue.size());
-        List<T> resultList = new ArrayList<>();
+        Queue<T> resultQueue = new ArrayDeque<>(amount);
 
-        while (resultList.size() < amount) {
-            resultList.add(queue.poll());
+        while (resultQueue.size() < amount) {
+            resultQueue.add(queue.poll());
         }
 
         notify();
-        return resultList;
+        return resultQueue;
     }
 }

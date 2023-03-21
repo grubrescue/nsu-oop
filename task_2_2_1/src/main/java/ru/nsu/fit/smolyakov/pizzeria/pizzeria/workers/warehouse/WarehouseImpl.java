@@ -6,6 +6,7 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.util.ConsumerProducerQueue;
 
 import java.util.List;
+import java.util.Queue;
 
 public class WarehouseImpl implements Warehouse {
     @JsonManagedReference
@@ -26,7 +27,7 @@ public class WarehouseImpl implements Warehouse {
     }
 
     @Override
-    public List<Order> takeMultiple(int maxAmount) {
+    public Queue<Order> takeMultiple(int maxAmount) {
         try {
             return consumerProducerQueue.takeMultiple(maxAmount);
         } catch (InterruptedException e) {

@@ -2,6 +2,7 @@ package ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.baker;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaBakerService;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.util.TasksExecutor;
 
 public class BakerImpl implements Baker {
@@ -20,6 +21,10 @@ public class BakerImpl implements Baker {
                 var orderQueue = pizzeriaBakerService.getOrderQueue();
 
                 var order = orderQueue.take();
+
+                order.setStatus(Order.Status.BEING_BAKED);
+                pizzeriaBakerService.printStatus(order);
+
                 try {
                     Thread.sleep(cookingTimeMillis);
                 } catch (InterruptedException e) {
@@ -28,6 +33,9 @@ public class BakerImpl implements Baker {
 
                 var warehouse = pizzeriaBakerService.getWarehouse();
                 warehouse.put(order);
+
+                order.setStatus(Order.Status.WAITING_FOR_DELIVERY);
+                pizzeriaBakerService.printStatus(order);
             }
         );
     }
