@@ -11,11 +11,11 @@ public class OrderQueueImpl implements OrderQueue {
     private final ConsumerProducerQueue<Order> consumerProducerQueue;
     private boolean working = false;
 
-    @JsonManagedReference
+    @JsonBackReference
     private PizzeriaStatusPrinterService pizzeriaStatusPrinterService;
 
-    @ConstructorProperties({"pizzeriaStatusPrinterService", "capacity"})
-    public OrderQueueImpl(PizzeriaStatusPrinterService owner, int capacity) {
+    @ConstructorProperties({"capacity", "pizzeriaStatusPrinterService"})
+    public OrderQueueImpl(int capacity, PizzeriaStatusPrinterService owner) {
         this.pizzeriaStatusPrinterService = owner;
         this.consumerProducerQueue = new ConsumerProducerQueue<>(capacity);
     }
