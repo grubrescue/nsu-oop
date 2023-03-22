@@ -6,7 +6,9 @@ public class Order {
     private final PizzeriaOrderService pizzeriaOrderService;
     private final int id;
     private final OrderDescription orderDescription;
+
     private Status status = Status.CREATED;
+
     public Order(PizzeriaOrderService pizzeriaOrderService,
                  int id,
                  Status status,

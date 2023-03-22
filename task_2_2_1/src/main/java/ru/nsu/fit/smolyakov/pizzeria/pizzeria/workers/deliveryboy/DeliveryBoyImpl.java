@@ -1,16 +1,26 @@
 package ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.deliveryboy;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaDeliveryBoyService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.util.TasksExecutor;
 
+import java.beans.ConstructorProperties;
+
 public class DeliveryBoyImpl implements DeliveryBoy {
-    @JsonManagedReference
+    @JsonBackReference
     private PizzeriaDeliveryBoyService pizzeriaDeliveryBoyService;
     private final int trunkCapacity;
 
-    public DeliveryBoyImpl(int trunkCapacity) {
+    private final int id;
+
+    @JsonCreator
+    @ConstructorProperties({"id", "trunkCapacity"})
+    public DeliveryBoyImpl(int id, int trunkCapacity) {
+        this.id = id;
         this.trunkCapacity = trunkCapacity;
     }
 

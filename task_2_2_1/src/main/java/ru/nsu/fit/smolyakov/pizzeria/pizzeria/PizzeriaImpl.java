@@ -1,6 +1,7 @@
 package ru.nsu.fit.smolyakov.pizzeria.pizzeria;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.OrderDescription;
@@ -8,11 +9,13 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.baker.Baker;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.deliveryboy.DeliveryBoy;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue.OrderQueue;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.warehouse.Warehouse;
-import ru.nsu.fit.smolyakov.pizzeria.util.PizeriaLogger;
+import ru.nsu.fit.smolyakov.pizzeria.util.PizzeriaPrinter;
 import ru.nsu.fit.smolyakov.pizzeria.util.TasksExecutor;
 
+import java.beans.ConstructorProperties;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -21,7 +24,8 @@ public class PizzeriaImpl implements PizzeriaOrderService,
                                      PizzeriaOwnerService,
                                      PizzeriaBakerService,
                                      PizzeriaDeliveryBoyService {
-    private final static ObjectMapper objectMapper = new ObjectMapper();
+    private final static ObjectMapper mapper = new ObjectMapper();
+    private final static PizzeriaPrinter pizzeriaPrinter = new PizzeriaPrinter(System.out);
 
     private final String pizzeriaName;
 
@@ -34,6 +38,7 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     private int orderId = 0;
 
     @JsonCreator
+    @ConstructorProperties({"name", "orderQueue", "warehouse", "bakers", "deliveryBoys"})
     private PizzeriaImpl(String pizzeriaName,
                          OrderQueue orderQueue,
                          Warehouse warehouse,
@@ -48,18 +53,10 @@ public class PizzeriaImpl implements PizzeriaOrderService,
 
     public static PizzeriaImpl fromJson(InputStream stream) {
         try {
-            return objectMapper.readValue(stream, PizzeriaImpl.class);
+            return mapper.readValue(stream, PizzeriaImpl.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static PizzeriaImpl fromJson(String resourceName) {
-        return fromJson(PizzeriaImpl.class.getResourceAsStream(resourceName));
-    }
-
-    public static PizzeriaImpl fromJson() {
-        return fromJson("PizzeriaConfiguration.json");
     }
 
     @Override
@@ -91,7 +88,7 @@ public class PizzeriaImpl implements PizzeriaOrderService,
 
     @Override
     public void printStatus(Order order) {
-        PizeriaLogger.INSTANCE.info(order);
+        pizzeriaPrinter.print(order);
     }
 
     @Override

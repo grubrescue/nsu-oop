@@ -1,16 +1,26 @@
 package ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.baker;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaBakerService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.util.TasksExecutor;
 
+import java.beans.ConstructorProperties;
+
 public class BakerImpl implements Baker {
-    @JsonManagedReference
+    @JsonBackReference
     private PizzeriaBakerService pizzeriaBakerService;
     private final int cookingTimeMillis;
 
-    public BakerImpl(int cookingTimeMillis) {
+    private final int id;
+
+    @JsonCreator
+    @ConstructorProperties({"id", "cookingTimeMillis"})
+    public BakerImpl(int id, int cookingTimeMillis) {
+        this.id = id;
         this.cookingTimeMillis = cookingTimeMillis;
     }
 
