@@ -22,7 +22,7 @@ public class Application {
         new FrequentCustomerImpl(
             new OrderDescription(
                 new Address("ПИРОГОВА 4", 2000),
-                "ВКУСНАЯ ШАУРМА"),
+                "ШАУРМА ЦЕЗАРЬЬ MAX"),
             pizzeriaOrderService,
             123
         ).start(100);

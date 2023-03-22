@@ -1,8 +1,6 @@
 package ru.nsu.fit.smolyakov.pizzeria.pizzeria;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.OrderDescription;
@@ -19,7 +17,6 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
-
 public class PizzeriaImpl implements PizzeriaOrderService,
                                      PizzeriaStatusPrinterService,
                                      PizzeriaOwnerService,
@@ -28,32 +25,29 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     private final static ObjectMapper mapper = new ObjectMapper();
     private final static PizzeriaPrinter pizzeriaPrinter = new PizzeriaPrinter(System.out);
 
-    private final String pizzeriaName;
+    @JsonProperty("name")
+    private String pizzeriaName;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "orderQueue")
     private OrderQueue orderQueue;
-    @JsonManagedReference
+
+    @JsonManagedReference(value = "warehouse")
     private Warehouse warehouse;
-    @JsonManagedReference
+
+    @JsonProperty("bakers")
+    @JsonManagedReference(value = "bakers")
     private List<Baker> bakerList;
-    @JsonManagedReference
+
+    @JsonProperty("deliveryBoys")
+    @JsonManagedReference(value = "deliveryBoys")
     private List<DeliveryBoy> deliveryBoyList;
 
+    @JsonIgnore
     private boolean working = false;
+    @JsonIgnore
     private int orderId = 0;
 
-    @ConstructorProperties({"name", "orderQueue", "warehouse", "bakers", "deliveryBoys"})
-    private PizzeriaImpl(String pizzeriaName,
-                         OrderQueue orderQueue,
-                         Warehouse warehouse,
-                         List<Baker> bakerList,
-                         List<DeliveryBoy> deliveryBoyList) {
-        this.pizzeriaName = pizzeriaName;
-        this.orderQueue = orderQueue;
-        this.warehouse = warehouse;
-        this.bakerList = bakerList;
-        this.deliveryBoyList = deliveryBoyList;
-    }
+    private PizzeriaImpl() {};
 
     public static PizzeriaImpl fromJson(InputStream stream) {
         try {
@@ -70,6 +64,7 @@ public class PizzeriaImpl implements PizzeriaOrderService,
         }
 
         orderQueue.put(Order.create(this, orderId++, orderDescription));
+        System.out.println("gottagrip");
         return true;
     }
 
@@ -78,8 +73,8 @@ public class PizzeriaImpl implements PizzeriaOrderService,
         working = true;
 
         orderQueue.start();
-        bakerList.forEach(baker -> TasksExecutor.INSTANCE.execute(baker::cook));
-        deliveryBoyList.forEach(deliveryBoy -> TasksExecutor.INSTANCE.execute(deliveryBoy::deliver));
+        bakerList.forEach(Baker::cook);
+        deliveryBoyList.forEach(DeliveryBoy::deliver);
     }
 
     @Override
@@ -90,6 +85,8 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     @Override
     public synchronized void stop() {
         orderQueue.stop();
+//        bakerList.forEach(Baker::stop);
+//        deliveryBoyList.forEach(DeliveryBoy::deliver);
         working = false;
     }
 

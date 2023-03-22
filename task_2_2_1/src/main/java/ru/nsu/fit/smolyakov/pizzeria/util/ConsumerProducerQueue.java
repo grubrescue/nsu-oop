@@ -28,7 +28,7 @@ public class ConsumerProducerQueue<T> {
             wait();
         }
         var polledValue = queue.poll();
-        notify();
+        notifyAll();
         return polledValue;
     }
 
@@ -48,7 +48,7 @@ public class ConsumerProducerQueue<T> {
             resultQueue.add(queue.poll());
         }
 
-        notify();
+        notifyAll();
         return resultQueue;
     }
 }

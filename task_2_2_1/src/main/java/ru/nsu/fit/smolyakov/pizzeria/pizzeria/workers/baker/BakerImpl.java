@@ -11,42 +11,41 @@ import ru.nsu.fit.smolyakov.pizzeria.util.TasksExecutor;
 import java.beans.ConstructorProperties;
 
 public class BakerImpl implements Baker {
-    @JsonBackReference
+    @JsonBackReference(value = "bakers")
     private PizzeriaBakerService pizzeriaBakerService;
 
-    private final int cookingTimeMillis;
+    @JsonProperty("cookingTimeMillis")
+    private int cookingTimeMillis;
 
-    private final int id;
+    @JsonProperty("id")
+    private int id;
 
-    @JsonCreator
-    @ConstructorProperties({"id", "cookingTimeMillis"})
-    public BakerImpl(int id, int cookingTimeMillis) {
-        this.id = id;
-        this.cookingTimeMillis = cookingTimeMillis;
-    }
+    private BakerImpl() {};
 
     @Override
     public void cook() {
         TasksExecutor.INSTANCE.execute(
             () -> {
-                var orderQueue = pizzeriaBakerService.getOrderQueue();
+                while (true) {//TODO NOT TRUE
+                    var orderQueue = pizzeriaBakerService.getOrderQueue();
 
-                var order = orderQueue.take();
+                    var order = orderQueue.take();
 
-                order.setStatus(Order.Status.BEING_BAKED);
-                pizzeriaBakerService.printStatus(order);
+                    order.setStatus(Order.Status.BEING_BAKED);
+                    pizzeriaBakerService.printStatus(order);
 
-                try {
-                    Thread.sleep(cookingTimeMillis);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    try {
+                        Thread.sleep(cookingTimeMillis);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    var warehouse = pizzeriaBakerService.getWarehouse();
+                    warehouse.put(order);
+
+                    order.setStatus(Order.Status.WAITING_FOR_DELIVERY);
+                    pizzeriaBakerService.printStatus(order);
                 }
-
-                var warehouse = pizzeriaBakerService.getWarehouse();
-                warehouse.put(order);
-
-                order.setStatus(Order.Status.WAITING_FOR_DELIVERY);
-                pizzeriaBakerService.printStatus(order);
             }
         );
     }

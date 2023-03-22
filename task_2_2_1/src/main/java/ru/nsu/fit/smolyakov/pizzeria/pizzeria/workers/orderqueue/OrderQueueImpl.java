@@ -8,17 +8,19 @@ import ru.nsu.fit.smolyakov.pizzeria.util.ConsumerProducerQueue;
 import java.beans.ConstructorProperties;
 
 public class OrderQueueImpl implements OrderQueue {
-    private final ConsumerProducerQueue<Order> consumerProducerQueue;
-    private boolean working = false;
-
-    @JsonBackReference
+    @JsonBackReference(value = "orderQueue")
     private PizzeriaStatusPrinterService pizzeriaStatusPrinterService;
 
-    @ConstructorProperties({"capacity", "pizzeriaStatusPrinterService"})
-    public OrderQueueImpl(int capacity, PizzeriaStatusPrinterService owner) {
-        this.pizzeriaStatusPrinterService = owner;
-        this.consumerProducerQueue = new ConsumerProducerQueue<>(capacity);
-    }
+    @JsonProperty("capacity")
+    private int capacity;
+
+    @JsonIgnore
+    private final ConsumerProducerQueue<Order> consumerProducerQueue = new ConsumerProducerQueue<>(capacity);
+
+    @JsonIgnore
+    private boolean working = false;
+
+    private OrderQueueImpl() {};
 
     @Override
     public void put(Order order) {
@@ -27,7 +29,6 @@ public class OrderQueueImpl implements OrderQueue {
         }
 
         System.out.println("puttingorder");
-        System.out.println(pizzeriaStatusPrinterService);
 
         try {
             consumerProducerQueue.put(order);

@@ -36,9 +36,9 @@ public class FrequentCustomerImpl implements FrequentCustomer {
                     final var index = i;
                     TasksExecutor.INSTANCE.execute(() ->
                         {
-                            System.out.printf("(customer %dms) pizza %d ordered %n%n", frequencyMillis, index);
+                            System.out.printf("(Customer %dms) pizza %d ordered %n%n", frequencyMillis, index);
                             order();
-                            System.out.printf("(customer %dms) pizza %d recieved %n%n", frequencyMillis, index);
+                            System.out.printf("(Customer %dms) pizza %d recieved %n%n", frequencyMillis, index);
                         }
                     );
                 }
