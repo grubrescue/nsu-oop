@@ -1,9 +1,6 @@
 package ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaStatusPrinterService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.util.ConsumerProducerQueue;
@@ -14,12 +11,12 @@ public class OrderQueueImpl implements OrderQueue {
     private final ConsumerProducerQueue<Order> consumerProducerQueue;
     private boolean working = false;
 
-    @JsonBackReference
+    @JsonManagedReference
     private PizzeriaStatusPrinterService pizzeriaStatusPrinterService;
 
-//    @JsonCreator
-    @ConstructorProperties({"capacity"})
-    public OrderQueueImpl(int capacity) {
+    @ConstructorProperties({"pizzeriaStatusPrinterService", "capacity"})
+    public OrderQueueImpl(PizzeriaStatusPrinterService owner, int capacity) {
+        this.pizzeriaStatusPrinterService = owner;
         this.consumerProducerQueue = new ConsumerProducerQueue<>(capacity);
     }
 
@@ -29,8 +26,12 @@ public class OrderQueueImpl implements OrderQueue {
             return;
         }
 
+        System.out.println("puttingorder");
+        System.out.println(pizzeriaStatusPrinterService);
+
         try {
             consumerProducerQueue.put(order);
+            pizzeriaStatusPrinterService.printStatus(order);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

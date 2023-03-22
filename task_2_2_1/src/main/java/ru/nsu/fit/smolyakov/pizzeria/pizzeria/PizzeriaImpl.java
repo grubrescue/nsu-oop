@@ -1,6 +1,7 @@
 package ru.nsu.fit.smolyakov.pizzeria.pizzeria;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
@@ -29,15 +30,18 @@ public class PizzeriaImpl implements PizzeriaOrderService,
 
     private final String pizzeriaName;
 
-    private final OrderQueue orderQueue;
-    private final Warehouse warehouse;
-    private final List<Baker> bakerList;
-    private final List<DeliveryBoy> deliveryBoyList;
+    @JsonManagedReference
+    private OrderQueue orderQueue;
+    @JsonManagedReference
+    private Warehouse warehouse;
+    @JsonManagedReference
+    private List<Baker> bakerList;
+    @JsonManagedReference
+    private List<DeliveryBoy> deliveryBoyList;
 
     private boolean working = false;
     private int orderId = 0;
 
-    @JsonCreator
     @ConstructorProperties({"name", "orderQueue", "warehouse", "bakers", "deliveryBoys"})
     private PizzeriaImpl(String pizzeriaName,
                          OrderQueue orderQueue,
@@ -65,15 +69,17 @@ public class PizzeriaImpl implements PizzeriaOrderService,
             return false;
         }
 
-        TasksExecutor.INSTANCE.execute(() ->
-            orderQueue.put(Order.create(this, orderId++, orderDescription))
-        );
+        orderQueue.put(Order.create(this, orderId++, orderDescription));
         return true;
     }
 
     @Override
     public synchronized void start() {
         working = true;
+
+        orderQueue.start();
+        bakerList.forEach(baker -> TasksExecutor.INSTANCE.execute(baker::cook));
+        deliveryBoyList.forEach(deliveryBoy -> TasksExecutor.INSTANCE.execute(deliveryBoy::deliver));
     }
 
     @Override
@@ -83,7 +89,13 @@ public class PizzeriaImpl implements PizzeriaOrderService,
 
     @Override
     public synchronized void stop() {
+        orderQueue.stop();
         working = false;
+    }
+
+    @Override
+    public PizzeriaOrderService getOrderService() {
+        return this;
     }
 
     @Override

@@ -27,13 +27,20 @@ public class FrequentCustomerImpl implements FrequentCustomer {
         Runnable task =
             () -> {
                 for (int i = 0; i < times; i++) {
-                    System.err.printf("I ordered pizza after %d millis!%n%n", frequencyMillis);
-                    order();
                     try {
                         Thread.sleep(frequencyMillis);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
+
+                    final var index = i;
+                    TasksExecutor.INSTANCE.execute(() ->
+                        {
+                            System.out.printf("(customer %dms) pizza %d ordered %n%n", frequencyMillis, index);
+                            order();
+                            System.out.printf("(customer %dms) pizza %d recieved %n%n", frequencyMillis, index);
+                        }
+                    );
                 }
             };
 

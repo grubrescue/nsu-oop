@@ -13,6 +13,7 @@ import java.beans.ConstructorProperties;
 public class BakerImpl implements Baker {
     @JsonBackReference
     private PizzeriaBakerService pizzeriaBakerService;
+
     private final int cookingTimeMillis;
 
     private final int id;

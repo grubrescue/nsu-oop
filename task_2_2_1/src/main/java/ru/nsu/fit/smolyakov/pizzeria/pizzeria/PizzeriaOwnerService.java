@@ -9,4 +9,6 @@ public interface PizzeriaOwnerService {
     boolean isWorking();
 
     void stop();
+
+    PizzeriaOrderService getOrderService();
 }
