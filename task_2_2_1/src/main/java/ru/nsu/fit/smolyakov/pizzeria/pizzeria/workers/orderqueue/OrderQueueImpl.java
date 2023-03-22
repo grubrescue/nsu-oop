@@ -5,30 +5,26 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaStatusPrinterService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.util.ConsumerProducerQueue;
 
-import java.beans.ConstructorProperties;
-
 public class OrderQueueImpl implements OrderQueue {
     @JsonBackReference(value = "orderQueue")
     private PizzeriaStatusPrinterService pizzeriaStatusPrinterService;
 
-    @JsonProperty("capacity")
-    private int capacity;
-
     @JsonIgnore
-    private final ConsumerProducerQueue<Order> consumerProducerQueue = new ConsumerProducerQueue<>(capacity);
+    private ConsumerProducerQueue<Order> consumerProducerQueue;
 
     @JsonIgnore
     private boolean working = false;
 
-    private OrderQueueImpl() {};
+    @JsonCreator
+    private OrderQueueImpl(@JsonProperty("capacity") int capacity) {
+        consumerProducerQueue = new ConsumerProducerQueue<>(capacity);
+    };
 
     @Override
     public void put(Order order) {
         if (!working) {
             return;
         }
-
-        System.out.println("puttingorder");
 
         try {
             consumerProducerQueue.put(order);

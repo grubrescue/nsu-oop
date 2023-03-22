@@ -1,10 +1,10 @@
 {
     "name": "ВКУСНАЯ ШАУРМА",
     "orderQueue": {
-        "capacity": 1
+        "capacity": 10
     },
     "warehouse": {
-        "capacity": 1
+        "capacity": 10
     },
     "bakers": [
         {

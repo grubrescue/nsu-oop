@@ -28,9 +28,11 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     @JsonProperty("name")
     private String pizzeriaName;
 
+    @JsonProperty("orderQueue")
     @JsonManagedReference(value = "orderQueue")
     private OrderQueue orderQueue;
 
+    @JsonProperty("warehouse")
     @JsonManagedReference(value = "warehouse")
     private Warehouse warehouse;
 
@@ -58,13 +60,12 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     }
 
     @Override
-    public synchronized boolean makeOrder(OrderDescription orderDescription) {
+    public boolean makeOrder(OrderDescription orderDescription) {
         if (!working) {
             return false;
         }
 
         orderQueue.put(Order.create(this, orderId++, orderDescription));
-        System.out.println("gottagrip");
         return true;
     }
 

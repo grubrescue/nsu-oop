@@ -1,9 +1,6 @@
 package ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.warehouse;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaStatusPrinterService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.util.ConsumerProducerQueue;
@@ -16,14 +13,13 @@ public class WarehouseImpl implements Warehouse {
     @JsonBackReference(value = "warehouse")
     private PizzeriaStatusPrinterService pizzeriaStatusPrinterService;
 
-    @JsonProperty("capacity")
-    private int capacity;
-
     @JsonIgnore
-    private final ConsumerProducerQueue<Order> consumerProducerQueue
-        = new ConsumerProducerQueue<>(capacity);;
+    private ConsumerProducerQueue<Order> consumerProducerQueue;
 
-    private WarehouseImpl() {};
+    @JsonCreator
+    private WarehouseImpl(@JsonProperty("capacity") int capacity) {
+        consumerProducerQueue = new ConsumerProducerQueue<>(capacity);
+    };
 
     @Override
     public void put(Order order) {

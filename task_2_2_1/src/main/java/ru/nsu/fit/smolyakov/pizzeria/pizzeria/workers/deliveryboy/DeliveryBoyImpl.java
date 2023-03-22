@@ -26,7 +26,7 @@ public class DeliveryBoyImpl implements DeliveryBoy {
     public void deliver() {
         TasksExecutor.INSTANCE.execute(
             () -> {
-                while (true) {
+                while (true) { // TODO УБРАЬТ !!!!!!!!!!!!! ОБЯЗАТЕЛЬНО  "!!!!"!!"
                     var warehouse = pizzeriaDeliveryBoyService.getWarehouse();
 
                     var orderQueue = warehouse.takeMultiple(trunkCapacity);

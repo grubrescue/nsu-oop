@@ -8,8 +8,6 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaBakerService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.util.TasksExecutor;
 
-import java.beans.ConstructorProperties;
-
 public class BakerImpl implements Baker {
     @JsonBackReference(value = "bakers")
     private PizzeriaBakerService pizzeriaBakerService;
@@ -26,9 +24,8 @@ public class BakerImpl implements Baker {
     public void cook() {
         TasksExecutor.INSTANCE.execute(
             () -> {
-                while (true) {//TODO NOT TRUE
-                    var orderQueue = pizzeriaBakerService.getOrderQueue();
-
+                var orderQueue = pizzeriaBakerService.getOrderQueue();
+                while (true) {//TODO Н Е К Р А С И В О Е
                     var order = orderQueue.take();
 
                     order.setStatus(Order.Status.BEING_BAKED);

@@ -19,6 +19,7 @@ public class ConsumerProducerQueue<T> {
         while (queue.size() == capacity) {
             wait();
         }
+
         queue.add(item);
         notifyAll();
     }
