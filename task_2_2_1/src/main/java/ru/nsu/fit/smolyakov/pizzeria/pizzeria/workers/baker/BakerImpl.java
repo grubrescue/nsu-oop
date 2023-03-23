@@ -1,12 +1,13 @@
 package ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.baker;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaBakerService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.util.TasksExecutor;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class BakerImpl implements Baker {
     @JsonBackReference(value = "bakers")
@@ -18,14 +19,20 @@ public class BakerImpl implements Baker {
     @JsonProperty("id")
     private int id;
 
-    private BakerImpl() {};
+    @JsonIgnore
+    private final AtomicBoolean working = new AtomicBoolean(false);
+
+    private BakerImpl() {
+    }
 
     @Override
     public void cook() {
+        working.set(true);
+
         TasksExecutor.INSTANCE.execute(
             () -> {
                 var orderQueue = pizzeriaBakerService.getOrderQueue();
-                while (true) {//TODO Н Е К Р А С И В О Е
+                while (working.get()) {
                     var order = orderQueue.take();
 
                     order.setStatus(Order.Status.BEING_BAKED);

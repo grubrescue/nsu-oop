@@ -6,6 +6,12 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.OrderDescription;
 @JsonDeserialize(as = PizzeriaImpl.class)
 public interface PizzeriaOrderService {
     String getPizzeriaName();
+
     boolean isWorking();
-    boolean makeOrder(OrderDescription orderDescription);
+
+    /**
+     * @param orderDescription
+     * @return
+     */
+    int makeOrder(OrderDescription orderDescription);
 }

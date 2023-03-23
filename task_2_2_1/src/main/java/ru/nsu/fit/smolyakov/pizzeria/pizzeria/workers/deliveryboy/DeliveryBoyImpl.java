@@ -1,14 +1,13 @@
 package ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.deliveryboy;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaDeliveryBoyService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.util.TasksExecutor;
 
-import java.beans.ConstructorProperties;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DeliveryBoyImpl implements DeliveryBoy {
     @JsonBackReference(value = "deliveryBoys")
@@ -20,13 +19,17 @@ public class DeliveryBoyImpl implements DeliveryBoy {
     @JsonProperty("id")
     private int id;
 
-    private DeliveryBoyImpl() {};
+    @JsonIgnore
+    private final AtomicBoolean working = new AtomicBoolean(false);
+
+    private DeliveryBoyImpl() {
+    }
 
     @Override
     public void deliver() {
         TasksExecutor.INSTANCE.execute(
             () -> {
-                while (true) { // TODO УБРАЬТ !!!!!!!!!!!!! ОБЯЗАТЕЛЬНО  "!!!!"!!"
+                while (working.get()) {
                     var warehouse = pizzeriaDeliveryBoyService.getWarehouse();
 
                     var orderQueue = warehouse.takeMultiple(trunkCapacity);
@@ -45,7 +48,7 @@ public class DeliveryBoyImpl implements DeliveryBoy {
                             order.setStatus(Order.Status.DONE);
                             pizzeriaDeliveryBoyService.printStatus(order);
                         });
-                    }
+                }
             }
         );
     }

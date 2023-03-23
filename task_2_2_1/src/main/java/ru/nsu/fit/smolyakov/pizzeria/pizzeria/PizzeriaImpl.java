@@ -1,6 +1,8 @@
 package ru.nsu.fit.smolyakov.pizzeria.pizzeria;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.OrderDescription;
@@ -9,19 +11,17 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.deliveryboy.DeliveryBoy;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue.OrderQueue;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.warehouse.Warehouse;
 import ru.nsu.fit.smolyakov.pizzeria.util.PizzeriaPrinter;
-import ru.nsu.fit.smolyakov.pizzeria.util.TasksExecutor;
 
-import java.beans.ConstructorProperties;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PizzeriaImpl implements PizzeriaOrderService,
-                                     PizzeriaStatusPrinterService,
-                                     PizzeriaOwnerService,
-                                     PizzeriaBakerService,
-                                     PizzeriaDeliveryBoyService {
+    PizzeriaStatusPrinterService,
+    PizzeriaOwnerService,
+    PizzeriaBakerService,
+    PizzeriaDeliveryBoyService {
     private final static ObjectMapper mapper = new ObjectMapper();
     private final static PizzeriaPrinter pizzeriaPrinter = new PizzeriaPrinter(System.out);
 
@@ -45,11 +45,12 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     private List<DeliveryBoy> deliveryBoyList;
 
     @JsonIgnore
-    private boolean working = false;
+    private final AtomicBoolean working = new AtomicBoolean(false);
     @JsonIgnore
     private int orderId = 0;
 
-    private PizzeriaImpl() {};
+    private PizzeriaImpl() {
+    }
 
     public static PizzeriaImpl fromJson(InputStream stream) {
         try {
@@ -60,18 +61,19 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     }
 
     @Override
-    public boolean makeOrder(OrderDescription orderDescription) {
-        if (!working) {
-            return false;
+    public int makeOrder(OrderDescription orderDescription) {
+        if (!working.get()) {
+            return -1; // TODO change
         }
 
-        orderQueue.put(Order.create(this, orderId++, orderDescription));
-        return true;
+        var order = Order.create(this, orderId++, orderDescription);
+        orderQueue.put(order);
+        return order.getId();
     }
 
     @Override
     public synchronized void start() {
-        working = true;
+        working.set(true);
 
         orderQueue.start();
         bakerList.forEach(Baker::cook);
@@ -80,7 +82,7 @@ public class PizzeriaImpl implements PizzeriaOrderService,
 
     @Override
     public boolean isWorking() {
-        return working;
+        return working.get();
     }
 
     @Override
@@ -88,7 +90,7 @@ public class PizzeriaImpl implements PizzeriaOrderService,
         orderQueue.stop();
 //        bakerList.forEach(Baker::stop);
 //        deliveryBoyList.forEach(DeliveryBoy::deliver);
-        working = false;
+        working.set(false);
     }
 
     @Override

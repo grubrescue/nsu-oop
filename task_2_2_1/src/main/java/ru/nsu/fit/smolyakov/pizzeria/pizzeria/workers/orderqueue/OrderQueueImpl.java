@@ -1,6 +1,9 @@
 package ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaStatusPrinterService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import ru.nsu.fit.smolyakov.pizzeria.util.ConsumerProducerQueue;
@@ -10,7 +13,7 @@ public class OrderQueueImpl implements OrderQueue {
     private PizzeriaStatusPrinterService pizzeriaStatusPrinterService;
 
     @JsonIgnore
-    private ConsumerProducerQueue<Order> consumerProducerQueue;
+    private final ConsumerProducerQueue<Order> consumerProducerQueue;
 
     @JsonIgnore
     private boolean working = false;
@@ -18,7 +21,7 @@ public class OrderQueueImpl implements OrderQueue {
     @JsonCreator
     private OrderQueueImpl(@JsonProperty("capacity") int capacity) {
         consumerProducerQueue = new ConsumerProducerQueue<>(capacity);
-    };
+    }
 
     @Override
     public void put(Order order) {

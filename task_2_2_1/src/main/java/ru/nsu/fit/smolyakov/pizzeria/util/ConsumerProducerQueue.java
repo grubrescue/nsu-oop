@@ -1,6 +1,8 @@
 package ru.nsu.fit.smolyakov.pizzeria.util;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Objects;
+import java.util.Queue;
 
 public class ConsumerProducerQueue<T> {
     private final Queue<T> queue;

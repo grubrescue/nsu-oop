@@ -1,15 +1,11 @@
 package ru.nsu.fit.smolyakov.pizzeria;
 
-import ru.nsu.fit.smolyakov.pizzeria.customer.Customer;
-import ru.nsu.fit.smolyakov.pizzeria.customer.FrequentCustomer;
 import ru.nsu.fit.smolyakov.pizzeria.customer.FrequentCustomerImpl;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaImpl;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOwnerService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Address;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.OrderDescription;
-
-import java.io.File;
 
 public class Application {
     public static void main(String[] args) {
@@ -24,7 +20,7 @@ public class Application {
                 new Address("ПИРОГОВА 4", 2000),
                 "ШАУРМА ЦЕЗАРЬЬ MAX"),
             pizzeriaOrderService,
-            123
+            600
         ).start(100);
 
     }

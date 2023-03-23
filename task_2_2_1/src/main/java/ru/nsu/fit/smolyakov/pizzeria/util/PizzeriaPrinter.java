@@ -5,8 +5,8 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
 import java.io.PrintStream;
 
 public class PizzeriaPrinter {
+    private static final String format = "~ %s: [%d], [%s];%n";
     private final PrintStream printStream;
-    private static final String format = "~%s: [%d], [%s];%n";
 
     public PizzeriaPrinter(PrintStream printStream) {
         this.printStream = printStream;
