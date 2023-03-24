@@ -82,6 +82,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">FrequentCustomer</span><span class="extends-implements">
 extends <a href="Customer.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.customer">Customer</a></span></div>
+<div class="block">Represents a customer, who wants to order pizza at regular intervals.
+ He probably likes pizza. Or ordering one.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -98,7 +100,9 @@ extends <a href="Customer.html" title="interface in ru.nsu.fit.smolyakov.pizzeri
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#start(int)" class="member-name-link">start</a><wbr>(int&nbsp;times)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Starts ordering pizza continuously.</div>
+</div>
 </div>
 </div>
 </div>
@@ -120,6 +124,14 @@ extends <a href="Customer.html" title="interface in ru.nsu.fit.smolyakov.pizzeri
 <section class="detail" id="start(int)">
 <h3>start</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">start</span><wbr><span class="parameters">(int&nbsp;times)</span></div>
+<div class="block">Starts ordering pizza continuously.
+
+ <p>This method is supposed to reuse <a href="Customer.html#order()"><code>Customer.order()</code></a>
+ method of <a href="Customer.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.customer"><code>Customer</code></a> interface.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>times</code> - amount of times to order</dd>
+</dl>
 </section>
 </li>
 </ul>

@@ -1,7 +1,8 @@
 ru.nsu.fit.smolyakov.pizzeria
 ru.nsu.fit.smolyakov.pizzeria.customer
 ru.nsu.fit.smolyakov.pizzeria.pizzeria
-ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity
+ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order
+ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description
 ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.baker
 ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.deliveryboy
 ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue

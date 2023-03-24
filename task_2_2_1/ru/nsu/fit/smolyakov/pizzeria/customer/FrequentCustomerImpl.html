@@ -82,6 +82,10 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">FrequentCustomerImpl</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="FrequentCustomer.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.customer">FrequentCustomer</a></span></div>
+<div class="block">An implementation of <a href="FrequentCustomer.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.customer"><code>FrequentCustomer</code></a> interface.
+ May be instantiated by
+ <a href="#%3Cinit%3E(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription,ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService,int)"><code>FrequentCustomerImpl(OrderDescription, PizzeriaOrderService, int)</code></a>
+ constructor.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -93,10 +97,12 @@ implements <a href="FrequentCustomer.html" title="interface in ru.nsu.fit.smolya
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.OrderDescription,ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService,int)" class="member-name-link">FrequentCustomerImpl</a><wbr>(<a href="../pizzeria/entity/OrderDescription.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity">OrderDescription</a>&nbsp;orderDescription,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription,ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService,int)" class="member-name-link">FrequentCustomerImpl</a><wbr>(<a href="../pizzeria/entity/order/description/OrderDescription.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description">OrderDescription</a>&nbsp;orderDescription,
  <a href="../pizzeria/PizzeriaOrderService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOrderService</a>&nbsp;pizzeriaOrderService,
  int&nbsp;frequencyMillis)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Constructs an instance of <code>FrequentCustomerImpl</code>.</div>
+</div>
 </div>
 </section>
 </li>
@@ -113,10 +119,15 @@ implements <a href="FrequentCustomer.html" title="interface in ru.nsu.fit.smolya
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#order()" class="member-name-link">order</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Makes an order in this <code>FrequentCustomer</code>'s favourite
+ pizzeria.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#start(int)" class="member-name-link">start</a><wbr>(int&nbsp;times)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Starts ordering pizza continuously.</div>
+</div>
 </div>
 </div>
 </div>
@@ -135,11 +146,19 @@ implements <a href="FrequentCustomer.html" title="interface in ru.nsu.fit.smolya
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.OrderDescription,ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService,int)">
+<section class="detail" id="&lt;init&gt;(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription,ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService,int)">
 <h3>FrequentCustomerImpl</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">FrequentCustomerImpl</span><wbr><span class="parameters">(<a href="../pizzeria/entity/OrderDescription.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity">OrderDescription</a>&nbsp;orderDescription,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">FrequentCustomerImpl</span><wbr><span class="parameters">(<a href="../pizzeria/entity/order/description/OrderDescription.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description">OrderDescription</a>&nbsp;orderDescription,
  <a href="../pizzeria/PizzeriaOrderService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOrderService</a>&nbsp;pizzeriaOrderService,
  int&nbsp;frequencyMillis)</span></div>
+<div class="block">Constructs an instance of <code>FrequentCustomerImpl</code>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>orderDescription</code> - a description of performed repeated orders</dd>
+<dd><code>pizzeriaOrderService</code> - a pizzeria to order pizza in</dd>
+<dd><code>frequencyMillis</code> - a frequency with whom orders will be
+                        performed by <a href="#start(int)"><code>start(int)</code></a> method.</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -154,6 +173,11 @@ implements <a href="FrequentCustomer.html" title="interface in ru.nsu.fit.smolya
 <section class="detail" id="order()">
 <h3>order</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">order</span>()</div>
+<div class="block">Makes an order in this <code>FrequentCustomer</code>'s favourite
+ pizzeria.
+
+ Prints to <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/System.html#out" title="class or interface in java.lang" class="external-link"><code>System.out</code></a> when a regular order is made,
+ either successfully or not.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Customer.html#order()">order</a></code>&nbsp;in interface&nbsp;<code><a href="Customer.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.customer">Customer</a></code></dd>
@@ -164,9 +188,19 @@ implements <a href="FrequentCustomer.html" title="interface in ru.nsu.fit.smolya
 <section class="detail" id="start(int)">
 <h3>start</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">start</span><wbr><span class="parameters">(int&nbsp;times)</span></div>
+<div class="block">Starts ordering pizza continuously.
+
+ <p>This method reuses <a href="#order()"><code>order()</code></a>
+ method.
+
+ <p>All orders are processed in separated tasks
+ which are to be executed by <a href="../util/TasksExecutor.html" title="enum class in ru.nsu.fit.smolyakov.pizzeria.util"><code>TasksExecutor</code></a>
+ singleton.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="FrequentCustomer.html#start(int)">start</a></code>&nbsp;in interface&nbsp;<code><a href="FrequentCustomer.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.customer">FrequentCustomer</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>times</code> - amount of times to order</dd>
 </dl>
 </section>
 </li>
