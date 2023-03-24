@@ -9,7 +9,6 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.Address;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription;
 import ru.nsu.fit.smolyakov.pizzeria.util.TasksExecutor;
 
-import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DeliveryBoyImpl implements DeliveryBoy {
@@ -46,7 +45,7 @@ public class DeliveryBoyImpl implements DeliveryBoy {
                          },
                          order.getOrderDescription()
                              .address()
-                             .deliveryTime()
+                             .deliveryTimeMillis()
                      );
                  }
 
@@ -55,7 +54,7 @@ public class DeliveryBoyImpl implements DeliveryBoy {
                      orders.stream()
                          .map(Order::getOrderDescription)
                          .map(OrderDescription::address)
-                         .map(Address::deliveryTime)
+                         .map(Address::deliveryTimeMillis)
                          .max(Integer::compare).get()
                  );
              });

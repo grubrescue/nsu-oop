@@ -3,9 +3,16 @@ package ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription;
 
+/**
+ * Represents an order, created by {@link ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaImpl}
+ * and used during the whole lifetime of the former.
+ */
 public class Order implements OrderInformationService {
+    /**
+     * Represents current status of this order.
+     */
     public enum Status {
-        CREATED("Created, waiting for acception"),
+        CREATED("Created, waiting for acceptation"),
         ACCEPTED("Accepted, waiting for baker"),
         BEING_BAKED("Being baked"),
         WAITING_FOR_WAREHOUSE("Baked, waiting for warehouse"),
@@ -19,6 +26,11 @@ public class Order implements OrderInformationService {
             this.caption = caption;
         }
 
+        /**
+         * Returns human-readable meaning of current status.
+         *
+         * @return a caption
+         */
         public String getCaption() {
             return caption;
         }
@@ -40,20 +52,39 @@ public class Order implements OrderInformationService {
         this.orderDescription = orderDescription;
     }
 
+    /**
+     *
+     * @param pizzeriaOrderService
+     * @param id
+     * @param orderDescription
+     * @return
+     */
     public static Order create(PizzeriaOrderService pizzeriaOrderService,
                                int id,
                                OrderDescription orderDescription) {
         return new Order(pizzeriaOrderService, id, Status.CREATED, orderDescription);
     }
 
+    /**
+     *
+     * @return
+     */
     public PizzeriaOrderService getPizzeriaOrderService() {
         return pizzeriaOrderService;
     }
 
+    /**
+     *
+     * @return
+     */
     public synchronized Status getStatus() {
         return status;
     }
 
+    /**
+     *
+     * @param status
+     */
     public synchronized void setStatus(Status status) {
         if (status.ordinal() - this.status.ordinal() == 1) {
             this.status = status;
@@ -62,10 +93,18 @@ public class Order implements OrderInformationService {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     *
+     * @return
+     */
     public OrderDescription getOrderDescription() {
         return orderDescription;
     }
