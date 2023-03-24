@@ -4,8 +4,8 @@ import ru.nsu.fit.smolyakov.pizzeria.customer.FrequentCustomerImpl;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaImpl;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOwnerService;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Address;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.OrderDescription;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.Address;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription;
 
 public class Application {
     public static void main(String[] args) {
@@ -21,6 +21,14 @@ public class Application {
                 "ШАУРМА ЦЕЗАРЬЬ MAX"),
             pizzeriaOrderService,
             600
+        ).start(100);
+
+        new FrequentCustomerImpl(
+            new OrderDescription(
+                new Address("ПИРОГОВА 4", 2000),
+                "ШАУРМА ЦЕЗАРЬЬ MAX"),
+            pizzeriaOrderService,
+            50
         ).start(100);
 
     }

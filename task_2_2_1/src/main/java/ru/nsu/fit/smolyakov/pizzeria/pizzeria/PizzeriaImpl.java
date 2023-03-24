@@ -4,8 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.OrderDescription;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.OrderInformationService;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.baker.Baker;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.deliveryboy.DeliveryBoy;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue.OrderQueue;
@@ -15,6 +16,7 @@ import ru.nsu.fit.smolyakov.pizzeria.util.PizzeriaPrinter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PizzeriaImpl implements PizzeriaOrderService,
@@ -22,6 +24,7 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     PizzeriaOwnerService,
     PizzeriaBakerService,
     PizzeriaDeliveryBoyService {
+
     private final static ObjectMapper mapper = new ObjectMapper();
     private final static PizzeriaPrinter pizzeriaPrinter = new PizzeriaPrinter(System.out);
 
@@ -52,7 +55,7 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     private PizzeriaImpl() {
     }
 
-    public static PizzeriaImpl fromJson(InputStream stream) {
+    public static PizzeriaOwnerService fromJson(InputStream stream) {
         try {
             return mapper.readValue(stream, PizzeriaImpl.class);
         } catch (IOException e) {
@@ -61,14 +64,17 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     }
 
     @Override
-    public int makeOrder(OrderDescription orderDescription) {
+    public Optional<OrderInformationService> makeOrder(OrderDescription orderDescription) {
         if (!working.get()) {
-            return -1; // TODO change
+            return Optional.empty();
         }
 
         var order = Order.create(this, orderId++, orderDescription);
+        printStatus(order);
+
         orderQueue.put(order);
-        return order.getId();
+
+        return Optional.of(order);
     }
 
     @Override
@@ -99,7 +105,7 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     }
 
     @Override
-    public void printStatus(Order order) {
+    public void printStatus(OrderInformationService order) {
         pizzeriaPrinter.print(order);
     }
 
@@ -118,3 +124,4 @@ public class PizzeriaImpl implements PizzeriaOrderService,
         return pizzeriaName;
     }
 }
+

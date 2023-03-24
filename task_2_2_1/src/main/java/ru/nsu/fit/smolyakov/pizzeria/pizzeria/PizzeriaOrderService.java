@@ -1,7 +1,10 @@
 package ru.nsu.fit.smolyakov.pizzeria.pizzeria;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.OrderDescription;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.OrderInformationService;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription;
+
+import java.util.Optional;
 
 @JsonDeserialize(as = PizzeriaImpl.class)
 public interface PizzeriaOrderService {
@@ -9,9 +12,5 @@ public interface PizzeriaOrderService {
 
     boolean isWorking();
 
-    /**
-     * @param orderDescription
-     * @return
-     */
-    int makeOrder(OrderDescription orderDescription);
+    Optional<OrderInformationService> makeOrder(OrderDescription orderDescription);
 }

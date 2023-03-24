@@ -4,9 +4,12 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaDeliveryBoyService;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.Address;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription;
 import ru.nsu.fit.smolyakov.pizzeria.util.TasksExecutor;
 
+import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DeliveryBoyImpl implements DeliveryBoy {
@@ -27,29 +30,35 @@ public class DeliveryBoyImpl implements DeliveryBoy {
 
     @Override
     public void deliver() {
-        TasksExecutor.INSTANCE.execute(
-            () -> {
-                while (working.get()) {
-                    var warehouse = pizzeriaDeliveryBoyService.getWarehouse();
+         TasksExecutor.INSTANCE.execute(
+             () -> {
+                 var warehouse = pizzeriaDeliveryBoyService.getWarehouse();
+                 var orders = warehouse.takeMultiple(trunkCapacity);
 
-                    var orderQueue = warehouse.takeMultiple(trunkCapacity);
+                 orders.forEach(order -> order.setStatus(Order.Status.IN_DELIVERY));
+                 orders.forEach(order -> pizzeriaDeliveryBoyService.printStatus(order));
 
-                    orderQueue.forEach(order -> order.setStatus(Order.Status.IN_DELIVERY));
-                    orderQueue.forEach(order -> pizzeriaDeliveryBoyService.printStatus(order));
+                 for (var order : orders) {
+                     TasksExecutor.INSTANCE.schedule(
+                         () -> {
+                             order.setStatus(Order.Status.DONE);
+                             pizzeriaDeliveryBoyService.printStatus(order);
+                         },
+                         order.getOrderDescription()
+                             .address()
+                             .deliveryTime()
+                     );
+                 }
 
-                    orderQueue.forEach(
-                        order -> {
-                            try {
-                                Thread.sleep(order.getOrderDescription().address().deliveryTime());
-                            } catch (InterruptedException e) {
-                                throw new RuntimeException(e);
-                            }
-
-                            order.setStatus(Order.Status.DONE);
-                            pizzeriaDeliveryBoyService.printStatus(order);
-                        });
-                }
-            }
-        );
-    }
+                 TasksExecutor.INSTANCE.schedule(
+                     this::deliver,
+                     orders.stream()
+                         .map(Order::getOrderDescription)
+                         .map(OrderDescription::address)
+                         .map(Address::deliveryTime)
+                         .max(Integer::compare).get()
+                 );
+             });
+        }
 }
+

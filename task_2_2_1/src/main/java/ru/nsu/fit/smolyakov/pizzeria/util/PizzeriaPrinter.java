@@ -1,6 +1,6 @@
 package ru.nsu.fit.smolyakov.pizzeria.util;
 
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.OrderInformationService;
 
 import java.io.PrintStream;
 
@@ -12,7 +12,7 @@ public class PizzeriaPrinter {
         this.printStream = printStream;
     }
 
-    public void print(Order order) {
+    public void print(OrderInformationService order) {
         printStream.printf(format,
             order.getPizzeriaOrderService().getPizzeriaName(),
             order.getId(),

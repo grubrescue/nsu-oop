@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaStatusPrinterService;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.Order;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order;
 import ru.nsu.fit.smolyakov.pizzeria.util.ConsumerProducerQueue;
 
 public class OrderQueueImpl implements OrderQueue {
@@ -31,6 +31,8 @@ public class OrderQueueImpl implements OrderQueue {
 
         try {
             consumerProducerQueue.put(order);
+
+            order.setStatus(Order.Status.ACCEPTED);
             pizzeriaStatusPrinterService.printStatus(order);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);

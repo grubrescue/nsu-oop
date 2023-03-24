@@ -1,7 +1,8 @@
 package ru.nsu.fit.smolyakov.pizzeria.customer;
 
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.OrderDescription;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.OrderInformationService;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription;
 import ru.nsu.fit.smolyakov.pizzeria.util.TasksExecutor;
 
 public class FrequentCustomerImpl implements FrequentCustomer {
@@ -19,31 +20,25 @@ public class FrequentCustomerImpl implements FrequentCustomer {
 
     @Override
     public void order() {
-        pizzeriaOrderService.makeOrder(orderDescription);
+        System.out.printf("(Customer %dms) Wanna order pizza... %n%n", frequencyMillis);
+        pizzeriaOrderService.makeOrder(orderDescription)
+            .ifPresentOrElse(
+                order ->
+                    System.out.printf("(Customer %dms) Pizza %d ordered! %n%n",
+                        frequencyMillis, order.getId()),
+                () ->
+                    System.out.printf("(Customer %dms) Pizza is not ordered, as pizzeria is not working! %n%n",
+                        frequencyMillis)
+            );
     }
 
     @Override
     public void start(int times) {
-        Runnable task =
-            () -> {
-                for (int i = 0; i < times; i++) {
-                    try {
-                        Thread.sleep(frequencyMillis);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                    final var index = i;
-                    TasksExecutor.INSTANCE.execute(() ->
-                        {
-                            System.out.printf("(Customer %dms) Wanna order pizza %d... %n%n", frequencyMillis, index);
-                            order();
-                            System.out.printf("(Customer %dms) Pizza %d ordered! %n%n", frequencyMillis, index);
-                        }
-                    );
-                }
-            };
-
-        TasksExecutor.INSTANCE.execute(task);
+        for (int i = 0; i < times; i++) {
+            TasksExecutor.INSTANCE.schedule(
+                this::order,
+                i * frequencyMillis
+            );
+        }
     }
 }
