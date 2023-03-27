@@ -97,17 +97,20 @@ implements <a href="OrderQueue.html" title="interface in ru.nsu.fit.smolyakov.pi
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#put(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order)" class="member-name-link">put</a><wbr>(<a href="../../entity/order/Order.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order</a>&nbsp;order)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#forceStop()" class="member-name-link">forceStop</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#put(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order)" class="member-name-link">put</a><wbr>(<a href="../../entity/order/Order.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order</a>&nbsp;order)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stop()" class="member-name-link">stop</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../entity/order/Order.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#take()" class="member-name-link">take</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stopAfterCompletion()" class="member-name-link">stopAfterCompletion</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../entity/order/Order.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#take()" class="member-name-link">take</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -156,12 +159,22 @@ implements <a href="OrderQueue.html" title="interface in ru.nsu.fit.smolyakov.pi
 </section>
 </li>
 <li>
-<section class="detail" id="stop()">
-<h3>stop</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">stop</span>()</div>
+<section class="detail" id="forceStop()">
+<h3>forceStop</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">forceStop</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="OrderQueue.html#stop()">stop</a></code>&nbsp;in interface&nbsp;<code><a href="OrderQueue.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue">OrderQueue</a></code></dd>
+<dd><code><a href="OrderQueue.html#forceStop()">forceStop</a></code>&nbsp;in interface&nbsp;<code><a href="OrderQueue.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue">OrderQueue</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="stopAfterCompletion()">
+<h3>stopAfterCompletion</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">stopAfterCompletion</span>()</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="OrderQueue.html#stopAfterCompletion()">stopAfterCompletion</a></code>&nbsp;in interface&nbsp;<code><a href="OrderQueue.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue">OrderQueue</a></code></dd>
 </dl>
 </section>
 </li>
