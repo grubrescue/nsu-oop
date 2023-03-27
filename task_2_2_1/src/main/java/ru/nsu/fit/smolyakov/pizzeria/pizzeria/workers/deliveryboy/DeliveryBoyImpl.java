@@ -9,6 +9,7 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.Address;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription;
 
 import java.util.Queue;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -78,13 +79,24 @@ public class DeliveryBoyImpl implements DeliveryBoy {
     }
 
     @Override
-    public void stop() {
+    public void forceStop() {
+        currentTaskFuture.cancel(true);
         working.set(false);
     }
 
     @Override
     public void stopAfterCompletion() {
+        try {
+            if (currentTaskFuture != null) {
+                currentTaskFuture.get();
+            }
+        } catch (InterruptedException ignored) {
 
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+
+        working.set(false);
     }
 }
 

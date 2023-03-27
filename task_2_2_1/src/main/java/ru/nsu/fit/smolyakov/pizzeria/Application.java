@@ -34,7 +34,7 @@ public class Application {
             50
         ).start(100);
 
-        pizzeriaOwnerService.forceStop();
-        pizzeriaOwnerService.start();
+        pizzeriaOwnerService.stop();
+//        pizzeriaOwnerService.start();
     }
 }

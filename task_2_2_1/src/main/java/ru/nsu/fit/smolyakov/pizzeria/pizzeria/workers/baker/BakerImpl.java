@@ -61,12 +61,15 @@ public class BakerImpl implements Baker {
     }
 
     @Override
-    public void stop() {
+    public void forceStop() {
         working.set(false);
+        currentTaskFuture.cancel(true);
     }
 
     @Override
     public void stopAfterCompletion() {
+        working.set(false);
+
         try {
             if (currentTaskFuture != null) {
                 currentTaskFuture.get();
@@ -76,7 +79,5 @@ public class BakerImpl implements Baker {
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
         }
-
-        stop();
     }
 }

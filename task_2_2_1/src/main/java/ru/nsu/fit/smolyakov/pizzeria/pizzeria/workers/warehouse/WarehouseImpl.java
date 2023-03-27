@@ -56,23 +56,18 @@ public class WarehouseImpl implements Warehouse {
     }
 
     @Override
-    public void stop() {
+    public void forceStop() {
         working.set(false);
+        consumerProducerQueue.clear();
     }
 
     @Override
     public void stopAfterCompletion() {
+        working.set(false);
         try {
             consumerProducerQueue.waitUntilEmpty();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
-        stop();
-    }
-
-    @Override
-    public void clear() {
-        consumerProducerQueue.clear();
     }
 }

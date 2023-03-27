@@ -12,8 +12,6 @@ public interface Warehouse {
     Queue<Order> takeMultiple(int maxAmount);
 
     void start();
-    void stop();
+    void forceStop();
     void stopAfterCompletion();
-
-    void clear();
 }

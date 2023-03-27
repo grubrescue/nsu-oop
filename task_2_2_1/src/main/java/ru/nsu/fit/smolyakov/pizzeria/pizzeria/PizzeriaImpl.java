@@ -12,6 +12,7 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.baker.Baker;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.deliveryboy.DeliveryBoy;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue.OrderQueue;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.warehouse.Warehouse;
+import ru.nsu.fit.smolyakov.pizzeria.util.PizzeriaLogger;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -95,6 +96,8 @@ public class PizzeriaImpl implements PizzeriaOrderService,
         bakerList.forEach(Baker::start);
         warehouse.start();
         deliveryBoyList.forEach(DeliveryBoy::start);
+
+        PizzeriaLogger.message(this.pizzeriaName, "Started");
     }
 
     @Override
@@ -104,28 +107,28 @@ public class PizzeriaImpl implements PizzeriaOrderService,
 
     @Override
     public synchronized void stop() {
+        PizzeriaLogger.message(this.pizzeriaName, "Soft stop signal");
+
         working.set(false);
         bakerList.forEach(Baker::stopAfterCompletion);
         orderQueue.stopAfterCompletion();
         warehouse.stopAfterCompletion();
         deliveryBoyList.forEach(DeliveryBoy::stopAfterCompletion);
+
+        PizzeriaLogger.message(this.pizzeriaName, "Stopped (soft stop)");
     }
 
     @Override
     public synchronized void forceStop() {
+        PizzeriaLogger.message(this.pizzeriaName, "Force stop signal");
+
         working.set(false);
+        bakerList.forEach(Baker::forceStop);
+        orderQueue.forceStop();
+        deliveryBoyList.forEach(DeliveryBoy::forceStop);
+        warehouse.forceStop();
 
-        bakerList.forEach(Baker::stop);
-
-        orderQueue.stop();
-        orderQueue.clear();
-
-        deliveryBoyList.forEach(DeliveryBoy::stop);
-
-        warehouse.stop();
-        warehouse.clear();
-
-        executorService.shutdownNow(); // drops all running tasks right now
+        ;PizzeriaLogger.message(this.pizzeriaName, "Stopped (force stop)");
     }
 
     @Override

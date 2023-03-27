@@ -94,7 +94,7 @@ public class Order implements OrderInformationService {
     public synchronized void setStatus(Status status) {
         if (status.ordinal() - this.status.ordinal() == 1) {
             this.status = status;
-            PizzeriaLogger.orderInfo(LocalTime.now(), this);
+            PizzeriaLogger.orderInfo(this);
         } else {
             throw new IllegalArgumentException("inappropriate status change (some steps are missed)");
         }

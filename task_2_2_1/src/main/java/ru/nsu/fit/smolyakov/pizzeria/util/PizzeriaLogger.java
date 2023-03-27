@@ -9,22 +9,22 @@ public class PizzeriaLogger {
     private static final String orderFormat = "(%s) ~ %s: [%d], [%s];%n";
     private static final String messageFormat = "(%s) ~ %s: %s;%n";
 
-    public static void orderInfo(LocalTime time, OrderInformationService order) {
+    public static void orderInfo(OrderInformationService order) {
         System.out.printf(
             orderFormat,
-            time,
+            LocalTime.now(),
             order.getPizzeriaOrderService().getPizzeriaName(),
             order.getId(),
             order.getStatus().getCaption()
         );
     }
 
-//    public static void message(ZonedDateTime time, String pizzeriaName, String message) {
-//        System.out.printf(
-//            messageFormat,
-//            pizzeriaName,
-//            time,
-//            message
-//        );
-//    }
+    public static void message(String pizzeriaName, String message) {
+        System.out.printf(
+            messageFormat,
+            LocalTime.now(),
+            pizzeriaName,
+            message
+        );
+    }
 }

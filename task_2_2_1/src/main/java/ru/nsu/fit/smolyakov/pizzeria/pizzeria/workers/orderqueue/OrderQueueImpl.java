@@ -55,7 +55,8 @@ public class OrderQueueImpl implements OrderQueue {
     }
 
     @Override
-    public void stop() {
+    public void forceStop() {
+        consumerProducerQueue.clear();
         working.set(false);
     }
 
@@ -67,11 +68,6 @@ public class OrderQueueImpl implements OrderQueue {
             throw new RuntimeException(e);
         }
 
-        stop();
-    }
-
-    @Override
-    public void clear() {
-        consumerProducerQueue.clear();
+        working.set(false);
     }
 }
