@@ -10,4 +10,8 @@ public interface Warehouse {
     void put(Order order);
 
     Queue<Order> takeMultiple(int maxAmount);
+
+    void start();
+    void stop();
+    void forceStop();
 }

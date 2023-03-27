@@ -4,6 +4,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.warehouse.Warehouse;
 
 @JsonDeserialize(as = PizzeriaImpl.class)
-public interface PizzeriaDeliveryBoyService extends PizzeriaStatusPrinterService {
+public interface PizzeriaDeliveryBoyService extends PizzeriaEmployeeService {
     Warehouse getWarehouse();
 }

@@ -4,5 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonDeserialize(as = DeliveryBoyImpl.class)
 public interface DeliveryBoy {
-    void deliver();
+    void start();
+    void stop();
+    void forceStop();
 }

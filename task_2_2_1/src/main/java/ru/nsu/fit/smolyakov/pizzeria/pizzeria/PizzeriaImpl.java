@@ -1,5 +1,6 @@
 package ru.nsu.fit.smolyakov.pizzeria.pizzeria;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,16 +18,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.logging.Logger;
 
 public class PizzeriaImpl implements PizzeriaOrderService,
-    PizzeriaStatusPrinterService,
+    PizzeriaEmployeeService,
     PizzeriaOwnerService,
     PizzeriaBakerService,
     PizzeriaDeliveryBoyService {
 
     private final static ObjectMapper mapper = new ObjectMapper();
-    private final static PizzeriaPrinter pizzeriaPrinter = new PizzeriaPrinter(System.out);
+    private final ScheduledExecutorService executorService =
+        new ScheduledThreadPoolExecutor(Runtime.getRuntime().availableProcessors());
 
     @JsonProperty("name")
     private String pizzeriaName;
@@ -52,8 +58,11 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     @JsonIgnore
     private int orderId = 0;
 
-    private PizzeriaImpl() {
+    @JsonCreator
+    private PizzeriaImpl(@JsonProperty("name") String pizzeriaName) {
+        this.pizzeriaName = pizzeriaName;
     }
+
 
     public static PizzeriaOwnerService fromJson(InputStream stream) {
         try {
@@ -70,7 +79,6 @@ public class PizzeriaImpl implements PizzeriaOrderService,
         }
 
         var order = Order.create(this, orderId++, orderDescription);
-        printStatus(order);
 
         orderQueue.put(order);
 
@@ -82,8 +90,8 @@ public class PizzeriaImpl implements PizzeriaOrderService,
         working.set(true);
 
         orderQueue.start();
-        bakerList.forEach(Baker::cook);
-        deliveryBoyList.forEach(DeliveryBoy::deliver);
+        bakerList.forEach(Baker::start);
+        deliveryBoyList.forEach(DeliveryBoy::start);
     }
 
     @Override
@@ -94,19 +102,14 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     @Override
     public synchronized void stop() {
         orderQueue.stop();
-//        bakerList.forEach(Baker::stop);
-//        deliveryBoyList.forEach(DeliveryBoy::deliver);
+        bakerList.forEach(Baker::stop);
+        deliveryBoyList.forEach(DeliveryBoy::stop);
         working.set(false);
     }
 
     @Override
     public PizzeriaOrderService getOrderService() {
         return this;
-    }
-
-    @Override
-    public void printStatus(OrderInformationService order) {
-        pizzeriaPrinter.print(order);
     }
 
     @Override
@@ -122,6 +125,16 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     @Override
     public String getPizzeriaName() {
         return pizzeriaName;
+    }
+
+    @Override
+    public void execute(Runnable task) {
+        executorService.execute(task);
+    }
+
+    @Override
+    public void schedule(int delayMillis, Runnable task) {
+        executorService.schedule(task, delayMillis, TimeUnit.MILLISECONDS);
     }
 }
 

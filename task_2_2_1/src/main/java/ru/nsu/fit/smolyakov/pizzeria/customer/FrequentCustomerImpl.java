@@ -3,15 +3,15 @@ package ru.nsu.fit.smolyakov.pizzeria.customer;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.OrderInformationService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription;
-import ru.nsu.fit.smolyakov.pizzeria.util.TasksExecutor;
 
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * An implementation of {@link FrequentCustomer} interface.
  * May be instantiated by
- * {@link #FrequentCustomerImpl(OrderDescription, PizzeriaOrderService, int)}
- * constructor.
+ * {@link FrequentCustomerFactory#instance(
+ * OrderDescription, PizzeriaOrderService, int)}.
  */
 public class FrequentCustomerImpl implements FrequentCustomer {
     private final OrderDescription orderDescription;
@@ -42,21 +42,12 @@ public class FrequentCustomerImpl implements FrequentCustomer {
      * Makes an order in this {@code FrequentCustomer}'s favourite
      * pizzeria.
      *
-     * Prints to {@link System#out} when a regular order is made,
+     * <p>Prints to {@link System#out} when a regular order is made,
      * either successfully or not.
      */
     @Override
     public void order() {
-        System.out.printf("(Customer %dms) Wanna order pizza... %n%n", frequencyMillis);
-        pizzeriaOrderService.makeOrder(orderDescription)
-            .ifPresentOrElse(
-                order ->
-                    System.out.printf("(Customer %dms) Pizza %d ordered! %n%n",
-                        frequencyMillis, order.getId()),
-                () ->
-                    System.out.printf("(Customer %dms) Pizza is not ordered, as pizzeria is not working! %n%n",
-                        frequencyMillis)
-            );
+        pizzeriaOrderService.makeOrder(orderDescription);
     }
 
     /**
@@ -66,17 +57,21 @@ public class FrequentCustomerImpl implements FrequentCustomer {
      * method.
      *
      * <p>All orders are processed in separated tasks
-     * which are to be executed by {@link TasksExecutor}
-     * singleton.
+     * which are to be executed by {@code executor}
+     * specified in {@link #FrequentCustomerImpl(
+     * ScheduledExecutorService, OrderDescription,
+     * PizzeriaOrderService, int)}
+     * constructor.
      *
      * @param times amount of times to order
      */
     @Override
     public void start(int times) {
         for (int i = 0; i < times; i++) {
-            TasksExecutor.INSTANCE.schedule(
+            executor.schedule(
                 this::order,
-                i * frequencyMillis
+                (long) i * frequencyMillis,
+                TimeUnit.MILLISECONDS
             );
         }
     }

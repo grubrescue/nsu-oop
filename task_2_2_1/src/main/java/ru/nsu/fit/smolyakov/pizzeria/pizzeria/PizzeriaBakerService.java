@@ -5,7 +5,7 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue.OrderQueue;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.warehouse.Warehouse;
 
 @JsonDeserialize(as = PizzeriaImpl.class)
-public interface PizzeriaBakerService extends PizzeriaStatusPrinterService {
+public interface PizzeriaBakerService extends PizzeriaEmployeeService {
     Warehouse getWarehouse();
 
     OrderQueue getOrderQueue();

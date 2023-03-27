@@ -4,5 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonDeserialize(as = BakerImpl.class)
 public interface Baker {
-    void cook();
+    void start();
+    void stop();
+    void forceStop();
 }

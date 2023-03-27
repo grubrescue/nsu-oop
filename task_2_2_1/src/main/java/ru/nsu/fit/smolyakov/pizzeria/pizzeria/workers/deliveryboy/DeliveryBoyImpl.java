@@ -7,8 +7,8 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaDeliveryBoyService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.Address;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription;
-import ru.nsu.fit.smolyakov.pizzeria.util.TasksExecutor;
 
+import java.util.Queue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DeliveryBoyImpl implements DeliveryBoy {
@@ -24,40 +24,58 @@ public class DeliveryBoyImpl implements DeliveryBoy {
     @JsonIgnore
     private final AtomicBoolean working = new AtomicBoolean(false);
 
-    private DeliveryBoyImpl() {
+    private DeliveryBoyImpl() {}
+
+    @Override
+    public void start() {
+        working.set(true);
+        waitForOrders();
+    }
+
+    private void waitForOrders() {
+         pizzeriaDeliveryBoyService.execute(() -> {
+             if (!working.get()) {
+                 return;
+             }
+
+             var warehouse = pizzeriaDeliveryBoyService.getWarehouse();
+             var orders = warehouse.takeMultiple(trunkCapacity);
+
+             orders.forEach(order -> order.setStatus(Order.Status.IN_DELIVERY));
+
+             deliverOrders(orders);
+         });
+    }
+
+    private void deliverOrders(Queue<Order> orders) {
+        for (var order : orders) {
+            pizzeriaDeliveryBoyService.schedule(
+                order.getOrderDescription()
+                    .address()
+                    .deliveryTimeMillis(),
+                () -> order.setStatus(Order.Status.DONE)
+            );
+        }
+
+        var timeToReachMostRemoteDestinationMillis =
+            orders.stream()
+                .map(Order::getOrderDescription)
+                .map(OrderDescription::address)
+                .map(Address::deliveryTimeMillis)
+                .max(Integer::compare).get();
+        comeBack(2 * timeToReachMostRemoteDestinationMillis);
+    }
+
+    private void comeBack(int afterMillis) {
+        pizzeriaDeliveryBoyService.schedule(
+            afterMillis,
+            this::waitForOrders
+        );
     }
 
     @Override
-    public void deliver() {
-         TasksExecutor.INSTANCE.execute(
-             () -> {
-                 var warehouse = pizzeriaDeliveryBoyService.getWarehouse();
-                 var orders = warehouse.takeMultiple(trunkCapacity);
-
-                 orders.forEach(order -> order.setStatus(Order.Status.IN_DELIVERY));
-                 orders.forEach(order -> pizzeriaDeliveryBoyService.printStatus(order));
-
-                 for (var order : orders) {
-                     TasksExecutor.INSTANCE.schedule(
-                         () -> {
-                             order.setStatus(Order.Status.DONE);
-                             pizzeriaDeliveryBoyService.printStatus(order);
-                         },
-                         order.getOrderDescription()
-                             .address()
-                             .deliveryTimeMillis()
-                     );
-                 }
-
-                 TasksExecutor.INSTANCE.schedule(
-                     this::deliver,
-                     orders.stream()
-                         .map(Order::getOrderDescription)
-                         .map(OrderDescription::address)
-                         .map(Address::deliveryTimeMillis)
-                         .max(Integer::compare).get()
-                 );
-             });
-        }
+    public void stop() {
+        working.set(false);
+    }
 }
 

@@ -1,5 +1,6 @@
 package ru.nsu.fit.smolyakov.pizzeria;
 
+import ru.nsu.fit.smolyakov.pizzeria.customer.FrequentCustomerFactory;
 import ru.nsu.fit.smolyakov.pizzeria.customer.FrequentCustomerImpl;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaImpl;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService;
@@ -15,7 +16,9 @@ public class Application {
 
         PizzeriaOrderService pizzeriaOrderService = pizzeriaOwnerService.getOrderService();
 
-        new FrequentCustomerImpl(
+        FrequentCustomerFactory frequentCustomerFactory = new FrequentCustomerFactory();
+
+        frequentCustomerFactory.instance(
             new OrderDescription(
                 new Address("ПИРОГОВА 4", 2000),
                 "ШАУРМА ЦЕЗАРЬЬ MAX"),
@@ -23,13 +26,12 @@ public class Application {
             600
         ).start(100);
 
-        new FrequentCustomerImpl(
-            new OrderDescription(
-                new Address("ПИРОГОВА 4", 2000),
-                "ШАУРМА ЦЕЗАРЬЬ MAX"),
-            pizzeriaOrderService,
-            50
-        ).start(100);
-
+//        frequentCustomerFactory.instance(
+//            new OrderDescription(
+//                new Address("ПИРОГОВА 4", 2000),
+//                "ШАУРМА ЦЕЗАРЬЬ MAX"),
+//            pizzeriaOrderService,
+//            50
+//        ).start(100);
     }
 }

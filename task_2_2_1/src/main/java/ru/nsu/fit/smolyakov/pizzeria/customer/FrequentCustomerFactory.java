@@ -6,9 +6,7 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDesc
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
-public enum FrequentCustomerFactory {
-    INSTANCE;
-
+public class FrequentCustomerFactory {
     private final ScheduledExecutorService threadPool =
         Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
 

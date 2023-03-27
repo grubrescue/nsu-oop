@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaBakerService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order;
-import ru.nsu.fit.smolyakov.pizzeria.util.TasksExecutor;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -20,39 +19,44 @@ public class BakerImpl implements Baker {
     private int id;
 
     @JsonIgnore
-    private final AtomicBoolean working = new AtomicBoolean(true);
+    private final AtomicBoolean working = new AtomicBoolean(false);
 
     private BakerImpl() {
     }
 
     @Override
-    public void cook() {
-        TasksExecutor.INSTANCE.execute(
-            () -> {
-                if (!working.get()) {
-                    return;
-                }
+    public void start() {
+        working.set(true);
+        waitForOrder();
+    }
 
-                var orderQueue = pizzeriaBakerService.getOrderQueue();
-                var warehouse = pizzeriaBakerService.getWarehouse();
-
-                var order = orderQueue.take();
-
-                order.setStatus(Order.Status.BEING_BAKED);
-                pizzeriaBakerService.printStatus(order);
-
-                TasksExecutor.INSTANCE.schedule(
-                    () -> {
-                        order.setStatus(Order.Status.WAITING_FOR_WAREHOUSE);
-                        pizzeriaBakerService.printStatus(order);
-
-                        warehouse.put(order);
-
-                        this.cook();
-                    },
-                    cookingTimeMillis
-                );
+    private void waitForOrder() {
+        pizzeriaBakerService.execute(() -> {
+            if (!working.get()) {
+                return;
             }
-        );
+
+            var orderQueue = pizzeriaBakerService.getOrderQueue();
+            var order = orderQueue.take();
+
+            order.setStatus(Order.Status.BEING_BAKED);
+            cookAndStore(order);
+        });
+    }
+
+    private void cookAndStore(Order order) {
+        pizzeriaBakerService.schedule(
+            cookingTimeMillis,
+            () -> {
+                order.setStatus(Order.Status.WAITING_FOR_WAREHOUSE);
+                var warehouse = pizzeriaBakerService.getWarehouse();
+                warehouse.put(order);
+                this.waitForOrder();
+            });
+    }
+
+    @Override
+    public void stop() {
+        working.set(false);
     }
 }

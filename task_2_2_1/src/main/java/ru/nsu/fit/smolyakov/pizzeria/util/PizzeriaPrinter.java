@@ -6,16 +6,12 @@ import java.io.PrintStream;
 
 public class PizzeriaPrinter {
     private static final String format = "~ %s: [%d], [%s];%n";
-    private final PrintStream printStream;
 
-    public PizzeriaPrinter(PrintStream printStream) {
-        this.printStream = printStream;
-    }
-
-    public void print(OrderInformationService order) {
-        printStream.printf(format,
+    public static String orderFormatted (OrderInformationService order) {
+        return format.formatted(
             order.getPizzeriaOrderService().getPizzeriaName(),
             order.getId(),
-            order.getStatus().getCaption());
+            order.getStatus().getCaption()
+        );
     }
 }

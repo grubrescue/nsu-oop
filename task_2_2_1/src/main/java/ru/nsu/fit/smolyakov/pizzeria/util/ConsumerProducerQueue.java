@@ -54,4 +54,8 @@ public class ConsumerProducerQueue<T> {
         notifyAll();
         return resultQueue;
     }
+
+    public synchronized void clear() {
+        queue.clear();
+    }
 }
