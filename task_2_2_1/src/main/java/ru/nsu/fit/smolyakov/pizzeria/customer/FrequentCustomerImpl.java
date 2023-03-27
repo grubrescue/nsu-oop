@@ -5,6 +5,8 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.OrderInformationServi
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription;
 import ru.nsu.fit.smolyakov.pizzeria.util.TasksExecutor;
 
+import java.util.concurrent.ScheduledExecutorService;
+
 /**
  * An implementation of {@link FrequentCustomer} interface.
  * May be instantiated by
@@ -15,18 +17,22 @@ public class FrequentCustomerImpl implements FrequentCustomer {
     private final OrderDescription orderDescription;
     private final PizzeriaOrderService pizzeriaOrderService;
     private final int frequencyMillis;
+    private final ScheduledExecutorService executor;
 
     /**
      * Constructs an instance of {@code FrequentCustomerImpl}.
      *
+     * @param executor an executor to put tasks into
      * @param orderDescription a description of performed repeated orders
      * @param pizzeriaOrderService a pizzeria to order pizza in
      * @param frequencyMillis a frequency with whom orders will be
      *                        performed by {@link #start(int)} method.
      */
-    public FrequentCustomerImpl(OrderDescription orderDescription,
+    public FrequentCustomerImpl(ScheduledExecutorService executor,
+                                OrderDescription orderDescription,
                                 PizzeriaOrderService pizzeriaOrderService,
                                 int frequencyMillis) {
+        this.executor = executor;
         this.orderDescription = orderDescription;
         this.pizzeriaOrderService = pizzeriaOrderService;
         this.frequencyMillis = frequencyMillis;
