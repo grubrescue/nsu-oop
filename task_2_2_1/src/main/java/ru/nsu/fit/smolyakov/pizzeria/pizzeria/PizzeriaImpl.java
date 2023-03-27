@@ -23,16 +23,20 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.logging.Logger;
 
-public class PizzeriaImpl implements PizzeriaOrderService,
+public class PizzeriaImpl implements PizzeriaCustomerService,
     PizzeriaEmployeeService,
     PizzeriaOwnerService,
     PizzeriaBakerService,
     PizzeriaDeliveryBoyService {
 
     private final static ObjectMapper mapper = new ObjectMapper();
+
+    @JsonIgnore
     private ScheduledExecutorService executorService;
+
+    @JsonIgnore
+    private final PizzeriaLogger logger;
 
     @JsonProperty("name")
     private String pizzeriaName;
@@ -61,8 +65,8 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     @JsonCreator
     private PizzeriaImpl(@JsonProperty("name") String pizzeriaName) {
         this.pizzeriaName = pizzeriaName;
+        this.logger = new PizzeriaLogger(pizzeriaName);
     }
-
 
     public static PizzeriaOwnerService fromJson(InputStream stream) {
         try {
@@ -78,7 +82,7 @@ public class PizzeriaImpl implements PizzeriaOrderService,
             return Optional.empty();
         }
 
-        var order = Order.create(this, orderId++, orderDescription);
+        var order = new Order(this, logger, orderId++, Order.Status.CREATED, orderDescription);
 
         orderQueue.put(order);
 
@@ -97,7 +101,7 @@ public class PizzeriaImpl implements PizzeriaOrderService,
         warehouse.start();
         deliveryBoyList.forEach(DeliveryBoy::start);
 
-        PizzeriaLogger.message(this.pizzeriaName, "Started");
+        logger.message("Started");
     }
 
     @Override
@@ -107,7 +111,7 @@ public class PizzeriaImpl implements PizzeriaOrderService,
 
     @Override
     public synchronized void stop() {
-        PizzeriaLogger.message(this.pizzeriaName, "Soft stop signal");
+        logger.message("Soft stop signal");
 
         working.set(false);
         bakerList.forEach(Baker::stopAfterCompletion);
@@ -115,12 +119,12 @@ public class PizzeriaImpl implements PizzeriaOrderService,
         warehouse.stopAfterCompletion();
         deliveryBoyList.forEach(DeliveryBoy::stopAfterCompletion);
 
-        PizzeriaLogger.message(this.pizzeriaName, "Stopped (soft stop)");
+        logger.message("Stopped (soft stop)");
     }
 
     @Override
     public synchronized void forceStop() {
-        PizzeriaLogger.message(this.pizzeriaName, "Force stop signal");
+        logger.message("Force stop signal");
 
         working.set(false);
         bakerList.forEach(Baker::forceStop);
@@ -128,11 +132,11 @@ public class PizzeriaImpl implements PizzeriaOrderService,
         deliveryBoyList.forEach(DeliveryBoy::forceStop);
         warehouse.forceStop();
 
-        ;PizzeriaLogger.message(this.pizzeriaName, "Stopped (force stop)");
+        logger.message("Stopped (force stop)");
     }
 
     @Override
-    public PizzeriaOrderService getOrderService() {
+    public PizzeriaCustomerService getOrderService() {
         return this;
     }
 

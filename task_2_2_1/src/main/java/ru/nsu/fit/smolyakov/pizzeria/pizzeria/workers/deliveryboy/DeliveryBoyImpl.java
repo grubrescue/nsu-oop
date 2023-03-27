@@ -85,9 +85,9 @@ public class DeliveryBoyImpl implements DeliveryBoy {
     }
 
     @Override
-    public void stopAfterCompletion() {
+    public synchronized void stopAfterCompletion() {
         try {
-            if (currentTaskFuture != null) {
+            if (currentTaskFuture != null && !currentTaskFuture.isDone()) {
                 currentTaskFuture.get();
             }
         } catch (InterruptedException ignored) {

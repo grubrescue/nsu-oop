@@ -1,6 +1,6 @@
 package ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order;
 
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaCustomerService;
 
 /**
  * Represents information that is allowed to be seen by the customer
@@ -11,9 +11,9 @@ public interface OrderInformationService {
      * Returns an interface that previously was used to make this order.
      * If customer likes a pizza, he can order one more.
      *
-     * @return a {@link PizzeriaOrderService}
+     * @return a {@link PizzeriaCustomerService}
      */
-    PizzeriaOrderService getPizzeriaOrderService();
+    PizzeriaCustomerService getPizzeriaCustomerService();
 
     /**
      * Returns current status of this order.

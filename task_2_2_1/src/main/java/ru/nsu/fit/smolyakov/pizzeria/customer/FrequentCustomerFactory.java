@@ -1,18 +1,26 @@
 package ru.nsu.fit.smolyakov.pizzeria.customer;
 
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaCustomerService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
+/**
+ * Creates instances of {@link FrequentCustomer} by
+ * {@link #instance(OrderDescription, PizzeriaCustomerService, int)} method.
+ *
+ * <p>Used implementation ({@link FrequentCustomerImpl} requires an
+ * {@link java.util.concurrent.ScheduledExecutorService} to schedule tasks;
+ * this factory shares one thread pool upo
+ */
 public class FrequentCustomerFactory {
     private final ScheduledExecutorService threadPool =
         Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
 
     public FrequentCustomer instance(OrderDescription orderDescription,
-                                     PizzeriaOrderService pizzeriaOrderService,
+                                     PizzeriaCustomerService pizzeriaCustomerService,
                                      int frequencyMillis) {
-        return new FrequentCustomerImpl(threadPool, orderDescription, pizzeriaOrderService, frequencyMillis);
+        return new FrequentCustomerImpl(threadPool, orderDescription, pizzeriaCustomerService, frequencyMillis);
     }
 }

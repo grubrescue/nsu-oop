@@ -1,9 +1,8 @@
 package ru.nsu.fit.smolyakov.pizzeria;
 
 import ru.nsu.fit.smolyakov.pizzeria.customer.FrequentCustomerFactory;
-import ru.nsu.fit.smolyakov.pizzeria.customer.FrequentCustomerImpl;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaImpl;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaCustomerService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOwnerService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.Address;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription;
@@ -14,7 +13,7 @@ public class Application {
             PizzeriaImpl.fromJson(Application.class.getResourceAsStream("/PizzeriaConfiguration.json"));
         pizzeriaOwnerService.start();
 
-        PizzeriaOrderService pizzeriaOrderService = pizzeriaOwnerService.getOrderService();
+        PizzeriaCustomerService pizzeriaCustomerService = pizzeriaOwnerService.getOrderService();
 
         FrequentCustomerFactory frequentCustomerFactory = new FrequentCustomerFactory();
 
@@ -22,7 +21,7 @@ public class Application {
             new OrderDescription(
                 new Address("ПИРОГОВА 4", 2000),
                 "ШАУРМА ЦЕЗАРЬЬ MAX"),
-            pizzeriaOrderService,
+            pizzeriaCustomerService,
             600
         ).start(100);
 
@@ -30,9 +29,15 @@ public class Application {
             new OrderDescription(
                 new Address("ПИРОГОВА 4", 2000),
                 "ШАУРМА ЦЕЗАРЬЬ MAX"),
-            pizzeriaOrderService,
+            pizzeriaCustomerService,
             50
         ).start(100);
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         pizzeriaOwnerService.stop();
 //        pizzeriaOwnerService.start();

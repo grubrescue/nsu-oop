@@ -11,5 +11,5 @@ public interface PizzeriaOwnerService {
     void stop();
     void forceStop();
 
-    PizzeriaOrderService getOrderService();
+    PizzeriaCustomerService getOrderService();
 }

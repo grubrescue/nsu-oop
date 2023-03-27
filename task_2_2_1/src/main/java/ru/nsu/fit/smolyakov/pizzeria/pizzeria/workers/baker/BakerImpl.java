@@ -71,7 +71,7 @@ public class BakerImpl implements Baker {
         working.set(false);
 
         try {
-            if (currentTaskFuture != null) {
+            if (currentTaskFuture != null && !currentTaskFuture.isDone()) {
                 currentTaskFuture.get();
             }
         } catch (InterruptedException ignored) {

@@ -1,7 +1,6 @@
 package ru.nsu.fit.smolyakov.pizzeria.customer;
 
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.OrderInformationService;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaCustomerService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription;
 
 import java.util.concurrent.ScheduledExecutorService;
@@ -11,11 +10,11 @@ import java.util.concurrent.TimeUnit;
  * An implementation of {@link FrequentCustomer} interface.
  * May be instantiated by
  * {@link FrequentCustomerFactory#instance(
- * OrderDescription, PizzeriaOrderService, int)}.
+ * OrderDescription, PizzeriaCustomerService, int)}.
  */
 public class FrequentCustomerImpl implements FrequentCustomer {
     private final OrderDescription orderDescription;
-    private final PizzeriaOrderService pizzeriaOrderService;
+    private final PizzeriaCustomerService pizzeriaCustomerService;
     private final int frequencyMillis;
     private final ScheduledExecutorService executor;
 
@@ -24,17 +23,17 @@ public class FrequentCustomerImpl implements FrequentCustomer {
      *
      * @param executor an executor to put tasks into
      * @param orderDescription a description of performed repeated orders
-     * @param pizzeriaOrderService a pizzeria to order pizza in
+     * @param pizzeriaCustomerService a pizzeria to order pizza in
      * @param frequencyMillis a frequency with whom orders will be
      *                        performed by {@link #start(int)} method.
      */
     public FrequentCustomerImpl(ScheduledExecutorService executor,
                                 OrderDescription orderDescription,
-                                PizzeriaOrderService pizzeriaOrderService,
+                                PizzeriaCustomerService pizzeriaCustomerService,
                                 int frequencyMillis) {
         this.executor = executor;
         this.orderDescription = orderDescription;
-        this.pizzeriaOrderService = pizzeriaOrderService;
+        this.pizzeriaCustomerService = pizzeriaCustomerService;
         this.frequencyMillis = frequencyMillis;
     }
 
@@ -47,7 +46,7 @@ public class FrequentCustomerImpl implements FrequentCustomer {
      */
     @Override
     public void order() {
-        pizzeriaOrderService.makeOrder(orderDescription);
+        pizzeriaCustomerService.makeOrder(orderDescription);
     }
 
     /**
@@ -60,7 +59,7 @@ public class FrequentCustomerImpl implements FrequentCustomer {
      * which are to be executed by {@code executor}
      * specified in {@link #FrequentCustomerImpl(
      * ScheduledExecutorService, OrderDescription,
-     * PizzeriaOrderService, int)}
+     * PizzeriaCustomerService, int)}
      * constructor.
      *
      * @param times amount of times to order

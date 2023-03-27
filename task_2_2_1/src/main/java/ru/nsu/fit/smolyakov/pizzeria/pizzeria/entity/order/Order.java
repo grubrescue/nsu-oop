@@ -1,12 +1,8 @@
 package ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order;
 
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaCustomerService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription;
 import ru.nsu.fit.smolyakov.pizzeria.util.PizzeriaLogger;
-
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZonedDateTime;
 
 /**
  * Represents an order, created by {@link ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaImpl}
@@ -41,42 +37,31 @@ public class Order implements OrderInformationService {
         }
     }
 
-    private final PizzeriaOrderService pizzeriaOrderService;
+    private final PizzeriaCustomerService pizzeriaCustomerService;
     private final int id;
     private final OrderDescription orderDescription;
 
+    private final PizzeriaLogger logger;
+
     private Status status;
 
-    private Order(PizzeriaOrderService pizzeriaOrderService,
-                  int id,
-                  Status status,
-                  OrderDescription orderDescription) {
-        this.pizzeriaOrderService = pizzeriaOrderService;
+    public Order(PizzeriaCustomerService pizzeriaCustomerService,
+                 PizzeriaLogger logger,
+                 int id,
+                 Status status,
+                 OrderDescription orderDescription) {
+        this.pizzeriaCustomerService = pizzeriaCustomerService;
+        this.logger = logger;
         this.status = status;
         this.id = id;
         this.orderDescription = orderDescription;
+
+        logger.orderInfo(this);
     }
 
-    /**
-     *
-     *
-     * @param pizzeriaOrderService
-     * @param id
-     * @param orderDescription
-     * @return
-     */
-    public static Order create(PizzeriaOrderService pizzeriaOrderService,
-                               int id,
-                               OrderDescription orderDescription) {
-        return new Order(pizzeriaOrderService, id, Status.CREATED, orderDescription);
-    }
-
-    /**
-     *
-     * @return
-     */
-    public PizzeriaOrderService getPizzeriaOrderService() {
-        return pizzeriaOrderService;
+    @Override
+    public PizzeriaCustomerService getPizzeriaCustomerService() {
+        return pizzeriaCustomerService;
     }
 
     /**
@@ -94,7 +79,7 @@ public class Order implements OrderInformationService {
     public synchronized void setStatus(Status status) {
         if (status.ordinal() - this.status.ordinal() == 1) {
             this.status = status;
-            PizzeriaLogger.orderInfo(this);
+            logger.orderInfo(this);
         } else {
             throw new IllegalArgumentException("inappropriate status change (some steps are missed)");
         }
