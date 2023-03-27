@@ -2,9 +2,11 @@ package ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order;
 
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription;
-import ru.nsu.fit.smolyakov.pizzeria.util.PizzeriaPrinter;
+import ru.nsu.fit.smolyakov.pizzeria.util.PizzeriaLogger;
 
-import java.util.logging.Logger;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
 
 /**
  * Represents an order, created by {@link ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaImpl}
@@ -42,7 +44,6 @@ public class Order implements OrderInformationService {
     private final PizzeriaOrderService pizzeriaOrderService;
     private final int id;
     private final OrderDescription orderDescription;
-    private final Logger logger;
 
     private Status status;
 
@@ -54,7 +55,6 @@ public class Order implements OrderInformationService {
         this.status = status;
         this.id = id;
         this.orderDescription = orderDescription;
-        this.logger = Logger.getLogger(pizzeriaOrderService.getPizzeriaName());
     }
 
     /**
@@ -94,7 +94,7 @@ public class Order implements OrderInformationService {
     public synchronized void setStatus(Status status) {
         if (status.ordinal() - this.status.ordinal() == 1) {
             this.status = status;
-            logger.info(PizzeriaPrinter.orderFormatted(this));
+            PizzeriaLogger.orderInfo(LocalTime.now(), this);
         } else {
             throw new IllegalArgumentException("inappropriate status change (some steps are missed)");
         }

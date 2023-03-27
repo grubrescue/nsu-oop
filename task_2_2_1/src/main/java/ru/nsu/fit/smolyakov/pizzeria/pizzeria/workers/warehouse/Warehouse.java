@@ -13,5 +13,7 @@ public interface Warehouse {
 
     void start();
     void stop();
-    void forceStop();
+    void stopAfterCompletion();
+
+    void clear();
 }

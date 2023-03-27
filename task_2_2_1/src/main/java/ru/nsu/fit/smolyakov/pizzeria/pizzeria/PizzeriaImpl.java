@@ -12,12 +12,12 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.baker.Baker;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.deliveryboy.DeliveryBoy;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue.OrderQueue;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.warehouse.Warehouse;
-import ru.nsu.fit.smolyakov.pizzeria.util.PizzeriaPrinter;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -31,8 +31,7 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     PizzeriaDeliveryBoyService {
 
     private final static ObjectMapper mapper = new ObjectMapper();
-    private final ScheduledExecutorService executorService =
-        new ScheduledThreadPoolExecutor(Runtime.getRuntime().availableProcessors());
+    private ScheduledExecutorService executorService;
 
     @JsonProperty("name")
     private String pizzeriaName;
@@ -87,10 +86,14 @@ public class PizzeriaImpl implements PizzeriaOrderService,
 
     @Override
     public synchronized void start() {
+        executorService =
+            new ScheduledThreadPoolExecutor(Runtime.getRuntime().availableProcessors());
+
         working.set(true);
 
         orderQueue.start();
         bakerList.forEach(Baker::start);
+        warehouse.start();
         deliveryBoyList.forEach(DeliveryBoy::start);
     }
 
@@ -101,10 +104,28 @@ public class PizzeriaImpl implements PizzeriaOrderService,
 
     @Override
     public synchronized void stop() {
-        orderQueue.stop();
-        bakerList.forEach(Baker::stop);
-        deliveryBoyList.forEach(DeliveryBoy::stop);
         working.set(false);
+        bakerList.forEach(Baker::stopAfterCompletion);
+        orderQueue.stopAfterCompletion();
+        warehouse.stopAfterCompletion();
+        deliveryBoyList.forEach(DeliveryBoy::stopAfterCompletion);
+    }
+
+    @Override
+    public synchronized void forceStop() {
+        working.set(false);
+
+        bakerList.forEach(Baker::stop);
+
+        orderQueue.stop();
+        orderQueue.clear();
+
+        deliveryBoyList.forEach(DeliveryBoy::stop);
+
+        warehouse.stop();
+        warehouse.clear();
+
+        executorService.shutdownNow(); // drops all running tasks right now
     }
 
     @Override
@@ -128,13 +149,13 @@ public class PizzeriaImpl implements PizzeriaOrderService,
     }
 
     @Override
-    public void execute(Runnable task) {
-        executorService.execute(task);
+    public Future<?> submit(Runnable task) {
+        return executorService.submit(task, null);
     }
 
     @Override
-    public void schedule(int delayMillis, Runnable task) {
-        executorService.schedule(task, delayMillis, TimeUnit.MILLISECONDS);
+    public Future<?> schedule(int delayMillis, Runnable task) {
+        return executorService.schedule(task, delayMillis, TimeUnit.MILLISECONDS);
     }
 }
 

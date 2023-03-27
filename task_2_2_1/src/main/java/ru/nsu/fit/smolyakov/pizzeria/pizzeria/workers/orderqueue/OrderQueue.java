@@ -12,6 +12,7 @@ public interface OrderQueue {
     void start();
 
     void stop();
+    void stopAfterCompletion();
 
-    void forceStop();
+    void clear();
 }

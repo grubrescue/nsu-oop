@@ -9,6 +9,7 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.Address;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription;
 
 import java.util.Queue;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DeliveryBoyImpl implements DeliveryBoy {
@@ -24,6 +25,9 @@ public class DeliveryBoyImpl implements DeliveryBoy {
     @JsonIgnore
     private final AtomicBoolean working = new AtomicBoolean(false);
 
+    @JsonIgnore
+    private Future<?> currentTaskFuture;
+
     private DeliveryBoyImpl() {}
 
     @Override
@@ -33,7 +37,7 @@ public class DeliveryBoyImpl implements DeliveryBoy {
     }
 
     private void waitForOrders() {
-         pizzeriaDeliveryBoyService.execute(() -> {
+         currentTaskFuture = pizzeriaDeliveryBoyService.submit(() -> {
              if (!working.get()) {
                  return;
              }
@@ -67,7 +71,7 @@ public class DeliveryBoyImpl implements DeliveryBoy {
     }
 
     private void comeBack(int afterMillis) {
-        pizzeriaDeliveryBoyService.schedule(
+        currentTaskFuture = pizzeriaDeliveryBoyService.schedule(
             afterMillis,
             this::waitForOrders
         );
@@ -76,6 +80,11 @@ public class DeliveryBoyImpl implements DeliveryBoy {
     @Override
     public void stop() {
         working.set(false);
+    }
+
+    @Override
+    public void stopAfterCompletion() {
+
     }
 }
 

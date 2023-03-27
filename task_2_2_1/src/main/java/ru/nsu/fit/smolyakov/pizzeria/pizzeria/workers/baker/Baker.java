@@ -6,5 +6,5 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 public interface Baker {
     void start();
     void stop();
-    void forceStop();
+    void stopAfterCompletion();
 }

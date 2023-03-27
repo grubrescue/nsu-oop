@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaBakerService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class BakerImpl implements Baker {
@@ -17,6 +19,9 @@ public class BakerImpl implements Baker {
 
     @JsonProperty("id")
     private int id;
+
+    @JsonIgnore
+    private Future<?> currentTaskFuture;
 
     @JsonIgnore
     private final AtomicBoolean working = new AtomicBoolean(false);
@@ -31,7 +36,7 @@ public class BakerImpl implements Baker {
     }
 
     private void waitForOrder() {
-        pizzeriaBakerService.execute(() -> {
+        currentTaskFuture = pizzeriaBakerService.submit(() -> {
             if (!working.get()) {
                 return;
             }
@@ -45,7 +50,7 @@ public class BakerImpl implements Baker {
     }
 
     private void cookAndStore(Order order) {
-        pizzeriaBakerService.schedule(
+        currentTaskFuture = pizzeriaBakerService.schedule(
             cookingTimeMillis,
             () -> {
                 order.setStatus(Order.Status.WAITING_FOR_WAREHOUSE);
@@ -58,5 +63,20 @@ public class BakerImpl implements Baker {
     @Override
     public void stop() {
         working.set(false);
+    }
+
+    @Override
+    public void stopAfterCompletion() {
+        try {
+            if (currentTaskFuture != null) {
+                currentTaskFuture.get();
+            }
+        } catch (InterruptedException ignored) {
+
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+
+        stop();
     }
 }

@@ -8,6 +8,8 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaEmployeeService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order;
 import ru.nsu.fit.smolyakov.pizzeria.util.ConsumerProducerQueue;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class OrderQueueImpl implements OrderQueue {
     @JsonBackReference(value = "orderQueue")
     private PizzeriaEmployeeService pizzeriaStatusPrinterService;
@@ -16,7 +18,7 @@ public class OrderQueueImpl implements OrderQueue {
     private final ConsumerProducerQueue<Order> consumerProducerQueue;
 
     @JsonIgnore
-    private boolean working = false;
+    private final AtomicBoolean working = new AtomicBoolean(false);
 
     @JsonCreator
     private OrderQueueImpl(@JsonProperty("capacity") int capacity) {
@@ -25,7 +27,7 @@ public class OrderQueueImpl implements OrderQueue {
 
     @Override
     public void put(Order order) {
-        if (!working) {
+        if (!working.get()) {
             return;
         }
 
@@ -48,12 +50,28 @@ public class OrderQueueImpl implements OrderQueue {
     }
 
     @Override
-    public synchronized void start() {
-        working = true;
+    public void start() {
+        working.set(true);
     }
 
     @Override
-    public synchronized void stop() {
-        working = false;
+    public void stop() {
+        working.set(false);
+    }
+
+    @Override
+    public void stopAfterCompletion() {
+        try {
+            consumerProducerQueue.waitUntilEmpty();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        stop();
+    }
+
+    @Override
+    public void clear() {
+        consumerProducerQueue.clear();
     }
 }

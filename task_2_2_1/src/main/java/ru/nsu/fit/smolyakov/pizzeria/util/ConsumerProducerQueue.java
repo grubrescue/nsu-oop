@@ -55,6 +55,14 @@ public class ConsumerProducerQueue<T> {
         return resultQueue;
     }
 
+    public synchronized void waitUntilEmpty() throws InterruptedException {
+        while (queue.size() != 0) {
+            wait();
+        }
+
+        notifyAll();
+    }
+
     public synchronized void clear() {
         queue.clear();
     }

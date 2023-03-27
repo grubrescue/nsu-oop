@@ -26,12 +26,15 @@ public class Application {
             600
         ).start(100);
 
-//        frequentCustomerFactory.instance(
-//            new OrderDescription(
-//                new Address("ПИРОГОВА 4", 2000),
-//                "ШАУРМА ЦЕЗАРЬЬ MAX"),
-//            pizzeriaOrderService,
-//            50
-//        ).start(100);
+        frequentCustomerFactory.instance(
+            new OrderDescription(
+                new Address("ПИРОГОВА 4", 2000),
+                "ШАУРМА ЦЕЗАРЬЬ MAX"),
+            pizzeriaOrderService,
+            50
+        ).start(100);
+
+        pizzeriaOwnerService.forceStop();
+        pizzeriaOwnerService.start();
     }
 }
