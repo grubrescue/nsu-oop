@@ -68,6 +68,9 @@ public class PizzeriaImpl implements PizzeriaCustomerService,
         this.logger = new PizzeriaLogger(pizzeriaName);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public static PizzeriaOwnerService fromJson(InputStream stream) {
         try {
             return mapper.readValue(stream, PizzeriaImpl.class);
@@ -76,6 +79,9 @@ public class PizzeriaImpl implements PizzeriaCustomerService,
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<OrderInformationService> makeOrder(OrderDescription orderDescription) {
         if (!working.get()) {
@@ -89,6 +95,9 @@ public class PizzeriaImpl implements PizzeriaCustomerService,
         return Optional.of(order);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public synchronized void start() {
         executorService =
@@ -104,11 +113,17 @@ public class PizzeriaImpl implements PizzeriaCustomerService,
         logger.message("Started");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isWorking() {
         return working.get();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public synchronized void stop() {
         logger.message("Soft stop signal");
@@ -118,10 +133,11 @@ public class PizzeriaImpl implements PizzeriaCustomerService,
         orderQueue.stopAfterCompletion();
         warehouse.stopAfterCompletion();
         deliveryBoyList.forEach(DeliveryBoy::stopAfterCompletion);
-
-        logger.message("Stopped (soft stop)");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public synchronized void forceStop() {
         logger.message("Force stop signal");
@@ -131,35 +147,51 @@ public class PizzeriaImpl implements PizzeriaCustomerService,
         orderQueue.forceStop();
         deliveryBoyList.forEach(DeliveryBoy::forceStop);
         warehouse.forceStop();
-
-        logger.message("Stopped (force stop)");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PizzeriaCustomerService getOrderService() {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Warehouse getWarehouse() {
         return warehouse;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public OrderQueue getOrderQueue() {
         return orderQueue;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getPizzeriaName() {
         return pizzeriaName;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Future<?> submit(Runnable task) {
         return executorService.submit(task, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Future<?> schedule(int delayMillis, Runnable task) {
         return executorService.schedule(task, delayMillis, TimeUnit.MILLISECONDS);

@@ -11,6 +11,7 @@ import ru.nsu.fit.smolyakov.pizzeria.util.ConsumerProducerQueue;
 import java.util.Queue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+
 public class WarehouseImpl implements Warehouse {
     @JsonBackReference(value = "warehouse")
     private PizzeriaEmployeeService pizzeriaStatusPrinterService;
@@ -26,6 +27,9 @@ public class WarehouseImpl implements Warehouse {
         consumerProducerQueue = new ConsumerProducerQueue<>(capacity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void put(Order order) {
         if (!working.get()) {
@@ -41,6 +45,9 @@ public class WarehouseImpl implements Warehouse {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Queue<Order> takeMultiple(int maxAmount) {
         try {
@@ -50,17 +57,26 @@ public class WarehouseImpl implements Warehouse {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void start() {
         working.set(true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void forceStop() {
         working.set(false);
         consumerProducerQueue.clear();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void stopAfterCompletion() {
         working.set(false);

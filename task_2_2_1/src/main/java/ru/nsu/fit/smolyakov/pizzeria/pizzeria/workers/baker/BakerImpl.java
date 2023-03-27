@@ -5,11 +5,31 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaBakerService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue.OrderQueue;
 
+import java.io.InputStream;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * An implementation of {@link Baker} interface.
+ *
+ * <p>Behaves as if a baker was a finite automata - firstly, he waits for
+ * an {@link Order} in a {@link OrderQueue}, then he does cooking,
+ * and, finally, he tries to put a pizza to a warehouse. Latter is
+ * incredibly small for a such a large pizzeria, so it locks every
+ * single second.
+ *
+ * <p>In fact, all cooking process is just sleeping for a {@code cookingTimeMillis}
+ * (specified in JSON).
+ *
+ * <p>Constructed from the JSON data, as specified in
+ * {@link ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaImpl#fromJson(InputStream)}.
+ *
+ * <p>Uses the shared {@link java.util.concurrent.ScheduledExecutorService}
+ * of {@link ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaImpl}.
+ */
 public class BakerImpl implements Baker {
     @JsonBackReference(value = "bakers")
     private PizzeriaBakerService pizzeriaBakerService;
@@ -29,6 +49,9 @@ public class BakerImpl implements Baker {
     private BakerImpl() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void start() {
         working.set(true);
@@ -60,12 +83,18 @@ public class BakerImpl implements Baker {
             });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void forceStop() {
         working.set(false);
         currentTaskFuture.cancel(true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void stopAfterCompletion() {
         working.set(false);

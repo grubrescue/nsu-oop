@@ -12,7 +12,8 @@ import java.util.concurrent.ScheduledExecutorService;
  *
  * <p>Used implementation ({@link FrequentCustomerImpl} requires an
  * {@link java.util.concurrent.ScheduledExecutorService} to schedule tasks;
- * this factory shares one thread pool upo
+ * one factory shares one thread pool between all created customers in terms
+ * of improving performance.
  */
 public class FrequentCustomerFactory {
     private final ScheduledExecutorService threadPool =

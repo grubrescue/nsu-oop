@@ -45,6 +45,15 @@ public class Order implements OrderInformationService {
 
     private Status status;
 
+    /**
+     * Constructs an instance of {@code order}.
+     *
+     * @param pizzeriaCustomerService a pizzeria customer service
+     * @param logger a logger that belong to pizzeria
+     * @param id an id given by pizzeria
+     * @param status a status
+     * @param orderDescription an order description
+     */
     public Order(PizzeriaCustomerService pizzeriaCustomerService,
                  PizzeriaLogger logger,
                  int id,
@@ -59,22 +68,27 @@ public class Order implements OrderInformationService {
         logger.orderInfo(this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PizzeriaCustomerService getPizzeriaCustomerService() {
         return pizzeriaCustomerService;
     }
 
     /**
-     *
-     * @return
+     * {@inheritDoc}
      */
     public synchronized Status getStatus() {
         return status;
     }
 
     /**
+     * Sets {@link Status} to a specified one.
      *
-     * @param status
+     * @param status specified status
+     * @throws IllegalArgumentException if an inappropriate status change occurred
+     *                                  (specifically, some steps are missed)
      */
     public synchronized void setStatus(Status status) {
         if (status.ordinal() - this.status.ordinal() == 1) {
@@ -86,16 +100,14 @@ public class Order implements OrderInformationService {
     }
 
     /**
-     *
-     * @return
+     * {@inheritDoc}
      */
     public int getId() {
         return id;
     }
 
     /**
-     *
-     * @return
+     * {@inheritDoc}
      */
     public OrderDescription getOrderDescription() {
         return orderDescription;

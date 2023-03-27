@@ -25,6 +25,9 @@ public class OrderQueueImpl implements OrderQueue {
         consumerProducerQueue = new ConsumerProducerQueue<>(capacity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void put(Order order) {
         if (!working.get()) {
@@ -40,6 +43,9 @@ public class OrderQueueImpl implements OrderQueue {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Order take() {
         try {
@@ -49,17 +55,26 @@ public class OrderQueueImpl implements OrderQueue {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void start() {
         working.set(true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void forceStop() {
         consumerProducerQueue.clear();
         working.set(false);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void stopAfterCompletion() {
         try {

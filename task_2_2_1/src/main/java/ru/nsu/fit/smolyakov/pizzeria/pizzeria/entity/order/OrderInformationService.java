@@ -16,17 +16,17 @@ public interface OrderInformationService {
     PizzeriaCustomerService getPizzeriaCustomerService();
 
     /**
-     * Returns current status of this order.
+     * Returns current {@link Order.Status} of this order.
      *
-     * @return current status of this order
+     * @return current status
      */
     Order.Status getStatus();
 
     /**
-     * Returns an identificator of this
+     * Returns an identifier of this
      * order given by pizzeria.
      *
-     * @return an identificator of this order
+     * @return an identifier of this order
      */
     int getId();
 }
