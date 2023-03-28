@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaEmployeeService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue.OrderQueue;
 import ru.nsu.fit.smolyakov.pizzeria.util.ConsumerProducerQueue;
 
 import java.util.Queue;
@@ -17,14 +16,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Reuses {@link ConsumerProducerQueue}.
  */
 public class WarehouseImpl implements Warehouse {
-    @JsonBackReference(value = "warehouse")
-    private PizzeriaEmployeeService pizzeriaStatusPrinterService;
-
     @JsonIgnore
     private final ConsumerProducerQueue<Order> consumerProducerQueue;
-
     @JsonIgnore
     private final AtomicBoolean working = new AtomicBoolean(false);
+    @JsonBackReference(value = "warehouse")
+    private PizzeriaEmployeeService pizzeriaStatusPrinterService;
 
     @JsonCreator
     private WarehouseImpl(@JsonProperty("capacity") int capacity) {

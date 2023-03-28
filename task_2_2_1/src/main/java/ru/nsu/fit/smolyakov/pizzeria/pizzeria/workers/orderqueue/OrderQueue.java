@@ -50,6 +50,7 @@ public interface OrderQueue {
 
     /**
      * Returns if there are more orders in a queue.
+     *
      * @return {@code true} if there are more orders in a queue
      */
     boolean isEmpty();

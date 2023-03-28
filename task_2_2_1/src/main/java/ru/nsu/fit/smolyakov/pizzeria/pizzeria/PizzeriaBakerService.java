@@ -12,12 +12,14 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.warehouse.Warehouse;
 public interface PizzeriaBakerService extends PizzeriaEmployeeService {
     /**
      * Returns a warehouse.
+     *
      * @return a warehouse.
      */
     Warehouse getWarehouse();
 
     /**
      * Returns an order queue.
+     *
      * @return an order queue.
      */
     OrderQueue getOrderQueue();

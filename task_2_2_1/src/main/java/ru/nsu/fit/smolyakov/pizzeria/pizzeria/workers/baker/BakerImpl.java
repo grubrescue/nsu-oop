@@ -31,20 +31,16 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * of {@link ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaImpl}.
  */
 public class BakerImpl implements Baker {
-    @JsonBackReference(value = "bakers")
-    private PizzeriaBakerService pizzeriaBakerService;
-
-    @JsonProperty("cookingTimeMillis")
-    private int cookingTimeMillis;
-
-    @JsonProperty("id")
-    private int id;
-
-    @JsonIgnore
-    private Future<?> currentTaskFuture;
-
     @JsonIgnore
     private final AtomicBoolean working = new AtomicBoolean(false);
+    @JsonBackReference(value = "bakers")
+    private PizzeriaBakerService pizzeriaBakerService;
+    @JsonProperty("cookingTimeMillis")
+    private int cookingTimeMillis;
+    @JsonProperty("id")
+    private int id;
+    @JsonIgnore
+    private Future<?> currentTaskFuture;
 
     private BakerImpl() {
     }

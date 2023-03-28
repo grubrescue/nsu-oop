@@ -35,7 +35,7 @@ public interface Warehouse {
      *                  (usually limited by his trunk capacity)
      * @return an order from the top of the queue
      * @throws IllegalArgumentException if {@code maxAmount}
-     *         is less than 1.
+     *                                  is less than 1.
      */
     Queue<Order> takeMultiple(int maxAmount);
 
@@ -59,6 +59,7 @@ public interface Warehouse {
 
     /**
      * Returns if there are more orders in a warehouse.
+     *
      * @return {@code true} if there are more orders in a warehouse
      */
     boolean isEmpty();

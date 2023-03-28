@@ -15,14 +15,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Reuses {@link ConsumerProducerQueue}.
  */
 public class OrderQueueImpl implements OrderQueue {
-    @JsonBackReference(value = "orderQueue")
-    private PizzeriaEmployeeService pizzeriaStatusPrinterService;
-
     @JsonIgnore
     private final ConsumerProducerQueue<Order> consumerProducerQueue;
-
     @JsonIgnore
     private final AtomicBoolean working = new AtomicBoolean(false);
+    @JsonBackReference(value = "orderQueue")
+    private PizzeriaEmployeeService pizzeriaStatusPrinterService;
 
     @JsonCreator
     private OrderQueueImpl(@JsonProperty("capacity") int capacity) {

@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
  * An implementation of {@link FrequentCustomer} interface.
  * May be instantiated by
  * {@link FrequentCustomerFactory#instance(
- * OrderDescription, PizzeriaCustomerService, int)}.
+ *OrderDescription, PizzeriaCustomerService, int)}.
  */
 public class FrequentCustomerImpl implements FrequentCustomer {
     private final OrderDescription orderDescription;
@@ -21,11 +21,11 @@ public class FrequentCustomerImpl implements FrequentCustomer {
     /**
      * Constructs an instance of {@code FrequentCustomerImpl}.
      *
-     * @param executor an executor to put tasks into
-     * @param orderDescription a description of performed repeated orders
+     * @param executor                an executor to put tasks into
+     * @param orderDescription        a description of performed repeated orders
      * @param pizzeriaCustomerService a pizzeria to order pizza in
-     * @param frequencyMillis a frequency with whom orders will be
-     *                        performed by {@link #start(int)} method.
+     * @param frequencyMillis         a frequency with whom orders will be
+     *                                performed by {@link #start(int)} method.
      */
     public FrequentCustomerImpl(ScheduledExecutorService executor,
                                 OrderDescription orderDescription,
@@ -58,7 +58,7 @@ public class FrequentCustomerImpl implements FrequentCustomer {
      * <p>All orders are processed in separated tasks
      * which are to be executed by {@code executor}
      * specified in {@link #FrequentCustomerImpl(
-     * ScheduledExecutorService, OrderDescription,
+     *ScheduledExecutorService, OrderDescription,
      * PizzeriaCustomerService, int)}
      * constructor.
      *

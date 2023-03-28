@@ -2,7 +2,6 @@ package ru.nsu.fit.smolyakov.pizzeria.util;
 
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.OrderInformationService;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -16,6 +15,7 @@ public class PizzeriaLogger {
 
     /**
      * Constructs.
+     *
      * @param pizzeriaName a name of a pizzeria
      */
     public PizzeriaLogger(String pizzeriaName) {
@@ -24,6 +24,7 @@ public class PizzeriaLogger {
 
     /**
      * Prints order info.
+     *
      * @param order order
      */
     public void orderInfo(OrderInformationService order) {
@@ -38,6 +39,7 @@ public class PizzeriaLogger {
 
     /**
      * Prints message.
+     *
      * @param message message
      */
     public void message(String message) {

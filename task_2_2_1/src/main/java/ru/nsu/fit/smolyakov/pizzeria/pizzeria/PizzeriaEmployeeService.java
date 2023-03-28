@@ -16,7 +16,7 @@ public interface PizzeriaEmployeeService {
      *
      * @param task a specified task
      * @return a {@link Future} instance, always returning {@code null}
-     *         on {@link Future#get()} method
+     * on {@link Future#get()} method
      */
     Future<?> submit(Runnable task);
 
@@ -25,9 +25,9 @@ public interface PizzeriaEmployeeService {
      * not earlier then after {@code delayMillis}.
      *
      * @param delayMillis a specified delay in milliseconds
-     * @param task a specified task
+     * @param task        a specified task
      * @return a {@link Future} instance, always returning {@code null}
-     *         on {@link Future#get()} method
+     * on {@link Future#get()} method
      */
     Future<?> schedule(int delayMillis, Runnable task);
 }

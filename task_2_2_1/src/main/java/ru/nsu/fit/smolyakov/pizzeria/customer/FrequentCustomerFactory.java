@@ -22,9 +22,9 @@ public class FrequentCustomerFactory {
     /**
      * Returns an instance of a {@link FrequentCustomer}.
      *
-     * @param orderDescription an order description
+     * @param orderDescription        an order description
      * @param pizzeriaCustomerService a pizzeria
-     * @param frequencyMillis a frequency
+     * @param frequencyMillis         a frequency
      * @return a new instance of a {@link FrequentCustomer}
      */
     public FrequentCustomer instance(OrderDescription orderDescription,

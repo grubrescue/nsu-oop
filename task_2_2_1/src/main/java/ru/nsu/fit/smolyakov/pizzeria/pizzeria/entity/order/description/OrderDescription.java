@@ -5,7 +5,7 @@ package ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description;
  * {@link ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaImpl#makeOrder(OrderDescription)}
  * in a pizzeria.
  *
- * @param address an address of a customer
+ * @param address               an address of a customer
  * @param additionalInformation some additional information about dishes, ingredients, preferences etc.
  */
 public record OrderDescription(

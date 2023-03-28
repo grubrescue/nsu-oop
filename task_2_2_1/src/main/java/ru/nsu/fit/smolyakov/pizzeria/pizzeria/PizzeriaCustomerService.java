@@ -14,6 +14,7 @@ import java.util.Optional;
 public interface PizzeriaCustomerService {
     /**
      * Returns a corresponding pizzeria name.
+     *
      * @return a pizzeria name
      */
     String getPizzeriaName();
@@ -21,6 +22,7 @@ public interface PizzeriaCustomerService {
     /**
      * Returns if corresponding pizzeria is working
      * and allows to create orders.
+     *
      * @return {@code true} if pizzeria is working
      */
     boolean isWorking();
@@ -30,8 +32,8 @@ public interface PizzeriaCustomerService {
      *
      * @param orderDescription a description of an order
      * @return an {@link Optional} of {@link OrderInformationService},
-     *         that allows to track order status, {@link Optional#empty()}
-     *         otherwise
+     * that allows to track order status, {@link Optional#empty()}
+     * otherwise
      */
     Optional<OrderInformationService> makeOrder(OrderDescription orderDescription);
 }

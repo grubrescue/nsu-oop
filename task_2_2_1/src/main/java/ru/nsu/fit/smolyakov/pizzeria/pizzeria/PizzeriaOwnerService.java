@@ -15,6 +15,7 @@ public interface PizzeriaOwnerService {
     /**
      * Returns if corresponding pizzeria is working
      * and allows to create orders.
+     *
      * @return {@code true} if pizzeria is working
      */
     boolean isWorking();
@@ -33,6 +34,7 @@ public interface PizzeriaOwnerService {
 
     /**
      * Returns an {@link PizzeriaCustomerService} interface designed for consumers.
+     *
      * @return an {@link PizzeriaCustomerService} interface designed for consumers.
      */
     PizzeriaCustomerService getOrderService();

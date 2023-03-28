@@ -66,7 +66,7 @@ public class ConsumerProducerQueue<T> {
      *
      * @param amount a maximum amount of items to take
      * @return a queue of items
-     * @throws InterruptedException if current thread was interrupted on block
+     * @throws InterruptedException     if current thread was interrupted on block
      * @throws IllegalArgumentException if a specified {@code amount} is less than 1
      */
     public synchronized Queue<T> takeMultiple(int amount) throws InterruptedException {
@@ -110,6 +110,7 @@ public class ConsumerProducerQueue<T> {
 
     /**
      * Returns {@code true} if this queue is empty.
+     *
      * @return {@code true} if this queue is empty
      */
     public synchronized boolean isEmpty() {

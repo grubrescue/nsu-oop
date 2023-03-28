@@ -34,34 +34,26 @@ public class PizzeriaImpl implements PizzeriaCustomerService,
     PizzeriaDeliveryBoyService {
 
     private final static ObjectMapper mapper = new ObjectMapper();
-
-    @JsonIgnore
-    private ScheduledExecutorService executorService;
-
     @JsonIgnore
     private final PizzeriaLogger logger;
-
+    @JsonIgnore
+    private final AtomicBoolean working = new AtomicBoolean(false);
+    @JsonIgnore
+    private ScheduledExecutorService executorService;
     @JsonProperty("name")
     private String pizzeriaName;
-
     @JsonProperty("orderQueue")
     @JsonManagedReference(value = "orderQueue")
     private OrderQueue orderQueue;
-
     @JsonProperty("warehouse")
     @JsonManagedReference(value = "warehouse")
     private Warehouse warehouse;
-
     @JsonProperty("bakers")
     @JsonManagedReference(value = "bakers")
     private List<Baker> bakerList;
-
     @JsonProperty("deliveryBoys")
     @JsonManagedReference(value = "deliveryBoys")
     private List<DeliveryBoy> deliveryBoyList;
-
-    @JsonIgnore
-    private final AtomicBoolean working = new AtomicBoolean(false);
     @JsonIgnore
     private int orderId = 0;
 

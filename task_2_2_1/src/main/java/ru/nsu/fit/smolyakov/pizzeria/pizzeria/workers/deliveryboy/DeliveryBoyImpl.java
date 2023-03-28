@@ -7,12 +7,9 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaDeliveryBoyService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.Address;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.baker.Baker;
-import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue.OrderQueue;
 
 import java.io.InputStream;
 import java.util.Queue;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -41,22 +38,19 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * of {@link ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaImpl}.
  */
 public class DeliveryBoyImpl implements DeliveryBoy {
-    @JsonBackReference(value = "deliveryBoys")
-    private PizzeriaDeliveryBoyService pizzeriaDeliveryBoyService;
-
-    @JsonProperty("trunkCapacity")
-    private int trunkCapacity;
-
-    @JsonProperty("id")
-    private int id;
-
     @JsonIgnore
     private final AtomicBoolean working = new AtomicBoolean(false);
-
+    @JsonBackReference(value = "deliveryBoys")
+    private PizzeriaDeliveryBoyService pizzeriaDeliveryBoyService;
+    @JsonProperty("trunkCapacity")
+    private int trunkCapacity;
+    @JsonProperty("id")
+    private int id;
     @JsonIgnore
     private Future<?> currentTaskFuture;
 
-    private DeliveryBoyImpl() {}
+    private DeliveryBoyImpl() {
+    }
 
     /**
      * {@inheritDoc}
@@ -68,18 +62,18 @@ public class DeliveryBoyImpl implements DeliveryBoy {
     }
 
     private void waitForOrders() {
-         currentTaskFuture = pizzeriaDeliveryBoyService.submit(() -> {
-             if (!working.get() && pizzeriaDeliveryBoyService.getWarehouse().isEmpty()) {
-                 return;
-             }
+        currentTaskFuture = pizzeriaDeliveryBoyService.submit(() -> {
+            if (!working.get() && pizzeriaDeliveryBoyService.getWarehouse().isEmpty()) {
+                return;
+            }
 
-             var warehouse = pizzeriaDeliveryBoyService.getWarehouse();
-             var orders = warehouse.takeMultiple(trunkCapacity);
+            var warehouse = pizzeriaDeliveryBoyService.getWarehouse();
+            var orders = warehouse.takeMultiple(trunkCapacity);
 
-             orders.forEach(order -> order.setStatus(Order.Status.IN_DELIVERY));
+            orders.forEach(order -> order.setStatus(Order.Status.IN_DELIVERY));
 
-             deliverOrders(orders);
-         });
+            deliverOrders(orders);
+        });
     }
 
     private void deliverOrders(Queue<Order> orders) {
