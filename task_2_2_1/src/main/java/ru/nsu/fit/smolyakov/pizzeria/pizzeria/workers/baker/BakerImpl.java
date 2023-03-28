@@ -60,7 +60,7 @@ public class BakerImpl implements Baker {
 
     private void waitForOrder() {
         currentTaskFuture = pizzeriaBakerService.submit(() -> {
-            if (!working.get()) {
+            if (!working.get() && pizzeriaBakerService.getOrderQueue().isEmpty()) {
                 return;
             }
 
@@ -100,7 +100,7 @@ public class BakerImpl implements Baker {
         working.set(false);
 
         try {
-            if (currentTaskFuture != null && !currentTaskFuture.isDone()) {
+            while (currentTaskFuture != null) {
                 currentTaskFuture.get();
             }
         } catch (InterruptedException ignored) {
@@ -108,5 +108,13 @@ public class BakerImpl implements Baker {
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isWorking() {
+        return working.get();
     }
 }

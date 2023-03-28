@@ -23,4 +23,14 @@ public interface Baker {
      * the goddamn pizzeria.
      */
     void stopAfterCompletion();
+
+    /**
+     * Returns if this baker is working.
+     * This method returns {@code true} if a worker
+     * received {@link #forceStop()} or {@link #stopAfterCompletion()},
+     * though he is allowed to finish his tasks.
+     *
+     * @return true if this baker is working
+     */
+    boolean isWorking();
 }

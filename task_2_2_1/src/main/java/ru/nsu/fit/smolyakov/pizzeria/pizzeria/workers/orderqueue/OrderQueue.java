@@ -47,4 +47,10 @@ public interface OrderQueue {
      * before they also go home.
      */
     void stopAfterCompletion();
+
+    /**
+     * Returns if there are more orders in a queue.
+     * @return {@code true} if there are more orders in a queue
+     */
+    boolean isEmpty();
 }

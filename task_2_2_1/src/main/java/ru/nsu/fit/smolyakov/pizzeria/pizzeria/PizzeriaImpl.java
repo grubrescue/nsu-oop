@@ -24,6 +24,9 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * An implementation of a pizzeria.
+ */
 public class PizzeriaImpl implements PizzeriaCustomerService,
     PizzeriaEmployeeService,
     PizzeriaOwnerService,

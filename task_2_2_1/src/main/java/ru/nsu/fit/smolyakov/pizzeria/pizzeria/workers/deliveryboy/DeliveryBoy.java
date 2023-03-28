@@ -24,4 +24,15 @@ public interface DeliveryBoy {
      * and drink beer called 387. This method also makes him happy.
      */
     void stopAfterCompletion();
+
+
+    /**
+     * Returns if this delivery boy is working.
+     * This method returns {@code true} if a worker
+     * received {@link #forceStop()} or {@link #stopAfterCompletion()},
+     * though he is allowed to finish his tasks.
+     *
+     * @return true if this delivery boy is working
+     */
+    boolean isWorking();
 }

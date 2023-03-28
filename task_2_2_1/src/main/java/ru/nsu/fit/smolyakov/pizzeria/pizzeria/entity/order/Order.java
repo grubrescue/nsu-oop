@@ -13,12 +13,39 @@ public class Order implements OrderInformationService {
      * Represents current status of this order.
      */
     public enum Status {
+        /**
+         * Created, waiting for acceptation.
+         */
         CREATED("Created, waiting for acceptation"),
+
+        /**
+         * Accepted, waiting for baker.
+         */
         ACCEPTED("Accepted, waiting for baker"),
+
+        /**
+         * Being baked.
+         */
         BEING_BAKED("Being baked"),
+
+        /**
+         * Baked, waiting for warehouse.
+         */
         WAITING_FOR_WAREHOUSE("Baked, waiting for warehouse"),
+
+        /**
+         * Accepted on warehouse, waiting for delivery.
+         */
         WAITING_FOR_DELIVERY("Accepted on warehouse, waiting for delivery"),
+
+        /**
+         * In delivery.
+         */
         IN_DELIVERY("In delivery"),
+
+        /**
+         * Delivered.
+         */
         DONE("Delivered");
 
         private final String caption;

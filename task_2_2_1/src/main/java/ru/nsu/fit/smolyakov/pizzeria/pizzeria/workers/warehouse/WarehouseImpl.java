@@ -6,12 +6,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaEmployeeService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order;
+import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue.OrderQueue;
 import ru.nsu.fit.smolyakov.pizzeria.util.ConsumerProducerQueue;
 
 import java.util.Queue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-
+/**
+ * An implementation of an {@link Warehouse} interface.
+ * Reuses {@link ConsumerProducerQueue}.
+ */
 public class WarehouseImpl implements Warehouse {
     @JsonBackReference(value = "warehouse")
     private PizzeriaEmployeeService pizzeriaStatusPrinterService;
@@ -85,5 +89,13 @@ public class WarehouseImpl implements Warehouse {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isEmpty() {
+        return consumerProducerQueue.isEmpty();
     }
 }

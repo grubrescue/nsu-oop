@@ -19,6 +19,14 @@ public class FrequentCustomerFactory {
     private final ScheduledExecutorService threadPool =
         Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
 
+    /**
+     * Returns an instance of a {@link FrequentCustomer}.
+     *
+     * @param orderDescription an order description
+     * @param pizzeriaCustomerService a pizzeria
+     * @param frequencyMillis a frequency
+     * @return a new instance of a {@link FrequentCustomer}
+     */
     public FrequentCustomer instance(OrderDescription orderDescription,
                                      PizzeriaCustomerService pizzeriaCustomerService,
                                      int frequencyMillis) {

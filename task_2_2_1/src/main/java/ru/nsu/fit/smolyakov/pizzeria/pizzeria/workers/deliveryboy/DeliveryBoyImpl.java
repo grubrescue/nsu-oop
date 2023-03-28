@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * An implementation of {@link DeliveryBoy} interface.
  *
- * <p>Behaves as if a baker was a finite automata - firstly, he waits for
+ * <p>Behaves as if a delivery boy was a finite automata - firstly, he waits for
  * an {@link Order} in a {@link ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.warehouse.Warehouse},
  * or multiple ones, then he delivers it, or them, to the destination address.
  *
@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  * <blockquote><pre>
  * <br/>(PIZZERIA)---(100ms)--->(CUSTOMER1)---(300ms)--->(CUSTOMER2)
- * <br/>(PIZZERIA)<----------------400ms-----------------(         )
+ * <br/>(PIZZERIA)&lt;----------------400ms-----------------(         )
  * </pre></blockquote>
  *
  * <p>In this example, all the time required for the delivery boy to deliver all orders
@@ -69,7 +69,7 @@ public class DeliveryBoyImpl implements DeliveryBoy {
 
     private void waitForOrders() {
          currentTaskFuture = pizzeriaDeliveryBoyService.submit(() -> {
-             if (!working.get()) {
+             if (!working.get() && pizzeriaDeliveryBoyService.getWarehouse().isEmpty()) {
                  return;
              }
 
@@ -122,17 +122,15 @@ public class DeliveryBoyImpl implements DeliveryBoy {
      */
     @Override
     public void stopAfterCompletion() {
-        try {
-            if (currentTaskFuture != null && !currentTaskFuture.isDone()) {
-                currentTaskFuture.get();
-            }
-        } catch (InterruptedException ignored) {
-
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        }
-
         working.set(false);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isWorking() {
+        return working.get();
     }
 }
 

@@ -10,6 +10,10 @@ import ru.nsu.fit.smolyakov.pizzeria.util.ConsumerProducerQueue;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * An implementation of an {@link OrderQueue} interface.
+ * Reuses {@link ConsumerProducerQueue}.
+ */
 public class OrderQueueImpl implements OrderQueue {
     @JsonBackReference(value = "orderQueue")
     private PizzeriaEmployeeService pizzeriaStatusPrinterService;
@@ -84,5 +88,13 @@ public class OrderQueueImpl implements OrderQueue {
         }
 
         working.set(false);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isEmpty() {
+        return consumerProducerQueue.isEmpty();
     }
 }

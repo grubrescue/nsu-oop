@@ -9,6 +9,8 @@ import java.util.Queue;
  * Represents an FIFO warehouse in a pizzeria. Allows to
  * {@link #put(Order)}} awaiting orders in it and
  * {@link #takeMultiple(int)} items from one.
+ *
+ * <p>Can be started, stopped or force stopped.
  */
 @JsonDeserialize(as = WarehouseImpl.class)
 public interface Warehouse {
@@ -54,4 +56,10 @@ public interface Warehouse {
      * will be able to go home.
      */
     void stopAfterCompletion();
+
+    /**
+     * Returns if there are more orders in a warehouse.
+     * @return {@code true} if there are more orders in a warehouse
+     */
+    boolean isEmpty();
 }
