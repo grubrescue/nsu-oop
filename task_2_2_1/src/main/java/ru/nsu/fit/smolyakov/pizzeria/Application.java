@@ -35,8 +35,8 @@ public class Application {
 
         frequentCustomerFactory.instance(
             new OrderDescription(
-                new Address("ПИРОГОВА 4", 2000),
-                "ШАУРМА ЦЕЗАРЬЬ MAX"),
+                new Address("ПИРОГОВА 18", 700),
+                "ДЕНЕР"),
             pizzeriaCustomerService,
             50
         ).start(100);
@@ -48,6 +48,5 @@ public class Application {
         }
 
         pizzeriaOwnerService.forceStop();
-        pizzeriaOwnerService.start();
     }
 }

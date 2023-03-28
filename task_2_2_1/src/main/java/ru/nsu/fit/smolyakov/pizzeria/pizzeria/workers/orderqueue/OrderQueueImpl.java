@@ -8,6 +8,8 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaEmployeeService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order;
 import ru.nsu.fit.smolyakov.pizzeria.util.ConsumerProducerQueue;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 /**
  * An implementation of an {@link OrderQueue} interface.
  * Reuses {@link ConsumerProducerQueue}.
