@@ -77,6 +77,11 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">Warehouse</span></div>
+<div class="block">Represents an FIFO warehouse in a pizzeria. Allows to
+ <a href="#put(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order)"><code>put(Order)</code></a>} awaiting orders in it and
+ <a href="#takeMultiple(int)"><code>takeMultiple(int)</code></a> items from one.
+
+ <p>Can be started, stopped or force stopped.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -93,19 +98,35 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#forceStop()" class="member-name-link">forceStop</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#put(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order)" class="member-name-link">put</a><wbr>(<a href="../../entity/order/Order.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order</a>&nbsp;order)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Removes all contained orders from the warehouse
+ and lets the reception go home right now.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#isEmpty()" class="member-name-link">isEmpty</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns if there are more orders in a warehouse.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#put(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order)" class="member-name-link">put</a><wbr>(<a href="../../entity/order/Order.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order</a>&nbsp;order)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Puts an order in a queue.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#stopAfterCompletion()" class="member-name-link">stopAfterCompletion</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Queue.html" title="class or interface in java.util" class="external-link">Queue</a>&lt;<a href="../../entity/order/Order.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#takeMultiple(int)" class="member-name-link">takeMultiple</a><wbr>(int&nbsp;maxAmount)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Initiates the warehouse.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#stopAfterCompletion()" class="member-name-link">stopAfterCompletion</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Allows the warehouse workers go home.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Queue.html" title="class or interface in java.util" class="external-link">Queue</a>&lt;<a href="../../entity/order/Order.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#takeMultiple(int)" class="member-name-link">takeMultiple</a><wbr>(int&nbsp;maxAmount)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Takes some orders from the queue.</div>
+</div>
 </div>
 </div>
 </div>
@@ -124,30 +145,70 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="put(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order)">
 <h3>put</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">put</span><wbr><span class="parameters">(<a href="../../entity/order/Order.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order</a>&nbsp;order)</span></div>
+<div class="block">Puts an order in a queue.
+
+ <p>This operation is blocking: if queue capacity is exhausted,
+ execution stops until previous statement won't become false.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>order</code> - a specified order to put into queue</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="takeMultiple(int)">
 <h3>takeMultiple</h3>
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Queue.html" title="class or interface in java.util" class="external-link">Queue</a>&lt;<a href="../../entity/order/Order.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order</a>&gt;</span>&nbsp;<span class="element-name">takeMultiple</span><wbr><span class="parameters">(int&nbsp;maxAmount)</span></div>
+<div class="block">Takes some orders from the queue.
+
+ <p>This operation is blocking: if queue is empty,
+ execution stops until previous statement won't become false.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>maxAmount</code> - a maximum amount of pizzas
+                  a delivery guy can bring with him
+                  (usually limited by his trunk capacity)</dd>
+<dt>Returns:</dt>
+<dd>an order from the top of the queue</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if <code>maxAmount</code>
+         is less than 1.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="start()">
 <h3>start</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">start</span>()</div>
+<div class="block">Initiates the warehouse.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="forceStop()">
 <h3>forceStop</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">forceStop</span>()</div>
+<div class="block">Removes all contained orders from the warehouse
+ and lets the reception go home right now.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="stopAfterCompletion()">
 <h3>stopAfterCompletion</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">stopAfterCompletion</span>()</div>
+<div class="block">Allows the warehouse workers go home. It is supposed that
+ delivery boys will deliver all pizzas before they also
+ will be able to go home.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="isEmpty()">
+<h3>isEmpty</h3>
+<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">isEmpty</span>()</div>
+<div class="block">Returns if there are more orders in a warehouse.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if there are more orders in a warehouse</dd>
+</dl>
 </section>
 </li>
 </ul>

@@ -77,6 +77,13 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">FrequentCustomerFactory</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Creates instances of <a href="FrequentCustomer.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.customer"><code>FrequentCustomer</code></a> by
+ <a href="#instance(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription,ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaCustomerService,int)"><code>instance(OrderDescription, PizzeriaCustomerService, int)</code></a> method.
+
+ <p>Used implementation (<a href="FrequentCustomerImpl.html" title="class in ru.nsu.fit.smolyakov.pizzeria.customer"><code>FrequentCustomerImpl</code></a> requires an
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ScheduledExecutorService.html" title="class or interface in java.util.concurrent" class="external-link"><code>ScheduledExecutorService</code></a> to schedule tasks;
+ one factory shares one thread pool between all created customers in terms
+ of improving performance.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -105,10 +112,12 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="FrequentCustomer.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.customer">FrequentCustomer</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#instance(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription,ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService,int)" class="member-name-link">instance</a><wbr>(<a href="../pizzeria/entity/order/description/OrderDescription.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description">OrderDescription</a>&nbsp;orderDescription,
- <a href="../pizzeria/PizzeriaOrderService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOrderService</a>&nbsp;pizzeriaOrderService,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#instance(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription,ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaCustomerService,int)" class="member-name-link">instance</a><wbr>(<a href="../pizzeria/entity/order/description/OrderDescription.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description">OrderDescription</a>&nbsp;orderDescription,
+ <a href="../pizzeria/PizzeriaCustomerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaCustomerService</a>&nbsp;pizzeriaCustomerService,
  int&nbsp;frequencyMillis)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns an instance of a <a href="FrequentCustomer.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.customer"><code>FrequentCustomer</code></a>.</div>
+</div>
 </div>
 </div>
 </div>
@@ -141,11 +150,20 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="instance(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription,ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOrderService,int)">
+<section class="detail" id="instance(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription,ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaCustomerService,int)">
 <h3>instance</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="FrequentCustomer.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.customer">FrequentCustomer</a></span>&nbsp;<span class="element-name">instance</span><wbr><span class="parameters">(<a href="../pizzeria/entity/order/description/OrderDescription.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description">OrderDescription</a>&nbsp;orderDescription,
- <a href="../pizzeria/PizzeriaOrderService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOrderService</a>&nbsp;pizzeriaOrderService,
+ <a href="../pizzeria/PizzeriaCustomerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaCustomerService</a>&nbsp;pizzeriaCustomerService,
  int&nbsp;frequencyMillis)</span></div>
+<div class="block">Returns an instance of a <a href="FrequentCustomer.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.customer"><code>FrequentCustomer</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>orderDescription</code> - an order description</dd>
+<dd><code>pizzeriaCustomerService</code> - a pizzeria</dd>
+<dd><code>frequencyMillis</code> - a frequency</dd>
+<dt>Returns:</dt>
+<dd>a new instance of a <a href="FrequentCustomer.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.customer"><code>FrequentCustomer</code></a></dd>
+</dl>
 </section>
 </li>
 </ul>

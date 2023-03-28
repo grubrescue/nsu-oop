@@ -82,6 +82,28 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">DeliveryBoyImpl</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="DeliveryBoy.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.deliveryboy">DeliveryBoy</a></span></div>
+<div class="block">An implementation of <a href="DeliveryBoy.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.deliveryboy"><code>DeliveryBoy</code></a> interface.
+
+ <p>Behaves as if a delivery boy was a finite automata - firstly, he waits for
+ an <a href="../../entity/order/Order.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order"><code>Order</code></a> in a <a href="../warehouse/Warehouse.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.warehouse"><code>Warehouse</code></a>,
+ or multiple ones, then he delivers it, or them, to the destination address.
+
+ <p>In order to simplify the difficult task of the delivery boy, imagine that the
+ Earth is flat and one-dimensional. So that, we can represent one on the coordinate line.
+
+ <blockquote><pre>
+ <br/>(PIZZERIA)---(100ms)--->(CUSTOMER1)---(300ms)--->(CUSTOMER2)
+ <br/>(PIZZERIA)&lt;----------------400ms-----------------(         )
+ </pre></blockquote>
+
+ <p>In this example, all the time required for the delivery boy to deliver all orders
+ and come back to pizzeria equals 800ms. This implementation follows this simplified logic.
+
+ <p>Constructed from the JSON data, as specified in
+ <a href="../../PizzeriaImpl.html#fromJson(java.io.InputStream)"><code>PizzeriaImpl.fromJson(InputStream)</code></a>.
+
+ <p>Uses the shared <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ScheduledExecutorService.html" title="class or interface in java.util.concurrent" class="external-link"><code>ScheduledExecutorService</code></a>
+ of <a href="../../PizzeriaImpl.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria"><code>PizzeriaImpl</code></a>.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -98,13 +120,25 @@ implements <a href="DeliveryBoy.html" title="interface in ru.nsu.fit.smolyakov.p
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#forceStop()" class="member-name-link">forceStop</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Allows a delivery boy to run away from work right here, right now.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isWorking()" class="member-name-link">isWorking</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns if this delivery boy is working.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stopAfterCompletion()" class="member-name-link">stopAfterCompletion</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Initiates delivery boy's work.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stopAfterCompletion()" class="member-name-link">stopAfterCompletion</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Informs the delivery boy that he can finish his tasks and then go home
+ and drink beer called 387.</div>
+</div>
 </div>
 </div>
 </div>
@@ -126,6 +160,7 @@ implements <a href="DeliveryBoy.html" title="interface in ru.nsu.fit.smolyakov.p
 <section class="detail" id="start()">
 <h3>start</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">start</span>()</div>
+<div class="block">Initiates delivery boy's work.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="DeliveryBoy.html#start()">start</a></code>&nbsp;in interface&nbsp;<code><a href="DeliveryBoy.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.deliveryboy">DeliveryBoy</a></code></dd>
@@ -136,6 +171,8 @@ implements <a href="DeliveryBoy.html" title="interface in ru.nsu.fit.smolyakov.p
 <section class="detail" id="forceStop()">
 <h3>forceStop</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">forceStop</span>()</div>
+<div class="block">Allows a delivery boy to run away from work right here, right now.
+ Maybe because a pizzeria where he works is on fire. This method makes him happy.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="DeliveryBoy.html#forceStop()">forceStop</a></code>&nbsp;in interface&nbsp;<code><a href="DeliveryBoy.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.deliveryboy">DeliveryBoy</a></code></dd>
@@ -146,9 +183,27 @@ implements <a href="DeliveryBoy.html" title="interface in ru.nsu.fit.smolyakov.p
 <section class="detail" id="stopAfterCompletion()">
 <h3>stopAfterCompletion</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">stopAfterCompletion</span>()</div>
+<div class="block">Informs the delivery boy that he can finish his tasks and then go home
+ and drink beer called 387. This method also makes him happy.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="DeliveryBoy.html#stopAfterCompletion()">stopAfterCompletion</a></code>&nbsp;in interface&nbsp;<code><a href="DeliveryBoy.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.deliveryboy">DeliveryBoy</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isWorking()">
+<h3>isWorking</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isWorking</span>()</div>
+<div class="block">Returns if this delivery boy is working.
+ This method returns <code>true</code> if a worker
+ received <a href="DeliveryBoy.html#forceStop()"><code>DeliveryBoy.forceStop()</code></a> or <a href="DeliveryBoy.html#stopAfterCompletion()"><code>DeliveryBoy.stopAfterCompletion()</code></a>,
+ though he is allowed to finish his tasks.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="DeliveryBoy.html#isWorking()">isWorking</a></code>&nbsp;in interface&nbsp;<code><a href="DeliveryBoy.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.deliveryboy">DeliveryBoy</a></code></dd>
+<dt>Returns:</dt>
+<dd>true if this delivery boy is working</dd>
 </dl>
 </section>
 </li>

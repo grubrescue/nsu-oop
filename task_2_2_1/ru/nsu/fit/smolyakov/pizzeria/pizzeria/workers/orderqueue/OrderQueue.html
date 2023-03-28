@@ -77,6 +77,9 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">OrderQueue</span></div>
+<div class="block">Represents an FIFO order queue in a pizzeria. Allows to
+ <a href="#put(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order)"><code>put(Order)</code></a>} awaiting orders in it and
+ <a href="#take()"><code>take()</code></a> ones from it.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -93,19 +96,35 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#forceStop()" class="member-name-link">forceStop</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#put(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order)" class="member-name-link">put</a><wbr>(<a href="../../entity/order/Order.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order</a>&nbsp;order)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Removes all contained orders from the queue
+ and lets the reception go home right now.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#isEmpty()" class="member-name-link">isEmpty</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns if there are more orders in a queue.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#put(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order)" class="member-name-link">put</a><wbr>(<a href="../../entity/order/Order.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order</a>&nbsp;order)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Puts an order in a queue.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#stopAfterCompletion()" class="member-name-link">stopAfterCompletion</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../../entity/order/Order.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#take()" class="member-name-link">take</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Initiates the queue.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#stopAfterCompletion()" class="member-name-link">stopAfterCompletion</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Allows the reception go home.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../../entity/order/Order.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#take()" class="member-name-link">take</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Takes an order from the queue.</div>
+</div>
 </div>
 </div>
 </div>
@@ -124,30 +143,63 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="put(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order)">
 <h3>put</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">put</span><wbr><span class="parameters">(<a href="../../entity/order/Order.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order</a>&nbsp;order)</span></div>
+<div class="block">Puts an order in a queue.
+
+ <p>This operation is blocking: if queue capacity is exhausted,
+ execution stops until previous statement won't become false.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>order</code> - a specified order to put into queue</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="take()">
 <h3>take</h3>
 <div class="member-signature"><span class="return-type"><a href="../../entity/order/Order.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order</a></span>&nbsp;<span class="element-name">take</span>()</div>
+<div class="block">Takes an order from the queue.
+
+ <p>This operation is blocking: if queue is empty,
+ execution stops until previous statement won't become false.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>an order from the top of the queue</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="start()">
 <h3>start</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">start</span>()</div>
+<div class="block">Initiates the queue.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="forceStop()">
 <h3>forceStop</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">forceStop</span>()</div>
+<div class="block">Removes all contained orders from the queue
+ and lets the reception go home right now.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="stopAfterCompletion()">
 <h3>stopAfterCompletion</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">stopAfterCompletion</span>()</div>
+<div class="block">Allows the reception go home. It is supposed that
+ all other workers will be serving remaining orders
+ before they also go home.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="isEmpty()">
+<h3>isEmpty</h3>
+<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">isEmpty</span>()</div>
+<div class="block">Returns if there are more orders in a queue.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if there are more orders in a queue</dd>
+</dl>
 </section>
 </li>
 </ul>

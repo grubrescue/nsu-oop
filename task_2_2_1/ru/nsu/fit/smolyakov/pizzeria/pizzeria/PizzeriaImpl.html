@@ -76,12 +76,13 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="PizzeriaBakerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaBakerService</a></code>, <code><a href="PizzeriaDeliveryBoyService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaDeliveryBoyService</a></code>, <code><a href="PizzeriaEmployeeService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaEmployeeService</a></code>, <code><a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOrderService</a></code>, <code><a href="PizzeriaOwnerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOwnerService</a></code></dd>
+<dd><code><a href="PizzeriaBakerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaBakerService</a></code>, <code><a href="PizzeriaCustomerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaCustomerService</a></code>, <code><a href="PizzeriaDeliveryBoyService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaDeliveryBoyService</a></code>, <code><a href="PizzeriaEmployeeService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaEmployeeService</a></code>, <code><a href="PizzeriaOwnerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOwnerService</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">PizzeriaImpl</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOrderService</a>, <a href="PizzeriaEmployeeService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaEmployeeService</a>, <a href="PizzeriaOwnerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOwnerService</a>, <a href="PizzeriaBakerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaBakerService</a>, <a href="PizzeriaDeliveryBoyService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaDeliveryBoyService</a></span></div>
+implements <a href="PizzeriaCustomerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaCustomerService</a>, <a href="PizzeriaEmployeeService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaEmployeeService</a>, <a href="PizzeriaOwnerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOwnerService</a>, <a href="PizzeriaBakerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaBakerService</a>, <a href="PizzeriaDeliveryBoyService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaDeliveryBoyService</a></span></div>
+<div class="block">An implementation of a pizzeria.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -98,41 +99,64 @@ implements <a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.sm
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#forceStop()" class="member-name-link">forceStop</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Immediately stops a corresponding pizzeria.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="PizzeriaOwnerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOwnerService</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#fromJson(java.io.InputStream)" class="member-name-link">fromJson</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;stream)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"></div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="workers/orderqueue/OrderQueue.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue">OrderQueue</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrderQueue()" class="member-name-link">getOrderQueue</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOrderService</a></code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns an order queue.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="PizzeriaCustomerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaCustomerService</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrderService()" class="member-name-link">getOrderService</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns an <a href="PizzeriaCustomerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria"><code>PizzeriaCustomerService</code></a> interface designed for consumers.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPizzeriaName()" class="member-name-link">getPizzeriaName</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns a corresponding pizzeria name.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="workers/warehouse/Warehouse.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.warehouse">Warehouse</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWarehouse()" class="member-name-link">getWarehouse</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns a warehouse.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isWorking()" class="member-name-link">isWorking</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns if corresponding pizzeria is working
+ and allows to create orders.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="entity/order/OrderInformationService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">OrderInformationService</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#makeOrder(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription)" class="member-name-link">makeOrder</a><wbr>(<a href="entity/order/description/OrderDescription.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description">OrderDescription</a>&nbsp;orderDescription)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates an order in a corresponding pizzeria.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/Future.html" title="class or interface in java.util.concurrent" class="external-link">Future</a>&lt;?&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#schedule(int,java.lang.Runnable)" class="member-name-link">schedule</a><wbr>(int&nbsp;delayMillis,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;task)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Schedules a specified <code>task</code>.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Starts a corresponding pizzeria.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stop()" class="member-name-link">stop</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Stops a corresponding pizzeria.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/Future.html" title="class or interface in java.util.concurrent" class="external-link">Future</a>&lt;?&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#submit(java.lang.Runnable)" class="member-name-link">submit</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;task)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Submits a specified <code>task</code>.</div>
+</div>
 </div>
 </div>
 </div>
@@ -160,9 +184,16 @@ implements <a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.sm
 <section class="detail" id="makeOrder(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription)">
 <h3>makeOrder</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="entity/order/OrderInformationService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">OrderInformationService</a>&gt;</span>&nbsp;<span class="element-name">makeOrder</span><wbr><span class="parameters">(<a href="entity/order/description/OrderDescription.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description">OrderDescription</a>&nbsp;orderDescription)</span></div>
+<div class="block">Creates an order in a corresponding pizzeria.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PizzeriaOrderService.html#makeOrder(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription)">makeOrder</a></code>&nbsp;in interface&nbsp;<code><a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOrderService</a></code></dd>
+<dd><code><a href="PizzeriaCustomerService.html#makeOrder(ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDescription)">makeOrder</a></code>&nbsp;in interface&nbsp;<code><a href="PizzeriaCustomerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaCustomerService</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>orderDescription</code> - a description of an order</dd>
+<dt>Returns:</dt>
+<dd>an <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link"><code>Optional</code></a> of <a href="entity/order/OrderInformationService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order"><code>OrderInformationService</code></a>,
+         that allows to track order status, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html#empty()" title="class or interface in java.util" class="external-link"><code>Optional.empty()</code></a>
+         otherwise</dd>
 </dl>
 </section>
 </li>
@@ -170,6 +201,7 @@ implements <a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.sm
 <section class="detail" id="start()">
 <h3>start</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">start</span>()</div>
+<div class="block">Starts a corresponding pizzeria.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="PizzeriaOwnerService.html#start()">start</a></code>&nbsp;in interface&nbsp;<code><a href="PizzeriaOwnerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOwnerService</a></code></dd>
@@ -180,11 +212,15 @@ implements <a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.sm
 <section class="detail" id="isWorking()">
 <h3>isWorking</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isWorking</span>()</div>
+<div class="block">Returns if corresponding pizzeria is working
+ and allows to create orders.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PizzeriaOrderService.html#isWorking()">isWorking</a></code>&nbsp;in interface&nbsp;<code><a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOrderService</a></code></dd>
+<dd><code><a href="PizzeriaCustomerService.html#isWorking()">isWorking</a></code>&nbsp;in interface&nbsp;<code><a href="PizzeriaCustomerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaCustomerService</a></code></dd>
 <dt>Specified by:</dt>
 <dd><code><a href="PizzeriaOwnerService.html#isWorking()">isWorking</a></code>&nbsp;in interface&nbsp;<code><a href="PizzeriaOwnerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOwnerService</a></code></dd>
+<dt>Returns:</dt>
+<dd><code>true</code> if pizzeria is working</dd>
 </dl>
 </section>
 </li>
@@ -192,6 +228,8 @@ implements <a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.sm
 <section class="detail" id="stop()">
 <h3>stop</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">stop</span>()</div>
+<div class="block">Stops a corresponding pizzeria. That means pizzeria won't accept new orders,
+ but already created ones will be completed.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="PizzeriaOwnerService.html#stop()">stop</a></code>&nbsp;in interface&nbsp;<code><a href="PizzeriaOwnerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOwnerService</a></code></dd>
@@ -202,6 +240,8 @@ implements <a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.sm
 <section class="detail" id="forceStop()">
 <h3>forceStop</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">forceStop</span>()</div>
+<div class="block">Immediately stops a corresponding pizzeria. All created orders are treated as if they
+ have never existed.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="PizzeriaOwnerService.html#forceStop()">forceStop</a></code>&nbsp;in interface&nbsp;<code><a href="PizzeriaOwnerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOwnerService</a></code></dd>
@@ -211,10 +251,13 @@ implements <a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.sm
 <li>
 <section class="detail" id="getOrderService()">
 <h3>getOrderService</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOrderService</a></span>&nbsp;<span class="element-name">getOrderService</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="PizzeriaCustomerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaCustomerService</a></span>&nbsp;<span class="element-name">getOrderService</span>()</div>
+<div class="block">Returns an <a href="PizzeriaCustomerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria"><code>PizzeriaCustomerService</code></a> interface designed for consumers.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="PizzeriaOwnerService.html#getOrderService()">getOrderService</a></code>&nbsp;in interface&nbsp;<code><a href="PizzeriaOwnerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOwnerService</a></code></dd>
+<dt>Returns:</dt>
+<dd>an <a href="PizzeriaCustomerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria"><code>PizzeriaCustomerService</code></a> interface designed for consumers.</dd>
 </dl>
 </section>
 </li>
@@ -222,11 +265,14 @@ implements <a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.sm
 <section class="detail" id="getWarehouse()">
 <h3>getWarehouse</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="workers/warehouse/Warehouse.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.warehouse">Warehouse</a></span>&nbsp;<span class="element-name">getWarehouse</span>()</div>
+<div class="block">Returns a warehouse.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="PizzeriaBakerService.html#getWarehouse()">getWarehouse</a></code>&nbsp;in interface&nbsp;<code><a href="PizzeriaBakerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaBakerService</a></code></dd>
 <dt>Specified by:</dt>
 <dd><code><a href="PizzeriaDeliveryBoyService.html#getWarehouse()">getWarehouse</a></code>&nbsp;in interface&nbsp;<code><a href="PizzeriaDeliveryBoyService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaDeliveryBoyService</a></code></dd>
+<dt>Returns:</dt>
+<dd>a warehouse.</dd>
 </dl>
 </section>
 </li>
@@ -234,9 +280,12 @@ implements <a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.sm
 <section class="detail" id="getOrderQueue()">
 <h3>getOrderQueue</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="workers/orderqueue/OrderQueue.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue">OrderQueue</a></span>&nbsp;<span class="element-name">getOrderQueue</span>()</div>
+<div class="block">Returns an order queue.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="PizzeriaBakerService.html#getOrderQueue()">getOrderQueue</a></code>&nbsp;in interface&nbsp;<code><a href="PizzeriaBakerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaBakerService</a></code></dd>
+<dt>Returns:</dt>
+<dd>an order queue.</dd>
 </dl>
 </section>
 </li>
@@ -244,9 +293,12 @@ implements <a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.sm
 <section class="detail" id="getPizzeriaName()">
 <h3>getPizzeriaName</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getPizzeriaName</span>()</div>
+<div class="block">Returns a corresponding pizzeria name.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PizzeriaOrderService.html#getPizzeriaName()">getPizzeriaName</a></code>&nbsp;in interface&nbsp;<code><a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOrderService</a></code></dd>
+<dd><code><a href="PizzeriaCustomerService.html#getPizzeriaName()">getPizzeriaName</a></code>&nbsp;in interface&nbsp;<code><a href="PizzeriaCustomerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaCustomerService</a></code></dd>
+<dt>Returns:</dt>
+<dd>a pizzeria name</dd>
 </dl>
 </section>
 </li>
@@ -254,9 +306,16 @@ implements <a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.sm
 <section class="detail" id="submit(java.lang.Runnable)">
 <h3>submit</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/Future.html" title="class or interface in java.util.concurrent" class="external-link">Future</a>&lt;?&gt;</span>&nbsp;<span class="element-name">submit</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;task)</span></div>
+<div class="block">Submits a specified <code>task</code>. Latter will be executed
+ shortly.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="PizzeriaEmployeeService.html#submit(java.lang.Runnable)">submit</a></code>&nbsp;in interface&nbsp;<code><a href="PizzeriaEmployeeService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaEmployeeService</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>task</code> - a specified task</dd>
+<dt>Returns:</dt>
+<dd>a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/Future.html" title="class or interface in java.util.concurrent" class="external-link"><code>Future</code></a> instance, always returning <code>null</code>
+         on <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/Future.html#get()" title="class or interface in java.util.concurrent" class="external-link"><code>Future.get()</code></a> method</dd>
 </dl>
 </section>
 </li>
@@ -265,9 +324,17 @@ implements <a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.sm
 <h3>schedule</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/Future.html" title="class or interface in java.util.concurrent" class="external-link">Future</a>&lt;?&gt;</span>&nbsp;<span class="element-name">schedule</span><wbr><span class="parameters">(int&nbsp;delayMillis,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;task)</span></div>
+<div class="block">Schedules a specified <code>task</code>. Latter will be executed
+ not earlier then after <code>delayMillis</code>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="PizzeriaEmployeeService.html#schedule(int,java.lang.Runnable)">schedule</a></code>&nbsp;in interface&nbsp;<code><a href="PizzeriaEmployeeService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaEmployeeService</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>delayMillis</code> - a specified delay in milliseconds</dd>
+<dd><code>task</code> - a specified task</dd>
+<dt>Returns:</dt>
+<dd>a <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/Future.html" title="class or interface in java.util.concurrent" class="external-link"><code>Future</code></a> instance, always returning <code>null</code>
+         on <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/Future.html#get()" title="class or interface in java.util.concurrent" class="external-link"><code>Future.get()</code></a> method</dd>
 </dl>
 </section>
 </li>

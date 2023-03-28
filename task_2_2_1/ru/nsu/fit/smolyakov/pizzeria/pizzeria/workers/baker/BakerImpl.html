@@ -82,6 +82,22 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">BakerImpl</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="Baker.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.baker">Baker</a></span></div>
+<div class="block">An implementation of <a href="Baker.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.baker"><code>Baker</code></a> interface.
+
+ <p>Behaves as if a baker was a finite automata - firstly, he waits for
+ an <a href="../../entity/order/Order.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order"><code>Order</code></a> in a <a href="../orderqueue/OrderQueue.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue"><code>OrderQueue</code></a>, then he does cooking,
+ and, finally, he tries to put a pizza to a warehouse. Latter is
+ incredibly small for a such a large pizzeria, so it locks every
+ single second.
+
+ <p>In fact, all cooking process is just sleeping for a <code>cookingTimeMillis</code>
+ (specified in JSON).
+
+ <p>Constructed from the JSON data, as specified in
+ <a href="../../PizzeriaImpl.html#fromJson(java.io.InputStream)"><code>PizzeriaImpl.fromJson(InputStream)</code></a>.
+
+ <p>Uses the shared <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ScheduledExecutorService.html" title="class or interface in java.util.concurrent" class="external-link"><code>ScheduledExecutorService</code></a>
+ of <a href="../../PizzeriaImpl.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria"><code>PizzeriaImpl</code></a>.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -98,13 +114,25 @@ implements <a href="Baker.html" title="interface in ru.nsu.fit.smolyakov.pizzeri
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#forceStop()" class="member-name-link">forceStop</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Immediately stops baker's task.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isWorking()" class="member-name-link">isWorking</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns if this baker is working.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stopAfterCompletion()" class="member-name-link">stopAfterCompletion</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Initiates baker's work.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stopAfterCompletion()" class="member-name-link">stopAfterCompletion</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Allows to complete current task and then leave
+ the goddamn pizzeria.</div>
+</div>
 </div>
 </div>
 </div>
@@ -126,6 +154,7 @@ implements <a href="Baker.html" title="interface in ru.nsu.fit.smolyakov.pizzeri
 <section class="detail" id="start()">
 <h3>start</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">start</span>()</div>
+<div class="block">Initiates baker's work.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Baker.html#start()">start</a></code>&nbsp;in interface&nbsp;<code><a href="Baker.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.baker">Baker</a></code></dd>
@@ -136,6 +165,7 @@ implements <a href="Baker.html" title="interface in ru.nsu.fit.smolyakov.pizzeri
 <section class="detail" id="forceStop()">
 <h3>forceStop</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">forceStop</span>()</div>
+<div class="block">Immediately stops baker's task.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Baker.html#forceStop()">forceStop</a></code>&nbsp;in interface&nbsp;<code><a href="Baker.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.baker">Baker</a></code></dd>
@@ -146,9 +176,27 @@ implements <a href="Baker.html" title="interface in ru.nsu.fit.smolyakov.pizzeri
 <section class="detail" id="stopAfterCompletion()">
 <h3>stopAfterCompletion</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">stopAfterCompletion</span>()</div>
+<div class="block">Allows to complete current task and then leave
+ the goddamn pizzeria.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Baker.html#stopAfterCompletion()">stopAfterCompletion</a></code>&nbsp;in interface&nbsp;<code><a href="Baker.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.baker">Baker</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isWorking()">
+<h3>isWorking</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isWorking</span>()</div>
+<div class="block">Returns if this baker is working.
+ This method returns <code>true</code> if a worker
+ received <a href="Baker.html#forceStop()"><code>Baker.forceStop()</code></a> or <a href="Baker.html#stopAfterCompletion()"><code>Baker.stopAfterCompletion()</code></a>,
+ though he is allowed to finish his tasks.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="Baker.html#isWorking()">isWorking</a></code>&nbsp;in interface&nbsp;<code><a href="Baker.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.baker">Baker</a></code></dd>
+<dt>Returns:</dt>
+<dd>true if this baker is working</dd>
 </dl>
 </section>
 </li>

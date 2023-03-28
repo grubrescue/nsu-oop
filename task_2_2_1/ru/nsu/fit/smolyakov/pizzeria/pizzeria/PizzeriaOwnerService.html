@@ -77,6 +77,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">PizzeriaOwnerService</span></div>
+<div class="block">Provides functionality allowed to be used</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -93,19 +94,30 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#forceStop()" class="member-name-link">forceStop</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOrderService</a></code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Immediately stops a corresponding pizzeria.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="PizzeriaCustomerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaCustomerService</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getOrderService()" class="member-name-link">getOrderService</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns an <a href="PizzeriaCustomerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria"><code>PizzeriaCustomerService</code></a> interface designed for consumers.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#isWorking()" class="member-name-link">isWorking</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns if corresponding pizzeria is working
+ and allows to create orders.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Starts a corresponding pizzeria.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#stop()" class="member-name-link">stop</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Stops a corresponding pizzeria.</div>
+</div>
 </div>
 </div>
 </div>
@@ -124,30 +136,46 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="start()">
 <h3>start</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">start</span>()</div>
+<div class="block">Starts a corresponding pizzeria.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="isWorking()">
 <h3>isWorking</h3>
 <div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">isWorking</span>()</div>
+<div class="block">Returns if corresponding pizzeria is working
+ and allows to create orders.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code> if pizzeria is working</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="stop()">
 <h3>stop</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">stop</span>()</div>
+<div class="block">Stops a corresponding pizzeria. That means pizzeria won't accept new orders,
+ but already created ones will be completed.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="forceStop()">
 <h3>forceStop</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">forceStop</span>()</div>
+<div class="block">Immediately stops a corresponding pizzeria. All created orders are treated as if they
+ have never existed.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="getOrderService()">
 <h3>getOrderService</h3>
-<div class="member-signature"><span class="return-type"><a href="PizzeriaOrderService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaOrderService</a></span>&nbsp;<span class="element-name">getOrderService</span>()</div>
+<div class="member-signature"><span class="return-type"><a href="PizzeriaCustomerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria">PizzeriaCustomerService</a></span>&nbsp;<span class="element-name">getOrderService</span>()</div>
+<div class="block">Returns an <a href="PizzeriaCustomerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria"><code>PizzeriaCustomerService</code></a> interface designed for consumers.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>an <a href="PizzeriaCustomerService.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria"><code>PizzeriaCustomerService</code></a> interface designed for consumers.</dd>
+</dl>
 </section>
 </li>
 </ul>
