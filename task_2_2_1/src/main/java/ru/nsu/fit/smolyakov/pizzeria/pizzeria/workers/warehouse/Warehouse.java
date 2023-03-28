@@ -40,22 +40,10 @@ public interface Warehouse {
     Queue<Order> takeMultiple(int maxAmount);
 
     /**
-     * Initiates the warehouse.
-     */
-    void start();
-
-    /**
      * Removes all contained orders from the warehouse
      * and lets the reception go home right now.
      */
     void forceStop();
-
-    /**
-     * Allows the warehouse workers go home. It is supposed that
-     * delivery boys will deliver all pizzas before they also
-     * will be able to go home.
-     */
-    void stopAfterCompletion();
 
     /**
      * Returns if there are more orders in a warehouse.

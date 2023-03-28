@@ -8,7 +8,6 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.orderqueue.OrderQueue;
 
 import java.io.InputStream;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -94,16 +93,6 @@ public class BakerImpl implements Baker {
     @Override
     public void stopAfterCompletion() {
         working.set(false);
-
-        try {
-            while (currentTaskFuture != null) {
-                currentTaskFuture.get();
-            }
-        } catch (InterruptedException ignored) {
-
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     /**

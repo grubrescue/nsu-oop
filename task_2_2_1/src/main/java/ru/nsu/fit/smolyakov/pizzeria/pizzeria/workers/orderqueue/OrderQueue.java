@@ -31,22 +31,10 @@ public interface OrderQueue {
     Order take();
 
     /**
-     * Initiates the queue.
-     */
-    void start();
-
-    /**
      * Removes all contained orders from the queue
      * and lets the reception go home right now.
      */
     void forceStop();
-
-    /**
-     * Allows the reception go home. It is supposed that
-     * all other workers will be serving remaining orders
-     * before they also go home.
-     */
-    void stopAfterCompletion();
 
     /**
      * Returns if there are more orders in a queue.

@@ -8,8 +8,6 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaEmployeeService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.Order;
 import ru.nsu.fit.smolyakov.pizzeria.util.ConsumerProducerQueue;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 /**
  * An implementation of an {@link OrderQueue} interface.
  * Reuses {@link ConsumerProducerQueue}.
@@ -17,8 +15,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class OrderQueueImpl implements OrderQueue {
     @JsonIgnore
     private final ConsumerProducerQueue<Order> consumerProducerQueue;
-    @JsonIgnore
-    private final AtomicBoolean working = new AtomicBoolean(false);
+
     @JsonBackReference(value = "orderQueue")
     private PizzeriaEmployeeService pizzeriaStatusPrinterService;
 
@@ -32,10 +29,6 @@ public class OrderQueueImpl implements OrderQueue {
      */
     @Override
     public void put(Order order) {
-        if (!working.get()) {
-            return;
-        }
-
         try {
             consumerProducerQueue.put(order);
 
@@ -61,31 +54,8 @@ public class OrderQueueImpl implements OrderQueue {
      * {@inheritDoc}
      */
     @Override
-    public void start() {
-        working.set(true);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void forceStop() {
         consumerProducerQueue.clear();
-        working.set(false);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void stopAfterCompletion() {
-        try {
-            consumerProducerQueue.waitUntilEmpty();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        working.set(false);
     }
 
     /**

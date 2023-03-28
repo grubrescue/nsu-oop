@@ -47,7 +47,7 @@ public class Application {
             throw new RuntimeException(e);
         }
 
-        pizzeriaOwnerService.stop();
-//        pizzeriaOwnerService.start();
+        pizzeriaOwnerService.forceStop();
+        pizzeriaOwnerService.start();
     }
 }

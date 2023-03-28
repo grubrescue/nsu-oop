@@ -100,9 +100,7 @@ public class PizzeriaImpl implements PizzeriaCustomerService,
 
         working.set(true);
 
-        orderQueue.start();
         bakerList.forEach(Baker::start);
-        warehouse.start();
         deliveryBoyList.forEach(DeliveryBoy::start);
 
         logger.message("Started");
@@ -124,9 +122,8 @@ public class PizzeriaImpl implements PizzeriaCustomerService,
         logger.message("Soft stop signal");
 
         working.set(false);
+
         bakerList.forEach(Baker::stopAfterCompletion);
-        orderQueue.stopAfterCompletion();
-        warehouse.stopAfterCompletion();
         deliveryBoyList.forEach(DeliveryBoy::stopAfterCompletion);
     }
 
@@ -138,6 +135,7 @@ public class PizzeriaImpl implements PizzeriaCustomerService,
         logger.message("Force stop signal");
 
         working.set(false);
+
         bakerList.forEach(Baker::forceStop);
         orderQueue.forceStop();
         deliveryBoyList.forEach(DeliveryBoy::forceStop);
