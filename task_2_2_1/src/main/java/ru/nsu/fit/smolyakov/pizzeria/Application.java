@@ -22,7 +22,6 @@ public class Application {
         pizzeriaOwnerService.start();
 
         PizzeriaCustomerService pizzeriaCustomerService = pizzeriaOwnerService.getOrderService();
-
         FrequentCustomerFactory frequentCustomerFactory = new FrequentCustomerFactory();
 
         frequentCustomerFactory.instance(
@@ -31,7 +30,7 @@ public class Application {
                 "ШАУРМА ЦЕЗАРЬЬ MAX"),
             pizzeriaCustomerService,
             600
-        ).start(100);
+        ).start(5);
 
         frequentCustomerFactory.instance(
             new OrderDescription(
@@ -39,7 +38,7 @@ public class Application {
                 "ДЕНЕР"),
             pizzeriaCustomerService,
             50
-        ).start(100);
+        ).start(5);
 
         try {
             Thread.sleep(100);
@@ -48,5 +47,15 @@ public class Application {
         }
 
         pizzeriaOwnerService.forceStop();
+
+        pizzeriaOwnerService.start();
+
+        try {
+            Thread.sleep(400);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        pizzeriaOwnerService.stop();
     }
 }

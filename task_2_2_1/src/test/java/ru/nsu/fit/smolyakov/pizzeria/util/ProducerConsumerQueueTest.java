@@ -1,11 +1,17 @@
 package ru.nsu.fit.smolyakov.pizzeria.util;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProducerConsumerQueueTest {
     @Test
+    @Timeout(value = 10)
     public void threadTest() throws InterruptedException {
         var shop = new ConsumerProducerQueue<Integer>(10);
+
+        assertThat(shop.isEmpty()).isTrue();
 
         var consumer = new Thread(() -> {
             for (int i = 0; i < 19; i++) {
@@ -33,6 +39,9 @@ public class ProducerConsumerQueueTest {
 
         consumer.start();
         Thread.sleep(4123);
+        assertThat(shop.isEmpty()).isTrue();
         producer.start();
+        Thread.sleep(4123);
+        assertThat(shop.isEmpty()).isTrue();
     }
 }
