@@ -114,16 +114,6 @@ implements <a href="Warehouse.html" title="interface in ru.nsu.fit.smolyakov.piz
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Puts an order in a queue.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Initiates the warehouse.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stopAfterCompletion()" class="member-name-link">stopAfterCompletion</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Allows the warehouse workers go home.</div>
-</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Queue.html" title="class or interface in java.util" class="external-link">Queue</a>&lt;<a href="../../entity/order/Order.html" title="class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#takeMultiple(int)" class="member-name-link">takeMultiple</a><wbr>(int&nbsp;maxAmount)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -183,17 +173,6 @@ implements <a href="Warehouse.html" title="interface in ru.nsu.fit.smolyakov.piz
 </section>
 </li>
 <li>
-<section class="detail" id="start()">
-<h3>start</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">start</span>()</div>
-<div class="block">Initiates the warehouse.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Warehouse.html#start()">start</a></code>&nbsp;in interface&nbsp;<code><a href="Warehouse.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.warehouse">Warehouse</a></code></dd>
-</dl>
-</section>
-</li>
-<li>
 <section class="detail" id="forceStop()">
 <h3>forceStop</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">forceStop</span>()</div>
@@ -202,19 +181,6 @@ implements <a href="Warehouse.html" title="interface in ru.nsu.fit.smolyakov.piz
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Warehouse.html#forceStop()">forceStop</a></code>&nbsp;in interface&nbsp;<code><a href="Warehouse.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.warehouse">Warehouse</a></code></dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="stopAfterCompletion()">
-<h3>stopAfterCompletion</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">stopAfterCompletion</span>()</div>
-<div class="block">Allows the warehouse workers go home. It is supposed that
- delivery boys will deliver all pizzas before they also
- will be able to go home.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Warehouse.html#stopAfterCompletion()">stopAfterCompletion</a></code>&nbsp;in interface&nbsp;<code><a href="Warehouse.html" title="interface in ru.nsu.fit.smolyakov.pizzeria.pizzeria.workers.warehouse">Warehouse</a></code></dd>
 </dl>
 </section>
 </li>
