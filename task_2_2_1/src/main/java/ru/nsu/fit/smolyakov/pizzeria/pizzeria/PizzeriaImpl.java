@@ -64,7 +64,10 @@ public class PizzeriaImpl implements PizzeriaCustomerService,
     }
 
     /**
-     * {@inheritDoc}
+     * Creates {@code PizzeriaImpl} instance from JSON provided by
+     * {@code stream}.
+     *
+     * @param stream a JSON provider
      */
     public static PizzeriaOwnerService fromJson(InputStream stream) {
         try {

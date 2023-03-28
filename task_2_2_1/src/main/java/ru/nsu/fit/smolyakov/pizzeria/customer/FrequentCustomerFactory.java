@@ -30,6 +30,7 @@ public class FrequentCustomerFactory {
     public FrequentCustomer instance(OrderDescription orderDescription,
                                      PizzeriaCustomerService pizzeriaCustomerService,
                                      int frequencyMillis) {
-        return new FrequentCustomerImpl(threadPool, orderDescription, pizzeriaCustomerService, frequencyMillis);
+        return new FrequentCustomerImpl(threadPool, orderDescription,
+            pizzeriaCustomerService, frequencyMillis);
     }
 }
