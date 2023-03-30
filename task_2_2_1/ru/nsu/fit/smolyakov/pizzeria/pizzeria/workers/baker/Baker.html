@@ -93,24 +93,19 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#forceStop()" class="member-name-link">forceStop</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#isWorking()" class="member-name-link">isWorking</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Immediately stops baker's task.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#isWorking()" class="member-name-link">isWorking</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Returns if this baker is working.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Initiates baker's work.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#stopAfterCompletion()" class="member-name-link">stopAfterCompletion</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#stop()" class="member-name-link">stop</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Allows to complete current task and then leave
  the goddamn pizzeria.</div>
 </div>
@@ -136,16 +131,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="forceStop()">
-<h3>forceStop</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">forceStop</span>()</div>
-<div class="block">Immediately stops baker's task.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="stopAfterCompletion()">
-<h3>stopAfterCompletion</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">stopAfterCompletion</span>()</div>
+<section class="detail" id="stop()">
+<h3>stop</h3>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">stop</span>()</div>
 <div class="block">Allows to complete current task and then leave
  the goddamn pizzeria.</div>
 </section>
@@ -155,12 +143,12 @@ loadScripts(document, 'script');</script>
 <h3>isWorking</h3>
 <div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">isWorking</span>()</div>
 <div class="block">Returns if this baker is working.
- This method returns <code>true</code> if a worker
- received <a href="#forceStop()"><code>forceStop()</code></a> or <a href="#stopAfterCompletion()"><code>stopAfterCompletion()</code></a>,
+ This method returns <code>false</code> if a worker
+ received <a href="#stop()"><code>stop()</code></a>,
  though he is allowed to finish his tasks.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>true if this baker is working</dd>
+<dd><code>true</code> if this baker is working</dd>
 </dl>
 </section>
 </li>
