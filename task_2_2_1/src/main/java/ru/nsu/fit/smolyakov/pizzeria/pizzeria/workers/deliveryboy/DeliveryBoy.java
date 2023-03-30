@@ -14,22 +14,16 @@ public interface DeliveryBoy {
     void start();
 
     /**
-     * Allows a delivery boy to run away from work right here, right now.
-     * Maybe because a pizzeria where he works is on fire. This method makes him happy.
-     */
-    void forceStop();
-
-    /**
      * Informs the delivery boy that he can finish his tasks and then go home
-     * and drink beer called 387. This method also makes him happy.
+     * and drink beer called 387. This method makes him happy.
      */
-    void stopAfterCompletion();
+    void stop();
 
 
     /**
      * Returns if this delivery boy is working.
-     * This method returns {@code true} if a worker
-     * received {@link #forceStop()} or {@link #stopAfterCompletion()},
+     * This method returns {@code false} if a worker
+     * received {@link #stop()},
      * though he is allowed to finish his tasks.
      *
      * @return true if this delivery boy is working

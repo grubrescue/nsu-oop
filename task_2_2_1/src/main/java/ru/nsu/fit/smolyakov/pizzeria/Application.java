@@ -30,7 +30,7 @@ public class Application {
                 "ШАУРМА ЦЕЗАРЬЬ MAX"),
             pizzeriaCustomerService,
             600
-        ).start(5);
+        ).start(100);
 
         frequentCustomerFactory.instance(
             new OrderDescription(
@@ -38,7 +38,7 @@ public class Application {
                 "ДЕНЕР"),
             pizzeriaCustomerService,
             50
-        ).start(5);
+        ).start(100);
 
         try {
             Thread.sleep(100);
@@ -51,11 +51,12 @@ public class Application {
         pizzeriaOwnerService.start();
 
         try {
-            Thread.sleep(400);
+            Thread.sleep(1200);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 
-        pizzeriaOwnerService.stop();
+        pizzeriaOwnerService.forceStop();
+        pizzeriaOwnerService.start();
     }
 }

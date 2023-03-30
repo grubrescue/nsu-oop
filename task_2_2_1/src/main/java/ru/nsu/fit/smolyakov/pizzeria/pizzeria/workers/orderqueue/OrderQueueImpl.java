@@ -56,7 +56,7 @@ public class OrderQueueImpl implements OrderQueue {
      * {@inheritDoc}
      */
     @Override
-    public void forceStop() {
+    public void clear() {
         consumerProducerQueue.clear();
     }
 

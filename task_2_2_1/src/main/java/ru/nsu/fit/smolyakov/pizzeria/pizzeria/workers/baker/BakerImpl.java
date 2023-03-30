@@ -39,8 +39,6 @@ public class BakerImpl implements Baker {
     private int cookingTimeMillis;
     @JsonProperty("id")
     private int id;
-    @JsonIgnore
-    private Future<?> currentTaskFuture;
 
     private BakerImpl() {
     }
@@ -55,7 +53,7 @@ public class BakerImpl implements Baker {
     }
 
     private void waitForOrder() {
-        currentTaskFuture = pizzeriaBakerService.submit(() -> {
+        pizzeriaBakerService.submit(() -> {
             if (!working.get() && pizzeriaBakerService.getOrderQueue().isEmpty()) {
                 return;
             }
@@ -69,7 +67,7 @@ public class BakerImpl implements Baker {
     }
 
     private void cookAndStore(Order order) {
-        currentTaskFuture = pizzeriaBakerService.schedule(
+        pizzeriaBakerService.schedule(
             cookingTimeMillis,
             () -> {
                 order.setStatus(Order.Status.WAITING_FOR_WAREHOUSE);
@@ -83,16 +81,7 @@ public class BakerImpl implements Baker {
      * {@inheritDoc}
      */
     @Override
-    public void forceStop() {
-        working.set(false);
-        currentTaskFuture.cancel(true);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void stopAfterCompletion() {
+    public void stop() {
         working.set(false);
     }
 

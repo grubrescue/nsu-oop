@@ -56,7 +56,7 @@ public class WarehouseImpl implements Warehouse {
      * {@inheritDoc}
      */
     @Override
-    public void forceStop() {
+    public void clear() {
         consumerProducerQueue.clear();
     }
 

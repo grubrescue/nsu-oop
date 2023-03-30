@@ -34,9 +34,7 @@ public class PizzeriaImpl implements PizzeriaCustomerService,
     PizzeriaDeliveryBoyService {
 
     private final static ObjectMapper mapper = new ObjectMapper();
-    @JsonIgnore
     private final PizzeriaLogger logger;
-    @JsonIgnore
     private final AtomicBoolean working = new AtomicBoolean(false);
     @JsonIgnore
     private ScheduledExecutorService executorService;
@@ -56,6 +54,7 @@ public class PizzeriaImpl implements PizzeriaCustomerService,
     private List<DeliveryBoy> deliveryBoyList;
     @JsonIgnore
     private int orderId = 0;
+
 
     @JsonCreator
     private PizzeriaImpl(@JsonProperty("name") String pizzeriaName) {
@@ -126,8 +125,8 @@ public class PizzeriaImpl implements PizzeriaCustomerService,
 
         working.set(false);
 
-        bakerList.forEach(Baker::stopAfterCompletion);
-        deliveryBoyList.forEach(DeliveryBoy::stopAfterCompletion);
+        bakerList.forEach(Baker::stop);
+        deliveryBoyList.forEach(DeliveryBoy::stop);
     }
 
     /**
@@ -139,10 +138,10 @@ public class PizzeriaImpl implements PizzeriaCustomerService,
 
         working.set(false);
 
-        bakerList.forEach(Baker::forceStop);
-        orderQueue.forceStop();
-        deliveryBoyList.forEach(DeliveryBoy::forceStop);
-        warehouse.forceStop();
+        executorService.shutdownNow();
+
+        orderQueue.clear();
+        warehouse.clear();
     }
 
     /**

@@ -62,7 +62,7 @@ public class DeliveryBoyImpl implements DeliveryBoy {
     }
 
     private void waitForOrders() {
-        currentTaskFuture = pizzeriaDeliveryBoyService.submit(() -> {
+        pizzeriaDeliveryBoyService.submit(() -> {
             if (!working.get() && pizzeriaDeliveryBoyService.getWarehouse().isEmpty()) {
                 return;
             }
@@ -96,7 +96,7 @@ public class DeliveryBoyImpl implements DeliveryBoy {
     }
 
     private void comeBack(int afterMillis) {
-        currentTaskFuture = pizzeriaDeliveryBoyService.schedule(
+        pizzeriaDeliveryBoyService.schedule(
             afterMillis,
             this::waitForOrders
         );
@@ -106,16 +106,7 @@ public class DeliveryBoyImpl implements DeliveryBoy {
      * {@inheritDoc}
      */
     @Override
-    public void forceStop() {
-        currentTaskFuture.cancel(true);
-        working.set(false);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void stopAfterCompletion() {
+    public void stop() {
         working.set(false);
     }
 

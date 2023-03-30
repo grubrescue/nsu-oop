@@ -31,10 +31,9 @@ public interface OrderQueue {
     Order take();
 
     /**
-     * Removes all contained orders from the queue
-     * and lets the reception go home right now.
+     * Removes all contained orders from the queue.
      */
-    void forceStop();
+    void clear();
 
     /**
      * Returns if there are more orders in a queue.

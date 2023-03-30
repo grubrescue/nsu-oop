@@ -40,10 +40,9 @@ public interface Warehouse {
     Queue<Order> takeMultiple(int maxAmount);
 
     /**
-     * Removes all contained orders from the warehouse
-     * and lets the reception go home right now.
+     * Removes all contained orders from the warehouse.
      */
-    void forceStop();
+    void clear();
 
     /**
      * Returns if there are more orders in a warehouse.
