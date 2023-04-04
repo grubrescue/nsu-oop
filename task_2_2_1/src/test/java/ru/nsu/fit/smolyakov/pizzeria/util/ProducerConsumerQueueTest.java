@@ -3,9 +3,7 @@ package ru.nsu.fit.smolyakov.pizzeria.util;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
-import java.util.Arrays;
 import java.util.BitSet;
-import java.util.Map;
 import java.util.Queue;
 
 import static org.assertj.core.api.Assertions.assertThat;
