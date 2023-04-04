@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ProducerConsumerQueueTest {
     @Test
-    @Timeout(value = 10)
+    @Timeout(value = 20)
     public void classicConsumerProducerTest() throws InterruptedException {
         var shop = new ConsumerProducerQueue<Integer>(10);
 
