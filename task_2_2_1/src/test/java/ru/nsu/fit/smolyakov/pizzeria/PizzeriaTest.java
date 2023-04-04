@@ -12,7 +12,7 @@ import ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order.description.OrderDesc
 public class PizzeriaTest {
     @Test
     @Timeout(value = 11)
-    void justTest() {
+    void justMainTest() {
         Application.main(null);
     }
 }

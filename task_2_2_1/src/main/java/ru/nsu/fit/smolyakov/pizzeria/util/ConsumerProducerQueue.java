@@ -90,17 +90,6 @@ public class ConsumerProducerQueue<T> {
     }
 
     /**
-     * Blocks until queue is not empty.
-     *
-     * @throws InterruptedException if current thread was interrupted on block
-     */
-    public synchronized void waitUntilEmpty() throws InterruptedException {
-        while (queue.size() != 0) {
-            wait();
-        }
-    }
-
-    /**
      * Clears the queue.
      */
     public synchronized void clear() {
