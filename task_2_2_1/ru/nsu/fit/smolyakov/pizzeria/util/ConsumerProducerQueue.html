@@ -134,7 +134,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns an item from the head of a queue.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Queue.html" title="class or interface in java.util" class="external-link">Queue</a>&lt;<a href="ConsumerProducerQueue.html" title="type parameter in ConsumerProducerQueue">T</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#takeMultiple(int)" class="member-name-link">takeMultiple</a><wbr>(int&nbsp;amount)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#takeMultiple(int)" class="member-name-link">takeMultiple</a><wbr>(int&nbsp;maxAmount)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a queue of items from the head of a queue.</div>
 </div>
@@ -207,13 +207,13 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="takeMultiple(int)">
 <h3>takeMultiple</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Queue.html" title="class or interface in java.util" class="external-link">Queue</a>&lt;<a href="ConsumerProducerQueue.html" title="type parameter in ConsumerProducerQueue">T</a>&gt;</span>&nbsp;<span class="element-name">takeMultiple</span><wbr><span class="parameters">(int&nbsp;amount)</span>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Queue.html" title="class or interface in java.util" class="external-link">Queue</a>&lt;<a href="ConsumerProducerQueue.html" title="type parameter in ConsumerProducerQueue">T</a>&gt;</span>&nbsp;<span class="element-name">takeMultiple</span><wbr><span class="parameters">(int&nbsp;maxAmount)</span>
                       throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
 <div class="block">Returns a queue of items from the head of a queue. Blocks until
  queue is not empty.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>amount</code> - a maximum amount of items to take</dd>
+<dd><code>maxAmount</code> - a maximum amount of items to take</dd>
 <dt>Returns:</dt>
 <dd>a queue of items</dd>
 <dt>Throws:</dt>

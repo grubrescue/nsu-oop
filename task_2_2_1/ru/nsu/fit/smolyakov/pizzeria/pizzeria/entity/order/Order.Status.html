@@ -155,14 +155,19 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns human-readable meaning of current status.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Order.Status.html" title="enum class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order.Status</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#valueOf(java.lang.String)" class="member-name-link">valueOf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Order.Status.html" title="enum class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order.Status</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPreviousStatus()" class="member-name-link">getPreviousStatus</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns a <code>Status</code> that is supposed to be set before this one.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Order.Status.html" title="enum class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order.Status</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#valueOf(java.lang.String)" class="member-name-link">valueOf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns the enum constant of this class with the specified name.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Order.Status.html" title="enum class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order.Status</a>[]</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#values()" class="member-name-link">values</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Order.Status.html" title="enum class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order.Status</a>[]</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#values()" class="member-name-link">values</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns an array containing the constants of this enum class, in
 the order they are declared.</div>
 </div>
@@ -190,49 +195,49 @@ the order they are declared.</div>
 <section class="detail" id="CREATED">
 <h3>CREATED</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="Order.Status.html" title="enum class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order.Status</a></span>&nbsp;<span class="element-name">CREATED</span></div>
-<div class="block">Created, waiting for acceptation.</div>
+<div class="block">Created, waiting for acceptation. The first possible status.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="ACCEPTED">
 <h3>ACCEPTED</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="Order.Status.html" title="enum class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order.Status</a></span>&nbsp;<span class="element-name">ACCEPTED</span></div>
-<div class="block">Accepted, waiting for baker.</div>
+<div class="block">Accepted, waiting for baker. May be set only and only after <a href="#CREATED"><code>CREATED</code></a>.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="BEING_BAKED">
 <h3>BEING_BAKED</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="Order.Status.html" title="enum class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order.Status</a></span>&nbsp;<span class="element-name">BEING_BAKED</span></div>
-<div class="block">Being baked.</div>
+<div class="block">Being baked. May be set only and only after <a href="#ACCEPTED"><code>ACCEPTED</code></a>.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="WAITING_FOR_WAREHOUSE">
 <h3>WAITING_FOR_WAREHOUSE</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="Order.Status.html" title="enum class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order.Status</a></span>&nbsp;<span class="element-name">WAITING_FOR_WAREHOUSE</span></div>
-<div class="block">Baked, waiting for warehouse.</div>
+<div class="block">Baked, waiting for warehouse. May be set only and only after <a href="#BEING_BAKED"><code>BEING_BAKED</code></a></div>
 </section>
 </li>
 <li>
 <section class="detail" id="WAITING_FOR_DELIVERY">
 <h3>WAITING_FOR_DELIVERY</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="Order.Status.html" title="enum class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order.Status</a></span>&nbsp;<span class="element-name">WAITING_FOR_DELIVERY</span></div>
-<div class="block">Accepted on warehouse, waiting for delivery.</div>
+<div class="block">Accepted on warehouse, waiting for delivery. May be set only and only after <a href="#WAITING_FOR_WAREHOUSE"><code>WAITING_FOR_WAREHOUSE</code></a>.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="IN_DELIVERY">
 <h3>IN_DELIVERY</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="Order.Status.html" title="enum class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order.Status</a></span>&nbsp;<span class="element-name">IN_DELIVERY</span></div>
-<div class="block">In delivery.</div>
+<div class="block">In delivery. May be set only and only after <a href="#WAITING_FOR_DELIVERY"><code>WAITING_FOR_DELIVERY</code></a>.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="DONE">
 <h3>DONE</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="Order.Status.html" title="enum class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order.Status</a></span>&nbsp;<span class="element-name">DONE</span></div>
-<div class="block">Delivered.</div>
+<div class="block">Delivered. May be set only and only after <a href="#IN_DELIVERY"><code>IN_DELIVERY</code></a>.</div>
 </section>
 </li>
 </ul>
@@ -282,6 +287,17 @@ not permitted.)</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>a caption</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getPreviousStatus()">
+<h3>getPreviousStatus</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Order.Status.html" title="enum class in ru.nsu.fit.smolyakov.pizzeria.pizzeria.entity.order">Order.Status</a></span>&nbsp;<span class="element-name">getPreviousStatus</span>()</div>
+<div class="block">Returns a <code>Status</code> that is supposed to be set before this one.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>a previous status</dd>
 </dl>
 </section>
 </li>
