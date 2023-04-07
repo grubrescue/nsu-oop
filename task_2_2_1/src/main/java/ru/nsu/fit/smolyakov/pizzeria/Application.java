@@ -1,6 +1,6 @@
 package ru.nsu.fit.smolyakov.pizzeria;
 
-import ru.nsu.fit.smolyakov.pizzeria.customer.FrequentCustomerFactory;
+import ru.nsu.fit.smolyakov.pizzeria.customer.RandomFrequentCustomerFactory;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaCustomerService;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaImpl;
 import ru.nsu.fit.smolyakov.pizzeria.pizzeria.PizzeriaOwnerService;
@@ -22,22 +22,22 @@ public class Application {
         pizzeriaOwnerService.start();
 
         PizzeriaCustomerService pizzeriaCustomerService = pizzeriaOwnerService.getOrderService();
-        FrequentCustomerFactory frequentCustomerFactory = new FrequentCustomerFactory();
+        RandomFrequentCustomerFactory randomFrequentCustomerFactory = new RandomFrequentCustomerFactory();
 
-        frequentCustomerFactory.instance(
+        randomFrequentCustomerFactory.instance(
             new OrderDescription(
                 new Address("ПИРОГОВА 4", 2000),
                 "ШАУРМА ЦЕЗАРЬЬ MAX"),
             pizzeriaCustomerService,
-            600
+            2600
         ).start(100);
 
-        frequentCustomerFactory.instance(
+        randomFrequentCustomerFactory.instance(
             new OrderDescription(
                 new Address("ПИРОГОВА 18", 700),
                 "ДЕНЕР"),
             pizzeriaCustomerService,
-            50
+            3300
         ).start(100);
 
         try {

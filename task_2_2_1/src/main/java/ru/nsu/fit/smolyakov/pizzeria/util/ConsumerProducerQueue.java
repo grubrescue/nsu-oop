@@ -64,13 +64,13 @@ public class ConsumerProducerQueue<T> {
      * Returns a queue of items from the head of a queue. Blocks until
      * queue is not empty.
      *
-     * @param amount a maximum amount of items to take
+     * @param maxAmount a maximum amount of items to take
      * @return a queue of items
      * @throws InterruptedException     if current thread was interrupted on block
      * @throws IllegalArgumentException if a specified {@code amount} is less than 1
      */
-    public synchronized Queue<T> takeMultiple(int amount) throws InterruptedException {
-        if (amount < 1) {
+    public synchronized Queue<T> takeMultiple(int maxAmount) throws InterruptedException {
+        if (maxAmount < 1) {
             throw new IllegalArgumentException("amount should be at least 1");
         }
 
@@ -78,7 +78,7 @@ public class ConsumerProducerQueue<T> {
             wait();
         }
 
-        amount = Integer.min(amount, queue.size());
+        var amount = Integer.min(maxAmount, queue.size());
         Queue<T> resultQueue = new ArrayDeque<>(amount);
 
         while (resultQueue.size() < amount) {

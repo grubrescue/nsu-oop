@@ -61,7 +61,7 @@ public class Order implements OrderInformationService {
      *                                  (specifically, some steps are missed)
      */
     public synchronized void setStatus(Status status) {
-        if (status.ordinal() - this.status.ordinal() == 1) {
+        if (status.getPreviousStatus() == this.status) {
             this.status = status;
             logger.orderInfo(this);
         } else {
@@ -88,44 +88,46 @@ public class Order implements OrderInformationService {
      */
     public enum Status {
         /**
-         * Created, waiting for acceptation.
+         * Created, waiting for acceptation. The first possible status.
          */
-        CREATED("Created, waiting for acceptation"),
+        CREATED("Created, waiting for acceptation", null),
 
         /**
-         * Accepted, waiting for baker.
+         * Accepted, waiting for baker. May be set only and only after {@link #CREATED}.
          */
-        ACCEPTED("Accepted, waiting for baker"),
+        ACCEPTED("Accepted, waiting for baker", CREATED),
 
         /**
-         * Being baked.
+         * Being baked. May be set only and only after {@link #ACCEPTED}.
          */
-        BEING_BAKED("Being baked"),
+        BEING_BAKED("Being baked", ACCEPTED),
 
         /**
-         * Baked, waiting for warehouse.
+         * Baked, waiting for warehouse. May be set only and only after {@link #BEING_BAKED}
          */
-        WAITING_FOR_WAREHOUSE("Baked, waiting for warehouse"),
+        WAITING_FOR_WAREHOUSE("Baked, waiting for warehouse", BEING_BAKED),
 
         /**
-         * Accepted on warehouse, waiting for delivery.
+         * Accepted on warehouse, waiting for delivery. May be set only and only after {@link #WAITING_FOR_WAREHOUSE}.
          */
-        WAITING_FOR_DELIVERY("Accepted on warehouse, waiting for delivery"),
+        WAITING_FOR_DELIVERY("Accepted on warehouse, waiting for delivery", WAITING_FOR_WAREHOUSE),
 
         /**
-         * In delivery.
+         * In delivery. May be set only and only after {@link #WAITING_FOR_DELIVERY}.
          */
-        IN_DELIVERY("In delivery"),
+        IN_DELIVERY("In delivery", WAITING_FOR_DELIVERY),
 
         /**
-         * Delivered.
+         * Delivered. May be set only and only after {@link #IN_DELIVERY}.
          */
-        DONE("Delivered");
+        DONE("Delivered", IN_DELIVERY);
 
         private final String caption;
+        private final Status previousStatus;
 
-        private Status(String caption) {
+        Status(String caption, Status previousStatus) {
             this.caption = caption;
+            this.previousStatus = previousStatus;
         }
 
         /**
@@ -135,6 +137,15 @@ public class Order implements OrderInformationService {
          */
         public String getCaption() {
             return caption;
+        }
+
+        /**
+         * Returns a {@code Status} that is supposed to be set before this one.
+         *
+         * @return a previous status
+         */
+        public Status getPreviousStatus() {
+            return previousStatus;
         }
     }
 }

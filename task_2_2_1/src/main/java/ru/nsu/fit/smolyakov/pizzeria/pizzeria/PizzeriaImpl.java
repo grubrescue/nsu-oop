@@ -28,7 +28,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * An implementation of a pizzeria.
  */
 public class PizzeriaImpl implements PizzeriaCustomerService,
-    PizzeriaEmployeeService,
     PizzeriaOwnerService,
     PizzeriaBakerService,
     PizzeriaDeliveryBoyService {
