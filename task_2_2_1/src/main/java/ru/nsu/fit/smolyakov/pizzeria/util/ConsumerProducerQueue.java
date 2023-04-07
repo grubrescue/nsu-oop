@@ -33,7 +33,7 @@ public class ConsumerProducerQueue<T> {
      */
     public synchronized void put(T item) throws InterruptedException {
         if (Objects.isNull(item)) {
-            throw new NullPointerException();
+            throw new NullPointerException("null items are not allowed");
         }
 
         while (queue.size() == capacity) {
