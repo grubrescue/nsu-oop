@@ -57,5 +57,6 @@ public class Application {
         }
 
         pizzeriaOwnerService.stop();
+        randomFrequentCustomerFactory.stopCustomers();
     }
 }

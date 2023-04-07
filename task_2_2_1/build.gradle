@@ -30,6 +30,14 @@ test {
 jacocoTestReport {
     dependsOn test
 
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    "ru/nsu/fit/smolyakov/pizzeria/Application.class"
+            ])
+        }))
+    }
+
     reports {
         xml.required = true
         html.outputLocation = layout.buildDirectory.dir('jacocoHtml')

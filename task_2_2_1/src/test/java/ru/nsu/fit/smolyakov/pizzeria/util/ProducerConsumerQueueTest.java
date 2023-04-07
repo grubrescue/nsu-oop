@@ -55,7 +55,6 @@ public class ProducerConsumerQueueTest {
 
         assertThat(put.stream().distinct().count()).isEqualTo(19);
         assertThat(got.stream().distinct().count()).isEqualTo(19);
-
     }
 
     @Test
