@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Scene fx:id="scene" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.fit.smolyakov.snakegame.configtool.Presenter">
+    <root>
+        <VBox prefHeight="444.0" prefWidth="716.0">
+            <children>
+                <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="503.0" prefWidth="738.0" VBox.vgrow="ALWAYS">
+                    <children>
+                        <Button fx:id="saveButton" layoutX="436.0" layoutY="388.0" mnemonicParsing="false" onAction="#saveConfig" text="Save configuration" />
+                        <Text layoutX="26.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Speed" wrappingWidth="86.79100036621094" />
+                        <ChoiceBox fx:id="speedChoiceBox" layoutX="117.0" layoutY="205.0" prefHeight="26.0" prefWidth="157.0" />
+                        <Text layoutX="27.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Field size" wrappingWidth="66.79100036621094" />
+                        <Text layoutX="192.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x" wrappingWidth="12.791000366210938" />
+                        <Spinner fx:id="widthSpinner" editable="true" layoutX="116.0" layoutY="38.0" prefHeight="26.0" prefWidth="71.0" />
+                        <Spinner fx:id="heightSpinner" editable="true" layoutX="208.0" layoutY="38.0" prefHeight="26.0" prefWidth="71.0" />
+                        <Slider fx:id="javaFxScalingSlider" blockIncrement="4.0" layoutX="117.0" layoutY="82.0" majorTickUnit="16.0" max="72.0" min="16.0" minorTickCount="8" prefHeight="40.0" prefWidth="240.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="32.0" />
+                        <Text layoutX="27.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="JavaFX Scaling" />
+                        <Spinner fx:id="applesSpinner" editable="true" layoutX="117.0" layoutY="161.0" prefHeight="26.0" prefWidth="87.0" />
+                        <Text layoutX="26.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apples" />
+                        <Text fx:id="resolutionText" layoutX="119.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RESOLUTION TEXT" wrappingWidth="231.8509979248047">
+                            <font>
+                                <Font name="System Italic" size="13.0" />
+                            </font>
+                        </Text>
+                        <ChoiceBox fx:id="customFileLevelChoiceBox" layoutX="162.0" layoutY="349.0" prefWidth="150.0" />
+                        <Text layoutX="27.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level" wrappingWidth="53.433998107910156" />
+                        <ListView fx:id="aiListView" layoutX="443.0" layoutY="40.0" prefHeight="303.0" prefWidth="246.0" />
+                        <Text layoutX="415.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AI" />
+                        <Button fx:id="runGameButton" layoutX="594.0" layoutY="389.0" mnemonicParsing="false" onAction="#saveAndRunGame" text="Save and run" />
+                        <RadioButton fx:id="customLevelRadioButton" layoutX="56.0" layoutY="353.0" mnemonicParsing="false" text="Custom file" />
+                        <RadioButton fx:id="randomLevelRadioButton" layoutX="56.0" layoutY="382.0" mnemonicParsing="false" text="Random" />
+                        <RadioButton fx:id="borderLevelRadioButton" layoutX="56.0" layoutY="326.0" mnemonicParsing="false" text="Border" />
+                        <RadioButton fx:id="emptyLevelRadioButton" layoutX="56.0" layoutY="299.0" mnemonicParsing="false" text="Empty" />
+                        <Button fx:id="matchFieldButton" layoutX="291.0" layoutY="38.0" mnemonicParsing="false" onAction="#matchFieldSize" prefHeight="26.0" prefWidth="67.0" text="Match" />
+                        <Slider fx:id="randomLevelDensitySlider" blockIncrement="5.0" layoutX="160.0" layoutY="380.0" majorTickUnit="15.0" max="30.0" minorTickCount="5" prefHeight="40.0" prefWidth="152.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="32.0" />
+                  <Separator layoutX="383.0" layoutY="31.0" orientation="VERTICAL" prefHeight="381.0" prefWidth="3.0" />
+                  <Separator layoutX="23.0" layoutY="245.0" prefHeight="0.0" prefWidth="362.0" />
+                  <Separator layoutX="385.0" layoutY="364.0" prefHeight="0.0" prefWidth="305.0" />
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+    </root>
+</Scene>

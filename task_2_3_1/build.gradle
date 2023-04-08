@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
+}
+
+repositories {
+    mavenCentral()
+}
+
+mainClassName = 'ru.nsu.fit.smolyakov.snakegame.Application'
+
+dependencies {
+    implementation 'com.googlecode.lanterna:lanterna:3.1.1'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.2'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.14.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.1'
+    testImplementation 'org.assertj:assertj-core:3.23.1'
+}
+
+
+javafx {
+    version = '19'
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.graphics']
+}
+
+test {
+    useJUnitPlatform()
+    dependsOn cleanTest
+    testLogging.showStandardStreams = true
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+//
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it,
+                     exclude:
+                     [
+                             "ru/nsu/fit/smolyakov/snakegame/view/*",
+                             "ru/nsu/fit/smolyakov/snakegame/presenter/*",
+                             "ru/nsu/fit/smolyakov/snakegame/configtool/*",
+                             "ru/nsu/fit/smolyakov/snakegame/executable/*",
+                             "ru/nsu/fit/smolyakov/snakegame/model/snake/ai/*",
+                             "ru/nsu/fit/smolyakov/snakegame/Application.class",
+                     ],
+            )
+        }))
+    }
+
+    reports {
+        xml.required = true
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+}
