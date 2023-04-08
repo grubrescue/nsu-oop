@@ -21,17 +21,7 @@ public record Apple (Point location) {
         }
 
         public Apple instance() {
-            Point location;
-
-            do {
-
-            } while (gameField.metBarrier())
-            return new Apple(
-                new Point(
-                    rand.nextInt(gameField.width()),
-                    rand.nextInt(gameField.height())
-                )
-            );
+            return new Apple(Point.random(gameField.getWidth(), gameField.getHeight()));
         }
     }
 }
