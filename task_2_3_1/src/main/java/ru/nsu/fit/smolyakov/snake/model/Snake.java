@@ -32,20 +32,20 @@ public class Snake {
                                                         // к элементам в середине, так что мучаемся с индексами
     private MovingDirection movingDirection;
 
-    private GameModel gameModel;
+    private GameField gameField;
 
     public void setMovingDirection(MovingDirection movingDirection) {
         this.movingDirection = movingDirection;
     }
 
-    private Optional<Point> newHeadLocation() {
-        var currentHead = snakeBody.get(0);
-
-        var height =
-
-        return new Point(currentHead.x() + movingDirection.xMove(),
-            snakeBody.get(0).y() + movingDirection.yMove());
-    }
+//    private Optional<Point> newHeadLocation() {
+//        var currentHead = snakeBody.get(0);
+//
+//        var height =
+//
+//        return new Point(currentHead.x() + movingDirection.xMove(),
+//            snakeBody.get(0).y() + movingDirection.yMove());
+//    }
 
     /**
      *
@@ -63,15 +63,23 @@ public class Snake {
         // а еще змейка может сама себя покушать, почему бы и нет
         snakeBody.add(0, newHeadLocation);
 
-        gameModel.getApple().ifPresentOrElse(
+        gameField.getApple().ifPresentOrElse(
             apple -> {
                 if (apple.location().equals(newHeadLocation)) {
-                    gameModel.eatApple();
+                    gameField.eatApple();
                 }},
 
             () -> snakeBody.remove(snakeBody.size() - 1)
         );
 
         return newHeadLocation;
+    }
+
+    public Point head() {
+        return snakeBody.get(0);
+    }
+
+    public List<Point> getSnakeBody() {
+        return snakeBody;
     }
 }

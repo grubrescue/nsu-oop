@@ -1,11 +1,20 @@
 package ru.nsu.fit.smolyakov.snake.model;
 
-import ru.nsu.fit.smolyakov.snake.model.Snake;
+import java.util.List;
+import java.util.Optional;
 
-// TODO добавить препятствия ????
-// TODO по хорошему вообще ченить написать...
-public record GameField(int height, int width) {
-    public boolean metBarrier(Snake snake) {
-        return false; // TODO
-    }
+/**
+ * A main model that composes {@link Apple} and {@link Snake}'s, both player- and AI-driven.
+ */
+public interface GameField { // TODO разделить интерфейсы
+    List<Snake> getAISnakes();
+    Snake getPlayerSnake();
+    Optional<Apple> getApple();
+
+    int getWidth();
+    int getHeight();
+
+
+    //mutable
+
 }
