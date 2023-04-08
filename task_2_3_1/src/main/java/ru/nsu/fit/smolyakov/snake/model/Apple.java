@@ -1,8 +1,5 @@
 package ru.nsu.fit.smolyakov.snake.model;
 
-import ru.nsu.fit.smolyakov.snake.entity.GameField;
-import ru.nsu.fit.smolyakov.snake.entity.Point;
-
 import java.security.SecureRandom;
 
 /**
@@ -24,6 +21,11 @@ public record Apple (Point location) {
         }
 
         public Apple instance() {
+            Point location;
+
+            do {
+
+            } while (gameField.metBarrier())
             return new Apple(
                 new Point(
                     rand.nextInt(gameField.width()),
@@ -32,5 +34,4 @@ public record Apple (Point location) {
             );
         }
     }
-
 }
