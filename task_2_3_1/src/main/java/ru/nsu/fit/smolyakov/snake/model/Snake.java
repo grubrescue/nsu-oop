@@ -1,9 +1,8 @@
 package ru.nsu.fit.smolyakov.snake.model;
 
-import ru.nsu.fit.smolyakov.snake.entity.Point;
-
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 public class Snake {
     public enum MovingDirection {
@@ -29,24 +28,50 @@ public class Snake {
         }
     }
 
-
-    private List<Point> snakeBody = new LinkedList<>();
+    private List<Point> snakeBody = new LinkedList<>(); // к сожалению, в деке нельзя обращаться
+                                                        // к элементам в середине, так что мучаемся с индексами
     private MovingDirection movingDirection;
 
-    private GameModelImpl gameModelImpl;
+    private GameModel gameModel;
 
     public void setMovingDirection(MovingDirection movingDirection) {
         this.movingDirection = movingDirection;
     }
 
-    public void move() {
+    private Optional<Point> newHeadLocation() {
+        var currentHead = snakeBody.get(0);
+
+        var height =
+
+        return new Point(currentHead.x() + movingDirection.xMove(),
+            snakeBody.get(0).y() + movingDirection.yMove());
+    }
+
+    /**
+     *
+     * @return head location
+     */
+    public Point move() {
         var newHeadLocation = new Point(snakeBody.get(0).x() + movingDirection.xMove(),
                                         snakeBody.get(0).y() + movingDirection.yMove());
 
-        if (gameModelImpl.)
+        // TODO коллизии со стенками
+
+        // if коллизия с другими змейками
+        // по идее если змейки столкнулись головами то обе умрут... (грустно)
+        // если змейка покушает хвост другой змейки то тот исчезнет просто
+        // а еще змейка может сама себя покушать, почему бы и нет
+        snakeBody.add(0, newHeadLocation);
+
+        gameModel.getApple().ifPresentOrElse(
+            apple -> {
+                if (apple.location().equals(newHeadLocation)) {
+                    gameModel.eatApple();
+                }},
+
+            () -> snakeBody.remove(snakeBody.size() - 1)
+        );
+
+        return newHeadLocation;
     }
-
-
-
-
 }
