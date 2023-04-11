@@ -1,12 +1,19 @@
 package ru.nsu.fit.smolyakov.snake.model;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
 
 /**
  * A snake that moves on the {@link GameField}.
  *
+ * (Пока на русском)
+ * В целом порядок такой:
+ * 1. Вызываем shift(). Изначально все змейки перемещаются в соответствии со своим MovingDirection.
+ * 1.1. В случае, если на новом месте головы встретилось яблоко - оно съедается, а хвост не удаляется.
+ * Важно упомянуть, что если несколько змей пытаются съесть одно и то же яблоко, то они обе умирают в последующем шаге.
+ * 1.2. В случае, если на новом месте головы встретился барьер - змейка умирает.
+ * 2. После shift() вызывается checkSnakeCollisions(). Она проверяет, не встретилась ли голова змейки с другими змейками.
+ * 2.1. Если голова встретилась с головой - харакири.
+ * 2.2. Если голова встретилась с хвостом - змейка обрубается на месте встречи.
  */
 public class Snake {
     /**
@@ -16,25 +23,25 @@ public class Snake {
     public enum MovingDirection {
         /**
          * Represents a direction in which the snake is moving to the left.
-         * The snake will only move along the x-axis by -1.
+         * The snake will only shift along the x-axis by -1.
          */
         LEFT(new Point(-1, 0)),
 
         /**
          * Represents a direction in which the snake is moving to the right.
-         * The snake will only move along the x-axis by 1.
+         * The snake will only shift along the x-axis by 1.
          */
         RIGHT(new Point(1, 0)),
 
         /**
          * Represents a direction in which the snake is moving up.
-         * The snake will only move along the y-axis by 1.
+         * The snake will only shift along the y-axis by 1.
          */
         UP(new Point(0, 1)),
 
         /**
          * Represents a direction in which the snake is moving down.
-         * The snake will only move along the y-axis by -1.
+         * The snake will only shift along the y-axis by -1.
          */
         DOWN(new Point(0, -1));
 
@@ -42,7 +49,7 @@ public class Snake {
 
         /**
          * Creates a new instance of {@link MovingDirection}
-         * with the movement specified by {@code move}.
+         * with the movement specified by {@code shift}.
          *
          * @param move movement
          */
@@ -71,39 +78,18 @@ public class Snake {
     public Snake(GameField gameField) {
         this.gameField = gameField;
 
-        Point initialHeadLocation;
-        Point initialTailLocation;
-
-        int iter = 0;
-        do {
-            initialHeadLocation = Point.random(gameField.getWidth(), gameField.getHeight());
-            initialTailLocation = initialHeadLocation.move(MovingDirection.DOWN.move());
-        } while (iter++ < MAX_CREATION_ITERATIONS
-            && !gameField.isFree(initialHeadLocation)
-            && !gameField.isFree(initialTailLocation));
-
-        if (iter >= MAX_CREATION_ITERATIONS) {
-            throw new IllegalStateException("Cannot create snake " +
-                "(maybe the field is too busy, " +
-                "try to increase its size or remove some barriers)");
-        }
+        this.snakeBody = new SnakeBody.Factory(gameField).generateRandom(MAX_CREATION_ITERATIONS);
+        // TODO сделать шоб одна фабрика на все змейки
 
         this.movingDirection = MovingDirection.UP;
-        snakeBody.add(initialHeadLocation);
     }
 
-    public void setMovingDirection(MovingDirection movingDirection) {
-        this.movingDirection = movingDirection;
-    }
-
-    private Optional<Point> newHeadLocation() {
-        var currentHead = snakeBody.get(0);
-
-        var newHeadLocation = currentHead.move(movingDirection.move(), gameField.getWidth(), gameField.getHeight());
-        if (newHeadLocation.equals(snakeBody.get(1))) {
-            return Optional.empty();
+    public boolean setMovingDirection(MovingDirection movingDirection) {
+        if (this.movingDirection.move().shift(movingDirection.move()).equals(Point.ZERO)) {
+            return false;
         } else {
-            return Optional.of(newHeadLocation);
+            this.movingDirection = movingDirection;
+            return true;
         }
     }
 
@@ -112,16 +98,27 @@ public class Snake {
      *
      * If the snake meets a
      */
-    public boolean move() {
-        var newHeadLocation = newHeadLocation();
+    public boolean update() {
+        var newHeadLocation = snakeBody.getHead()
+            .shift(movingDirection.move(),
+                gameField.getWidth(),
+                gameField.getHeight());
 
         // TODO коллизии со стенками
+        if (gameField.getBarrier().met(newHeadLocation)) {
+            dead = true;
+            return false;
+        }
 
-        // if коллизия с другими змейками
-        // по идее если змейки столкнулись головами то обе умрут... (грустно)
-        // если змейка покушает хвост другой змейки то тот исчезнет просто
-        // а еще змейка может сама себя покушать, почему бы и нет
+        var apples = gameField.getApplesSet();
+        var apple = gameField.getApplesSet().stream().filter(food -> food.location().equals(newHeadLocation)).findAny();
 
+        boolean ateApple = false;
+        if (apple.isPresent()) {
+            ateApple = true;
+            apples.remove(apple.get());
+        }
+
+        snakeBody.move(newHeadLocation, ateApple);
     }
-
 }

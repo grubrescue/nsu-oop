@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class SnakeBody {
-    private final Point head;
+    private Point head;
     private final List<Point> tail = new LinkedList<>();
 
     protected SnakeBody(Point head, List<Point> tail) {
@@ -22,7 +22,7 @@ public class SnakeBody {
         public SnakeBody generateRandom(int iterations) {
             for (int i = 0; i < iterations; i++) {
                 var initialHeadLocation = Point.random(gameField.getWidth(), gameField.getHeight());
-                var initialTailLocation = initialHeadLocation.move(new Point(0, -1)); // чучуть вниз
+                var initialTailLocation = initialHeadLocation.shift(new Point(0, -1)); // чучуть вниз
 
                 if (gameField.isFree(initialHeadLocation) && gameField.isFree(initialTailLocation)) {
                     return new SnakeBody(initialHeadLocation, List.of(initialTailLocation));
@@ -47,5 +47,26 @@ public class SnakeBody {
     public boolean cutTail(Point point) {
         // TODO сделать?????????????????????????????????????????????????????????????????????????????????????????????
         return false;
+    }
+
+    public Point getHead() {
+        return head;
+    }
+
+    public List<Point> getTail() {
+        return tail;
+    }
+
+    public void move(Point newHead, boolean grow) {
+        if (!newHead.connected(head)) {
+            throw new IllegalArgumentException("New head must be connected to the tail");
+        }
+
+        tail.add(0, head);
+        head = newHead;
+
+        if (!grow) {
+            tail.remove(tail.size() - 1);
+        }
     }
 }
