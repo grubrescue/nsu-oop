@@ -60,22 +60,36 @@ public class Snake {
         }
     }
 
-    private final List<Point> snakeBody = new LinkedList<>(); // к сожалению, в деке нельзя обращаться
-                                                        // к элементам в середине, так что мучаемся с индексами
+    private final SnakeBody snakeBody;
     private MovingDirection movingDirection;
 
     private final GameField gameField;
     private boolean dead = false;
 
+    protected final static int MAX_CREATION_ITERATIONS = 10000; // TODO сделать зависимо от наполненности поля и размера??
 
     public Snake(GameField gameField) {
         this.gameField = gameField;
 
-        var initialHeadLocation = Point.random(gameField.getWidth(), gameField.getHeight());
-        var initialMovement =
+        Point initialHeadLocation;
+        Point initialTailLocation;
 
+        int iter = 0;
+        do {
+            initialHeadLocation = Point.random(gameField.getWidth(), gameField.getHeight());
+            initialTailLocation = initialHeadLocation.move(MovingDirection.DOWN.move());
+        } while (iter++ < MAX_CREATION_ITERATIONS
+            && !gameField.isFree(initialHeadLocation)
+            && !gameField.isFree(initialTailLocation));
+
+        if (iter >= MAX_CREATION_ITERATIONS) {
+            throw new IllegalStateException("Cannot create snake " +
+                "(maybe the field is too busy, " +
+                "try to increase its size or remove some barriers)");
+        }
+
+        this.movingDirection = MovingDirection.UP;
         snakeBody.add(initialHeadLocation);
-
     }
 
     public void setMovingDirection(MovingDirection movingDirection) {
@@ -85,10 +99,7 @@ public class Snake {
     private Optional<Point> newHeadLocation() {
         var currentHead = snakeBody.get(0);
 
-        var x = (currentHead.x() + movingDirection.xMove()) % gameField.getWidth();
-        var y = (currentHead.y() + movingDirection.yMove()) % gameField.getHeight();
-
-        var newHeadLocation = new Point(x, y);
+        var newHeadLocation = currentHead.move(movingDirection.move(), gameField.getWidth(), gameField.getHeight());
         if (newHeadLocation.equals(snakeBody.get(1))) {
             return Optional.empty();
         } else {
@@ -110,28 +121,7 @@ public class Snake {
         // по идее если змейки столкнулись головами то обе умрут... (грустно)
         // если змейка покушает хвост другой змейки то тот исчезнет просто
         // а еще змейка может сама себя покушать, почему бы и нет
-        newHeadLocation.if
-        snakeBody.add(0, newHeadLocation);
 
-        gameField.getApple().ifPresentOrElse(
-            apple -> {
-                if (apple.location().equals(newHeadLocation)) {
-                    gameField.eatApple();
-                }},
-
-            () -> snakeBody.remove(snakeBody.size() - 1)
-        );
-
-        return newHeadLocation;
     }
-
-    public Point head() {
-        return snakeBody.get(0);
-    }
-
-    public List<Point> getSnakeBody() {
-        return snakeBody;
-    }
-
 
 }
