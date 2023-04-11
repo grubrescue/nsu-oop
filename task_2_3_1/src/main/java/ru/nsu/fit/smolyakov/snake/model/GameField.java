@@ -13,6 +13,8 @@ public interface GameField { // TODO разделить интерфейсы
     Set<Apple> getApplesSet();
     Barrier getBarrier();
 
+    boolean isFree(Point point);
+
     int getWidth();
     int getHeight();
 }

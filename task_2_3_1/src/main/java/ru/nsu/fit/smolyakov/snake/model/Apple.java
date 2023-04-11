@@ -13,15 +13,24 @@ public record Apple(Point location) {
      * Instantiates an apple in a random position on a field.
      */
     public static class Factory {
-        private SecureRandom rand = new SecureRandom();
         private final GameField gameField;
 
         public Factory(GameField gameField) {
             this.gameField = gameField;
         }
 
-        public Apple instance() {
-            return new Apple(Point.random(gameField.getWidth(), gameField.getHeight()));
+        public Apple generateRandom(int iterations) {
+            for (int i = 0; i < iterations; i++) {
+                Apple apple = new Apple(Point.random(gameField.getWidth(), gameField.getHeight()));
+                if (gameField.isFree(apple.location)) {
+                    return apple;
+                }
+            }
+
+            throw new IllegalStateException("Cannot create an apple " +
+                "(maybe the field is too busy, " +
+                "try to increase the amount of iterations, " +
+                "increase the field size or remove some barriers)");
         }
     }
 }
