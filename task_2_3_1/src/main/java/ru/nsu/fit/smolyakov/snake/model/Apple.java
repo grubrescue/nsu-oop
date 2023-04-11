@@ -8,13 +8,13 @@ import java.security.SecureRandom;
  *
  * @param location
  */
-public record Apple (Point location) {
+public record Apple(Point location) {
     /**
      * Instantiates an apple in a random position on a field.
      */
-    public class Factory {
+    public static class Factory {
         private SecureRandom rand = new SecureRandom();
-        private GameField gameField;
+        private final GameField gameField;
 
         public Factory(GameField gameField) {
             this.gameField = gameField;
