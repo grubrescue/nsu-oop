@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * A main model that composes {@link Apple}s and {@link Snake}s, both player- and AI-driven.
+ */
 public class GameFieldImpl implements GameField {
     private int width;
     private int height;
@@ -14,26 +17,52 @@ public class GameFieldImpl implements GameField {
     private Set<Apple> applesSet;
     private Barrier barrier;
 
+    /**
+     * Returns a list of AI-driven snakes.
+     *
+     * @return a list of AI-driven snakes
+     */
     @Override
     public List<Snake> getAISnakeList() {
         return AISnakesList;
     }
 
+    /**
+     * Returns a player-driven snake.
+     * @return a player-driven snake
+     */
     @Override
     public Snake getPlayerSnake() {
         return playerSnake;
     }
 
+    /**
+     * Returns a set of apples.
+     *
+     * @return a set of apples
+     */
     @Override
     public Set<Apple> getApplesSet() {
         return applesSet;
     }
 
+    /**
+     * Returns a barrier.
+     *
+     * @return a barrier
+     */
     @Override
     public Barrier getBarrier() {
         return barrier;
     }
 
+    /**
+     * Checks if the point is free.
+     *
+     * @param point point
+     * @return {@code true} if the point is free,
+     *         {@code false} otherwise
+     */
     @Override
     public boolean isFree(Point point) {
         return playerSnake.getSnakeBody().headCollision(point) ||
@@ -44,6 +73,12 @@ public class GameFieldImpl implements GameField {
             AISnakesList.stream().anyMatch(snake -> snake.getSnakeBody().tailCollision(point));
     }
 
+    /**
+     * Updates the model.
+     *
+     * @return {@code true} if the player snake is dead,
+     *         {@code false} otherwise
+     */
     @Override
     public boolean update() {
         var death = playerSnake.update();
@@ -60,11 +95,21 @@ public class GameFieldImpl implements GameField {
         return death;
     }
 
+    /**
+     * Returns the width of the game field.
+     *
+     * @return the width of the game field
+     */
     @Override
     public int getWidth() {
         return width;
     }
 
+    /**
+     * Returns the height of the game field.
+     *
+     * @return the height of the game field
+     */
     @Override
     public int getHeight() {
         return height;
