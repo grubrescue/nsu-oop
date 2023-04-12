@@ -71,9 +71,14 @@ public class Snake {
     private MovingDirection movingDirection;
 
     private final GameField gameField;
+    private int points = 0; // TODO отнаследовать класс PlayerSnake и AISnake
 
-    protected final static int MAX_CREATION_ITERATIONS = 10000; // TODO сделать зависимо от наполненности поля и размера??
+    protected final static int MAX_CREATION_ITERATIONS = 10000;
+    // TODO сделать зависимо от наполненности поля и размера?? или сделать глобальной константой, чтоб везде одинаково было
 
+    /**
+     * Instantiates a snake in a random position on a field.
+     */
     public Snake(GameField gameField) {
         this.gameField = gameField;
 
@@ -83,6 +88,16 @@ public class Snake {
         this.movingDirection = MovingDirection.UP;
     }
 
+    /**
+     * Sets the direction in which the snake is moving.
+     *
+     * <p>If incorrect {@code movingDirection} is passed (e.g. {@code LEFT} when the snake
+     * is currently moving {@code RIGHT}), then the direction will not be changed.
+     *
+     * @param movingDirection direction in which the snake is moving
+     * @return {@code true} if the direction was changed,
+     *         {@code false} otherwise
+     */
     public boolean setMovingDirection(MovingDirection movingDirection) {
         if (this.movingDirection.move().shift(movingDirection.move()).equals(Point.ZERO)) {
             return false;
@@ -95,8 +110,8 @@ public class Snake {
     /**
      * Moves the snake in the direction it is currently moving.
      *
-     * @return {@code true} if the snake is still alive, {@code false} otherwise
-     *
+     * @return {@code true} if the snake is still alive,
+     *         {@code false} otherwise
      */
     public boolean update() {
         var newHeadLocation = snakeBody.getHead()
@@ -125,7 +140,22 @@ public class Snake {
         return true;
     }
 
+    /**
+     * Returns the snake's body, that consists of {@link Point}s.
+     *
+     * @return snake's body
+     */
     public SnakeBody getSnakeBody() {
         return snakeBody;
+    }
+
+    /**
+     * Returns the snake's amount of points. Currently, those are equal to
+     * the amount of apples eaten.
+     *
+     * @return snake's amount of points
+     */
+    public int getPoints() {
+        return points;
     }
 }
