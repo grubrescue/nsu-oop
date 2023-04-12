@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * A main model that composes {@link Apple} and {@link Snake}'s, both player- and AI-driven.
+ * A main model that composes {@link Apple}s and {@link Snake}s, both player- and AI-driven.
  */
 public interface GameField { // TODO разделить интерфейсы
     List<Snake> getAISnakeList();
@@ -17,4 +17,6 @@ public interface GameField { // TODO разделить интерфейсы
 
     int getWidth();
     int getHeight();
+
+    boolean update();
 }
