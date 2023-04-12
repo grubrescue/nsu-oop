@@ -5,7 +5,7 @@ import java.util.Optional;
 /**
  * A snake that moves on the {@link GameField}.
  *
- * (Пока на русском)
+ * <p>(Пока на русском)
  * В целом порядок такой:
  * 1. Вызываем shift(). Изначально все змейки перемещаются в соответствии со своим MovingDirection.
  * 1.1. В случае, если на новом месте головы встретилось яблоко - оно съедается, а хвост не удаляется.
@@ -71,7 +71,6 @@ public class Snake {
     private MovingDirection movingDirection;
 
     private final GameField gameField;
-    private boolean dead = false;
 
     protected final static int MAX_CREATION_ITERATIONS = 10000; // TODO сделать зависимо от наполненности поля и размера??
 
@@ -96,7 +95,8 @@ public class Snake {
     /**
      * Moves the snake in the direction it is currently moving.
      *
-     * If the snake meets a
+     * @return {@code true} if the snake is still alive, {@code false} otherwise
+     *
      */
     public boolean update() {
         var newHeadLocation = snakeBody.getHead()
@@ -104,21 +104,28 @@ public class Snake {
                 gameField.getWidth(),
                 gameField.getHeight());
 
-        // TODO коллизии со стенками
         if (gameField.getBarrier().met(newHeadLocation)) {
-            dead = true;
             return false;
         }
 
-        var apples = gameField.getApplesSet();
-        var apple = gameField.getApplesSet().stream().filter(food -> food.location().equals(newHeadLocation)).findAny();
+        var appleSet = gameField.getApplesSet();
+        var apple = appleSet.stream()
+            .filter(food -> food.location().equals(newHeadLocation))
+            .findAny();
 
-        boolean ateApple = false;
+        boolean ateApple;
         if (apple.isPresent()) {
             ateApple = true;
-            apples.remove(apple.get());
+            appleSet.remove(apple.get());
+        } else {
+            ateApple = false;
         }
 
         snakeBody.move(newHeadLocation, ateApple);
+        return true;
+    }
+
+    public SnakeBody getSnakeBody() {
+        return snakeBody;
     }
 }
