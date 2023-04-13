@@ -124,14 +124,13 @@ public class Snake {
         }
 
         var appleSet = gameField.getApplesSet();
-        var apple = appleSet.stream()
-            .filter(food -> food.location().equals(newHeadLocation))
-            .findAny();
 
+        var possibleApple = new Apple(newHeadLocation);
         boolean ateApple;
-        if (apple.isPresent()) {
+
+        if (appleSet.contains(possibleApple)) {
             ateApple = true;
-            appleSet.remove(apple.get());
+            appleSet.remove(possibleApple);
         } else {
             ateApple = false;
         }

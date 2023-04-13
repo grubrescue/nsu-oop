@@ -68,7 +68,7 @@ public class GameFieldImpl implements GameField {
         return playerSnake.getSnakeBody().headCollision(point) ||
             playerSnake.getSnakeBody().tailCollision(point) ||
             barrier.met(point) ||
-            applesSet.stream().anyMatch(apple -> apple.location().equals(point)) ||
+            applesSet.contains(new Apple(point)) ||
             AISnakesList.stream().anyMatch(snake -> snake.getSnakeBody().headCollision(point)) ||
             AISnakesList.stream().anyMatch(snake -> snake.getSnakeBody().tailCollision(point));
     }
