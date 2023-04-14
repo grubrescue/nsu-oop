@@ -85,7 +85,7 @@ public class GameFieldImpl implements GameField {
         AISnakesList = AISnakesList.stream().filter(Snake::update)
             .collect(Collectors.toList());
 
-        if (applesSet.size() < maxApples) {
+        while (applesSet.size() < maxApples) {
             applesSet.add(new Apple.Factory(this).generateRandom(10000));
             // TODO объединить везде maxIterations, вынести в константу
             // TODO одна фабрика для всех яблок
