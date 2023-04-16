@@ -123,13 +123,13 @@ public class Snake {
 
         /**
          * Represents a direction in which the snake is moving up.
-         * The snake will only shift along the y-axis by 1.
+         * The snake will only shift along the y-axis by -1.
          */
         UP(new Point(0, -1)),
 
         /**
          * Represents a direction in which the snake is moving down.
-         * The snake will only shift along the y-axis by -1.
+         * The snake will only shift along the y-axis by 1.
          */
         DOWN(new Point(0, 1));
 
