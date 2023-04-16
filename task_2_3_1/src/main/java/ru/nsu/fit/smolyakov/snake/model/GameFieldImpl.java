@@ -95,11 +95,26 @@ public class GameFieldImpl implements GameField {
 
     private boolean checkPlayerSnakeCollisions() {
         if (playerSnake.getSnakeBody().tailCollision(playerSnake.getSnakeBody().getHead())) {
-            playerSnake.getSnakeBody().cutTail(playerSnake.getSnakeBody().getHead());
+            return true;
+        } else {
+            var iter = AISnakesList.iterator();
+            while (iter.hasNext()) {
+                var snake = iter.next();
+                if (snake.getSnakeBody().headCollision(playerSnake.getSnakeBody().getHead())) {
+                    iter.remove();
+                    return true;
+                } else if (snake.getSnakeBody().tailCollision(playerSnake.getSnakeBody().getHead())) {
+                    snake.getSnakeBody().cutTail(playerSnake.getSnakeBody().getHead());
+                } else if (playerSnake.getSnakeBody().tailCollision(snake.getSnakeBody().getHead())) {
+                    playerSnake.getSnakeBody().cutTail(snake.getSnakeBody().getHead());
+                } else if (snake.getSnakeBody().tailCollision(snake.getSnakeBody().getHead())) {
+                    snake.getSnakeBody().cutTail(snake.getSnakeBody().getHead());
+                }
+            }
+            //TODO змейки жрут сами себя
         }
 
         return false;
-        // TODO другие змейки
     }
 
     /**
