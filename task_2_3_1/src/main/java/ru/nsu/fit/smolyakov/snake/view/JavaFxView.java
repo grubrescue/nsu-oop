@@ -5,7 +5,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ru.nsu.fit.smolyakov.snake.model.Apple;
@@ -15,7 +14,6 @@ import ru.nsu.fit.smolyakov.snake.model.Snake;
 import ru.nsu.fit.smolyakov.snake.presenter.Presenter;
 
 import java.net.URL;
-import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -132,5 +130,9 @@ public class JavaFxView implements View, Initializable {
 
     public void clear() {
         canvas.getGraphicsContext2D().clearRect(0, 0, context.resX(), context.resY());
+    }
+
+    public void showMessage(String message) {
+        canvas.getGraphicsContext2D().strokeText(message, 10, 10);
     }
 }

@@ -9,14 +9,14 @@ import java.util.stream.Collectors;
  * A main model that composes {@link Apple}s and {@link Snake}s, both player- and AI-driven.
  */
 public class GameFieldImpl implements GameField {
-    private int width;
-    private int height;
-    private int maxApples;
+    private final int width;
+    private final int height;
+    private final int maxApples;
 
-    private Snake playerSnake;
+    private final Snake playerSnake;
     private List<Snake> AISnakesList;
-    private Set<Apple> applesSet;
-    private Barrier barrier;
+    private final Set<Apple> applesSet;
+    private final Barrier barrier;
 
     public GameFieldImpl(int width, int height, int maxApples) {
         this.barrier = new Barrier(Set.of());
@@ -93,6 +93,15 @@ public class GameFieldImpl implements GameField {
         return true;
     }
 
+    private boolean checkPlayerSnakeCollisions() {
+        if (playerSnake.getSnakeBody().tailCollision(playerSnake.getSnakeBody().getHead())) {
+            playerSnake.getSnakeBody().cutTail(playerSnake.getSnakeBody().getHead());
+        }
+
+        return false;
+        // TODO другие змейки
+    }
+
     /**
      * Updates the model.
      *
@@ -105,12 +114,13 @@ public class GameFieldImpl implements GameField {
         AISnakesList = AISnakesList.stream().filter(Snake::update)
             .collect(Collectors.toList());
 
+        death = checkPlayerSnakeCollisions();
+
         while (applesSet.size() < maxApples) {
             applesSet.add(new Apple.Factory(this).generateRandom(10000));
             // TODO объединить везде maxIterations, вынести в константу
             // TODO одна фабрика для всех яблок
         }
-        // TODO snakes collisions
 
         return death;
     }

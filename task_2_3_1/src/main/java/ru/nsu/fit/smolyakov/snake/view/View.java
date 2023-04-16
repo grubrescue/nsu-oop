@@ -4,7 +4,6 @@ import ru.nsu.fit.smolyakov.snake.model.Apple;
 import ru.nsu.fit.smolyakov.snake.model.Barrier;
 import ru.nsu.fit.smolyakov.snake.model.Snake;
 
-import java.util.List;
 import java.util.Set;
 
 public interface View {
@@ -15,6 +14,8 @@ public interface View {
     void draw(Barrier barrier);
 
     void draw(Snake snake);
+
+    void showMessage(String string);
 
     void clear();
 }

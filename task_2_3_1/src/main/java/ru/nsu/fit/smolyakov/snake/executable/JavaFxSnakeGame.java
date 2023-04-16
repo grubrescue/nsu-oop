@@ -23,6 +23,7 @@ public class JavaFxSnakeGame extends Application {
         var fxmlLoader = new FXMLLoader(getClass().getResource("/gamefield.fxml"));
 
         Scene rootScene = fxmlLoader.load();
+        primaryStage.setScene(rootScene);
 
         var context = new JavaFxContext("Snake JAVAFX", 1600, 900, 16, 9); // TODO хочу вынести в жсон
 
@@ -34,7 +35,7 @@ public class JavaFxSnakeGame extends Application {
 
         this.view.createField(primaryStage, rootScene, context, presenter);
 
-        primaryStage.setScene(rootScene);
+
         primaryStage.show();
     }
 

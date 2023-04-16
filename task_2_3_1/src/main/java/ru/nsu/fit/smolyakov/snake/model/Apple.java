@@ -3,8 +3,6 @@ package ru.nsu.fit.smolyakov.snake.model;
 /**
  * Represents an apple, which is located on {@link GameField} and can be
  * eaten by {@link Snake}.
- *
- * @param location
  */
 public record Apple(Point point) {
     /**
