@@ -27,16 +27,15 @@ public class JavaFxView implements View, Initializable {
 
     @FXML
     private Text scoreAmountText;
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-    }
-
     // resources
     private Image appleImage;
     private Image barrierImage;
     private Image snakeTailImage;
     private Image snakeHeadImage;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    }
 
     private Image imageInstance(String path) {
         return new Image(

@@ -1,7 +1,6 @@
 package ru.nsu.fit.smolyakov.snake.model;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -41,7 +40,7 @@ public interface GameField { // TODO разделить интерфейсы
      *
      * @param point point
      * @return {@code true} if the point is free,
-     *         {@code false} otherwise
+     * {@code false} otherwise
      */
     boolean isFree(Point point);
 
@@ -63,7 +62,7 @@ public interface GameField { // TODO разделить интерфейсы
      * Updates the model.
      *
      * @return {@code true} if the player snake is dead,
-     *         {@code false} otherwise
+     * {@code false} otherwise
      */
     boolean update();
 }

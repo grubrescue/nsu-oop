@@ -62,7 +62,7 @@ public class GameFieldImpl implements GameField {
      *
      * @param point point
      * @return {@code true} if the point is free,
-     *         {@code false} otherwise
+     * {@code false} otherwise
      */
     @Override
     public boolean isFree(Point point) {
@@ -78,7 +78,7 @@ public class GameFieldImpl implements GameField {
      * Updates the model.
      *
      * @return {@code true} if the player snake is dead,
-     *         {@code false} otherwise
+     * {@code false} otherwise
      */
     @Override
     public boolean update() {

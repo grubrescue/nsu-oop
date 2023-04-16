@@ -6,7 +6,7 @@ import java.util.Set;
  * Represents a barrier that is located on {@link GameField}.
  * The snake cannot pass through the barrier.
  */
-public record Barrier(Set<Point> barrierPoints){
+public record Barrier(Set<Point> barrierPoints) {
     /**
      * Checks if the point is located on the barrier.
      *

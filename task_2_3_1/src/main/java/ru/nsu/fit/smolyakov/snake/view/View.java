@@ -11,6 +11,8 @@ public interface View {
     void setScoreAmount(int scoreAmount);
 
     void draw(Set<Apple> appleSet);
+
     void draw(Barrier barrier);
+
     void draw(List<Snake> snakeList);
 }

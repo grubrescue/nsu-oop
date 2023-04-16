@@ -29,7 +29,6 @@ public record Apple(Point point) {
          *
          * @param iterations amount of iterations to try to create an apple
          * @return an apple in a random position on a field
-         *
          * @throws IllegalStateException if the apple cannot be created
          */
         public Apple generateRandom(int iterations) {
