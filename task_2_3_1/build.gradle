@@ -2,14 +2,14 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'application'
-//    id 'org.openjfx.javafxplugin' version '0.0.13'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
 }
 
 repositories {
     mavenCentral()
 }
 
-//mainClassName = 'ru.nsu.fit.smolyakov.snake.executable.App'
+mainClassName = 'ru.nsu.fit.smolyakov.snake.Application'
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
@@ -18,10 +18,10 @@ dependencies {
 }
 
 
-//javafx {
-//    version = "17"
-//    modules = [ 'javafx.controls' ]
-//}
+javafx {
+    version = '19'
+    modules = [ 'javafx.controls', 'javafx.fxml' , 'javafx.graphics' ]
+}
 
 test {
     useJUnitPlatform()

@@ -29,6 +29,7 @@ public class GameFieldImpl implements GameField {
 
     /**
      * Returns a player-driven snake.
+     *
      * @return a player-driven snake
      */
     @Override
