@@ -1,14 +1,12 @@
 package ru.nsu.fit.smolyakov.snake.model;
 
-import java.security.SecureRandom;
-
 /**
  * Represents an apple, which is located on {@link GameField} and can be
  * eaten by {@link Snake}.
  *
  * @param location
  */
-public record Apple(Point location) {
+public record Apple(Point point) {
     /**
      * Instantiates an apple in a random position on a field.
      */
@@ -37,7 +35,7 @@ public record Apple(Point location) {
         public Apple generateRandom(int iterations) {
             for (int i = 0; i < iterations; i++) {
                 Apple apple = new Apple(Point.random(gameField.getWidth(), gameField.getHeight()));
-                if (gameField.isFree(apple.location)) {
+                if (gameField.isFree(apple.point)) {
                     return apple;
                 }
             }
