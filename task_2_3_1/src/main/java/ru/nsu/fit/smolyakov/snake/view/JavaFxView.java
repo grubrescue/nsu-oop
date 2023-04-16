@@ -2,14 +2,17 @@ package ru.nsu.fit.smolyakov.snake.view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ru.nsu.fit.smolyakov.snake.model.Apple;
 import ru.nsu.fit.smolyakov.snake.model.Barrier;
 import ru.nsu.fit.smolyakov.snake.model.Point;
 import ru.nsu.fit.smolyakov.snake.model.Snake;
+import ru.nsu.fit.smolyakov.snake.presenter.Presenter;
 
 import java.net.URL;
 import java.util.List;
@@ -18,6 +21,8 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 public class JavaFxView implements View, Initializable {
+    private Presenter presenter;
+
     private Stage stage;
     private JavaFxContext context;
     private int proportion;
@@ -27,11 +32,13 @@ public class JavaFxView implements View, Initializable {
 
     @FXML
     private Text scoreAmountText;
+
     // resources
     private Image appleImage;
     private Image barrierImage;
     private Image snakeTailImage;
     private Image snakeHeadImage;
+    private Scene scene;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -47,8 +54,8 @@ public class JavaFxView implements View, Initializable {
         );
     }
 
-    public void createField(Stage stage, JavaFxContext context) {
-        if (stage == null || context == null) {
+    public void createField(Stage stage, Scene scene, JavaFxContext context, Presenter presenter) {
+        if (stage == null || context == null || presenter == null) {
             throw new IllegalArgumentException("Stage or context is null");
         }
 
@@ -64,12 +71,24 @@ public class JavaFxView implements View, Initializable {
 
         this.proportion = context.resX() / context.gameFieldWidth();
 
+        this.scene = scene;
         this.stage = stage;
         this.context = context;
+
+        this.presenter = presenter;
 
         this.stage.setWidth(context.resX());
         this.stage.setHeight(context.resY());
         this.stage.setTitle(context.title());
+
+        this.scene.setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+                case UP -> presenter.onUpKeyPressed();
+                case DOWN -> presenter.onDownKeyPressed();
+                case LEFT -> presenter.onLeftKeyPressed();
+                case RIGHT -> presenter.onRightKeyPressed();
+            }
+        });
 
         canvas.setWidth(context.resX());
         canvas.setHeight(context.resY());
@@ -80,8 +99,6 @@ public class JavaFxView implements View, Initializable {
 //        barrierImage = imageInstance("/barrier.png");
         snakeTailImage = imageInstance("/tail.png");
         snakeHeadImage = imageInstance("/head.png");
-
-        draw(Set.of(new Apple(new Point(1, 1)), new Apple(new Point(2, 2))));
     }
 
     private void drawFigure(Point point, Image image) {
@@ -97,7 +114,7 @@ public class JavaFxView implements View, Initializable {
     }
 
     public void setScoreAmount(int scoreAmount) {
-        this.scoreAmountText.setText(String.valueOf(scoreAmountText));
+        this.scoreAmountText.setText(String.valueOf(scoreAmount));
     }
 
     public void draw(Set<Apple> appleSet) {
@@ -108,13 +125,12 @@ public class JavaFxView implements View, Initializable {
         barrier.barrierPoints().forEach(point -> drawFigure(point, barrierImage));
     }
 
-    public void draw(List<Snake> snakeList) {
-        snakeList.forEach(snake -> {
-            var snakePoints = snake.getSnakeBody().getTail();
-            var snakeHead = snake.getSnakeBody().getHead();
+    public void draw(Snake snake) {
+        drawFigure(snake.getSnakeBody().getHead(), snakeHeadImage); // TODO сделать поворот
+        snake.getSnakeBody().getTail().forEach(point -> drawFigure(point, snakeTailImage));
+    }
 
-            drawFigure(snakeHead, snakeHeadImage); // TODO сделать поворот
-            snakePoints.forEach(point -> drawFigure(point, snakeTailImage));
-        });
+    public void clear() {
+        canvas.getGraphicsContext2D().clearRect(0, 0, context.resX(), context.resY());
     }
 }
