@@ -3,12 +3,9 @@ package ru.nsu.fit.smolyakov.snake.view;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import ru.nsu.fit.smolyakov.snake.model.Apple;
 import ru.nsu.fit.smolyakov.snake.model.Barrier;
 import ru.nsu.fit.smolyakov.snake.model.Point;
@@ -33,6 +30,22 @@ public class JavaFxView implements View, Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+    }
+
+    // resources
+    private Image appleImage;
+    private Image barrierImage;
+    private Image snakeTailImage;
+    private Image snakeHeadImage;
+
+    private Image imageInstance(String path) {
+        return new Image(
+            Objects.requireNonNull(getClass().getResourceAsStream(path)),
+            proportion,
+            proportion,
+            true,
+            true
+        );
     }
 
     public void createField(Stage stage, JavaFxContext context) {
@@ -63,14 +76,25 @@ public class JavaFxView implements View, Initializable {
         canvas.setHeight(context.resY());
         // TODO разделить как то чтоли
 
-        drawFigure(new Point(5, 5), new Image(Objects.requireNonNull(getClass().getResourceAsStream("/apple.png"))));
-    }
 
+        appleImage = imageInstance("/apple.png");
+//        barrierImage = imageInstance("/barrier.png");
+        snakeTailImage = imageInstance("/tail.png");
+        snakeHeadImage = imageInstance("/head.png");
+
+        draw(Set.of(new Apple(new Point(1, 1)), new Apple(new Point(2, 2))));
+    }
 
     private void drawFigure(Point point, Image image) {
         var graphicsContext = canvas.getGraphicsContext2D(); // TODO надо ли хранить в поле или получать каждый раз???
 
-        graphicsContext.drawImage(image, point.x() * proportion, point.y() * proportion, proportion/2, proportion/2);
+        graphicsContext.drawImage(
+            image,
+            point.x() * proportion,
+            point.y() * proportion,
+            proportion,
+            proportion
+        );
     }
 
     public void setScoreAmount(int scoreAmount) {
@@ -78,14 +102,20 @@ public class JavaFxView implements View, Initializable {
     }
 
     public void draw(Set<Apple> appleSet) {
-        appleSet.forEach(apple -> drawFigure(apple.point(), new Image(Objects.requireNonNull(getClass().getResourceAsStream("/apple.png")))));
+        appleSet.forEach(apple -> drawFigure(apple.point(), appleImage));
     }
 
     public void draw(Barrier barrier) {
-
+        barrier.barrierPoints().forEach(point -> drawFigure(point, barrierImage));
     }
 
     public void draw(List<Snake> snakeList) {
+        snakeList.forEach(snake -> {
+            var snakePoints = snake.getSnakeBody().getTail();
+            var snakeHead = snake.getSnakeBody().getHead();
 
+            drawFigure(snakeHead, snakeHeadImage); // TODO сделать поворот
+            snakePoints.forEach(point -> drawFigure(point, snakeTailImage));
+        });
     }
 }
