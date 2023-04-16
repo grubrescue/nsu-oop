@@ -24,51 +24,11 @@ public class SnakeBody {
     }
 
     /**
-     * Creates a snake body in a random location. One always consists of a head and one tail point
-     * and always directed upwards.
-     */
-    public static class Factory {
-        private final GameField gameField;
-
-        /**
-         * Creates a new instance of {@link Factory} connected to the specified {@code gameField}.
-         * @param gameField game field
-         */
-        public Factory(GameField gameField) {
-            this.gameField = gameField;
-        }
-
-        /**
-         * Creates a snake body in a random location. One always consists of a head and one tail point.
-         *
-         * @param iterations amount of iterations to try to create a snake
-         * @return a snake body in a random location
-         *
-         * @throws IllegalStateException if the snake cannot be created
-         */
-        public SnakeBody generateRandom(int iterations) {
-            for (int i = 0; i < iterations; i++) {
-                var initialHeadLocation = Point.random(gameField.getWidth(), gameField.getHeight());
-                var initialTailLocation = initialHeadLocation.shift(new Point(0, -1)); // чучуть вниз
-
-                if (gameField.isFree(initialHeadLocation) && gameField.isFree(initialTailLocation)) {
-                    return new SnakeBody(initialHeadLocation, List.of(initialTailLocation));
-                }
-            }
-
-            throw new IllegalStateException("Cannot create a snake " +
-                "(maybe the field is too busy, " +
-                "try to increase the amount of iterations, " +
-                "increase the field size or remove some barriers)");
-        }
-    }
-
-    /**
      * Checks whether the head of a snake contains the specified {@code point}.
      *
      * @param point point
      * @return {@code true} if the head of a snake contains the specified {@code point},
-     *         {@code false} otherwise
+     * {@code false} otherwise
      */
     public boolean headCollision(Point point) {
         return head.equals(point);
@@ -79,7 +39,7 @@ public class SnakeBody {
      *
      * @param point point
      * @return {@code true} if the tail of a snake contains the specified {@code point},
-     *         {@code false} otherwise
+     * {@code false} otherwise
      */
     public boolean tailCollision(Point point) {
         return tail.contains(point);
@@ -87,9 +47,10 @@ public class SnakeBody {
 
     /**
      * Cuts the tail of a snake if it contains the specified {@code point}.
+     *
      * @param point point
      * @return {@code true} if the cut is successful,
-     *         {@code false} otherwise
+     * {@code false} otherwise
      */
     public boolean cutTail(Point point) {
         if (tail.contains(point)) {
@@ -124,7 +85,7 @@ public class SnakeBody {
      * old head {@link Point} becomes a first item of a tail.
      *
      * @param newHead new head location
-     * @param grow whether the snake has eaten the apple
+     * @param grow    whether the snake has eaten the apple
      */
     public void move(Point newHead, boolean grow) {
         if (!newHead.connected(head)) {
@@ -136,6 +97,46 @@ public class SnakeBody {
 
         if (!grow) {
             tail.remove(tail.size() - 1);
+        }
+    }
+
+    /**
+     * Creates a snake body in a random location. One always consists of a head and one tail point
+     * and always directed upwards.
+     */
+    public static class Factory {
+        private final GameField gameField;
+
+        /**
+         * Creates a new instance of {@link Factory} connected to the specified {@code gameField}.
+         *
+         * @param gameField game field
+         */
+        public Factory(GameField gameField) {
+            this.gameField = gameField;
+        }
+
+        /**
+         * Creates a snake body in a random location. One always consists of a head and one tail point.
+         *
+         * @param iterations amount of iterations to try to create a snake
+         * @return a snake body in a random location
+         * @throws IllegalStateException if the snake cannot be created
+         */
+        public SnakeBody generateRandom(int iterations) {
+            for (int i = 0; i < iterations; i++) {
+                var initialHeadLocation = Point.random(gameField.getWidth(), gameField.getHeight());
+                var initialTailLocation = initialHeadLocation.shift(new Point(0, -1)); // чучуть вниз
+
+                if (gameField.isFree(initialHeadLocation) && gameField.isFree(initialTailLocation)) {
+                    return new SnakeBody(initialHeadLocation, List.of(initialTailLocation));
+                }
+            }
+
+            throw new IllegalStateException("Cannot create a snake " +
+                "(maybe the field is too busy, " +
+                "try to increase the amount of iterations, " +
+                "increase the field size or remove some barriers)");
         }
     }
 }

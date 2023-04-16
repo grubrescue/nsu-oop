@@ -45,7 +45,7 @@ public record Point(int x, int y) {
      * If resulting point is out of the field with specified {@code xLimit} and {@code yLimit},
      * it will be moved to the opposite side of the field.
      *
-     * @param shift movement
+     * @param shift  movement
      * @param xLimit x-coordinate limit
      * @param yLimit y-coordinate limit
      * @return a new point that is moved by {@code shift} from the current point

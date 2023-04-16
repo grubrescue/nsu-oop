@@ -1,7 +1,5 @@
 package ru.nsu.fit.smolyakov.snake.model;
 
-import java.util.Optional;
-
 /**
  * A snake that moves on the {@link GameField}.
  *
@@ -16,65 +14,11 @@ import java.util.Optional;
  * 2.2. Если голова встретилась с хвостом - змейка обрубается на месте встречи.
  */
 public class Snake {
-    /**
-     * Represents a direction in which the snake is moving.
-     * It is used to calculate the next location of the snake's head.
-     */
-    public enum MovingDirection {
-        /**
-         * Represents a direction in which the snake is moving to the left.
-         * The snake will only shift along the x-axis by -1.
-         */
-        LEFT(new Point(-1, 0)),
-
-        /**
-         * Represents a direction in which the snake is moving to the right.
-         * The snake will only shift along the x-axis by 1.
-         */
-        RIGHT(new Point(1, 0)),
-
-        /**
-         * Represents a direction in which the snake is moving up.
-         * The snake will only shift along the y-axis by 1.
-         */
-        UP(new Point(0, 1)),
-
-        /**
-         * Represents a direction in which the snake is moving down.
-         * The snake will only shift along the y-axis by -1.
-         */
-        DOWN(new Point(0, -1));
-
-        private final Point move;
-
-        /**
-         * Creates a new instance of {@link MovingDirection}
-         * with the movement specified by {@code shift}.
-         *
-         * @param move movement
-         */
-        private MovingDirection(Point move) {
-            this.move = move;
-        }
-
-        /**
-         * Returns the movement of the snake.
-         *
-         * @return movement of the snake
-         */
-        public Point move() {
-            return move;
-        }
-    }
-
-    private final SnakeBody snakeBody;
-    private MovingDirection movingDirection;
-
-    private final GameField gameField;
-    private int points = 0; // TODO отнаследовать класс PlayerSnake и AISnake
-
     protected final static int MAX_CREATION_ITERATIONS = 10000;
-    // TODO сделать зависимо от наполненности поля и размера?? или сделать глобальной константой, чтоб везде одинаково было
+    private final SnakeBody snakeBody;
+    private final GameField gameField;
+    private MovingDirection movingDirection;
+    private final int points = 0; // TODO отнаследовать класс PlayerSnake и AISnake
 
     /**
      * Instantiates a snake in a random position on a field.
@@ -87,6 +31,7 @@ public class Snake {
 
         this.movingDirection = MovingDirection.UP;
     }
+    // TODO сделать зависимо от наполненности поля и размера?? или сделать глобальной константой, чтоб везде одинаково было
 
     /**
      * Sets the direction in which the snake is moving.
@@ -96,7 +41,7 @@ public class Snake {
      *
      * @param movingDirection direction in which the snake is moving
      * @return {@code true} if the direction was changed,
-     *         {@code false} otherwise
+     * {@code false} otherwise
      */
     public boolean setMovingDirection(MovingDirection movingDirection) {
         if (this.movingDirection.move().shift(movingDirection.move()).equals(Point.ZERO)) {
@@ -111,7 +56,7 @@ public class Snake {
      * Moves the snake in the direction it is currently moving.
      *
      * @return {@code true} if the snake is still alive,
-     *         {@code false} otherwise
+     * {@code false} otherwise
      */
     public boolean update() {
         var newHeadLocation = snakeBody.getHead()
@@ -156,5 +101,56 @@ public class Snake {
      */
     public int getPoints() {
         return points;
+    }
+
+    /**
+     * Represents a direction in which the snake is moving.
+     * It is used to calculate the next location of the snake's head.
+     */
+    public enum MovingDirection {
+        /**
+         * Represents a direction in which the snake is moving to the left.
+         * The snake will only shift along the x-axis by -1.
+         */
+        LEFT(new Point(-1, 0)),
+
+        /**
+         * Represents a direction in which the snake is moving to the right.
+         * The snake will only shift along the x-axis by 1.
+         */
+        RIGHT(new Point(1, 0)),
+
+        /**
+         * Represents a direction in which the snake is moving up.
+         * The snake will only shift along the y-axis by 1.
+         */
+        UP(new Point(0, 1)),
+
+        /**
+         * Represents a direction in which the snake is moving down.
+         * The snake will only shift along the y-axis by -1.
+         */
+        DOWN(new Point(0, -1));
+
+        private final Point move;
+
+        /**
+         * Creates a new instance of {@link MovingDirection}
+         * with the movement specified by {@code shift}.
+         *
+         * @param move movement
+         */
+        MovingDirection(Point move) {
+            this.move = move;
+        }
+
+        /**
+         * Returns the movement of the snake.
+         *
+         * @return movement of the snake
+         */
+        public Point move() {
+            return move;
+        }
     }
 }
