@@ -1,49 +1,58 @@
 package ru.nsu.fit.smolyakov.snake.presenter;
 
 import ru.nsu.fit.smolyakov.snake.model.GameField;
+import ru.nsu.fit.smolyakov.snake.model.GameFieldImpl;
 import ru.nsu.fit.smolyakov.snake.model.Snake;
 import ru.nsu.fit.smolyakov.snake.view.View;
 
 public class Presenter {
     private final View view;
-    private final GameField model;
+    private GameField model;
 
-    public Presenter(View view, GameField model) {
+    private final int height;
+    private final int width;
+    private Thread thread;
+
+    public Presenter(View view, int width, int height) {
         this.view = view;
-        this.model = model;
+        this.height = height;
+        this.width = width;
     }
 
     public void start() {
-        new Thread(() -> {
+        model = new GameFieldImpl(width, height, 3);
+        
+        thread = new Thread(() -> {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                return;
             }
 
-            while (true) {
+            while (!Thread.currentThread().isInterrupted()) {
                 var playerDeath = model.update();
 
                 view.clear();
-
-                if (playerDeath) {
-                    view.showMessage("You died! You earned " + model.getPlayerSnake().getPoints() + " points.");
-                    return;
-                }
 
                 view.draw(model.getApplesSet());
                 view.draw(model.getBarrier());
                 view.draw(model.getPlayerSnake());
                 view.setScoreAmount(model.getPlayerSnake().getPoints());
 
+                if (playerDeath) {
+                    view.showMessage("You died! You earned " + model.getPlayerSnake().getPoints() + " points.");
+                    return;
+                }
+
                 try {
                     Thread.sleep(50);
                 } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    return;
                 }
             }
         }
-        ).start();
+        );
+        thread.start();
     }
 
     public void update() {
@@ -65,5 +74,15 @@ public class Presenter {
 
     public void onDownKeyPressed() {
         model.getPlayerSnake().setMovingDirection(Snake.MovingDirection.DOWN);
+    }
+
+    public void onRestartKeyPressed() {
+        thread.interrupt();
+        start();
+    }
+    
+    public void onExitKeyPressed() {
+        thread.interrupt();
+        view.close();
     }
 }

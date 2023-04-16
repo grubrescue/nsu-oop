@@ -85,6 +85,8 @@ public class JavaFxView implements View, Initializable {
                 case DOWN -> presenter.onDownKeyPressed();
                 case LEFT -> presenter.onLeftKeyPressed();
                 case RIGHT -> presenter.onRightKeyPressed();
+                case Q -> presenter.onExitKeyPressed();
+                case R -> presenter.onRestartKeyPressed();
             }
         });
 
@@ -134,5 +136,9 @@ public class JavaFxView implements View, Initializable {
 
     public void showMessage(String message) {
         canvas.getGraphicsContext2D().strokeText(message, 10, 10);
+    }
+
+    public void close() {
+        stage.close();
     }
 }

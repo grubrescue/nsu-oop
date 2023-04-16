@@ -18,4 +18,6 @@ public interface View {
     void showMessage(String string);
 
     void clear();
+
+    void close();
 }

@@ -27,10 +27,9 @@ public class JavaFxSnakeGame extends Application {
 
         var context = new JavaFxContext("Snake JAVAFX", 1600, 900, 16, 9); // TODO хочу вынести в жсон
 
-        this.model = new GameFieldImpl(context.gameFieldWidth(), context.gameFieldHeight(), 3);
         this.view = fxmlLoader.getController();
 
-        this.presenter = new Presenter(this.view, this.model);
+        this.presenter = new Presenter(this.view, context.gameFieldWidth(), context.gameFieldHeight());
         this.presenter.start();
 
         this.view.createField(primaryStage, rootScene, context, presenter);
