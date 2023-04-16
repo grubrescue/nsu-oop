@@ -1,5 +1,6 @@
 package ru.nsu.fit.smolyakov.snake.model;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -16,6 +17,22 @@ public class GameFieldImpl implements GameField {
     private List<Snake> AISnakesList;
     private Set<Apple> applesSet;
     private Barrier barrier;
+
+    public GameFieldImpl(int width, int height, int maxApples) {
+        this.barrier = new Barrier(Set.of());
+
+        this.width = width;
+        this.height = height;
+        this.maxApples = maxApples;
+        this.AISnakesList = List.of();
+
+        this.playerSnake = new Snake(this);
+
+        this.applesSet = new HashSet<>(); // TODO сделать нормально
+        while (applesSet.size() < maxApples) {
+            applesSet.add(new Apple.Factory(this).generateRandom(10000));
+        }
+    }
 
     /**
      * Returns a list of AI-driven snakes.
@@ -66,12 +83,14 @@ public class GameFieldImpl implements GameField {
      */
     @Override
     public boolean isFree(Point point) {
-        return playerSnake.getSnakeBody().headCollision(point) ||
-            playerSnake.getSnakeBody().tailCollision(point) ||
-            barrier.met(point) ||
-            applesSet.contains(new Apple(point)) ||
-            AISnakesList.stream().anyMatch(snake -> snake.getSnakeBody().headCollision(point)) ||
-            AISnakesList.stream().anyMatch(snake -> snake.getSnakeBody().tailCollision(point));
+//        return playerSnake.getSnakeBody().headCollision(point) ||
+//            playerSnake.getSnakeBody().tailCollision(point) ||
+//            barrier.met(point) ||
+//            applesSet.contains(new Apple(point)) ||
+//            AISnakesList.stream().anyMatch(snake -> snake.getSnakeBody().headCollision(point)) ||
+//            AISnakesList.stream().anyMatch(snake -> snake.getSnakeBody().tailCollision(point));
+
+        return true;
     }
 
     /**

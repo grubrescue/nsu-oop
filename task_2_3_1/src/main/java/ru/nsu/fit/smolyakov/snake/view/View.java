@@ -14,5 +14,7 @@ public interface View {
 
     void draw(Barrier barrier);
 
-    void draw(List<Snake> snakeList);
+    void draw(Snake snake);
+
+    void clear();
 }

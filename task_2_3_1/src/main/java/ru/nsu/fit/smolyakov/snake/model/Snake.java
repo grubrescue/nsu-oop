@@ -18,7 +18,7 @@ public class Snake {
     private final SnakeBody snakeBody;
     private final GameField gameField;
     private MovingDirection movingDirection;
-    private final int points = 0; // TODO отнаследовать класс PlayerSnake и AISnake
+    private int points = 0; // TODO отнаследовать класс PlayerSnake и AISnake
 
     /**
      * Instantiates a snake in a random position on a field.
@@ -75,6 +75,7 @@ public class Snake {
 
         if (appleSet.contains(possibleApple)) {
             ateApple = true;
+            points++;
             appleSet.remove(possibleApple);
         } else {
             ateApple = false;
@@ -124,13 +125,13 @@ public class Snake {
          * Represents a direction in which the snake is moving up.
          * The snake will only shift along the y-axis by 1.
          */
-        UP(new Point(0, 1)),
+        UP(new Point(0, -1)),
 
         /**
          * Represents a direction in which the snake is moving down.
          * The snake will only shift along the y-axis by -1.
          */
-        DOWN(new Point(0, -1));
+        DOWN(new Point(0, 1));
 
         private final Point move;
 
