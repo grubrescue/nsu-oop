@@ -46,11 +46,11 @@ public class Presenter {
             }
 
             while (!Thread.currentThread().isInterrupted()) {
-                var playerDeath = model.update();
+                var playerAlive = model.update();
 
                 updateView();
 
-                if (playerDeath) {
+                if (!playerAlive) {
                     view.showMessage("You died! You earned " + model.getPlayerSnake().getPoints() + " points.");
                     return;
                 }

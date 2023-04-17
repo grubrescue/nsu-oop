@@ -123,11 +123,9 @@ public class GameFieldImpl implements GameField {
      */
     @Override
     public boolean update() {
-        var death = playerSnake.update();
+        var alive = playerSnake.update();
         AISnakesList = AISnakesList.stream().filter(Snake::update)
             .collect(Collectors.toList());
-
-        death = checkPlayerSnakeCollisions();
 
         while (applesSet.size() < properties.maxApples()) {
             applesSet.add(new Apple.Factory(this).generateRandom(10000));
@@ -135,7 +133,8 @@ public class GameFieldImpl implements GameField {
             // TODO одна фабрика для всех яблок
         }
 
-        return death;
+        var collisions = checkPlayerSnakeCollisions();
+        return alive && !collisions; // TODO переименовать все
     }
 
     /**
