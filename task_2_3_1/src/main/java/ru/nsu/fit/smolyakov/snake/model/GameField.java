@@ -1,5 +1,7 @@
 package ru.nsu.fit.smolyakov.snake.model;
 
+import ru.nsu.fit.smolyakov.snake.properties.GameFieldProperties;
+
 import java.util.List;
 import java.util.Set;
 
@@ -45,18 +47,11 @@ public interface GameField { // TODO разделить интерфейсы
     boolean isFree(Point point);
 
     /**
-     * Returns the width of the game field.
+     * Returns the properties of the game field.
      *
-     * @return the width of the game field
+     * @return the properties of the game field
      */
-    int getWidth();
-
-    /**
-     * Returns the height of the game field.
-     *
-     * @return the height of the game field
-     */
-    int getHeight();
+    GameFieldProperties getProperties();
 
     /**
      * Updates the model.

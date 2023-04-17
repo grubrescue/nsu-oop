@@ -61,8 +61,8 @@ public class Snake {
     public boolean update() {
         var newHeadLocation = snakeBody.getHead()
             .shift(movingDirection.move(),
-                gameField.getWidth(),
-                gameField.getHeight());
+                gameField.getProperties().width(),
+                gameField.getProperties().height());
 
         if (gameField.getBarrier().met(newHeadLocation)) {
             return false;

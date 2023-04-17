@@ -12,6 +12,8 @@ import ru.nsu.fit.smolyakov.snake.model.Barrier;
 import ru.nsu.fit.smolyakov.snake.model.Point;
 import ru.nsu.fit.smolyakov.snake.model.Snake;
 import ru.nsu.fit.smolyakov.snake.presenter.Presenter;
+import ru.nsu.fit.smolyakov.snake.properties.GameFieldProperties;
+import ru.nsu.fit.smolyakov.snake.properties.JavaFxProperties;
 
 import java.net.URL;
 import java.util.Objects;
@@ -22,7 +24,7 @@ public class JavaFxView implements View, Initializable {
     private Presenter presenter;
 
     private Stage stage;
-    private JavaFxContext context;
+    private JavaFxProperties javaFxProperties;
     private int proportion;
 
     @FXML
@@ -32,6 +34,7 @@ public class JavaFxView implements View, Initializable {
     private Text scoreAmountText;
 
     // resources
+    // TODO вынести отдельно и доделать других змеек
     private Image appleImage;
     private Image barrierImage;
     private Image snakeTailImage;
@@ -52,32 +55,36 @@ public class JavaFxView implements View, Initializable {
         );
     }
 
-    public void createField(Stage stage, Scene scene, JavaFxContext context, Presenter presenter) {
-        if (stage == null || context == null || presenter == null) {
-            throw new IllegalArgumentException("Stage or context is null");
+    public void createField(Stage stage,
+                            Scene scene,
+                            GameFieldProperties properties,
+                            JavaFxProperties javaFxProperties,
+                            Presenter presenter) {
+        if (stage == null || javaFxProperties == null || presenter == null) {
+            throw new IllegalArgumentException("Stage or javaFxProperties is null");
         }
 
-        if (context.resX() % (2 * context.gameFieldWidth()) != 0
-            || context.resY() % (2 * context.gameFieldHeight()) != 0) {
+        if (javaFxProperties.resX() % (2 * properties.width()) != 0
+            || javaFxProperties.resY() % (2 * properties.height()) != 0) {
             throw new IllegalArgumentException("Resolution is not divisible by game field size");
         }
 
-        if (context.resX() / context.gameFieldWidth() !=
-            context.resY() / context.gameFieldHeight()) {
+        if (javaFxProperties.resX() / properties.width() !=
+            javaFxProperties.resY() / properties.height()) {
             throw new IllegalArgumentException("Resolution is not proportional to game field size");
         }
 
-        this.proportion = context.resX() / context.gameFieldWidth();
+        this.proportion = javaFxProperties.resX() / properties.width();
 
         this.scene = scene;
         this.stage = stage;
-        this.context = context;
+        this.javaFxProperties = javaFxProperties;
 
         this.presenter = presenter;
 
-        this.stage.setWidth(context.resX());
-        this.stage.setHeight(context.resY());
-        this.stage.setTitle(context.title());
+        this.stage.setWidth(javaFxProperties.resX());
+        this.stage.setHeight(javaFxProperties.resY());
+        this.stage.setTitle(javaFxProperties.title());
 
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
@@ -90,8 +97,8 @@ public class JavaFxView implements View, Initializable {
             }
         });
 
-        canvas.setWidth(context.resX());
-        canvas.setHeight(context.resY());
+        canvas.setWidth(javaFxProperties.resX());
+        canvas.setHeight(javaFxProperties.resY());
         // TODO разделить как то чтоли
 
 
@@ -131,11 +138,11 @@ public class JavaFxView implements View, Initializable {
     }
 
     public void clear() {
-        canvas.getGraphicsContext2D().clearRect(0, 0, context.resX(), context.resY());
+        canvas.getGraphicsContext2D().clearRect(0, 0, javaFxProperties.resX(), javaFxProperties.resY());
     }
 
     public void showMessage(String message) {
-        canvas.getGraphicsContext2D().strokeText(message, 10, 10);
+        canvas.getGraphicsContext2D().strokeText(message, javaFxProperties.resX() / 3, javaFxProperties.resY() / 3);
     }
 
     public void close() {
