@@ -1,5 +1,7 @@
 package ru.nsu.fit.smolyakov.snake.executable;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,6 +15,7 @@ import ru.nsu.fit.smolyakov.snake.properties.GameFieldProperties;
 import ru.nsu.fit.smolyakov.snake.view.JavaFxView;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class JavaFxSnakeGame extends Application {
     private JavaFxProperties javaFxProperties;
@@ -24,8 +27,19 @@ public class JavaFxSnakeGame extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        this.javaFxProperties = new JavaFxProperties("Snake JAVAFX", 1400, 900); // TODO хочу вынести в жсон
-        this.gameFieldProperties = new GameFieldProperties(28, 18, 5); // TODO хочу вынести в жсон
+        var mapper = new ObjectMapper(new YAMLFactory());
+
+//        this.javaFxProperties = new JavaFxProperties("Snake JAVAFX", 1400, 900); // TODO хочу вынести в жсон
+//        this.gameFieldProperties = new GameFieldProperties(28, 18, 5); // TODO хочу вынести в жсон
+
+        this.javaFxProperties = mapper.readValue(
+            Objects.requireNonNull(getClass().getResourceAsStream("/java_fx_properties.yaml")),
+            JavaFxProperties.class
+        );
+        this.gameFieldProperties = mapper.readValue(
+            Objects.requireNonNull(getClass().getResourceAsStream("/game_field_properties.yaml")),
+            GameFieldProperties.class
+        );
 
         var fxmlLoader = new FXMLLoader(getClass().getResource("/gamefield.fxml"));
         Scene rootScene = fxmlLoader.load();
