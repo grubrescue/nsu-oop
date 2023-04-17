@@ -21,8 +21,6 @@ public class Presenter {
         thread = new Thread(() -> {
             for (int i = 3; i >= 0; i--) {
                 updateView();
-                System.out.println(model.getPlayerSnake().getSnakeBody().getHead());
-                System.out.println(model.getPlayerSnake().getSnakeBody().getTail().get(0));
 
                 if (i != 0) {
                     view.showMessage("Game starts in " + i);
