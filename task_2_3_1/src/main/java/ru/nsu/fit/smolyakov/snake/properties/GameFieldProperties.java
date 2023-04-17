@@ -8,6 +8,7 @@ import java.beans.ConstructorProperties;
 public record GameFieldProperties(
     @JsonProperty("width") int width,
     @JsonProperty("height") int height,
-    @JsonProperty("maxApples") int maxApples
+    @JsonProperty("maxApples") int maxApples,
+    @JsonProperty("barrierUrl") String barrierUrl
 ){
 }
