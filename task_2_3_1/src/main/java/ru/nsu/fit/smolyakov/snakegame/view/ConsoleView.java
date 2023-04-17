@@ -14,6 +14,7 @@ import ru.nsu.fit.smolyakov.snakegame.presenter.Presenter;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -30,7 +31,6 @@ public class ConsoleView implements View {
 
         this.terminal = new DefaultTerminalFactory().createTerminal();
         this.screen = new TerminalScreen(terminal);
-
 
         initializeResources();
     }
@@ -86,8 +86,6 @@ public class ConsoleView implements View {
         }
     }
 
-    ;
-
     private void pollKeyboardInput() {
         KeyStroke keyStroke;
 
@@ -133,8 +131,8 @@ public class ConsoleView implements View {
     }
 
     @Override
-    public void drawAppleSet(Set<Apple> appleSet) {
-        appleSet.forEach(apple -> screen.setCharacter(apple.point().x(), apple.point().y(), resources.apple));
+    public void drawApple(Apple apple) {
+        screen.setCharacter(apple.point().x(), apple.point().y(), resources.apple);
         try {
             screen.refresh();
         } catch (IOException e) {
@@ -152,16 +150,25 @@ public class ConsoleView implements View {
         }
     }
 
-    @Override
-    public void drawPlayerSnake(Snake snake) {
-        snake.getSnakeBody().getTail().forEach(point -> screen.setCharacter(point.x(), point.y(), resources.playerSnakeTail));
-        screen.setCharacter(snake.getSnakeBody().getHead().x(), snake.getSnakeBody().getHead().y(), resources.playerSnakeHead);
+    private void drawSnake(Snake snake, TextCharacter head, TextCharacter tail) {
+        snake.getSnakeBody().getTail().forEach(point -> screen.setCharacter(point.x(), point.y(), tail));
+        screen.setCharacter(snake.getSnakeBody().getHead().x(), snake.getSnakeBody().getHead().y(), head);
 
         try {
             screen.refresh();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void drawPlayerSnake(Snake snake) {
+        drawSnake(snake, resources.playerSnakeHead, resources.playerSnakeTail);
+    }
+
+    @Override
+    public void drawEnemySnake(Snake snake) {
+        drawSnake(snake, resources.enemySnakeHead, resources.enemySnakeTail);
     }
 
     @Override

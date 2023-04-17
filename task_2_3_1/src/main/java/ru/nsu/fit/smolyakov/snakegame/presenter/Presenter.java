@@ -2,6 +2,7 @@ package ru.nsu.fit.smolyakov.snakegame.presenter;
 
 import ru.nsu.fit.smolyakov.snakegame.model.GameField;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
+import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
 import ru.nsu.fit.smolyakov.snakegame.properties.PresenterProperties;
 import ru.nsu.fit.smolyakov.snakegame.view.View;
 
@@ -40,6 +41,7 @@ public class Presenter {
 
         while (!Thread.currentThread().isInterrupted()) {
             var playerAlive = model.update();
+            model.getAISnakeList().forEach(AISnake::thinkAboutTurn);
             showFrame();
 
             if (!playerAlive) {
@@ -68,8 +70,9 @@ public class Presenter {
     public void showFrame() {
         view.clear();
         view.drawBarrier(model.getBarrier());
-        view.drawAppleSet(model.getApplesSet());
+        model.getApplesSet().forEach(view::drawApple);
         view.drawPlayerSnake(model.getPlayerSnake());
+        model.getAISnakeList().forEach(view::drawEnemySnake);
         view.setScoreAmount(model.getPlayerSnake().getPoints());
     }
 
