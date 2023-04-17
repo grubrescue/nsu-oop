@@ -1,9 +1,7 @@
 package ru.nsu.fit.smolyakov.snake.presenter;
 
 import ru.nsu.fit.smolyakov.snake.model.GameField;
-import ru.nsu.fit.smolyakov.snake.model.GameFieldImpl;
 import ru.nsu.fit.smolyakov.snake.model.Snake;
-import ru.nsu.fit.smolyakov.snake.properties.GameFieldProperties;
 import ru.nsu.fit.smolyakov.snake.view.View;
 
 public class Presenter {
@@ -49,7 +47,7 @@ public class Presenter {
                 }
 
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(50);
                 } catch (InterruptedException e) {
                     return;
                 }
@@ -61,9 +59,9 @@ public class Presenter {
 
     public void updateView() {
         view.clear();
-        view.draw(model.getBarrier());
-        view.draw(model.getApplesSet());
-        view.draw(model.getPlayerSnake());
+        view.drawBarrier(model.getBarrier());
+        view.drawAppleSet(model.getApplesSet());
+        view.drawPlayerSnake(model.getPlayerSnake());
         view.setScoreAmount(model.getPlayerSnake().getPoints());
     }
 

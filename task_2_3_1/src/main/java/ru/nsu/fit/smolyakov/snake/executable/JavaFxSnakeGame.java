@@ -24,8 +24,8 @@ public class JavaFxSnakeGame extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        this.javaFxProperties = new JavaFxProperties("Snake JAVAFX", 1600, 900); // TODO хочу вынести в жсон
-        this.gameFieldProperties = new GameFieldProperties(16, 9, 3); // TODO хочу вынести в жсон
+        this.javaFxProperties = new JavaFxProperties("Snake JAVAFX", 1400, 900); // TODO хочу вынести в жсон
+        this.gameFieldProperties = new GameFieldProperties(28, 18, 5); // TODO хочу вынести в жсон
 
         var fxmlLoader = new FXMLLoader(getClass().getResource("/gamefield.fxml"));
         Scene rootScene = fxmlLoader.load();
@@ -37,9 +37,9 @@ public class JavaFxSnakeGame extends Application {
 
         this.view = fxmlLoader.getController();
         this.model = new GameFieldImpl(gameFieldProperties);
-
         this.presenter = new Presenter(this.view, this.model);
-        this.view.createField(primaryStage, rootScene, gameFieldProperties, javaFxProperties, presenter);
+
+        this.view.createField(gameFieldProperties, javaFxProperties, presenter);
 
         this.presenter.start();
         primaryStage.show();
