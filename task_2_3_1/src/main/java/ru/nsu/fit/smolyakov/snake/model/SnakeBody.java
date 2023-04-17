@@ -88,10 +88,6 @@ public class SnakeBody {
      * @param grow    whether the snake has eaten the apple
      */
     public void move(Point newHead, boolean grow) {
-//        if (!newHead.connected(head)) {
-//            throw new IllegalArgumentException("New head must be connected to the tail");
-//        }
-
         tail.add(0, head);
         head = newHead;
 

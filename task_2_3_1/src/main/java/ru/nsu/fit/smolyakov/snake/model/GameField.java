@@ -60,4 +60,7 @@ public interface GameField { // TODO разделить интерфейсы
      * {@code false} otherwise
      */
     boolean update();
+
+
+    GameField newGame();
 }
