@@ -14,9 +14,9 @@ public class GameFieldImpl implements GameField {
     private final GameFieldProperties properties;
 
     private final Snake playerSnake;
-    private List<Snake> AISnakesList;
     private final Set<Apple> applesSet;
     private final Barrier barrier;
+    private List<Snake> AISnakesList;
 
     public GameFieldImpl(GameFieldProperties properties) {
         this.properties = properties;

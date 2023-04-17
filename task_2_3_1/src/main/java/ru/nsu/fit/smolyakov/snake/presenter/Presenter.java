@@ -20,7 +20,7 @@ public class Presenter {
 
     private void startTimeOut() throws InterruptedException {
         for (int i = 3; i >= 0; i--) {
-            updateView();
+            showFrame();
 
             if (i != 0) {
                 view.showMessage("Game starts in " + i);
@@ -31,42 +31,41 @@ public class Presenter {
         }
     }
 
-    private void drawFrameAndSleep() {
+    private void mainLoop() {
+        try {
+            startTimeOut();
+        } catch (InterruptedException e) {
+            return;
+        }
 
-    }
+        while (!Thread.currentThread().isInterrupted()) {
+            var playerAlive = model.update();
+            showFrame();
 
-    public void start() {
-        model = model.newGame();
-        
-        thread = new Thread(() -> {
-            try {
-                startTimeOut();
-            } catch (InterruptedException e) {
+            if (!playerAlive) {
+                view.showMessage("You died! You earned " + model.getPlayerSnake().getPoints() + " points.");
                 return;
             }
 
-            while (!Thread.currentThread().isInterrupted()) {
-                var playerAlive = model.update();
-
-                updateView();
-
-                if (!playerAlive) {
-                    view.showMessage("You died! You earned " + model.getPlayerSnake().getPoints() + " points.");
-                    return;
-                }
-
-                try {
-                    Thread.sleep(presenterProperties.speed().getFrameDelayMillis());
-                } catch (InterruptedException e) {
-                    return;
-                }
+            try {
+                Thread.sleep(presenterProperties.speed().getFrameDelayMillis());
+            } catch (InterruptedException e) {
+                return;
             }
         }
-        );
+    }
+
+    ;
+
+    public void start() {
+        model = model.newGame();
+
+        // TODO вынести в отдельный метод?
+        thread = new Thread(this::mainLoop);
         thread.start();
     }
 
-    public void updateView() {
+    public void showFrame() {
         view.clear();
         view.drawBarrier(model.getBarrier());
         view.drawAppleSet(model.getApplesSet());
@@ -94,7 +93,7 @@ public class Presenter {
         thread.interrupt();
         start();
     }
-    
+
     public void onExitKeyPressed() {
         thread.interrupt();
         view.close();

@@ -1,7 +1,6 @@
 package ru.nsu.fit.smolyakov.snake;
 
 import ru.nsu.fit.smolyakov.snake.executable.ConsoleSnakeGame;
-import ru.nsu.fit.smolyakov.snake.executable.JavaFxSnakeGame;
 
 import java.io.IOException;
 

@@ -30,18 +30,6 @@ public class JavaFxView implements View, Initializable {
 
     @FXML
     private Text scoreAmountText;
-
-    // resources
-    // TODO вынести отдельно и доделать других змеек
-    private class Resources {
-        Image apple;
-        Image barrier;
-        Image playerSnakeHead;
-        Image playerSnakeTail;
-        Image enemySnakeHead;
-        Image enemySnakeTail;
-    }
-
     private Resources resources;
 
     @Override
@@ -54,19 +42,42 @@ public class JavaFxView implements View, Initializable {
             proportion,
             proportion,
             true,
-            true
+            false
         );
     }
 
-    public void createField(GameFieldProperties properties,
-                            JavaFxProperties javaFxProperties,
-                            Presenter presenter) {
-        if (presenter == null) {
-            throw new IllegalArgumentException("presenter is null");
-        } else if (properties == null) {
-            throw new IllegalArgumentException("properties is null");
-        } else if (javaFxProperties == null) {
-            throw new IllegalArgumentException("javaFxProperties is null");
+    private void initializeResources() {
+        resources = new Resources();
+        resources.apple = imageInstance("/sprites/apple.png");
+        resources.barrier = imageInstance("/sprites/barrier.png");
+        resources.playerSnakeHead = imageInstance("/sprites/player/head.png");
+        resources.playerSnakeTail = imageInstance("/sprites/player/tail.png");
+        resources.enemySnakeHead = imageInstance("/sprites/enemy/head.png");
+        resources.enemySnakeTail = imageInstance("/sprites/enemy/tail.png");
+    }
+
+    private void initializeEventHandlers() {
+        this.canvas.getScene().setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+                case UP -> presenter.onUpKeyPressed();
+                case DOWN -> presenter.onDownKeyPressed();
+                case LEFT -> presenter.onLeftKeyPressed();
+                case RIGHT -> presenter.onRightKeyPressed();
+                case Q -> presenter.onExitKeyPressed();
+                case R -> presenter.onRestartKeyPressed();
+            }
+        });
+
+        this.canvas.getScene().getWindow().setOnCloseRequest(e ->
+            presenter.onExitKeyPressed()
+        );
+    }
+
+    public void initializeField(GameFieldProperties properties,
+                                JavaFxProperties javaFxProperties,
+                                Presenter presenter) {
+        if (presenter == null || javaFxProperties == null || properties == null) {
+            throw new IllegalArgumentException("Arguments can't be null");
         }
 
         if (javaFxProperties.resX() % (2 * properties.width()) != 0
@@ -83,32 +94,11 @@ public class JavaFxView implements View, Initializable {
         this.javaFxProperties = javaFxProperties;
         this.proportion = javaFxProperties.resX() / properties.width();
 
-        this.canvas.getScene().setOnKeyPressed(e -> {
-            switch (e.getCode()) {
-                case UP -> presenter.onUpKeyPressed();
-                case DOWN -> presenter.onDownKeyPressed();
-                case LEFT -> presenter.onLeftKeyPressed();
-                case RIGHT -> presenter.onRightKeyPressed();
-                case Q -> presenter.onExitKeyPressed();
-                case R -> presenter.onRestartKeyPressed();
-            }
-        });
-
-        this.canvas.getScene().getWindow().setOnCloseRequest(e ->
-            presenter.onExitKeyPressed()
-        );
-
         canvas.setWidth(javaFxProperties.resX());
         canvas.setHeight(javaFxProperties.resY());
 
-        // TODO конструктор слишком жирный, вынести куда нибудь в отдельный приватный метод
-        resources = new Resources();
-        resources.apple = imageInstance("/sprites/apple.png");
-        resources.barrier = imageInstance("/sprites/barrier.png");
-        resources.playerSnakeHead = imageInstance("/sprites/player/head.png");
-        resources.playerSnakeTail = imageInstance("/sprites/player/tail.png");
-        resources.enemySnakeHead = imageInstance("/sprites/enemy/head.png");
-        resources.enemySnakeTail = imageInstance("/sprites/enemy/tail.png");
+        initializeEventHandlers();
+        initializeResources();
     }
 
     private void drawFigure(Point point, Image image) {
@@ -151,5 +141,15 @@ public class JavaFxView implements View, Initializable {
 
     public void close() {
         ((Stage) canvas.getScene().getWindow()).close();
+    }
+
+    // TODO вынести отдельно и доделать других змеек
+    private class Resources {
+        Image apple;
+        Image barrier;
+        Image playerSnakeHead;
+        Image playerSnakeTail;
+        Image enemySnakeHead;
+        Image enemySnakeTail;
     }
 }
