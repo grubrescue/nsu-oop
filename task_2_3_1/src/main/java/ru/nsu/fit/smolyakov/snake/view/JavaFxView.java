@@ -146,7 +146,7 @@ public class JavaFxView implements View, Initializable {
     }
 
     public void showMessage(String message) {
-        canvas.getGraphicsContext2D().strokeText(message, javaFxProperties.resX() / 2, javaFxProperties.resY() / 2);
+        canvas.getGraphicsContext2D().strokeText(message, javaFxProperties.resX() / 3, javaFxProperties.resY() / 2);
         // TODO сделать нормально в ссене билдере
     }
 
