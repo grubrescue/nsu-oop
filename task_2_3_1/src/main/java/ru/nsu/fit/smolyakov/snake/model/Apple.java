@@ -31,7 +31,7 @@ public record Apple(Point point) {
          */
         public Apple generateRandom(int iterations) {
             for (int i = 0; i < iterations; i++) {
-                Apple apple = new Apple(Point.random(gameField.getWidth(), gameField.getHeight()));
+                Apple apple = new Apple(Point.random(gameField.getProperties().width(), gameField.getProperties().height()));
                 if (gameField.isFree(apple.point)) {
                     return apple;
                 }

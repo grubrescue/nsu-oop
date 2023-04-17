@@ -5,36 +5,36 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ru.nsu.fit.smolyakov.snake.model.GameField;
-import ru.nsu.fit.smolyakov.snake.model.GameFieldImpl;
 import ru.nsu.fit.smolyakov.snake.presenter.Presenter;
-import ru.nsu.fit.smolyakov.snake.view.JavaFxContext;
+import ru.nsu.fit.smolyakov.snake.properties.JavaFxProperties;
+import ru.nsu.fit.smolyakov.snake.properties.GameFieldProperties;
 import ru.nsu.fit.smolyakov.snake.view.JavaFxView;
 
 import java.io.IOException;
 
 public class JavaFxSnakeGame extends Application {
-    private JavaFxContext context;
+    private JavaFxProperties javaFxProperties;
+    private GameFieldProperties gameFieldProperties;
+
     private JavaFxView view;
     private GameField model;
     private Presenter presenter;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        var fxmlLoader = new FXMLLoader(getClass().getResource("/gamefield.fxml"));
+        this.javaFxProperties = new JavaFxProperties("Snake JAVAFX", 1600, 900); // TODO хочу вынести в жсон
+        this.gameFieldProperties = new GameFieldProperties(16, 9, 3); // TODO хочу вынести в жсон
 
+        var fxmlLoader = new FXMLLoader(getClass().getResource("/gamefield.fxml"));
         Scene rootScene = fxmlLoader.load();
         primaryStage.setScene(rootScene);
 
-        var context = new JavaFxContext("Snake JAVAFX", 1600, 900, 16, 9); // TODO хочу вынести в жсон
-
         this.view = fxmlLoader.getController();
 
-        this.presenter = new Presenter(this.view, context.gameFieldWidth(), context.gameFieldHeight());
+        this.presenter = new Presenter(this.view, gameFieldProperties);
+        this.view.createField(primaryStage, rootScene, gameFieldProperties, javaFxProperties, presenter);
+
         this.presenter.start();
-
-        this.view.createField(primaryStage, rootScene, context, presenter);
-
-
         primaryStage.show();
     }
 

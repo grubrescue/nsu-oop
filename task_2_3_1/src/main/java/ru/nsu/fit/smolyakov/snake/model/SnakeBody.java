@@ -125,8 +125,8 @@ public class SnakeBody {
          */
         public SnakeBody generateRandom(int iterations) {
             for (int i = 0; i < iterations; i++) {
-                var initialHeadLocation = Point.random(gameField.getWidth(), gameField.getHeight());
-                var initialTailLocation = initialHeadLocation.shift(new Point(0, -1)); // чучуть вниз
+                var initialHeadLocation = Point.random(gameField.getProperties().width(), gameField.getProperties().height());
+                var initialTailLocation = initialHeadLocation.shift(new Point(0, 1)); // чучуть вниз
 
                 if (gameField.isFree(initialHeadLocation) && gameField.isFree(initialTailLocation)) {
                     return new SnakeBody(initialHeadLocation, List.of(initialTailLocation));

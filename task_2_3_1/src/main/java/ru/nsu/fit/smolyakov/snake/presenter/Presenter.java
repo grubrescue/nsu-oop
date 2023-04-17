@@ -3,41 +3,46 @@ package ru.nsu.fit.smolyakov.snake.presenter;
 import ru.nsu.fit.smolyakov.snake.model.GameField;
 import ru.nsu.fit.smolyakov.snake.model.GameFieldImpl;
 import ru.nsu.fit.smolyakov.snake.model.Snake;
+import ru.nsu.fit.smolyakov.snake.properties.GameFieldProperties;
 import ru.nsu.fit.smolyakov.snake.view.View;
 
 public class Presenter {
     private final View view;
     private GameField model;
 
-    private final int height;
-    private final int width;
+    private final GameFieldProperties properties;
     private Thread thread;
 
-    public Presenter(View view, int width, int height) {
+    public Presenter(View view, GameFieldProperties properties) {
         this.view = view;
-        this.height = height;
-        this.width = width;
+        this.properties = properties;
     }
 
     public void start() {
-        model = new GameFieldImpl(width, height, 3);
+        model = new GameFieldImpl(properties);
         
         thread = new Thread(() -> {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                return;
+            for (int i = 3; i >= 0; i--) {
+                updateView();
+                System.out.println(model.getPlayerSnake().getSnakeBody().getHead());
+                System.out.println(model.getPlayerSnake().getSnakeBody().getTail().get(0));
+
+                if (i != 0) {
+                    view.showMessage("Game starts in " + i);
+                } else {
+                    view.showMessage("Go!");
+                }
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    return;
+                }
             }
 
             while (!Thread.currentThread().isInterrupted()) {
                 var playerDeath = model.update();
 
-                view.clear();
-
-                view.draw(model.getApplesSet());
-                view.draw(model.getBarrier());
-                view.draw(model.getPlayerSnake());
-                view.setScoreAmount(model.getPlayerSnake().getPoints());
+                updateView();
 
                 if (playerDeath) {
                     view.showMessage("You died! You earned " + model.getPlayerSnake().getPoints() + " points.");
@@ -45,7 +50,7 @@ public class Presenter {
                 }
 
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     return;
                 }
@@ -55,13 +60,16 @@ public class Presenter {
         thread.start();
     }
 
-    public void update() {
-
+    public void updateView() {
+        view.clear();
+        view.draw(model.getBarrier());
+        view.draw(model.getApplesSet());
+        view.draw(model.getPlayerSnake());
+        view.setScoreAmount(model.getPlayerSnake().getPoints());
     }
 
     public void onLeftKeyPressed() {
         model.getPlayerSnake().setMovingDirection(Snake.MovingDirection.LEFT);
-
     }
 
     public void onRightKeyPressed() {

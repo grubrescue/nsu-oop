@@ -1,5 +1,7 @@
 package ru.nsu.fit.smolyakov.snake.model;
 
+import ru.nsu.fit.smolyakov.snake.properties.GameFieldProperties;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,27 +11,23 @@ import java.util.stream.Collectors;
  * A main model that composes {@link Apple}s and {@link Snake}s, both player- and AI-driven.
  */
 public class GameFieldImpl implements GameField {
-    private final int width;
-    private final int height;
-    private final int maxApples;
+    private final GameFieldProperties properties;
 
     private final Snake playerSnake;
     private List<Snake> AISnakesList;
     private final Set<Apple> applesSet;
     private final Barrier barrier;
 
-    public GameFieldImpl(int width, int height, int maxApples) {
+    public GameFieldImpl(GameFieldProperties properties) {
+        this.properties = properties;
         this.barrier = new Barrier(Set.of());
 
-        this.width = width;
-        this.height = height;
-        this.maxApples = maxApples;
         this.AISnakesList = List.of();
 
         this.playerSnake = new Snake(this);
 
         this.applesSet = new HashSet<>(); // TODO сделать нормально
-        while (applesSet.size() < maxApples) {
+        while (applesSet.size() < properties.maxApples()) {
             applesSet.add(new Apple.Factory(this).generateRandom(10000));
         }
     }
@@ -131,7 +129,7 @@ public class GameFieldImpl implements GameField {
 
         death = checkPlayerSnakeCollisions();
 
-        while (applesSet.size() < maxApples) {
+        while (applesSet.size() < properties.maxApples()) {
             applesSet.add(new Apple.Factory(this).generateRandom(10000));
             // TODO объединить везде maxIterations, вынести в константу
             // TODO одна фабрика для всех яблок
@@ -141,22 +139,11 @@ public class GameFieldImpl implements GameField {
     }
 
     /**
-     * Returns the width of the game field.
+     * Returns the properties of the game field.
      *
-     * @return the width of the game field
+     * @return the properties of the game field
      */
-    @Override
-    public int getWidth() {
-        return width;
-    }
-
-    /**
-     * Returns the height of the game field.
-     *
-     * @return the height of the game field
-     */
-    @Override
-    public int getHeight() {
-        return height;
+    public GameFieldProperties getProperties() {
+        return properties;
     }
 }
