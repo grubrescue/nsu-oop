@@ -4,7 +4,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import ru.nsu.fit.smolyakov.snake.model.GameField;
+import ru.nsu.fit.smolyakov.snake.model.GameFieldImpl;
 import ru.nsu.fit.smolyakov.snake.presenter.Presenter;
 import ru.nsu.fit.smolyakov.snake.properties.JavaFxProperties;
 import ru.nsu.fit.smolyakov.snake.properties.GameFieldProperties;
@@ -27,11 +29,16 @@ public class JavaFxSnakeGame extends Application {
 
         var fxmlLoader = new FXMLLoader(getClass().getResource("/gamefield.fxml"));
         Scene rootScene = fxmlLoader.load();
+
         primaryStage.setScene(rootScene);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setWidth(javaFxProperties.resX());
+        primaryStage.setHeight(javaFxProperties.resY());
 
         this.view = fxmlLoader.getController();
+        this.model = new GameFieldImpl(gameFieldProperties);
 
-        this.presenter = new Presenter(this.view, gameFieldProperties);
+        this.presenter = new Presenter(this.view, this.model);
         this.view.createField(primaryStage, rootScene, gameFieldProperties, javaFxProperties, presenter);
 
         this.presenter.start();

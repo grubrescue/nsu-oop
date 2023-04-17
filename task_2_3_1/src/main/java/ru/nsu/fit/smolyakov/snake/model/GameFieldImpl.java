@@ -146,4 +146,9 @@ public class GameFieldImpl implements GameField {
     public GameFieldProperties getProperties() {
         return properties;
     }
+
+    @Override
+    public GameField newGame() {
+        return new GameFieldImpl(properties);
+    }
 }

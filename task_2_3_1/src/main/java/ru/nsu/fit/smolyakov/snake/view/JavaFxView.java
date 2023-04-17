@@ -82,10 +82,6 @@ public class JavaFxView implements View, Initializable {
 
         this.presenter = presenter;
 
-        this.stage.setWidth(javaFxProperties.resX());
-        this.stage.setHeight(javaFxProperties.resY());
-        this.stage.setTitle(javaFxProperties.title());
-
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case UP -> presenter.onUpKeyPressed();
@@ -99,6 +95,9 @@ public class JavaFxView implements View, Initializable {
 
         canvas.setWidth(javaFxProperties.resX());
         canvas.setHeight(javaFxProperties.resY());
+
+
+//        stage.sizeToScene();
         // TODO разделить как то чтоли
 
 

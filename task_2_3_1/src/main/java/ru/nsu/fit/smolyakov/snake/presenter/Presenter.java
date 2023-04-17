@@ -10,16 +10,15 @@ public class Presenter {
     private final View view;
     private GameField model;
 
-    private final GameFieldProperties properties;
     private Thread thread;
 
-    public Presenter(View view, GameFieldProperties properties) {
+    public Presenter(View view, GameField model) {
         this.view = view;
-        this.properties = properties;
+        this.model = model;
     }
 
     public void start() {
-        model = new GameFieldImpl(properties);
+        model = model.newGame();
         
         thread = new Thread(() -> {
             for (int i = 3; i >= 0; i--) {
