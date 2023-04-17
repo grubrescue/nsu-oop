@@ -81,14 +81,12 @@ public class GameFieldImpl implements GameField {
      */
     @Override
     public boolean isFree(Point point) {
-//        return playerSnake.getSnakeBody().headCollision(point) ||
-//            playerSnake.getSnakeBody().tailCollision(point) ||
-//            barrier.met(point) ||
-//            applesSet.contains(new Apple(point)) ||
-//            AISnakesList.stream().anyMatch(snake -> snake.getSnakeBody().headCollision(point)) ||
-//            AISnakesList.stream().anyMatch(snake -> snake.getSnakeBody().tailCollision(point));
-
-        return true;
+        return (playerSnake == null || !playerSnake.getSnakeBody().headCollision(point)) &&
+            (playerSnake == null || !playerSnake.getSnakeBody().tailCollision(point)) &&
+            (barrier == null || !barrier.met(point)) &&
+            (applesSet == null || !applesSet.contains(new Apple(point))) &&
+            (AISnakesList == null || AISnakesList.stream().noneMatch(snake -> snake.getSnakeBody().headCollision(point))) &&
+            (AISnakesList == null || AISnakesList.stream().noneMatch(snake -> snake.getSnakeBody().tailCollision(point)));
     }
 
     private boolean checkPlayerSnakeCollisions() {
