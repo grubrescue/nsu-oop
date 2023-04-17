@@ -10,8 +10,8 @@ import javafx.stage.StageStyle;
 import ru.nsu.fit.smolyakov.snake.model.GameField;
 import ru.nsu.fit.smolyakov.snake.model.GameFieldImpl;
 import ru.nsu.fit.smolyakov.snake.presenter.Presenter;
-import ru.nsu.fit.smolyakov.snake.properties.JavaFxProperties;
 import ru.nsu.fit.smolyakov.snake.properties.GameFieldProperties;
+import ru.nsu.fit.smolyakov.snake.properties.JavaFxProperties;
 import ru.nsu.fit.smolyakov.snake.properties.PresenterProperties;
 import ru.nsu.fit.smolyakov.snake.view.JavaFxView;
 
@@ -52,7 +52,7 @@ public class JavaFxSnakeGame extends Application {
         this.model = new GameFieldImpl(gameFieldProperties);
         this.presenter = new Presenter(this.view, this.model, presenterProperties);
 
-        this.view.createField(gameFieldProperties, javaFxProperties, presenter);
+        this.view.initializeField(gameFieldProperties, javaFxProperties, presenter);
 
         this.presenter.start();
         primaryStage.show();
