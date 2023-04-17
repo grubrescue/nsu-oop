@@ -1,4 +1,7 @@
-package ru.nsu.fit.smolyakov.snake.model;
+package ru.nsu.fit.smolyakov.snakegame.model.snake;
+
+import ru.nsu.fit.smolyakov.snakegame.model.GameField;
+import ru.nsu.fit.smolyakov.snakegame.point.Point;
 
 import java.util.LinkedList;
 import java.util.List;

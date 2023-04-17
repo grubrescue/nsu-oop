@@ -5,7 +5,7 @@
 <?import javafx.scene.Scene?>
 <?import javafx.scene.text.Text?>
 <Scene xmlns:fx="http://javafx.com/fxml/1" fx:id="scene" xmlns="http://javafx.com/javafx/19"
-       fx:controller="ru.nsu.fit.smolyakov.snake.view.JavaFxView">
+       fx:controller="ru.nsu.fit.smolyakov.snakegame.view.JavaFxView">
     <root>
         <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
               prefHeight="400.0" prefWidth="600.0">

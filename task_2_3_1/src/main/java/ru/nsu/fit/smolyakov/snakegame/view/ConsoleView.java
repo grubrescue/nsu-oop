@@ -1,4 +1,4 @@
-package ru.nsu.fit.smolyakov.snake.view;
+package ru.nsu.fit.smolyakov.snakegame.view;
 
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
@@ -7,11 +7,11 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-import ru.nsu.fit.smolyakov.snake.model.Apple;
-import ru.nsu.fit.smolyakov.snake.model.Barrier;
-import ru.nsu.fit.smolyakov.snake.model.Snake;
-import ru.nsu.fit.smolyakov.snake.presenter.Presenter;
-import ru.nsu.fit.smolyakov.snake.properties.GameFieldProperties;
+import ru.nsu.fit.smolyakov.snakegame.model.Apple;
+import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
+import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
+import ru.nsu.fit.smolyakov.snakegame.presenter.Presenter;
+import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
 
 import java.io.IOException;
 import java.util.Objects;

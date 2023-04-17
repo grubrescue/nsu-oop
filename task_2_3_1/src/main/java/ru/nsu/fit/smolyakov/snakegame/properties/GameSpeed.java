@@ -1,4 +1,4 @@
-package ru.nsu.fit.smolyakov.snake.properties;
+package ru.nsu.fit.smolyakov.snakegame.properties;
 
 public enum GameSpeed {
     LEVEL_0(400),
