@@ -65,10 +65,6 @@ public class Snake {
                 gameField.getProperties().width(),
                 gameField.getProperties().height());
 
-        if (gameField.getBarrier().met(newHeadLocation)) {
-            return false;
-        }
-
         var appleSet = gameField.getApplesSet();
 
         var possibleApple = new Apple(newHeadLocation);
@@ -83,7 +79,7 @@ public class Snake {
         }
 
         snakeBody.move(newHeadLocation, ateApple);
-        return true;
+        return !gameField.getBarrier().met(newHeadLocation);
     }
 
     /**
