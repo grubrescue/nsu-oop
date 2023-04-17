@@ -22,7 +22,7 @@ public class GameFieldImpl implements GameField {
         this.properties = properties;
         this.barrier = new Barrier(Set.of());
 
-        this.AISnakesList = List.of();
+        this.AISnakesList = List.of(); // TODO пока пустой
 
         this.playerSnake = new Snake(this);
 

@@ -44,7 +44,8 @@ public class Snake {
      * {@code false} otherwise
      */
     public boolean setMovingDirection(MovingDirection movingDirection) {
-        if (this.movingDirection.move().shift(movingDirection.move()).equals(Point.ZERO)) {
+        if (this.getSnakeBody().getTail().get(0).equals(
+            this.getSnakeBody().getHead().shift(movingDirection.move()))) {
             return false;
         } else {
             this.movingDirection = movingDirection;

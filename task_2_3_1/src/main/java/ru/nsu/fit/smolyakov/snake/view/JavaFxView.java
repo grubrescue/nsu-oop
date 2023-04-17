@@ -2,7 +2,6 @@ package ru.nsu.fit.smolyakov.snake.view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.text.Text;
@@ -23,7 +22,6 @@ import java.util.Set;
 public class JavaFxView implements View, Initializable {
     private Presenter presenter;
 
-    private Stage stage;
     private JavaFxProperties javaFxProperties;
     private int proportion;
 
@@ -35,11 +33,16 @@ public class JavaFxView implements View, Initializable {
 
     // resources
     // TODO вынести отдельно и доделать других змеек
-    private Image appleImage;
-    private Image barrierImage;
-    private Image snakeTailImage;
-    private Image snakeHeadImage;
-    private Scene scene;
+    private class Resources {
+        Image apple;
+        Image barrier;
+        Image playerSnakeHead;
+        Image playerSnakeTail;
+        Image enemySnakeHead;
+        Image enemySnakeTail;
+    }
+
+    private Resources resources;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -55,13 +58,15 @@ public class JavaFxView implements View, Initializable {
         );
     }
 
-    public void createField(Stage stage,
-                            Scene scene,
-                            GameFieldProperties properties,
+    public void createField(GameFieldProperties properties,
                             JavaFxProperties javaFxProperties,
                             Presenter presenter) {
-        if (stage == null || javaFxProperties == null || presenter == null) {
-            throw new IllegalArgumentException("Stage or javaFxProperties is null");
+        if (presenter == null) {
+            throw new IllegalArgumentException("presenter is null");
+        } else if (properties == null) {
+            throw new IllegalArgumentException("properties is null");
+        } else if (javaFxProperties == null) {
+            throw new IllegalArgumentException("javaFxProperties is null");
         }
 
         if (javaFxProperties.resX() % (2 * properties.width()) != 0
@@ -74,15 +79,11 @@ public class JavaFxView implements View, Initializable {
             throw new IllegalArgumentException("Resolution is not proportional to game field size");
         }
 
+        this.presenter = presenter;
+        this.javaFxProperties = javaFxProperties;
         this.proportion = javaFxProperties.resX() / properties.width();
 
-        this.scene = scene;
-        this.stage = stage;
-        this.javaFxProperties = javaFxProperties;
-
-        this.presenter = presenter;
-
-        this.scene.setOnKeyPressed(e -> {
+        this.canvas.getScene().setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case UP -> presenter.onUpKeyPressed();
                 case DOWN -> presenter.onDownKeyPressed();
@@ -93,18 +94,22 @@ public class JavaFxView implements View, Initializable {
             }
         });
 
+        this.canvas.getScene().getWindow().setOnCloseRequest(e ->
+            presenter.onExitKeyPressed()
+        );
+
         canvas.setWidth(javaFxProperties.resX());
         canvas.setHeight(javaFxProperties.resY());
 
-
-//        stage.sizeToScene();
-        // TODO разделить как то чтоли
-
-
-        appleImage = imageInstance("/apple.png");
-//        barrierImage = imageInstance("/barrier.png");
-        snakeTailImage = imageInstance("/tail.png");
-        snakeHeadImage = imageInstance("/head.png");
+        // TODO вынести в отдельный класс
+        // TODO другие змейки и барьер
+        resources = new Resources();
+        resources.apple = imageInstance("/sprites/apple.png");
+        resources.barrier = imageInstance("/sprites/barrier.png");
+        resources.playerSnakeHead = imageInstance("/sprites/player/head.png");
+        resources.playerSnakeTail = imageInstance("/sprites/player/tail.png");
+        resources.enemySnakeHead = imageInstance("/sprites/enemy/head.png");
+        resources.enemySnakeTail = imageInstance("/sprites/enemy/tail.png");
     }
 
     private void drawFigure(Point point, Image image) {
@@ -123,17 +128,17 @@ public class JavaFxView implements View, Initializable {
         this.scoreAmountText.setText(String.valueOf(scoreAmount));
     }
 
-    public void draw(Set<Apple> appleSet) {
-        appleSet.forEach(apple -> drawFigure(apple.point(), appleImage));
+    public void drawAppleSet(Set<Apple> appleSet) {
+        appleSet.forEach(apple -> drawFigure(apple.point(), resources.apple));
     }
 
-    public void draw(Barrier barrier) {
-        barrier.barrierPoints().forEach(point -> drawFigure(point, barrierImage));
+    public void drawBarrier(Barrier barrier) {
+        barrier.barrierPoints().forEach(point -> drawFigure(point, resources.barrier));
     }
 
-    public void draw(Snake snake) {
-        drawFigure(snake.getSnakeBody().getHead(), snakeHeadImage); // TODO сделать поворот
-        snake.getSnakeBody().getTail().forEach(point -> drawFigure(point, snakeTailImage));
+    public void drawPlayerSnake(Snake snake) {
+        drawFigure(snake.getSnakeBody().getHead(), resources.playerSnakeHead); // TODO сделать поворот
+        snake.getSnakeBody().getTail().forEach(point -> drawFigure(point, resources.playerSnakeTail));
     }
 
     public void clear() {
@@ -141,10 +146,11 @@ public class JavaFxView implements View, Initializable {
     }
 
     public void showMessage(String message) {
-        canvas.getGraphicsContext2D().strokeText(message, javaFxProperties.resX() / 3, javaFxProperties.resY() / 3);
+        canvas.getGraphicsContext2D().strokeText(message, javaFxProperties.resX() / 2, javaFxProperties.resY() / 2);
+        // TODO сделать нормально в ссене билдере
     }
 
     public void close() {
-        stage.close();
+        ((Stage) canvas.getScene().getWindow()).close();
     }
 }

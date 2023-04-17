@@ -9,11 +9,11 @@ import java.util.Set;
 public interface View {
     void setScoreAmount(int scoreAmount);
 
-    void draw(Set<Apple> appleSet);
+    void drawAppleSet(Set<Apple> appleSet);
 
-    void draw(Barrier barrier);
+    void drawBarrier(Barrier barrier);
 
-    void draw(Snake snake);
+    void drawPlayerSnake(Snake snake);
 
     void showMessage(String string);
 
