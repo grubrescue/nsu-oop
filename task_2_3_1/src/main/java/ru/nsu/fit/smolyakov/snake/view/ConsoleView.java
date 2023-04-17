@@ -27,6 +27,9 @@ public class ConsoleView implements View {
         TextCharacter playerSnakeTail;
         TextCharacter enemySnakeHead;
         TextCharacter enemySnakeTail;
+
+        TextCharacter messageChar;
+        TextCharacter scoreChar;
     }
 
     private final GameFieldProperties properties;
@@ -50,11 +53,19 @@ public class ConsoleView implements View {
         resources.apple =
             TextCharacter.DEFAULT_CHARACTER.withCharacter('$').withForegroundColor(TextColor.ANSI.GREEN);
         resources.barrier =
-            TextCharacter.DEFAULT_CHARACTER.withCharacter('*').withForegroundColor(TextColor.ANSI.YELLOW);
+            TextCharacter.DEFAULT_CHARACTER.withCharacter('*').withForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
         resources.playerSnakeHead =
-            TextCharacter.DEFAULT_CHARACTER.withCharacter('@').withForegroundColor(TextColor.ANSI.WHITE);
+            TextCharacter.DEFAULT_CHARACTER.withCharacter('@').withForegroundColor(TextColor.ANSI.WHITE_BRIGHT);
         resources.playerSnakeTail =
-            TextCharacter.DEFAULT_CHARACTER.withCharacter('0').withForegroundColor(TextColor.ANSI.WHITE);
+            TextCharacter.DEFAULT_CHARACTER.withCharacter('0').withForegroundColor(TextColor.ANSI.WHITE_BRIGHT);
+        resources.enemySnakeHead =
+            TextCharacter.DEFAULT_CHARACTER.withCharacter('@').withForegroundColor(TextColor.ANSI.RED_BRIGHT);
+        resources.enemySnakeTail =
+            TextCharacter.DEFAULT_CHARACTER.withCharacter('0').withForegroundColor(TextColor.ANSI.RED_BRIGHT);
+        resources.messageChar =
+            TextCharacter.DEFAULT_CHARACTER.withForegroundColor(TextColor.ANSI.BLACK).withBackgroundColor(TextColor.ANSI.CYAN_BRIGHT);
+        resources.scoreChar =
+            TextCharacter.DEFAULT_CHARACTER.withForegroundColor(TextColor.ANSI.BLACK).withBackgroundColor(TextColor.ANSI.CYAN_BRIGHT);
     }
 
     public void setPresenter(Presenter presenter) {
@@ -98,6 +109,17 @@ public class ConsoleView implements View {
 
     @Override
     public void setScoreAmount(int scoreAmount) {
+        String scoreString = "Score: " + scoreAmount;
+
+        for (int i = 0; i < scoreString.length(); i++) {
+            screen.setCharacter(i, properties.height(), resources.scoreChar.withCharacter(scoreString.charAt(i)));
+        }
+
+        try {
+            screen.refresh();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -124,6 +146,7 @@ public class ConsoleView implements View {
     public void drawPlayerSnake(Snake snake) {
         snake.getSnakeBody().getTail().forEach(point -> screen.setCharacter(point.x(), point.y(), resources.playerSnakeTail));
         screen.setCharacter(snake.getSnakeBody().getHead().x(), snake.getSnakeBody().getHead().y(), resources.playerSnakeHead);
+
         try {
             screen.refresh();
         } catch (IOException e) {
@@ -133,6 +156,16 @@ public class ConsoleView implements View {
 
     @Override
     public void showMessage(String string) {
+        for (int i = 0; i < string.length(); i++) {
+            screen.setCharacter(5 + i, properties.height()/2,
+                resources.messageChar.withCharacter(string.charAt(i)));
+        }
+
+        try {
+            screen.refresh();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
