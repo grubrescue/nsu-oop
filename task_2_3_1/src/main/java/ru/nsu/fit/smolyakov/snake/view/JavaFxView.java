@@ -125,9 +125,13 @@ public class JavaFxView implements View, Initializable {
         barrier.barrierPoints().forEach(point -> drawFigure(point, resources.barrier));
     }
 
+    private void drawSnake(Snake snake, Image head, Image tail) {
+        drawFigure(snake.getSnakeBody().getHead(), head);
+        snake.getSnakeBody().getTail().forEach(point -> drawFigure(point, tail));
+    }
+
     public void drawPlayerSnake(Snake snake) {
-        drawFigure(snake.getSnakeBody().getHead(), resources.playerSnakeHead); // TODO сделать поворот
-        snake.getSnakeBody().getTail().forEach(point -> drawFigure(point, resources.playerSnakeTail));
+        drawSnake(snake, resources.playerSnakeHead, resources.playerSnakeTail);
     }
 
     public void clear() {
