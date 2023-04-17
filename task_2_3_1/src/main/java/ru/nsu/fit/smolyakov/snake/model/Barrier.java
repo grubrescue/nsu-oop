@@ -1,5 +1,9 @@
 package ru.nsu.fit.smolyakov.snake.model;
 
+import ru.nsu.fit.smolyakov.snake.properties.GameFieldProperties;
+
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -7,6 +11,19 @@ import java.util.Set;
  * The snake cannot pass through the barrier.
  */
 public record Barrier(Set<Point> barrierPoints) {
+    public static Barrier fromResource(GameFieldProperties properties, String url) {
+        var stream = Objects.requireNonNull(Barrier.class.getResourceAsStream(url));
+        var reader = new java.util.Scanner(stream).useDelimiter("\\A");
+
+        Set<Point> points = new HashSet<>();
+        for (int y = 0; y < properties.height(); y++) {
+
+        }
+
+
+        return new Barrier(points);
+    }
+
     /**
      * Checks if the point is located on the barrier.
      *
