@@ -12,15 +12,13 @@ import ru.nsu.fit.smolyakov.snake.model.GameFieldImpl;
 import ru.nsu.fit.smolyakov.snake.presenter.Presenter;
 import ru.nsu.fit.smolyakov.snake.properties.JavaFxProperties;
 import ru.nsu.fit.smolyakov.snake.properties.GameFieldProperties;
+import ru.nsu.fit.smolyakov.snake.properties.PresenterProperties;
 import ru.nsu.fit.smolyakov.snake.view.JavaFxView;
 
 import java.io.IOException;
 import java.util.Objects;
 
 public class JavaFxSnakeGame extends Application {
-    private JavaFxProperties javaFxProperties;
-    private GameFieldProperties gameFieldProperties;
-
     private JavaFxView view;
     private GameField model;
     private Presenter presenter;
@@ -29,16 +27,17 @@ public class JavaFxSnakeGame extends Application {
     public void start(Stage primaryStage) throws IOException {
         var mapper = new ObjectMapper(new YAMLFactory());
 
-//        this.javaFxProperties = new JavaFxProperties("Snake JAVAFX", 1400, 900); // TODO хочу вынести в жсон
-//        this.gameFieldProperties = new GameFieldProperties(28, 18, 5); // TODO хочу вынести в жсон
-
-        this.javaFxProperties = mapper.readValue(
+        var javaFxProperties = mapper.readValue(
             Objects.requireNonNull(getClass().getResourceAsStream("/java_fx_properties.yaml")),
             JavaFxProperties.class
         );
-        this.gameFieldProperties = mapper.readValue(
+        var gameFieldProperties = mapper.readValue(
             Objects.requireNonNull(getClass().getResourceAsStream("/game_field_properties.yaml")),
             GameFieldProperties.class
+        );
+        var presenterProperties = mapper.readValue(
+            Objects.requireNonNull(getClass().getResourceAsStream("/presenter_properties.yaml")),
+            PresenterProperties.class
         );
 
         var fxmlLoader = new FXMLLoader(getClass().getResource("/gamefield.fxml"));
@@ -51,7 +50,7 @@ public class JavaFxSnakeGame extends Application {
 
         this.view = fxmlLoader.getController();
         this.model = new GameFieldImpl(gameFieldProperties);
-        this.presenter = new Presenter(this.view, this.model);
+        this.presenter = new Presenter(this.view, this.model, presenterProperties);
 
         this.view.createField(gameFieldProperties, javaFxProperties, presenter);
 
