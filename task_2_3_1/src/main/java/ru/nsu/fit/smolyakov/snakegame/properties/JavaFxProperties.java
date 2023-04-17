@@ -1,4 +1,4 @@
-package ru.nsu.fit.smolyakov.snake.properties;
+package ru.nsu.fit.smolyakov.snakegame.properties;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,8 +1,8 @@
-package ru.nsu.fit.smolyakov.snake.view;
+package ru.nsu.fit.smolyakov.snakegame.view;
 
-import ru.nsu.fit.smolyakov.snake.model.Apple;
-import ru.nsu.fit.smolyakov.snake.model.Barrier;
-import ru.nsu.fit.smolyakov.snake.model.Snake;
+import ru.nsu.fit.smolyakov.snakegame.model.Apple;
+import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
+import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
 
 import java.util.Set;
 

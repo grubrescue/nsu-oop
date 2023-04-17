@@ -1,4 +1,4 @@
-package ru.nsu.fit.smolyakov.snake.view;
+package ru.nsu.fit.smolyakov.snakegame.view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -6,13 +6,13 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import ru.nsu.fit.smolyakov.snake.model.Apple;
-import ru.nsu.fit.smolyakov.snake.model.Barrier;
-import ru.nsu.fit.smolyakov.snake.model.Point;
-import ru.nsu.fit.smolyakov.snake.model.Snake;
-import ru.nsu.fit.smolyakov.snake.presenter.Presenter;
-import ru.nsu.fit.smolyakov.snake.properties.GameFieldProperties;
-import ru.nsu.fit.smolyakov.snake.properties.JavaFxProperties;
+import ru.nsu.fit.smolyakov.snakegame.model.Apple;
+import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
+import ru.nsu.fit.smolyakov.snakegame.point.Point;
+import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
+import ru.nsu.fit.smolyakov.snakegame.presenter.Presenter;
+import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
+import ru.nsu.fit.smolyakov.snakegame.properties.JavaFxProperties;
 
 import java.net.URL;
 import java.util.Objects;

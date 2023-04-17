@@ -1,9 +1,9 @@
-package ru.nsu.fit.smolyakov.snake.presenter;
+package ru.nsu.fit.smolyakov.snakegame.presenter;
 
-import ru.nsu.fit.smolyakov.snake.model.GameField;
-import ru.nsu.fit.smolyakov.snake.model.Snake;
-import ru.nsu.fit.smolyakov.snake.properties.PresenterProperties;
-import ru.nsu.fit.smolyakov.snake.view.View;
+import ru.nsu.fit.smolyakov.snakegame.model.GameField;
+import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
+import ru.nsu.fit.smolyakov.snakegame.properties.PresenterProperties;
+import ru.nsu.fit.smolyakov.snakegame.view.View;
 
 public class Presenter {
     private final View view;

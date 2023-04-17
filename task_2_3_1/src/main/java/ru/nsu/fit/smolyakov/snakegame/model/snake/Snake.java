@@ -1,4 +1,8 @@
-package ru.nsu.fit.smolyakov.snake.model;
+package ru.nsu.fit.smolyakov.snakegame.model.snake;
+
+import ru.nsu.fit.smolyakov.snakegame.model.Apple;
+import ru.nsu.fit.smolyakov.snakegame.model.GameField;
+import ru.nsu.fit.smolyakov.snakegame.point.Point;
 
 /**
  * A snake that moves on the {@link GameField}.

@@ -1,6 +1,7 @@
-package ru.nsu.fit.smolyakov.snake.model;
+package ru.nsu.fit.smolyakov.snakegame.model;
 
-import ru.nsu.fit.smolyakov.snake.properties.GameFieldProperties;
+import ru.nsu.fit.smolyakov.snakegame.point.Point;
+import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
 
 import java.util.HashSet;
 import java.util.Objects;
