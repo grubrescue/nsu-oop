@@ -15,6 +15,7 @@ import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
 import ru.nsu.fit.smolyakov.snakegame.properties.JavaFxProperties;
 
 import java.net.URL;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -117,8 +118,8 @@ public class JavaFxView implements View, Initializable {
         this.scoreAmountText.setText(String.valueOf(scoreAmount));
     }
 
-    public void drawAppleSet(Set<Apple> appleSet) {
-        appleSet.forEach(apple -> drawFigure(apple.point(), resources.apple));
+    public void drawApple(Apple apple) {
+        drawFigure(apple.point(), resources.apple);
     }
 
     public void drawBarrier(Barrier barrier) {
@@ -132,6 +133,11 @@ public class JavaFxView implements View, Initializable {
 
     public void drawPlayerSnake(Snake snake) {
         drawSnake(snake, resources.playerSnakeHead, resources.playerSnakeTail);
+    }
+
+    @Override
+    public void drawEnemySnake(Snake snake) {
+        drawSnake(snake, resources.enemySnakeHead, resources.enemySnakeTail);
     }
 
     public void clear() {

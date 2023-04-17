@@ -4,6 +4,8 @@ import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.GameField;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
 
+import java.util.stream.Collectors;
+
 /**
  * A snake that moves on the {@link GameField}.
  *
@@ -20,7 +22,9 @@ import ru.nsu.fit.smolyakov.snakegame.point.Point;
 public class Snake {
     protected final static int MAX_CREATION_ITERATIONS = 10000;
     private final SnakeBody snakeBody;
+
     private final GameField gameField;
+
     private MovingDirection movingDirection;
     private int points = 0; // TODO отнаследовать класс PlayerSnake и AISnake
 
@@ -106,6 +110,24 @@ public class Snake {
     }
 
     /**
+     * Returns the game field on which the snake is moving.
+     *
+     * @return game field
+     */
+    public GameField getGameField() {
+        return gameField;
+    }
+
+    /**
+     * Returns the direction in which the snake is moving.
+     *
+     * @return direction in which the snake is moving
+     */
+    public MovingDirection getMovingDirection() {
+        return movingDirection;
+    }
+
+    /**
      * Represents a direction in which the snake is moving.
      * It is used to calculate the next location of the snake's head.
      */
@@ -153,6 +175,10 @@ public class Snake {
          */
         public Point move() {
             return move;
+        }
+
+        public Point opposite() {
+            return new Point(-move.x(), -move.y());
         }
     }
 }

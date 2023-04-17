@@ -1,4 +1,4 @@
 width: 40
 height: 20
-maxApples: 10
+maxApples: 5
 barrierUrl: /barrier/border.txt

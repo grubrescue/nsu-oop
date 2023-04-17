@@ -1,6 +1,11 @@
 package ru.nsu.fit.smolyakov.snakegame.model;
 
+import ru.nsu.fit.smolyakov.snakegame.model.snake.CollisionSolver;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
+import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
+import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.SemiRandomAISnake;
+import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.StraightForwardAISnake;
+import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.TotallyRandomAISnake;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
 
@@ -18,19 +23,27 @@ public class GameFieldImpl implements GameField {
     private final Snake playerSnake;
     private final Set<Apple> applesSet;
     private final Barrier barrier;
-    private List<Snake> AISnakesList;
+    private List<AISnake> AISnakesList;
 
+    /**
+     * Creates a game field with the specified properties.
+     *
+     * @param properties properties of the game field
+     */
     public GameFieldImpl(GameFieldProperties properties) {
         this.properties = properties;
         this.barrier = Barrier.fromResource(properties);
 
-        this.AISnakesList = List.of(); // TODO пока пустой
-
         this.playerSnake = new Snake(this);
+        this.AISnakesList = List.of(
+            new StraightForwardAISnake(this),
+            new TotallyRandomAISnake(this),
+            new SemiRandomAISnake(this)
+        );
 
         this.applesSet = new HashSet<>(); // TODO сделать нормально
         while (applesSet.size() < properties.maxApples()) {
-            applesSet.add(new Apple.Factory(this).generateRandom(10000));
+            applesSet.add(new Apple.Factory(this).generateRandom(10000)); // TODO перенести макситерации куда нибудь
         }
     }
 
@@ -40,7 +53,7 @@ public class GameFieldImpl implements GameField {
      * @return a list of AI-driven snakes
      */
     @Override
-    public List<Snake> getAISnakeList() {
+    public List<AISnake> getAISnakeList() {
         return AISnakesList;
     }
 
@@ -91,26 +104,24 @@ public class GameFieldImpl implements GameField {
             (AISnakesList == null || AISnakesList.stream().noneMatch(snake -> snake.getSnakeBody().tailCollision(point)));
     }
 
+    /**
+     * Checks if the player snake collides with any AI snake.
+     *
+     * @return {@code true} if the player snake collides with any AI snake,
+     *         {@code false} otherwise
+     */
     private boolean checkPlayerSnakeCollisions() {
-        if (playerSnake.getSnakeBody().tailCollision(playerSnake.getSnakeBody().getHead())) {
-            return true;
-        } else {
-            var iter = AISnakesList.iterator();
-            while (iter.hasNext()) {
-                var snake = iter.next();
-                if (snake.getSnakeBody().headCollision(playerSnake.getSnakeBody().getHead())) {
-                    iter.remove();
-                    return true;
-                } else if (snake.getSnakeBody().tailCollision(playerSnake.getSnakeBody().getHead())) {
-                    snake.getSnakeBody().cutTail(playerSnake.getSnakeBody().getHead());
-                } else if (playerSnake.getSnakeBody().tailCollision(snake.getSnakeBody().getHead())) {
-                    playerSnake.getSnakeBody().cutTail(snake.getSnakeBody().getHead());
-                } else if (snake.getSnakeBody().tailCollision(snake.getSnakeBody().getHead())) {
-                    snake.getSnakeBody().cutTail(snake.getSnakeBody().getHead());
-                }
+        var iter = AISnakesList.iterator();
+        while (iter.hasNext()) {
+            var snake = iter.next();
+            // коллизион солвер рубит змейку если там коллизия какая
+            if (CollisionSolver.solve(playerSnake, snake) == CollisionSolver.Result.BOTH_DEAD) {
+                iter.remove();
+                return true;
             }
-            //TODO змейки жрут сами себя
         }
+
+        // TODO змейки между собой
 
         return false;
     }
@@ -119,7 +130,7 @@ public class GameFieldImpl implements GameField {
      * Updates the model.
      *
      * @return {@code true} if the player snake is dead,
-     * {@code false} otherwise
+     *         {@code false} otherwise
      */
     @Override
     public boolean update() {
@@ -146,6 +157,10 @@ public class GameFieldImpl implements GameField {
         return properties;
     }
 
+    /**
+     * Returns a new game field with the same properties as this one.
+     * @return a new game field with the same properties as this one
+     */
     @Override
     public GameField newGame() {
         return new GameFieldImpl(properties);

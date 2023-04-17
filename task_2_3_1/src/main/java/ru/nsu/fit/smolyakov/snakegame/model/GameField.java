@@ -1,6 +1,7 @@
 package ru.nsu.fit.smolyakov.snakegame.model;
 
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
+import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
 
@@ -16,7 +17,7 @@ public interface GameField { // TODO разделить интерфейсы
      *
      * @return a list of AI-driven snakes
      */
-    List<Snake> getAISnakeList();
+    List<AISnake> getAISnakeList();
 
     /**
      * Returns a player-driven snake.
