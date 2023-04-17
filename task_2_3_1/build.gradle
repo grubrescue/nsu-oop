@@ -12,6 +12,7 @@ repositories {
 mainClassName = 'ru.nsu.fit.smolyakov.snake.Application'
 
 dependencies {
+    implementation 'com.googlecode.lanterna:lanterna:3.1.1'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.2'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.14.2'
