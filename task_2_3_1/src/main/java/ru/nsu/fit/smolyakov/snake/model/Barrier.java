@@ -11,15 +11,23 @@ import java.util.Set;
  * The snake cannot pass through the barrier.
  */
 public record Barrier(Set<Point> barrierPoints) {
-    public static Barrier fromResource(GameFieldProperties properties, String url) {
-        var stream = Objects.requireNonNull(Barrier.class.getResourceAsStream(url));
+    public static Barrier fromResource(GameFieldProperties properties) {
+        var stream = Objects.requireNonNull(Barrier.class.getResourceAsStream(properties.barrierUrl()));
         var reader = new java.util.Scanner(stream).useDelimiter("\\A");
 
         Set<Point> points = new HashSet<>();
         for (int y = 0; y < properties.height(); y++) {
+            String line = reader.nextLine();
+            if (line.length() != properties.width()) {
+                throw new IllegalArgumentException("Invalid barrier file");
+            }
 
+            for (int x = 0; x < properties.width(); x++) {
+                if (line.charAt(x) == '*') {
+                    points.add(new Point(x, y));
+                }
+            }
         }
-
 
         return new Barrier(points);
     }

@@ -20,7 +20,7 @@ public class GameFieldImpl implements GameField {
 
     public GameFieldImpl(GameFieldProperties properties) {
         this.properties = properties;
-        this.barrier = new Barrier(Set.of());
+        this.barrier = Barrier.fromResource(properties);
 
         this.AISnakesList = List.of(); // TODO пока пустой
 
