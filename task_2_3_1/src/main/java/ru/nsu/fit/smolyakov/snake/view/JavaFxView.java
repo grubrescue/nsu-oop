@@ -101,8 +101,7 @@ public class JavaFxView implements View, Initializable {
         canvas.setWidth(javaFxProperties.resX());
         canvas.setHeight(javaFxProperties.resY());
 
-        // TODO вынести в отдельный класс
-        // TODO другие змейки и барьер
+        // TODO конструктор слишком жирный, вынести куда нибудь в отдельный приватный метод
         resources = new Resources();
         resources.apple = imageInstance("/sprites/apple.png");
         resources.barrier = imageInstance("/sprites/barrier.png");
