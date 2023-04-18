@@ -8,8 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-public class SemiRandomAISnake extends AISnake {
-    public SemiRandomAISnake(GameField gameField) {
+public class NotWonnaDieAISnake extends AISnake {
+    public NotWonnaDieAISnake(GameField gameField) {
         super(gameField);
     }
 

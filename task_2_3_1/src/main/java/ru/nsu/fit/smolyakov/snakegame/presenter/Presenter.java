@@ -40,8 +40,9 @@ public class Presenter {
         }
 
         while (!Thread.currentThread().isInterrupted()) {
-            var playerAlive = model.update();
             model.getAISnakeList().forEach(AISnake::thinkAboutTurn);
+            var playerAlive = model.update();
+
             showFrame();
 
             if (!playerAlive) {
