@@ -14,18 +14,28 @@ import ru.nsu.fit.smolyakov.snakegame.presenter.Presenter;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
+/**
+ * Console {@link View} of the game. Uses Lanterna library.
+ *
+ * <p>Scene size is equal to the game field size plus additional
+ * 2 rows for the score.
+ */
 public class ConsoleView implements View {
     private final GameFieldProperties properties;
     private Resources resources;
     private Presenter presenter;
-    private Terminal terminal;
-    private Screen screen;
+    private final Terminal terminal;
+    private final Screen screen;
     private Thread inputPollThread;
 
+    /**
+     * Creates a new {@link ConsoleView} instance.
+     *
+     * @param properties properties of the game field
+     * @throws IOException if an I/O error occurs
+     */
     public ConsoleView(GameFieldProperties properties) throws IOException {
         this.properties = properties;
 
@@ -100,10 +110,18 @@ public class ConsoleView implements View {
         }
     }
 
+    /**
+     * Sets the {@link Presenter} for this {@link View}.
+     *
+     * @param presenter the {@link Presenter} to set
+     */
     public void setPresenter(Presenter presenter) {
         this.presenter = Objects.requireNonNull(presenter);
     }
 
+    /**
+     * Starts the view.
+     */
     public void start() {
         try {
             screen.startScreen();
@@ -115,6 +133,13 @@ public class ConsoleView implements View {
         inputPollThread.start();
     }
 
+    /**
+     * Sets the current amount of points the player
+     * has on an attached scoreboard.
+     * One is located two rows above the game field.
+     *
+     * @param scoreAmount the amount of points
+     */
     @Override
     public void setScoreAmount(int scoreAmount) {
         String scoreString = "Score: " + scoreAmount;
@@ -130,6 +155,12 @@ public class ConsoleView implements View {
         }
     }
 
+    /**
+     * Draws an apple on the game field.
+     * One is drawn as a green-colored {@code $} symbol.
+     *
+     * @param apple the apple to draw
+     */
     @Override
     public void drawApple(Apple apple) {
         screen.setCharacter(apple.point().x(), apple.point().y(), resources.apple);
@@ -140,6 +171,12 @@ public class ConsoleView implements View {
         }
     }
 
+    /**
+     * Draws a barrier on the game field.
+     * Each point is drawn as a yellow-colored {@code *} symbol.
+     *
+     * @param barrier the barrier to draw
+     */
     @Override
     public void drawBarrier(Barrier barrier) {
         barrier.barrierPoints().forEach(point -> screen.setCharacter(point.x(), point.y(), resources.barrier));
@@ -161,16 +198,36 @@ public class ConsoleView implements View {
         }
     }
 
+    /**
+     * Draws the player snake on the game field.
+     * The head is drawn as a white-colored {@code @} symbol.
+     * The tail is drawn as a white-colored {@code 0} symbol.
+     *
+     * @param snake the snake to draw
+     */
     @Override
     public void drawPlayerSnake(Snake snake) {
         drawSnake(snake, resources.playerSnakeHead, resources.playerSnakeTail);
     }
 
+    /**
+     * Draws the enemy snake on the game field.
+     * The head is drawn as a red-colored {@code @} symbol.
+     * The tail is drawn as a red-colored {@code 0} symbol.
+     *
+     * @param snake the snake to draw
+     */
     @Override
     public void drawEnemySnake(Snake snake) {
         drawSnake(snake, resources.enemySnakeHead, resources.enemySnakeTail);
     }
 
+    /**
+     * Shows a message on the game field.
+     * The message is centered on the screen.
+     *
+     * @param string the message to show
+     */
     @Override
     public void showMessage(String string) {
         for (int i = 0; i < string.length(); i++) {
@@ -185,11 +242,17 @@ public class ConsoleView implements View {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void clear() {
         screen.clear();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void close() {
         try {
