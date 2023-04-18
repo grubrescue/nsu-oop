@@ -1,14 +1,35 @@
 package ru.nsu.fit.smolyakov.snakegame.model.snake;
 
 // TODO возможно эта штука временно тут
+
+/**
+ * Solves collisions between two snakes.
+ */
 public class CollisionSolver {
+    /**
+     * A result of collision solving.
+     */
     public enum Result {
 //        FIRST_DEAD,
 //        SECOND_DEAD,
+        /**
+         * Both snakes are dead.
+         */
         BOTH_DEAD,
+
+        /**
+         * Both snakes are alive.
+         */
         BOTH_ALIVE
     }
 
+    /**
+     * Solves collisions between two snakes.
+     *
+     * @param first the first snake
+     * @param second the second snake
+     * @return a result of collision solving
+     */
     public static Result solve(Snake first, Snake second) {
         // TODO а точно надо отдельный класс для этого?
         // и возвращать булин в целом ок было бы

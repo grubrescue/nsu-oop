@@ -12,6 +12,14 @@ import java.util.Set;
  * The snake cannot pass through the barrier.
  */
 public record Barrier(Set<Point> barrierPoints) {
+    /**
+     * Creates a barrier from the specified text file.
+     * One should use '*' to represent a barrier point, and '.' to represent an empty point.
+     * The amount of rows and columns have to correspond with the game field size.
+     *
+     * @param properties properties of the game field
+     * @return a barrier
+     */
     public static Barrier fromResource(GameFieldProperties properties) {
         var stream = Objects.requireNonNull(Barrier.class.getResourceAsStream(properties.barrierUrl()));
         var reader = new java.util.Scanner(stream).useDelimiter("\\A");

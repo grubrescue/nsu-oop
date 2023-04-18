@@ -38,9 +38,10 @@ public class GameFieldImpl implements GameField {
             new NotWonnaDieAISnake(this)
         ); // TODO вынести в конструктор?
 
-        this.applesSet = new HashSet<>(); // TODO сделать нормально
+        this.applesSet = new HashSet<>();
         while (applesSet.size() < properties.maxApples()) {
-            applesSet.add(new Apple.Factory(this).generateRandom(10000)); // TODO перенести макситерации куда нибудь
+            applesSet.add(new Apple.Factory(this).generateRandom(10000));
+            // TODO перенести макситерации куда нибудь
         }
     }
 
@@ -156,6 +157,7 @@ public class GameFieldImpl implements GameField {
 
     /**
      * Returns a new game field with the same properties as this one.
+     *
      * @return a new game field with the same properties as this one
      */
     @Override

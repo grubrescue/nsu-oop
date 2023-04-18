@@ -64,5 +64,10 @@ public interface GameField { // TODO разделить интерфейсы
      */
     boolean update();
 
+    /**
+     * Returns a new game field with the same properties as this one.
+     *
+     * @return a new game field with the same properties as this one
+     */
     GameField newGame();
 }
