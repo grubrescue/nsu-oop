@@ -6,6 +6,10 @@ import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
 import ru.nsu.fit.smolyakov.snakegame.properties.PresenterProperties;
 import ru.nsu.fit.smolyakov.snakegame.view.View;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.*;
+
 /**
  * A presenter that connects a model and a view.
  *
@@ -22,7 +26,8 @@ public class Presenter {
     private final PresenterProperties presenterProperties;
     private GameField model;
 
-    private Thread thread;
+    private ScheduledExecutorService executorService;
+    private List<Future<?>> futureList = new ArrayList<>();
 
     /**
      * Creates a presenter with the specified view, model and properties.
@@ -41,7 +46,7 @@ public class Presenter {
         for (int i = 3; i >= 0; i--) {
             showFrame();
 
-            if (i != 0) {
+            if (i > 0) {
                 view.showMessage("Game starts in " + i);
                 view.refresh();
             } else {
@@ -52,31 +57,28 @@ public class Presenter {
         }
     }
 
-    private void mainLoop() {
-        try {
-            startTimeOut();
-        } catch (InterruptedException e) {
-            return;
-        }
-
-        while (!Thread.currentThread().isInterrupted()) {
-            model.getAISnakeList().forEach(AISnake::thinkAboutTurn);
-            var playerAlive = model.update();
-
-            showFrame();
-
-            if (!playerAlive) {
-                view.showMessage("You died! You earned " + model.getPlayerSnake().getPoints() + " points.");
-                view.refresh();
-                return;
-            }
-
+    private void newFrame() { // TODO renaamee
+        for (Future<?> future : futureList) {
             try {
-                Thread.sleep(presenterProperties.speed().getFrameDelayMillis());
+                future.get();
             } catch (InterruptedException e) {
                 return;
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
             }
         }
+
+        var playerAlive = model.update();
+        showFrame();
+
+        if (!playerAlive) {
+            view.showMessage("You died! You earned " + model.getPlayerSnake().getPoints() + " points.");
+            view.refresh();
+            executorService.shutdownNow(); // TODO хочется чтобы боты работали и после смерти, надо добавить флаг внутрь змейки
+        }
+
+        futureList.clear();
+        model.getAISnakeList().forEach(aiSnake -> futureList.add(executorService.submit(aiSnake::thinkAboutTurn)));
     }
 
     /**
@@ -86,12 +88,25 @@ public class Presenter {
         model = model.newGame();
 
         // TODO вынести в отдельный метод?
-        thread = new Thread(this::mainLoop);
-        thread.start();
+        executorService = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
+        executorService.submit(() -> {
+            try {
+                startTimeOut();
+            } catch (InterruptedException e) {
+                return;
+            }
+        });
+
+        executorService.scheduleAtFixedRate(this::newFrame,
+            (long) presenterProperties.startTimeoutMillis() * 4,
+            (long) presenterProperties.speed().getFrameDelayMillis(),
+            TimeUnit.MILLISECONDS);
     }
+
 
     private void showFrame() {
         view.clear();
+
         view.drawBarrier(model.getBarrier());
         model.getApplesSet().forEach(view::drawApple);
         view.drawPlayerSnake(model.getPlayerSnake());
@@ -133,7 +148,7 @@ public class Presenter {
      * Restarts the game.
      */
     public void onRestartKeyPressed() {
-        thread.interrupt();
+        executorService.shutdownNow();
         start();
     }
 
@@ -141,7 +156,7 @@ public class Presenter {
      * Stops the game.
      */
     public void onExitKeyPressed() {
-        thread.interrupt();
+        executorService.shutdownNow();
         view.close();
     }
 }

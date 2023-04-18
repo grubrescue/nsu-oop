@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * 2.1. Если голова встретилась с головой - харакири.
  * 2.2. Если голова встретилась с хвостом - змейка обрубается на месте встречи.
  */
-public class Snake {
+public class Snake { // TODO хочется добавить состояние жива/не жива
     protected final static int MAX_CREATION_ITERATIONS = 10000;
     private final SnakeBody snakeBody;
 
