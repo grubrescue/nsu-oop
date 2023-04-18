@@ -43,8 +43,10 @@ public class Presenter {
 
             if (i != 0) {
                 view.showMessage("Game starts in " + i);
+                view.refresh();
             } else {
                 view.showMessage("Go!");
+                view.refresh();
             }
             Thread.sleep(presenterProperties.startTimeoutMillis());
         }
@@ -65,6 +67,7 @@ public class Presenter {
 
             if (!playerAlive) {
                 view.showMessage("You died! You earned " + model.getPlayerSnake().getPoints() + " points.");
+                view.refresh();
                 return;
             }
 
@@ -94,6 +97,8 @@ public class Presenter {
         view.drawPlayerSnake(model.getPlayerSnake());
         model.getAISnakeList().forEach(view::drawEnemySnake);
         view.setScoreAmount(model.getPlayerSnake().getPoints());
+
+        view.refresh();
     }
 
     /**

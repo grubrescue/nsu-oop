@@ -63,4 +63,9 @@ public interface View {
      * Safely closes all running view components.
      */
     void close();
+
+    /**
+     * Applies changes.
+     */
+    void refresh();
 }

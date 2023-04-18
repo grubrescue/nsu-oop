@@ -213,6 +213,15 @@ public class JavaFxView implements View, Initializable {
         ((Stage) canvas.getScene().getWindow()).close();
     }
 
+
+    /**
+     * Does nothing.
+     */
+    @Override
+    public void refresh() {
+
+    }
+
     // TODO вынести отдельно и доделать других змеек
     private class Resources {
         Image apple;

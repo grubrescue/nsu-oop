@@ -147,12 +147,6 @@ public class ConsoleView implements View {
         for (int i = 0; i < scoreString.length(); i++) {
             screen.setCharacter(i, properties.height(), resources.scoreChar.withCharacter(scoreString.charAt(i)));
         }
-
-        try {
-            screen.refresh();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     /**
@@ -164,11 +158,6 @@ public class ConsoleView implements View {
     @Override
     public void drawApple(Apple apple) {
         screen.setCharacter(apple.point().x(), apple.point().y(), resources.apple);
-        try {
-            screen.refresh();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     /**
@@ -180,22 +169,11 @@ public class ConsoleView implements View {
     @Override
     public void drawBarrier(Barrier barrier) {
         barrier.barrierPoints().forEach(point -> screen.setCharacter(point.x(), point.y(), resources.barrier));
-        try {
-            screen.refresh();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private void drawSnake(Snake snake, TextCharacter head, TextCharacter tail) {
         snake.getSnakeBody().getTail().forEach(point -> screen.setCharacter(point.x(), point.y(), tail));
         screen.setCharacter(snake.getSnakeBody().getHead().x(), snake.getSnakeBody().getHead().y(), head);
-
-        try {
-            screen.refresh();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     /**
@@ -234,12 +212,6 @@ public class ConsoleView implements View {
             screen.setCharacter(5 + i, properties.height() / 2,
                 resources.messageChar.withCharacter(string.charAt(i)));
         }
-
-        try {
-            screen.refresh();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     /**
@@ -248,6 +220,15 @@ public class ConsoleView implements View {
     @Override
     public void clear() {
         screen.clear();
+    }
+
+    @Override
+    public void refresh() {
+        try {
+            screen.refresh();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
