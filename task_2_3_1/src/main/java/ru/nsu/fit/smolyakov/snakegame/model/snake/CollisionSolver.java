@@ -10,6 +10,8 @@ public class CollisionSolver {
     }
 
     public static Result solve(Snake first, Snake second) {
+        // TODO а точно надо отдельный класс для этого?
+        // и возвращать булин в целом ок было бы
         var firstBody = first.getSnakeBody();
         var secondBody = second.getSnakeBody();
 

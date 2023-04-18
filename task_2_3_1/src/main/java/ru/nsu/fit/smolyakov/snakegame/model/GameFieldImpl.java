@@ -2,10 +2,7 @@ package ru.nsu.fit.smolyakov.snakegame.model;
 
 import ru.nsu.fit.smolyakov.snakegame.model.snake.CollisionSolver;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
-import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
-import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.SemiRandomAISnake;
-import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.StraightForwardAISnake;
-import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.TotallyRandomAISnake;
+import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.*;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
 
@@ -38,8 +35,8 @@ public class GameFieldImpl implements GameField {
         this.AISnakesList = List.of(
             new StraightForwardAISnake(this),
             new TotallyRandomAISnake(this),
-            new SemiRandomAISnake(this)
-        );
+            new NotWonnaDieAISnake(this)
+        ); // TODO вынести в конструктор?
 
         this.applesSet = new HashSet<>(); // TODO сделать нормально
         while (applesSet.size() < properties.maxApples()) {
