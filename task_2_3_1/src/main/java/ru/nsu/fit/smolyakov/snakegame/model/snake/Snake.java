@@ -30,6 +30,8 @@ public class Snake {
 
     /**
      * Instantiates a snake in a random position on a field.
+     *
+     * @param gameField game field
      */
     public Snake(GameField gameField) {
         this.gameField = gameField;
