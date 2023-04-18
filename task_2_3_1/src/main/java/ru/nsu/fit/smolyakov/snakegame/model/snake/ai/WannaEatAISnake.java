@@ -6,7 +6,11 @@ import ru.nsu.fit.smolyakov.snakegame.model.GameField;
 import java.security.SecureRandom;
 import java.util.Random;
 
+// TODO TODO TDOD TODO TODO
 public class WannaEatAISnake extends AISnake {
+    /**
+     * {@inheritDoc}
+     */
     public WannaEatAISnake(GameField gameField) {
         super(gameField);
     }

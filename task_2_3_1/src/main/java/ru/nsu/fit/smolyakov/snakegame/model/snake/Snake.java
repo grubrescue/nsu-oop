@@ -177,6 +177,11 @@ public class Snake {
             return move;
         }
 
+        /**
+         * Returns the opposite direction.
+         *
+         * @return opposite direction
+         */
         public Point opposite() {
             return new Point(-move.x(), -move.y());
         }
