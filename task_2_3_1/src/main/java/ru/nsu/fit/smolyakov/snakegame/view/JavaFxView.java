@@ -8,18 +8,26 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
-import ru.nsu.fit.smolyakov.snakegame.point.Point;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
+import ru.nsu.fit.smolyakov.snakegame.point.Point;
 import ru.nsu.fit.smolyakov.snakegame.presenter.Presenter;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
 import ru.nsu.fit.smolyakov.snakegame.properties.JavaFxProperties;
 
 import java.net.URL;
-import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.Set;
 
+/**
+ * An implementation of the {@link View} interface that uses JavaFX.
+ *
+ * <p>A scene configuration is specified in the {@code gamefield.fxml} file and
+ * all sprites are located in the {@code /sprites} directory.
+ *
+ * <p>This implementation is capable of scaling the game field correctly if the resolution
+ * specified in {@code JavaFxProperties} is a multiple of the doubled size of the game field
+ * in relevant dimensions.
+ */
 public class JavaFxView implements View, Initializable {
     private Presenter presenter;
 
@@ -33,6 +41,9 @@ public class JavaFxView implements View, Initializable {
     private Text scoreAmountText;
     private Resources resources;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
@@ -74,6 +85,14 @@ public class JavaFxView implements View, Initializable {
         );
     }
 
+    /**
+     * Initializes the view so that its parameters correspond to {@code javaFxProperties}
+     * and {@code properties}. Also, the {@code presenter} is set as the view's presenter.
+     *
+     * @param properties       game field properties
+     * @param javaFxProperties JavaFX properties
+     * @param presenter        presenter
+     */
     public void initializeField(GameFieldProperties properties,
                                 JavaFxProperties javaFxProperties,
                                 Presenter presenter) {
@@ -114,14 +133,32 @@ public class JavaFxView implements View, Initializable {
         );
     }
 
+    /**
+     * Sets the score amount to be displayed on the screen.
+     * Scoreboard is implemented as {@code scoreAmountText} JavaFx node.
+     *
+     * @param scoreAmount score amount
+     */
     public void setScoreAmount(int scoreAmount) {
         this.scoreAmountText.setText(String.valueOf(scoreAmount));
     }
 
+    /**
+     * Draws the apple on the screen.
+     * Sprite used is located at {@code /sprites/apple.png}.
+     *
+     * @param apple the apple to draw
+     */
     public void drawApple(Apple apple) {
         drawFigure(apple.point(), resources.apple);
     }
 
+    /**
+     * Draws the barrier on the screen.
+     * Sprite used for each barrier point is located at {@code /sprites/barrier.png}.
+     *
+     * @param barrier the barrier to draw
+     */
     public void drawBarrier(Barrier barrier) {
         barrier.barrierPoints().forEach(point -> drawFigure(point, resources.barrier));
     }
@@ -131,24 +168,47 @@ public class JavaFxView implements View, Initializable {
         snake.getSnakeBody().getTail().forEach(point -> drawFigure(point, tail));
     }
 
+    /**
+     * Draws the player snake on the screen.
+     * Sprites used are located at {@code /sprites/player/head.png} and
+     * {@code /sprites/player/tail.png}.
+     *
+     * @param snake the snake to draw
+     */
     public void drawPlayerSnake(Snake snake) {
         drawSnake(snake, resources.playerSnakeHead, resources.playerSnakeTail);
     }
 
+    /**
+     * Draws the enemy snake on the screen.
+     * Sprites used are located at {@code /sprites/enemy/head.png} and
+     * {@code /sprites/enemy/tail.png}.
+     *
+     * @param snake the snake to draw
+     */
     @Override
     public void drawEnemySnake(Snake snake) {
         drawSnake(snake, resources.enemySnakeHead, resources.enemySnakeTail);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void clear() {
         canvas.getGraphicsContext2D().clearRect(0, 0, javaFxProperties.resX(), javaFxProperties.resY());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void showMessage(String message) {
         canvas.getGraphicsContext2D().strokeText(message, javaFxProperties.resX() / 3, javaFxProperties.resY() / 2);
         // TODO сделать нормально в ссене билдере
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void close() {
         ((Stage) canvas.getScene().getWindow()).close();
     }
