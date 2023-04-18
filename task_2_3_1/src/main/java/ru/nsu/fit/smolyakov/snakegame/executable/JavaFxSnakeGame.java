@@ -18,11 +18,18 @@ import ru.nsu.fit.smolyakov.snakegame.view.JavaFxView;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * The class that executes the JavaFX variant of the snake game.
+ * It creates the model, view and presenter and connects them.
+ */
 public class JavaFxSnakeGame extends Application {
     private JavaFxView view;
     private GameField model;
     private Presenter presenter;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
         var mapper = new ObjectMapper(new YAMLFactory());
@@ -58,6 +65,9 @@ public class JavaFxSnakeGame extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Executes the game.
+     */
     public void execute() {
         launch();
     }

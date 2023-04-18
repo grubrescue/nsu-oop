@@ -12,11 +12,20 @@ import ru.nsu.fit.smolyakov.snakegame.view.ConsoleView;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * The class that executes the console variant of the snake game.
+ * It creates the model, view and presenter and connects them.
+ */
 public class ConsoleSnakeGame {
     private ConsoleView view;
     private GameField model;
     private Presenter presenter;
 
+    /**
+     * Executes the game.
+     *
+     * @throws IOException if there is a problem with reading the properties files
+     */
     public void execute() throws IOException {
         var mapper = new ObjectMapper(new YAMLFactory());
 
