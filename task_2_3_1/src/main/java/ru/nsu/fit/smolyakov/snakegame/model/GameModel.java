@@ -3,7 +3,7 @@ package ru.nsu.fit.smolyakov.snakegame.model;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
-import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
+import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 
 import java.util.List;
 import java.util.Set;
@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * A main model that composes {@link Apple}s and {@link Snake}s, both player- and AI-driven.
  */
-public interface GameField { // TODO разделить интерфейсы
+public interface GameModel { // TODO разделить интерфейсы
     /**
      * Returns a list of AI-driven snakes.
      *
@@ -54,7 +54,7 @@ public interface GameField { // TODO разделить интерфейсы
      *
      * @return the properties of the game field
      */
-    GameFieldProperties getProperties();
+    GameProperties getProperties();
 
     /**
      * Updates the model.
@@ -69,5 +69,5 @@ public interface GameField { // TODO разделить интерфейсы
      *
      * @return a new game field with the same properties as this one
      */
-    GameField newGame();
+    GameModel newGame();
 }

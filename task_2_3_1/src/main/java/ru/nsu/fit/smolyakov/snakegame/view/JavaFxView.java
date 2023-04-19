@@ -12,8 +12,7 @@ import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
 import ru.nsu.fit.smolyakov.snakegame.presenter.SnakePresenter;
-import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
-import ru.nsu.fit.smolyakov.snakegame.properties.JavaFxProperties;
+import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -34,8 +33,9 @@ import java.util.ResourceBundle;
 public class JavaFxView implements View, Initializable {
     private SnakePresenter snakePresenter;
 
-    private JavaFxProperties javaFxProperties;
-    private int proportion;
+    private GameProperties properties;
+    private int resX;
+    private int resY;
 
     @FXML
     private Canvas canvas;
@@ -58,8 +58,8 @@ public class JavaFxView implements View, Initializable {
     private Image imageInstance(String path) {
         return new Image(
             Objects.requireNonNull(getClass().getResourceAsStream(path)),
-            proportion,
-            proportion,
+            properties.javaFxScaling(),
+            properties.javaFxScaling(),
             true,
             false
         );
@@ -108,33 +108,26 @@ public class JavaFxView implements View, Initializable {
      * Initializes the view so that its parameters correspond to {@code javaFxProperties}
      * and {@code properties}. Also, the {@code snakePresenter} is set as the view's snakePresenter.
      *
-     * @param properties       game field properties
-     * @param javaFxProperties JavaFX properties
-     * @param snakePresenter        snakePresenter
+     * @param properties     game properties
+     * @param snakePresenter snake presenter
      */
-    public void initializeField(GameFieldProperties properties,
-                                JavaFxProperties javaFxProperties,
+    public void initializeField(GameProperties properties,
                                 SnakePresenter snakePresenter) {
-        if (snakePresenter == null || javaFxProperties == null || properties == null) {
+        if (snakePresenter == null || properties == null) {
             throw new IllegalArgumentException("Arguments can't be null");
         }
 
-        if (javaFxProperties.resX() % (2 * properties.width()) != 0
-            || javaFxProperties.resY() % (2 * properties.height()) != 0) {
-            throw new IllegalArgumentException("Resolution is not divisible by game field size");
-        }
-
-        if (javaFxProperties.resX() / properties.width() !=
-            javaFxProperties.resY() / properties.height()) {
-            throw new IllegalArgumentException("Resolution is not proportional to game field size");
-        }
-
         this.snakePresenter = snakePresenter;
-        this.javaFxProperties = javaFxProperties;
-        this.proportion = javaFxProperties.resX() / properties.width();
+        this.properties = properties;
+        
+        this.resX = properties.width() * properties.javaFxScaling();
+        this.resY = properties.height() * properties.javaFxScaling();
 
-        canvas.setWidth(javaFxProperties.resX());
-        canvas.setHeight(javaFxProperties.resY());
+        canvas.setWidth(this.resX);
+        canvas.setHeight(this.resY);
+
+        canvas.getScene().getWindow().setWidth(this.resX);
+        canvas.getScene().getWindow().setHeight(this.resY);
 
         initializeEventActionMap();
         initializeEventActions();
@@ -146,10 +139,10 @@ public class JavaFxView implements View, Initializable {
 
         graphicsContext.drawImage(
             image,
-            point.x() * proportion,
-            point.y() * proportion,
-            proportion,
-            proportion
+            point.x() * properties.javaFxScaling(),
+            point.y() * properties.javaFxScaling(),
+            properties.javaFxScaling(),
+            properties.javaFxScaling()
         );
     }
 
@@ -215,14 +208,14 @@ public class JavaFxView implements View, Initializable {
      * {@inheritDoc}
      */
     public void clear() {
-        canvas.getGraphicsContext2D().clearRect(0, 0, javaFxProperties.resX(), javaFxProperties.resY());
+        canvas.getGraphicsContext2D().clearRect(0, 0, this.resX, this.resY);
     }
 
     /**
      * {@inheritDoc}
      */
     public void showMessage(String message) {
-        canvas.getGraphicsContext2D().strokeText(message, javaFxProperties.resX() / 3, javaFxProperties.resY() / 2);
+        canvas.getGraphicsContext2D().strokeText(message, this.resX / 3, this.resY / 2);
         // TODO сделать нормально в ссене билдере (или не делать уж...)
     }
 

@@ -4,7 +4,7 @@ import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
 
 /**
- * Represents an apple, which is located on {@link GameField} and can be
+ * Represents an apple, which is located on {@link GameModel} and can be
  * eaten by {@link Snake}.
  */
 public record Apple(Point point) {
@@ -12,15 +12,18 @@ public record Apple(Point point) {
      * Instantiates an apple in a random position on a field.
      */
     public static class Factory {
-        private final GameField gameField;
+        private final GameModel gameModel;
+        private final int iterations;
 
         /**
-         * Creates a factory for apples connected to the specified {@code gameField}.
+         * Creates a factory for apples connected to the specified {@code gameModel}.
          *
-         * @param gameField game field
+         * @param gameModel game field
+         * @param iterations amount of iterations to try to create an apple
          */
-        public Factory(GameField gameField) {
-            this.gameField = gameField;
+        public Factory(GameModel gameModel, int iterations) {
+            this.gameModel = gameModel;
+            this.iterations = iterations;
         }
 
         /**
@@ -28,14 +31,13 @@ public record Apple(Point point) {
          * If the field is too busy, the method will try to
          * create an apple for {@code iterations} times.
          *
-         * @param iterations amount of iterations to try to create an apple
          * @return an apple in a random position on a field
          * @throws IllegalStateException if the apple cannot be created
          */
-        public Apple generateRandom(int iterations) {
+        public Apple generateRandom() {
             for (int i = 0; i < iterations; i++) {
-                Apple apple = new Apple(Point.random(gameField.getProperties().width(), gameField.getProperties().height()));
-                if (gameField.isFree(apple.point)) {
+                Apple apple = new Apple(Point.random(gameModel.getProperties().width(), gameModel.getProperties().height()));
+                if (gameModel.isFree(apple.point)) {
                     return apple;
                 }
             }

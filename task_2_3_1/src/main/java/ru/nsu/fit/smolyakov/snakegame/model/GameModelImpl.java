@@ -2,9 +2,10 @@ package ru.nsu.fit.smolyakov.snakegame.model;
 
 import ru.nsu.fit.smolyakov.snakegame.model.snake.CollisionSolver;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
+import ru.nsu.fit.smolyakov.snakegame.model.snake.SnakeBody;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.*;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
-import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
+import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
@@ -18,21 +19,31 @@ import java.util.stream.Collectors;
  * It also contains a {@link Barrier} that is a reason of collisions that may lead to
  * one (or all) of snakes' death.
  *
- * <p>As specified in {@link GameFieldProperties} (usually deserialized from {@code /game_field_properties.yaml})
- * this class dynamically loads {@link AISnake}s that are capable of playing the game, as well as the user.
+ * <p>As specified in {@link GameProperties} (usually deserialized from {@code gamedata/config/gameProperties.yaml}
+ * file), this class dynamically loads {@link AISnake}s that are capable of playing the game, as well as the user.
  *
- * <p>All other properties also specified in {@link GameFieldProperties}, such as {@code maxApples},
+ * <p>All other properties also specified in {@link GameProperties}, such as {@code apples},
  * {@code width} and {@code height} are used to initialize the game field and affect the representation of the latter.
  */
-public class GameFieldImpl implements GameField {
-    private final GameFieldProperties properties;
+public class GameModelImpl implements GameModel {
+    public final static int MAX_GENERATION_ITERATIONS = 5000;
+
+    private final GameProperties properties;
 
     private final Snake playerSnake;
     private final Set<Apple> applesSet;
     private final Barrier barrier;
     private List<AISnake> AISnakesList;
 
-    private Optional<AISnake> aiSnakefromUrl(String url) {
+    private final Apple.Factory appleFactory = new Apple.Factory(this, MAX_GENERATION_ITERATIONS);
+
+    private void fulfilApplesSet() {
+        while (applesSet.size() < properties.apples()) {
+            applesSet.add(appleFactory.generateRandom());
+        }
+    }
+
+    private Optional<AISnake> aiSnakeFromUrl(String url) {
         Class<?> aiSnakeClass;
 
         try {
@@ -47,7 +58,7 @@ public class GameFieldImpl implements GameField {
 
         AISnake aiSnake;
         try {
-            aiSnake = (AISnake) aiSnakeClass.getDeclaredConstructor(GameField.class).newInstance(this);
+            aiSnake = (AISnake) aiSnakeClass.getDeclaredConstructor(GameModel.class).newInstance(this);
         } catch (InstantiationException
                  | IllegalAccessException
                  | InvocationTargetException
@@ -63,22 +74,19 @@ public class GameFieldImpl implements GameField {
      *
      * @param properties properties of the game field
      */
-    public GameFieldImpl(GameFieldProperties properties) {
+    public GameModelImpl(GameProperties properties) {
         this.properties = properties;
         this.barrier = Barrier.fromResource(properties);
 
         this.playerSnake = new Snake(this);
         this.AISnakesList = properties.aiClassNamesList()
             .stream()
-            .map(this::aiSnakefromUrl)
+            .map(this::aiSnakeFromUrl)
             .flatMap(Optional::stream)
             .toList();
 
         this.applesSet = new HashSet<>();
-        while (applesSet.size() < properties.maxApples()) {
-            applesSet.add(new Apple.Factory(this).generateRandom(10000));
-            // TODO перенести макситерации куда нибудь
-        }
+        fulfilApplesSet();
     }
 
     /**
@@ -130,12 +138,14 @@ public class GameFieldImpl implements GameField {
      */
     @Override
     public boolean isFree(Point point) {
-        return (playerSnake == null || !playerSnake.getSnakeBody().headCollision(point)) &&
-            (playerSnake == null || !playerSnake.getSnakeBody().tailCollision(point)) &&
-            (barrier == null || !barrier.met(point)) &&
-            (applesSet == null || !applesSet.contains(new Apple(point))) &&
-            (AISnakesList == null || AISnakesList.stream().noneMatch(snake -> snake.getSnakeBody().headCollision(point))) &&
-            (AISnakesList == null || AISnakesList.stream().noneMatch(snake -> snake.getSnakeBody().tailCollision(point)));
+        return (playerSnake == null || !playerSnake.getSnakeBody().headCollision(point))
+            && (playerSnake == null || !playerSnake.getSnakeBody().tailCollision(point))
+            && (barrier == null || !barrier.met(point))
+            && (applesSet == null || !applesSet.contains(new Apple(point)))
+            && (AISnakesList == null
+                || AISnakesList.stream().noneMatch(snake -> snake.getSnakeBody().headCollision(point)))
+            && (AISnakesList == null
+                || AISnakesList.stream().noneMatch(snake -> snake.getSnakeBody().tailCollision(point)));
     }
 
     /**
@@ -170,14 +180,10 @@ public class GameFieldImpl implements GameField {
         AISnakesList = AISnakesList.stream().filter(Snake::update)
             .collect(Collectors.toList());
 
-        while (applesSet.size() < properties.maxApples()) {
-            applesSet.add(new Apple.Factory(this).generateRandom(10000));
-            // TODO объединить везде maxIterations, вынести в константу
-            // TODO одна фабрика для всех яблок
-        }
+        fulfilApplesSet();
 
         var collisions = checkPlayerSnakeCollisions();
-        return alive && !collisions; // TODO переименовать все
+        return alive && !collisions;
     }
 
     /**
@@ -185,7 +191,7 @@ public class GameFieldImpl implements GameField {
      *
      * @return the properties of the game field
      */
-    public GameFieldProperties getProperties() {
+    public GameProperties getProperties() {
         return properties;
     }
 
@@ -195,7 +201,7 @@ public class GameFieldImpl implements GameField {
      * @return a new game field with the same properties as this one
      */
     @Override
-    public GameField newGame() {
-        return new GameFieldImpl(properties);
+    public GameModel newGame() {
+        return new GameModelImpl(properties);
     }
 }

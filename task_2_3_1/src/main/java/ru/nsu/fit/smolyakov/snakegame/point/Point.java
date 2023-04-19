@@ -1,11 +1,11 @@
 package ru.nsu.fit.smolyakov.snakegame.point;
 
-import ru.nsu.fit.smolyakov.snakegame.model.GameField;
+import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 
 import java.security.SecureRandom;
 
 /**
- * Represents a point on the {@link GameField}.
+ * Represents a point on the {@link GameModel}.
  * In case of {@link ru.nsu.fit.smolyakov.snakegame} and inner packages, the coordinates are
  * supposed to be non-negative.
  *

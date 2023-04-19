@@ -2,15 +2,14 @@ package ru.nsu.fit.smolyakov.snakegame.executable;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import ru.nsu.fit.smolyakov.snakegame.model.GameField;
-import ru.nsu.fit.smolyakov.snakegame.model.GameFieldImpl;
+import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
+import ru.nsu.fit.smolyakov.snakegame.model.GameModelImpl;
 import ru.nsu.fit.smolyakov.snakegame.presenter.SnakePresenter;
-import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
-import ru.nsu.fit.smolyakov.snakegame.properties.PresenterProperties;
+import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 import ru.nsu.fit.smolyakov.snakegame.view.ConsoleView;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * The class that executes the console variant of the snake game.
@@ -18,7 +17,7 @@ import java.util.Objects;
  */
 public class ConsoleSnakeGame {
     private ConsoleView view;
-    private GameField model;
+    private GameModel model;
     private SnakePresenter snakePresenter;
 
     /**
@@ -29,19 +28,15 @@ public class ConsoleSnakeGame {
     public void execute() throws IOException {
         var mapper = new ObjectMapper(new YAMLFactory());
 
-        var gameFieldProperties = mapper.readValue(
-            Objects.requireNonNull(getClass().getResourceAsStream("/config/game_field_properties.yaml")),
-            GameFieldProperties.class
+        var properties = mapper.readValue(
+            new File("gamedata/config/gameProperties.yaml"),
+            GameProperties.class
         );
 
-        var presenterProperties = mapper.readValue(
-            Objects.requireNonNull(getClass().getResourceAsStream("/config/presenter_properties.yaml")),
-            PresenterProperties.class
-        );
 
-        this.model = new GameFieldImpl(gameFieldProperties);
-        this.view = new ConsoleView(gameFieldProperties);
-        this.snakePresenter = new SnakePresenter(view, model, presenterProperties);
+        this.model = new GameModelImpl(properties);
+        this.view = new ConsoleView(properties);
+        this.snakePresenter = new SnakePresenter(view, model, properties);
 
         this.view.setPresenter(snakePresenter);
 

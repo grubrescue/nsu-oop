@@ -7,12 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import ru.nsu.fit.smolyakov.snakegame.model.GameField;
-import ru.nsu.fit.smolyakov.snakegame.model.GameFieldImpl;
+import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
+import ru.nsu.fit.smolyakov.snakegame.model.GameModelImpl;
 import ru.nsu.fit.smolyakov.snakegame.presenter.SnakePresenter;
-import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
-import ru.nsu.fit.smolyakov.snakegame.properties.JavaFxProperties;
-import ru.nsu.fit.smolyakov.snakegame.properties.PresenterProperties;
+import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 import ru.nsu.fit.smolyakov.snakegame.view.JavaFxView;
 
 import java.io.File;
@@ -25,7 +23,7 @@ import java.util.Objects;
  */
 public class JavaFxSnakeGame extends Application {
     private JavaFxView view;
-    private GameField model;
+    private GameModel model;
     private SnakePresenter snakePresenter;
 
     /**
@@ -33,19 +31,10 @@ public class JavaFxSnakeGame extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws IOException {
-        var mapper = new ObjectMapper(new YAMLFactory());
-
-        var javaFxProperties = mapper.readValue(
-            new File("/"),
-            JavaFxProperties.class
-        );
-        var gameFieldProperties = mapper.readValue(
-            Objects.requireNonNull(getClass().getResourceAsStream("/config/game_field_properties.yaml")),
-            GameFieldProperties.class
-        );
-        var presenterProperties = mapper.readValue(
-            Objects.requireNonNull(getClass().getResourceAsStream("/config/presenter_properties.yaml")),
-            PresenterProperties.class
+        var gameProperties =
+            new ObjectMapper(new YAMLFactory()).readValue(
+                new File("gamedata/config/gameProperties.yaml"),
+                GameProperties.class
         );
 
         var fxmlLoader = new FXMLLoader(getClass().getResource("/gamefield.fxml"));
@@ -53,14 +42,12 @@ public class JavaFxSnakeGame extends Application {
 
         primaryStage.setScene(rootScene);
         primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.setWidth(javaFxProperties.resX());
-        primaryStage.setHeight(javaFxProperties.resY());
 
         this.view = fxmlLoader.getController();
-        this.model = new GameFieldImpl(gameFieldProperties);
-        this.snakePresenter = new SnakePresenter(this.view, this.model, presenterProperties);
+        this.model = new GameModelImpl(gameProperties);
+        this.snakePresenter = new SnakePresenter(this.view, this.model, gameProperties);
 
-        this.view.initializeField(gameFieldProperties, javaFxProperties, snakePresenter);
+        this.view.initializeField(gameProperties, snakePresenter);
 
         this.snakePresenter.start();
         primaryStage.show();

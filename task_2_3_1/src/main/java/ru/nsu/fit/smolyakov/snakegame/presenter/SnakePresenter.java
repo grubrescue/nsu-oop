@@ -1,8 +1,8 @@
 package ru.nsu.fit.smolyakov.snakegame.presenter;
 
-import ru.nsu.fit.smolyakov.snakegame.model.GameField;
+import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
-import ru.nsu.fit.smolyakov.snakegame.properties.PresenterProperties;
+import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 import ru.nsu.fit.smolyakov.snakegame.view.View;
 
 import java.util.ArrayList;
@@ -22,9 +22,11 @@ import java.util.function.Consumer;
  * <p>One works correctly with both JavaFX and console views.
  */
 public class SnakePresenter {
+    protected final static int START_SLEEP_TIME_MILLIS = 500;
+
     private final View view;
-    private final PresenterProperties presenterProperties;
-    private GameField model;
+    private final GameProperties gameProperties;
+    private GameModel model;
 
     private ScheduledExecutorService executorService;
     private List<Future<?>> futureList = new ArrayList<>();
@@ -87,10 +89,10 @@ public class SnakePresenter {
      * @param model a model
      * @param properties properties of the presenter
      */
-    public SnakePresenter(View view, GameField model, PresenterProperties properties) {
+    public SnakePresenter(View view, GameModel model, GameProperties properties) {
         this.view = view;
         this.model = model;
-        this.presenterProperties = properties;
+        this.gameProperties = properties;
     }
 
     private void startTimeOut() throws InterruptedException {
@@ -104,7 +106,7 @@ public class SnakePresenter {
                 view.showMessage("Go!");
                 view.refresh();
             }
-            Thread.sleep(presenterProperties.startTimeoutMillis());
+            Thread.sleep(START_SLEEP_TIME_MILLIS);
         }
     }
 
@@ -149,8 +151,8 @@ public class SnakePresenter {
         });
 
         executorService.scheduleAtFixedRate(this::newFrame,
-            (long) presenterProperties.startTimeoutMillis() * 4,
-            (long) presenterProperties.speed().getFrameDelayMillis(),
+            (long) START_SLEEP_TIME_MILLIS * 4,
+            (long) gameProperties.speed().getFrameDelayMillis(),
             TimeUnit.MILLISECONDS);
     }
 
