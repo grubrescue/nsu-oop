@@ -1,5 +1,6 @@
 package ru.nsu.fit.smolyakov.snakegame.view;
 
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -47,7 +48,11 @@ public class ConsoleView implements View {
     public ConsoleView(GameProperties properties) throws IOException {
         this.properties = properties;
 
-        this.terminal = new DefaultTerminalFactory().createTerminal();
+        this.terminal = new DefaultTerminalFactory()
+            .setInitialTerminalSize(new TerminalSize(properties.width(), properties.height() + 2))
+            .setPreferTerminalEmulator(true)
+            .createTerminal();
+        this.terminal.setCursorVisible(false);
         this.screen = new TerminalScreen(terminal);
 
         initializeResources();

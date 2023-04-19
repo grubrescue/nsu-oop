@@ -1,8 +1,8 @@
 ---
-width: 3
-height: 2
-javaFxScaling: 48
-apples: 0
+width: 40
+height: 20
+javaFxScaling: 42
+apples: 20
 barrierTxtPath: "gamedata/barrier/40x20_border.txt"
 aiClassNames:
 - "ru.nsu.fit.smolyakov.snakegame.model.snake.ai.NotWonnaDieAISnake"

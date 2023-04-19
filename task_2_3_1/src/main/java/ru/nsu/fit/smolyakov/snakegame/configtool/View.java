@@ -57,7 +57,7 @@ public class View implements Initializable {
         };
 
         ChangeListener<Number> applesListener = (observable, oldValue, newValue) -> {
-            var newMax = getWidth() * getHeight();
+            var newMax = getWidth() * getHeight() - 2;
             var prevVal = applesSpinner.getValue();
             var svf = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, newMax);
             svf.setValue(Integer.min(prevVal, newMax));
@@ -83,7 +83,7 @@ public class View implements Initializable {
         heightSpinner.valueProperty().addListener(applesListener);
 
         SpinnerValueFactory<Integer> applesSpinnerValue =
-            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, getWidth() * getHeight());
+            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, getWidth() * getHeight() - 2);
         applesSpinner.setEditable(true);
         applesSpinner.setValueFactory(applesSpinnerValue);
     }
