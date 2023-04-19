@@ -1,6 +1,5 @@
 package ru.nsu.fit.smolyakov.snakegame.view;
 
-import com.googlecode.lanterna.input.KeyType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -12,7 +11,7 @@ import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
-import ru.nsu.fit.smolyakov.snakegame.presenter.Presenter;
+import ru.nsu.fit.smolyakov.snakegame.presenter.SnakePresenter;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
 import ru.nsu.fit.smolyakov.snakegame.properties.JavaFxProperties;
 
@@ -33,7 +32,7 @@ import java.util.ResourceBundle;
  * in relevant dimensions.
  */
 public class JavaFxView implements View, Initializable {
-    private Presenter presenter;
+    private SnakePresenter snakePresenter;
 
     private JavaFxProperties javaFxProperties;
     private int proportion;
@@ -43,9 +42,10 @@ public class JavaFxView implements View, Initializable {
 
     @FXML
     private Text scoreAmountText;
+
     private Resources resources;
 
-    private Map<KeyCode, Presenter.EventAction> eventActionMap
+    private Map<KeyCode, SnakePresenter.EventAction> eventActionMap
         = new HashMap<>();
 
     /**
@@ -76,44 +76,44 @@ public class JavaFxView implements View, Initializable {
     }
 
     private void initializeEventHandler() {
-        eventActionMap.put(KeyCode.R, Presenter.EventAction.RESTART);
-        eventActionMap.put(KeyCode.Q, Presenter.EventAction.EXIT);
+        eventActionMap.put(KeyCode.R, SnakePresenter.EventAction.RESTART);
+        eventActionMap.put(KeyCode.Q, SnakePresenter.EventAction.EXIT);
 
-        eventActionMap.put(KeyCode.UP, Presenter.EventAction.UP);
-        eventActionMap.put(KeyCode.W, Presenter.EventAction.UP);
+        eventActionMap.put(KeyCode.UP, SnakePresenter.EventAction.UP);
+        eventActionMap.put(KeyCode.W, SnakePresenter.EventAction.UP);
 
-        eventActionMap.put(KeyCode.DOWN, Presenter.EventAction.DOWN);
-        eventActionMap.put(KeyCode.S, Presenter.EventAction.DOWN);
+        eventActionMap.put(KeyCode.DOWN, SnakePresenter.EventAction.DOWN);
+        eventActionMap.put(KeyCode.S, SnakePresenter.EventAction.DOWN);
 
-        eventActionMap.put(KeyCode.LEFT, Presenter.EventAction.LEFT);
-        eventActionMap.put(KeyCode.A, Presenter.EventAction.LEFT);
+        eventActionMap.put(KeyCode.LEFT, SnakePresenter.EventAction.LEFT);
+        eventActionMap.put(KeyCode.A, SnakePresenter.EventAction.LEFT);
 
-        eventActionMap.put(KeyCode.RIGHT, Presenter.EventAction.RIGHT);
-        eventActionMap.put(KeyCode.D, Presenter.EventAction.RIGHT);
+        eventActionMap.put(KeyCode.RIGHT, SnakePresenter.EventAction.RIGHT);
+        eventActionMap.put(KeyCode.D, SnakePresenter.EventAction.RIGHT);
 
         this.canvas.getScene().setOnKeyPressed(e -> {
             var eventAction = eventActionMap.get(e.getCode());
             if (eventAction != null)
-                eventAction.execute(presenter);
+                eventAction.execute(snakePresenter);
         });
 
         this.canvas.getScene().getWindow().setOnCloseRequest(e ->
-            Presenter.EventAction.EXIT.execute(presenter)
+            SnakePresenter.EventAction.EXIT.execute(snakePresenter)
         );
     }
 
     /**
      * Initializes the view so that its parameters correspond to {@code javaFxProperties}
-     * and {@code properties}. Also, the {@code presenter} is set as the view's presenter.
+     * and {@code properties}. Also, the {@code snakePresenter} is set as the view's snakePresenter.
      *
      * @param properties       game field properties
      * @param javaFxProperties JavaFX properties
-     * @param presenter        presenter
+     * @param snakePresenter        snakePresenter
      */
     public void initializeField(GameFieldProperties properties,
                                 JavaFxProperties javaFxProperties,
-                                Presenter presenter) {
-        if (presenter == null || javaFxProperties == null || properties == null) {
+                                SnakePresenter snakePresenter) {
+        if (snakePresenter == null || javaFxProperties == null || properties == null) {
             throw new IllegalArgumentException("Arguments can't be null");
         }
 
@@ -127,7 +127,7 @@ public class JavaFxView implements View, Initializable {
             throw new IllegalArgumentException("Resolution is not proportional to game field size");
         }
 
-        this.presenter = presenter;
+        this.snakePresenter = snakePresenter;
         this.javaFxProperties = javaFxProperties;
         this.proportion = javaFxProperties.resX() / properties.width();
 

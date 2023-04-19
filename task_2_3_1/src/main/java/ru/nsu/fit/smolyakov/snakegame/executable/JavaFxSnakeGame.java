@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import ru.nsu.fit.smolyakov.snakegame.model.GameField;
 import ru.nsu.fit.smolyakov.snakegame.model.GameFieldImpl;
-import ru.nsu.fit.smolyakov.snakegame.presenter.Presenter;
+import ru.nsu.fit.smolyakov.snakegame.presenter.SnakePresenter;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
 import ru.nsu.fit.smolyakov.snakegame.properties.JavaFxProperties;
 import ru.nsu.fit.smolyakov.snakegame.properties.PresenterProperties;
@@ -20,12 +20,12 @@ import java.util.Objects;
 
 /**
  * The class that executes the JavaFX variant of the snake game.
- * It creates the model, view and presenter and connects them.
+ * It creates the model, view and snakePresenter and connects them.
  */
 public class JavaFxSnakeGame extends Application {
     private JavaFxView view;
     private GameField model;
-    private Presenter presenter;
+    private SnakePresenter snakePresenter;
 
     /**
      * {@inheritDoc}
@@ -57,11 +57,11 @@ public class JavaFxSnakeGame extends Application {
 
         this.view = fxmlLoader.getController();
         this.model = new GameFieldImpl(gameFieldProperties);
-        this.presenter = new Presenter(this.view, this.model, presenterProperties);
+        this.snakePresenter = new SnakePresenter(this.view, this.model, presenterProperties);
 
-        this.view.initializeField(gameFieldProperties, javaFxProperties, presenter);
+        this.view.initializeField(gameFieldProperties, javaFxProperties, snakePresenter);
 
-        this.presenter.start();
+        this.snakePresenter.start();
         primaryStage.show();
     }
 
