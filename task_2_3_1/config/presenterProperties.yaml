@@ -1,2 +1,2 @@
-speed: LEVEL_4
+speed: "LEVEL_4"
 startTimeoutMillis: 500

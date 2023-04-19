@@ -30,12 +30,12 @@ public class ConsoleSnakeGame {
         var mapper = new ObjectMapper(new YAMLFactory());
 
         var gameFieldProperties = mapper.readValue(
-            Objects.requireNonNull(getClass().getResourceAsStream("/game_field_properties.yaml")),
+            Objects.requireNonNull(getClass().getResourceAsStream("/config/game_field_properties.yaml")),
             GameFieldProperties.class
         );
 
         var presenterProperties = mapper.readValue(
-            Objects.requireNonNull(getClass().getResourceAsStream("/presenter_properties.yaml")),
+            Objects.requireNonNull(getClass().getResourceAsStream("/config/presenter_properties.yaml")),
             PresenterProperties.class
         );
 

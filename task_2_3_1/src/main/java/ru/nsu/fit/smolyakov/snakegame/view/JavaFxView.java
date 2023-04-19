@@ -75,7 +75,7 @@ public class JavaFxView implements View, Initializable {
         resources.enemySnakeTail = imageInstance("/sprites/enemy/tail.png");
     }
 
-    private void initializeEventHandler() {
+    private void initializeEventActionMap() {
         eventActionMap.put(KeyCode.R, SnakePresenter.EventAction.RESTART);
         eventActionMap.put(KeyCode.Q, SnakePresenter.EventAction.EXIT);
 
@@ -90,7 +90,9 @@ public class JavaFxView implements View, Initializable {
 
         eventActionMap.put(KeyCode.RIGHT, SnakePresenter.EventAction.RIGHT);
         eventActionMap.put(KeyCode.D, SnakePresenter.EventAction.RIGHT);
+    }
 
+    private void initializeEventActions() {
         this.canvas.getScene().setOnKeyPressed(e -> {
             var eventAction = eventActionMap.get(e.getCode());
             if (eventAction != null)
@@ -134,7 +136,8 @@ public class JavaFxView implements View, Initializable {
         canvas.setWidth(javaFxProperties.resX());
         canvas.setHeight(javaFxProperties.resY());
 
-        initializeEventHandler();
+        initializeEventActionMap();
+        initializeEventActions();
         initializeResources();
     }
 
@@ -236,10 +239,8 @@ public class JavaFxView implements View, Initializable {
      */
     @Override
     public void refresh() {
-
     }
 
-    // TODO вынести отдельно и доделать других змеек
     private class Resources {
         Image apple;
         Image barrier;

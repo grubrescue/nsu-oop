@@ -18,6 +18,8 @@ import java.util.Objects;
 
 public class JavaFxConfigTool extends Application {
     private View view;
+    private Model model;
+    private Presenter presenter;
 
     /**
      * {@inheritDoc}
@@ -32,12 +34,9 @@ public class JavaFxConfigTool extends Application {
         primaryStage.setScene(rootScene);
 
         this.view = fxmlLoader.getController();
-//        this.model = new GameFieldImpl(gameFieldProperties);
-//        this.snakePresenter = new SnakePresenter(this.view, this.model, presenterProperties);
-//
-//        this.view.initializeField(gameFieldProperties, javaFxProperties, snakePresenter);
-//
-//        this.snakePresenter.start();
+        this.model = new Model();
+        this.presenter = new Presenter(this.model, this.view);
+
         primaryStage.show();
     }
 
