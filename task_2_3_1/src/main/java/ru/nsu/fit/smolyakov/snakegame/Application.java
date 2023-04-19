@@ -17,6 +17,8 @@ public class Application {
     public static final String CONFIG_FOLDER_PATH = GAMEDATA_FOLDER_PATH + "config/";
     public static final String GAME_PROPERTIES_YAML_PATH = CONFIG_FOLDER_PATH + "gameProperties.yaml";
     public static final String LEVEL_FOLDER_PATH = GAMEDATA_FOLDER_PATH + "level/";
+    public static final String AI_SNAKES_CLASS_PATH = "ru.nsu.fit.smolyakov.snakegame.ai.";
+    public static final String AI_SNAKES_FOLDER_PATH = "src/main/java/ru/nsu/fit/smolyakov/snakegame/ai/";
 
 
     private static void runJavaFxSnakeGame() {

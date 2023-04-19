@@ -31,6 +31,7 @@ public class Model {
     }
 
     public void sync() throws IOException {
+        System.out.println(gameProperties);
         mapper.writeValue(gamePropertiesFile, gameProperties);
     }
 }
