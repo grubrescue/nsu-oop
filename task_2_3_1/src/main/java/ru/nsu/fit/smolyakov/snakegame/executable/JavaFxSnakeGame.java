@@ -17,6 +17,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
+import static ru.nsu.fit.smolyakov.snakegame.Application.GAME_PROPERTIES_YAML_PATH;
+
 /**
  * The class that executes the JavaFX variant of the snake game.
  * It creates the model, view and snakePresenter and connects them.
@@ -33,7 +35,7 @@ public class JavaFxSnakeGame extends Application {
     public void start(Stage primaryStage) throws IOException {
         var gameProperties =
             new ObjectMapper(new YAMLFactory()).readValue(
-                new File("gamedata/config/gameProperties.yaml"),
+                new File(GAME_PROPERTIES_YAML_PATH),
                 GameProperties.class
         );
 

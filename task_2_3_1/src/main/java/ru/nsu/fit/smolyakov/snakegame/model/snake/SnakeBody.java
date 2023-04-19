@@ -17,7 +17,7 @@ public class SnakeBody {
 
     /**
      * Creates a snake body with the specified head and tail.
-     * Typically, this one only used to create a snake body by {@link Factory}.
+     * Typically, this one only used to create a snake body by {@link #generateRandom(GameModel)}.
      *
      * @param head head
      * @param tail tail

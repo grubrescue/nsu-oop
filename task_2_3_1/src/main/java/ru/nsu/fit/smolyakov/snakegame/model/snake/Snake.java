@@ -24,7 +24,7 @@ public class Snake { // TODO хочется добавить состояние 
     private final GameModel gameModel;
 
     private MovingDirection movingDirection;
-    private int points = 0; // TODO отнаследовать класс PlayerSnake и AISnake
+    private int points = 0;
 
     /**
      * Instantiates a snake in a random position on a field.
@@ -36,7 +36,6 @@ public class Snake { // TODO хочется добавить состояние 
         this.snakeBody = SnakeBody.generateRandom(this.gameModel);
         this.movingDirection = MovingDirection.UP;
     }
-    // TODO сделать зависимо от наполненности поля и размера?? или сделать глобальной константой, чтоб везде одинаково было
 
     /**
      * Sets the direction in which the snake is moving.
