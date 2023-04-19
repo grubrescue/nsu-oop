@@ -5,24 +5,39 @@ package ru.nsu.fit.smolyakov.snakegame.properties;
  */
 public enum GameSpeed {
     /**
-     * The slowest game speed. The snake moves every 400 milliseconds.
+     * The slowest game speed. The snake moves every 800 milliseconds.
      */
-    LEVEL_0(400),
+    LEVEL_0(800),
 
     /**
-     * The medium game speed. The snake moves every 200 milliseconds.
+     * The medium game speed. The snake moves every 400 milliseconds.
      */
-    LEVEL_1(200),
+    LEVEL_1(400),
 
     /**
-     * The fast game speed. The snake moves every 100 milliseconds.
+     * The fast game speed. The snake moves every 200 milliseconds.
      */
-    LEVEL_2(100),
+    LEVEL_2(200),
+
+    /**
+     * Faster game speed. The snake moves every 100 milliseconds.
+     */
+    LEVEL_3(100),
 
     /**
      * The fastest game speed. The snake moves every 50 milliseconds.
      */
-    LEVEL_3(50);
+    LEVEL_4(50),
+
+    /**
+     * Extreme game speed. The snake moves every 25 milliseconds.
+     */
+    LEVEL_5(25),
+
+    /**
+     * Kamikaze game speed. The snake moves every 10 milliseconds.
+     */
+    LEVEL_6(10);
 
     private final int frameDelayMillis;
 
