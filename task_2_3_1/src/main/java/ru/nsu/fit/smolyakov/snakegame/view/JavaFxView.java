@@ -1,9 +1,11 @@
 package ru.nsu.fit.smolyakov.snakegame.view;
 
+import com.googlecode.lanterna.input.KeyType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ru.nsu.fit.smolyakov.snakegame.model.Apple;
@@ -15,6 +17,8 @@ import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
 import ru.nsu.fit.smolyakov.snakegame.properties.JavaFxProperties;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -40,6 +44,9 @@ public class JavaFxView implements View, Initializable {
     @FXML
     private Text scoreAmountText;
     private Resources resources;
+
+    private Map<KeyCode, Presenter.EventAction> eventActionMap
+        = new HashMap<>();
 
     /**
      * {@inheritDoc}
@@ -68,20 +75,30 @@ public class JavaFxView implements View, Initializable {
         resources.enemySnakeTail = imageInstance("/sprites/enemy/tail.png");
     }
 
-    private void initializeEventHandlers() {
+    private void initializeEventHandler() {
+        eventActionMap.put(KeyCode.R, Presenter.EventAction.RESTART);
+        eventActionMap.put(KeyCode.Q, Presenter.EventAction.EXIT);
+
+        eventActionMap.put(KeyCode.UP, Presenter.EventAction.UP);
+        eventActionMap.put(KeyCode.W, Presenter.EventAction.UP);
+
+        eventActionMap.put(KeyCode.DOWN, Presenter.EventAction.DOWN);
+        eventActionMap.put(KeyCode.S, Presenter.EventAction.DOWN);
+
+        eventActionMap.put(KeyCode.LEFT, Presenter.EventAction.LEFT);
+        eventActionMap.put(KeyCode.A, Presenter.EventAction.LEFT);
+
+        eventActionMap.put(KeyCode.RIGHT, Presenter.EventAction.RIGHT);
+        eventActionMap.put(KeyCode.D, Presenter.EventAction.RIGHT);
+
         this.canvas.getScene().setOnKeyPressed(e -> {
-            switch (e.getCode()) {
-                case UP -> presenter.onUpKeyPressed();
-                case DOWN -> presenter.onDownKeyPressed();
-                case LEFT -> presenter.onLeftKeyPressed();
-                case RIGHT -> presenter.onRightKeyPressed();
-                case Q -> presenter.onExitKeyPressed();
-                case R -> presenter.onRestartKeyPressed();
-            }
+            var eventAction = eventActionMap.get(e.getCode());
+            if (eventAction != null)
+                eventAction.execute(presenter);
         });
 
         this.canvas.getScene().getWindow().setOnCloseRequest(e ->
-            presenter.onExitKeyPressed()
+            Presenter.EventAction.EXIT.execute(presenter)
         );
     }
 
@@ -117,7 +134,7 @@ public class JavaFxView implements View, Initializable {
         canvas.setWidth(javaFxProperties.resX());
         canvas.setHeight(javaFxProperties.resY());
 
-        initializeEventHandlers();
+        initializeEventHandler();
         initializeResources();
     }
 
