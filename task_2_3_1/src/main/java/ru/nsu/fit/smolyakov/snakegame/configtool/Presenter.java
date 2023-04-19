@@ -11,6 +11,7 @@ public class Presenter {
         this.view = view;
 
         view.setPresenter(this);
+
         view.setGameSpeed(model.getProperties().speed());
         view.setWidth(model.getProperties().width());
         view.setHeight(model.getProperties().height());
@@ -41,8 +42,8 @@ public class Presenter {
     public void scalingChanged() {
         var scaling = view.getJavaFxScalingSlider();
         view.setResolutionText(
-            scaling * model.getProperties().width(),
-            scaling * model.getProperties().height()
+            scaling * view.getWidth(),
+            scaling * view.getHeight()
         );
     }
 }

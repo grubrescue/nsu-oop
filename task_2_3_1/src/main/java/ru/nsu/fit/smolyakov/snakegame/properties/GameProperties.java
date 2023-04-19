@@ -114,6 +114,8 @@ public record GameProperties(
     public GameProperties withApples(int apples) {
         if (apples < 0) {
             throw new IllegalArgumentException("Number of apples must be non-negative");
+        } else if (apples >= width() * height()) {
+            throw new IllegalArgumentException("Number of apples must be less than the number of cells");
         }
 
         return new GameProperties(

@@ -67,11 +67,11 @@
                   <Text layoutX="192.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x" wrappingWidth="12.791000366210938" />
                   <Spinner fx:id="widthSpinner" editable="true" layoutX="116.0" layoutY="38.0" prefHeight="26.0" prefWidth="71.0" />
                   <Spinner fx:id="heightSpinner" editable="true" layoutX="208.0" layoutY="38.0" prefHeight="26.0" prefWidth="71.0" />
-                  <Slider fx:id="javaFxScalingSlider" blockIncrement="4.0" layoutX="117.0" layoutY="82.0" majorTickUnit="16.0" max="72.0" min="8.0" minorTickCount="8" onMouseReleased="#updateCalculatedResolution" prefHeight="40.0" prefWidth="163.0" showTickLabels="true" showTickMarks="true" value="32.0" />
+                  <Slider fx:id="javaFxScalingSlider" blockIncrement="4.0" layoutX="117.0" layoutY="82.0" majorTickUnit="16.0" max="72.0" min="16.0" minorTickCount="8" prefHeight="40.0" prefWidth="207.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="32.0" />
                   <Text layoutX="27.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="JavaFX Scaling" />
                   <Spinner fx:id="applesSpinner" editable="true" layoutX="123.0" layoutY="152.0" prefHeight="26.0" prefWidth="71.0" />
                   <Text layoutX="36.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apples" />
-                  <Text fx:id="resolutionText" layoutX="26.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Resolution will be n x n px." wrappingWidth="264.8509979248047">
+                  <Text fx:id="resolutionText" layoutX="26.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.8509979248047">
                      <font>
                         <Font name="System Italic" size="13.0" />
                      </font>
