@@ -1,5 +1,6 @@
 package ru.nsu.fit.smolyakov.snakegame.configtool;
 
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -46,19 +47,43 @@ public class View implements Initializable {
         presenter.scalingChanged();
     }
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ChangeListener<Number> scalingListener = (observable, oldValue, newValue) -> {
+            if (presenter != null) {
+                presenter.scalingChanged();
+            }
+        };
+
+        ChangeListener<Number> applesListener = (observable, oldValue, newValue) -> {
+            var newMax = getWidth() * getHeight();
+            var prevVal = applesSpinner.getValue();
+            var svf = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, newMax);
+            svf.setValue(Integer.min(prevVal, newMax));
+            applesSpinner.setValueFactory(svf);
+        };
+
         speedChoiceBox.getItems().addAll(GameSpeed.values());
 
-        SpinnerValueFactory<Integer> widthSpinnerValue = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000);
+        javaFxScalingSlider.valueProperty().addListener(scalingListener);
+
+        SpinnerValueFactory<Integer> widthSpinnerValue =
+            new SpinnerValueFactory.IntegerSpinnerValueFactory(2, 1000);
         widthSpinner.setEditable(true);
         widthSpinner.setValueFactory(widthSpinnerValue);
+        widthSpinner.valueProperty().addListener(scalingListener);
+        widthSpinner.valueProperty().addListener(applesListener);
 
-        SpinnerValueFactory<Integer> heightSpinnerValue = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000);
+        SpinnerValueFactory<Integer> heightSpinnerValue =
+            new SpinnerValueFactory.IntegerSpinnerValueFactory(2, 1000);
         heightSpinner.setEditable(true);
         heightSpinner.setValueFactory(heightSpinnerValue);
+        heightSpinner.valueProperty().addListener(scalingListener);
+        heightSpinner.valueProperty().addListener(applesListener);
 
-        SpinnerValueFactory<Integer> applesSpinnerValue = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10);
+        SpinnerValueFactory<Integer> applesSpinnerValue =
+            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, getWidth() * getHeight());
         applesSpinner.setEditable(true);
         applesSpinner.setValueFactory(applesSpinnerValue);
     }
@@ -67,9 +92,6 @@ public class View implements Initializable {
         this.presenter = presenter;
     }
 
-
-
-
     public GameSpeed getGameSpeed() {
         return speedChoiceBox.getValue();
     }
@@ -77,7 +99,6 @@ public class View implements Initializable {
     public void setGameSpeed(GameSpeed gameSpeed) {
         speedChoiceBox.setValue(gameSpeed);
     }
-
 
     public void setWidth(int width) {
         widthSpinner.getValueFactory().setValue(width);

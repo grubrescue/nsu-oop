@@ -19,7 +19,6 @@ public class Model {
         gamePropertiesFile = new File(Application.GAME_PROPERTIES_YAML_PATH);
         gameProperties
             = mapper.readValue(gamePropertiesFile, GameProperties.class);
-
     }
 
     public GameProperties getProperties() {
