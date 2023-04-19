@@ -13,6 +13,12 @@ import java.io.IOException;
  * The latter can be run by passing the {@code --console} argument.
  */
 public class Application {
+    public static final String GAMEDATA_FOLDER_PATH = "gamedata/";
+    public static final String CONFIG_FOLDER_PATH = GAMEDATA_FOLDER_PATH + "config/";
+    public static final String GAME_PROPERTIES_YAML_PATH = CONFIG_FOLDER_PATH + "gameProperties.yaml";
+    public static final String LEVEL_FOLDER_PATH = GAMEDATA_FOLDER_PATH + "level/";
+
+
     private static void runJavaFxSnakeGame() {
         var app = new JavaFxSnakeGame();
         app.execute();

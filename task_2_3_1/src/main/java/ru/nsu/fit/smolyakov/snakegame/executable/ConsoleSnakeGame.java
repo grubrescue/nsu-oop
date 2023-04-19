@@ -2,6 +2,7 @@ package ru.nsu.fit.smolyakov.snakegame.executable;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import ru.nsu.fit.smolyakov.snakegame.Application;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModelImpl;
 import ru.nsu.fit.smolyakov.snakegame.presenter.SnakePresenter;
@@ -29,7 +30,7 @@ public class ConsoleSnakeGame {
         var mapper = new ObjectMapper(new YAMLFactory());
 
         var properties = mapper.readValue(
-            new File("gamedata/config/gameProperties.yaml"),
+            new File(Application.GAME_PROPERTIES_YAML_PATH),
             GameProperties.class
         );
 
