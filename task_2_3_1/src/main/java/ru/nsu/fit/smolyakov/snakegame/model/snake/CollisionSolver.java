@@ -10,7 +10,14 @@ public class CollisionSolver {
      * A result of collision solving.
      */
     public enum Result {
+//        /**
+//         * The first snake is dead.
+//         */
 //        FIRST_DEAD,
+//
+//        /**
+//         * The second snake is dead.
+//         */
 //        SECOND_DEAD,
         /**
          * Both snakes are dead.

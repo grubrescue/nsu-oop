@@ -89,7 +89,8 @@ public class Snake { // TODO хочется добавить состояние 
         }
 
         snakeBody.move(newHeadLocation, ateApple);
-        return !gameField.getBarrier().met(newHeadLocation);
+        return !gameField.getBarrier().met(newHeadLocation)
+            && !snakeBody.tailCollision(snakeBody.getHead());
     }
 
     /**
