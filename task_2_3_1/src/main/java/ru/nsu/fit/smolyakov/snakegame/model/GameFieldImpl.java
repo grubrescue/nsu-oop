@@ -148,13 +148,11 @@ public class GameFieldImpl implements GameField {
         var iter = AISnakesList.iterator();
         while (iter.hasNext()) {
             var snake = iter.next();
-            // коллизион солвер рубит змейку если там коллизия какая
             if (CollisionSolver.solve(playerSnake, snake) == CollisionSolver.Result.BOTH_DEAD) {
                 iter.remove();
                 return true;
             }
         }
-
         // TODO змейки между собой
 
         return false;
