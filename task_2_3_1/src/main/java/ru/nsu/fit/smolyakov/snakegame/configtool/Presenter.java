@@ -12,12 +12,23 @@ public class Presenter {
 
         view.setPresenter(this);
         view.setGameSpeed(model.getProperties().speed());
+        view.setWidth(model.getProperties().width());
+        view.setHeight(model.getProperties().height());
+        view.setApples(model.getProperties().apples());
+        view.setJavaFxScalingSlider(model.getProperties().javaFxScaling());
+        view.updateCalculatedResolution();
+//        view.setBarrier(model.getProperties().barrier());
     }
 
     public void saveConfig() {
         model.setProperties(
             model.getProperties()
                 .withSpeed(view.getGameSpeed())
+                .withApples(view.getApples())
+                .withWidth(view.getWidth())
+                .withHeight(view.getHeight())
+                .withJavaFxScaling(view.getJavaFxScalingSlider())
+//                .withBarrierFilePath(view.getBarrier())
         );
 
         try {
@@ -27,5 +38,11 @@ public class Presenter {
         }
     }
 
-
+    public void scalingChanged() {
+        var scaling = view.getJavaFxScalingSlider();
+        view.setResolutionText(
+            scaling * model.getProperties().width(),
+            scaling * model.getProperties().height()
+        );
+    }
 }
