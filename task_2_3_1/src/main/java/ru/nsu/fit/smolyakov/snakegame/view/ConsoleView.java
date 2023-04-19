@@ -11,7 +11,7 @@ import com.googlecode.lanterna.terminal.Terminal;
 import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
-import ru.nsu.fit.smolyakov.snakegame.presenter.Presenter;
+import ru.nsu.fit.smolyakov.snakegame.presenter.SnakePresenter;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
 
 import java.io.IOException;
@@ -28,14 +28,14 @@ import java.util.Objects;
 public class ConsoleView implements View {
     private final GameFieldProperties properties;
     private Resources resources;
-    private Presenter presenter;
+    private SnakePresenter snakePresenter;
     private final Terminal terminal;
     private final Screen screen;
     private Thread inputPollThread;
 
-    private Map<Character, Presenter.EventAction> characterEventActionMap
+    private Map<Character, SnakePresenter.EventAction> characterEventActionMap
         = new HashMap<>();
-    private Map<KeyType, Presenter.EventAction> keyTypeEventActionMap
+    private Map<KeyType, SnakePresenter.EventAction> keyTypeEventActionMap
         = new HashMap<>();
 
     /**
@@ -91,24 +91,24 @@ public class ConsoleView implements View {
     }
 
     private void initializeEventHandler() {
-        characterEventActionMap.put('r', Presenter.EventAction.RESTART);
-        characterEventActionMap.put('к', Presenter.EventAction.RESTART);
-        characterEventActionMap.put('q', Presenter.EventAction.EXIT);
-        characterEventActionMap.put('й', Presenter.EventAction.EXIT);
+        characterEventActionMap.put('r', SnakePresenter.EventAction.RESTART);
+        characterEventActionMap.put('к', SnakePresenter.EventAction.RESTART);
+        characterEventActionMap.put('q', SnakePresenter.EventAction.EXIT);
+        characterEventActionMap.put('й', SnakePresenter.EventAction.EXIT);
 
-        characterEventActionMap.put('w', Presenter.EventAction.UP);
-        characterEventActionMap.put('ц', Presenter.EventAction.UP);
-        characterEventActionMap.put('s', Presenter.EventAction.DOWN);
-        characterEventActionMap.put('ы', Presenter.EventAction.DOWN);
-        characterEventActionMap.put('a', Presenter.EventAction.LEFT);
-        characterEventActionMap.put('ф', Presenter.EventAction.LEFT);
-        characterEventActionMap.put('d', Presenter.EventAction.RIGHT);
-        characterEventActionMap.put('в', Presenter.EventAction.RIGHT);
+        characterEventActionMap.put('w', SnakePresenter.EventAction.UP);
+        characterEventActionMap.put('ц', SnakePresenter.EventAction.UP);
+        characterEventActionMap.put('s', SnakePresenter.EventAction.DOWN);
+        characterEventActionMap.put('ы', SnakePresenter.EventAction.DOWN);
+        characterEventActionMap.put('a', SnakePresenter.EventAction.LEFT);
+        characterEventActionMap.put('ф', SnakePresenter.EventAction.LEFT);
+        characterEventActionMap.put('d', SnakePresenter.EventAction.RIGHT);
+        characterEventActionMap.put('в', SnakePresenter.EventAction.RIGHT);
 
-        keyTypeEventActionMap.put(KeyType.ArrowDown, Presenter.EventAction.DOWN);
-        keyTypeEventActionMap.put(KeyType.ArrowUp, Presenter.EventAction.UP);
-        keyTypeEventActionMap.put(KeyType.ArrowLeft, Presenter.EventAction.LEFT);
-        keyTypeEventActionMap.put(KeyType.ArrowRight, Presenter.EventAction.RIGHT);
+        keyTypeEventActionMap.put(KeyType.ArrowDown, SnakePresenter.EventAction.DOWN);
+        keyTypeEventActionMap.put(KeyType.ArrowUp, SnakePresenter.EventAction.UP);
+        keyTypeEventActionMap.put(KeyType.ArrowLeft, SnakePresenter.EventAction.LEFT);
+        keyTypeEventActionMap.put(KeyType.ArrowRight, SnakePresenter.EventAction.RIGHT);
     }
 
 
@@ -116,12 +116,12 @@ public class ConsoleView implements View {
         if (keyStroke.getKeyType().equals(KeyType.Character)) {
             var keyCharacterEvent = characterEventActionMap.get(keyStroke.getCharacter());
             if (keyCharacterEvent != null) {
-                keyCharacterEvent.execute(presenter);
+                keyCharacterEvent.execute(snakePresenter);
             }
         } else {
             var keyTypeEvent = keyTypeEventActionMap.get(keyStroke.getKeyType());
             if (keyTypeEvent != null) {
-                keyTypeEvent.execute(presenter);
+                keyTypeEvent.execute(snakePresenter);
             }
         }
     }
@@ -141,12 +141,12 @@ public class ConsoleView implements View {
     }
 
     /**
-     * Sets the {@link Presenter} for this {@link View}.
+     * Sets the {@link SnakePresenter} for this {@link View}.
      *
-     * @param presenter the {@link Presenter} to set
+     * @param snakePresenter the {@link SnakePresenter} to set
      */
-    public void setPresenter(Presenter presenter) {
-        this.presenter = Objects.requireNonNull(presenter);
+    public void setPresenter(SnakePresenter snakePresenter) {
+        this.snakePresenter = Objects.requireNonNull(snakePresenter);
     }
 
     /**

@@ -21,7 +21,7 @@ import java.util.function.Consumer;
  *
  * <p>One works correctly with both JavaFX and console views.
  */
-public class Presenter {
+public class SnakePresenter {
     private final View view;
     private final PresenterProperties presenterProperties;
     private GameField model;
@@ -37,46 +37,46 @@ public class Presenter {
         /**
          * A left key is pressed.
          */
-        LEFT(Presenter::onLeftPressed),
+        LEFT(SnakePresenter::onLeftPressed),
 
         /**
          * A right key is pressed.
          */
-        RIGHT(Presenter::onRightPressed),
+        RIGHT(SnakePresenter::onRightPressed),
 
         /**
          * An up key is pressed.
          */
-        UP(Presenter::onUpPressed),
+        UP(SnakePresenter::onUpPressed),
 
         /**
          * A down key is pressed.
          */
-        DOWN(Presenter::onDownPressed),
+        DOWN(SnakePresenter::onDownPressed),
 
         /**
          * A restart button is pressed.
          */
-        RESTART(Presenter::onRestartPressed),
+        RESTART(SnakePresenter::onRestartPressed),
 
         /**
          * An exit button is pressed.
          */
-        EXIT(Presenter::onExitPressed);
+        EXIT(SnakePresenter::onExitPressed);
 
-        private final Consumer<Presenter> action;
+        private final Consumer<SnakePresenter> action;
 
-        EventAction(Consumer<Presenter> action) {
+        EventAction(Consumer<SnakePresenter> action) {
             this.action = action;
         }
 
         /**
          * Executes the {@link Consumer} that is connected to the action.
          *
-         * @param presenter a presenter
+         * @param snakePresenter a snakePresenter
          */
-        public void execute(Presenter presenter) {
-            action.accept(presenter);
+        public void execute(SnakePresenter snakePresenter) {
+            action.accept(snakePresenter);
         }
     }
 
@@ -87,7 +87,7 @@ public class Presenter {
      * @param model a model
      * @param properties properties of the presenter
      */
-    public Presenter(View view, GameField model, PresenterProperties properties) {
+    public SnakePresenter(View view, GameField model, PresenterProperties properties) {
         this.view = view;
         this.model = model;
         this.presenterProperties = properties;

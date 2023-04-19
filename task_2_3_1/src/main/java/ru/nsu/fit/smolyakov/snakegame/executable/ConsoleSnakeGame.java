@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import ru.nsu.fit.smolyakov.snakegame.model.GameField;
 import ru.nsu.fit.smolyakov.snakegame.model.GameFieldImpl;
-import ru.nsu.fit.smolyakov.snakegame.presenter.Presenter;
+import ru.nsu.fit.smolyakov.snakegame.presenter.SnakePresenter;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
 import ru.nsu.fit.smolyakov.snakegame.properties.PresenterProperties;
 import ru.nsu.fit.smolyakov.snakegame.view.ConsoleView;
@@ -14,12 +14,12 @@ import java.util.Objects;
 
 /**
  * The class that executes the console variant of the snake game.
- * It creates the model, view and presenter and connects them.
+ * It creates the model, view and snakePresenter and connects them.
  */
 public class ConsoleSnakeGame {
     private ConsoleView view;
     private GameField model;
-    private Presenter presenter;
+    private SnakePresenter snakePresenter;
 
     /**
      * Executes the game.
@@ -41,11 +41,11 @@ public class ConsoleSnakeGame {
 
         this.model = new GameFieldImpl(gameFieldProperties);
         this.view = new ConsoleView(gameFieldProperties);
-        this.presenter = new Presenter(view, model, presenterProperties);
+        this.snakePresenter = new SnakePresenter(view, model, presenterProperties);
 
-        this.view.setPresenter(presenter);
+        this.view.setPresenter(snakePresenter);
 
-        this.presenter.start();
+        this.snakePresenter.start();
         this.view.start();
     }
 }

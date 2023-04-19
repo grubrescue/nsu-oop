@@ -3,12 +3,12 @@ package ru.nsu.fit.smolyakov.snakegame.view;
 import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
-import ru.nsu.fit.smolyakov.snakegame.presenter.Presenter;
+import ru.nsu.fit.smolyakov.snakegame.presenter.SnakePresenter;
 
 /**
  * Represents a view of the game. One is responsible for drawing the game field
  * and all the objects on it. Though, as we stick to MVP pattern, the view is passive
- * and can only be changed by {@link Presenter}.
+ * and can only be changed by {@link SnakePresenter}.
  */
 public interface View {
     /**

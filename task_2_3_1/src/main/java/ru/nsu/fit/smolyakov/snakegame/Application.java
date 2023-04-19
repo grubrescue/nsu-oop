@@ -1,5 +1,6 @@
 package ru.nsu.fit.smolyakov.snakegame;
 
+import ru.nsu.fit.smolyakov.snakegame.configtool.JavaFxConfigTool;
 import ru.nsu.fit.smolyakov.snakegame.executable.ConsoleSnakeGame;
 import ru.nsu.fit.smolyakov.snakegame.executable.JavaFxSnakeGame;
 
@@ -26,6 +27,11 @@ public class Application {
         }
     }
 
+    private static void runJavaFxConfigTool() {
+        var app = new JavaFxConfigTool();
+        app.execute();
+    }
+
     /**
      * The entry point of the application.
      *
@@ -37,6 +43,8 @@ public class Application {
             runJavaFxSnakeGame();
         } else if (args[0].equals("--console")) {
             runConsoleSnakeGame();
+        } else if (args[0].equals("--config")) {
+            runJavaFxConfigTool();
         } else {
             throw new RuntimeException("unknown argument: " + args[0]);
         }
