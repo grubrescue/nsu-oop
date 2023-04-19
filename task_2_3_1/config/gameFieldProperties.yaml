@@ -1,7 +1,7 @@
 width: 40
 height: 20
 maxApples: 5
-barrierUrl: /barrier/border.txt
+barrier: /barrier/border.txt
 aiClassNames:
   - "ru.nsu.fit.smolyakov.snakegame.model.snake.ai.NotWonnaDieAISnake"
   - "ru.nsu.fit.smolyakov.snakegame.model.snake.ai.StraightForwardAISnake"

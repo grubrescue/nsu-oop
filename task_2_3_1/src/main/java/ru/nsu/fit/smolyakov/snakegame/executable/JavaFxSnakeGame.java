@@ -15,6 +15,7 @@ import ru.nsu.fit.smolyakov.snakegame.properties.JavaFxProperties;
 import ru.nsu.fit.smolyakov.snakegame.properties.PresenterProperties;
 import ru.nsu.fit.smolyakov.snakegame.view.JavaFxView;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -35,15 +36,15 @@ public class JavaFxSnakeGame extends Application {
         var mapper = new ObjectMapper(new YAMLFactory());
 
         var javaFxProperties = mapper.readValue(
-            Objects.requireNonNull(getClass().getResourceAsStream("/java_fx_properties.yaml")),
+            new File("/"),
             JavaFxProperties.class
         );
         var gameFieldProperties = mapper.readValue(
-            Objects.requireNonNull(getClass().getResourceAsStream("/game_field_properties.yaml")),
+            Objects.requireNonNull(getClass().getResourceAsStream("/config/game_field_properties.yaml")),
             GameFieldProperties.class
         );
         var presenterProperties = mapper.readValue(
-            Objects.requireNonNull(getClass().getResourceAsStream("/presenter_properties.yaml")),
+            Objects.requireNonNull(getClass().getResourceAsStream("/config/presenter_properties.yaml")),
             PresenterProperties.class
         );
 
