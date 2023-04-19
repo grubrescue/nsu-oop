@@ -1,6 +1,6 @@
 package ru.nsu.fit.smolyakov.snakegame.model.snake.ai;
 
-import ru.nsu.fit.smolyakov.snakegame.model.GameField;
+import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 
 /**
  * An AI-driven samurai snake that always follow the original
@@ -11,8 +11,8 @@ public class StraightForwardAISnake extends AISnake {
     /**
      * {@inheritDoc}
      */
-    public StraightForwardAISnake(GameField gameField) {
-        super(gameField);
+    public StraightForwardAISnake(GameModel gameModel) {
+        super(gameModel);
     }
 
     /**

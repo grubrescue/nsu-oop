@@ -1,6 +1,6 @@
 package ru.nsu.fit.smolyakov.snakegame.model.snake.ai;
 
-import ru.nsu.fit.smolyakov.snakegame.model.GameField;
+import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
 
 /**
@@ -14,10 +14,10 @@ public abstract class AISnake extends Snake {
     /**
      * Instantiates an AI-snake in a random position on a field.
      *
-     * @param gameField game field
+     * @param gameModel game field
      */
-    public AISnake(GameField gameField) {
-        super(gameField);
+    public AISnake(GameModel gameModel) {
+        super(gameModel);
     }
 
     public abstract void thinkAboutTurn();

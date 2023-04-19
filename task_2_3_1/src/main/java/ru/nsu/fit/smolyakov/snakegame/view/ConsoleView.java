@@ -12,7 +12,7 @@ import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
 import ru.nsu.fit.smolyakov.snakegame.presenter.SnakePresenter;
-import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
+import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -26,7 +26,7 @@ import java.util.Objects;
  * 2 rows for the score.
  */
 public class ConsoleView implements View {
-    private final GameFieldProperties properties;
+    private final GameProperties properties;
     private Resources resources;
     private SnakePresenter snakePresenter;
     private final Terminal terminal;
@@ -44,7 +44,7 @@ public class ConsoleView implements View {
      * @param properties properties of the game field
      * @throws IOException if an I/O error occurs
      */
-    public ConsoleView(GameFieldProperties properties) throws IOException {
+    public ConsoleView(GameProperties properties) throws IOException {
         this.properties = properties;
 
         this.terminal = new DefaultTerminalFactory().createTerminal();
@@ -252,6 +252,9 @@ public class ConsoleView implements View {
         screen.clear();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void refresh() {
         try {

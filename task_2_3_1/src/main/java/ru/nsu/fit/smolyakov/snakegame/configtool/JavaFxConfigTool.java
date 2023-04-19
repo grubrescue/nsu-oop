@@ -6,15 +6,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import ru.nsu.fit.smolyakov.snakegame.model.GameFieldImpl;
-import ru.nsu.fit.smolyakov.snakegame.presenter.SnakePresenter;
-import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
-import ru.nsu.fit.smolyakov.snakegame.properties.JavaFxProperties;
-import ru.nsu.fit.smolyakov.snakegame.properties.PresenterProperties;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class JavaFxConfigTool extends Application {
     private View view;
@@ -30,7 +23,6 @@ public class JavaFxConfigTool extends Application {
 
         var fxmlLoader = new FXMLLoader(getClass().getResource("/configscene.fxml"));
         Scene rootScene = fxmlLoader.load();
-
         primaryStage.setScene(rootScene);
 
         this.view = fxmlLoader.getController();

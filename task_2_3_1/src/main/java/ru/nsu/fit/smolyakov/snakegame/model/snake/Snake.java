@@ -1,13 +1,12 @@
 package ru.nsu.fit.smolyakov.snakegame.model.snake;
 
 import ru.nsu.fit.smolyakov.snakegame.model.Apple;
-import ru.nsu.fit.smolyakov.snakegame.model.GameField;
+import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
+import ru.nsu.fit.smolyakov.snakegame.model.GameModelImpl;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
 
-import java.util.stream.Collectors;
-
 /**
- * A snake that moves on the {@link GameField}.
+ * A snake that moves on the {@link GameModel}.
  *
  * <p>(Пока на русском)
  * В целом порядок такой:
@@ -20,10 +19,9 @@ import java.util.stream.Collectors;
  * 2.2. Если голова встретилась с хвостом - змейка обрубается на месте встречи.
  */
 public class Snake { // TODO хочется добавить состояние жива/не жива
-    protected final static int MAX_CREATION_ITERATIONS = 10000;
     private final SnakeBody snakeBody;
 
-    private final GameField gameField;
+    private final GameModel gameModel;
 
     private MovingDirection movingDirection;
     private int points = 0; // TODO отнаследовать класс PlayerSnake и AISnake
@@ -31,14 +29,11 @@ public class Snake { // TODO хочется добавить состояние 
     /**
      * Instantiates a snake in a random position on a field.
      *
-     * @param gameField game field
+     * @param gameModel game field
      */
-    public Snake(GameField gameField) {
-        this.gameField = gameField;
-
-        this.snakeBody = new SnakeBody.Factory(gameField).generateRandom(MAX_CREATION_ITERATIONS);
-        // TODO сделать шоб одна фабрика на все змейки
-
+    public Snake(GameModel gameModel) {
+        this.gameModel = gameModel;
+        this.snakeBody = SnakeBody.generateRandom(this.gameModel);
         this.movingDirection = MovingDirection.UP;
     }
     // TODO сделать зависимо от наполненности поля и размера?? или сделать глобальной константой, чтоб везде одинаково было
@@ -72,10 +67,10 @@ public class Snake { // TODO хочется добавить состояние 
     public boolean update() {
         var newHeadLocation = snakeBody.getHead()
             .shift(movingDirection.move(),
-                gameField.getProperties().width(),
-                gameField.getProperties().height());
+                gameModel.getProperties().width(),
+                gameModel.getProperties().height());
 
-        var appleSet = gameField.getApplesSet();
+        var appleSet = gameModel.getApplesSet();
 
         var possibleApple = new Apple(newHeadLocation);
         boolean ateApple;
@@ -89,7 +84,7 @@ public class Snake { // TODO хочется добавить состояние 
         }
 
         snakeBody.move(newHeadLocation, ateApple);
-        return !gameField.getBarrier().met(newHeadLocation)
+        return !gameModel.getBarrier().met(newHeadLocation)
             && !snakeBody.tailCollision(snakeBody.getHead());
     }
 
@@ -117,8 +112,8 @@ public class Snake { // TODO хочется добавить состояние 
      *
      * @return game field
      */
-    public GameField getGameField() {
-        return gameField;
+    public GameModel getGameField() {
+        return gameModel;
     }
 
     /**

@@ -1,7 +1,7 @@
 package ru.nsu.fit.smolyakov.snakegame.model.snake.ai;
 
 import ru.nsu.fit.smolyakov.snakegame.model.Apple;
-import ru.nsu.fit.smolyakov.snakegame.model.GameField;
+import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 
 import java.security.SecureRandom;
 import java.util.Random;
@@ -11,8 +11,8 @@ public class WannaEatAISnake extends AISnake {
     /**
      * {@inheritDoc}
      */
-    public WannaEatAISnake(GameField gameField) {
-        super(gameField);
+    public WannaEatAISnake(GameModel gameModel) {
+        super(gameModel);
     }
 
     private final Random rand = new SecureRandom();

@@ -11,12 +11,12 @@ public class Presenter {
         this.view = view;
 
         view.setPresenter(this);
-        view.setGameSpeed(model.getPresenterProperties().speed());
+        view.setGameSpeed(model.getProperties().speed());
     }
 
     public void saveConfig() {
-        model.setPresenterProperties(
-            model.getPresenterProperties()
+        model.setProperties(
+            model.getProperties()
                 .withSpeed(view.getGameSpeed())
         );
 

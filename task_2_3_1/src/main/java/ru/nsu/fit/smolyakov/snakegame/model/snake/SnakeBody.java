@@ -1,6 +1,7 @@
 package ru.nsu.fit.smolyakov.snakegame.model.snake;
 
-import ru.nsu.fit.smolyakov.snakegame.model.GameField;
+import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
+import ru.nsu.fit.smolyakov.snakegame.model.GameModelImpl;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
 
 import java.util.LinkedList;
@@ -99,43 +100,19 @@ public class SnakeBody {
         }
     }
 
-    /**
-     * Creates a snake body in a random location. One always consists of a head and one tail point
-     * and always directed upwards.
-     */
-    public static class Factory {
-        private final GameField gameField;
+    public static SnakeBody generateRandom(GameModel gameModel) {
+        for (int i = 0; i < GameModelImpl.MAX_GENERATION_ITERATIONS; i++) {
+            var initialHeadLocation = Point.random(gameModel.getProperties().width(), gameModel.getProperties().height());
+            var initialTailLocation = initialHeadLocation.shift(new Point(0, 1)); // чучуть вниз
 
-        /**
-         * Creates a new instance of {@link Factory} connected to the specified {@code gameField}.
-         *
-         * @param gameField game field
-         */
-        public Factory(GameField gameField) {
-            this.gameField = gameField;
-        }
-
-        /**
-         * Creates a snake body in a random location. One always consists of a head and one tail point.
-         *
-         * @param iterations amount of iterations to try to create a snake
-         * @return a snake body in a random location
-         * @throws IllegalStateException if the snake cannot be created
-         */
-        public SnakeBody generateRandom(int iterations) {
-            for (int i = 0; i < iterations; i++) {
-                var initialHeadLocation = Point.random(gameField.getProperties().width(), gameField.getProperties().height());
-                var initialTailLocation = initialHeadLocation.shift(new Point(0, 1)); // чучуть вниз
-
-                if (gameField.isFree(initialHeadLocation) && gameField.isFree(initialTailLocation)) {
-                    return new SnakeBody(initialHeadLocation, List.of(initialTailLocation));
-                }
+            if (gameModel.isFree(initialHeadLocation) && gameModel.isFree(initialTailLocation)) {
+                return new SnakeBody(initialHeadLocation, List.of(initialTailLocation));
             }
-
-            throw new IllegalStateException("Cannot create a snake " +
-                "(maybe the field is too busy, " +
-                "try to increase the amount of iterations, " +
-                "increase the field size or remove some barriers)");
         }
+
+        throw new IllegalStateException("Cannot create a snake " +
+            "(maybe the field is too busy, " +
+            "try to increase the amount of iterations, " +
+            "increase the field size or remove some barriers)");
     }
 }

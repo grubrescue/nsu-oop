@@ -1,6 +1,6 @@
 package ru.nsu.fit.smolyakov.snakegame.model.snake.ai;
 
-import ru.nsu.fit.smolyakov.snakegame.model.GameField;
+import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 
 import java.security.SecureRandom;
 import java.util.Arrays;
@@ -16,8 +16,8 @@ public class NotWonnaDieAISnake extends AISnake {
     /**
      * {@inheritDoc}
      */
-    public NotWonnaDieAISnake(GameField gameField) {
-        super(gameField);
+    public NotWonnaDieAISnake(GameModel gameModel) {
+        super(gameModel);
     }
 
     private final Random rand = new SecureRandom();
