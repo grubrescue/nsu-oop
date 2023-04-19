@@ -3,6 +3,7 @@ package ru.nsu.fit.smolyakov.snakegame.view;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
@@ -14,6 +15,8 @@ import ru.nsu.fit.smolyakov.snakegame.presenter.Presenter;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -30,6 +33,11 @@ public class ConsoleView implements View {
     private final Screen screen;
     private Thread inputPollThread;
 
+    private Map<Character, Presenter.EventAction> characterEventActionMap
+        = new HashMap<>();
+    private Map<KeyType, Presenter.EventAction> keyTypeEventActionMap
+        = new HashMap<>();
+
     /**
      * Creates a new {@link ConsoleView} instance.
      *
@@ -43,6 +51,7 @@ public class ConsoleView implements View {
         this.screen = new TerminalScreen(terminal);
 
         initializeResources();
+        initializeEventHandler();
     }
 
     private void initializeResources() {
@@ -81,17 +90,38 @@ public class ConsoleView implements View {
                 .withBackgroundColor(TextColor.ANSI.CYAN_BRIGHT);
     }
 
+    private void initializeEventHandler() {
+        characterEventActionMap.put('r', Presenter.EventAction.RESTART);
+        characterEventActionMap.put('к', Presenter.EventAction.RESTART);
+        characterEventActionMap.put('q', Presenter.EventAction.EXIT);
+        characterEventActionMap.put('й', Presenter.EventAction.EXIT);
+
+        characterEventActionMap.put('w', Presenter.EventAction.UP);
+        characterEventActionMap.put('ц', Presenter.EventAction.UP);
+        characterEventActionMap.put('s', Presenter.EventAction.DOWN);
+        characterEventActionMap.put('ы', Presenter.EventAction.DOWN);
+        characterEventActionMap.put('a', Presenter.EventAction.LEFT);
+        characterEventActionMap.put('ф', Presenter.EventAction.LEFT);
+        characterEventActionMap.put('d', Presenter.EventAction.RIGHT);
+        characterEventActionMap.put('в', Presenter.EventAction.RIGHT);
+
+        keyTypeEventActionMap.put(KeyType.ArrowDown, Presenter.EventAction.DOWN);
+        keyTypeEventActionMap.put(KeyType.ArrowUp, Presenter.EventAction.UP);
+        keyTypeEventActionMap.put(KeyType.ArrowLeft, Presenter.EventAction.LEFT);
+        keyTypeEventActionMap.put(KeyType.ArrowRight, Presenter.EventAction.RIGHT);
+    }
+
+
     private void keyEventHandler(KeyStroke keyStroke) {
-        switch (keyStroke.getKeyType()) {
-            case ArrowDown -> presenter.onDownKeyPressed();
-            case ArrowUp -> presenter.onUpKeyPressed();
-            case ArrowLeft -> presenter.onLeftKeyPressed();
-            case ArrowRight -> presenter.onRightKeyPressed();
-            case Character -> {
-                switch (keyStroke.getCharacter()) {
-                    case 'r' -> presenter.onRestartKeyPressed();
-                    case 'q' -> presenter.onExitKeyPressed();
-                }
+        if (keyStroke.getKeyType().equals(KeyType.Character)) {
+            var keyCharacterEvent = characterEventActionMap.get(keyStroke.getCharacter());
+            if (keyCharacterEvent != null) {
+                keyCharacterEvent.execute(presenter);
+            }
+        } else {
+            var keyTypeEvent = keyTypeEventActionMap.get(keyStroke.getKeyType());
+            if (keyTypeEvent != null) {
+                keyTypeEvent.execute(presenter);
             }
         }
     }

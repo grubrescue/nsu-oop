@@ -2,22 +2,22 @@ package ru.nsu.fit.smolyakov.snakegame.presenter;
 
 import ru.nsu.fit.smolyakov.snakegame.model.GameField;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
-import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
 import ru.nsu.fit.smolyakov.snakegame.properties.PresenterProperties;
 import ru.nsu.fit.smolyakov.snakegame.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
+import java.util.function.Consumer;
 
 /**
  * A presenter that connects a model and a view.
  *
  * <p>{@link #start()} method starts a new thread with the game's main loop.
- * {@link #onExitKeyPressed()} method stops both this presenter and an attached view.
- * {@link #onRestartKeyPressed()} method restarts the game.
- * {@link #onLeftKeyPressed()}, {@link #onRightKeyPressed()}, {@link #onUpKeyPressed()} and
- * {@link #onDownKeyPressed()} change the direction of the player snake.
+ * {@link #onExitPressed()} method stops both this presenter and an attached view.
+ * {@link #onRestartPressed()} method restarts the game.
+ * {@link #onLeftPressed()}, {@link #onRightPressed()}, {@link #onUpPressed()} and
+ * {@link #onDownPressed()} change the direction of the player snake.
  *
  * <p>One works correctly with both JavaFX and console views.
  */
@@ -28,6 +28,57 @@ public class Presenter {
 
     private ScheduledExecutorService executorService;
     private List<Future<?>> futureList = new ArrayList<>();
+
+    /**
+     * An enum that represents user-associated actions that can be performed by the view.
+     * Each action is connected to an event method of the presenter.
+     */
+    public enum EventAction {
+        /**
+         * A left key is pressed.
+         */
+        LEFT(Presenter::onLeftPressed),
+
+        /**
+         * A right key is pressed.
+         */
+        RIGHT(Presenter::onRightPressed),
+
+        /**
+         * An up key is pressed.
+         */
+        UP(Presenter::onUpPressed),
+
+        /**
+         * A down key is pressed.
+         */
+        DOWN(Presenter::onDownPressed),
+
+        /**
+         * A restart button is pressed.
+         */
+        RESTART(Presenter::onRestartPressed),
+
+        /**
+         * An exit button is pressed.
+         */
+        EXIT(Presenter::onExitPressed);
+
+        private final Consumer<Presenter> action;
+
+        EventAction(Consumer<Presenter> action) {
+            this.action = action;
+        }
+
+        /**
+         * Executes the {@link Consumer} that is connected to the action.
+         *
+         * @param presenter a presenter
+         */
+        public void execute(Presenter presenter) {
+            action.accept(presenter);
+        }
+    }
 
     /**
      * Creates a presenter with the specified view, model and properties.
@@ -119,35 +170,35 @@ public class Presenter {
     /**
      * Changes the direction of the player snake to left.
      */
-    public void onLeftKeyPressed() {
+    public void onLeftPressed() {
         model.getPlayerSnake().setMovingDirection(Snake.MovingDirection.LEFT);
     }
 
     /**
      * Changes the direction of the player snake to right.
      */
-    public void onRightKeyPressed() {
+    public void onRightPressed() {
         model.getPlayerSnake().setMovingDirection(Snake.MovingDirection.RIGHT);
     }
 
     /**
      * Changes the direction of the player snake to up.
      */
-    public void onUpKeyPressed() {
+    public void onUpPressed() {
         model.getPlayerSnake().setMovingDirection(Snake.MovingDirection.UP);
     }
 
     /**
      * Changes the direction of the player snake to down.
      */
-    public void onDownKeyPressed() {
+    public void onDownPressed() {
         model.getPlayerSnake().setMovingDirection(Snake.MovingDirection.DOWN);
     }
 
     /**
      * Restarts the game.
      */
-    public void onRestartKeyPressed() {
+    public void onRestartPressed() {
         executorService.shutdownNow();
         start();
     }
@@ -155,7 +206,7 @@ public class Presenter {
     /**
      * Stops the game.
      */
-    public void onExitKeyPressed() {
+    public void onExitPressed() {
         executorService.shutdownNow();
         view.close();
     }
