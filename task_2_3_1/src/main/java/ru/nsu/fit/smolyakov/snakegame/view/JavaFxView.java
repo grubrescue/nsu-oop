@@ -220,7 +220,7 @@ public class JavaFxView implements View, Initializable {
      */
     public void showMessage(String message) {
         canvas.getGraphicsContext2D().strokeText(message, javaFxProperties.resX() / 3, javaFxProperties.resY() / 2);
-        // TODO сделать нормально в ссене билдере
+        // TODO сделать нормально в ссене билдере (или не делать уж...)
     }
 
     /**

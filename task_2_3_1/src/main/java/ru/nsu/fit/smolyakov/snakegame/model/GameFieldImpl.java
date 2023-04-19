@@ -6,13 +6,23 @@ import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.*;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameFieldProperties;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
  * A main model that composes {@link Apple}s and {@link Snake}s, both player- and AI-driven.
+ * It also contains a {@link Barrier} that is a reason of collisions that may lead to
+ * one (or all) of snakes' death.
+ *
+ * <p>As specified in {@link GameFieldProperties} (usually deserialized from {@code /game_field_properties.yaml})
+ * this class dynamically loads {@link AISnake}s that are capable of playing the game, as well as the user.
+ *
+ * <p>All other properties also specified in {@link GameFieldProperties}, such as {@code maxApples},
+ * {@code width} and {@code height} are used to initialize the game field and affect the representation of the latter.
  */
 public class GameFieldImpl implements GameField {
     private final GameFieldProperties properties;
@@ -21,6 +31,32 @@ public class GameFieldImpl implements GameField {
     private final Set<Apple> applesSet;
     private final Barrier barrier;
     private List<AISnake> AISnakesList;
+
+    private Optional<AISnake> aiSnakefromUrl(String url) {
+        Class<?> aiSnakeClass;
+
+        try {
+            aiSnakeClass = Class.forName(url);
+        } catch (ClassNotFoundException e) {
+            return Optional.empty();
+        }
+
+        if (!AISnake.class.isAssignableFrom(aiSnakeClass)) {
+            return Optional.empty();
+        }
+
+        AISnake aiSnake;
+        try {
+            aiSnake = (AISnake) aiSnakeClass.getDeclaredConstructor(GameField.class).newInstance(this);
+        } catch (InstantiationException
+                 | IllegalAccessException
+                 | InvocationTargetException
+                 | NoSuchMethodException e) {
+            return Optional.empty();
+        }
+
+        return Optional.of(aiSnake);
+    }
 
     /**
      * Creates a game field with the specified properties.
@@ -32,11 +68,11 @@ public class GameFieldImpl implements GameField {
         this.barrier = Barrier.fromResource(properties);
 
         this.playerSnake = new Snake(this);
-        this.AISnakesList = List.of(
-            new StraightForwardAISnake(this),
-            new TotallyRandomAISnake(this),
-            new NotWonnaDieAISnake(this)
-        ); // TODO вынести в конструктор?
+        this.AISnakesList = properties.aiClassNamesList()
+            .stream()
+            .map(this::aiSnakefromUrl)
+            .flatMap(Optional::stream)
+            .toList();
 
         this.applesSet = new HashSet<>();
         while (applesSet.size() < properties.maxApples()) {
