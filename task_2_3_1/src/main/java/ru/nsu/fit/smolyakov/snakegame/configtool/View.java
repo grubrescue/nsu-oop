@@ -3,6 +3,7 @@ package ru.nsu.fit.smolyakov.snakegame.configtool;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import ru.nsu.fit.smolyakov.snakegame.Application;
@@ -19,6 +20,9 @@ import java.util.ResourceBundle;
 
 public class View implements Initializable {
     private Presenter presenter;
+
+    @FXML
+    private Scene scene;
 
     @FXML
     private ListView<String> aiListView;
@@ -48,6 +52,9 @@ public class View implements Initializable {
     private ChoiceBox<String> barrierChoiceBox;
 
     @FXML
+    private Button runGameButton;
+
+    @FXML
     public void saveConfig() {
         presenter.saveConfig();
     }
@@ -55,6 +62,11 @@ public class View implements Initializable {
     @FXML
     public void updateCalculatedResolution() {
         presenter.scalingChanged();
+    }
+
+    @FXML
+    public void runGame() {
+        presenter.runJavaFxSnake();
     }
 
     private List<String> aiNames(String path) {
@@ -70,6 +82,8 @@ public class View implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // TODO refactor this
+        // TODO и вообще всю хрень где определяются списочки надо в презентер
+
         var aiNames = aiNames(Application.AI_SNAKES_PACKAGE_NAME);
         aiListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         aiListView.getItems().addAll(aiNames);
@@ -190,5 +204,9 @@ public class View implements Initializable {
             var index = aiListView.getItems().indexOf(aiName);
             aiListView.getSelectionModel().select(aiName);
         });
+    }
+
+    public Scene getScene() {
+        return scene;
     }
 }
