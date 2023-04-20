@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ru.nsu.fit.smolyakov.snakegame.model.Apple;
@@ -36,6 +37,9 @@ public class JavaFxView implements View, Initializable {
     private GameProperties properties;
     private int resX;
     private int resY;
+
+    @FXML
+    private Pane pane;
 
     @FXML
     private Canvas canvas;
@@ -119,15 +123,14 @@ public class JavaFxView implements View, Initializable {
 
         this.snakePresenter = snakePresenter;
         this.properties = properties;
+
+        pane.setStyle("-fx-background-color: white");
         
         this.resX = properties.width() * properties.javaFxScaling();
         this.resY = properties.height() * properties.javaFxScaling();
 
         canvas.setWidth(this.resX);
         canvas.setHeight(this.resY);
-
-        canvas.getScene().getWindow().setWidth(this.resX);
-        canvas.getScene().getWindow().setHeight(this.resY);
 
         initializeEventActionMap();
         initializeEventActions();

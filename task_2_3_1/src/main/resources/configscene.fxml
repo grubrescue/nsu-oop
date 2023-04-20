@@ -46,7 +46,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.fit.smolyakov.snakegame.configtool.View">
+<Scene fx:id="scene" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.fit.smolyakov.snakegame.configtool.View">
    <root>
       <VBox prefHeight="400.0" prefWidth="640.0">
         <children>
@@ -61,7 +61,7 @@
           </MenuBar>
           <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="367.0" prefWidth="551.0" VBox.vgrow="ALWAYS">
             <children>
-                  <Button fx:id="saveButton" layoutX="479.0" layoutY="319.0" mnemonicParsing="false" onAction="#saveConfig" text="Save configuration" />
+                  <Button fx:id="saveButton" layoutX="334.0" layoutY="326.0" mnemonicParsing="false" onAction="#saveConfig" text="Save configuration" />
                   <Text layoutX="36.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Speed" wrappingWidth="86.79100036621094" />
                   <ChoiceBox fx:id="speedChoiceBox" layoutX="123.0" layoutY="245.0" prefWidth="150.0" />
                   <Text layoutX="27.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Field size" wrappingWidth="66.79100036621094" />
@@ -81,6 +81,8 @@
                   <Text layoutX="357.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Barrier" />
                   <ListView fx:id="aiListView" layoutX="400.0" layoutY="102.0" prefHeight="200.0" prefWidth="200.0" />
                   <Text layoutX="365.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AI" />
+                  <Button fx:id="runGameButton" layoutX="519.0" layoutY="326.0" mnemonicParsing="false" onAction="#runGame" text="Run game" />
+                  <Text layoutX="426.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME RUNS WITHOUT SAVING!!!" />
             </children>
           </AnchorPane>
         </children>

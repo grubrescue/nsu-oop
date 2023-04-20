@@ -1,12 +1,11 @@
 ---
-width: 40
-height: 20
-javaFxScaling: 40
-apples: 13
+width: 25
+height: 13
+javaFxScaling: 72
+apples: 18
 barrierTxtFile: "40x20_border.txt"
 aiClassNames:
-- "NotWonnaDieAISnake"
 - "StraightForwardAISnake"
 - "TotallyRandomAISnake"
 - "WannaEatAISnake"
-speed: "LEVEL_4"
+speed: "LEVEL_1"

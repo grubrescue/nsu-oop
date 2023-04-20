@@ -1,5 +1,8 @@
 package ru.nsu.fit.smolyakov.snakegame.configtool;
 
+import javafx.stage.Stage;
+import ru.nsu.fit.smolyakov.snakegame.executable.JavaFxSnakeGame;
+
 import java.io.IOException;
 
 public class Presenter {
@@ -36,6 +39,17 @@ public class Presenter {
 
         try {
             model.sync();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void runJavaFxSnake() {
+        var app = new JavaFxSnakeGame();
+        var stage = new Stage();
+        view.getScene().getWindow().hide();
+        try {
+            app.runGame(stage);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

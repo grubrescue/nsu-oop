@@ -19,8 +19,6 @@ public class JavaFxConfigTool extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws IOException {
-        var mapper = new ObjectMapper(new YAMLFactory());
-
         var fxmlLoader = new FXMLLoader(getClass().getResource("/configscene.fxml"));
         Scene rootScene = fxmlLoader.load();
         primaryStage.setScene(rootScene);
