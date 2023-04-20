@@ -1,6 +1,7 @@
 package ru.nsu.fit.smolyakov.snakegame.properties;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ru.nsu.fit.smolyakov.snakegame.Application;
 
 import java.util.List;
 import java.util.Objects;
@@ -14,7 +15,8 @@ import java.util.Objects;
  *                      every cell will take both in width and height. For example, if the value is 8, then every cell
  *                      will take 8x8 pixels
  * @param apples a number of apples
- * @param barrierFileName a path to the file with barriers
+ * @param barrierFileName a name of file located in {@link Application#LEVEL_FOLDER_PATH} that contains
+ *                        a barrier
  * @param aiClassNamesList a list of AI class names
  * @param speed a game speed
  */
@@ -130,10 +132,10 @@ public record GameProperties(
     }
 
     /**
-     * Returns new {@code GameProperties} instance with the path to the file
+     * Returns new {@code GameProperties} instance with the name of file
      * with barriers changed to a specified one. This object is not modified.
      *
-     * @param barrierFilePath a new path to the file with barriers
+     * @param barrierFilePath a new name of file with barriers
      * @return a new {@code GameProperties}
      *         with the specified path to the file with barriers
      */

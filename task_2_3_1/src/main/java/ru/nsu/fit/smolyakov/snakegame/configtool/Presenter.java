@@ -18,7 +18,7 @@ public class Presenter {
         view.setApples(model.getProperties().apples());
         view.setJavaFxScalingSlider(model.getProperties().javaFxScaling());
         view.updateCalculatedResolution();
-//        view.setBarrier(model.getProperties().barrier());
+        view.setBarrier(model.getProperties().barrierFileName());
     }
 
     public void saveConfig() {
@@ -29,7 +29,7 @@ public class Presenter {
                 .withWidth(view.getWidth())
                 .withHeight(view.getHeight())
                 .withJavaFxScaling(view.getJavaFxScalingSlider())
-//                .withBarrierFilePath(view.getBarrier())
+                .withBarrierFilePath(view.getBarrier())
         );
 
         try {
