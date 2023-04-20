@@ -14,7 +14,7 @@ import java.util.Objects;
  *                      every cell will take both in width and height. For example, if the value is 8, then every cell
  *                      will take 8x8 pixels
  * @param apples a number of apples
- * @param barrierFilePath a path to the file with barriers
+ * @param barrierFileName a path to the file with barriers
  * @param aiClassNamesList a list of AI class names
  * @param speed a game speed
  */
@@ -23,7 +23,7 @@ public record GameProperties(
     @JsonProperty("height") int height,
     @JsonProperty("javaFxScaling") int javaFxScaling,
     @JsonProperty("apples") int apples,
-    @JsonProperty("barrierTxtPath") String barrierFilePath,
+    @JsonProperty("barrierTxtFile") String barrierFileName,
     @JsonProperty("aiClassNames") List<String> aiClassNamesList,
     @JsonProperty("speed") GameSpeed speed
 ) {
@@ -46,7 +46,7 @@ public record GameProperties(
             height(),
             javaFxScaling(),
             apples(),
-            barrierFilePath(),
+            barrierFileName(),
             aiClassNamesList(),
             speed()
         );
@@ -71,7 +71,7 @@ public record GameProperties(
             height,
             javaFxScaling(),
             apples(),
-            barrierFilePath(),
+            barrierFileName(),
             aiClassNamesList(),
             speed()
         );
@@ -96,7 +96,7 @@ public record GameProperties(
             height(),
             javaFxScaling,
             apples(),
-            barrierFilePath(),
+            barrierFileName(),
             aiClassNamesList(),
             speed()
         );
@@ -123,7 +123,7 @@ public record GameProperties(
             height(),
             javaFxScaling(),
             apples,
-            barrierFilePath(),
+            barrierFileName(),
             aiClassNamesList(),
             speed()
         );
@@ -164,7 +164,7 @@ public record GameProperties(
             height(),
             javaFxScaling(),
             apples(),
-            barrierFilePath(),
+            barrierFileName(),
             Objects.requireNonNull(aiClassNamesList),
             speed()
         );
@@ -184,7 +184,7 @@ public record GameProperties(
             height(),
             javaFxScaling(),
             apples(),
-            barrierFilePath(),
+            barrierFileName(),
             aiClassNamesList(),
             speed
         );

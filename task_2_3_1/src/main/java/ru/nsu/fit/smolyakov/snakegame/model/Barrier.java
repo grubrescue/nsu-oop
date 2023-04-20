@@ -1,12 +1,12 @@
 package ru.nsu.fit.smolyakov.snakegame.model;
 
+import ru.nsu.fit.smolyakov.snakegame.Application;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -25,7 +25,7 @@ public record Barrier(Set<Point> barrierPoints) {
      * @return a barrier; if file wasn't found, returns an empty barrier
      */
     public static Barrier fromResource(GameProperties properties) {
-        var file = Objects.requireNonNull(new File(properties.barrierFilePath()));
+        var file = new File(Application.LEVEL_FOLDER_PATH + properties.barrierFileName());
         Scanner reader;
         try {
             reader = new Scanner(file).useDelimiter("\\A");
