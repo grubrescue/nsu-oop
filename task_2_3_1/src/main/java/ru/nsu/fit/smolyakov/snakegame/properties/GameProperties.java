@@ -17,7 +17,8 @@ import java.util.Objects;
  * @param apples a number of apples
  * @param barrierFileName a name of file located in {@link Application#LEVEL_FOLDER_PATH} that contains
  *                        a barrier
- * @param aiClassNamesList a list of AI class names
+ * @param aiClassNamesList a list of AI class names, each of them located in {@link Application#AI_SNAKES_PACKAGE_NAME}
+ *                        package
  * @param speed a game speed
  */
 public record GameProperties(

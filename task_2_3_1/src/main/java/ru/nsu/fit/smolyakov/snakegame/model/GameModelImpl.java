@@ -1,8 +1,8 @@
 package ru.nsu.fit.smolyakov.snakegame.model;
 
+import ru.nsu.fit.smolyakov.snakegame.Application;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.CollisionSolver;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
-import ru.nsu.fit.smolyakov.snakegame.model.snake.SnakeBody;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.*;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
@@ -43,11 +43,11 @@ public class GameModelImpl implements GameModel {
         }
     }
 
-    private Optional<AISnake> aiSnakeFromUrl(String url) {
+    private Optional<AISnake> aiSnakeFromClassName(String className) {
         Class<?> aiSnakeClass;
 
         try {
-            aiSnakeClass = Class.forName(url);
+            aiSnakeClass = Class.forName(Application.AI_SNAKES_PACKAGE_NAME + "." + className);
         } catch (ClassNotFoundException e) {
             return Optional.empty();
         }
@@ -81,7 +81,7 @@ public class GameModelImpl implements GameModel {
         this.playerSnake = new Snake(this);
         this.AISnakesList = properties.aiClassNamesList()
             .stream()
-            .map(this::aiSnakeFromUrl)
+            .map(this::aiSnakeFromClassName)
             .flatMap(Optional::stream)
             .toList();
 

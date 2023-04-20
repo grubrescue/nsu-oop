@@ -1,7 +1,8 @@
-package ru.nsu.fit.smolyakov.snakegame.model.snake.ai;
+package ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl;
 
 import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
+import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
 
 import java.security.SecureRandom;
 import java.util.Random;

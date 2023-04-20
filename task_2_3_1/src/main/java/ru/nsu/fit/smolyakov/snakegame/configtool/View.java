@@ -8,16 +8,20 @@ import javafx.scene.text.Text;
 import ru.nsu.fit.smolyakov.snakegame.Application;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class View implements Initializable {
     private Presenter presenter;
+
+    @FXML
+    private ListView<String> aiListView;
 
     @FXML
     private Button saveButton;
@@ -53,9 +57,24 @@ public class View implements Initializable {
         presenter.scalingChanged();
     }
 
+    private List<String> aiNames(String path) {
+        try (InputStream stream = Thread.currentThread().getContextClassLoader()
+            .getResourceAsStream(path.replaceAll("[.]", "/"))) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(stream)));
+            return reader.lines().map(str -> str.substring(0, str.length() - 6)).toList();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // TODO refactor this
+        var aiNames = aiNames(Application.AI_SNAKES_PACKAGE_NAME);
+        aiListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        aiListView.getItems().addAll(aiNames);
+
+
 
         ChangeListener<Number> scalingListener = (observable, oldValue, newValue) -> {
             if (presenter != null) {
@@ -159,5 +178,17 @@ public class View implements Initializable {
 
     public void setBarrier(String barrier) {
         barrierChoiceBox.setValue(barrier);
+    }
+
+    public List<String> getAiNames() {
+        return aiListView.getSelectionModel().getSelectedItems();
+    }
+
+    public void setAiNames(List<String> aiNames) {
+        aiListView.getSelectionModel().clearSelection();
+        aiNames.forEach(aiName -> {
+            var index = aiListView.getItems().indexOf(aiName);
+            aiListView.getSelectionModel().select(aiName);
+        });
     }
 }

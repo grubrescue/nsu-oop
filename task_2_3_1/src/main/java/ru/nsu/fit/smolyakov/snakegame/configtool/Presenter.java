@@ -19,6 +19,7 @@ public class Presenter {
         view.setJavaFxScalingSlider(model.getProperties().javaFxScaling());
         view.updateCalculatedResolution();
         view.setBarrier(model.getProperties().barrierFileName());
+        view.setAiNames(model.getProperties().aiClassNamesList());
     }
 
     public void saveConfig() {
@@ -30,6 +31,7 @@ public class Presenter {
                 .withHeight(view.getHeight())
                 .withJavaFxScaling(view.getJavaFxScalingSlider())
                 .withBarrierFilePath(view.getBarrier())
+                .withAiClassNamesList(view.getAiNames())
         );
 
         try {
