@@ -5,9 +5,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
+import ru.nsu.fit.smolyakov.snakegame.Application;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed;
 
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class View implements Initializable {
@@ -47,7 +53,6 @@ public class View implements Initializable {
         presenter.scalingChanged();
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ChangeListener<Number> scalingListener = (observable, oldValue, newValue) -> {
@@ -65,6 +70,15 @@ public class View implements Initializable {
         };
 
         speedChoiceBox.getItems().addAll(GameSpeed.values());
+        try (var barrierPathsList = Files.list(Paths.get(Application.LEVEL_FOLDER_PATH))){
+            var barrierFilenamesList = barrierPathsList
+                .map(Path::getFileName)
+                .map(Path::toString)
+                .toList();
+            barrierChoiceBox.getItems().addAll(barrierFilenamesList);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         javaFxScalingSlider.valueProperty().addListener(scalingListener);
 
