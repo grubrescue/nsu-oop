@@ -5,6 +5,8 @@ javaFxScaling: 40
 apples: 13
 barrierTxtFile: "40x20_border.txt"
 aiClassNames:
-- "ru.nsu.fit.smolyakov.snakegame.model.snake.ai.NotWonnaDieAISnake"
-- "ru.nsu.fit.smolyakov.snakegame.model.snake.ai.StraightForwardAISnake"
+- "NotWonnaDieAISnake"
+- "StraightForwardAISnake"
+- "TotallyRandomAISnake"
+- "WannaEatAISnake"
 speed: "LEVEL_4"

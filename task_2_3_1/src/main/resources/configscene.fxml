@@ -35,6 +35,7 @@
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -78,7 +79,8 @@
                   </Text>
                   <ChoiceBox fx:id="barrierChoiceBox" layoutX="413.0" layoutY="51.0" prefWidth="150.0" />
                   <Text layoutX="357.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Barrier" />
-                  <Text layoutX="320.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="потом придумать как отоброизть ботов" wrappingWidth="285.79100036621094" />
+                  <ListView fx:id="aiListView" layoutX="400.0" layoutY="102.0" prefHeight="200.0" prefWidth="200.0" />
+                  <Text layoutX="365.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AI" />
             </children>
           </AnchorPane>
         </children>
