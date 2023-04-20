@@ -19,6 +19,7 @@ public class Application {
     public static final String LEVEL_FOLDER_PATH = GAMEDATA_FOLDER_PATH + "level/";
     public static final String AI_SNAKES_CLASS_PATH = "ru.nsu.fit.smolyakov.snakegame.ai.";
     public static final String AI_SNAKES_FOLDER_PATH = "src/main/java/ru/nsu/fit/smolyakov/snakegame/ai/";
+    // TODO мб лучше в build смотреть?
 
 
     private static void runJavaFxSnakeGame() {
