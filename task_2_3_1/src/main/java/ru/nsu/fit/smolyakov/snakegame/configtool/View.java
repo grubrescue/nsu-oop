@@ -55,6 +55,8 @@ public class View implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // TODO refactor this
+
         ChangeListener<Number> scalingListener = (observable, oldValue, newValue) -> {
             if (presenter != null) {
                 presenter.scalingChanged();
