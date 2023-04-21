@@ -97,7 +97,7 @@ public class SnakePresenter {
 
     private void startTimeOut() throws InterruptedException {
         for (int i = 3; i >= 0; i--) {
-            showFrame();
+            drawFrame();
 
             if (i > 0) {
                 view.showMessage("Game starts in " + i);
@@ -110,7 +110,7 @@ public class SnakePresenter {
         }
     }
 
-    private void newFrame() { // TODO renaamee
+    private void update() { // TODO renaamee
         for (Future<?> future : futureList) {
             try {
                 future.get();
@@ -122,7 +122,7 @@ public class SnakePresenter {
         }
 
         var playerAlive = model.update();
-        showFrame();
+        drawFrame();
 
         if (!playerAlive) {
             view.showMessage("You died! You earned " + model.getPlayerSnake().getPoints() + " points.");
@@ -150,14 +150,14 @@ public class SnakePresenter {
             }
         });
 
-        executorService.scheduleAtFixedRate(this::newFrame,
+        executorService.scheduleAtFixedRate(this::update,
             (long) START_SLEEP_TIME_MILLIS * 4,
             (long) gameProperties.speed().getFrameDelayMillis(),
             TimeUnit.MILLISECONDS);
     }
 
 
-    private void showFrame() {
+    private void drawFrame() {
         view.clear();
 
         view.drawBarrier(model.getBarrier());

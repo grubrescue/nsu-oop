@@ -49,7 +49,7 @@ public class JavaFxView implements View, Initializable {
 
     private Resources resources;
 
-    private Map<KeyCode, SnakePresenter.EventAction> eventActionMap
+    private final Map<KeyCode, SnakePresenter.EventAction> eventActionMap
         = new HashMap<>();
 
     /**

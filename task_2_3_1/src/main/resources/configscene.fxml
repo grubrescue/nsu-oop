@@ -61,7 +61,7 @@
           </MenuBar>
           <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="367.0" prefWidth="551.0" VBox.vgrow="ALWAYS">
             <children>
-                  <Button fx:id="saveButton" layoutX="334.0" layoutY="326.0" mnemonicParsing="false" onAction="#saveConfig" text="Save configuration" />
+                  <Button fx:id="saveButton" layoutX="347.0" layoutY="326.0" mnemonicParsing="false" onAction="#saveConfig" text="Save configuration" />
                   <Text layoutX="36.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Speed" wrappingWidth="86.79100036621094" />
                   <ChoiceBox fx:id="speedChoiceBox" layoutX="123.0" layoutY="245.0" prefWidth="150.0" />
                   <Text layoutX="27.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Field size" wrappingWidth="66.79100036621094" />
@@ -77,12 +77,11 @@
                         <Font name="System Italic" size="13.0" />
                      </font>
                   </Text>
-                  <ChoiceBox fx:id="barrierChoiceBox" layoutX="413.0" layoutY="51.0" prefWidth="150.0" />
-                  <Text layoutX="357.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Barrier" />
+                  <ChoiceBox fx:id="levelChoiceBox" layoutX="413.0" layoutY="51.0" prefWidth="150.0" />
+                  <Text layoutX="357.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level" />
                   <ListView fx:id="aiListView" layoutX="400.0" layoutY="102.0" prefHeight="200.0" prefWidth="200.0" />
                   <Text layoutX="365.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AI" />
-                  <Button fx:id="runGameButton" layoutX="519.0" layoutY="326.0" mnemonicParsing="false" onAction="#runGame" text="Run game" />
-                  <Text layoutX="426.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME RUNS WITHOUT SAVING!!!" />
+                  <Button fx:id="runGameButton" layoutX="502.0" layoutY="326.0" mnemonicParsing="false" onAction="#saveAndRunGame" text="Save and run" />
             </children>
           </AnchorPane>
         </children>

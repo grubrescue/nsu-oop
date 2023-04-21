@@ -1,9 +1,13 @@
 package ru.nsu.fit.smolyakov.snakegame.configtool;
 
+import javafx.beans.value.ChangeListener;
 import javafx.stage.Stage;
+import ru.nsu.fit.smolyakov.snakegame.GameData;
 import ru.nsu.fit.smolyakov.snakegame.executable.JavaFxSnakeGame;
+import ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Presenter {
     private Model model;
@@ -15,25 +19,33 @@ public class Presenter {
 
         view.setPresenter(this);
 
+        view.initWidthSelector(model.getProperties().width());
+        view.initHeightSelector(model.getProperties().height());
+        view.initApplesAmountSelector(model.getProperties().apples(), getMaxApplesAvailable());
+
+        view.setAvailableGameSpeedChoices(Arrays.asList(GameSpeed.values()));
         view.setGameSpeed(model.getProperties().speed());
-        view.setWidth(model.getProperties().width());
-        view.setHeight(model.getProperties().height());
-        view.setApples(model.getProperties().apples());
-        view.setJavaFxScalingSlider(model.getProperties().javaFxScaling());
+
+        view.initAiNames();
+        view.setAvailableAiNames(GameData.INSTANCE.getAvailableAiNames());
+        view.setSelectedAiNames(model.getProperties().aiClassNamesList());
+
+        view.setAvailableLevelNames(GameData.INSTANCE.levelFileNames());
+        view.setSelectedLevel(model.getProperties().levelFileName());
+
+        view.setSelectedJavaFxScalingValue(model.getProperties().javaFxScaling());
         view.updateCalculatedResolution();
-        view.setBarrier(model.getProperties().barrierFileName());
-        view.setAiNames(model.getProperties().aiClassNamesList());
     }
 
     public void saveConfig() {
         model.setProperties(
             model.getProperties()
                 .withSpeed(view.getGameSpeed())
-                .withApples(view.getApples())
+                .withApples(view.getApplesAmount())
                 .withWidth(view.getWidth())
                 .withHeight(view.getHeight())
                 .withJavaFxScaling(view.getJavaFxScalingSlider())
-                .withBarrierFilePath(view.getBarrier())
+                .withBarrierFilePath(view.getLevel())
                 .withAiClassNamesList(view.getAiNames())
         );
 
@@ -55,7 +67,29 @@ public class Presenter {
         }
     }
 
-    public void scalingChanged() {
+    public final ChangeListener<Number> onScalingChangedListener = (observable, oldValue, newValue) -> {
+        onScalingChanged();
+    };
+
+    public int getMaxApplesAvailable() {
+        return view.getWidth() * view.getHeight() - 4;
+    }
+
+    public final ChangeListener<Number> onMaxApplesLimitChangeListener = (observable, oldValue, newValue) -> {
+        var newMax = getMaxApplesAvailable();
+        var prevVal = view.getApplesAmount();
+
+        view.setApplesAvailableRange(newMax);
+        view.setApples(Math.min(prevVal, newMax));
+    };
+
+    public final ChangeListener<Number> onFieldSizeChangeListener = (observable, oldValue, newValue) -> {
+        onMaxApplesLimitChangeListener.changed(observable, oldValue, newValue);
+        onScalingChangedListener.changed(observable, oldValue, newValue);
+    };
+
+
+    public void onScalingChanged() {
         var scaling = view.getJavaFxScalingSlider();
         view.setResolutionText(
             scaling * view.getWidth(),
