@@ -1,14 +1,10 @@
 package ru.nsu.fit.smolyakov.snakegame.model;
 
-import ru.nsu.fit.smolyakov.snakegame.Application;
 import ru.nsu.fit.smolyakov.snakegame.GameData;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Set;
 
 /**
@@ -29,18 +25,18 @@ public record Barrier(Set<Point> barrierPoints) {
         Set<Point> points = new HashSet<>();
 
         GameData.INSTANCE.levelFileScanner(properties.levelFileName()).ifPresent(
-                scanner -> {
-                    for (int y = 0; y < properties.height() && scanner.hasNextLine(); y++) {
-                        String line = scanner.nextLine();
+            scanner -> {
+                for (int y = 0; y < properties.height() && scanner.hasNextLine(); y++) {
+                    String line = scanner.nextLine();
 
-                        var colums = Integer.min(line.length(), properties.width());
-                        for (int x = 0; x < properties.width(); x++) {
-                            if (line.charAt(x) == '*') {
-                                points.add(new Point(x, y));
-                            }
+                    var colums = Integer.min(line.length(), properties.width());
+                    for (int x = 0; x < properties.width(); x++) {
+                        if (line.charAt(x) == '*') {
+                            points.add(new Point(x, y));
                         }
                     }
                 }
+            }
         );
 
         return new Barrier(points);

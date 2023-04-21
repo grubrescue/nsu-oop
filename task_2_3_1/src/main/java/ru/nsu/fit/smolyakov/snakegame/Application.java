@@ -18,7 +18,7 @@ public class Application {
         var app = new JavaFxSnakeGame();
         app.execute();
     }
-    
+
     private static void runConsoleSnakeGame() {
         var app = new ConsoleSnakeGame();
         try {

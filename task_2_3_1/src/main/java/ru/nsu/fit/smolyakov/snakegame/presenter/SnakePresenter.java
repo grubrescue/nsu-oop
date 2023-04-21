@@ -32,64 +32,13 @@ public class SnakePresenter {
     private GameModel model;
 
     private ScheduledExecutorService executorService;
-    private List<Future<?>> futureList = new ArrayList<>();
-
-    /**
-     * An enum that represents user-associated actions that can be performed by the view.
-     * Each action is connected to an event method of the presenter.
-     */
-    public enum EventAction {
-        /**
-         * A left key is pressed.
-         */
-        LEFT(SnakePresenter::onLeftPressed),
-
-        /**
-         * A right key is pressed.
-         */
-        RIGHT(SnakePresenter::onRightPressed),
-
-        /**
-         * An up key is pressed.
-         */
-        UP(SnakePresenter::onUpPressed),
-
-        /**
-         * A down key is pressed.
-         */
-        DOWN(SnakePresenter::onDownPressed),
-
-        /**
-         * A restart button is pressed.
-         */
-        RESTART(SnakePresenter::onRestartPressed),
-
-        /**
-         * An exit button is pressed.
-         */
-        EXIT(SnakePresenter::onExitPressed);
-
-        private final Consumer<SnakePresenter> action;
-
-        EventAction(Consumer<SnakePresenter> action) {
-            this.action = action;
-        }
-
-        /**
-         * Executes the {@link Consumer} that is connected to the action.
-         *
-         * @param snakePresenter a snakePresenter
-         */
-        public void execute(SnakePresenter snakePresenter) {
-            action.accept(snakePresenter);
-        }
-    }
+    private final List<Future<?>> futureList = new ArrayList<>();
 
     /**
      * Creates a presenter with the specified view, model and properties.
      *
-     * @param view a view
-     * @param model a model
+     * @param view       a view
+     * @param model      a model
      * @param properties properties of the presenter
      */
     public SnakePresenter(View view, GameModel model, GameProperties properties) {
@@ -149,16 +98,14 @@ public class SnakePresenter {
             try {
                 startTimeOut();
             } catch (InterruptedException e) {
-                return;
             }
         });
 
         executorService.scheduleAtFixedRate(this::update,
             (long) START_SLEEP_TIME_MILLIS * 4,
-            (long) gameProperties.speed().getFrameDelayMillis(),
+            gameProperties.speed().getFrameDelayMillis(),
             TimeUnit.MILLISECONDS);
     }
-
 
     private void drawFrame() {
         view.clear();
@@ -214,5 +161,56 @@ public class SnakePresenter {
     public void onExitPressed() {
         executorService.shutdownNow();
         view.close();
+    }
+
+    /**
+     * An enum that represents user-associated actions that can be performed by the view.
+     * Each action is connected to an event method of the presenter.
+     */
+    public enum EventAction {
+        /**
+         * A left key is pressed.
+         */
+        LEFT(SnakePresenter::onLeftPressed),
+
+        /**
+         * A right key is pressed.
+         */
+        RIGHT(SnakePresenter::onRightPressed),
+
+        /**
+         * An up key is pressed.
+         */
+        UP(SnakePresenter::onUpPressed),
+
+        /**
+         * A down key is pressed.
+         */
+        DOWN(SnakePresenter::onDownPressed),
+
+        /**
+         * A restart button is pressed.
+         */
+        RESTART(SnakePresenter::onRestartPressed),
+
+        /**
+         * An exit button is pressed.
+         */
+        EXIT(SnakePresenter::onExitPressed);
+
+        private final Consumer<SnakePresenter> action;
+
+        EventAction(Consumer<SnakePresenter> action) {
+            this.action = action;
+        }
+
+        /**
+         * Executes the {@link Consumer} that is connected to the action.
+         *
+         * @param snakePresenter a snakePresenter
+         */
+        public void execute(SnakePresenter snakePresenter) {
+            action.accept(snakePresenter);
+        }
     }
 }

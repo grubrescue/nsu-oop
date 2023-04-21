@@ -203,32 +203,6 @@ public class View {
     }
 
     /**
-     * Sets the width of the game field.
-     *
-     * @param width the width of the game field
-     */
-    public void setWidth(int width) {
-        widthSpinner.getValueFactory().setValue(width);
-    }
-
-    /**
-     * Sets the height of the game field.
-     *
-     * @param height the height of the game field
-     */
-    public void setHeight(int height) {
-        heightSpinner.getValueFactory().setValue(height);
-    }
-
-    /**
-     * Sets the amount of apples.
-     * @param apples the amount of apples
-     */
-    public void setApplesAmount(int apples) {
-        applesSpinner.getValueFactory().setValue(apples);
-    }
-
-    /**
      * Sets the JavaFx implementation scaling factor.
      * One is described in the {@link java.util.Properties} class.
      *
@@ -259,6 +233,15 @@ public class View {
     }
 
     /**
+     * Sets the amount of apples.
+     *
+     * @param apples the amount of apples
+     */
+    public void setApplesAmount(int apples) {
+        applesSpinner.getValueFactory().setValue(apples);
+    }
+
+    /**
      * Returns the width of the game field.
      *
      * @return the width of the game field
@@ -268,12 +251,30 @@ public class View {
     }
 
     /**
+     * Sets the width of the game field.
+     *
+     * @param width the width of the game field
+     */
+    public void setWidth(int width) {
+        widthSpinner.getValueFactory().setValue(width);
+    }
+
+    /**
      * Returns the height of the game field.
      *
      * @return the height of the game field
      */
     public int getHeight() {
         return heightSpinner.getValue();
+    }
+
+    /**
+     * Sets the height of the game field.
+     *
+     * @param height the height of the game field
+     */
+    public void setHeight(int height) {
+        heightSpinner.getValueFactory().setValue(height);
     }
 
     /**

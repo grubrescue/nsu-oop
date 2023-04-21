@@ -2,7 +2,6 @@ package ru.nsu.fit.smolyakov.snakegame.model.snake;
 
 import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
-import ru.nsu.fit.smolyakov.snakegame.model.GameModelImpl;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
 
 /**

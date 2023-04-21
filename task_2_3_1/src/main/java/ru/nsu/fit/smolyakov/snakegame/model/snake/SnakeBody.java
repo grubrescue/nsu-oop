@@ -28,6 +28,29 @@ public class SnakeBody {
     }
 
     /**
+     * Generates a random snake body, always directed to the top.
+     * Amount of iterations is limited by {@link GameModelImpl#MAX_GENERATION_ITERATIONS}.
+     *
+     * @param gameModel game field
+     * @return a random snake body
+     */
+    public static SnakeBody generateRandom(GameModel gameModel) {
+        for (int i = 0; i < GameModelImpl.MAX_GENERATION_ITERATIONS; i++) {
+            var initialHeadLocation = Point.random(gameModel.getProperties().width(), gameModel.getProperties().height());
+            var initialTailLocation = initialHeadLocation.shift(new Point(0, 1)); // чучуть вниз
+
+            if (gameModel.isFree(initialHeadLocation) && gameModel.isFree(initialTailLocation)) {
+                return new SnakeBody(initialHeadLocation, List.of(initialTailLocation));
+            }
+        }
+
+        throw new IllegalStateException("Cannot create a snake " +
+            "(maybe the field is too busy, " +
+            "try to increase the amount of iterations, " +
+            "increase the field size or remove some barriers)");
+    }
+
+    /**
      * Checks whether the head of a snake contains the specified {@code point}.
      *
      * @param point point
@@ -98,28 +121,5 @@ public class SnakeBody {
         if (!grow) {
             tail.remove(tail.size() - 1);
         }
-    }
-
-    /**
-     * Generates a random snake body, always directed to the top.
-     * Amount of iterations is limited by {@link GameModelImpl#MAX_GENERATION_ITERATIONS}.
-     *
-     * @param gameModel game field
-     * @return a random snake body
-     */
-    public static SnakeBody generateRandom(GameModel gameModel) {
-        for (int i = 0; i < GameModelImpl.MAX_GENERATION_ITERATIONS; i++) {
-            var initialHeadLocation = Point.random(gameModel.getProperties().width(), gameModel.getProperties().height());
-            var initialTailLocation = initialHeadLocation.shift(new Point(0, 1)); // чучуть вниз
-
-            if (gameModel.isFree(initialHeadLocation) && gameModel.isFree(initialTailLocation)) {
-                return new SnakeBody(initialHeadLocation, List.of(initialTailLocation));
-            }
-        }
-
-        throw new IllegalStateException("Cannot create a snake " +
-            "(maybe the field is too busy, " +
-            "try to increase the amount of iterations, " +
-            "increase the field size or remove some barriers)");
     }
 }

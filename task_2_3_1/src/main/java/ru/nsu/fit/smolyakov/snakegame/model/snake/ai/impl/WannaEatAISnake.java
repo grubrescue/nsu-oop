@@ -13,15 +13,14 @@ import java.util.Random;
  * а её еще сделать надо, че доки то впустую писать...
  */
 public class WannaEatAISnake extends AISnake {
+    private final Random rand = new SecureRandom();
+    private Apple target = null;
     /**
      * {@inheritDoc}
      */
     public WannaEatAISnake(GameModel gameModel) {
         super(gameModel);
     }
-
-    private final Random rand = new SecureRandom();
-    private Apple target = null;
 
     private void findNewTarget() {
         target = getGameField().getApplesSet().stream().skip(rand.nextLong(getGameField().getApplesSet().size() - 1)).findFirst().orElse(null);

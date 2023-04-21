@@ -32,25 +32,19 @@ import java.util.ResourceBundle;
  * in relevant dimensions.
  */
 public class JavaFxView implements View, Initializable {
+    private final Map<KeyCode, SnakePresenter.EventAction> eventActionMap
+        = new HashMap<>();
     private SnakePresenter snakePresenter;
-
     private GameProperties properties;
     private int resX;
     private int resY;
-
     @FXML
     private Pane pane;
-
     @FXML
     private Canvas canvas;
-
     @FXML
     private Text scoreAmountText;
-
     private Resources resources;
-
-    private final Map<KeyCode, SnakePresenter.EventAction> eventActionMap
-        = new HashMap<>();
 
     /**
      * {@inheritDoc}
@@ -125,7 +119,7 @@ public class JavaFxView implements View, Initializable {
         this.properties = properties;
 
         pane.setStyle("-fx-background-color: white");
-        
+
         this.resX = properties.width() * properties.javaFxScaling();
         this.resY = properties.height() * properties.javaFxScaling();
 

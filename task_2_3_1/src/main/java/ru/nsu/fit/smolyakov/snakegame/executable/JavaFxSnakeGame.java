@@ -6,7 +6,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import ru.nsu.fit.smolyakov.snakegame.GameData;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModelImpl;
@@ -32,7 +31,7 @@ public class JavaFxSnakeGame extends Application {
      *
      * @param newStage the stage to run the game on
      * @throws IOException if there is a problem with reading the properties files
-     *         or the fxml file
+     *                     or the fxml file
      * @see Application#start(Stage)
      */
     public void runGame(Stage newStage) throws IOException {

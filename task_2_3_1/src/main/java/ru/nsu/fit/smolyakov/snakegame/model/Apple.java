@@ -18,7 +18,7 @@ public record Apple(Point point) {
         /**
          * Creates a factory for apples connected to the specified {@code gameModel}.
          *
-         * @param gameModel game field
+         * @param gameModel  game field
          * @param iterations amount of iterations to try to create an apple
          */
         public Factory(GameModel gameModel, int iterations) {

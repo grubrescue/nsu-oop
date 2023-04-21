@@ -8,7 +8,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Scanner;
 
 /**
  * A singleton class that contains all the static data that is used in the game.
@@ -62,8 +65,8 @@ public enum GameData {
      *
      * <p>Actual path to the package with AI snakes is defined by {@link #AI_SNAKES_PACKAGE_NAME}.
      *
-     * @see ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl
      * @return list of AI snake names
+     * @see ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl
      */
     public List<String> getAvailableAiNames() {
         try (InputStream stream = Thread.currentThread().getContextClassLoader()
@@ -87,9 +90,9 @@ public enum GameData {
      * <p>Actual path to the package with AI snakes is defined by {@link #AI_SNAKES_PACKAGE_NAME}.
      *
      * @param shortClassName short class name of the AI snake
-     * @param gameModel game model that is passed to the constructor of the AI snake
+     * @param gameModel      game model that is passed to the constructor of the AI snake
      * @return {@link Optional} with an instance of {@link AISnake} if the class with the given name
-     *        exists and is a subclass of {@link AISnake}, or {@link Optional#empty()} otherwise.
+     * exists and is a subclass of {@link AISnake}, or {@link Optional#empty()} otherwise.
      */
     public Optional<AISnake> aiSnakeByShortName(String shortClassName, GameModel gameModel) {
         Class<?> aiSnakeClass;
@@ -123,7 +126,7 @@ public enum GameData {
      * @return list of level file names
      */
     public List<String> levelFileNames() {
-        try (var barrierPathsList = Files.list(Paths.get(LEVEL_FOLDER_PATH))){
+        try (var barrierPathsList = Files.list(Paths.get(LEVEL_FOLDER_PATH))) {
             return barrierPathsList
                 .map(Path::getFileName)
                 .map(Path::toString)
@@ -139,8 +142,8 @@ public enum GameData {
      *
      * @param levelFilename name of the file with the level
      * @return {@link Optional} of {@link java.util.Scanner} instance associated
-     *         with the file with the given name if one exists,
-     *         {@link Optional#empty()} otherwise
+     * with the file with the given name if one exists,
+     * {@link Optional#empty()} otherwise
      */
     public Optional<Scanner> levelFileScanner(String levelFilename) {
         var file = new File(LEVEL_FOLDER_PATH + levelFilename);
