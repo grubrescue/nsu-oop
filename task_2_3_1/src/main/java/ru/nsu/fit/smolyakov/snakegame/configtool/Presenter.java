@@ -44,9 +44,9 @@ public class Presenter {
                 .withApples(view.getApplesAmount())
                 .withWidth(view.getWidth())
                 .withHeight(view.getHeight())
-                .withJavaFxScaling(view.getJavaFxScalingSlider())
+                .withJavaFxScaling(view.getJavaFxScalingValue())
                 .withBarrierFilePath(view.getLevel())
-                .withAiClassNamesList(view.getAiNames())
+                .withAiClassNamesList(view.getSelectedAiNames())
         );
 
         try {
@@ -59,7 +59,7 @@ public class Presenter {
     public void runJavaFxSnake() {
         var app = new JavaFxSnakeGame();
         var stage = new Stage();
-        view.getScene().getWindow().hide();
+        view.hide();
         try {
             app.runGame(stage);
         } catch (IOException e) {
@@ -80,7 +80,7 @@ public class Presenter {
         var prevVal = view.getApplesAmount();
 
         view.setApplesAvailableRange(newMax);
-        view.setApples(Math.min(prevVal, newMax));
+        view.setApplesAmount(Math.min(prevVal, newMax));
     };
 
     public final ChangeListener<Number> onFieldSizeChangeListener = (observable, oldValue, newValue) -> {
@@ -90,7 +90,7 @@ public class Presenter {
 
 
     public void onScalingChanged() {
-        var scaling = view.getJavaFxScalingSlider();
+        var scaling = view.getJavaFxScalingValue();
         view.setResolutionText(
             scaling * view.getWidth(),
             scaling * view.getHeight()
