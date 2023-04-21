@@ -14,14 +14,14 @@ import java.util.Random;
  * He only does random movements, trying to avoid collisions with the barrier.
  */
 public class NotWonnaDieAISnake extends AISnake {
+    private final Random rand = new SecureRandom();
+
     /**
      * {@inheritDoc}
      */
     public NotWonnaDieAISnake(GameModel gameModel) {
         super(gameModel);
     }
-
-    private final Random rand = new SecureRandom();
 
     private boolean isCollidingTurn(MovingDirection direction) {
         return getGameField().getBarrier().met(getSnakeBody().getHead().shift(direction.move()));
@@ -40,7 +40,7 @@ public class NotWonnaDieAISnake extends AISnake {
         );
 
         if (!options.isEmpty()) {
-            setMovingDirection((MovingDirection) options.get(rand.nextInt(options.size())));
+            setMovingDirection(options.get(rand.nextInt(options.size())));
         }
     }
 }

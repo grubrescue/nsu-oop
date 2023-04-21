@@ -1,14 +1,12 @@
 package ru.nsu.fit.smolyakov.snakegame.model;
 
-import ru.nsu.fit.smolyakov.snakegame.Application;
 import ru.nsu.fit.smolyakov.snakegame.GameData;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.CollisionSolver;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
-import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.*;
+import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -38,15 +36,8 @@ public class GameModelImpl implements GameModel {
     private final Snake playerSnake;
     private final Set<Apple> applesSet;
     private final Barrier barrier;
-    private List<AISnake> AISnakesList;
-
     private final Apple.Factory appleFactory = new Apple.Factory(this, MAX_GENERATION_ITERATIONS);
-
-    private void fulfilApplesSet() {
-        while (applesSet.size() < properties.apples()) {
-            applesSet.add(appleFactory.generateRandom());
-        }
-    }
+    private List<AISnake> AISnakesList;
 
     /**
      * Creates a game field with the specified properties.
@@ -66,6 +57,12 @@ public class GameModelImpl implements GameModel {
 
         this.applesSet = new HashSet<>();
         fulfilApplesSet();
+    }
+
+    private void fulfilApplesSet() {
+        while (applesSet.size() < properties.apples()) {
+            applesSet.add(appleFactory.generateRandom());
+        }
     }
 
     /**
@@ -122,16 +119,16 @@ public class GameModelImpl implements GameModel {
             && (barrier == null || !barrier.met(point))
             && (applesSet == null || !applesSet.contains(new Apple(point)))
             && (AISnakesList == null
-                || AISnakesList.stream().noneMatch(snake -> snake.getSnakeBody().headCollision(point)))
+            || AISnakesList.stream().noneMatch(snake -> snake.getSnakeBody().headCollision(point)))
             && (AISnakesList == null
-                || AISnakesList.stream().noneMatch(snake -> snake.getSnakeBody().tailCollision(point)));
+            || AISnakesList.stream().noneMatch(snake -> snake.getSnakeBody().tailCollision(point)));
     }
 
     /**
      * Checks if the player snake collides with any AI snake.
      *
      * @return {@code true} if the player snake collides with any AI snake,
-     *         {@code false} otherwise
+     * {@code false} otherwise
      */
     private boolean checkPlayerSnakeCollisions() {
         var iter = AISnakesList.iterator();
@@ -151,7 +148,7 @@ public class GameModelImpl implements GameModel {
      * Updates the model.
      *
      * @return {@code true} if the player snake is dead,
-     *         {@code false} otherwise
+     * {@code false} otherwise
      */
     @Override
     public boolean update() {

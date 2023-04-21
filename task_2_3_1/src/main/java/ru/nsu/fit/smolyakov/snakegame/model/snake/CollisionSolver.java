@@ -7,33 +7,9 @@ package ru.nsu.fit.smolyakov.snakegame.model.snake;
  */
 public class CollisionSolver {
     /**
-     * A result of collision solving.
-     */
-    public enum Result {
-//        /**
-//         * The first snake is dead.
-//         */
-//        FIRST_DEAD,
-//
-//        /**
-//         * The second snake is dead.
-//         */
-//        SECOND_DEAD,
-        /**
-         * Both snakes are dead.
-         */
-        BOTH_DEAD,
-
-        /**
-         * Both snakes are alive.
-         */
-        BOTH_ALIVE
-    }
-
-    /**
      * Solves collisions between two snakes.
      *
-     * @param first the first snake
+     * @param first  the first snake
      * @param second the second snake
      * @return a result of collision solving
      */
@@ -59,5 +35,29 @@ public class CollisionSolver {
         }
 
         return Result.BOTH_ALIVE;
+    }
+
+    /**
+     * A result of collision solving.
+     */
+    public enum Result {
+//        /**
+//         * The first snake is dead.
+//         */
+//        FIRST_DEAD,
+//
+//        /**
+//         * The second snake is dead.
+//         */
+//        SECOND_DEAD,
+        /**
+         * Both snakes are dead.
+         */
+        BOTH_DEAD,
+
+        /**
+         * Both snakes are alive.
+         */
+        BOTH_ALIVE
     }
 }

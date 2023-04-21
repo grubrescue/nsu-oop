@@ -9,17 +9,17 @@ import java.util.Objects;
 /**
  * Represents properties of presenter.
  *
- * @param width a width of the game field
- * @param height a height of the game field
- * @param javaFxScaling a resolution scaling of JavaFX. This value determines, how many pixels
- *                      every cell will take both in width and height. For example, if the value is 8, then every cell
- *                      will take 8x8 pixels
- * @param apples a number of apples
- * @param levelFileName a name of file located in {@link GameData#LEVEL_FOLDER_PATH} that contains
- *                        a barrier
+ * @param width            a width of the game field
+ * @param height           a height of the game field
+ * @param javaFxScaling    a resolution scaling of JavaFX. This value determines, how many pixels
+ *                         every cell will take both in width and height. For example, if the value is 8, then every cell
+ *                         will take 8x8 pixels
+ * @param apples           a number of apples
+ * @param levelFileName    a name of file located in {@link GameData#LEVEL_FOLDER_PATH} that contains
+ *                         a barrier
  * @param aiClassNamesList a list of AI class names, each of them located in {@link GameData#AI_SNAKES_PACKAGE_NAME}
- *                        package
- * @param speed a game speed
+ *                         package
+ * @param speed            a game speed
  */
 public record GameProperties(
     @JsonProperty("width") int width,
@@ -36,7 +36,7 @@ public record GameProperties(
      *
      * @param width a new width of the game field
      * @return a new {@code GameProperties}
-     *         with the specified width
+     * with the specified width
      * @throws IllegalArgumentException if the specified width is not positive
      */
     public GameProperties withWidth(int width) {
@@ -61,7 +61,7 @@ public record GameProperties(
      *
      * @param height a new height of the game field
      * @return a new {@code GameProperties}
-     *         with the specified height
+     * with the specified height
      * @throws IllegalArgumentException if the specified height is not positive
      */
     public GameProperties withHeight(int height) {
@@ -86,7 +86,7 @@ public record GameProperties(
      *
      * @param javaFxScaling a new resolution scaling of JavaFX
      * @return a new {@code GameProperties}
-     *         with the specified resolution scaling of JavaFX
+     * with the specified resolution scaling of JavaFX
      * @throws IllegalArgumentException if the specified resolution scaling is not positive
      */
     public GameProperties withJavaFxScaling(int javaFxScaling) {
@@ -111,7 +111,7 @@ public record GameProperties(
      *
      * @param apples a new number of apples
      * @return a new {@code GameProperties}
-     *         with the specified number of apples
+     * with the specified number of apples
      * @throws IllegalArgumentException if the specified number of apples is negative
      */
     public GameProperties withApples(int apples) {
@@ -138,7 +138,7 @@ public record GameProperties(
      *
      * @param barrierFilePath a new name of file with barriers
      * @return a new {@code GameProperties}
-     *         with the specified path to the file with barriers
+     * with the specified path to the file with barriers
      */
     public GameProperties withBarrierFilePath(String barrierFilePath) {
         return new GameProperties(
@@ -158,7 +158,7 @@ public record GameProperties(
      *
      * @param aiClassNamesList a new list of AI class names
      * @return a new {@code GameProperties}
-     *         with the specified list of AI class names
+     * with the specified list of AI class names
      * @throws NullPointerException if the specified list is null
      */
     public GameProperties withAiClassNamesList(List<String> aiClassNamesList) {
@@ -179,7 +179,7 @@ public record GameProperties(
      *
      * @param speed a new game speed
      * @return a new {@code GameProperties}
-     *         with the specified game speed
+     * with the specified game speed
      */
     public GameProperties withSpeed(GameSpeed speed) {
         return new GameProperties(

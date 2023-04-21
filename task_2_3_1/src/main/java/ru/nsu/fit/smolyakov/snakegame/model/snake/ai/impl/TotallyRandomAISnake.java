@@ -11,14 +11,14 @@ import java.util.Random;
  * He only does random movements.
  */
 public class TotallyRandomAISnake extends AISnake {
+    private final Random rand = new SecureRandom();
+
     /**
      * {@inheritDoc}
      */
     public TotallyRandomAISnake(GameModel gameModel) {
         super(gameModel);
     }
-
-    private final Random rand = new SecureRandom();
 
     /**
      * Does random choice.

@@ -13,14 +13,38 @@ import java.util.Arrays;
  * The presenter of the configuration tool.
  */
 public class Presenter {
-    private Model model;
+    private final Model model;
     private View view;
+    /**
+     * {@link ChangeListener} that is called when the scaling value is changed.
+     */
+    public final ChangeListener<Number> onScalingChangedListener = (observable, oldValue, newValue) -> {
+        onScalingChanged();
+    };
+    /**
+     * {@link ChangeListener} that is called when the maximum number of apples is changed.
+     * Usually, that happens when the width or height of the game field is changed.
+     */
+    public final ChangeListener<Number> onMaxApplesLimitChangeListener = (observable, oldValue, newValue) -> {
+        var newMax = getMaxApplesAvailable();
+        var prevVal = view.getApplesAmount();
+
+        view.setApplesAvailableRange(newMax);
+        view.setApplesAmount(Math.min(prevVal, newMax));
+    };
+    /**
+     * {@link ChangeListener} that is called when the width or height of the game field is changed.
+     */
+    public final ChangeListener<Number> onFieldSizeChangeListener = (observable, oldValue, newValue) -> {
+        onMaxApplesLimitChangeListener.changed(observable, oldValue, newValue);
+        onScalingChangedListener.changed(observable, oldValue, newValue);
+    };
 
     /**
      * Creates a new presenter.
      *
      * @param model the model of the configuration tool
-     * @param view the view of the configuration tool
+     * @param view  the view of the configuration tool
      */
     public Presenter(Model model, View view) {
         this.model = model;
@@ -86,13 +110,6 @@ public class Presenter {
     }
 
     /**
-     * {@link ChangeListener} that is called when the scaling value is changed.
-     */
-    public final ChangeListener<Number> onScalingChangedListener = (observable, oldValue, newValue) -> {
-        onScalingChanged();
-    };
-
-    /**
      * Returns the maximum number of apples that can be placed on the game field.
      *
      * @return the maximum number of apples that can be placed on the game field
@@ -100,26 +117,6 @@ public class Presenter {
     public int getMaxApplesAvailable() {
         return view.getWidth() * view.getHeight() - 4;
     }
-
-    /**
-     * {@link ChangeListener} that is called when the maximum number of apples is changed.
-     * Usually, that happens when the width or height of the game field is changed.
-     */
-    public final ChangeListener<Number> onMaxApplesLimitChangeListener = (observable, oldValue, newValue) -> {
-        var newMax = getMaxApplesAvailable();
-        var prevVal = view.getApplesAmount();
-
-        view.setApplesAvailableRange(newMax);
-        view.setApplesAmount(Math.min(prevVal, newMax));
-    };
-
-    /**
-     * {@link ChangeListener} that is called when the width or height of the game field is changed.
-     */
-    public final ChangeListener<Number> onFieldSizeChangeListener = (observable, oldValue, newValue) -> {
-        onMaxApplesLimitChangeListener.changed(observable, oldValue, newValue);
-        onScalingChangedListener.changed(observable, oldValue, newValue);
-    };
 
     /**
      * Updates the resolution text in the view.

@@ -2,7 +2,6 @@ package ru.nsu.fit.smolyakov.snakegame.configtool;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import ru.nsu.fit.smolyakov.snakegame.Application;
 import ru.nsu.fit.smolyakov.snakegame.GameData;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 

@@ -28,15 +28,15 @@ import java.util.Objects;
  */
 public class ConsoleView implements View {
     private final GameProperties properties;
-    private Resources resources;
-    private SnakePresenter snakePresenter;
     private final Terminal terminal;
     private final Screen screen;
+    private Resources resources;
+    private SnakePresenter snakePresenter;
     private Thread inputPollThread;
 
-    private Map<Character, SnakePresenter.EventAction> characterEventActionMap
+    private final Map<Character, SnakePresenter.EventAction> characterEventActionMap
         = new HashMap<>();
-    private Map<KeyType, SnakePresenter.EventAction> keyTypeEventActionMap
+    private final Map<KeyType, SnakePresenter.EventAction> keyTypeEventActionMap
         = new HashMap<>();
 
     /**
