@@ -1,24 +1,22 @@
 package ru.nsu.fit.smolyakov.snakegame.configtool;
 
-import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
-import ru.nsu.fit.smolyakov.snakegame.Application;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed;
 
-import java.io.*;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class View implements Initializable {
+    public static final int MIN_WIDTH = 3;
+    public static final int MIN_HEIGHT = 3;
+    public static final int MAX_WIDTH = 1000;
+    public static final int MAX_HEIGHT = 1000;
+
     private Presenter presenter;
 
     @FXML
@@ -49,7 +47,7 @@ public class View implements Initializable {
     private Text resolutionText;
 
     @FXML
-    private ChoiceBox<String> barrierChoiceBox;
+    private ChoiceBox<String> levelChoiceBox;
 
     @FXML
     private Button runGameButton;
@@ -61,84 +59,67 @@ public class View implements Initializable {
 
     @FXML
     public void updateCalculatedResolution() {
-        presenter.scalingChanged();
+        presenter.onScalingChanged();
     }
 
     @FXML
-    public void runGame() {
+    public void saveAndRunGame() {
+        presenter.saveConfig();
         presenter.runJavaFxSnake();
-    }
-
-    private List<String> aiNames(String path) {
-        try (InputStream stream = Thread.currentThread().getContextClassLoader()
-            .getResourceAsStream(path.replaceAll("[.]", "/"))) {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(stream)));
-            return reader.lines().map(str -> str.substring(0, str.length() - 6)).toList();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO refactor this
-        // TODO и вообще всю хрень где определяются списочки надо в презентер
-
-        var aiNames = aiNames(Application.AI_SNAKES_PACKAGE_NAME);
-        aiListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        aiListView.getItems().addAll(aiNames);
-
-
-
-        ChangeListener<Number> scalingListener = (observable, oldValue, newValue) -> {
-            if (presenter != null) {
-                presenter.scalingChanged();
-            }
-        };
-
-        ChangeListener<Number> applesListener = (observable, oldValue, newValue) -> {
-            var newMax = getWidth() * getHeight() - 2;
-            var prevVal = applesSpinner.getValue();
-            var svf = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, newMax);
-            svf.setValue(Integer.min(prevVal, newMax));
-            applesSpinner.setValueFactory(svf);
-        };
-
-        speedChoiceBox.getItems().addAll(GameSpeed.values());
-        try (var barrierPathsList = Files.list(Paths.get(Application.LEVEL_FOLDER_PATH))){
-            var barrierFilenamesList = barrierPathsList
-                .map(Path::getFileName)
-                .map(Path::toString)
-                .toList();
-            barrierChoiceBox.getItems().addAll(barrierFilenamesList);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        javaFxScalingSlider.valueProperty().addListener(scalingListener);
-
-        SpinnerValueFactory<Integer> widthSpinnerValue =
-            new SpinnerValueFactory.IntegerSpinnerValueFactory(2, 1000);
-        widthSpinner.setEditable(true);
-        widthSpinner.setValueFactory(widthSpinnerValue);
-        widthSpinner.valueProperty().addListener(scalingListener);
-        widthSpinner.valueProperty().addListener(applesListener);
-
-        SpinnerValueFactory<Integer> heightSpinnerValue =
-            new SpinnerValueFactory.IntegerSpinnerValueFactory(2, 1000);
-        heightSpinner.setEditable(true);
-        heightSpinner.setValueFactory(heightSpinnerValue);
-        heightSpinner.valueProperty().addListener(scalingListener);
-        heightSpinner.valueProperty().addListener(applesListener);
-
-        SpinnerValueFactory<Integer> applesSpinnerValue =
-            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, getWidth() * getHeight() - 2);
-        applesSpinner.setEditable(true);
-        applesSpinner.setValueFactory(applesSpinnerValue);
     }
 
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    public void initAiNames() {
+        aiListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        javaFxScalingSlider.valueProperty().addListener(presenter.onScalingChangedListener);
+    }
+
+    public void initWidthSelector(int width) {
+        SpinnerValueFactory<Integer> widthSpinnerValue =
+            new SpinnerValueFactory.IntegerSpinnerValueFactory(MIN_WIDTH, MAX_WIDTH);
+        widthSpinner.setEditable(true);
+        widthSpinnerValue.setValue(width);
+        widthSpinner.setValueFactory(widthSpinnerValue);
+        widthSpinner.valueProperty().addListener(presenter.onFieldSizeChangeListener);
+    }
+
+    public void initHeightSelector(int height) {
+        SpinnerValueFactory<Integer> heightSpinnerValue =
+            new SpinnerValueFactory.IntegerSpinnerValueFactory(MIN_HEIGHT, MAX_HEIGHT);
+        heightSpinner.setEditable(true);
+        heightSpinnerValue.setValue(height);
+        heightSpinner.setValueFactory(heightSpinnerValue);
+        heightSpinner.valueProperty().addListener(presenter.onFieldSizeChangeListener);
+    }
+
+    public void initApplesAmountSelector(int initValue, int maxApples) {
+        SpinnerValueFactory<Integer> applesSpinnerValue =
+            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxApples - 2);
+        applesSpinner.setEditable(true);
+        applesSpinnerValue.setValue(initValue);
+        applesSpinner.setValueFactory(applesSpinnerValue);
+    }
+
+    public void setAvailableAiNames(List<String> aiNames) {
+        aiListView.getItems().clear();
+        aiListView.getItems().addAll(aiNames);
+    }
+
+    public void setAvailableLevelNames(List<String> levelNames) {
+        levelChoiceBox.getItems().clear();
+        levelChoiceBox.getItems().addAll(levelNames);
+    }
+
+    public void setAvailableGameSpeedChoices(List<GameSpeed> gameSpeeds) {
+        speedChoiceBox.getItems().clear();
+        speedChoiceBox.getItems().addAll(gameSpeeds);
     }
 
     public GameSpeed getGameSpeed() {
@@ -161,7 +142,7 @@ public class View implements Initializable {
         applesSpinner.getValueFactory().setValue(apples);
     }
 
-    public void setJavaFxScalingSlider(int javaFxScaling) {
+    public void setSelectedJavaFxScalingValue(int javaFxScaling) {
         javaFxScalingSlider.setValue(javaFxScaling);
     }
 
@@ -170,7 +151,7 @@ public class View implements Initializable {
         resolutionText.setText(format.formatted(resX, resY));
     }
 
-    public int getApples() {
+    public int getApplesAmount() {
         return applesSpinner.getValue();
     }
 
@@ -186,24 +167,29 @@ public class View implements Initializable {
         return (int) javaFxScalingSlider.getValue();
     }
 
-    public String getBarrier() {
-        return barrierChoiceBox.getValue();
+    public String getLevel() {
+        return levelChoiceBox.getValue();
     }
 
-    public void setBarrier(String barrier) {
-        barrierChoiceBox.setValue(barrier);
+    public void setSelectedLevel(String level) {
+        levelChoiceBox.setValue(level);
     }
 
     public List<String> getAiNames() {
         return aiListView.getSelectionModel().getSelectedItems();
     }
 
-    public void setAiNames(List<String> aiNames) {
+    public void setSelectedAiNames(List<String> aiNames) {
         aiListView.getSelectionModel().clearSelection();
         aiNames.forEach(aiName -> {
             var index = aiListView.getItems().indexOf(aiName);
             aiListView.getSelectionModel().select(aiName);
         });
+    }
+
+    public void setApplesAvailableRange(int upon) {
+        var svf = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, upon);
+        applesSpinner.setValueFactory(svf);
     }
 
     public Scene getScene() {

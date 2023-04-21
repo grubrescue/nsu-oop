@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import ru.nsu.fit.smolyakov.snakegame.GameData;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModelImpl;
 import ru.nsu.fit.smolyakov.snakegame.presenter.SnakePresenter;
@@ -16,8 +17,6 @@ import ru.nsu.fit.smolyakov.snakegame.view.JavaFxView;
 import java.io.File;
 import java.io.IOException;
 
-import static ru.nsu.fit.smolyakov.snakegame.Application.*;
-import static ru.nsu.fit.smolyakov.snakegame.Application.GAME_PROPERTIES_YAML_PATH;
 
 /**
  * The class that executes the JavaFX variant of the snake game.
@@ -31,7 +30,7 @@ public class JavaFxSnakeGame extends Application {
     public void runGame(Stage newStage) throws IOException {
         var gameProperties =
             new ObjectMapper(new YAMLFactory()).readValue(
-                new File(GAME_PROPERTIES_YAML_PATH),
+                new File(GameData.GAME_PROPERTIES_YAML_PATH),
                 GameProperties.class
             );
 
@@ -41,7 +40,7 @@ public class JavaFxSnakeGame extends Application {
             gameProperties.height() * gameProperties.javaFxScaling()
         );
 
-        newStage.setTitle(TITLE);
+        newStage.setTitle(GameData.GAME_TITLE);
         newStage.setScene(rootScene);
         newStage.sizeToScene();
 

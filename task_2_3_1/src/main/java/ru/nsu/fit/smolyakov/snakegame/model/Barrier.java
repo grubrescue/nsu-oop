@@ -1,6 +1,7 @@
 package ru.nsu.fit.smolyakov.snakegame.model;
 
 import ru.nsu.fit.smolyakov.snakegame.Application;
+import ru.nsu.fit.smolyakov.snakegame.GameData;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 
@@ -25,25 +26,22 @@ public record Barrier(Set<Point> barrierPoints) {
      * @return a barrier; if file wasn't found, returns an empty barrier
      */
     public static Barrier fromResource(GameProperties properties) {
-        var file = new File(Application.LEVEL_FOLDER_PATH + properties.barrierFileName());
-        Scanner reader;
-        try {
-            reader = new Scanner(file).useDelimiter("\\A");
-        } catch (FileNotFoundException e) {
-            return new Barrier(Set.of());
-        }
-
         Set<Point> points = new HashSet<>();
-        for (int y = 0; y < properties.height() && reader.hasNextLine(); y++) {
-            String line = reader.nextLine();
 
-            var colums = Integer.min(line.length(), properties.width());
-            for (int x = 0; x < properties.width(); x++) {
-                if (line.charAt(x) == '*') {
-                    points.add(new Point(x, y));
+        GameData.INSTANCE.levelFileScanner(properties.levelFileName()).ifPresent(
+                scanner -> {
+                    for (int y = 0; y < properties.height() && scanner.hasNextLine(); y++) {
+                        String line = scanner.nextLine();
+
+                        var colums = Integer.min(line.length(), properties.width());
+                        for (int x = 0; x < properties.width(); x++) {
+                            if (line.charAt(x) == '*') {
+                                points.add(new Point(x, y));
+                            }
+                        }
+                    }
                 }
-            }
-        }
+        );
 
         return new Barrier(points);
     }

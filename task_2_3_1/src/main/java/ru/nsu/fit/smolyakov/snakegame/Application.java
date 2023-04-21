@@ -13,16 +13,6 @@ import java.io.IOException;
  * The latter can be run by passing the {@code --console} argument.
  */
 public class Application {
-    public static final String TITLE = "Snake Game";
-    public static final String GAMEDATA_FOLDER_PATH = "gamedata/";
-    public static final String CONFIG_FOLDER_PATH = GAMEDATA_FOLDER_PATH + "config/";
-    public static final String GAME_PROPERTIES_YAML_PATH = CONFIG_FOLDER_PATH + "gameProperties.yaml";
-    public static final String LEVEL_FOLDER_PATH = GAMEDATA_FOLDER_PATH + "level/";
-    public static final String AI_SNAKES_PACKAGE_NAME = "ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl";
-//    public static final String AI_SNAKES_FOLDER_PATH = "src/main/java/ru/nsu/fit/smolyakov/snakegame/model/snake/ai/impl";
-    // TODO мб лучше в build смотреть?
-
-
     private static void runJavaFxSnakeGame() {
         var app = new JavaFxSnakeGame();
         app.execute();

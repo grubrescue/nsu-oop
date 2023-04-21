@@ -22,6 +22,7 @@ public class JavaFxConfigTool extends Application {
         var fxmlLoader = new FXMLLoader(getClass().getResource("/configscene.fxml"));
         Scene rootScene = fxmlLoader.load();
         primaryStage.setScene(rootScene);
+        primaryStage.setTitle("SnakeGame Configuration Tool");
 
         this.view = fxmlLoader.getController();
         this.model = new Model();

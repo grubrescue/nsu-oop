@@ -3,6 +3,7 @@ package ru.nsu.fit.smolyakov.snakegame.configtool;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import ru.nsu.fit.smolyakov.snakegame.Application;
+import ru.nsu.fit.smolyakov.snakegame.GameData;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 
 import java.io.File;
@@ -16,7 +17,7 @@ public class Model {
     private GameProperties gameProperties;
 
     public Model() throws IOException {
-        gamePropertiesFile = new File(Application.GAME_PROPERTIES_YAML_PATH);
+        gamePropertiesFile = new File(GameData.GAME_PROPERTIES_YAML_PATH);
         gameProperties
             = mapper.readValue(gamePropertiesFile, GameProperties.class);
     }

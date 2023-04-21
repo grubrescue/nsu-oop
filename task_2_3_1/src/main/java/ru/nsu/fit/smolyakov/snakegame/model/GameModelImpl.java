@@ -1,6 +1,7 @@
 package ru.nsu.fit.smolyakov.snakegame.model;
 
 import ru.nsu.fit.smolyakov.snakegame.Application;
+import ru.nsu.fit.smolyakov.snakegame.GameData;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.CollisionSolver;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.*;
@@ -43,32 +44,6 @@ public class GameModelImpl implements GameModel {
         }
     }
 
-    private Optional<AISnake> aiSnakeFromClassName(String className) {
-        Class<?> aiSnakeClass;
-
-        try {
-            aiSnakeClass = Class.forName(Application.AI_SNAKES_PACKAGE_NAME + "." + className);
-        } catch (ClassNotFoundException e) {
-            return Optional.empty();
-        }
-
-        if (!AISnake.class.isAssignableFrom(aiSnakeClass)) {
-            return Optional.empty();
-        }
-
-        AISnake aiSnake;
-        try {
-            aiSnake = (AISnake) aiSnakeClass.getDeclaredConstructor(GameModel.class).newInstance(this);
-        } catch (InstantiationException
-                 | IllegalAccessException
-                 | InvocationTargetException
-                 | NoSuchMethodException e) {
-            return Optional.empty();
-        }
-
-        return Optional.of(aiSnake);
-    }
-
     /**
      * Creates a game field with the specified properties.
      *
@@ -81,7 +56,7 @@ public class GameModelImpl implements GameModel {
         this.playerSnake = new Snake(this);
         this.AISnakesList = properties.aiClassNamesList()
             .stream()
-            .map(this::aiSnakeFromClassName)
+            .map(name -> GameData.INSTANCE.aiSnakeByShortName(name, this))
             .flatMap(Optional::stream)
             .toList();
 
