@@ -31,7 +31,7 @@ public class ConsoleSnakeGame {
         var mapper = new ObjectMapper(new YAMLFactory());
 
         var properties = mapper.readValue(
-            new File(GameData.GAME_PROPERTIES_YAML_PATH),
+            new File(GameData.INSTANCE.GAME_PROPERTIES_YAML_PATH),
             GameProperties.class
         );
 

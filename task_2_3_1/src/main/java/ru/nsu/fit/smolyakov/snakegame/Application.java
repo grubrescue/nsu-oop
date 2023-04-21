@@ -11,6 +11,7 @@ import java.io.IOException;
  * The former is the default one, and can be explicitly specified by passing the
  * {@code --gui} command line argument.
  * The latter can be run by passing the {@code --console} argument.
+ * The configuration tool can be run by passing the {@code --config} argument.
  */
 public class Application {
     private static void runJavaFxSnakeGame() {

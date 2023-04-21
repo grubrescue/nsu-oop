@@ -9,10 +9,19 @@ import ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed;
 import java.io.IOException;
 import java.util.Arrays;
 
+/**
+ * The presenter of the configuration tool.
+ */
 public class Presenter {
     private Model model;
     private View view;
 
+    /**
+     * Creates a new presenter.
+     *
+     * @param model the model of the configuration tool
+     * @param view the view of the configuration tool
+     */
     public Presenter(Model model, View view) {
         this.model = model;
         this.view = view;
@@ -37,6 +46,10 @@ public class Presenter {
         view.updateCalculatedResolution();
     }
 
+    /**
+     * Sets the {@link Model}'s properties to the values from the view
+     * and saves them to the file.
+     */
     public void saveConfig() {
         model.setProperties(
             model.getProperties()
@@ -56,10 +69,15 @@ public class Presenter {
         }
     }
 
+    /**
+     * Runs the game with the saved configuration.
+     * Usually, if this method is called, it is called after {@link #saveConfig()}.
+     */
     public void runJavaFxSnake() {
         var app = new JavaFxSnakeGame();
         var stage = new Stage();
         view.hide();
+
         try {
             app.runGame(stage);
         } catch (IOException e) {
@@ -67,14 +85,26 @@ public class Presenter {
         }
     }
 
+    /**
+     * {@link ChangeListener} that is called when the scaling value is changed.
+     */
     public final ChangeListener<Number> onScalingChangedListener = (observable, oldValue, newValue) -> {
         onScalingChanged();
     };
 
+    /**
+     * Returns the maximum number of apples that can be placed on the game field.
+     *
+     * @return the maximum number of apples that can be placed on the game field
+     */
     public int getMaxApplesAvailable() {
         return view.getWidth() * view.getHeight() - 4;
     }
 
+    /**
+     * {@link ChangeListener} that is called when the maximum number of apples is changed.
+     * Usually, that happens when the width or height of the game field is changed.
+     */
     public final ChangeListener<Number> onMaxApplesLimitChangeListener = (observable, oldValue, newValue) -> {
         var newMax = getMaxApplesAvailable();
         var prevVal = view.getApplesAmount();
@@ -83,12 +113,17 @@ public class Presenter {
         view.setApplesAmount(Math.min(prevVal, newMax));
     };
 
+    /**
+     * {@link ChangeListener} that is called when the width or height of the game field is changed.
+     */
     public final ChangeListener<Number> onFieldSizeChangeListener = (observable, oldValue, newValue) -> {
         onMaxApplesLimitChangeListener.changed(observable, oldValue, newValue);
         onScalingChangedListener.changed(observable, oldValue, newValue);
     };
 
-
+    /**
+     * Updates the resolution text in the view.
+     */
     public void onScalingChanged() {
         var scaling = view.getJavaFxScalingValue();
         view.setResolutionText(

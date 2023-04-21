@@ -20,5 +20,10 @@ public abstract class AISnake extends Snake {
         super(gameModel);
     }
 
+    /**
+     * Implementation of this method are supposed to
+     * contain logic that decides which direction the snake should
+     * turn to.
+     */
     public abstract void thinkAboutTurn();
 }

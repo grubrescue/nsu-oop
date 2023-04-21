@@ -27,6 +27,10 @@ import java.util.stream.Collectors;
  * {@code width} and {@code height} are used to initialize the game field and affect the representation of the latter.
  */
 public class GameModelImpl implements GameModel {
+    /**
+     * The maximum number of attempts to generate a random object that does
+     * not collide with already existing ones.
+     */
     public final static int MAX_GENERATION_ITERATIONS = 5000;
 
     private final GameProperties properties;

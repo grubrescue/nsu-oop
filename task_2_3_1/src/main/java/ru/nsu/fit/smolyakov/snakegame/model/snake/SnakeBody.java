@@ -100,6 +100,13 @@ public class SnakeBody {
         }
     }
 
+    /**
+     * Generates a random snake body, always directed to the top.
+     * Amount of iterations is limited by {@link GameModelImpl#MAX_GENERATION_ITERATIONS}.
+     *
+     * @param gameModel game field
+     * @return a random snake body
+     */
     public static SnakeBody generateRandom(GameModel gameModel) {
         for (int i = 0; i < GameModelImpl.MAX_GENERATION_ITERATIONS; i++) {
             var initialHeadLocation = Point.random(gameModel.getProperties().width(), gameModel.getProperties().height());

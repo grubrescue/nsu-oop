@@ -8,6 +8,10 @@ import java.security.SecureRandom;
 import java.util.Random;
 
 // TODO TODO TDOD TODO TODO
+
+/**
+ * а её еще сделать надо, че доки то впустую писать...
+ */
 public class WannaEatAISnake extends AISnake {
     /**
      * {@inheritDoc}

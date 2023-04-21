@@ -24,33 +24,33 @@ public enum GameData {
     /**
      * The title of the game. Usually, one is used in the window title in JavaFx implementation.
      */
-    public static final String GAME_TITLE = "Snake Game";
+    public final String GAME_TITLE = "Snake Game";
 
     /**
      * The path to the folder with game data.
      */
-    public static final String GAMEDATA_FOLDER_PATH = "gamedata/";
+    public final String GAMEDATA_FOLDER_PATH = "gamedata/";
 
     /**
      * The path to the folder with game configuration files.
      */
-    public static final String CONFIG_FOLDER_PATH = GAMEDATA_FOLDER_PATH + "config/";
+    public final String CONFIG_FOLDER_PATH = GAMEDATA_FOLDER_PATH + "config/";
 
     /**
      * The path to the file with game properties. Currently, there is only one file with game properties,
      * but potentially it is possible to have multiple files with different game properties.
      */
-    public static final String GAME_PROPERTIES_YAML_PATH = CONFIG_FOLDER_PATH + "gameProperties.yaml";
+    public final String GAME_PROPERTIES_YAML_PATH = CONFIG_FOLDER_PATH + "gameProperties.yaml";
 
     /**
      * The path to the folder with level files.
      */
-    public static final String LEVEL_FOLDER_PATH = GAMEDATA_FOLDER_PATH + "level/";
+    public final String LEVEL_FOLDER_PATH = GAMEDATA_FOLDER_PATH + "level/";
 
     /**
      * The path to the folder with AI snakes.
      */
-    public static final String AI_SNAKES_PACKAGE_NAME = "ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl";
+    public final String AI_SNAKES_PACKAGE_NAME = "ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl";
 
     /**
      * Returns the list of names of all AI snakes.
@@ -87,6 +87,7 @@ public enum GameData {
      * <p>Actual path to the package with AI snakes is defined by {@link #AI_SNAKES_PACKAGE_NAME}.
      *
      * @param shortClassName short class name of the AI snake
+     * @param gameModel game model that is passed to the constructor of the AI snake
      * @return {@link Optional} with an instance of {@link AISnake} if the class with the given name
      *        exists and is a subclass of {@link AISnake}, or {@link Optional#empty()} otherwise.
      */
