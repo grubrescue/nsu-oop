@@ -9,6 +9,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The entry point of the configuration tool.
+ */
 public class JavaFxConfigTool extends Application {
     private View view;
     private Model model;

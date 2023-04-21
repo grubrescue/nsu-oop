@@ -22,6 +22,9 @@ import java.util.function.Consumer;
  * <p>One works correctly with both JavaFX and console views.
  */
 public class SnakePresenter {
+    /**
+     * A time to sleep between the countdown frame updates.
+     */
     protected final static int START_SLEEP_TIME_MILLIS = 500;
 
     private final View view;

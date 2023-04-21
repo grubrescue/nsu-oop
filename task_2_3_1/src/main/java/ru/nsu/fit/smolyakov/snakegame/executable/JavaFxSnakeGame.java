@@ -27,10 +27,18 @@ public class JavaFxSnakeGame extends Application {
     private GameModel model;
     private SnakePresenter snakePresenter;
 
+    /**
+     * Runs the game.
+     *
+     * @param newStage the stage to run the game on
+     * @throws IOException if there is a problem with reading the properties files
+     *         or the fxml file
+     * @see Application#start(Stage)
+     */
     public void runGame(Stage newStage) throws IOException {
         var gameProperties =
             new ObjectMapper(new YAMLFactory()).readValue(
-                new File(GameData.GAME_PROPERTIES_YAML_PATH),
+                new File(GameData.INSTANCE.GAME_PROPERTIES_YAML_PATH),
                 GameProperties.class
             );
 
@@ -40,7 +48,7 @@ public class JavaFxSnakeGame extends Application {
             gameProperties.height() * gameProperties.javaFxScaling()
         );
 
-        newStage.setTitle(GameData.GAME_TITLE);
+        newStage.setTitle(GameData.INSTANCE.GAME_TITLE);
         newStage.setScene(rootScene);
         newStage.sizeToScene();
 
