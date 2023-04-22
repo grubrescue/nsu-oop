@@ -57,16 +57,37 @@ public class Snake { // TODO хочется добавить состояние 
     }
 
     /**
+     * Returns the {@link Point} where the head will be located
+     * if the snake moves in the direction.
+     *
+     * @return the {@link Point} where the head will be located
+     */
+    protected Point getNewHeadLocation(MovingDirection movingDirection) {
+        return snakeBody.getHead()
+            .shift(movingDirection.move(),
+                gameModel.getProperties().width(),
+                gameModel.getProperties().height());
+    }
+
+    /**
+     * Returns the {@link Point} where the head will be located
+     * if the snake moves in the direction it is currently moving.
+     *
+     * @return the {@link Point} where the head will be located
+     * if the snake moves in the direction it is currently moving
+     */
+    protected Point getNewHeadLocation() {
+        return getNewHeadLocation(movingDirection);
+    }
+
+    /**
      * Moves the snake in the direction it is currently moving.
      *
      * @return {@code true} if the snake is still alive,
      * {@code false} otherwise
      */
     public boolean update() {
-        var newHeadLocation = snakeBody.getHead()
-            .shift(movingDirection.move(),
-                gameModel.getProperties().width(),
-                gameModel.getProperties().height());
+        var newHeadLocation = getNewHeadLocation();
 
         var appleSet = gameModel.getApplesSet();
         var possibleApple = new Apple(newHeadLocation);

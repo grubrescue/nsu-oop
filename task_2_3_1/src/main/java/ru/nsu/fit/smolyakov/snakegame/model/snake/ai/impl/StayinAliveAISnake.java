@@ -12,19 +12,27 @@ import java.util.Random;
 /**
  * An AI-driven snake that doesn't want to die.
  * He only does random movements, trying to avoid collisions with the barrier.
+ * Though, if he meets an apple on his way, he will eat it.
  */
-public class NotWonnaDieAISnake extends AISnake {
+public class StayinAliveAISnake extends AISnake {
     private final Random rand = new SecureRandom();
 
     /**
      * {@inheritDoc}
      */
-    public NotWonnaDieAISnake(GameModel gameModel) {
+    public StayinAliveAISnake(GameModel gameModel) {
         super(gameModel);
     }
 
     private boolean isCollidingTurn(MovingDirection direction) {
-        return getGameField().getBarrier().met(getSnakeBody().getHead().shift(direction.move()));
+        var newHead = getNewHeadLocation(direction);
+        return getGameField().getBarrier().met(newHead)
+            || getSnakeBody().tailCollision(newHead)
+            || getGameField().getAISnakeList()
+                .stream()
+                .filter(snake -> snake != this)
+                .anyMatch(snake -> snake.getSnakeBody().headCollision(newHead))
+            || getGameField().getPlayerSnake().getSnakeBody().headCollision(newHead);
     }
 
     /**
@@ -39,8 +47,16 @@ public class NotWonnaDieAISnake extends AISnake {
                 .toList()
         );
 
-        if (!options.isEmpty()) {
-            setMovingDirection(options.get(rand.nextInt(options.size())));
+        if (options.isEmpty()) {
+            return; // уже ничего не сделаешь.............. страшно!!!
         }
+
+        options.stream()
+            .filter(movePoint -> getGameField().getApplesSet().contains(getNewHeadLocation(movePoint)))
+            .findAny()
+            .ifPresentOrElse(
+                this::setMovingDirection,
+                () -> setMovingDirection(options.get(rand.nextInt(options.size())))
+            );
     }
 }
