@@ -73,4 +73,8 @@ public record Point(int x, int y) {
     public boolean connected(Point to) {
         return Math.abs(x - to.x) <= 1 && Math.abs(y - to.y) <= 1;
     }
+
+    public double distance(Point to) {
+        return Math.sqrt((x - to.x) * (x - to.x) + (y - to.y) * (y - to.y));
+    }
 }

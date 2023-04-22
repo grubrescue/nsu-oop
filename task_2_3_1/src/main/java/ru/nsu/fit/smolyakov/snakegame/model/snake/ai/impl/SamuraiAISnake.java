@@ -5,14 +5,15 @@ import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
 
 /**
  * An AI-driven samurai snake that always follow the original
- * movement direction. Though, {@link #thinkAboutTurn()} method
+ * movement direction. One has no goal, only a path.
+ * Obviously, {@link #thinkAboutTurn()} method
  * does nothing.
  */
-public class StraightForwardAISnake extends AISnake {
+public class SamuraiAISnake extends AISnake {
     /**
      * {@inheritDoc}
      */
-    public StraightForwardAISnake(GameModel gameModel) {
+    public SamuraiAISnake(GameModel gameModel) {
         super(gameModel);
     }
 
@@ -21,6 +22,6 @@ public class StraightForwardAISnake extends AISnake {
      */
     @Override
     public void thinkAboutTurn() {
-        // do nothing, this one is stupid
+        // do nothing
     }
 }
