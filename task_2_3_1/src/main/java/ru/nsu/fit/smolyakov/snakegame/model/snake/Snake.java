@@ -69,16 +69,12 @@ public class Snake { // TODO хочется добавить состояние 
                 gameModel.getProperties().height());
 
         var appleSet = gameModel.getApplesSet();
-
         var possibleApple = new Apple(newHeadLocation);
-        boolean ateApple;
 
-        if (appleSet.contains(possibleApple)) {
-            ateApple = true;
+        boolean ateApple = appleSet.contains(possibleApple);
+        if (ateApple) {
             points++;
             appleSet.remove(possibleApple);
-        } else {
-            ateApple = false;
         }
 
         snakeBody.move(newHeadLocation, ateApple);
