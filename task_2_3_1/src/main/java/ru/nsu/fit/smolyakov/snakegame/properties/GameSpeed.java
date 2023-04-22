@@ -1,5 +1,7 @@
 package ru.nsu.fit.smolyakov.snakegame.properties;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents game speed.
  */
@@ -7,37 +9,37 @@ public enum GameSpeed {
     /**
      * The slowest game speed. The snake moves every 800 milliseconds.
      */
-    LEVEL_0(800, "Level 0: slowest"),
+    @JsonProperty("slowest") SPEED_0(800, "Speed 0: slowest"),
 
     /**
      * The medium game speed. The snake moves every 400 milliseconds.
      */
-    LEVEL_1(400, "Level 1: medium"),
+    @JsonProperty("medium") SPEED_1(400, "Speed 1: medium"),
 
     /**
      * The fast game speed. The snake moves every 200 milliseconds.
      */
-    LEVEL_2(200, "Level 2: fast"),
+    @JsonProperty("fast") SPEED_2(200, "Speed 2: fast"),
 
     /**
      * Faster game speed. The snake moves every 100 milliseconds.
      */
-    LEVEL_3(100, "Level 3: faster"),
+    @JsonProperty("faster") SPEED_3(100, "Speed 3: faster"),
 
     /**
      * The fastest game speed. The snake moves every 50 milliseconds.
      */
-    LEVEL_4(50, "Level 4: fastest"),
+    @JsonProperty("fastest") SPEED_4(50, "Speed 4: fastest"),
 
     /**
      * Extreme game speed. The snake moves every 25 milliseconds.
      */
-    LEVEL_5(25, "Level 5: extreme"),
+    @JsonProperty("extreme") SPEED_5(25, "Speed 5: extreme"),
 
     /**
      * Kamikaze game speed. The snake moves every 10 milliseconds.
      */
-    LEVEL_6(10, "Level 6: kamikaze");
+    @JsonProperty("kamikaze") SPEED_6(10, "Speed 6: kamikaze");
 
     private final int frameDelayMillis;
     private final String representation;

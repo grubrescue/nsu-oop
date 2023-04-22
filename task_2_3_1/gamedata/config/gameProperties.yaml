@@ -1,9 +1,10 @@
 ---
 width: 40
 height: 20
-javaFxScaling: 40
-apples: 5
-levelTxtFile: "40x20_border.txt"
+javaFxScaling: 72
+apples: 794
+levelTxtFile: "40x20_empty.txt"
 aiClassNames:
+- "TotallyRandomAISnake"
 - "WannaEatAISnake"
-speed: "LEVEL_3"
+speed: "medium"
