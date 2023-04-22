@@ -7,10 +7,7 @@ import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -37,7 +34,7 @@ public class GameModelImpl implements GameModel {
     private final Set<Apple> applesSet;
     private final Barrier barrier;
     private final Apple.Factory appleFactory = new Apple.Factory(this, MAX_GENERATION_ITERATIONS);
-    private List<AISnake> AISnakesList;
+    private final List<AISnake> aiSnakesList = new LinkedList<>();
 
     /**
      * Creates a game field with the specified properties.
@@ -49,11 +46,12 @@ public class GameModelImpl implements GameModel {
         this.barrier = Barrier.fromResource(properties);
 
         this.playerSnake = new Snake(this);
-        this.AISnakesList = properties.aiClassNamesList()
+
+        properties.aiClassNamesList()
             .stream()
             .map(name -> GameData.INSTANCE.aiSnakeByShortName(name, this))
             .flatMap(Optional::stream)
-            .toList();
+            .forEach(aiSnakesList::add);
 
         this.applesSet = new HashSet<>();
         fulfilApplesSet();
@@ -72,7 +70,7 @@ public class GameModelImpl implements GameModel {
      */
     @Override
     public List<AISnake> getAISnakeList() {
-        return AISnakesList;
+        return aiSnakesList;
     }
 
     /**
@@ -118,10 +116,10 @@ public class GameModelImpl implements GameModel {
             && (playerSnake == null || !playerSnake.getSnakeBody().tailCollision(point))
             && (barrier == null || !barrier.met(point))
             && (applesSet == null || !applesSet.contains(new Apple(point)))
-            && (AISnakesList == null
-            || AISnakesList.stream().noneMatch(snake -> snake.getSnakeBody().headCollision(point)))
-            && (AISnakesList == null
-            || AISnakesList.stream().noneMatch(snake -> snake.getSnakeBody().tailCollision(point)));
+            && (aiSnakesList == null
+            || aiSnakesList.stream().noneMatch(snake -> snake.getSnakeBody().headCollision(point)))
+            && (aiSnakesList == null
+            || aiSnakesList.stream().noneMatch(snake -> snake.getSnakeBody().tailCollision(point)));
     }
 
     /**
@@ -131,7 +129,7 @@ public class GameModelImpl implements GameModel {
      * {@code false} otherwise
      */
     private boolean checkPlayerSnakeCollisions() {
-        var iter = AISnakesList.iterator();
+        var iter = aiSnakesList.iterator();
         while (iter.hasNext()) {
             var snake = iter.next();
             if (CollisionSolver.solve(playerSnake, snake) == CollisionSolver.Result.BOTH_DEAD) {
@@ -153,8 +151,10 @@ public class GameModelImpl implements GameModel {
     @Override
     public boolean update() {
         var alive = playerSnake.update();
-        AISnakesList = AISnakesList.stream().filter(Snake::update)
-            .collect(Collectors.toList());
+//        aiSnakesList = aiSnakesList.stream().filter(Snake::update)
+//            .collect(Collectors.toList());
+//
+        aiSnakesList.removeIf(snake -> !snake.update());
 
         fulfilApplesSet();
 
