@@ -7,18 +7,16 @@ import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
 import java.security.SecureRandom;
 import java.util.Random;
 
-// TODO TODO TDOD TODO TODO
-
 /**
  * а её еще сделать надо, че доки то впустую писать...
  */
-public class WannaEatAISnake extends AISnake {
+public class GreedyAISnake extends AISnake {
     private final Random rand = new SecureRandom();
     private Apple target = null;
     /**
      * {@inheritDoc}
      */
-    public WannaEatAISnake(GameModel gameModel) {
+    public GreedyAISnake(GameModel gameModel) {
         super(gameModel);
     }
 
