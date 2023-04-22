@@ -24,7 +24,14 @@ public class StayinAliveAISnake extends AISnake {
         super(gameModel);
     }
 
-    private boolean isCollidingTurn(MovingDirection direction) {
+    /**
+     * Checks if the snake will collide with the barrier or its own body
+     * if it turns in the given direction.
+     *
+     * @param direction direction to check
+     * @return true if the snake will collide, false otherwise
+     */
+    protected boolean isCollidingTurn(MovingDirection direction) {
         var newHead = getNewHeadLocation(direction);
         return getGameField().getBarrier().met(newHead)
             || getSnakeBody().tailCollision(newHead)
@@ -36,7 +43,7 @@ public class StayinAliveAISnake extends AISnake {
     }
 
     /**
-     * Does random choice, trying to exclude barrier collision variants
+     * Does random choice, trying to exclude barrier collision variants.
      */
     @Override
     public void thinkAboutTurn() {

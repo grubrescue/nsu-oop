@@ -1,9 +1,9 @@
 ---
 width: 40
-height: 20
-javaFxScaling: 39
-apples: 3
-levelTxtFile: "40x20_border.txt"
+height: 22
+javaFxScaling: 44
+apples: 6
+levelTxtFile: "40x20_empty.txt"
 aiClassNames:
 - "StayinAliveAISnake"
 speed: "fastest"
