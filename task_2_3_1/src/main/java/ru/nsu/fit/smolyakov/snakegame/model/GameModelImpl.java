@@ -137,10 +137,11 @@ public class GameModelImpl implements GameModel {
                 return true;
             }
         }
-        // TODO змейки между собой
 
         return false;
     }
+
+
 
     /**
      * Updates the model.
