@@ -8,7 +8,6 @@ import ru.nsu.fit.smolyakov.snakegame.point.Point;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * A main model that composes {@link Apple}s and {@link Snake}s, both player- and AI-driven.
@@ -141,6 +140,16 @@ public class GameModelImpl implements GameModel {
         return false;
     }
 
+    private void checkAiSnakesCollisions() {
+        var removalList = aiSnakesList.stream()
+            .filter(firstSnake ->
+                aiSnakesList.stream()
+                    .filter(secondSnake -> firstSnake != secondSnake)
+                    .anyMatch(secondSnake -> CollisionSolver.solve(firstSnake, secondSnake)
+                        == CollisionSolver.Result.BOTH_DEAD))
+            .toList();
+        aiSnakesList.removeAll(removalList);
+    }
 
 
     /**
@@ -160,6 +169,7 @@ public class GameModelImpl implements GameModel {
         fulfilApplesSet();
 
         var collisions = checkPlayerSnakeCollisions();
+        checkAiSnakesCollisions();
         return alive && !collisions;
     }
 

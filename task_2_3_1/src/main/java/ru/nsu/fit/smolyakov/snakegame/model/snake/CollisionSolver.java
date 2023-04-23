@@ -8,6 +8,8 @@ package ru.nsu.fit.smolyakov.snakegame.model.snake;
 public class CollisionSolver {
     /**
      * Solves collisions between two snakes.
+     * Cuts the snakes, if the collision without casualties
+     * happened.
      *
      * @param first  the first snake
      * @param second the second snake
