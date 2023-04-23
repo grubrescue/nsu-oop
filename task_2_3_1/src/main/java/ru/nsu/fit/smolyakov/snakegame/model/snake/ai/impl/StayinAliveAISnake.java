@@ -2,7 +2,10 @@ package ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl;
 
 import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
+import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
+import ru.nsu.fit.smolyakov.snakegame.model.snake.SnakeBody;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
+import ru.nsu.fit.smolyakov.snakegame.point.Point;
 
 import java.security.SecureRandom;
 import java.util.Arrays;
@@ -26,6 +29,49 @@ public class StayinAliveAISnake extends AISnake {
     }
 
     /**
+     * Returns the {@link Point} where the head will be located
+     * if the snake with specified {@code snakeBody} moves in the
+     * specified direction.
+     *
+     * @return the {@link Point} where the head will be located
+     */
+    protected Point getNewHeadLocation(SnakeBody snakeBody, MovingDirection movingDirection) {
+        return snakeBody.getHead()
+            .shift(movingDirection.move(),
+                getGameField().getProperties().width(),
+                getGameField().getProperties().height());
+    }
+
+
+    /**
+     * Returns the {@link Point} where the head will be located
+     * if the snake moves in the specified direction.
+     *
+     * @return the {@link Point} where the head will be located
+     */
+    protected Point getNewHeadLocation(MovingDirection movingDirection) {
+        return getNewHeadLocation(getSnakeBody(), movingDirection);
+    }
+
+    /**
+     * Checks if the snake with specified {@code snakeBody} will collide with
+     * the barrier or its own body if it turns in the given direction.
+     *
+     * @param direction direction to check
+     * @return true if the snake will collide, false otherwise
+     */
+    protected boolean isNonCollidingTurn(SnakeBody snakeBody, MovingDirection direction) {
+        var newHead = getNewHeadLocation(snakeBody, direction);
+        return !getGameField().getBarrier().met(newHead)
+            && !snakeBody.tailCollision(newHead)
+            && getGameField().getAISnakeList()
+                .stream()
+                .filter(snake -> snake.getSnakeBody() != snakeBody)
+                .noneMatch(snake -> snake.getSnakeBody().headCollision(newHead))
+            && !getGameField().getPlayerSnake().getSnakeBody().headCollision(newHead);
+    }
+
+    /**
      * Checks if the snake will collide with the barrier or its own body
      * if it turns in the given direction.
      *
@@ -33,14 +79,7 @@ public class StayinAliveAISnake extends AISnake {
      * @return true if the snake will collide, false otherwise
      */
     protected boolean isNonCollidingTurn(MovingDirection direction) {
-        var newHead = getNewHeadLocation(direction);
-        return !getGameField().getBarrier().met(newHead)
-            && !getSnakeBody().tailCollision(newHead)
-            && getGameField().getAISnakeList()
-                .stream()
-                .filter(snake -> snake != this)
-                .noneMatch(snake -> snake.getSnakeBody().headCollision(newHead))
-            && !getGameField().getPlayerSnake().getSnakeBody().headCollision(newHead);
+        return isNonCollidingTurn(getSnakeBody(), direction);
     }
 
     /**
