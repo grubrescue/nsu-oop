@@ -58,6 +58,31 @@ public class Snake { // TODO хочется добавить состояние 
 
     /**
      * Returns the {@link Point} where the head will be located
+     * if the snake with specified {@code snakeBody} moves in the
+     * specified direction.
+     *
+     * @return the {@link Point} where the head will be located
+     */
+    protected Point getNewHeadLocation(SnakeBody snakeBody, MovingDirection movingDirection) {
+        return snakeBody.getHead()
+            .shift(movingDirection.move(),
+                getGameField().getProperties().width(),
+                getGameField().getProperties().height());
+    }
+
+
+    /**
+     * Returns the {@link Point} where the head will be located
+     * if the snake moves in the specified direction.
+     *
+     * @return the {@link Point} where the head will be located
+     */
+    protected Point getNewHeadLocation(MovingDirection movingDirection) {
+        return getNewHeadLocation(getSnakeBody(), movingDirection);
+    }
+
+    /**
+     * Returns the {@link Point} where the head will be located
      * if the snake moves in the direction it is currently moving.
      *
      * @return the {@link Point} where the head will be located
