@@ -41,7 +41,7 @@ public class HungryAISnake extends StayinAliveAISnake {
 
     /**
      * Does such choices that the snake will move towards the closest apple
-     * and will not collide with the barrier or its own body.
+     * and will not collide with the barrier, other snakes or its own body.
      */
     @Override
     public void thinkAboutTurn() {
@@ -56,25 +56,20 @@ public class HungryAISnake extends StayinAliveAISnake {
         var xDiff = target.point().x() - getSnakeBody().getHead().x();
         var yDiff = target.point().y() - getSnakeBody().getHead().y();
 
-        if (xDiff > 0 && !isCollidingTurn(MovingDirection.RIGHT)) {
+        if (xDiff > 0 && isNonCollidingTurn(MovingDirection.RIGHT)) {
             setMovingDirection(MovingDirection.RIGHT);
-            return;
-        } else if (xDiff < 0 && !isCollidingTurn(MovingDirection.LEFT)) {
+        } else if (xDiff < 0 && isNonCollidingTurn(MovingDirection.LEFT)) {
             setMovingDirection(MovingDirection.LEFT);
-            return;
-        } else if (yDiff > 0 && !isCollidingTurn(MovingDirection.DOWN)) {
+        } else if (yDiff > 0 && isNonCollidingTurn(MovingDirection.DOWN)) {
             setMovingDirection(MovingDirection.DOWN);
-            return;
-        } else if (yDiff < 0 && !isCollidingTurn(MovingDirection.UP)) {
+        } else if (yDiff < 0 && isNonCollidingTurn(MovingDirection.UP)) {
             setMovingDirection(MovingDirection.UP);
-            return;
-        }
-
-        var nonCollidingTurn = Arrays.stream(MovingDirection.values())
-                .filter(movePoint -> !isCollidingTurn(movePoint))
+        } else {
+            Arrays.stream(MovingDirection.values())
+                .filter(this::isNonCollidingTurn)
                 .filter(movePoint -> !movePoint.move().equals(getMovingDirection().opposite()))
-                .findAny();
-
-        nonCollidingTurn.ifPresent(this::setMovingDirection);
+                .findAny()
+                .ifPresent(this::setMovingDirection);
+        }
     }
 }

@@ -22,6 +22,6 @@ public class SamuraiAISnake extends AISnake {
      */
     @Override
     public void thinkAboutTurn() {
-        // do nothing
+        // :3
     }
 }

@@ -1,5 +1,6 @@
 package ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl;
 
+import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
 
@@ -31,15 +32,15 @@ public class StayinAliveAISnake extends AISnake {
      * @param direction direction to check
      * @return true if the snake will collide, false otherwise
      */
-    protected boolean isCollidingTurn(MovingDirection direction) {
+    protected boolean isNonCollidingTurn(MovingDirection direction) {
         var newHead = getNewHeadLocation(direction);
-        return getGameField().getBarrier().met(newHead)
-            || getSnakeBody().tailCollision(newHead)
-            || getGameField().getAISnakeList()
+        return !getGameField().getBarrier().met(newHead)
+            && !getSnakeBody().tailCollision(newHead)
+            && getGameField().getAISnakeList()
                 .stream()
                 .filter(snake -> snake != this)
-                .anyMatch(snake -> snake.getSnakeBody().headCollision(newHead))
-            || getGameField().getPlayerSnake().getSnakeBody().headCollision(newHead);
+                .noneMatch(snake -> snake.getSnakeBody().headCollision(newHead))
+            && !getGameField().getPlayerSnake().getSnakeBody().headCollision(newHead);
     }
 
     /**
@@ -49,7 +50,7 @@ public class StayinAliveAISnake extends AISnake {
     public void thinkAboutTurn() {
         List<MovingDirection> options = new LinkedList<>(
             Arrays.stream(MovingDirection.values())
-                .filter(movePoint -> !isCollidingTurn(movePoint))
+                .filter(this::isNonCollidingTurn)
                 .filter(movePoint -> !movePoint.move().equals(getMovingDirection().opposite()))
                 .toList()
         );
@@ -59,7 +60,7 @@ public class StayinAliveAISnake extends AISnake {
         }
 
         options.stream()
-            .filter(movePoint -> getGameField().getApplesSet().contains(getNewHeadLocation(movePoint)))
+            .filter(movePoint -> getGameField().getApplesSet().contains(new Apple(getNewHeadLocation(movePoint))))
             .findAny()
             .ifPresentOrElse(
                 this::setMovingDirection,
