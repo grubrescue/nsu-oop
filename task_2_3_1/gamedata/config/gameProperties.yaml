@@ -5,7 +5,5 @@ javaFxScaling: 44
 apples: 30
 levelTxtFile: "40x20_empty.txt"
 aiClassNames:
-- "HungryAISnake"
-- "SamuraiAISnake"
-- "StayinAliveAISnake"
+- "GreedyAISnake"
 speed: "faster"
