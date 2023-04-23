@@ -6,19 +6,19 @@ import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import java.security.SecureRandom;
 import java.util.*;
 
-import static java.util.Arrays.stream;
-
 /**
  * This one hunts for an apple, and tries not to die at the same time.
+ * Though, he doesn't look ahead more than for a one step, so could easily put
+ * himself to a problematic situation.
  */
-public class HungryAISnake extends StayinAliveAISnake {
+public class GreedyAISnake extends StayinAliveAISnake {
     private final Random rand = new SecureRandom();
     private Apple target = null;
 
     /**
      * {@inheritDoc}
      */
-    public HungryAISnake(GameModel gameModel) {
+    public GreedyAISnake(GameModel gameModel) {
         super(gameModel);
     }
 

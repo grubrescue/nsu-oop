@@ -122,4 +122,8 @@ public class SnakeBody {
             tail.remove(tail.size() - 1);
         }
     }
+
+    public SnakeBody copy() {
+        return new SnakeBody(head, tail);
+    }
 }
