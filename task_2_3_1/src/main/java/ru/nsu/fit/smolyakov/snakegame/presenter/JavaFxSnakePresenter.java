@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class JavaFxSnakePresenter extends SnakePresenter {
     private class Resources {
@@ -113,11 +114,32 @@ public class JavaFxSnakePresenter extends SnakePresenter {
 
     @Override
     protected void runFramesUpdater() {
+        drawFrame();
+        showMessage("Prepare...");
+        refresh();
+
         timeline = new Timeline(
-            new KeyFrame(Duration.millis(properties.speed().getFrameDelayMillis()), e -> this.update())
+            new KeyFrame(
+                Duration.millis(START_SLEEP_TIME_MILLIS),
+                event -> {
+                    drawFrame();
+                    showMessage("FIGHT!!!1");
+                    refresh();
+                }
+                )
         );
-        timeline.setCycleCount(Timeline.INDEFINITE);
+
+        timeline.setCycleCount(2);
         timeline.play();
+
+        timeline.setOnFinished(e -> {
+            timeline.stop();
+            timeline = new Timeline(
+                new KeyFrame(Duration.millis(properties.speed().getFrameDelayMillis()), e1 -> this.update())
+            );
+            timeline.setCycleCount(Timeline.INDEFINITE);
+            timeline.play();
+        });
     }
 
     @Override

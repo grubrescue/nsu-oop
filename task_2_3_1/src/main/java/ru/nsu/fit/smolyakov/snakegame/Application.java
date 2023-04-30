@@ -2,6 +2,7 @@ package ru.nsu.fit.smolyakov.snakegame;
 
 import ru.nsu.fit.smolyakov.snakegame.configtool.JavaFxConfigTool;
 //import ru.nsu.fit.smolyakov.snakegame.executable.ConsoleSnakeGame;
+import ru.nsu.fit.smolyakov.snakegame.executable.ConsoleSnakeGame;
 import ru.nsu.fit.smolyakov.snakegame.executable.JavaFxSnakeGame;
 
 import java.io.IOException;
@@ -19,14 +20,14 @@ public class Application {
         app.execute();
     }
 
-//    private static void runConsoleSnakeGame() {
-//        var app = new ConsoleSnakeGame();
-//        try {
-//            app.execute();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    private static void runConsoleSnakeGame() {
+        var app = new ConsoleSnakeGame();
+        try {
+            app.execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private static void runJavaFxConfigTool() {
         var app = new JavaFxConfigTool();
@@ -42,8 +43,8 @@ public class Application {
     public static void main(String[] args) {
         if (args.length == 0 || args[0].equals("--gui")) {
             runJavaFxSnakeGame();
-//        } else if (args[0].equals("--console")) {
-//            runConsoleSnakeGame();
+        } else if (args[0].equals("--console")) {
+            runConsoleSnakeGame();
         } else if (args[0].equals("--config")) {
             runJavaFxConfigTool();
         } else {

@@ -4,6 +4,7 @@ import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
+import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 
 import java.util.ArrayList;
@@ -16,13 +17,12 @@ import java.util.function.Consumer;
  *
  * <p>{@link #start()} method starts a new thread with the game's main loop.
  *
- * <p>One works correctly with both JavaFX and console views.
  */
 public abstract class SnakePresenter {
     /**
      * A time to sleep between the countdown frame updates.
      */
-    protected final static int START_SLEEP_TIME_MILLIS = 500;
+    protected final static int START_SLEEP_TIME_MILLIS = 1000;
 
     protected GameProperties properties;
     private GameModel model;
@@ -47,21 +47,6 @@ public abstract class SnakePresenter {
     public void setModel(GameModel model) {
         this.model = model;
     }
-
-//    private void startTimeOut() throws InterruptedException {
-//        for (int i = 3; i >= 0; i--) {
-//            drawFrame();
-//
-//            if (i > 0) {
-//                this.showMessage("Game starts in " + i);
-//                this.refresh();
-//            } else {
-//                this.showMessage("Go!");
-//                this.refresh();
-//            }
-//            Thread.sleep(START_SLEEP_TIME_MILLIS);
-//        }
-//    }
 
     /**
      * Draws a frame.
@@ -97,21 +82,17 @@ public abstract class SnakePresenter {
      */
     public void start() {
         model = model.newGame();
-        executorService = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
+        executorService = Executors.newScheduledThreadPool(
+            Integer.min(model.getAISnakeList().size(), Runtime.getRuntime().availableProcessors()));
 
         runFramesUpdater();
-
-//        executorService.scheduleAtFixedRate(this::update,
-//            (long) START_SLEEP_TIME_MILLIS * 4,
-//            properties.speed().getFrameDelayMillis(),
-//            TimeUnit.MILLISECONDS);
     }
 
     protected abstract void runFramesUpdater();
 
     protected abstract void stopFramesUpdater();
 
-    private void drawFrame() {
+    protected void drawFrame() {
         this.clear();
 
         this.drawBarrier(model.getBarrier());
