@@ -48,6 +48,7 @@ public class JavaFxSnakeGame extends Application {
         newStage.setTitle(GameData.INSTANCE.GAME_TITLE);
         newStage.setScene(rootScene);
         newStage.sizeToScene();
+        newStage.setResizable(false);
 
         this.model = new GameModelImpl(gameProperties);
         this.snakePresenter = fxmlLoader.getController();
