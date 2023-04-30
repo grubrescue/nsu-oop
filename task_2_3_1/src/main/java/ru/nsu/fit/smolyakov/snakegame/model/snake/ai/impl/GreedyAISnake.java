@@ -4,7 +4,9 @@ import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 
 import java.security.SecureRandom;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.Random;
 
 /**
  * This one hunts for an apple, and tries not to die at the same time.

@@ -1,31 +1,45 @@
 package ru.nsu.fit.smolyakov.snakegame.presenter;
 
-import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.Terminal;
-import ru.nsu.fit.smolyakov.snakegame.GameData;
 import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
-import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
-import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 import ru.nsu.fit.smolyakov.snakegame.view.ConsoleView;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ConsoleSnakePresenter extends SnakePresenter {
+    private final Map<Character, EventAction> characterEventActionMap
+        = Map.ofEntries(
+        Map.entry('r', SnakePresenter.EventAction.RESTART),
+        Map.entry('к', SnakePresenter.EventAction.RESTART),
+        Map.entry('q', SnakePresenter.EventAction.EXIT),
+        Map.entry('й', SnakePresenter.EventAction.EXIT),
+
+        Map.entry('w', SnakePresenter.EventAction.UP),
+        Map.entry('ц', SnakePresenter.EventAction.UP),
+        Map.entry('s', SnakePresenter.EventAction.DOWN),
+        Map.entry('ы', SnakePresenter.EventAction.DOWN),
+        Map.entry('a', SnakePresenter.EventAction.LEFT),
+        Map.entry('ф', SnakePresenter.EventAction.LEFT),
+        Map.entry('d', SnakePresenter.EventAction.RIGHT),
+        Map.entry('в', SnakePresenter.EventAction.RIGHT)
+    );
+    private final Map<KeyType, SnakePresenter.EventAction> keyTypeEventActionMap
+        = Map.of(
+        KeyType.ArrowDown, SnakePresenter.EventAction.DOWN,
+        KeyType.ArrowUp, SnakePresenter.EventAction.UP,
+        KeyType.ArrowLeft, SnakePresenter.EventAction.LEFT,
+        KeyType.ArrowRight, SnakePresenter.EventAction.RIGHT
+    );
     private Timer timer;
-
-    private Resources resources
+    private final Resources resources
         = new Resources();
-
     private ConsoleView view;
 
     @Override
@@ -70,31 +84,6 @@ public class ConsoleSnakePresenter extends SnakePresenter {
     protected void stopFramesUpdater() {
         timer.cancel();
     }
-
-    private final Map<Character, EventAction> characterEventActionMap
-        = Map.ofEntries(
-            Map.entry('r', SnakePresenter.EventAction.RESTART),
-            Map.entry('к', SnakePresenter.EventAction.RESTART),
-            Map.entry('q', SnakePresenter.EventAction.EXIT),
-            Map.entry('й', SnakePresenter.EventAction.EXIT),
-
-            Map.entry('w', SnakePresenter.EventAction.UP),
-            Map.entry('ц', SnakePresenter.EventAction.UP),
-            Map.entry('s', SnakePresenter.EventAction.DOWN),
-            Map.entry('ы', SnakePresenter.EventAction.DOWN),
-            Map.entry('a', SnakePresenter.EventAction.LEFT),
-            Map.entry('ф', SnakePresenter.EventAction.LEFT),
-            Map.entry('d', SnakePresenter.EventAction.RIGHT),
-            Map.entry('в', SnakePresenter.EventAction.RIGHT)
-        );
-
-    private final Map<KeyType, SnakePresenter.EventAction> keyTypeEventActionMap
-        = Map.of(
-            KeyType.ArrowDown, SnakePresenter.EventAction.DOWN,
-            KeyType.ArrowUp, SnakePresenter.EventAction.UP,
-            KeyType.ArrowLeft, SnakePresenter.EventAction.LEFT,
-            KeyType.ArrowRight, SnakePresenter.EventAction.RIGHT
-        );
 
     public void keyEventHandler(KeyStroke keyStroke) {
         if (keyStroke.getKeyType().equals(KeyType.Character)) {

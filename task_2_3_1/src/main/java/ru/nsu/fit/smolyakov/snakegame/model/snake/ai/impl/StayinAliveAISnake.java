@@ -2,10 +2,8 @@ package ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl;
 
 import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
-import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.SnakeBody;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
-import ru.nsu.fit.smolyakov.snakegame.point.Point;
 
 import java.security.SecureRandom;
 import java.util.Arrays;
@@ -40,9 +38,9 @@ public class StayinAliveAISnake extends AISnake {
         return !getGameField().getBarrier().met(newHead)
             && !snakeBody.tailCollision(newHead)
             && getGameField().getAISnakeList()
-                .stream()
-                .filter(snake -> snake.getSnakeBody() != snakeBody)
-                .noneMatch(snake -> snake.getSnakeBody().headCollision(newHead))
+            .stream()
+            .filter(snake -> snake.getSnakeBody() != snakeBody)
+            .noneMatch(snake -> snake.getSnakeBody().headCollision(newHead))
             && !getGameField().getPlayerSnake().getSnakeBody().headCollision(newHead);
     }
 

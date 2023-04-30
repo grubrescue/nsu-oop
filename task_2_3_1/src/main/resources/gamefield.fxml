@@ -5,24 +5,27 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
-<Pane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.fit.smolyakov.snakegame.presenter.JavaFxSnakePresenter">
-   <children>
-      <StackPane style="-fx-background-color: white;">
-         <children>
-             <!--   <children>-->
-             <Canvas fx:id="canvas" height="400.0" width="600.0" />
-            <Text fx:id="messageText" strokeType="OUTSIDE" strokeWidth="0.0" text="dfsglkdsflkgnklsfjdgklsdfg" textAlignment="CENTER" wrappingWidth="474.9830722808838">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Text>
-         </children>
-      </StackPane>
-       <Text fx:id="scoreAmountText" fill="WHITE" fontSmoothingType="LCD" stroke="BLACK" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="2.0" text="1000" textOrigin="CENTER" translateX="25.0" translateY="25.0" wrappingWidth="547.4359998703003">
-           <font>
-               <Font size="20.0" />
-           </font>
-       </Text>
-   </children>
+<Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19"
+      fx:controller="ru.nsu.fit.smolyakov.snakegame.presenter.JavaFxSnakePresenter">
+    <children>
+        <StackPane style="-fx-background-color: white;">
+            <children>
+                <!--   <children>-->
+                <Canvas fx:id="canvas" height="400.0" width="600.0"/>
+                <Text fx:id="messageText" strokeType="OUTSIDE" strokeWidth="0.0" text="dfsglkdsflkgnklsfjdgklsdfg"
+                      textAlignment="CENTER" wrappingWidth="474.9830722808838">
+                    <font>
+                        <Font size="17.0"/>
+                    </font>
+                </Text>
+            </children>
+        </StackPane>
+        <Text fx:id="scoreAmountText" fill="WHITE" fontSmoothingType="LCD" stroke="BLACK" strokeLineJoin="ROUND"
+              strokeType="OUTSIDE" strokeWidth="2.0" text="1000" textOrigin="CENTER" translateX="25.0" translateY="25.0"
+              wrappingWidth="547.4359998703003">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Text>
+    </children>
 </Pane>

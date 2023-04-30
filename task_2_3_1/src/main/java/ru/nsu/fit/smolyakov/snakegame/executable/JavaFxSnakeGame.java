@@ -10,7 +10,6 @@ import ru.nsu.fit.smolyakov.snakegame.GameData;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModelImpl;
 import ru.nsu.fit.smolyakov.snakegame.presenter.JavaFxSnakePresenter;
-import ru.nsu.fit.smolyakov.snakegame.presenter.SnakePresenter;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 
 import java.io.File;

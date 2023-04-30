@@ -2,7 +2,6 @@ package ru.nsu.fit.smolyakov.snakegame.model.snake.ai;
 
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
-import ru.nsu.fit.smolyakov.snakegame.point.Point;
 
 /**
  * An abstract class for AI-driven snakes.

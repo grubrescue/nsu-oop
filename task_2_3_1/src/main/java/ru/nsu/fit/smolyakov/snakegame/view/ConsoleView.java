@@ -2,16 +2,12 @@ package ru.nsu.fit.smolyakov.snakegame.view;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
-import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-import ru.nsu.fit.smolyakov.snakegame.model.Apple;
-import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
-import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
 import ru.nsu.fit.smolyakov.snakegame.presenter.ConsoleSnakePresenter;
 import ru.nsu.fit.smolyakov.snakegame.presenter.SnakePresenter;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
@@ -31,14 +27,12 @@ public class ConsoleView {
     private final GameProperties properties;
     private final Terminal terminal;
     private final Screen screen;
-    private ConsoleSnakePresenter presenter;
-
-    private Thread inputPollThread;
-
     private final Map<Character, SnakePresenter.EventAction> characterEventActionMap
         = new HashMap<>();
     private final Map<KeyType, SnakePresenter.EventAction> keyTypeEventActionMap
         = new HashMap<>();
+    private ConsoleSnakePresenter presenter;
+    private Thread inputPollThread;
 
     /**
      * Creates a new {@link ConsoleView} instance.

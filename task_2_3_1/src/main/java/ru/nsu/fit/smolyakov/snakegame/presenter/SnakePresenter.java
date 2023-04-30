@@ -4,31 +4,30 @@ import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
-import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Consumer;
 
 /**
  * A presenter that connects a model and a view.
  *
  * <p>{@link #start()} method starts a new thread with the game's main loop.
- *
  */
 public abstract class SnakePresenter {
     /**
      * A time to sleep between the countdown frame updates.
      */
     protected final static int START_SLEEP_TIME_MILLIS = 1000;
-
+    private final List<Future<?>> futureList = new ArrayList<>();
     protected GameProperties properties;
     private GameModel model;
-
     private ScheduledExecutorService executorService;
-    private final List<Future<?>> futureList = new ArrayList<>();
 
     /**
      * Sets game properties.
@@ -151,57 +150,6 @@ public abstract class SnakePresenter {
     }
 
     /**
-     * An enum that represents user-associated actions that can be performed by the view.
-     * Each action is connected to an event method of the presenter.
-     */
-    public enum EventAction {
-        /**
-         * A left key is pressed.
-         */
-        LEFT(SnakePresenter::onLeftPressed),
-
-        /**
-         * A right key is pressed.
-         */
-        RIGHT(SnakePresenter::onRightPressed),
-
-        /**
-         * An up key is pressed.
-         */
-        UP(SnakePresenter::onUpPressed),
-
-        /**
-         * A down key is pressed.
-         */
-        DOWN(SnakePresenter::onDownPressed),
-
-        /**
-         * A restart button is pressed.
-         */
-        RESTART(SnakePresenter::onRestartPressed),
-
-        /**
-         * An exit button is pressed.
-         */
-        EXIT(SnakePresenter::onExitPressed);
-
-        private final Consumer<SnakePresenter> action;
-
-        EventAction(Consumer<SnakePresenter> action) {
-            this.action = action;
-        }
-
-        /**
-         * Executes the {@link Consumer} that is connected to the action.
-         *
-         * @param snakePresenter a snakePresenter
-         */
-        public void execute(SnakePresenter snakePresenter) {
-            action.accept(snakePresenter);
-        }
-    }
-
-    /**
      * Sets the current amount of points the player
      * has on an attached scoreboard.
      *
@@ -258,4 +206,55 @@ public abstract class SnakePresenter {
      * Applies changes.
      */
     protected abstract void refresh();
+
+    /**
+     * An enum that represents user-associated actions that can be performed by the view.
+     * Each action is connected to an event method of the presenter.
+     */
+    public enum EventAction {
+        /**
+         * A left key is pressed.
+         */
+        LEFT(SnakePresenter::onLeftPressed),
+
+        /**
+         * A right key is pressed.
+         */
+        RIGHT(SnakePresenter::onRightPressed),
+
+        /**
+         * An up key is pressed.
+         */
+        UP(SnakePresenter::onUpPressed),
+
+        /**
+         * A down key is pressed.
+         */
+        DOWN(SnakePresenter::onDownPressed),
+
+        /**
+         * A restart button is pressed.
+         */
+        RESTART(SnakePresenter::onRestartPressed),
+
+        /**
+         * An exit button is pressed.
+         */
+        EXIT(SnakePresenter::onExitPressed);
+
+        private final Consumer<SnakePresenter> action;
+
+        EventAction(Consumer<SnakePresenter> action) {
+            this.action = action;
+        }
+
+        /**
+         * Executes the {@link Consumer} that is connected to the action.
+         *
+         * @param snakePresenter a snakePresenter
+         */
+        public void execute(SnakePresenter snakePresenter) {
+            action.accept(snakePresenter);
+        }
+    }
 }

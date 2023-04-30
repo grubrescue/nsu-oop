@@ -1,80 +1,49 @@
 package ru.nsu.fit.smolyakov.snakegame.presenter;
 
-import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
-import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
 import ru.nsu.fit.smolyakov.snakegame.point.Point;
-import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 
-import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class JavaFxSnakePresenter extends SnakePresenter {
-    private class Resources {
-        Image apple = imageInstance("/sprites/apple.png");
-        Image barrier = imageInstance("/sprites/barrier.png");
-        Image playerSnakeHead = imageInstance("/sprites/player/head.png");
-        Image playerSnakeTail = imageInstance("/sprites/player/tail.png");
-        Image enemySnakeHead = imageInstance("/sprites/enemy/head.png");
-        Image enemySnakeTail = imageInstance("/sprites/enemy/tail.png");
-
-        private Image imageInstance(String path) {
-            return new Image(
-                Objects.requireNonNull(getClass().getResourceAsStream(path)),
-                properties.javaFxScaling(),
-                properties.javaFxScaling(),
-                true,
-                true // TODO посмотреть как лучше выглядит
-            );
-        }
-    }
-
     private final Map<KeyCode, EventAction> eventActionMap
         = Map.of(
-            KeyCode.R, SnakePresenter.EventAction.RESTART,
-            KeyCode.Q, SnakePresenter.EventAction.EXIT,
+        KeyCode.R, SnakePresenter.EventAction.RESTART,
+        KeyCode.Q, SnakePresenter.EventAction.EXIT,
 
-            KeyCode.UP, SnakePresenter.EventAction.UP,
-            KeyCode.W, SnakePresenter.EventAction.UP,
+        KeyCode.UP, SnakePresenter.EventAction.UP,
+        KeyCode.W, SnakePresenter.EventAction.UP,
 
-            KeyCode.DOWN, SnakePresenter.EventAction.DOWN,
-            KeyCode.S, SnakePresenter.EventAction.DOWN,
+        KeyCode.DOWN, SnakePresenter.EventAction.DOWN,
+        KeyCode.S, SnakePresenter.EventAction.DOWN,
 
-            KeyCode.LEFT, SnakePresenter.EventAction.LEFT,
-            KeyCode.A, SnakePresenter.EventAction.LEFT,
+        KeyCode.LEFT, SnakePresenter.EventAction.LEFT,
+        KeyCode.A, SnakePresenter.EventAction.LEFT,
 
-            KeyCode.RIGHT, SnakePresenter.EventAction.RIGHT,
-            KeyCode.D, SnakePresenter.EventAction.RIGHT
+        KeyCode.RIGHT, SnakePresenter.EventAction.RIGHT,
+        KeyCode.D, SnakePresenter.EventAction.RIGHT
     );
-
     private int resX;
     private int resY;
-
     @FXML
     private Canvas canvas;
     @FXML
     private Text scoreAmountText;
     @FXML
     private Text messageText;
-
     private Resources resources;
-
     private Timeline timeline;
 
     private void initializeEventActions() {
@@ -126,7 +95,7 @@ public class JavaFxSnakePresenter extends SnakePresenter {
                     showMessage("FIGHT!!!1");
                     refresh();
                 }
-                )
+            )
         );
 
         timeline.setCycleCount(2);
@@ -238,5 +207,24 @@ public class JavaFxSnakePresenter extends SnakePresenter {
      */
     @Override
     protected void refresh() {
+    }
+
+    private class Resources {
+        Image apple = imageInstance("/sprites/apple.png");
+        Image barrier = imageInstance("/sprites/barrier.png");
+        Image playerSnakeHead = imageInstance("/sprites/player/head.png");
+        Image playerSnakeTail = imageInstance("/sprites/player/tail.png");
+        Image enemySnakeHead = imageInstance("/sprites/enemy/head.png");
+        Image enemySnakeTail = imageInstance("/sprites/enemy/tail.png");
+
+        private Image imageInstance(String path) {
+            return new Image(
+                Objects.requireNonNull(getClass().getResourceAsStream(path)),
+                properties.javaFxScaling(),
+                properties.javaFxScaling(),
+                true,
+                true // TODO посмотреть как лучше выглядит
+            );
+        }
     }
 }
