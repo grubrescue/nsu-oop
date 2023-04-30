@@ -1,5 +1,8 @@
 package ru.nsu.fit.smolyakov.snakegame.presenter;
 
+import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
@@ -7,6 +10,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
@@ -61,8 +65,6 @@ public class JavaFxSnakePresenter extends SnakePresenter {
     private int resX;
     private int resY;
 
-//    @FXML
-//    private Pane pane;
     @FXML
     private Canvas canvas;
     @FXML
@@ -71,6 +73,8 @@ public class JavaFxSnakePresenter extends SnakePresenter {
     private Text messageText;
 
     private Resources resources;
+
+    private Timeline timeline;
 
     private void initializeEventActions() {
         this.canvas.getScene().setOnKeyPressed(e -> {
@@ -105,6 +109,20 @@ public class JavaFxSnakePresenter extends SnakePresenter {
             properties.javaFxScaling(),
             properties.javaFxScaling()
         );
+    }
+
+    @Override
+    protected void runFramesUpdater() {
+        timeline = new Timeline(
+            new KeyFrame(Duration.millis(properties.speed().getFrameDelayMillis()), e -> this.update())
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+    @Override
+    protected void stopFramesUpdater() {
+        timeline.stop();
     }
 
     /**

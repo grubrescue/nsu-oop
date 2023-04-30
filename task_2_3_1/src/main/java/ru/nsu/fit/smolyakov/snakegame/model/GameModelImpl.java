@@ -115,10 +115,8 @@ public class GameModelImpl implements GameModel {
             && (playerSnake == null || !playerSnake.getSnakeBody().tailCollision(point))
             && (barrier == null || !barrier.met(point))
             && (applesSet == null || !applesSet.contains(new Apple(point)))
-            && (aiSnakesList == null
-            || aiSnakesList.stream().noneMatch(snake -> snake.getSnakeBody().headCollision(point)))
-            && (aiSnakesList == null
-            || aiSnakesList.stream().noneMatch(snake -> snake.getSnakeBody().tailCollision(point)));
+            && aiSnakesList.stream().noneMatch(snake -> snake.getSnakeBody().headCollision(point))
+            && aiSnakesList.stream().noneMatch(snake -> snake.getSnakeBody().tailCollision(point));
     }
 
     /**

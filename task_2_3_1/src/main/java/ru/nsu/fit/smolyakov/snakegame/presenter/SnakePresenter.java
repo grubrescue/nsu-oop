@@ -15,10 +15,6 @@ import java.util.function.Consumer;
  * A presenter that connects a model and a view.
  *
  * <p>{@link #start()} method starts a new thread with the game's main loop.
- * {@link #onExitPressed()} method stops both this presenter and an attached view.
- * {@link #onRestartPressed()} method restarts the game.
- * {@link #onLeftPressed()}, {@link #onRightPressed()}, {@link #onUpPressed()} and
- * {@link #onDownPressed()} change the direction of the player snake.
  *
  * <p>One works correctly with both JavaFX and console views.
  */
@@ -52,22 +48,25 @@ public abstract class SnakePresenter {
         this.model = model;
     }
 
-    private void startTimeOut() throws InterruptedException {
-        for (int i = 3; i >= 0; i--) {
-            drawFrame();
+//    private void startTimeOut() throws InterruptedException {
+//        for (int i = 3; i >= 0; i--) {
+//            drawFrame();
+//
+//            if (i > 0) {
+//                this.showMessage("Game starts in " + i);
+//                this.refresh();
+//            } else {
+//                this.showMessage("Go!");
+//                this.refresh();
+//            }
+//            Thread.sleep(START_SLEEP_TIME_MILLIS);
+//        }
+//    }
 
-            if (i > 0) {
-                this.showMessage("Game starts in " + i);
-                this.refresh();
-            } else {
-                this.showMessage("Go!");
-                this.refresh();
-            }
-            Thread.sleep(START_SLEEP_TIME_MILLIS);
-        }
-    }
-
-    private void update() {
+    /**
+     * Draws a frame.
+     */
+    protected void update() {
         for (Future<?> future : futureList) {
             try {
                 future.get();
@@ -84,7 +83,9 @@ public abstract class SnakePresenter {
         if (!playerAlive) {
             this.showMessage("You died! You earned " + model.getPlayerSnake().getPoints() + " points.");
             this.refresh();
-            executorService.shutdownNow(); // TODO хочется чтобы боты работали и после смерти, надо добавить флаг внутрь змейки
+            executorService.shutdownNow();
+            stopFramesUpdater();
+            return;
         }
 
         futureList.clear();
@@ -96,20 +97,19 @@ public abstract class SnakePresenter {
      */
     public void start() {
         model = model.newGame();
-
         executorService = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
-        executorService.submit(() -> {
-            try {
-                startTimeOut();
-            } catch (InterruptedException ignored) {
-            }
-        });
 
-        executorService.scheduleAtFixedRate(this::update,
-            (long) START_SLEEP_TIME_MILLIS * 4,
-            properties.speed().getFrameDelayMillis(),
-            TimeUnit.MILLISECONDS);
+        runFramesUpdater();
+
+//        executorService.scheduleAtFixedRate(this::update,
+//            (long) START_SLEEP_TIME_MILLIS * 4,
+//            properties.speed().getFrameDelayMillis(),
+//            TimeUnit.MILLISECONDS);
     }
+
+    protected abstract void runFramesUpdater();
+
+    protected abstract void stopFramesUpdater();
 
     private void drawFrame() {
         this.clear();
@@ -156,6 +156,7 @@ public abstract class SnakePresenter {
      */
     private void onRestartPressed() {
         executorService.shutdownNow();
+        stopFramesUpdater();
         start();
     }
 
@@ -164,6 +165,7 @@ public abstract class SnakePresenter {
      */
     private void onExitPressed() {
         executorService.shutdownNow();
+        stopFramesUpdater();
         this.close();
     }
 
