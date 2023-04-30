@@ -1,7 +1,6 @@
 package ru.nsu.fit.smolyakov.snakegame;
 
 import ru.nsu.fit.smolyakov.snakegame.configtool.JavaFxConfigTool;
-//import ru.nsu.fit.smolyakov.snakegame.executable.ConsoleSnakeGame;
 import ru.nsu.fit.smolyakov.snakegame.executable.ConsoleSnakeGame;
 import ru.nsu.fit.smolyakov.snakegame.executable.JavaFxSnakeGame;
 
