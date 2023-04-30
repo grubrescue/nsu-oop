@@ -1,9 +1,9 @@
 ---
-width: 40
-height: 20
-javaFxScaling: 44
-apples: 30
-levelTxtFile: "40x20_empty.txt"
+width: 113
+height: 67
+javaFxScaling: 16
+apples: 6
+levelTxtFile: "40x20_border.txt"
 aiClassNames:
 - "GreedyAISnake"
-speed: "faster"
+speed: "kamikaze"
