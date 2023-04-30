@@ -9,22 +9,20 @@ import javafx.stage.Stage;
 import ru.nsu.fit.smolyakov.snakegame.GameData;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModelImpl;
+import ru.nsu.fit.smolyakov.snakegame.presenter.JavaFxSnakePresenter;
 import ru.nsu.fit.smolyakov.snakegame.presenter.SnakePresenter;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
-import ru.nsu.fit.smolyakov.snakegame.view.JavaFxView;
 
 import java.io.File;
 import java.io.IOException;
-
 
 /**
  * The class that executes the JavaFX variant of the snake game.
  * It creates the model, view and snakePresenter and connects them.
  */
 public class JavaFxSnakeGame extends Application {
-    private JavaFxView view;
     private GameModel model;
-    private SnakePresenter snakePresenter;
+    private JavaFxSnakePresenter snakePresenter;
 
     /**
      * Runs the game.
@@ -51,11 +49,11 @@ public class JavaFxSnakeGame extends Application {
         newStage.setScene(rootScene);
         newStage.sizeToScene();
 
-        this.view = fxmlLoader.getController();
         this.model = new GameModelImpl(gameProperties);
-        this.snakePresenter = new SnakePresenter(this.view, this.model, gameProperties);
-
-        this.view.initializeField(gameProperties, snakePresenter);
+        this.snakePresenter = fxmlLoader.getController();
+        this.snakePresenter.setModel(model);
+        this.snakePresenter.setProperties(gameProperties);
+        this.snakePresenter.initializeField();
 
         this.snakePresenter.start();
         newStage.show();

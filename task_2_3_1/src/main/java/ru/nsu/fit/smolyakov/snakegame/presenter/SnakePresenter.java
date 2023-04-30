@@ -1,9 +1,10 @@
 package ru.nsu.fit.smolyakov.snakegame.presenter;
 
+import ru.nsu.fit.smolyakov.snakegame.model.Apple;
+import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
-import ru.nsu.fit.smolyakov.snakegame.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,30 +22,34 @@ import java.util.function.Consumer;
  *
  * <p>One works correctly with both JavaFX and console views.
  */
-public class SnakePresenter {
+public abstract class SnakePresenter {
     /**
      * A time to sleep between the countdown frame updates.
      */
     protected final static int START_SLEEP_TIME_MILLIS = 500;
 
-    private final View view;
-    private final GameProperties gameProperties;
+    protected GameProperties properties;
     private GameModel model;
 
     private ScheduledExecutorService executorService;
     private final List<Future<?>> futureList = new ArrayList<>();
 
     /**
-     * Creates a presenter with the specified view, model and properties.
+     * Sets game properties.
      *
-     * @param view       a view
-     * @param model      a model
-     * @param properties properties of the presenter
+     * @param properties the game properties
      */
-    public SnakePresenter(View view, GameModel model, GameProperties properties) {
-        this.view = view;
+    public void setProperties(GameProperties properties) {
+        this.properties = properties;
+    }
+
+    /**
+     * Sets a model to work with.
+     *
+     * @param model the model to work with
+     */
+    public void setModel(GameModel model) {
         this.model = model;
-        this.gameProperties = properties;
     }
 
     private void startTimeOut() throws InterruptedException {
@@ -52,17 +57,17 @@ public class SnakePresenter {
             drawFrame();
 
             if (i > 0) {
-                view.showMessage("Game starts in " + i);
-                view.refresh();
+                this.showMessage("Game starts in " + i);
+                this.refresh();
             } else {
-                view.showMessage("Go!");
-                view.refresh();
+                this.showMessage("Go!");
+                this.refresh();
             }
             Thread.sleep(START_SLEEP_TIME_MILLIS);
         }
     }
 
-    private void update() { // TODO renaamee
+    private void update() {
         for (Future<?> future : futureList) {
             try {
                 future.get();
@@ -77,8 +82,8 @@ public class SnakePresenter {
         drawFrame();
 
         if (!playerAlive) {
-            view.showMessage("You died! You earned " + model.getPlayerSnake().getPoints() + " points.");
-            view.refresh();
+            this.showMessage("You died! You earned " + model.getPlayerSnake().getPoints() + " points.");
+            this.refresh();
             executorService.shutdownNow(); // TODO хочется чтобы боты работали и после смерти, надо добавить флаг внутрь змейки
         }
 
@@ -92,65 +97,64 @@ public class SnakePresenter {
     public void start() {
         model = model.newGame();
 
-        // TODO вынести в отдельный метод?
         executorService = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
         executorService.submit(() -> {
             try {
                 startTimeOut();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
         });
 
         executorService.scheduleAtFixedRate(this::update,
             (long) START_SLEEP_TIME_MILLIS * 4,
-            gameProperties.speed().getFrameDelayMillis(),
+            properties.speed().getFrameDelayMillis(),
             TimeUnit.MILLISECONDS);
     }
 
     private void drawFrame() {
-        view.clear();
+        this.clear();
 
-        view.drawBarrier(model.getBarrier());
-        model.getApplesSet().forEach(view::drawApple);
-        view.drawPlayerSnake(model.getPlayerSnake());
-        model.getAISnakeList().forEach(view::drawEnemySnake);
-        view.setScoreAmount(model.getPlayerSnake().getPoints());
+        this.drawBarrier(model.getBarrier());
+        model.getApplesSet().forEach(this::drawApple);
+        this.drawPlayerSnake(model.getPlayerSnake());
+        model.getAISnakeList().forEach(this::drawEnemySnake);
+        this.setScoreAmount(model.getPlayerSnake().getPoints());
 
-        view.refresh();
+        this.refresh();
     }
 
     /**
      * Changes the direction of the player snake to left.
      */
-    public void onLeftPressed() {
+    private void onLeftPressed() {
         model.getPlayerSnake().setMovingDirection(Snake.MovingDirection.LEFT);
     }
 
     /**
      * Changes the direction of the player snake to right.
      */
-    public void onRightPressed() {
+    private void onRightPressed() {
         model.getPlayerSnake().setMovingDirection(Snake.MovingDirection.RIGHT);
     }
 
     /**
      * Changes the direction of the player snake to up.
      */
-    public void onUpPressed() {
+    private void onUpPressed() {
         model.getPlayerSnake().setMovingDirection(Snake.MovingDirection.UP);
     }
 
     /**
      * Changes the direction of the player snake to down.
      */
-    public void onDownPressed() {
+    private void onDownPressed() {
         model.getPlayerSnake().setMovingDirection(Snake.MovingDirection.DOWN);
     }
 
     /**
      * Restarts the game.
      */
-    public void onRestartPressed() {
+    private void onRestartPressed() {
         executorService.shutdownNow();
         start();
     }
@@ -158,9 +162,9 @@ public class SnakePresenter {
     /**
      * Stops the game.
      */
-    public void onExitPressed() {
+    private void onExitPressed() {
         executorService.shutdownNow();
-        view.close();
+        this.close();
     }
 
     /**
@@ -213,4 +217,62 @@ public class SnakePresenter {
             action.accept(snakePresenter);
         }
     }
+
+    /**
+     * Sets the current amount of points the player
+     * has on an attached scoreboard.
+     *
+     * @param scoreAmount the amount of points
+     */
+    protected abstract void setScoreAmount(int scoreAmount);
+
+    /**
+     * Draws an apple on the game field.
+     *
+     * @param apple the apple to draw
+     */
+    protected abstract void drawApple(Apple apple);
+
+    /**
+     * Draws a barrier on the game field.
+     *
+     * @param barrier the barrier to draw
+     */
+    protected abstract void drawBarrier(Barrier barrier);
+
+    /**
+     * Draws a snake on the game field.
+     *
+     * @param snake the snake to draw
+     */
+    protected abstract void drawPlayerSnake(Snake snake);
+
+    /**
+     * Draws a snake on the game field.
+     *
+     * @param snake the snake to draw
+     */
+    protected abstract void drawEnemySnake(Snake snake);
+
+    /**
+     * Shows a message on the attached information panel.
+     *
+     * @param message the message to show
+     */
+    protected abstract void showMessage(String message);
+
+    /**
+     * Clears the game field.
+     */
+    protected abstract void clear();
+
+    /**
+     * Safely closes all running view components.
+     */
+    protected abstract void close();
+
+    /**
+     * Applies changes.
+     */
+    protected abstract void refresh();
 }
