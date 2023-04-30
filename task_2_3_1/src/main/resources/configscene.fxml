@@ -32,13 +32,21 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.Scene?>
-<?import javafx.scene.text.*?>
-<Scene xmlns:fx="http://javafx.com/fxml/1" fx:id="scene" xmlns="http://javafx.com/javafx/19"
-       fx:controller="ru.nsu.fit.smolyakov.snakegame.configtool.View">
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Scene fx:id="scene" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.fit.smolyakov.snakegame.configtool.Presenter">
     <root>
         <VBox prefHeight="400.0" prefWidth="640.0">
             <children>
@@ -46,48 +54,34 @@
                     <menus>
                         <Menu mnemonicParsing="false" text="Help">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="About"/>
+                                <MenuItem mnemonicParsing="false" text="About" />
                             </items>
                         </Menu>
                     </menus>
                 </MenuBar>
                 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="367.0" prefWidth="551.0" VBox.vgrow="ALWAYS">
                     <children>
-                        <Button fx:id="saveButton" layoutX="347.0" layoutY="326.0" mnemonicParsing="false"
-                                onAction="#saveConfig" text="Save configuration"/>
-                        <Text layoutX="36.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Speed"
-                              wrappingWidth="86.79100036621094"/>
-                        <ChoiceBox fx:id="speedChoiceBox" layoutX="123.0" layoutY="245.0" prefWidth="150.0"/>
-                        <Text layoutX="27.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Field size"
-                              wrappingWidth="66.79100036621094"/>
-                        <Text layoutX="192.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x"
-                              wrappingWidth="12.791000366210938"/>
-                        <Spinner fx:id="widthSpinner" editable="true" layoutX="116.0" layoutY="38.0" prefHeight="26.0"
-                                 prefWidth="71.0"/>
-                        <Spinner fx:id="heightSpinner" editable="true" layoutX="208.0" layoutY="38.0" prefHeight="26.0"
-                                 prefWidth="71.0"/>
-                        <Slider fx:id="javaFxScalingSlider" blockIncrement="4.0" layoutX="117.0" layoutY="82.0"
-                                majorTickUnit="16.0" max="72.0" min="16.0" minorTickCount="8" prefHeight="40.0"
-                                prefWidth="207.0" showTickLabels="true" showTickMarks="true" snapToTicks="true"
-                                value="32.0"/>
-                        <Text layoutX="27.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                              text="JavaFX Scaling"/>
-                        <Spinner fx:id="applesSpinner" editable="true" layoutX="123.0" layoutY="152.0" prefHeight="26.0"
-                                 prefWidth="71.0"/>
-                        <Text layoutX="36.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apples"/>
-                        <Text fx:id="resolutionText" layoutX="26.0" layoutY="136.0" strokeType="OUTSIDE"
-                              strokeWidth="0.0" wrappingWidth="264.8509979248047">
+                        <Button fx:id="saveButton" layoutX="347.0" layoutY="326.0" mnemonicParsing="false" onAction="#saveConfig" text="Save configuration" />
+                        <Text layoutX="36.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Speed" wrappingWidth="86.79100036621094" />
+                        <ChoiceBox fx:id="speedChoiceBox" layoutX="123.0" layoutY="245.0" prefWidth="150.0" />
+                        <Text layoutX="27.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Field size" wrappingWidth="66.79100036621094" />
+                        <Text layoutX="192.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x" wrappingWidth="12.791000366210938" />
+                        <Spinner fx:id="widthSpinner" editable="true" layoutX="116.0" layoutY="38.0" prefHeight="26.0" prefWidth="71.0" />
+                        <Spinner fx:id="heightSpinner" editable="true" layoutX="208.0" layoutY="38.0" prefHeight="26.0" prefWidth="71.0" />
+                        <Slider fx:id="javaFxScalingSlider" blockIncrement="4.0" layoutX="117.0" layoutY="82.0" majorTickUnit="16.0" max="72.0" min="16.0" minorTickCount="8" prefHeight="40.0" prefWidth="207.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="32.0" />
+                        <Text layoutX="27.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="JavaFX Scaling" />
+                        <Spinner fx:id="applesSpinner" editable="true" layoutX="123.0" layoutY="152.0" prefHeight="26.0" prefWidth="71.0" />
+                        <Text layoutX="36.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apples" />
+                        <Text fx:id="resolutionText" layoutX="26.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.8509979248047">
                             <font>
-                                <Font name="System Italic" size="13.0"/>
+                                <Font name="System Italic" size="13.0" />
                             </font>
                         </Text>
-                        <ChoiceBox fx:id="levelChoiceBox" layoutX="413.0" layoutY="51.0" prefWidth="150.0"/>
-                        <Text layoutX="357.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level"/>
-                        <ListView fx:id="aiListView" layoutX="400.0" layoutY="102.0" prefHeight="200.0"
-                                  prefWidth="200.0"/>
-                        <Text layoutX="365.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AI"/>
-                        <Button fx:id="runGameButton" layoutX="502.0" layoutY="326.0" mnemonicParsing="false"
-                                onAction="#saveAndRunGame" text="Save and run"/>
+                        <ChoiceBox fx:id="levelChoiceBox" layoutX="413.0" layoutY="51.0" prefWidth="150.0" />
+                        <Text layoutX="357.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level" />
+                        <ListView fx:id="aiListView" layoutX="400.0" layoutY="102.0" prefHeight="200.0" prefWidth="200.0" />
+                        <Text layoutX="365.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AI" />
+                        <Button fx:id="runGameButton" layoutX="502.0" layoutY="326.0" mnemonicParsing="false" onAction="#saveAndRunGame" text="Save and run" />
                     </children>
                 </AnchorPane>
             </children>

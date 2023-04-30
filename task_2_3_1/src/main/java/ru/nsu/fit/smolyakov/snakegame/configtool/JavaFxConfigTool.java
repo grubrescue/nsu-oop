@@ -11,7 +11,6 @@ import java.io.IOException;
  * The entry point of the configuration tool.
  */
 public class JavaFxConfigTool extends Application {
-    private View view;
     private Model model;
     private Presenter presenter;
 
@@ -25,9 +24,11 @@ public class JavaFxConfigTool extends Application {
         primaryStage.setScene(rootScene);
         primaryStage.setTitle("SnakeGame Configuration Tool");
 
-        this.view = fxmlLoader.getController();
+        this.presenter = fxmlLoader.getController();
         this.model = new Model();
-        this.presenter = new Presenter(this.model, this.view);
+        this.presenter.setModel(model);
+        this.presenter.setModel(model);
+        this.presenter.init();
 
         primaryStage.show();
     }

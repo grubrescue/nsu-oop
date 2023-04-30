@@ -29,8 +29,8 @@ public record Barrier(Set<Point> barrierPoints) {
                 for (int y = 0; y < properties.height() && scanner.hasNextLine(); y++) {
                     String line = scanner.nextLine();
 
-                    var colums = Integer.min(line.length(), properties.width());
-                    for (int x = 0; x < properties.width(); x++) {
+                    var columns = Integer.min(line.length(), properties.width());
+                    for (int x = 0; x < columns; x++) {
                         if (line.charAt(x) == '*') {
                             points.add(new Point(x, y));
                         }

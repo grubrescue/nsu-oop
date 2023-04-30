@@ -8,7 +8,7 @@
 
 <Pane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.fit.smolyakov.snakegame.presenter.JavaFxSnakePresenter">
    <children>
-      <StackPane>
+      <StackPane style="-fx-background-color: white;">
          <children>
              <!--   <children>-->
              <Canvas fx:id="canvas" height="400.0" width="600.0" />
