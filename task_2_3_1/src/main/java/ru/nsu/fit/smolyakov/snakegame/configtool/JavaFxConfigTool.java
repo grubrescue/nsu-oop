@@ -25,7 +25,7 @@ public class JavaFxConfigTool extends Application {
         Model model = new Model();
         presenter.setModel(model);
         presenter.setModel(model);
-        presenter.init();
+        presenter.initializeViewFields();
 
         primaryStage.show();
     }

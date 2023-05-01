@@ -74,6 +74,13 @@ public record Point(int x, int y) {
         return Math.abs(x - to.x) <= 1 && Math.abs(y - to.y) <= 1;
     }
 
+    /**
+     * Returns the distance between the current point and the specified point.
+     * The distance is calculated as the Euclidean distance between two points.
+     *
+     * @param to point to calculate distance to
+     * @return the distance between the current point and the specified point
+     */
     public double distance(Point to) {
         return Math.sqrt((x - to.x) * (x - to.x) + (y - to.y) * (y - to.y));
     }

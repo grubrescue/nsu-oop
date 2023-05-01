@@ -12,11 +12,15 @@ import javafx.util.Duration;
 import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
+import ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed;
 import ru.nsu.fit.smolyakov.snakegame.utils.Point;
 
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * A presenter for a JavaFX implementation of a snake game.
+ */
 public class JavaFxSnakePresenter extends SnakePresenter {
     private final Map<KeyCode, EventAction> eventActionMap
         = Map.of(
@@ -58,9 +62,14 @@ public class JavaFxSnakePresenter extends SnakePresenter {
         );
     }
 
+    /**
+     * Initializes the presenter.
+     *
+     * <p>Must be called before {@link #start()}.
+     */
     public void initializeField() {
-        this.resX = properties.width() * properties.javaFxScaling();
-        this.resY = properties.height() * properties.javaFxScaling();
+        this.resX = getProperties().width() * getProperties().javaFxScaling();
+        this.resY = getProperties().height() * getProperties().javaFxScaling();
 
         canvas.setWidth(this.resX);
         canvas.setHeight(this.resY);
@@ -74,13 +83,18 @@ public class JavaFxSnakePresenter extends SnakePresenter {
 
         graphicsContext.drawImage(
             image,
-            point.x() * properties.javaFxScaling(),
-            point.y() * properties.javaFxScaling(),
-            properties.javaFxScaling(),
-            properties.javaFxScaling()
+            point.x() * getProperties().javaFxScaling(),
+            point.y() * getProperties().javaFxScaling(),
+            getProperties().javaFxScaling(),
+            getProperties().javaFxScaling()
         );
     }
 
+    /**
+     * Runs the {@link Timeline} which updates the game state
+     * and the view once per {@link GameSpeed#getFrameDelayMillis()} milliseconds,
+     * specified in {@link #getProperties()}.
+     */
     @Override
     protected void runFramesUpdater() {
         drawFrame();
@@ -104,13 +118,16 @@ public class JavaFxSnakePresenter extends SnakePresenter {
         timeline.setOnFinished(e -> {
             timeline.stop();
             timeline = new Timeline(
-                new KeyFrame(Duration.millis(properties.speed().getFrameDelayMillis()), e1 -> this.update())
+                new KeyFrame(Duration.millis(getProperties().speed().getFrameDelayMillis()), e1 -> this.update())
             );
             timeline.setCycleCount(Timeline.INDEFINITE);
             timeline.play();
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void stopFramesUpdater() {
         timeline.stop();
@@ -220,8 +237,8 @@ public class JavaFxSnakePresenter extends SnakePresenter {
         private Image imageInstance(String path) {
             return new Image(
                 Objects.requireNonNull(getClass().getResourceAsStream(path)),
-                properties.javaFxScaling(),
-                properties.javaFxScaling(),
+                getProperties().javaFxScaling(),
+                getProperties().javaFxScaling(),
                 true,
                 false
             );

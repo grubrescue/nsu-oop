@@ -32,7 +32,6 @@ public class CollisionSolver {
     }
 
 
-
     /**
      * A result of collision solving.
      */

@@ -2,8 +2,8 @@ package ru.nsu.fit.smolyakov.snakegame.model;
 
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
-import ru.nsu.fit.smolyakov.snakegame.utils.Point;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
+import ru.nsu.fit.smolyakov.snakegame.utils.Point;
 
 import java.util.List;
 import java.util.Set;

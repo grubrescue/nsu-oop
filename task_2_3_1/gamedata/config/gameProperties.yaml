@@ -6,4 +6,4 @@ apples: 4
 levelTxtFile: "40x20_empty.txt"
 aiClassNames:
 - "KamikazeAISnake"
-speed: "fastest"
+speed: "faster"

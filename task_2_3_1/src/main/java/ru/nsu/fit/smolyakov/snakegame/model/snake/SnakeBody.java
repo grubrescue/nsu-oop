@@ -61,6 +61,13 @@ public class SnakeBody {
         return head.equals(point);
     }
 
+    /**
+     * Checks whether this collision may lead to snake's death.
+     *
+     * @param point point
+     * @return {@code true} if this collision may lead to snake's death,
+     * {@code false} otherwise
+     */
     public boolean deathCollision(Point point) {
         return head.equals(point) || tail.get(0).equals(point);
     }
@@ -127,6 +134,11 @@ public class SnakeBody {
         }
     }
 
+    /**
+     * Returns a copy of a snake body.
+     *
+     * @return a copy of a snake body
+     */
     public SnakeBody copy() {
         return new SnakeBody(head, tail);
     }
