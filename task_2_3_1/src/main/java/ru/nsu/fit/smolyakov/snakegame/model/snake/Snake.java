@@ -61,6 +61,8 @@ public class Snake { // TODO хочется добавить состояние 
      * if the snake with specified {@code snakeBody} moves in the
      * specified direction.
      *
+     * @param snakeBody       snake's body
+     * @param movingDirection direction in which the snake is moving
      * @return the {@link Point} where the head will be located
      */
     protected Point getNewHeadLocation(SnakeBody snakeBody, MovingDirection movingDirection) {
@@ -74,6 +76,7 @@ public class Snake { // TODO хочется добавить состояние 
      * Returns the {@link Point} where the head will be located
      * if the snake moves in the specified direction.
      *
+     * @param movingDirection direction in which the snake is moving
      * @return the {@link Point} where the head will be located
      */
     protected Point getNewHeadLocation(MovingDirection movingDirection) {

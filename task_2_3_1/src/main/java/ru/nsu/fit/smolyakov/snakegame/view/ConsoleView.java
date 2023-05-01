@@ -67,7 +67,7 @@ public class ConsoleView {
     }
 
     /**
-     * Sets the {@link SnakePresenter} for this {@link View}.
+     * Sets the {@link SnakePresenter} for this {@link ConsoleView}.
      *
      * @param snakePresenter the {@link SnakePresenter} to set
      */
@@ -89,10 +89,16 @@ public class ConsoleView {
         inputPollThread.start();
     }
 
+    /**
+     * Clears the screen.
+     */
     public void clear() {
         screen.clear();
     }
 
+    /**
+     * Refreshes the screen.
+     */
     public void refresh() {
         try {
             screen.refresh();
@@ -102,10 +108,20 @@ public class ConsoleView {
     }
 
 
+    /**
+     * Sets a character to the specified position.
+     *
+     * @param x         the x coordinate
+     * @param y         the y coordinate
+     * @param character the character to set
+     */
     public void setCharacter(int x, int y, TextCharacter character) {
         screen.setCharacter(x, y, character);
     }
 
+    /**
+     * Closes the view.
+     */
     public void close() {
         try {
             terminal.close();

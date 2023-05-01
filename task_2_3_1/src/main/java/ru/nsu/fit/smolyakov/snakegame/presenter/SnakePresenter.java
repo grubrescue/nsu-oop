@@ -5,6 +5,7 @@ import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
+import ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +26,20 @@ public abstract class SnakePresenter {
      */
     protected final static int START_SLEEP_TIME_MILLIS = 1000;
     private final List<Future<?>> futureList = new ArrayList<>();
-    protected GameProperties properties;
+
+    private GameProperties properties;
+
     private GameModel model;
     private ScheduledExecutorService executorService;
+
+    /**
+     * Returns the game properties.
+     *
+     * @return the game properties
+     */
+    public GameProperties getProperties() {
+        return properties;
+    }
 
     /**
      * Sets game properties.
@@ -87,10 +99,21 @@ public abstract class SnakePresenter {
         runFramesUpdater();
     }
 
+    /**
+     * Runs the timer which updates the game state
+     * and the view once per {@link GameSpeed#getFrameDelayMillis()} milliseconds,
+     * specified in #link {@link #properties}.
+     */
     protected abstract void runFramesUpdater();
 
+    /**
+     * Stops the timer which was started by {@link #runFramesUpdater()}.
+     */
     protected abstract void stopFramesUpdater();
 
+    /**
+     * Draws a single frame.
+     */
     protected void drawFrame() {
         this.clear();
 

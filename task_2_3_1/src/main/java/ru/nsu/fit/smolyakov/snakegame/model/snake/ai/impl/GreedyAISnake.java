@@ -4,7 +4,6 @@ import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 
 import java.security.SecureRandom;
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.Random;
 
@@ -59,6 +58,7 @@ public class GreedyAISnake extends StayinAliveAISnake {
         var xDiff = target.point().x() - getSnakeBody().getHead().x();
         var yDiff = target.point().y() - getSnakeBody().getHead().y();
 
+        // TODO кринж?????
         if (xDiff > 0 && isNonCollidingTurn(MovingDirection.RIGHT)) {
             setMovingDirection(MovingDirection.RIGHT);
         } else if (xDiff < 0 && isNonCollidingTurn(MovingDirection.LEFT)) {

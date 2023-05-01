@@ -7,12 +7,18 @@ import com.googlecode.lanterna.input.KeyType;
 import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
+import ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed;
 import ru.nsu.fit.smolyakov.snakegame.view.ConsoleView;
 
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * A presenter for a console (TUI) implementation snake game.
+ *
+ * @see ru.nsu.fit.smolyakov.snakegame.view.ConsoleView
+ */
 public class ConsoleSnakePresenter extends SnakePresenter {
     private final Map<Character, EventAction> characterEventActionMap
         = Map.ofEntries(
@@ -37,11 +43,16 @@ public class ConsoleSnakePresenter extends SnakePresenter {
         KeyType.ArrowLeft, SnakePresenter.EventAction.LEFT,
         KeyType.ArrowRight, SnakePresenter.EventAction.RIGHT
     );
-    private Timer timer;
     private final Resources resources
         = new Resources();
+    private Timer timer;
     private ConsoleView view;
 
+    /**
+     * Runs the {@link Timer} which updates the game state
+     * and the view once per {@link GameSpeed#getFrameDelayMillis()} milliseconds,
+     * specified in #link {@link #getProperties()}.
+     */
     @Override
     protected void runFramesUpdater() {
         timer = new Timer();
@@ -77,14 +88,22 @@ public class ConsoleSnakePresenter extends SnakePresenter {
                 }
             },
             SnakePresenter.START_SLEEP_TIME_MILLIS * 2,
-            properties.speed().getFrameDelayMillis());
+            getProperties().speed().getFrameDelayMillis());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void stopFramesUpdater() {
         timer.cancel();
     }
 
+    /**
+     * Handles the keyboard event.
+     *
+     * @param keyStroke the keystroke to handle
+     */
     public void keyEventHandler(KeyStroke keyStroke) {
         if (keyStroke.getKeyType().equals(KeyType.Character)) {
             var keyCharacterEvent = characterEventActionMap.get(keyStroke.getCharacter());
@@ -99,6 +118,11 @@ public class ConsoleSnakePresenter extends SnakePresenter {
         }
     }
 
+    /**
+     * Sets the view.
+     *
+     * @param view the view to set
+     */
     public void setView(ConsoleView view) {
         this.view = view;
     }
@@ -115,7 +139,7 @@ public class ConsoleSnakePresenter extends SnakePresenter {
         String scoreString = "Score: " + scoreAmount;
 
         for (int i = 0; i < scoreString.length(); i++) {
-            view.setCharacter(i, properties.height(), resources.scoreChar.withCharacter(scoreString.charAt(i)));
+            view.setCharacter(i, getProperties().height(), resources.scoreChar.withCharacter(scoreString.charAt(i)));
         }
     }
 
@@ -179,7 +203,7 @@ public class ConsoleSnakePresenter extends SnakePresenter {
     @Override
     public void showMessage(String string) {
         for (int i = 0; i < string.length(); i++) {
-            view.setCharacter(5 + i, properties.height() / 2,
+            view.setCharacter(5 + i, getProperties().height() / 2,
                 resources.messageChar.withCharacter(string.charAt(i)));
         }
     }

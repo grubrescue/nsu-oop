@@ -4,8 +4,8 @@ import ru.nsu.fit.smolyakov.snakegame.GameData;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.CollisionSolver;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
-import ru.nsu.fit.smolyakov.snakegame.utils.Point;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
+import ru.nsu.fit.smolyakov.snakegame.utils.Point;
 
 import java.util.*;
 
@@ -147,7 +147,7 @@ public class GameModelImpl implements GameModel {
                     .anyMatch(
                         secondSnake ->
                             CollisionSolver.solve(firstSnake.getSnakeBody(), secondSnake.getSnakeBody())
-                            == CollisionSolver.Result.BOTH_DEAD
+                                == CollisionSolver.Result.BOTH_DEAD
                     )
             )
             .toList();
