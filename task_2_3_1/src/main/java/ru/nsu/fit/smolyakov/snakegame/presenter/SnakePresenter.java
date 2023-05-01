@@ -93,8 +93,7 @@ public abstract class SnakePresenter {
      */
     public void start() {
         model = model.newGame();
-        executorService = Executors.newScheduledThreadPool(
-            Integer.min(model.getAISnakeList().size(), Runtime.getRuntime().availableProcessors()));
+        executorService = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
 
         runFramesUpdater();
     }
