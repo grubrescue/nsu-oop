@@ -2,7 +2,7 @@ package ru.nsu.fit.smolyakov.snakegame.model.snake;
 
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModelImpl;
-import ru.nsu.fit.smolyakov.snakegame.point.Point;
+import ru.nsu.fit.smolyakov.snakegame.utils.Point;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -59,6 +59,10 @@ public class SnakeBody {
      */
     public boolean headCollision(Point point) {
         return head.equals(point);
+    }
+
+    public boolean deathCollision(Point point) {
+        return head.equals(point) || tail.get(0).equals(point);
     }
 
     /**

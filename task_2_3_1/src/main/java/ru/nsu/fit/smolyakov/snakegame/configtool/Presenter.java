@@ -44,9 +44,6 @@ public class Presenter {
     @FXML
     private ListView<String> aiListView;
 
-//    @FXML
-//    private Button saveButton;
-
     @FXML
     private ChoiceBox<GameSpeed> speedChoiceBox;
 
@@ -58,6 +55,16 @@ public class Presenter {
 
     @FXML
     private Spinner<Integer> applesSpinner;
+
+    @FXML
+    private Slider javaFxScalingSlider;
+    @FXML
+    private Text resolutionText;
+    @FXML
+    private ChoiceBox<String> levelChoiceBox;
+
+    private Model model;
+
     /**
      * {@link ChangeListener} that is called when the maximum number of apples is changed.
      * Usually, that happens when the width or height of the game field is changed.
@@ -69,19 +76,14 @@ public class Presenter {
         setApplesAvailableRange(newMax);
         setApplesAmount(Math.min(prevVal, newMax));
     };
-    @FXML
-    private Slider javaFxScalingSlider;
-    @FXML
-    private Text resolutionText;
 
-//    @FXML
-//    private Button runGameButton;
     /**
      * {@link ChangeListener} that is called when the scaling value is changed.
      */
     public final ChangeListener<Number> onScalingChangedListener = (observable, oldValue, newValue) -> {
         updateCalculatedResolution();
     };
+
     /**
      * {@link ChangeListener} that is called when the width or height of the game field is changed.
      */
@@ -89,9 +91,6 @@ public class Presenter {
         onMaxApplesLimitChangeListener.changed(observable, oldValue, newValue);
         onScalingChangedListener.changed(observable, oldValue, newValue);
     };
-    @FXML
-    private ChoiceBox<String> levelChoiceBox;
-    private Model model;
 
     public void init() {
         initWidthSelector(model.getProperties().width());
@@ -173,7 +172,6 @@ public class Presenter {
             scaling * getHeight()
         );
     }
-
 
     /**
      * Saves the configuration and runs the game.

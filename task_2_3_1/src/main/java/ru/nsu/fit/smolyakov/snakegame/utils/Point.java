@@ -1,4 +1,4 @@
-package ru.nsu.fit.smolyakov.snakegame.point;
+package ru.nsu.fit.smolyakov.snakegame.utils;
 
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 
@@ -16,7 +16,7 @@ public record Point(int x, int y) {
     /**
      * Zero point.
      */
-    public static Point ZERO = new Point(0, 0);
+    public static final Point ZERO = new Point(0, 0);
 
     /**
      * Instantiates a point in a random position with {@code x} and {@code y} coordinates

@@ -4,7 +4,7 @@ import ru.nsu.fit.smolyakov.snakegame.GameData;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.CollisionSolver;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
-import ru.nsu.fit.smolyakov.snakegame.point.Point;
+import ru.nsu.fit.smolyakov.snakegame.utils.Point;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 
 import java.util.*;
@@ -129,7 +129,8 @@ public class GameModelImpl implements GameModel {
         var iter = aiSnakesList.iterator();
         while (iter.hasNext()) {
             var snake = iter.next();
-            if (CollisionSolver.solve(playerSnake, snake) == CollisionSolver.Result.BOTH_DEAD) {
+            if (CollisionSolver.solve(playerSnake.getSnakeBody(), snake.getSnakeBody())
+                == CollisionSolver.Result.BOTH_DEAD) {
                 iter.remove();
                 return true;
             }
@@ -143,8 +144,12 @@ public class GameModelImpl implements GameModel {
             .filter(firstSnake ->
                 aiSnakesList.stream()
                     .filter(secondSnake -> firstSnake != secondSnake)
-                    .anyMatch(secondSnake -> CollisionSolver.solve(firstSnake, secondSnake)
-                        == CollisionSolver.Result.BOTH_DEAD))
+                    .anyMatch(
+                        secondSnake ->
+                            CollisionSolver.solve(firstSnake.getSnakeBody(), secondSnake.getSnakeBody())
+                            == CollisionSolver.Result.BOTH_DEAD
+                    )
+            )
             .toList();
         aiSnakesList.removeAll(removalList);
     }

@@ -11,33 +11,27 @@ public class CollisionSolver {
      * Cuts the snakes, if the collision without casualties
      * happened.
      *
-     * @param first  the first snake
-     * @param second the second snake
+     * @param firstBody  the first snake body
+     * @param secondBody the second snake body
      * @return a result of collision solving
      */
-    public static Result solve(Snake first, Snake second) {
-        // TODO а точно надо отдельный класс для этого?
-        // и возвращать булин в целом ок было бы
-        var firstBody = first.getSnakeBody();
-        var secondBody = second.getSnakeBody();
-
-        if (firstBody.headCollision(secondBody.getHead())
-            || firstBody.headCollision(secondBody.getTail().get(0))
-            || secondBody.headCollision(firstBody.getTail().get(0))) {
+    public static Result solve(SnakeBody firstBody, SnakeBody secondBody) {
+        if (firstBody.deathCollision(secondBody.getHead())
+            || secondBody.deathCollision(firstBody.getHead())) {
             return Result.BOTH_DEAD;
         }
 
         if (firstBody.tailCollision(secondBody.getHead())) {
             firstBody.cutTail(secondBody.getHead());
-            return Result.BOTH_ALIVE;
         }
         if (secondBody.tailCollision(firstBody.getHead())) {
             secondBody.cutTail(firstBody.getHead());
-            return Result.BOTH_ALIVE;
         }
 
         return Result.BOTH_ALIVE;
     }
+
+
 
     /**
      * A result of collision solving.
