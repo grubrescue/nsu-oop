@@ -9,6 +9,7 @@ import ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake;
  * Obviously, {@link #thinkAboutTurn()} method
  * does nothing.
  */
+@SuppressWarnings("unused")
 public class SamuraiAISnake extends AISnake {
     /**
      * {@inheritDoc}

@@ -2,7 +2,7 @@ package ru.nsu.fit.smolyakov.snakegame.model.snake;
 
 import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
-import ru.nsu.fit.smolyakov.snakegame.point.Point;
+import ru.nsu.fit.smolyakov.snakegame.utils.Point;
 
 /**
  * A snake that moves on the {@link GameModel}.
@@ -69,7 +69,6 @@ public class Snake { // TODO хочется добавить состояние 
                 getGameField().getProperties().width(),
                 getGameField().getProperties().height());
     }
-
 
     /**
      * Returns the {@link Point} where the head will be located

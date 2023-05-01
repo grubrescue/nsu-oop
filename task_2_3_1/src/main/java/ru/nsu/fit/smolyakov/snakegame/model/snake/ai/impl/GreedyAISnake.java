@@ -13,6 +13,7 @@ import java.util.Random;
  * Though, he doesn't look ahead more than for a one step, so could easily put
  * himself to a problematic situation.
  */
+@SuppressWarnings("unused")
 public class GreedyAISnake extends StayinAliveAISnake {
     private final Random rand = new SecureRandom();
     private Apple target = null;
@@ -62,16 +63,19 @@ public class GreedyAISnake extends StayinAliveAISnake {
             setMovingDirection(MovingDirection.RIGHT);
         } else if (xDiff < 0 && isNonCollidingTurn(MovingDirection.LEFT)) {
             setMovingDirection(MovingDirection.LEFT);
+        } else if (xDiff > 0 && isNonCollidingTurn(MovingDirection.LEFT)) {
+            setMovingDirection(MovingDirection.LEFT);
+        } else if (xDiff < 0 && isNonCollidingTurn(MovingDirection.RIGHT)) {
+            setMovingDirection(MovingDirection.RIGHT);
+
         } else if (yDiff > 0 && isNonCollidingTurn(MovingDirection.DOWN)) {
             setMovingDirection(MovingDirection.DOWN);
         } else if (yDiff < 0 && isNonCollidingTurn(MovingDirection.UP)) {
             setMovingDirection(MovingDirection.UP);
-        } else {
-            Arrays.stream(MovingDirection.values())
-                .filter(this::isNonCollidingTurn)
-                .filter(movePoint -> !movePoint.move().equals(getMovingDirection().opposite()))
-                .findAny()
-                .ifPresent(this::setMovingDirection);
+        } else if (yDiff > 0 && isNonCollidingTurn(MovingDirection.UP)) {
+            setMovingDirection(MovingDirection.UP);
+        } else if (yDiff < 0 && isNonCollidingTurn(MovingDirection.DOWN)) {
+            setMovingDirection(MovingDirection.DOWN);
         }
     }
 }

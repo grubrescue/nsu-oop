@@ -12,7 +12,7 @@ import javafx.util.Duration;
 import ru.nsu.fit.smolyakov.snakegame.model.Apple;
 import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
-import ru.nsu.fit.smolyakov.snakegame.point.Point;
+import ru.nsu.fit.smolyakov.snakegame.utils.Point;
 
 import java.util.Map;
 import java.util.Objects;
@@ -223,7 +223,7 @@ public class JavaFxSnakePresenter extends SnakePresenter {
                 properties.javaFxScaling(),
                 properties.javaFxScaling(),
                 true,
-                true // TODO посмотреть как лучше выглядит
+                false
             );
         }
     }

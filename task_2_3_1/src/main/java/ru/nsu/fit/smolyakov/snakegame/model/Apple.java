@@ -1,7 +1,7 @@
 package ru.nsu.fit.smolyakov.snakegame.model;
 
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
-import ru.nsu.fit.smolyakov.snakegame.point.Point;
+import ru.nsu.fit.smolyakov.snakegame.utils.Point;
 
 /**
  * Represents an apple, which is located on {@link GameModel} and can be
