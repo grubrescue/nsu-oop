@@ -24,7 +24,10 @@ public class SnakeBody {
      * @param tail tail
      */
     public SnakeBody(Point head, List<Point> tail) {
-        this.head = head;
+        if (Objects.requireNonNull(tail).isEmpty()) {
+            throw new IllegalArgumentException("tail cannot be empty");
+        }
+        this.head = Objects.requireNonNull(head);
         this.tail.addAll(tail);
     }
 

@@ -9,6 +9,10 @@ public class TestingSnakePresenter extends SnakePresenter {
     boolean frameUpdaterRunning = false;
     int scoreAmount = 0;
 
+    public void nextStep() {
+        update();
+    }
+
     @Override
     protected void runFramesUpdater() {
         frameUpdaterRunning = true;

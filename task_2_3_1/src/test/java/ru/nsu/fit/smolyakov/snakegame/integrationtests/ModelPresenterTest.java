@@ -3,8 +3,10 @@ package ru.nsu.fit.smolyakov.snakegame.integrationtests;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.nsu.fit.smolyakov.snakegame.ExampleProperties;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModelImpl;
+import ru.nsu.fit.smolyakov.snakegame.presenter.SnakePresenter;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed;
 import ru.nsu.fit.smolyakov.snakegame.utils.Point;
@@ -18,15 +20,7 @@ import java.util.Set;
 public class ModelPresenterTest {
     TestingSnakePresenter presenter;
     GameModel model;
-    GameProperties properties = new GameProperties(
-        6,
-        6,
-        1,
-        1,
-        "40x20_border.txt",
-        List.of(),
-        GameSpeed.SPEED_0
-    );
+    GameProperties properties = ExampleProperties.properties;
 
     @BeforeEach
     void init() {
@@ -34,7 +28,6 @@ public class ModelPresenterTest {
         model = new GameModelImpl(properties);
         presenter.setProperties(properties);
         presenter.setModel(model);
-
     }
 
     @Test
@@ -43,7 +36,6 @@ public class ModelPresenterTest {
             .isEqualTo(
                 Set.of(
                     new Point(0, 0),
-
                     new Point(0, 1),
                     new Point(0, 2),
                     new Point(0, 3),
@@ -59,28 +51,69 @@ public class ModelPresenterTest {
             );
     }
 
-    @Test
-    public void snakeInitializationTest() {
-        var body = model.getPlayerSnake().getSnakeBody();
-        assertThat(body.)
-            .isEqualTo(
-                Set.of(
-                    new Point(1, 1),
-                    new Point(1, 2),
-                    new Point(1, 3),
-                    new Point(1, 4),
-                    new Point(1, 5)
-                )
-            );
+    private Point head() {
+        return model.getPlayerSnake().getSnakeBody().getHead();
     }
-
 
     @Test
     public void test() {
-        Assertions.assertThat(presenter.frameUpdaterRunning).isFalse();
+        assertThat(presenter.frameUpdaterRunning).isFalse();
         presenter.start();
 
-        Assertions.assertThat(presenter.frameUpdaterRunning).isTrue();
-        Assertions.assertThat(presenter.scoreAmount).isEqualTo(0);
+        assertThat(presenter.frameUpdaterRunning).isTrue();
+        assertThat(presenter.scoreAmount).isEqualTo(0);
+
+        // TODO wip
+//        var target = model.getApplesSet().stream().findAny().get();
+//
+//        var xDiff = target.point().x() - head().x();
+//        var yDiff = target.point().y() - head().y();
+//
+//        System.out.println(head());
+//        presenter.nextStep();
+//        System.out.println(head());
+
+        return;
+
+//        if (xDiff > 0) { // змейка ползет вверх, а надо вниз
+//            SnakePresenter.EventAction.RIGHT.execute(presenter);
+//            presenter.nextStep();
+//
+//            SnakePresenter.EventAction.DOWN.execute(presenter);
+//            presenter.nextStep();
+//
+//            xDiff = target.point().x() - head().x();
+//            while (xDiff > 0) {
+//                presenter.nextStep();
+//                System.out.println("down" + head());
+//
+//                xDiff = target.point().x() - head().x();
+//            }
+//        } else if (xDiff < 0) {
+//            do {
+//                presenter.nextStep();
+//                System.out.println("up" + head());
+//
+//                xDiff = target.point().x() - head().x();
+//            } while (xDiff != 0);
+//        }
+//
+//        while (yDiff > 0) {
+//            SnakePresenter.EventAction.RIGHT.execute(presenter);
+//            presenter.nextStep();
+//            System.out.println("right" + head());
+//
+//            yDiff = target.point().y() - head().y();
+//        }
+//        while (yDiff < 0) {
+//            SnakePresenter.EventAction.LEFT.execute(presenter);
+//            presenter.nextStep();
+//            System.out.println("left" + head());
+//
+//            yDiff = target.point().y() - head().y();
+//        }
+//
+//        assertThat(target).isNotIn(model.getApplesSet());
+//        assertThat(presenter.scoreAmount).isEqualTo(1);
     }
 }
