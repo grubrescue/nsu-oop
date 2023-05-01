@@ -140,7 +140,7 @@ public record GameProperties(
      * @return a new {@code GameProperties}
      * with the specified path to the file with barriers
      */
-    public GameProperties withBarrierFilePath(String barrierFilePath) {
+    public GameProperties withLevelFileName(String barrierFilePath) {
         return new GameProperties(
             width(),
             height(),

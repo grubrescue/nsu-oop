@@ -121,7 +121,7 @@ public class Presenter {
                 .withWidth(getWidth())
                 .withHeight(getHeight())
                 .withJavaFxScaling(getJavaFxScalingValue())
-                .withBarrierFilePath(getLevel())
+                .withLevelFileName(getLevel())
                 .withAiClassNamesList(getSelectedAiNames())
         );
 

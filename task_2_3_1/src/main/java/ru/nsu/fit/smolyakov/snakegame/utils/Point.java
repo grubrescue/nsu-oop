@@ -58,8 +58,8 @@ public record Point(int x, int y) {
         }
 
         return new Point(
-            (x + shift.x + xLimit) % xLimit,
-            (y + shift.y + yLimit) % yLimit
+            ((x + shift.x) % xLimit + xLimit) % xLimit,
+            ((y + shift.y) % yLimit + yLimit) % yLimit
         );
     }
 
@@ -71,7 +71,7 @@ public record Point(int x, int y) {
      * @return {@code true} if the current point is connected to the specified point
      */
     public boolean connected(Point to) {
-        return Math.abs(x - to.x) <= 1 && Math.abs(y - to.y) <= 1;
+        return Math.abs(x - to.x) + Math.abs(y - to.y) <= 1;
     }
 
     /**

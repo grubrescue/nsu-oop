@@ -56,7 +56,7 @@ public enum GameData {
     public final String AI_SNAKES_PACKAGE_NAME = "ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl";
 
     /**
-     * Returns the list of names of all AI snakes.
+     * Returns the alphabetically sorted list of names of all AI snakes.
      * In this case, AI name is defined as the part of the class name after the last dot: for example,
      * short name for {@code ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl.ExampleAISnake}
      * is {@code ExampleAISnake}.
@@ -75,6 +75,7 @@ public enum GameData {
             return reader.lines()
                 .filter(str -> str.endsWith(".class"))
                 .map(str -> str.substring(0, str.length() - 6))
+                .sorted()
                 .toList();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -121,7 +122,7 @@ public enum GameData {
     }
 
     /**
-     * Returns the list of names of all level files. Ones are searched in the {@link #LEVEL_FOLDER_PATH}.
+     * Returns the sorted list of names of all level files. Ones are searched in the {@link #LEVEL_FOLDER_PATH}.
      *
      * @return list of level file names
      */
@@ -130,6 +131,7 @@ public enum GameData {
             return barrierPathsList
                 .map(Path::getFileName)
                 .map(Path::toString)
+                .sorted()
                 .toList();
         } catch (IOException e) {
             throw new RuntimeException(e);

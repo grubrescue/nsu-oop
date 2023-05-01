@@ -6,6 +6,7 @@ import ru.nsu.fit.smolyakov.snakegame.utils.Point;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Represents a snake body that consists of a head and a tail. The former is a
@@ -22,7 +23,7 @@ public class SnakeBody {
      * @param head head
      * @param tail tail
      */
-    protected SnakeBody(Point head, List<Point> tail) {
+    public SnakeBody(Point head, List<Point> tail) {
         this.head = head;
         this.tail.addAll(tail);
     }
@@ -141,5 +142,36 @@ public class SnakeBody {
      */
     public SnakeBody copy() {
         return new SnakeBody(head, tail);
+    }
+
+    /**
+     * Returns if this snake body is equal to the specified object.
+     * Two snake bodies are equal if they have the same head and tail.
+     *
+     * @param o object to be compared for equality with this snake body
+     * @return {@code true} if this snake body is equal to the specified object,
+     * {@code false} otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o == null) {
+            return false;
+        } else if (o instanceof SnakeBody snakeBody) {
+            return getHead().equals(snakeBody.getHead()) && getTail().equals(snakeBody.getTail());
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Returns a hash code value for this snake body.
+     *
+     * @return a hash code value for this snake body
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(getHead(), getTail());
     }
 }

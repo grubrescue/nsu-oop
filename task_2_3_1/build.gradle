@@ -37,13 +37,21 @@ test {
 jacocoTestReport {
     dependsOn test
 //
-//    afterEvaluate {
-//        classDirectories.setFrom(files(classDirectories.files.collect {
-//            fileTree(dir: it, exclude: [
-//                    "ru/nsu/fit/smolyakov/diary/executable/*"
-//            ])
-//        }))
-//    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it,
+                     exclude:
+                     [
+                             "ru/nsu/fit/smolyakov/snakegame/view/*",
+                             "ru/nsu/fit/smolyakov/snakegame/presenter/*",
+                             "ru/nsu/fit/smolyakov/snakegame/configtool/*",
+                             "ru/nsu/fit/smolyakov/snakegame/executable/*",
+                             "ru/nsu/fit/smolyakov/snakegame/model/snake/ai/*",
+                             "ru/nsu/fit/smolyakov/snakegame/Application.class",
+                     ],
+            )
+        }))
+    }
 
     reports {
         xml.required = true
