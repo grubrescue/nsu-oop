@@ -1,0 +1,11 @@
+ru.nsu.fit.smolyakov.snakegame
+ru.nsu.fit.smolyakov.snakegame.configtool
+ru.nsu.fit.smolyakov.snakegame.executable
+ru.nsu.fit.smolyakov.snakegame.model
+ru.nsu.fit.smolyakov.snakegame.model.snake
+ru.nsu.fit.smolyakov.snakegame.model.snake.ai
+ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl
+ru.nsu.fit.smolyakov.snakegame.presenter
+ru.nsu.fit.smolyakov.snakegame.properties
+ru.nsu.fit.smolyakov.snakegame.utils
+ru.nsu.fit.smolyakov.snakegame.view
