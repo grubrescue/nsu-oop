@@ -59,7 +59,7 @@ public interface GameModel { // TODO разделить интерфейсы
     /**
      * Updates the model.
      *
-     * @return {@code true} if the player snake is dead,
+     * @return {@code true} if the player snake is alive,
      * {@code false} otherwise
      */
     boolean update();

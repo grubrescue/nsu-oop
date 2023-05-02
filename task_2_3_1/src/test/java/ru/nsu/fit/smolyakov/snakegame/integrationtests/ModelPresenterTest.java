@@ -3,9 +3,11 @@ package ru.nsu.fit.smolyakov.snakegame.integrationtests;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import ru.nsu.fit.smolyakov.snakegame.ExampleProperties;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModelImpl;
+import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
 import ru.nsu.fit.smolyakov.snakegame.presenter.SnakePresenter;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed;
@@ -26,6 +28,7 @@ public class ModelPresenterTest {
     void init() {
         presenter = new TestingSnakePresenter();
         model = new GameModelImpl(properties);
+
         presenter.setProperties(properties);
         presenter.setModel(model);
     }
@@ -56,64 +59,35 @@ public class ModelPresenterTest {
     }
 
     @Test
-    public void test() {
+    public void presenterLittleTest() {
         assertThat(presenter.frameUpdaterRunning).isFalse();
         presenter.start();
 
         assertThat(presenter.frameUpdaterRunning).isTrue();
         assertThat(presenter.scoreAmount).isEqualTo(0);
+    }
 
-        // TODO wip
-//        var target = model.getApplesSet().stream().findAny().get();
-//
-//        var xDiff = target.point().x() - head().x();
-//        var yDiff = target.point().y() - head().y();
-//
-//        System.out.println(head());
-//        presenter.nextStep();
-//        System.out.println(head());
+    @Test
+    @Timeout(value = 2)
+    public void modelUpDeathTest() {
+        boolean alive = model.update();
+        while (alive) {
+            alive = model.update();
+        }
 
-        return;
+        assertThat(head().y()).isZero();
+    }
 
-//        if (xDiff > 0) { // змейка ползет вверх, а надо вниз
-//            SnakePresenter.EventAction.RIGHT.execute(presenter);
-//            presenter.nextStep();
-//
-//            SnakePresenter.EventAction.DOWN.execute(presenter);
-//            presenter.nextStep();
-//
-//            xDiff = target.point().x() - head().x();
-//            while (xDiff > 0) {
-//                presenter.nextStep();
-//                System.out.println("down" + head());
-//
-//                xDiff = target.point().x() - head().x();
-//            }
-//        } else if (xDiff < 0) {
-//            do {
-//                presenter.nextStep();
-//                System.out.println("up" + head());
-//
-//                xDiff = target.point().x() - head().x();
-//            } while (xDiff != 0);
-//        }
-//
-//        while (yDiff > 0) {
-//            SnakePresenter.EventAction.RIGHT.execute(presenter);
-//            presenter.nextStep();
-//            System.out.println("right" + head());
-//
-//            yDiff = target.point().y() - head().y();
-//        }
-//        while (yDiff < 0) {
-//            SnakePresenter.EventAction.LEFT.execute(presenter);
-//            presenter.nextStep();
-//            System.out.println("left" + head());
-//
-//            yDiff = target.point().y() - head().y();
-//        }
-//
-//        assertThat(target).isNotIn(model.getApplesSet());
-//        assertThat(presenter.scoreAmount).isEqualTo(1);
+    @Test
+    @Timeout(value = 2)
+    public void modelLeftDeathTest() {
+        model.getPlayerSnake().setMovingDirection(Snake.MovingDirection.LEFT);
+
+        boolean alive = model.update();
+        while (alive) {
+            alive = model.update();
+        }
+
+        assertThat(head().x()).isZero();
     }
 }

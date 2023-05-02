@@ -158,7 +158,7 @@ public class GameModelImpl implements GameModel {
     /**
      * Updates the model.
      *
-     * @return {@code true} if the player snake is dead,
+     * @return {@code true} if the player snake is alive,
      * {@code false} otherwise
      */
     @Override
