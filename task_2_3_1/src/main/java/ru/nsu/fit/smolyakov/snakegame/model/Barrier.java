@@ -41,22 +41,40 @@ public record Barrier(Set<Point> barrierPoints) {
     }
 
     private static Set<Point> points(GameProperties properties, EmptyLevel level) {
-        throw new IllegalArgumentException("empty level");
+        return Set.of();
     }
 
     private static Set<Point> points(GameProperties properties, RandomLevel level) {
-        throw new IllegalArgumentException("random level");
+        var points = new HashSet<Point>();
+        int amountOfBarrierPoints
+            = (int) ((int) properties.width() * properties.height() * level.getDensity());
+
+        for (int i = 0; i < amountOfBarrierPoints; i++) {
+            points.add(Point.random(properties.width(), properties.height()));
+        }
+        return points;
     }
 
     private static Set<Point> points(GameProperties properties, BorderLevel level) {
-        return null;
+        Set<Point> points = new HashSet<>();
+
+        for (int x = 0; x < properties.width(); x++) {
+            points.add(new Point(x, 0));
+            points.add(new Point(x, properties.height() - 1));
+        }
+
+        for (int y = 0; y < properties.height(); y++) {
+            points.add(new Point(0, y));
+            points.add(new Point(properties.width() - 1, y));
+        }
+
+        return points;
     }
 
 
     private static Set<Point> points(GameProperties properties, CustomFileLevel level) {
         Set<Point> points = new HashSet<>();
 
-        System.out.println(level.getFileName());
         GameData.INSTANCE.levelFileScanner(level.getFileName()).ifPresent(
             scanner -> {
                 for (int y = 0; y < properties.height() && scanner.hasNextLine(); y++) {
