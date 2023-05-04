@@ -103,7 +103,7 @@ public class Presenter {
         setSelectedAiNames(model.getProperties().aiClassNamesList());
 
         setAvailableLevelNames(GameData.INSTANCE.levelFileNames());
-        setSelectedLevel(model.getProperties().levelFileName());
+//        setSelectedLevel(model.getProperties().levelFileName());
 
         setSelectedJavaFxScalingValue(model.getProperties().javaFxScaling());
         updateCalculatedResolution();
@@ -121,7 +121,7 @@ public class Presenter {
                 .withWidth(getWidth())
                 .withHeight(getHeight())
                 .withJavaFxScaling(getJavaFxScalingValue())
-                .withLevelFileName(getLevel())
+//                .withLevelFileName(getLevel())
                 .withAiClassNamesList(getSelectedAiNames())
         );
 

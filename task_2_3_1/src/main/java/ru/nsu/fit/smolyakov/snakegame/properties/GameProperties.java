@@ -2,6 +2,7 @@ package ru.nsu.fit.smolyakov.snakegame.properties;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.nsu.fit.smolyakov.snakegame.GameData;
+import ru.nsu.fit.smolyakov.snakegame.properties.level.Level;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,8 +16,7 @@ import java.util.Objects;
  *                         every cell will take both in width and height. For example, if the value is 8, then every cell
  *                         will take 8x8 pixels
  * @param apples           a number of apples
- * @param levelFileName    a name of file located in {@link GameData#LEVEL_FOLDER_PATH} that contains
- *                         a barrier
+ * @param level            one of possible {@link Level} subclasses
  * @param aiClassNamesList a list of AI class names, each of them located in {@link GameData#AI_SNAKES_PACKAGE_NAME}
  *                         package
  * @param speed            a game speed
@@ -26,7 +26,7 @@ public record GameProperties(
     @JsonProperty("height") int height,
     @JsonProperty("javaFxScaling") int javaFxScaling,
     @JsonProperty("apples") int apples,
-    @JsonProperty("levelTxtFile") String levelFileName,
+    @JsonProperty("level") Level level,
     @JsonProperty("aiClassNames") List<String> aiClassNamesList,
     @JsonProperty("speed") GameSpeed speed
 ) {
@@ -49,7 +49,7 @@ public record GameProperties(
             height(),
             javaFxScaling(),
             apples(),
-            levelFileName(),
+            level(),
             aiClassNamesList(),
             speed()
         );
@@ -74,7 +74,7 @@ public record GameProperties(
             height,
             javaFxScaling(),
             apples(),
-            levelFileName(),
+            level(),
             aiClassNamesList(),
             speed()
         );
@@ -99,7 +99,7 @@ public record GameProperties(
             height(),
             javaFxScaling,
             apples(),
-            levelFileName(),
+            level(),
             aiClassNamesList(),
             speed()
         );
@@ -126,32 +126,12 @@ public record GameProperties(
             height(),
             javaFxScaling(),
             apples,
-            levelFileName(),
+            level(),
             aiClassNamesList(),
             speed()
         );
     }
-
-    /**
-     * Returns new {@code GameProperties} instance with the name of file
-     * with barriers changed to a specified one. This object is not modified.
-     *
-     * @param barrierFilePath a new name of file with barriers
-     * @return a new {@code GameProperties}
-     * with the specified path to the file with barriers
-     */
-    public GameProperties withLevelFileName(String barrierFilePath) {
-        return new GameProperties(
-            width(),
-            height(),
-            javaFxScaling(),
-            apples(),
-            barrierFilePath,
-            aiClassNamesList(),
-            speed()
-        );
-    }
-
+    
     /**
      * Returns new {@code GameProperties} instance with the list of AI class names
      * changed to a specified one. This object is not modified.
@@ -167,7 +147,7 @@ public record GameProperties(
             height(),
             javaFxScaling(),
             apples(),
-            levelFileName(),
+            level(),
             Objects.requireNonNull(aiClassNamesList),
             speed()
         );
@@ -187,9 +167,11 @@ public record GameProperties(
             height(),
             javaFxScaling(),
             apples(),
-            levelFileName(),
+            level(),
             aiClassNamesList(),
             speed
         );
     }
+
+
 }

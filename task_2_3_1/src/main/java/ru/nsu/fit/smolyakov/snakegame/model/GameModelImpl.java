@@ -42,7 +42,7 @@ public class GameModelImpl implements GameModel {
      */
     public GameModelImpl(GameProperties properties) {
         this.properties = properties;
-        this.barrier = Barrier.fromResource(properties);
+        this.barrier = Barrier.fromProperties(properties);
 
         this.playerSnake = new Snake(this);
 

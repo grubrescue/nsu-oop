@@ -1,8 +1,11 @@
 ---
-width: 100
-height: 44
-javaFxScaling: 16
-apples: 4
-levelTxtFile: "40x20_empty.txt"
-aiClassNames: []
-speed: "kamikaze"
+width: 40
+height: 20
+javaFxScaling: 42
+apples: 5
+level:
+  "@type": "CustomFile"
+  fileName: "40x20_border.txt"
+aiClassNames:
+- "KamikazeAISnake"
+speed: "fastest"

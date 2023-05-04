@@ -2,8 +2,11 @@ package ru.nsu.fit.smolyakov.snakegame.model;
 
 import ru.nsu.fit.smolyakov.snakegame.GameData;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
+import ru.nsu.fit.smolyakov.snakegame.properties.level.*;
 import ru.nsu.fit.smolyakov.snakegame.utils.Point;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,19 +15,49 @@ import java.util.Set;
  * The snake cannot pass through the barrier.
  */
 public record Barrier(Set<Point> barrierPoints) {
-    /**
-     * Creates a barrier from the specified text file.
-     * One should use '*' to represent a barrier point, and '.' to represent an empty point.
-     * The amount of rows and columns have to correspond with the game field size,
-     * however, this is not a requirement:
-     *
-     * @param properties properties of the game field
-     * @return a barrier; if file wasn't found, returns an empty barrier
-     */
-    public static Barrier fromResource(GameProperties properties) {
+    public static Barrier fromProperties(GameProperties properties) {
+        Set<Point> points;
+
+//        if (properties.level() instanceof BorderLevel borderLevel) {
+//            points = points(properties, borderLevel);
+//        } else if (properties.level() instanceof EmptyLevel emptyLevel) {
+//            points = points(properties, emptyLevel);
+//        } else if (properties.level() instanceof RandomLevel randomLevel) {
+//            points = points(properties, randomLevel);
+//        } else if (properties.level() instanceof CustomFileLevel customFileLevel) {
+//            points = points(properties, customFileLevel);
+//        } else {
+//            throw new IllegalArgumentException("Unknown level type");
+//        }
+
+        try {
+            Method method = Barrier.class.getDeclaredMethod("points", GameProperties.class, properties.level().getClass());
+            points = (Set<Point>) method.invoke(null, properties, properties.level());
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException | ClassCastException e) {
+            throw new RuntimeException(e);
+        }
+
+        return new Barrier(points);
+    }
+
+    private static Set<Point> points(GameProperties properties, EmptyLevel level) {
+        throw new IllegalArgumentException("empty level");
+    }
+
+    private static Set<Point> points(GameProperties properties, RandomLevel level) {
+        throw new IllegalArgumentException("random level");
+    }
+
+    private static Set<Point> points(GameProperties properties, BorderLevel level) {
+        return null;
+    }
+
+
+    private static Set<Point> points(GameProperties properties, CustomFileLevel level) {
         Set<Point> points = new HashSet<>();
 
-        GameData.INSTANCE.levelFileScanner(properties.levelFileName()).ifPresent(
+        System.out.println(level.getFileName());
+        GameData.INSTANCE.levelFileScanner(level.getFileName()).ifPresent(
             scanner -> {
                 for (int y = 0; y < properties.height() && scanner.hasNextLine(); y++) {
                     String line = scanner.nextLine();
@@ -39,8 +72,9 @@ public record Barrier(Set<Point> barrierPoints) {
             }
         );
 
-        return new Barrier(points);
+        return points;
     }
+
 
     /**
      * Checks if the point is located on the barrier.
