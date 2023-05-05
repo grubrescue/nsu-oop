@@ -3,9 +3,8 @@ width: 40
 height: 20
 javaFxScaling: 42
 apples: 5
-level:
-  "@type": "CustomFile"
-  fileName: "40x20_border.txt"
+level: !<CustomFile>
+  fileName: "nosize_trash.txt"
 aiClassNames:
-- "KamikazeAISnake"
-speed: "fastest"
+- "GreedyAISnake"
+speed: "fast"

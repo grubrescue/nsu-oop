@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import ru.nsu.fit.smolyakov.snakegame.GameData;
 import ru.nsu.fit.smolyakov.snakegame.executable.JavaFxSnakeGame;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed;
+import ru.nsu.fit.smolyakov.snakegame.properties.level.*;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -55,6 +56,69 @@ public class Presenter {
 
     @FXML
     private Spinner<Integer> applesSpinner;
+
+    @FXML
+    private Slider randomLevelDensitySlider;
+
+    @FXML
+    private Button matchFieldButton;
+
+    @FXML
+    private Slider javaFxScalingSlider;
+
+    @FXML
+    private Text resolutionText;
+
+    @FXML
+    private RadioButton borderLevelRadioButton;
+
+    @FXML
+    private RadioButton randomLevelRadioButton;
+
+    @FXML
+    private RadioButton emptyLevelRadioButton;
+
+    @FXML
+    private RadioButton customLevelRadioButton;
+
+    @FXML
+    private ChoiceBox<String> customFileLevelChoiceBox;
+    private Model model;
+
+    private ToggleGroup levelToggleGroup;
+
+    /**
+     * Updates the calculated resolution based on
+     * the current scaling factor and width and
+     * height of the game field.
+     */
+    @FXML
+    public void updateCalculatedResolution() {
+        var scaling = getJavaFxScalingValue();
+        setResolutionText(
+            scaling * getWidth(),
+            scaling * getHeight()
+        );
+    }
+
+    /**
+     * Saves the configuration and runs the game.
+     */
+    @FXML
+    public void saveAndRunGame() {
+        saveConfig();
+        runJavaFxSnake();
+    }
+
+    @FXML
+    private void matchFieldSize() {
+        var fieldSize = CustomFileLevel.parseFieldSize(getLevelFileName());
+        fieldSize.ifPresent(size -> {
+            setWidth(size.width());
+            setHeight(size.height());
+        });
+    }
+
     /**
      * {@link ChangeListener} that is called when the maximum number of apples is changed.
      * Usually, that happens when the width or height of the game field is changed.
@@ -66,16 +130,14 @@ public class Presenter {
         setApplesAvailableRange(newMax);
         setApplesAmount(Math.min(prevVal, newMax));
     };
-    @FXML
-    private Slider javaFxScalingSlider;
-    @FXML
-    private Text resolutionText;
+
     /**
      * {@link ChangeListener} that is called when the scaling value is changed.
      */
     public final ChangeListener<Number> onScalingChangedListener = (observable, oldValue, newValue) -> {
         updateCalculatedResolution();
     };
+
     /**
      * {@link ChangeListener} that is called when the width or height of the game field is changed.
      */
@@ -83,9 +145,37 @@ public class Presenter {
         onMaxApplesLimitChangeListener.changed(observable, oldValue, newValue);
         onScalingChangedListener.changed(observable, oldValue, newValue);
     };
-    @FXML
-    private ChoiceBox<String> levelChoiceBox;
-    private Model model;
+
+    public final ChangeListener<String> onLevelChoiceBoxChangeListener = (observable, oldValue, newValue) -> {
+        if (newValue == null) {
+            return;
+        }
+        matchFieldButton.setDisable(CustomFileLevel.parseFieldSize(newValue).isEmpty());
+    };
+
+    public final ChangeListener<Toggle> onLevelRadioButtonsChangeListener = (observable, oldValue, newValue) -> {
+//        System.out.println(newValue.);
+        if (newValue.equals(customLevelRadioButton)) {
+            customFileLevelChoiceBox.setDisable(false);
+            randomLevelDensitySlider.setDisable(true);
+
+            boolean canParseFieldSize;
+            if (customFileLevelChoiceBox.getValue() != null) {
+                canParseFieldSize = CustomFileLevel.parseFieldSize(customFileLevelChoiceBox.getValue()).isPresent();
+            } else {
+                canParseFieldSize = false;
+            }
+            matchFieldButton.setDisable(!canParseFieldSize);
+        } else if (newValue.equals(randomLevelRadioButton)){
+            customFileLevelChoiceBox.setDisable(true);
+            randomLevelDensitySlider.setDisable(false);
+            matchFieldButton.setDisable(true);
+        } else {
+            customFileLevelChoiceBox.setDisable(true);
+            randomLevelDensitySlider.setDisable(true);
+            matchFieldButton.setDisable(true);
+        }
+    };
 
     /**
      * Initializes the view components.
@@ -102,8 +192,7 @@ public class Presenter {
         setAvailableAiNames(GameData.INSTANCE.getAvailableAiNames());
         setSelectedAiNames(model.getProperties().aiClassNamesList());
 
-        setAvailableLevelNames(GameData.INSTANCE.levelFileNames());
-//        setSelectedLevel(model.getProperties().levelFileName());
+        initLevelRadioButtons();
 
         setSelectedJavaFxScalingValue(model.getProperties().javaFxScaling());
         updateCalculatedResolution();
@@ -121,8 +210,8 @@ public class Presenter {
                 .withWidth(getWidth())
                 .withHeight(getHeight())
                 .withJavaFxScaling(getJavaFxScalingValue())
-//                .withLevelFileName(getLevel())
                 .withAiClassNamesList(getSelectedAiNames())
+                .withLevel(instanceLevel())
         );
 
         try {
@@ -157,33 +246,38 @@ public class Presenter {
         return getWidth() * getHeight() - 4;
     }
 
-    /**
-     * Updates the calculated resolution based on
-     * the current scaling factor and width and
-     * height of the game field.
-     */
-    @FXML
-    public void updateCalculatedResolution() {
-        var scaling = getJavaFxScalingValue();
-        setResolutionText(
-            scaling * getWidth(),
-            scaling * getHeight()
-        );
-    }
+    private void initLevelRadioButtons() {
+        levelToggleGroup = new ToggleGroup();
 
-    /**
-     * Saves the configuration and runs the game.
-     */
-    @FXML
-    public void saveAndRunGame() {
-        saveConfig();
-        runJavaFxSnake();
+        borderLevelRadioButton.setToggleGroup(levelToggleGroup);
+        randomLevelRadioButton.setToggleGroup(levelToggleGroup);
+        emptyLevelRadioButton.setToggleGroup(levelToggleGroup);
+        customLevelRadioButton.setToggleGroup(levelToggleGroup);
+
+        levelToggleGroup.selectedToggleProperty().addListener(onLevelRadioButtonsChangeListener);
+
+        customFileLevelChoiceBox.setDisable(true);
+        customFileLevelChoiceBox.valueProperty().addListener(onLevelChoiceBoxChangeListener);
+
+        setAvailableLevelNames(GameData.INSTANCE.levelFileNames());
+        if (model.getProperties().level() instanceof CustomFileLevel lvl) {
+            setSelectedLevel(lvl.getFileName());
+            levelToggleGroup.selectToggle(customLevelRadioButton);
+            customFileLevelChoiceBox.setDisable(false);
+        } else if (model.getProperties().level() instanceof RandomLevel lvl) {
+            levelToggleGroup.selectToggle(randomLevelRadioButton);
+            randomLevelDensitySlider.setValue(lvl.getDensity() * 100);
+        } else if (model.getProperties().level() instanceof EmptyLevel) {
+            levelToggleGroup.selectToggle(emptyLevelRadioButton);
+        } else {
+            levelToggleGroup.selectToggle(borderLevelRadioButton);
+        }
     }
 
     /**
      * Initializes the list of available AI names.
      */
-    public void initAiNames() {
+    private void initAiNames() {
         aiListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         javaFxScalingSlider.valueProperty().addListener(onScalingChangedListener);
     }
@@ -193,7 +287,7 @@ public class Presenter {
      *
      * @param width the initial width
      */
-    public void initWidthSelector(int width) {
+    private void initWidthSelector(int width) {
         SpinnerValueFactory<Integer> widthSpinnerValue =
             new SpinnerValueFactory.IntegerSpinnerValueFactory(MIN_WIDTH, MAX_WIDTH);
         widthSpinner.setEditable(true);
@@ -207,7 +301,7 @@ public class Presenter {
      *
      * @param height the initial height
      */
-    public void initHeightSelector(int height) {
+    private void initHeightSelector(int height) {
         SpinnerValueFactory<Integer> heightSpinnerValue =
             new SpinnerValueFactory.IntegerSpinnerValueFactory(MIN_HEIGHT, MAX_HEIGHT);
         heightSpinner.setEditable(true);
@@ -216,13 +310,21 @@ public class Presenter {
         heightSpinner.valueProperty().addListener(onFieldSizeChangeListener);
     }
 
+    private void initApplyButton() {
+        if (levelToggleGroup.getSelectedToggle().equals(customLevelRadioButton)) {
+            matchFieldButton.setDisable(CustomFileLevel.parseFieldSize(customFileLevelChoiceBox.getValue()).isEmpty());
+        } else {
+            matchFieldButton.setDisable(false);
+        }
+    }
+
     /**
      * Initializes the apples amount selector.
      *
      * @param initValue the initial value
      * @param maxApples the maximum amount of apples
      */
-    public void initApplesAmountSelector(int initValue, int maxApples) {
+    private void initApplesAmountSelector(int initValue, int maxApples) {
         SpinnerValueFactory<Integer> applesSpinnerValue =
             new SpinnerValueFactory.IntegerSpinnerValueFactory(0, maxApples - 2);
         applesSpinner.setEditable(true);
@@ -235,7 +337,7 @@ public class Presenter {
      *
      * @param aiNames the list of available AI names
      */
-    public void setAvailableAiNames(List<String> aiNames) {
+    private void setAvailableAiNames(List<String> aiNames) {
         aiListView.getItems().clear();
         aiListView.getItems().addAll(aiNames);
     }
@@ -245,9 +347,9 @@ public class Presenter {
      *
      * @param levelNames the list of names of available levels
      */
-    public void setAvailableLevelNames(List<String> levelNames) {
-        levelChoiceBox.getItems().clear();
-        levelChoiceBox.getItems().addAll(levelNames);
+    private void setAvailableLevelNames(List<String> levelNames) {
+        customFileLevelChoiceBox.getItems().clear();
+        customFileLevelChoiceBox.getItems().addAll(levelNames);
     }
 
     /**
@@ -255,7 +357,7 @@ public class Presenter {
      *
      * @param gameSpeeds the list of available game speeds
      */
-    public void setAvailableGameSpeedChoices(List<GameSpeed> gameSpeeds) {
+    private void setAvailableGameSpeedChoices(List<GameSpeed> gameSpeeds) {
         speedChoiceBox.getItems().clear();
         speedChoiceBox.getItems().addAll(gameSpeeds);
     }
@@ -362,13 +464,9 @@ public class Presenter {
         return (int) javaFxScalingSlider.getValue();
     }
 
-    /**
-     * Returns the selected level.
-     *
-     * @return the selected level
-     */
-    public String getLevel() {
-        return levelChoiceBox.getValue();
+
+    public String getLevelFileName() {
+        return customFileLevelChoiceBox.getValue();
     }
 
     /**
@@ -377,7 +475,7 @@ public class Presenter {
      * @param level the selected level
      */
     public void setSelectedLevel(String level) {
-        levelChoiceBox.setValue(level);
+        customFileLevelChoiceBox.setValue(level);
     }
 
     /**
@@ -400,6 +498,22 @@ public class Presenter {
             var index = aiListView.getItems().indexOf(aiName);
             aiListView.getSelectionModel().select(aiName);
         });
+    }
+
+    public double getRandomLevelDensity() {
+        return randomLevelDensitySlider.getValue() / 100;
+    }
+
+    public Level instanceLevel() {
+        if (levelToggleGroup.getSelectedToggle().equals(customLevelRadioButton)) {
+            return new CustomFileLevel(getLevelFileName());
+        } else if (levelToggleGroup.getSelectedToggle().equals(randomLevelRadioButton)) {
+            return new RandomLevel(getRandomLevelDensity());
+        } else if (levelToggleGroup.getSelectedToggle().equals(emptyLevelRadioButton)){
+            return new EmptyLevel();
+        } else {
+            return new BorderLevel();
+        }
     }
 
     /**

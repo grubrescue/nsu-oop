@@ -83,12 +83,12 @@
                         <ListView fx:id="aiListView" layoutX="402.0" layoutY="122.0" prefHeight="200.0" prefWidth="200.0" />
                         <Text layoutX="365.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AI" />
                         <Button fx:id="runGameButton" layoutX="502.0" layoutY="326.0" mnemonicParsing="false" onAction="#saveAndRunGame" text="Save and run" />
-                  <RadioButton layoutX="380.0" layoutY="91.0" mnemonicParsing="false" text="Custom file" />
+                  <RadioButton fx:id="customLevelRadioButton" layoutX="380.0" layoutY="91.0" mnemonicParsing="false" text="Custom file" />
                   <RadioButton fx:id="randomLevelRadioButton" layoutX="389.0" layoutY="64.0" mnemonicParsing="false" text="Random" />
                   <RadioButton fx:id="borderLevelRadioButton" layoutX="383.0" layoutY="42.0" mnemonicParsing="false" text="Border" />
                   <RadioButton fx:id="emptyLevelRadioButton" layoutX="389.0" layoutY="23.0" mnemonicParsing="false" text="Empty" />
-                  <Button fx:id="matchResolutionButton" layoutX="198.0" layoutY="10.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="91.0" text="Match" />
-                  <Slider fx:id="randomLevelDensitySpinner" blockIncrement="5.0" layoutX="479.0" layoutY="40.0" majorTickUnit="20.0" max="60.0" minorTickCount="5" prefHeight="40.0" prefWidth="144.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="32.0" />
+                  <Button fx:id="matchFieldButton" layoutX="198.0" layoutY="10.0" mnemonicParsing="false" onAction="#matchFieldSize" prefHeight="26.0" prefWidth="91.0" text="Match" />
+                  <Slider fx:id="randomLevelDensitySlider" blockIncrement="5.0" layoutX="479.0" layoutY="40.0" majorTickUnit="20.0" max="60.0" minorTickCount="5" prefHeight="40.0" prefWidth="144.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="32.0" />
                     </children>
                 </AnchorPane>
             </children>

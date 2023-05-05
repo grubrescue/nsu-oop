@@ -173,5 +173,23 @@ public record GameProperties(
         );
     }
 
-
+    /**
+     * Returns new {@code GameProperties} instance with the level
+     * changed to a specified one. This object is not modified.
+     *
+     * @param level a new level
+     * @return a new {@code GameProperties}
+     * with the specified level
+     */
+    public GameProperties withLevel(Level level) {
+        return new GameProperties(
+            width(),
+            height(),
+            javaFxScaling(),
+            apples(),
+            level,
+            aiClassNamesList(),
+            speed()
+        );
+    }
 }
