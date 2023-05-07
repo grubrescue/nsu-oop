@@ -60,7 +60,7 @@ public class Presenter {
      * {@link ChangeListener} that is called when the maximum number of apples is changed.
      * Usually, that happens when the width or height of the game field is changed.
      */
-    public final ChangeListener<Number> onMaxApplesLimitChangeListener = (observable, oldValue, newValue) -> {
+    private final ChangeListener<Number> onMaxApplesLimitChangeListener = (observable, oldValue, newValue) -> {
         var newMax = getMaxApplesAvailable();
         var prevVal = getApplesAmount();
 
@@ -74,7 +74,7 @@ public class Presenter {
     /**
      * {@link ChangeListener} that is called when the selected custom level is changed.
      */
-    public final ChangeListener<String> onLevelChoiceBoxChangeListener = (observable, oldValue, newValue) -> {
+    private final ChangeListener<String> onLevelChoiceBoxChangeListener = (observable, oldValue, newValue) -> {
         if (newValue == null) {
             return;
         }
@@ -87,13 +87,13 @@ public class Presenter {
     /**
      * {@link ChangeListener} that is called when the scaling value is changed.
      */
-    public final ChangeListener<Number> onScalingChangedListener = (observable, oldValue, newValue) -> {
+    private final ChangeListener<Number> onScalingChangedListener = (observable, oldValue, newValue) -> {
         updateCalculatedResolution();
     };
     /**
      * {@link ChangeListener} that is called when the width or height of the game field is changed.
      */
-    public final ChangeListener<Number> onFieldSizeChangeListener = (observable, oldValue, newValue) -> {
+    private final ChangeListener<Number> onFieldSizeChangeListener = (observable, oldValue, newValue) -> {
         onMaxApplesLimitChangeListener.changed(observable, oldValue, newValue);
         onScalingChangedListener.changed(observable, oldValue, newValue);
     };
@@ -110,7 +110,7 @@ public class Presenter {
     /**
      * {@link ChangeListener} that is called when the selected level type is changed.
      */
-    public final ChangeListener<Toggle> onLevelRadioButtonsChangeListener = (observable, oldValue, newValue) -> {
+    private final ChangeListener<Toggle> onLevelRadioButtonsChangeListener = (observable, oldValue, newValue) -> {
         if (newValue.equals(customLevelRadioButton)) {
             customFileLevelChoiceBox.setDisable(false);
             randomLevelDensitySlider.setDisable(true);
@@ -141,7 +141,7 @@ public class Presenter {
      * height of the game field.
      */
     @FXML
-    public void updateCalculatedResolution() {
+    private void updateCalculatedResolution() {
         var scaling = getJavaFxScalingValue();
         setResolutionText(
             scaling * getWidth(),
@@ -153,7 +153,7 @@ public class Presenter {
      * Saves the configuration and runs the game.
      */
     @FXML
-    public void saveAndRunGame() {
+    private void saveAndRunGame() {
         saveConfig();
         runJavaFxSnake();
     }
@@ -192,7 +192,8 @@ public class Presenter {
      * Sets the {@link Model}'s properties to the values from the view
      * and saves them to the file.
      */
-    public void saveConfig() {
+    @FXML
+    private void saveConfig() {
         model.setProperties(
             model.getProperties()
                 .withSpeed(getGameSpeed())
@@ -215,7 +216,7 @@ public class Presenter {
      * Runs the game with the saved configuration.
      * Usually, if this method is called, it is called after {@link #saveConfig()}.
      */
-    public void runJavaFxSnake() {
+    private void runJavaFxSnake() {
         var app = new JavaFxSnakeGame();
         var stage = new Stage();
         hide();
@@ -232,7 +233,7 @@ public class Presenter {
      *
      * @return the maximum number of apples that can be placed on the game field
      */
-    public int getMaxApplesAvailable() {
+    private int getMaxApplesAvailable() {
         return getWidth() * getHeight() - 4;
     }
 
@@ -357,7 +358,7 @@ public class Presenter {
      *
      * @return the selected game speed
      */
-    public GameSpeed getGameSpeed() {
+    private GameSpeed getGameSpeed() {
         return speedChoiceBox.getValue();
     }
 
@@ -366,7 +367,7 @@ public class Presenter {
      *
      * @param gameSpeed the selected game speed
      */
-    public void setGameSpeed(GameSpeed gameSpeed) {
+    private void setGameSpeed(GameSpeed gameSpeed) {
         speedChoiceBox.setValue(gameSpeed);
     }
 
@@ -376,7 +377,7 @@ public class Presenter {
      *
      * @param javaFxScaling the JavaFx implementation scaling factor
      */
-    public void setSelectedJavaFxScalingValue(int javaFxScaling) {
+    private void setSelectedJavaFxScalingValue(int javaFxScaling) {
         javaFxScalingSlider.setValue(javaFxScaling);
     }
 
@@ -386,7 +387,7 @@ public class Presenter {
      * @param resX the X-dimensional resolution
      * @param resY the Y-dimensional resolution
      */
-    public void setResolutionText(int resX, int resY) {
+    private void setResolutionText(int resX, int resY) {
         String format = "Resolution will be %d x %d px.";
         resolutionText.setText(format.formatted(resX, resY));
     }
@@ -396,7 +397,7 @@ public class Presenter {
      *
      * @return the amount of apples
      */
-    public int getApplesAmount() {
+    private int getApplesAmount() {
         return applesSpinner.getValue();
     }
 
@@ -405,7 +406,7 @@ public class Presenter {
      *
      * @param apples the amount of apples
      */
-    public void setApplesAmount(int apples) {
+    private void setApplesAmount(int apples) {
         applesSpinner.getValueFactory().setValue(apples);
     }
 
@@ -414,7 +415,7 @@ public class Presenter {
      *
      * @return the width of the game field
      */
-    public int getWidth() {
+    private int getWidth() {
         return widthSpinner.getValue();
     }
 
@@ -423,7 +424,7 @@ public class Presenter {
      *
      * @param width the width of the game field
      */
-    public void setWidth(int width) {
+    private void setWidth(int width) {
         widthSpinner.getValueFactory().setValue(width);
     }
 
@@ -432,7 +433,7 @@ public class Presenter {
      *
      * @return the height of the game field
      */
-    public int getHeight() {
+    private int getHeight() {
         return heightSpinner.getValue();
     }
 
@@ -441,7 +442,7 @@ public class Presenter {
      *
      * @param height the height of the game field
      */
-    public void setHeight(int height) {
+    private void setHeight(int height) {
         heightSpinner.getValueFactory().setValue(height);
     }
 
@@ -450,7 +451,7 @@ public class Presenter {
      *
      * @return the JavaFx implementation scaling factor
      */
-    public int getJavaFxScalingValue() {
+    private int getJavaFxScalingValue() {
         return (int) javaFxScalingSlider.getValue();
     }
 
@@ -460,7 +461,7 @@ public class Presenter {
      *
      * @return the selected level file name or {@code null} if custom level is not selected
      */
-    public String getLevelFileName() {
+    private String getLevelFileName() {
         if (!levelToggleGroup.getSelectedToggle().equals(customLevelRadioButton)) {
             return null;
         }
@@ -472,7 +473,7 @@ public class Presenter {
      *
      * @param level the selected level
      */
-    public void setSelectedLevel(String level) {
+    private void setSelectedLevel(String level) {
         customFileLevelChoiceBox.setValue(level);
     }
 
@@ -481,7 +482,7 @@ public class Presenter {
      *
      * @return the list of selected AI names
      */
-    public List<String> getSelectedAiNames() {
+    private List<String> getSelectedAiNames() {
         return aiListView.getSelectionModel().getSelectedItems();
     }
 
@@ -490,7 +491,7 @@ public class Presenter {
      *
      * @param aiNames the list of selected AI names
      */
-    public void setSelectedAiNames(List<String> aiNames) {
+    private void setSelectedAiNames(List<String> aiNames) {
         aiListView.getSelectionModel().clearSelection();
         aiNames.forEach(aiName -> {
             var index = aiListView.getItems().indexOf(aiName);
@@ -503,7 +504,7 @@ public class Presenter {
      *
      * @return the selected random level density
      */
-    public double getRandomLevelDensity() {
+    private double getRandomLevelDensity() {
         return randomLevelDensitySlider.getValue() / 100;
     }
 
@@ -512,7 +513,7 @@ public class Presenter {
      *
      * @return the selected level
      */
-    public Level instanceLevel() {
+    private Level instanceLevel() {
         if (levelToggleGroup.getSelectedToggle().equals(customLevelRadioButton)) {
             return new CustomFileLevel(getLevelFileName());
         } else if (levelToggleGroup.getSelectedToggle().equals(randomLevelRadioButton)) {
@@ -529,7 +530,7 @@ public class Presenter {
      *
      * @param upon the upper bound of the range (lower is always 0)
      */
-    public void setApplesAvailableRange(int upon) {
+    private void setApplesAvailableRange(int upon) {
         var svf = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, upon);
         applesSpinner.setValueFactory(svf);
     }

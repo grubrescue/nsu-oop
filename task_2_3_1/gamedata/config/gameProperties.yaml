@@ -1,10 +1,13 @@
 ---
 width: 40
 height: 20
-javaFxScaling: 42
-apples: 5
-level: !<CustomFile>
-  fileName: "nosize_trash.txt"
+javaFxScaling: 39
+apples: 10
+level: !<Random>
+  density: 0.06666666666666667
 aiClassNames:
 - "GreedyAISnake"
-speed: "fast"
+- "KamikazeAISnake"
+- "SamuraiAISnake"
+- "StayinAliveAISnake"
+speed: "fastest"
