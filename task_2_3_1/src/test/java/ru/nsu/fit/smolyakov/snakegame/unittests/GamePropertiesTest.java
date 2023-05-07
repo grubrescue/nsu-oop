@@ -90,13 +90,4 @@ public class GamePropertiesTest {
                 .aiClassNamesList()
         ).isEqualTo(list);
     }
-
-    @Test
-    void withBorderFileNameTest() {
-        assertThat(
-            ExampleProperties.properties
-                .withLevelFileName("луууууч сооооонца золотоооооооооооооооооооооваааааа")
-                .levelFileName()
-        ).isEqualTo("луууууч сооооонца золотоооооооооооооооооооооваааааа");
-    }
 }

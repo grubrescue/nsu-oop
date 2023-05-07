@@ -2,6 +2,8 @@ package ru.nsu.fit.smolyakov.snakegame;
 
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed;
+import ru.nsu.fit.smolyakov.snakegame.properties.level.BorderLevel;
+import ru.nsu.fit.smolyakov.snakegame.properties.level.Level;
 
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class ExampleProperties {
         6,
         1,
         1,
-        "40x20_border.txt",
+        new BorderLevel(),
         List.of(),
         GameSpeed.SPEED_0
     );

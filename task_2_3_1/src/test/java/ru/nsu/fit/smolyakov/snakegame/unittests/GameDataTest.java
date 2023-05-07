@@ -41,7 +41,8 @@ public class GameDataTest {
             .isEqualTo(
                 List.of(
                     "40x20_border.txt",
-                    "40x20_empty.txt"
+                    "40x20_empty.txt",
+                    "nosize_trash.txt"
                 )
             );
     }
