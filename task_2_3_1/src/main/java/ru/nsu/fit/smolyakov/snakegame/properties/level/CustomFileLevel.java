@@ -40,7 +40,7 @@ public final class CustomFileLevel extends Level {
      */
     @JsonCreator
     public CustomFileLevel(@JsonProperty("fileName") String fileName) {
-        this.fileName = fileName;
+        this.fileName = Objects.requireNonNull(fileName);
     }
 
     /**
@@ -50,6 +50,10 @@ public final class CustomFileLevel extends Level {
      * @return a {@link FieldSize} instance
      */
     public static Optional<FieldSize> parseFilenameFieldSize(String fileName) {
+        if (fileName == null) {
+            throw new NullPointerException("fileName is null");
+        }
+
         Matcher matcher = Pattern.compile(pattern).matcher(Objects.requireNonNull(fileName));
 
         if (matcher.matches()) {
@@ -80,7 +84,7 @@ public final class CustomFileLevel extends Level {
      *
      * @return a {@link FieldSize} instance
      */
-    public Optional<FieldSize> parseFilenameFieldSize() {
+    public Optional<FieldSize> parseFieldSize() {
         return parseFilenameFieldSize(fileName);
     }
 
