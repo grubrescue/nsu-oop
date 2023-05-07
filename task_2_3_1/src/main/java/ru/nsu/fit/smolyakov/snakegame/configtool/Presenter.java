@@ -219,7 +219,9 @@ public class Presenter {
     private void runJavaFxSnake() {
         var app = new JavaFxSnakeGame();
         var stage = new Stage();
-        hide();
+
+        stage.setOnHidden(event -> ((Stage) scene.getWindow()).show());
+        scene.getWindow().hide();
 
         try {
             app.runGame(stage);
@@ -533,13 +535,6 @@ public class Presenter {
     private void setApplesAvailableRange(int upon) {
         var svf = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, upon);
         applesSpinner.setValueFactory(svf);
-    }
-
-    /**
-     * Hides the window.
-     */
-    public void hide() {
-        scene.getWindow().hide();
     }
 
     /**
