@@ -7,5 +7,6 @@ ru.nsu.fit.smolyakov.snakegame.model.snake.ai
 ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl
 ru.nsu.fit.smolyakov.snakegame.presenter
 ru.nsu.fit.smolyakov.snakegame.properties
+ru.nsu.fit.smolyakov.snakegame.properties.level
 ru.nsu.fit.smolyakov.snakegame.utils
 ru.nsu.fit.smolyakov.snakegame.view

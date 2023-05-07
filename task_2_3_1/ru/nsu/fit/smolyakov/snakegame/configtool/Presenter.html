@@ -115,6 +115,16 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">
 <div class="block"><code>ChangeListener</code> that is called when the width or height of the game field is changed.</div>
 </div>
+<div class="col-first odd-row-color"><code>final javafx.beans.value.ChangeListener&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second odd-row-color"><code><a href="#onLevelChoiceBoxChangeListener" class="member-name-link">onLevelChoiceBoxChangeListener</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block"><code>ChangeListener</code> that is called when the selected custom level is changed.</div>
+</div>
+<div class="col-first even-row-color"><code>final javafx.beans.value.ChangeListener&lt;javafx.scene.control.Toggle&gt;</code></div>
+<div class="col-second even-row-color"><code><a href="#onLevelRadioButtonsChangeListener" class="member-name-link">onLevelRadioButtonsChangeListener</a></code></div>
+<div class="col-last even-row-color">
+<div class="block"><code>ChangeListener</code> that is called when the selected level type is changed.</div>
+</div>
 <div class="col-first odd-row-color"><code>final javafx.beans.value.ChangeListener&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Number.html" title="class or interface in java.lang" class="external-link">Number</a>&gt;</code></div>
 <div class="col-second odd-row-color"><code><a href="#onMaxApplesLimitChangeListener" class="member-name-link">onMaxApplesLimitChangeListener</a></code></div>
 <div class="col-last odd-row-color">
@@ -173,55 +183,44 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the JavaFx implementation scaling factor.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLevel()" class="member-name-link">getLevel</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLevelFileName()" class="member-name-link">getLevelFileName</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the selected level.</div>
+<div class="block">Returns the selected level file name, if custom level is selected.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMaxApplesAvailable()" class="member-name-link">getMaxApplesAvailable</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the maximum number of apples that can be placed on the game field.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSelectedAiNames()" class="member-name-link">getSelectedAiNames</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRandomLevelDensity()" class="member-name-link">getRandomLevelDensity</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the selected random level density.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSelectedAiNames()" class="member-name-link">getSelectedAiNames</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the list of selected AI names.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWidth()" class="member-name-link">getWidth</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWidth()" class="member-name-link">getWidth</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the width of the game field.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hide()" class="member-name-link">hide</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hide()" class="member-name-link">hide</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Hides the window.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initAiNames()" class="member-name-link">initAiNames</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Initializes the list of available AI names.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initApplesAmountSelector(int,int)" class="member-name-link">initApplesAmountSelector</a><wbr>(int&nbsp;initValue,
- int&nbsp;maxApples)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Initializes the apples amount selector.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initHeightSelector(int)" class="member-name-link">initHeightSelector</a><wbr>(int&nbsp;height)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Initializes the height selector.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initializeViewFields()" class="member-name-link">initializeViewFields</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Initializes the view components.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initWidthSelector(int)" class="member-name-link">initWidthSelector</a><wbr>(int&nbsp;width)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../properties/level/Level.html" title="class in ru.nsu.fit.smolyakov.snakegame.properties.level">Level</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#instanceLevel()" class="member-name-link">instanceLevel</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Initializes the width selector.</div>
+<div class="block">Instantiates and returns the selected level.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#runJavaFxSnake()" class="member-name-link">runJavaFxSnake</a>()</code></div>
@@ -250,64 +249,49 @@ loadScripts(document, 'script');</script>
 <div class="block">Sets the range of available apples amount.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setAvailableAiNames(java.util.List)" class="member-name-link">setAvailableAiNames</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;aiNames)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setGameSpeed(ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed)" class="member-name-link">setGameSpeed</a><wbr>(<a href="../properties/GameSpeed.html" title="enum class in ru.nsu.fit.smolyakov.snakegame.properties">GameSpeed</a>&nbsp;gameSpeed)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Sets the list of available AI names the user able to choose.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setAvailableGameSpeedChoices(java.util.List)" class="member-name-link">setAvailableGameSpeedChoices</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../properties/GameSpeed.html" title="enum class in ru.nsu.fit.smolyakov.snakegame.properties">GameSpeed</a>&gt;&nbsp;gameSpeeds)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Sets the list of available game speeds the user able to choose.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setAvailableLevelNames(java.util.List)" class="member-name-link">setAvailableLevelNames</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;levelNames)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Sets the list of names of available levels the user able to choose.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setGameSpeed(ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed)" class="member-name-link">setGameSpeed</a><wbr>(<a href="../properties/GameSpeed.html" title="enum class in ru.nsu.fit.smolyakov.snakegame.properties">GameSpeed</a>&nbsp;gameSpeed)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the selected game speed.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setHeight(int)" class="member-name-link">setHeight</a><wbr>(int&nbsp;height)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setHeight(int)" class="member-name-link">setHeight</a><wbr>(int&nbsp;height)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the height of the game field.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setModel(ru.nsu.fit.smolyakov.snakegame.configtool.Model)" class="member-name-link">setModel</a><wbr>(<a href="Model.html" title="class in ru.nsu.fit.smolyakov.snakegame.configtool">Model</a>&nbsp;model)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setModel(ru.nsu.fit.smolyakov.snakegame.configtool.Model)" class="member-name-link">setModel</a><wbr>(<a href="Model.html" title="class in ru.nsu.fit.smolyakov.snakegame.configtool">Model</a>&nbsp;model)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the model.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setResolutionText(int,int)" class="member-name-link">setResolutionText</a><wbr>(int&nbsp;resX,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setResolutionText(int,int)" class="member-name-link">setResolutionText</a><wbr>(int&nbsp;resX,
  int&nbsp;resY)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the text of the resolution label.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSelectedAiNames(java.util.List)" class="member-name-link">setSelectedAiNames</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;aiNames)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSelectedAiNames(java.util.List)" class="member-name-link">setSelectedAiNames</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;aiNames)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the list of selected AI names.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSelectedJavaFxScalingValue(int)" class="member-name-link">setSelectedJavaFxScalingValue</a><wbr>(int&nbsp;javaFxScaling)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSelectedJavaFxScalingValue(int)" class="member-name-link">setSelectedJavaFxScalingValue</a><wbr>(int&nbsp;javaFxScaling)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the JavaFx implementation scaling factor.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSelectedLevel(java.lang.String)" class="member-name-link">setSelectedLevel</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;level)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSelectedLevel(java.lang.String)" class="member-name-link">setSelectedLevel</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;level)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the selected level.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setWidth(int)" class="member-name-link">setWidth</a><wbr>(int&nbsp;width)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setWidth(int)" class="member-name-link">setWidth</a><wbr>(int&nbsp;width)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the width of the game field.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateCalculatedResolution()" class="member-name-link">updateCalculatedResolution</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateCalculatedResolution()" class="member-name-link">updateCalculatedResolution</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Updates the calculated resolution based on
  the current scaling factor and width and
  height of the game field.</div>
@@ -398,6 +382,13 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="onLevelChoiceBoxChangeListener">
+<h3>onLevelChoiceBoxChangeListener</h3>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">javafx.beans.value.ChangeListener&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">onLevelChoiceBoxChangeListener</span></div>
+<div class="block"><code>ChangeListener</code> that is called when the selected custom level is changed.</div>
+</section>
+</li>
+<li>
 <section class="detail" id="onScalingChangedListener">
 <h3>onScalingChangedListener</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">javafx.beans.value.ChangeListener&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Number.html" title="class or interface in java.lang" class="external-link">Number</a>&gt;</span>&nbsp;<span class="element-name">onScalingChangedListener</span></div>
@@ -409,6 +400,13 @@ loadScripts(document, 'script');</script>
 <h3>onFieldSizeChangeListener</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">javafx.beans.value.ChangeListener&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Number.html" title="class or interface in java.lang" class="external-link">Number</a>&gt;</span>&nbsp;<span class="element-name">onFieldSizeChangeListener</span></div>
 <div class="block"><code>ChangeListener</code> that is called when the width or height of the game field is changed.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="onLevelRadioButtonsChangeListener">
+<h3>onLevelRadioButtonsChangeListener</h3>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">javafx.beans.value.ChangeListener&lt;javafx.scene.control.Toggle&gt;</span>&nbsp;<span class="element-name">onLevelRadioButtonsChangeListener</span></div>
+<div class="block"><code>ChangeListener</code> that is called when the selected level type is changed.</div>
 </section>
 </li>
 </ul>
@@ -433,6 +431,22 @@ loadScripts(document, 'script');</script>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="updateCalculatedResolution()">
+<h3>updateCalculatedResolution</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateCalculatedResolution</span>()</div>
+<div class="block">Updates the calculated resolution based on
+ the current scaling factor and width and
+ height of the game field.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="saveAndRunGame()">
+<h3>saveAndRunGame</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">saveAndRunGame</span>()</div>
+<div class="block">Saves the configuration and runs the game.</div>
+</section>
+</li>
 <li>
 <section class="detail" id="initializeViewFields()">
 <h3>initializeViewFields</h3>
@@ -464,97 +478,6 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the maximum number of apples that can be placed on the game field</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="updateCalculatedResolution()">
-<h3>updateCalculatedResolution</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateCalculatedResolution</span>()</div>
-<div class="block">Updates the calculated resolution based on
- the current scaling factor and width and
- height of the game field.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="saveAndRunGame()">
-<h3>saveAndRunGame</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">saveAndRunGame</span>()</div>
-<div class="block">Saves the configuration and runs the game.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="initAiNames()">
-<h3>initAiNames</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">initAiNames</span>()</div>
-<div class="block">Initializes the list of available AI names.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="initWidthSelector(int)">
-<h3>initWidthSelector</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">initWidthSelector</span><wbr><span class="parameters">(int&nbsp;width)</span></div>
-<div class="block">Initializes the width selector.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>width</code> - the initial width</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="initHeightSelector(int)">
-<h3>initHeightSelector</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">initHeightSelector</span><wbr><span class="parameters">(int&nbsp;height)</span></div>
-<div class="block">Initializes the height selector.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>height</code> - the initial height</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="initApplesAmountSelector(int,int)">
-<h3>initApplesAmountSelector</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">initApplesAmountSelector</span><wbr><span class="parameters">(int&nbsp;initValue,
- int&nbsp;maxApples)</span></div>
-<div class="block">Initializes the apples amount selector.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>initValue</code> - the initial value</dd>
-<dd><code>maxApples</code> - the maximum amount of apples</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="setAvailableAiNames(java.util.List)">
-<h3>setAvailableAiNames</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setAvailableAiNames</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;aiNames)</span></div>
-<div class="block">Sets the list of available AI names the user able to choose.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>aiNames</code> - the list of available AI names</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="setAvailableLevelNames(java.util.List)">
-<h3>setAvailableLevelNames</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setAvailableLevelNames</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;levelNames)</span></div>
-<div class="block">Sets the list of names of available levels the user able to choose.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>levelNames</code> - the list of names of available levels</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="setAvailableGameSpeedChoices(java.util.List)">
-<h3>setAvailableGameSpeedChoices</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setAvailableGameSpeedChoices</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../properties/GameSpeed.html" title="enum class in ru.nsu.fit.smolyakov.snakegame.properties">GameSpeed</a>&gt;&nbsp;gameSpeeds)</span></div>
-<div class="block">Sets the list of available game speeds the user able to choose.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>gameSpeeds</code> - the list of available game speeds</dd>
 </dl>
 </section>
 </li>
@@ -683,13 +606,13 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getLevel()">
-<h3>getLevel</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getLevel</span>()</div>
-<div class="block">Returns the selected level.</div>
+<section class="detail" id="getLevelFileName()">
+<h3>getLevelFileName</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getLevelFileName</span>()</div>
+<div class="block">Returns the selected level file name, if custom level is selected.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the selected level</dd>
+<dd>the selected level file name or <code>null</code> if custom level is not selected</dd>
 </dl>
 </section>
 </li>
@@ -723,6 +646,28 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>aiNames</code> - the list of selected AI names</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getRandomLevelDensity()">
+<h3>getRandomLevelDensity</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">getRandomLevelDensity</span>()</div>
+<div class="block">Returns the selected random level density.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the selected random level density</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="instanceLevel()">
+<h3>instanceLevel</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../properties/level/Level.html" title="class in ru.nsu.fit.smolyakov.snakegame.properties.level">Level</a></span>&nbsp;<span class="element-name">instanceLevel</span>()</div>
+<div class="block">Instantiates and returns the selected level.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the selected level</dd>
 </dl>
 </section>
 </li>

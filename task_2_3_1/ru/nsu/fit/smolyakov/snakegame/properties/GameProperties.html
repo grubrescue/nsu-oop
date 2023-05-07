@@ -84,14 +84,13 @@ loadScripts(document, 'script');</script>
                          every cell will take both in width and height. For example, if the value is 8, then every cell
                          will take 8x8 pixels</dd>
 <dd><code><span id="param-apples">apples</span></code> - a number of apples</dd>
-<dd><code><span id="param-levelFileName">levelFileName</span></code> - a name of file located in <a href="../GameData.html#LEVEL_FOLDER_PATH"><code>GameData.LEVEL_FOLDER_PATH</code></a> that contains
-                         a barrier</dd>
+<dd><code><span id="param-level">level</span></code> - one of possible <a href="level/Level.html" title="class in ru.nsu.fit.smolyakov.snakegame.properties.level"><code>Level</code></a> subclasses</dd>
 <dd><code><span id="param-aiClassNamesList">aiClassNamesList</span></code> - a list of AI class names, each of them located in <a href="../GameData.html#AI_SNAKES_PACKAGE_NAME"><code>GameData.AI_SNAKES_PACKAGE_NAME</code></a>
                          package</dd>
 <dd><code><span id="param-speed">speed</span></code> - a game speed</dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">GameProperties</span>(int&nbsp;width, int&nbsp;height, int&nbsp;javaFxScaling, int&nbsp;apples, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;levelFileName, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;aiClassNamesList, <a href="GameSpeed.html" title="enum class in ru.nsu.fit.smolyakov.snakegame.properties">GameSpeed</a>&nbsp;speed)
+<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">GameProperties</span>(int&nbsp;width, int&nbsp;height, int&nbsp;javaFxScaling, int&nbsp;apples, <a href="level/Level.html" title="class in ru.nsu.fit.smolyakov.snakegame.properties.level">Level</a>&nbsp;level, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;aiClassNamesList, <a href="GameSpeed.html" title="enum class in ru.nsu.fit.smolyakov.snakegame.properties">GameSpeed</a>&nbsp;speed)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
 <div class="block">Represents properties of presenter.</div>
 </section>
@@ -105,11 +104,11 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int,int,int,java.lang.String,java.util.List,ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed)" class="member-name-link">GameProperties</a><wbr>(int&nbsp;width,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int,int,int,ru.nsu.fit.smolyakov.snakegame.properties.level.Level,java.util.List,ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed)" class="member-name-link">GameProperties</a><wbr>(int&nbsp;width,
  int&nbsp;height,
  int&nbsp;javaFxScaling,
  int&nbsp;apples,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;levelFileName,
+ <a href="level/Level.html" title="class in ru.nsu.fit.smolyakov.snakegame.properties.level">Level</a>&nbsp;level,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;aiClassNamesList,
  <a href="GameSpeed.html" title="enum class in ru.nsu.fit.smolyakov.snakegame.properties">GameSpeed</a>&nbsp;speed)</code></div>
 <div class="col-last even-row-color">
@@ -159,10 +158,10 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <a href="#param-javaFxScaling"><code>javaFxScaling</code></a> record component.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#levelFileName()" class="member-name-link">levelFileName</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="level/Level.html" title="class in ru.nsu.fit.smolyakov.snakegame.properties.level">Level</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#level()" class="member-name-link">level</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <a href="#param-levelFileName"><code>levelFileName</code></a> record component.</div>
+<div class="block">Returns the value of the <a href="#param-level"><code>level</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GameSpeed.html" title="enum class in ru.nsu.fit.smolyakov.snakegame.properties">GameSpeed</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#speed()" class="member-name-link">speed</a>()</code></div>
@@ -204,10 +203,10 @@ loadScripts(document, 'script');</script>
  of JavaFX implementation changed to a specified one.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GameProperties.html" title="class in ru.nsu.fit.smolyakov.snakegame.properties">GameProperties</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#withLevelFileName(java.lang.String)" class="member-name-link">withLevelFileName</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;barrierFilePath)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#withLevel(ru.nsu.fit.smolyakov.snakegame.properties.level.Level)" class="member-name-link">withLevel</a><wbr>(<a href="level/Level.html" title="class in ru.nsu.fit.smolyakov.snakegame.properties.level">Level</a>&nbsp;level)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns new <code>GameProperties</code> instance with the name of file
- with barriers changed to a specified one.</div>
+<div class="block">Returns new <code>GameProperties</code> instance with the level
+ changed to a specified one.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="GameProperties.html" title="class in ru.nsu.fit.smolyakov.snakegame.properties">GameProperties</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#withSpeed(ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed)" class="member-name-link">withSpeed</a><wbr>(<a href="GameSpeed.html" title="enum class in ru.nsu.fit.smolyakov.snakegame.properties">GameSpeed</a>&nbsp;speed)</code></div>
@@ -239,13 +238,13 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(int,int,int,int,java.lang.String,java.util.List,ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed)">
+<section class="detail" id="&lt;init&gt;(int,int,int,int,ru.nsu.fit.smolyakov.snakegame.properties.level.Level,java.util.List,ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed)">
 <h3>GameProperties</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">GameProperties</span><wbr><span class="parameters">(int&nbsp;width,
  int&nbsp;height,
  int&nbsp;javaFxScaling,
  int&nbsp;apples,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;levelFileName,
+ <a href="level/Level.html" title="class in ru.nsu.fit.smolyakov.snakegame.properties.level">Level</a>&nbsp;level,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;aiClassNamesList,
  <a href="GameSpeed.html" title="enum class in ru.nsu.fit.smolyakov.snakegame.properties">GameSpeed</a>&nbsp;speed)</span></div>
 <div class="block">Creates an instance of a <code>GameProperties</code> record class.</div>
@@ -255,7 +254,7 @@ loadScripts(document, 'script');</script>
 <dd><code>height</code> - the value for the <a href="#param-height"><code>height</code></a> record component</dd>
 <dd><code>javaFxScaling</code> - the value for the <a href="#param-javaFxScaling"><code>javaFxScaling</code></a> record component</dd>
 <dd><code>apples</code> - the value for the <a href="#param-apples"><code>apples</code></a> record component</dd>
-<dd><code>levelFileName</code> - the value for the <a href="#param-levelFileName"><code>levelFileName</code></a> record component</dd>
+<dd><code>level</code> - the value for the <a href="#param-level"><code>level</code></a> record component</dd>
 <dd><code>aiClassNamesList</code> - the value for the <a href="#param-aiClassNamesList"><code>aiClassNamesList</code></a> record component</dd>
 <dd><code>speed</code> - the value for the <a href="#param-speed"><code>speed</code></a> record component</dd>
 </dl>
@@ -338,21 +337,6 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="withLevelFileName(java.lang.String)">
-<h3>withLevelFileName</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="GameProperties.html" title="class in ru.nsu.fit.smolyakov.snakegame.properties">GameProperties</a></span>&nbsp;<span class="element-name">withLevelFileName</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;barrierFilePath)</span></div>
-<div class="block">Returns new <code>GameProperties</code> instance with the name of file
- with barriers changed to a specified one. This object is not modified.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>barrierFilePath</code> - a new name of file with barriers</dd>
-<dt>Returns:</dt>
-<dd>a new <code>GameProperties</code>
- with the specified path to the file with barriers</dd>
-</dl>
-</section>
-</li>
-<li>
 <section class="detail" id="withAiClassNamesList(java.util.List)">
 <h3>withAiClassNamesList</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="GameProperties.html" title="class in ru.nsu.fit.smolyakov.snakegame.properties">GameProperties</a></span>&nbsp;<span class="element-name">withAiClassNamesList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;aiClassNamesList)</span></div>
@@ -381,6 +365,21 @@ loadScripts(document, 'script');</script>
 <dt>Returns:</dt>
 <dd>a new <code>GameProperties</code>
  with the specified game speed</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="withLevel(ru.nsu.fit.smolyakov.snakegame.properties.level.Level)">
+<h3>withLevel</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="GameProperties.html" title="class in ru.nsu.fit.smolyakov.snakegame.properties">GameProperties</a></span>&nbsp;<span class="element-name">withLevel</span><wbr><span class="parameters">(<a href="level/Level.html" title="class in ru.nsu.fit.smolyakov.snakegame.properties.level">Level</a>&nbsp;level)</span></div>
+<div class="block">Returns new <code>GameProperties</code> instance with the level
+ changed to a specified one. This object is not modified.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>level</code> - a new level</dd>
+<dt>Returns:</dt>
+<dd>a new <code>GameProperties</code>
+ with the specified level</dd>
 </dl>
 </section>
 </li>
@@ -470,13 +469,13 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="levelFileName()">
-<h3>levelFileName</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">levelFileName</span>()</div>
-<div class="block">Returns the value of the <a href="#param-levelFileName"><code>levelFileName</code></a> record component.</div>
+<section class="detail" id="level()">
+<h3>level</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="level/Level.html" title="class in ru.nsu.fit.smolyakov.snakegame.properties.level">Level</a></span>&nbsp;<span class="element-name">level</span>()</div>
+<div class="block">Returns the value of the <a href="#param-level"><code>level</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <a href="#param-levelFileName"><code>levelFileName</code></a> record component</dd>
+<dd>the value of the <a href="#param-level"><code>level</code></a> record component</dd>
 </dl>
 </section>
 </li>
