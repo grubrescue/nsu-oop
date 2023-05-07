@@ -32,22 +32,13 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.Scene?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-
-<Scene fx:id="scene" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.fit.smolyakov.snakegame.configtool.Presenter">
+<?import javafx.scene.Scene?>
+<?import javafx.scene.text.*?>
+<Scene xmlns:fx="http://javafx.com/fxml/1" fx:id="scene" xmlns="http://javafx.com/javafx/19"
+       fx:controller="ru.nsu.fit.smolyakov.snakegame.configtool.Presenter">
     <root>
         <VBox prefHeight="400.0" prefWidth="640.0">
             <children>
@@ -55,40 +46,61 @@
                     <menus>
                         <Menu mnemonicParsing="false" text="Help">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="About" />
+                                <MenuItem mnemonicParsing="false" text="About"/>
                             </items>
                         </Menu>
                     </menus>
                 </MenuBar>
                 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="367.0" prefWidth="551.0" VBox.vgrow="ALWAYS">
                     <children>
-                        <Button fx:id="saveButton" layoutX="347.0" layoutY="326.0" mnemonicParsing="false" onAction="#saveConfig" text="Save configuration" />
-                        <Text layoutX="36.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Speed" wrappingWidth="86.79100036621094" />
-                        <ChoiceBox fx:id="speedChoiceBox" layoutX="123.0" layoutY="245.0" prefWidth="150.0" />
-                        <Text layoutX="27.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Field size" wrappingWidth="66.79100036621094" />
-                        <Text layoutX="192.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x" wrappingWidth="12.791000366210938" />
-                        <Spinner fx:id="widthSpinner" editable="true" layoutX="116.0" layoutY="38.0" prefHeight="26.0" prefWidth="71.0" />
-                        <Spinner fx:id="heightSpinner" editable="true" layoutX="208.0" layoutY="38.0" prefHeight="26.0" prefWidth="71.0" />
-                        <Slider fx:id="javaFxScalingSlider" blockIncrement="4.0" layoutX="117.0" layoutY="82.0" majorTickUnit="16.0" max="72.0" min="16.0" minorTickCount="8" prefHeight="40.0" prefWidth="207.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="32.0" />
-                        <Text layoutX="27.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="JavaFX Scaling" />
-                        <Spinner fx:id="applesSpinner" editable="true" layoutX="123.0" layoutY="152.0" prefHeight="26.0" prefWidth="71.0" />
-                        <Text layoutX="36.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apples" />
-                        <Text fx:id="resolutionText" layoutX="26.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="264.8509979248047">
+                        <Button fx:id="saveButton" layoutX="347.0" layoutY="326.0" mnemonicParsing="false"
+                                onAction="#saveConfig" text="Save configuration"/>
+                        <Text layoutX="36.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Speed"
+                              wrappingWidth="86.79100036621094"/>
+                        <ChoiceBox fx:id="speedChoiceBox" layoutX="123.0" layoutY="245.0" prefWidth="150.0"/>
+                        <Text layoutX="27.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Field size"
+                              wrappingWidth="66.79100036621094"/>
+                        <Text layoutX="192.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x"
+                              wrappingWidth="12.791000366210938"/>
+                        <Spinner fx:id="widthSpinner" editable="true" layoutX="116.0" layoutY="38.0" prefHeight="26.0"
+                                 prefWidth="71.0"/>
+                        <Spinner fx:id="heightSpinner" editable="true" layoutX="208.0" layoutY="38.0" prefHeight="26.0"
+                                 prefWidth="71.0"/>
+                        <Slider fx:id="javaFxScalingSlider" blockIncrement="4.0" layoutX="117.0" layoutY="82.0"
+                                majorTickUnit="16.0" max="72.0" min="16.0" minorTickCount="8" prefHeight="40.0"
+                                prefWidth="207.0" showTickLabels="true" showTickMarks="true" snapToTicks="true"
+                                value="32.0"/>
+                        <Text layoutX="27.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                              text="JavaFX Scaling"/>
+                        <Spinner fx:id="applesSpinner" editable="true" layoutX="123.0" layoutY="152.0" prefHeight="26.0"
+                                 prefWidth="71.0"/>
+                        <Text layoutX="36.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apples"/>
+                        <Text fx:id="resolutionText" layoutX="26.0" layoutY="136.0" strokeType="OUTSIDE"
+                              strokeWidth="0.0" wrappingWidth="264.8509979248047">
                             <font>
-                                <Font name="System Italic" size="13.0" />
+                                <Font name="System Italic" size="13.0"/>
                             </font>
                         </Text>
-                        <ChoiceBox fx:id="customFileLevelChoiceBox" layoutX="480.0" layoutY="87.0" prefWidth="150.0" />
-                        <Text layoutX="385.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level" />
-                        <ListView fx:id="aiListView" layoutX="402.0" layoutY="122.0" prefHeight="200.0" prefWidth="200.0" />
-                        <Text layoutX="365.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AI" />
-                        <Button fx:id="runGameButton" layoutX="502.0" layoutY="326.0" mnemonicParsing="false" onAction="#saveAndRunGame" text="Save and run" />
-                  <RadioButton fx:id="customLevelRadioButton" layoutX="380.0" layoutY="91.0" mnemonicParsing="false" text="Custom file" />
-                  <RadioButton fx:id="randomLevelRadioButton" layoutX="389.0" layoutY="64.0" mnemonicParsing="false" text="Random" />
-                  <RadioButton fx:id="borderLevelRadioButton" layoutX="383.0" layoutY="42.0" mnemonicParsing="false" text="Border" />
-                  <RadioButton fx:id="emptyLevelRadioButton" layoutX="389.0" layoutY="23.0" mnemonicParsing="false" text="Empty" />
-                  <Button fx:id="matchFieldButton" layoutX="198.0" layoutY="10.0" mnemonicParsing="false" onAction="#matchFieldSize" prefHeight="26.0" prefWidth="91.0" text="Match" />
-                  <Slider fx:id="randomLevelDensitySlider" blockIncrement="5.0" layoutX="479.0" layoutY="40.0" majorTickUnit="20.0" max="60.0" minorTickCount="5" prefHeight="40.0" prefWidth="144.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="32.0" />
+                        <ChoiceBox fx:id="customFileLevelChoiceBox" layoutX="480.0" layoutY="87.0" prefWidth="150.0"/>
+                        <Text layoutX="385.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level"/>
+                        <ListView fx:id="aiListView" layoutX="402.0" layoutY="122.0" prefHeight="200.0"
+                                  prefWidth="200.0"/>
+                        <Text layoutX="365.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AI"/>
+                        <Button fx:id="runGameButton" layoutX="502.0" layoutY="326.0" mnemonicParsing="false"
+                                onAction="#saveAndRunGame" text="Save and run"/>
+                        <RadioButton fx:id="customLevelRadioButton" layoutX="380.0" layoutY="91.0"
+                                     mnemonicParsing="false" text="Custom file"/>
+                        <RadioButton fx:id="randomLevelRadioButton" layoutX="389.0" layoutY="64.0"
+                                     mnemonicParsing="false" text="Random"/>
+                        <RadioButton fx:id="borderLevelRadioButton" layoutX="383.0" layoutY="42.0"
+                                     mnemonicParsing="false" text="Border"/>
+                        <RadioButton fx:id="emptyLevelRadioButton" layoutX="389.0" layoutY="23.0"
+                                     mnemonicParsing="false" text="Empty"/>
+                        <Button fx:id="matchFieldButton" layoutX="198.0" layoutY="10.0" mnemonicParsing="false"
+                                onAction="#matchFieldSize" prefHeight="26.0" prefWidth="91.0" text="Match"/>
+                        <Slider fx:id="randomLevelDensitySlider" blockIncrement="5.0" layoutX="479.0" layoutY="40.0"
+                                majorTickUnit="20.0" max="60.0" minorTickCount="5" prefHeight="40.0" prefWidth="144.0"
+                                showTickLabels="true" showTickMarks="true" snapToTicks="true" value="32.0"/>
                     </children>
                 </AnchorPane>
             </children>

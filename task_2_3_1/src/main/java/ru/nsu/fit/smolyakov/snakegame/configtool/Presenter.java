@@ -56,35 +56,83 @@ public class Presenter {
 
     @FXML
     private Spinner<Integer> applesSpinner;
+    /**
+     * {@link ChangeListener} that is called when the maximum number of apples is changed.
+     * Usually, that happens when the width or height of the game field is changed.
+     */
+    public final ChangeListener<Number> onMaxApplesLimitChangeListener = (observable, oldValue, newValue) -> {
+        var newMax = getMaxApplesAvailable();
+        var prevVal = getApplesAmount();
 
+        setApplesAvailableRange(newMax);
+        setApplesAmount(Math.min(prevVal, newMax));
+    };
     @FXML
     private Slider randomLevelDensitySlider;
-
     @FXML
     private Button matchFieldButton;
-
+    /**
+     * {@link ChangeListener} that is called when the selected custom level is changed.
+     */
+    public final ChangeListener<String> onLevelChoiceBoxChangeListener = (observable, oldValue, newValue) -> {
+        if (newValue == null) {
+            return;
+        }
+        matchFieldButton.setDisable(CustomFileLevel.parseFilenameFieldSize(newValue).isEmpty());
+    };
     @FXML
     private Slider javaFxScalingSlider;
-
     @FXML
     private Text resolutionText;
-
+    /**
+     * {@link ChangeListener} that is called when the scaling value is changed.
+     */
+    public final ChangeListener<Number> onScalingChangedListener = (observable, oldValue, newValue) -> {
+        updateCalculatedResolution();
+    };
+    /**
+     * {@link ChangeListener} that is called when the width or height of the game field is changed.
+     */
+    public final ChangeListener<Number> onFieldSizeChangeListener = (observable, oldValue, newValue) -> {
+        onMaxApplesLimitChangeListener.changed(observable, oldValue, newValue);
+        onScalingChangedListener.changed(observable, oldValue, newValue);
+    };
     @FXML
     private RadioButton borderLevelRadioButton;
-
     @FXML
     private RadioButton randomLevelRadioButton;
-
     @FXML
     private RadioButton emptyLevelRadioButton;
-
     @FXML
     private RadioButton customLevelRadioButton;
-
     @FXML
     private ChoiceBox<String> customFileLevelChoiceBox;
-    private Model model;
+    /**
+     * {@link ChangeListener} that is called when the selected level type is changed.
+     */
+    public final ChangeListener<Toggle> onLevelRadioButtonsChangeListener = (observable, oldValue, newValue) -> {
+        if (newValue.equals(customLevelRadioButton)) {
+            customFileLevelChoiceBox.setDisable(false);
+            randomLevelDensitySlider.setDisable(true);
 
+            boolean canParseFieldSize;
+            if (customFileLevelChoiceBox.getValue() != null) {
+                canParseFieldSize = CustomFileLevel.parseFilenameFieldSize(customFileLevelChoiceBox.getValue()).isPresent();
+            } else {
+                canParseFieldSize = false;
+            }
+            matchFieldButton.setDisable(!canParseFieldSize);
+        } else if (newValue.equals(randomLevelRadioButton)) {
+            customFileLevelChoiceBox.setDisable(true);
+            randomLevelDensitySlider.setDisable(false);
+            matchFieldButton.setDisable(true);
+        } else {
+            customFileLevelChoiceBox.setDisable(true);
+            randomLevelDensitySlider.setDisable(true);
+            matchFieldButton.setDisable(true);
+        }
+    };
+    private Model model;
     private ToggleGroup levelToggleGroup;
 
     /**
@@ -118,69 +166,6 @@ public class Presenter {
             setHeight(size.height());
         });
     }
-
-    /**
-     * {@link ChangeListener} that is called when the maximum number of apples is changed.
-     * Usually, that happens when the width or height of the game field is changed.
-     */
-    public final ChangeListener<Number> onMaxApplesLimitChangeListener = (observable, oldValue, newValue) -> {
-        var newMax = getMaxApplesAvailable();
-        var prevVal = getApplesAmount();
-
-        setApplesAvailableRange(newMax);
-        setApplesAmount(Math.min(prevVal, newMax));
-    };
-
-    /**
-     * {@link ChangeListener} that is called when the scaling value is changed.
-     */
-    public final ChangeListener<Number> onScalingChangedListener = (observable, oldValue, newValue) -> {
-        updateCalculatedResolution();
-    };
-
-    /**
-     * {@link ChangeListener} that is called when the width or height of the game field is changed.
-     */
-    public final ChangeListener<Number> onFieldSizeChangeListener = (observable, oldValue, newValue) -> {
-        onMaxApplesLimitChangeListener.changed(observable, oldValue, newValue);
-        onScalingChangedListener.changed(observable, oldValue, newValue);
-    };
-
-    /**
-     * {@link ChangeListener} that is called when the selected custom level is changed.
-     */
-    public final ChangeListener<String> onLevelChoiceBoxChangeListener = (observable, oldValue, newValue) -> {
-        if (newValue == null) {
-            return;
-        }
-        matchFieldButton.setDisable(CustomFileLevel.parseFilenameFieldSize(newValue).isEmpty());
-    };
-
-    /**
-     * {@link ChangeListener} that is called when the selected level type is changed.
-     */
-    public final ChangeListener<Toggle> onLevelRadioButtonsChangeListener = (observable, oldValue, newValue) -> {
-        if (newValue.equals(customLevelRadioButton)) {
-            customFileLevelChoiceBox.setDisable(false);
-            randomLevelDensitySlider.setDisable(true);
-
-            boolean canParseFieldSize;
-            if (customFileLevelChoiceBox.getValue() != null) {
-                canParseFieldSize = CustomFileLevel.parseFilenameFieldSize(customFileLevelChoiceBox.getValue()).isPresent();
-            } else {
-                canParseFieldSize = false;
-            }
-            matchFieldButton.setDisable(!canParseFieldSize);
-        } else if (newValue.equals(randomLevelRadioButton)){
-            customFileLevelChoiceBox.setDisable(true);
-            randomLevelDensitySlider.setDisable(false);
-            matchFieldButton.setDisable(true);
-        } else {
-            customFileLevelChoiceBox.setDisable(true);
-            randomLevelDensitySlider.setDisable(true);
-            matchFieldButton.setDisable(true);
-        }
-    };
 
     /**
      * Initializes the view components.
@@ -515,6 +500,7 @@ public class Presenter {
 
     /**
      * Returns the selected random level density.
+     *
      * @return the selected random level density
      */
     public double getRandomLevelDensity() {
@@ -531,7 +517,7 @@ public class Presenter {
             return new CustomFileLevel(getLevelFileName());
         } else if (levelToggleGroup.getSelectedToggle().equals(randomLevelRadioButton)) {
             return new RandomLevel(getRandomLevelDensity());
-        } else if (levelToggleGroup.getSelectedToggle().equals(emptyLevelRadioButton)){
+        } else if (levelToggleGroup.getSelectedToggle().equals(emptyLevelRadioButton)) {
             return new EmptyLevel();
         } else {
             return new BorderLevel();

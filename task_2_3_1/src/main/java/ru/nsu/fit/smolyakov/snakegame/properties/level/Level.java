@@ -1,13 +1,9 @@
 package ru.nsu.fit.smolyakov.snakegame.properties.level;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
-import ru.nsu.fit.smolyakov.snakegame.utils.Point;
-
-import java.util.Set;
 
 /**
  * An abstract representation of a level.

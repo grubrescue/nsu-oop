@@ -2,12 +2,12 @@ package ru.nsu.fit.smolyakov.snakegame.unittests;
 
 import org.junit.jupiter.api.Test;
 import ru.nsu.fit.smolyakov.snakegame.ExampleProperties;
-import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class GamePropertiesTest {
     @Test
@@ -24,7 +24,7 @@ public class GamePropertiesTest {
         assertThatThrownBy(() ->
             ExampleProperties.properties.withApples(
                 ExampleProperties.properties.height() *
-                ExampleProperties.properties.width()
+                    ExampleProperties.properties.width()
             )
         ).isInstanceOf(IllegalArgumentException.class);
     }

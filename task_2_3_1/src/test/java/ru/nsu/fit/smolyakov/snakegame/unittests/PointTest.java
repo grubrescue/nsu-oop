@@ -3,7 +3,8 @@ package ru.nsu.fit.smolyakov.snakegame.unittests;
 import org.junit.jupiter.api.Test;
 import ru.nsu.fit.smolyakov.snakegame.utils.Point;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PointTest {
     @Test
@@ -29,8 +30,8 @@ public class PointTest {
     @Test
     void shiftWithLimitsExceptionTest() {
         assertThatThrownBy(() -> Point.ZERO.shift(new Point(1, 1), 0, 0))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Limits must be positive");
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("Limits must be positive");
     }
 
     @Test

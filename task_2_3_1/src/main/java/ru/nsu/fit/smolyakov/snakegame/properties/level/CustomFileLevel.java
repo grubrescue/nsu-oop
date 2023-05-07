@@ -27,12 +27,11 @@ import java.util.regex.Pattern;
  * {@link ru.nsu.fit.smolyakov.snakegame.model.Barrier#fromProperties(GameProperties)} method.
  */
 public final class CustomFileLevel extends Level {
-    private final String fileName;
-
     /**
      * The pattern of the file name so one could be parsable by {@link #parseFilenameFieldSize(String)}.
      */
     public static final String pattern = "(?<width>\\d+)x(?<height>\\d+)_(\\w+).txt";
+    private final String fileName;
 
     /**
      * Initializes a new instance of the {@link CustomFileLevel} class.
@@ -42,35 +41,6 @@ public final class CustomFileLevel extends Level {
     @JsonCreator
     public CustomFileLevel(@JsonProperty("fileName") String fileName) {
         this.fileName = fileName;
-    }
-
-    /**
-     * Returns a name of the file with the barrier.
-     * One is relative to the {@link ru.nsu.fit.smolyakov.snakegame.GameData#LEVEL_FOLDER_PATH}.
-     *
-     * @return a name of the file with the barrier
-     */
-    public String getFileName() {
-        return fileName;
-    }
-
-    /**
-     * A DTO for the field size.
-     *
-     * @param width a width of the field
-     * @param height a height of the field
-     */
-    public record FieldSize(int width, int height) {
-    }
-
-    /**
-     * Parses the filename associated with current instance
-     * and returns a {@link FieldSize} instance.
-     *
-     * @return a {@link FieldSize} instance
-     */
-    public Optional<FieldSize> parseFilenameFieldSize() {
-        return parseFilenameFieldSize(fileName);
     }
 
     /**
@@ -92,5 +62,34 @@ public final class CustomFileLevel extends Level {
         } else {
             return Optional.empty();
         }
+    }
+
+    /**
+     * Returns a name of the file with the barrier.
+     * One is relative to the {@link ru.nsu.fit.smolyakov.snakegame.GameData#LEVEL_FOLDER_PATH}.
+     *
+     * @return a name of the file with the barrier
+     */
+    public String getFileName() {
+        return fileName;
+    }
+
+    /**
+     * Parses the filename associated with current instance
+     * and returns a {@link FieldSize} instance.
+     *
+     * @return a {@link FieldSize} instance
+     */
+    public Optional<FieldSize> parseFilenameFieldSize() {
+        return parseFilenameFieldSize(fileName);
+    }
+
+    /**
+     * A DTO for the field size.
+     *
+     * @param width  a width of the field
+     * @param height a height of the field
+     */
+    public record FieldSize(int width, int height) {
     }
 }

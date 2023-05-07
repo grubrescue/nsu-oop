@@ -7,7 +7,7 @@ import ru.nsu.fit.smolyakov.snakegame.utils.Point;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CollisionSolverTest {
     @Test

@@ -1,10 +1,12 @@
 package ru.nsu.fit.smolyakov.snakegame.unittests;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.fit.smolyakov.snakegame.ExampleProperties;
 import ru.nsu.fit.smolyakov.snakegame.model.Barrier;
-import ru.nsu.fit.smolyakov.snakegame.properties.level.*;
+import ru.nsu.fit.smolyakov.snakegame.properties.level.BorderLevel;
+import ru.nsu.fit.smolyakov.snakegame.properties.level.CustomFileLevel;
+import ru.nsu.fit.smolyakov.snakegame.properties.level.EmptyLevel;
+import ru.nsu.fit.smolyakov.snakegame.properties.level.RandomLevel;
 import ru.nsu.fit.smolyakov.snakegame.utils.Point;
 
 import java.util.Set;

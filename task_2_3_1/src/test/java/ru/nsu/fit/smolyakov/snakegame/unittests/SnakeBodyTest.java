@@ -7,7 +7,8 @@ import ru.nsu.fit.smolyakov.snakegame.utils.Point;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class SnakeBodyTest {
     SnakeBody snakeBody;
@@ -80,7 +81,8 @@ public class SnakeBodyTest {
             new SnakeBody(new Point(5, 5), List.of(new Point(5, 6)))
         );
     }
-//
+
+    //
     @Test
     void hashcodeAndEqualsTest() {
         var equalSnake

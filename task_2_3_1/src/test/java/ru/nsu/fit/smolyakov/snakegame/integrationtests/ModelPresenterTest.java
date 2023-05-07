@@ -1,6 +1,5 @@
 package ru.nsu.fit.smolyakov.snakegame.integrationtests;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
@@ -8,16 +7,10 @@ import ru.nsu.fit.smolyakov.snakegame.ExampleProperties;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModel;
 import ru.nsu.fit.smolyakov.snakegame.model.GameModelImpl;
 import ru.nsu.fit.smolyakov.snakegame.model.snake.Snake;
-import ru.nsu.fit.smolyakov.snakegame.presenter.SnakePresenter;
 import ru.nsu.fit.smolyakov.snakegame.properties.GameProperties;
-import ru.nsu.fit.smolyakov.snakegame.properties.GameSpeed;
 import ru.nsu.fit.smolyakov.snakegame.utils.Point;
 
-import static org.assertj.core.api.Assertions.*;
-
-import java.util.List;
-import java.util.Properties;
-import java.util.Set;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ModelPresenterTest {
     TestingSnakePresenter presenter;

@@ -131,7 +131,7 @@ public record GameProperties(
             speed()
         );
     }
-    
+
     /**
      * Returns new {@code GameProperties} instance with the list of AI class names
      * changed to a specified one. This object is not modified.
