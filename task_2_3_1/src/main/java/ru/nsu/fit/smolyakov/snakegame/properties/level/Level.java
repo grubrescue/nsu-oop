@@ -9,6 +9,13 @@ import ru.nsu.fit.smolyakov.snakegame.utils.Point;
 
 import java.util.Set;
 
+/**
+ * An abstract representation of a level.
+ *
+ * <p>This class is used as a DTO for the {@link ru.nsu.fit.smolyakov.snakegame.model.Barrier} class,
+ * so the game level is actually created by
+ * {@link ru.nsu.fit.smolyakov.snakegame.model.Barrier#fromProperties(GameProperties)} method.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
 @JsonSubTypes(

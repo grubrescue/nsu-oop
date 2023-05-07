@@ -15,20 +15,14 @@ import java.util.Set;
  * The snake cannot pass through the barrier.
  */
 public record Barrier(Set<Point> barrierPoints) {
+    /**
+     * Creates a barrier from a {@link Level} specified in {@link GameProperties}.
+     *
+     * @param properties {@link GameProperties} to get {@link Level} from
+     * @return a barrier
+     */
     public static Barrier fromProperties(GameProperties properties) {
         Set<Point> points;
-
-//        if (properties.level() instanceof BorderLevel borderLevel) {
-//            points = points(properties, borderLevel);
-//        } else if (properties.level() instanceof EmptyLevel emptyLevel) {
-//            points = points(properties, emptyLevel);
-//        } else if (properties.level() instanceof RandomLevel randomLevel) {
-//            points = points(properties, randomLevel);
-//        } else if (properties.level() instanceof CustomFileLevel customFileLevel) {
-//            points = points(properties, customFileLevel);
-//        } else {
-//            throw new IllegalArgumentException("Unknown level type");
-//        }
 
         try {
             Method method = Barrier.class.getDeclaredMethod("points", GameProperties.class, properties.level().getClass());
@@ -47,7 +41,7 @@ public record Barrier(Set<Point> barrierPoints) {
     private static Set<Point> points(GameProperties properties, RandomLevel level) {
         var points = new HashSet<Point>();
         int amountOfBarrierPoints
-            = (int) ((int) properties.width() * properties.height() * level.getDensity());
+            = (int) (properties.width() * properties.height() * level.getDensity());
 
         for (int i = 0; i < amountOfBarrierPoints; i++) {
             points.add(Point.random(properties.width(), properties.height()));

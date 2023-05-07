@@ -112,7 +112,7 @@ public class Presenter {
 
     @FXML
     private void matchFieldSize() {
-        var fieldSize = CustomFileLevel.parseFieldSize(getLevelFileName());
+        var fieldSize = CustomFileLevel.parseFilenameFieldSize(getLevelFileName());
         fieldSize.ifPresent(size -> {
             setWidth(size.width());
             setHeight(size.height());
@@ -146,22 +146,27 @@ public class Presenter {
         onScalingChangedListener.changed(observable, oldValue, newValue);
     };
 
+    /**
+     * {@link ChangeListener} that is called when the selected custom level is changed.
+     */
     public final ChangeListener<String> onLevelChoiceBoxChangeListener = (observable, oldValue, newValue) -> {
         if (newValue == null) {
             return;
         }
-        matchFieldButton.setDisable(CustomFileLevel.parseFieldSize(newValue).isEmpty());
+        matchFieldButton.setDisable(CustomFileLevel.parseFilenameFieldSize(newValue).isEmpty());
     };
 
+    /**
+     * {@link ChangeListener} that is called when the selected level type is changed.
+     */
     public final ChangeListener<Toggle> onLevelRadioButtonsChangeListener = (observable, oldValue, newValue) -> {
-//        System.out.println(newValue.);
         if (newValue.equals(customLevelRadioButton)) {
             customFileLevelChoiceBox.setDisable(false);
             randomLevelDensitySlider.setDisable(true);
 
             boolean canParseFieldSize;
             if (customFileLevelChoiceBox.getValue() != null) {
-                canParseFieldSize = CustomFileLevel.parseFieldSize(customFileLevelChoiceBox.getValue()).isPresent();
+                canParseFieldSize = CustomFileLevel.parseFilenameFieldSize(customFileLevelChoiceBox.getValue()).isPresent();
             } else {
                 canParseFieldSize = false;
             }
@@ -312,7 +317,7 @@ public class Presenter {
 
     private void initApplyButton() {
         if (levelToggleGroup.getSelectedToggle().equals(customLevelRadioButton)) {
-            matchFieldButton.setDisable(CustomFileLevel.parseFieldSize(customFileLevelChoiceBox.getValue()).isEmpty());
+            matchFieldButton.setDisable(CustomFileLevel.parseFilenameFieldSize(customFileLevelChoiceBox.getValue()).isEmpty());
         } else {
             matchFieldButton.setDisable(false);
         }
@@ -465,7 +470,15 @@ public class Presenter {
     }
 
 
+    /**
+     * Returns the selected level file name, if custom level is selected.
+     *
+     * @return the selected level file name or {@code null} if custom level is not selected
+     */
     public String getLevelFileName() {
+        if (!levelToggleGroup.getSelectedToggle().equals(customLevelRadioButton)) {
+            return null;
+        }
         return customFileLevelChoiceBox.getValue();
     }
 
@@ -500,10 +513,19 @@ public class Presenter {
         });
     }
 
+    /**
+     * Returns the selected random level density.
+     * @return the selected random level density
+     */
     public double getRandomLevelDensity() {
         return randomLevelDensitySlider.getValue() / 100;
     }
 
+    /**
+     * Instantiates and returns the selected level.
+     *
+     * @return the selected level
+     */
     public Level instanceLevel() {
         if (levelToggleGroup.getSelectedToggle().equals(customLevelRadioButton)) {
             return new CustomFileLevel(getLevelFileName());
