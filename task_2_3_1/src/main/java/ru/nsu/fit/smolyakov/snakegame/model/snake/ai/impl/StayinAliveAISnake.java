@@ -46,8 +46,8 @@ public class StayinAliveAISnake extends AISnake {
             && getGameField().getAISnakeList()
             .stream()
             .filter(snake -> snake != this)
-            .noneMatch(snake -> snake.getSnakeBody().getHead().cathetusDistance(newHead, width, height) < 2)
-            && !(getGameField().getPlayerSnake().getSnakeBody().getHead().cathetusDistance(newHead, width, height) < 2);
+            .noneMatch(snake -> snake.getSnakeBody().getHead().cathetusDistance(newHead, width, height) < 3)
+            && !(getGameField().getPlayerSnake().getSnakeBody().getHead().cathetusDistance(newHead, width, height) < 3);
     }
 
     /**
