@@ -75,23 +75,29 @@ public record Point(int x, int y) {
     }
 
     public Point shortestVector(Point to, int xLimit, int yLimit) {
-        int dx = to.x - x;
-        int dy = to.y - y;
-        int[] nearest = new int[] {
-            (Integer.compare(dx, 0)),
-            (Integer.compare(dy, 0))
-        };
-        if (Math.abs(dx) > xLimit / 2) {
-            nearest[0] += ((dx > 0) ? -1 : 1);
-        }
-        if (Math.abs(dy) > yLimit / 2) {
-            nearest[1] += ((dy > 0) ? -1 : 1);
+        if (this.x >= xLimit || this.y >= yLimit
+            || to.x >= xLimit || to.y >= yLimit
+            || this.x < 0 || this.y < 0
+            || to.x < 0 || to.y < 0) {
+            throw new IllegalArgumentException("Points must be within the field");
         }
 
-        return new Point(
-            dx - nearest[0] * xLimit,
-            dy - nearest[1] * yLimit
-        );
+        int dx = to.x - x;
+        int dy = to.y - y;
+
+        if (dx < 0 && Math.abs(dx + xLimit) < Math.abs(dx)) {
+            dx += xLimit;
+        } else if (dx > 0 && Math.abs(dx - xLimit) < Math.abs(dx)) {
+            dx -= xLimit;
+        }
+
+        if (dy < 0 && Math.abs(dy + yLimit) < Math.abs(dy)) {
+            dy += yLimit;
+        } else if (dy > 0 && Math.abs(dy - yLimit) < Math.abs(dy)) {
+            dy -= yLimit;
+        }
+
+        return new Point(dx, dy);
     }
 
     public int cathetusDistance(Point to, int xLimit, int yLimit) {

@@ -29,8 +29,6 @@ public class KamikazeAISnake extends AISnake {
         var height = getGameField().getProperties().height();
         var vec = getSnakeBody().getHead().shortestVector(target, width, height);
 
-        System.out.println("the shortest path to the "+ target + " is " + vec);
-
         if (vec.x() > 0 && !getMovingDirection().move().equals(MovingDirection.RIGHT.opposite())) {
             setMovingDirection(MovingDirection.RIGHT);
         } else if (vec.x() < 0 && !getMovingDirection().move().equals(MovingDirection.LEFT.opposite())) {
