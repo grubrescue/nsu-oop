@@ -43,12 +43,34 @@ public class PointTest {
     }
 
     @Test
-    void distanceTest() {
-        assertThat(Point.ZERO.distance(Point.ZERO)).isEqualTo(0);
-        assertThat(Point.ZERO.distance(new Point(3, 4))).isEqualTo(5);
+    void shortestVectorTest() {
+        assertThat(new Point(3, 3)
+            .shortestVector(new Point(5, 5), 100, 100)
+        ).isEqualTo(new Point(2, 2));
 
-        assertThat(new Point(1, 1).distance(new Point(4, 5))).isEqualTo(5);
+        assertThat(new Point(3, 3)
+            .shortestVector(new Point(1, 1), 100, 100)
+        ).isEqualTo(new Point(-2, -2));
+
+        assertThat(new Point(1, 1)
+            .shortestVector(new Point(4, 4), 5, 5)
+        ).isEqualTo(new Point(-2, -2));
+
+        assertThat(new Point(1, 4)
+            .shortestVector(new Point(4, 4), 5, 5)
+        ).isEqualTo(new Point(-2, 0));
+
+        assertThat(new Point(4, 4)
+            .shortestVector(new Point(0, 0), 5, 5)
+        ).isEqualTo(new Point(1, 1));
     }
+
+
+//    @Test
+//    void cathetusDistanceTest() {
+//        assertThat(Point.ZERO.cathetusDistance(new Point(10, 0), 11, 11))
+//            .isEqualTo()
+//    }
 
     @Test
     void gettersTest() {

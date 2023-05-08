@@ -33,18 +33,20 @@ public class StayinAliveAISnake extends AISnake {
      *
      * @param snakeBody snake to check
      * @param direction direction to check
-     * @return {@code true }if the snake won't collide, {@code false} otherwise
+     * @return {@code true} if the snake won't collide, {@code false} otherwise
      */
     protected boolean isNonCollidingTurn(SnakeBody snakeBody, MovingDirection direction) {
+        var width = getGameField().getProperties().width();
+        var height = getGameField().getProperties().height();
+
         var newHead = getNewHeadLocation(snakeBody, direction);
         return !getGameField().getBarrier().met(newHead)
             && !snakeBody.tailCollision(newHead)
             && getGameField().getAISnakeList()
             .stream()
             .filter(snake -> snake != this)
-//            .noneMatch(snake -> snake.getSnakeBody().deathCollision(newHead))
-            .noneMatch(snake -> snake.getSnakeBody().getHead().distance(newHead) < 2)
-            && !(getGameField().getPlayerSnake().getSnakeBody().getHead().distance(newHead) < 2);
+            .noneMatch(snake -> snake.getSnakeBody().getHead().cathetusDistance(newHead, width, height) < 2)
+            && !(getGameField().getPlayerSnake().getSnakeBody().getHead().cathetusDistance(newHead, width, height) < 2);
     }
 
     /**

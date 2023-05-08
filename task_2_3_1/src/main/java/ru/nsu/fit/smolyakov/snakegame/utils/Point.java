@@ -74,14 +74,28 @@ public record Point(int x, int y) {
         return Math.abs(x - to.x) + Math.abs(y - to.y) <= 1;
     }
 
-    /**
-     * Returns the distance between the current point and the specified point.
-     * The distance is calculated as the Euclidean distance between two points.
-     *
-     * @param to point to calculate distance to
-     * @return the distance between the current point and the specified point
-     */
-    public double distance(Point to) {
-        return Math.sqrt((x - to.x) * (x - to.x) + (y - to.y) * (y - to.y));
+    public Point shortestVector(Point to, int xLimit, int yLimit) {
+        int dx = to.x - x;
+        int dy = to.y - y;
+        int[] nearest = new int[] {
+            (Integer.compare(dx, 0)),
+            (Integer.compare(dy, 0))
+        };
+        if (Math.abs(dx) > xLimit / 2) {
+            nearest[0] += ((dx > 0) ? -1 : 1);
+        }
+        if (Math.abs(dy) > yLimit / 2) {
+            nearest[1] += ((dy > 0) ? -1 : 1);
+        }
+
+        return new Point(
+            dx - nearest[0] * xLimit,
+            dy - nearest[1] * yLimit
+        );
+    }
+
+    public int cathetusDistance(Point to, int xLimit, int yLimit) {
+        var point = shortestVector(to, xLimit, yLimit);
+        return Math.abs(point.x) + Math.abs(point.y);
     }
 }

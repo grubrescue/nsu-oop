@@ -31,13 +31,16 @@ public class GreedyAISnake extends StayinAliveAISnake {
      * or {@link Optional#empty()} if there are no apples on the field
      */
     protected Optional<Apple> findNewTarget() {
+        var width = getGameField().getProperties().width();
+        var height = getGameField().getProperties().height();
+
         return getGameField()
             .getApplesSet()
             .stream()
-            .min((Apple a, Apple b) -> {
-                var aDist = getSnakeBody().getHead().distance(a.point());
-                var bDist = getSnakeBody().getHead().distance(b.point());
-                return Double.compare(aDist, bDist);
+            .max((Apple a, Apple b) -> {
+                var aDist = getSnakeBody().getHead().cathetusDistance(a.point(), width, height);
+                var bDist = getSnakeBody().getHead().cathetusDistance(b.point(), width, height);
+                return Integer.compare(aDist, bDist);
             });
     }
 
@@ -55,27 +58,20 @@ public class GreedyAISnake extends StayinAliveAISnake {
             return;
         }
 
-        var xDiff = target.point().x() - getSnakeBody().getHead().x();
-        var yDiff = target.point().y() - getSnakeBody().getHead().y();
+        var width = getGameField().getProperties().width();
+        var height = getGameField().getProperties().height();
+        var vec = getSnakeBody().getHead().shortestVector(target.point(), width, height);
 
-        // TODO кринж?????
-        if (xDiff > 0 && isNonCollidingTurn(MovingDirection.RIGHT)) {
+        if (vec.x() > 0 && isNonCollidingTurn(MovingDirection.RIGHT)) {
             setMovingDirection(MovingDirection.RIGHT);
-        } else if (xDiff < 0 && isNonCollidingTurn(MovingDirection.LEFT)) {
+        } else if (vec.x() < 0 && isNonCollidingTurn(MovingDirection.LEFT)) {
             setMovingDirection(MovingDirection.LEFT);
-        } else if (xDiff > 0 && isNonCollidingTurn(MovingDirection.LEFT)) {
-            setMovingDirection(MovingDirection.LEFT);
-        } else if (xDiff < 0 && isNonCollidingTurn(MovingDirection.RIGHT)) {
-            setMovingDirection(MovingDirection.RIGHT);
-
-        } else if (yDiff > 0 && isNonCollidingTurn(MovingDirection.DOWN)) {
+        } else if (vec.y() > 0 && isNonCollidingTurn(MovingDirection.DOWN)) {
             setMovingDirection(MovingDirection.DOWN);
-        } else if (yDiff < 0 && isNonCollidingTurn(MovingDirection.UP)) {
+        } else if (vec.y() < 0 && isNonCollidingTurn(MovingDirection.UP)) {
             setMovingDirection(MovingDirection.UP);
-        } else if (yDiff > 0 && isNonCollidingTurn(MovingDirection.UP)) {
-            setMovingDirection(MovingDirection.UP);
-        } else if (yDiff < 0 && isNonCollidingTurn(MovingDirection.DOWN)) {
-            setMovingDirection(MovingDirection.DOWN);
+        } else {
+            super.thinkAboutTurn();
         }
     }
 }

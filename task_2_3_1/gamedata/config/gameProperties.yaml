@@ -3,11 +3,8 @@ width: 40
 height: 20
 javaFxScaling: 39
 apples: 10
-level: !<Random>
-  density: 0.06666666666666667
+level: !<CustomFile>
+  fileName: "40x20_empty.txt"
 aiClassNames:
-- "GreedyAISnake"
 - "KamikazeAISnake"
-- "SamuraiAISnake"
-- "StayinAliveAISnake"
 speed: "fastest"

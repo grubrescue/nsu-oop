@@ -77,7 +77,7 @@
                         <RadioButton fx:id="borderLevelRadioButton" layoutX="56.0" layoutY="326.0" mnemonicParsing="false" text="Border" />
                         <RadioButton fx:id="emptyLevelRadioButton" layoutX="56.0" layoutY="299.0" mnemonicParsing="false" text="Empty" />
                         <Button fx:id="matchFieldButton" layoutX="291.0" layoutY="38.0" mnemonicParsing="false" onAction="#matchFieldSize" prefHeight="26.0" prefWidth="67.0" text="Match" />
-                        <Slider fx:id="randomLevelDensitySlider" blockIncrement="5.0" layoutX="160.0" layoutY="380.0" majorTickUnit="20.0" max="40.0" minorTickCount="5" prefHeight="40.0" prefWidth="152.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="32.0" />
+                        <Slider fx:id="randomLevelDensitySlider" blockIncrement="5.0" layoutX="160.0" layoutY="380.0" majorTickUnit="15.0" max="30.0" minorTickCount="5" prefHeight="40.0" prefWidth="152.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="32.0" />
                   <Separator layoutX="383.0" layoutY="31.0" orientation="VERTICAL" prefHeight="381.0" prefWidth="3.0" />
                   <Separator layoutX="23.0" layoutY="245.0" prefHeight="0.0" prefWidth="362.0" />
                   <Separator layoutX="385.0" layoutY="364.0" prefHeight="0.0" prefWidth="305.0" />
