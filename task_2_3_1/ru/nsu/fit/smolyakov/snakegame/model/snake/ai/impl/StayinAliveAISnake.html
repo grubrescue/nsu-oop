@@ -80,7 +80,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="GreedyAISnake.html" title="class in ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl">GreedyAISnake</a></code></dd>
+<dd><code><a href="GreedyAISnake.html" title="class in ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl">GreedyAISnake</a></code>, <code><a href="KamikazeAISnake.html" title="class in ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl">KamikazeAISnake</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">StayinAliveAISnake</span>
@@ -127,15 +127,16 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isNonCollidingTurn(ru.nsu.fit.smolyakov.snakegame.model.snake.Snake.MovingDirection)" class="member-name-link">isNonCollidingTurn</a><wbr>(<a href="../../Snake.MovingDirection.html" title="enum class in ru.nsu.fit.smolyakov.snakegame.model.snake">Snake.MovingDirection</a>&nbsp;direction)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Checks if the snake will collide with the barrier or its own body
- if it turns in the given direction.</div>
+<div class="block">Calls <a href="#isNonCollidingTurn(ru.nsu.fit.smolyakov.snakegame.model.snake.SnakeBody,ru.nsu.fit.smolyakov.snakegame.model.snake.Snake.MovingDirection)"><code>isNonCollidingTurn(SnakeBody, MovingDirection)</code></a> with
+ the current snake's body.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isNonCollidingTurn(ru.nsu.fit.smolyakov.snakegame.model.snake.SnakeBody,ru.nsu.fit.smolyakov.snakegame.model.snake.Snake.MovingDirection)" class="member-name-link">isNonCollidingTurn</a><wbr>(<a href="../../SnakeBody.html" title="class in ru.nsu.fit.smolyakov.snakegame.model.snake">SnakeBody</a>&nbsp;snakeBody,
  <a href="../../Snake.MovingDirection.html" title="enum class in ru.nsu.fit.smolyakov.snakegame.model.snake">Snake.MovingDirection</a>&nbsp;direction)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Checks if the snake with specified <code>snakeBody</code> will collide with
- the barrier or its own body if it turns in the given direction.</div>
+ the barrier or its own body or other snakes' heads
+ if it turns in the given direction.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#thinkAboutTurn()" class="member-name-link">thinkAboutTurn</a>()</code></div>
@@ -182,13 +183,14 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isNonCollidingTurn</span><wbr><span class="parameters">(<a href="../../SnakeBody.html" title="class in ru.nsu.fit.smolyakov.snakegame.model.snake">SnakeBody</a>&nbsp;snakeBody,
  <a href="../../Snake.MovingDirection.html" title="enum class in ru.nsu.fit.smolyakov.snakegame.model.snake">Snake.MovingDirection</a>&nbsp;direction)</span></div>
 <div class="block">Checks if the snake with specified <code>snakeBody</code> will collide with
- the barrier or its own body if it turns in the given direction.</div>
+ the barrier or its own body or other snakes' heads
+ if it turns in the given direction.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>snakeBody</code> - snake to check</dd>
 <dd><code>direction</code> - direction to check</dd>
 <dt>Returns:</dt>
-<dd><code>true </code>if the snake won't collide, <code>false</code> otherwise</dd>
+<dd><code>true</code> if the snake won't collide, <code>false</code> otherwise</dd>
 </dl>
 </section>
 </li>
@@ -196,8 +198,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="isNonCollidingTurn(ru.nsu.fit.smolyakov.snakegame.model.snake.Snake.MovingDirection)">
 <h3>isNonCollidingTurn</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isNonCollidingTurn</span><wbr><span class="parameters">(<a href="../../Snake.MovingDirection.html" title="enum class in ru.nsu.fit.smolyakov.snakegame.model.snake">Snake.MovingDirection</a>&nbsp;direction)</span></div>
-<div class="block">Checks if the snake will collide with the barrier or its own body
- if it turns in the given direction.</div>
+<div class="block">Calls <a href="#isNonCollidingTurn(ru.nsu.fit.smolyakov.snakegame.model.snake.SnakeBody,ru.nsu.fit.smolyakov.snakegame.model.snake.Snake.MovingDirection)"><code>isNonCollidingTurn(SnakeBody, MovingDirection)</code></a> with
+ the current snake's body.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>direction</code> - direction to check</dd>

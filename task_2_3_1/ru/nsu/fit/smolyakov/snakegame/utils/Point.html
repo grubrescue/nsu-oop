@@ -134,15 +134,17 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#connected(ru.nsu.fit.smolyakov.snakegame.utils.Point)" class="member-name-link">connected</a><wbr>(<a href="Point.html" title="class in ru.nsu.fit.smolyakov.snakegame.utils">Point</a>&nbsp;to)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#cathetusDistance(ru.nsu.fit.smolyakov.snakegame.utils.Point,int,int)" class="member-name-link">cathetusDistance</a><wbr>(<a href="Point.html" title="class in ru.nsu.fit.smolyakov.snakegame.utils">Point</a>&nbsp;to,
+ int&nbsp;xLimit,
+ int&nbsp;yLimit)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns <code>true</code> if the current point is connected to the specified point.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#distance(ru.nsu.fit.smolyakov.snakegame.utils.Point)" class="member-name-link">distance</a><wbr>(<a href="Point.html" title="class in ru.nsu.fit.smolyakov.snakegame.utils">Point</a>&nbsp;to)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the distance between the current point and the specified point.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#connected(ru.nsu.fit.smolyakov.snakegame.utils.Point)" class="member-name-link">connected</a><wbr>(<a href="Point.html" title="class in ru.nsu.fit.smolyakov.snakegame.utils">Point</a>&nbsp;to)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if the current point is connected to the specified point.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
@@ -174,19 +176,26 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a new point that is moved by <code>shift</code> from the current point.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Point.html" title="class in ru.nsu.fit.smolyakov.snakegame.utils">Point</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#shortestVector(ru.nsu.fit.smolyakov.snakegame.utils.Point,int,int)" class="member-name-link">shortestVector</a><wbr>(<a href="Point.html" title="class in ru.nsu.fit.smolyakov.snakegame.utils">Point</a>&nbsp;to,
+ int&nbsp;xLimit,
+ int&nbsp;yLimit)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns a vector that is the shortest way from the current point to the specified point.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a string representation of this record class.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#x()" class="member-name-link">x</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#x()" class="member-name-link">x</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <a href="#param-x"><code>x</code></a> record component.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#y()" class="member-name-link">y</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#y()" class="member-name-link">y</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <a href="#param-y"><code>y</code></a> record component.</div>
 </div>
 </div>
@@ -306,16 +315,39 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="distance(ru.nsu.fit.smolyakov.snakegame.utils.Point)">
-<h3>distance</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">distance</span><wbr><span class="parameters">(<a href="Point.html" title="class in ru.nsu.fit.smolyakov.snakegame.utils">Point</a>&nbsp;to)</span></div>
+<section class="detail" id="shortestVector(ru.nsu.fit.smolyakov.snakegame.utils.Point,int,int)">
+<h3>shortestVector</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Point.html" title="class in ru.nsu.fit.smolyakov.snakegame.utils">Point</a></span>&nbsp;<span class="element-name">shortestVector</span><wbr><span class="parameters">(<a href="Point.html" title="class in ru.nsu.fit.smolyakov.snakegame.utils">Point</a>&nbsp;to,
+ int&nbsp;xLimit,
+ int&nbsp;yLimit)</span></div>
+<div class="block">Returns a vector that is the shortest way from the current point to the specified point.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>to</code> - point to calculate vector to</dd>
+<dd><code>xLimit</code> - x-coordinate limit</dd>
+<dd><code>yLimit</code> - y-coordinate limit</dd>
+<dt>Returns:</dt>
+<dd>a vector that is the shortest way from the current point to the specified point</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="cathetusDistance(ru.nsu.fit.smolyakov.snakegame.utils.Point,int,int)">
+<h3>cathetusDistance</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">cathetusDistance</span><wbr><span class="parameters">(<a href="Point.html" title="class in ru.nsu.fit.smolyakov.snakegame.utils">Point</a>&nbsp;to,
+ int&nbsp;xLimit,
+ int&nbsp;yLimit)</span></div>
 <div class="block">Returns the distance between the current point and the specified point.
- The distance is calculated as the Euclidean distance between two points.</div>
+ The distance is calculated as the sum of absolute values of the differences
+ between the coordinates of the current point and the specified point.
+ Ones are calculated by <a href="#shortestVector(ru.nsu.fit.smolyakov.snakegame.utils.Point,int,int)"><code>shortestVector(Point, int, int)</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>to</code> - point to calculate distance to</dd>
+<dd><code>xLimit</code> - x-coordinate limit</dd>
+<dd><code>yLimit</code> - y-coordinate limit</dd>
 <dt>Returns:</dt>
-<dd>the distance between the current point and the specified point</dd>
+<dd>the cathetus distance between the current point and the specified point</dd>
 </dl>
 </section>
 </li>

@@ -73,14 +73,16 @@ loadScripts(document, 'script');</script>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
 <div class="inheritance"><a href="../../Snake.html" title="class in ru.nsu.fit.smolyakov.snakegame.model.snake">ru.nsu.fit.smolyakov.snakegame.model.snake.Snake</a>
 <div class="inheritance"><a href="../AISnake.html" title="class in ru.nsu.fit.smolyakov.snakegame.model.snake.ai">ru.nsu.fit.smolyakov.snakegame.model.snake.ai.AISnake</a>
+<div class="inheritance"><a href="StayinAliveAISnake.html" title="class in ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl">ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl.StayinAliveAISnake</a>
 <div class="inheritance">ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl.KamikazeAISnake</div>
+</div>
 </div>
 </div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">KamikazeAISnake</span>
-<span class="extends-implements">extends <a href="../AISnake.html" title="class in ru.nsu.fit.smolyakov.snakegame.model.snake.ai">AISnake</a></span></div>
+<span class="extends-implements">extends <a href="StayinAliveAISnake.html" title="class in ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl">StayinAliveAISnake</a></span></div>
 <div class="block">Follows the player snake's head. Doesn't care about anything else, including
  other snakes, apples, walls.
 
@@ -121,14 +123,24 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#thinkAboutTurn()" class="member-name-link">thinkAboutTurn</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isNonCollidingTurn(ru.nsu.fit.smolyakov.snakegame.model.snake.SnakeBody,ru.nsu.fit.smolyakov.snakegame.model.snake.Snake.MovingDirection)" class="member-name-link">isNonCollidingTurn</a><wbr>(<a href="../../SnakeBody.html" title="class in ru.nsu.fit.smolyakov.snakegame.model.snake">SnakeBody</a>&nbsp;snakeBody,
+ <a href="../../Snake.MovingDirection.html" title="enum class in ru.nsu.fit.smolyakov.snakegame.model.snake">Snake.MovingDirection</a>&nbsp;direction)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks if the snake with specified <code>snakeBody</code> will collide with
+ the barrier or its own body if it turns in the given direction.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#thinkAboutTurn()" class="member-name-link">thinkAboutTurn</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Follows the player snake's head.</div>
 </div>
 </div>
 </div>
 </div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl.StayinAliveAISnake">Methods inherited from class&nbsp;ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl.<a href="StayinAliveAISnake.html" title="class in ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl">StayinAliveAISnake</a></h3>
+<code><a href="StayinAliveAISnake.html#isNonCollidingTurn(ru.nsu.fit.smolyakov.snakegame.model.snake.Snake.MovingDirection)">isNonCollidingTurn</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-ru.nsu.fit.smolyakov.snakegame.model.snake.Snake">Methods inherited from class&nbsp;ru.nsu.fit.smolyakov.snakegame.model.snake.<a href="../../Snake.html" title="class in ru.nsu.fit.smolyakov.snakegame.model.snake">Snake</a></h3>
 <code><a href="../../Snake.html#getGameField()">getGameField</a>, <a href="../../Snake.html#getMovingDirection()">getMovingDirection</a>, <a href="../../Snake.html#getNewHeadLocation()">getNewHeadLocation</a>, <a href="../../Snake.html#getNewHeadLocation(ru.nsu.fit.smolyakov.snakegame.model.snake.Snake.MovingDirection)">getNewHeadLocation</a>, <a href="../../Snake.html#getNewHeadLocation(ru.nsu.fit.smolyakov.snakegame.model.snake.SnakeBody,ru.nsu.fit.smolyakov.snakegame.model.snake.Snake.MovingDirection)">getNewHeadLocation</a>, <a href="../../Snake.html#getPoints()">getPoints</a>, <a href="../../Snake.html#getSnakeBody()">getSnakeBody</a>, <a href="../../Snake.html#setMovingDirection(ru.nsu.fit.smolyakov.snakegame.model.snake.Snake.MovingDirection)">setMovingDirection</a>, <a href="../../Snake.html#update()">update</a></code></div>
@@ -161,13 +173,31 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="isNonCollidingTurn(ru.nsu.fit.smolyakov.snakegame.model.snake.SnakeBody,ru.nsu.fit.smolyakov.snakegame.model.snake.Snake.MovingDirection)">
+<h3>isNonCollidingTurn</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isNonCollidingTurn</span><wbr><span class="parameters">(<a href="../../SnakeBody.html" title="class in ru.nsu.fit.smolyakov.snakegame.model.snake">SnakeBody</a>&nbsp;snakeBody,
+ <a href="../../Snake.MovingDirection.html" title="enum class in ru.nsu.fit.smolyakov.snakegame.model.snake">Snake.MovingDirection</a>&nbsp;direction)</span></div>
+<div class="block">Checks if the snake with specified <code>snakeBody</code> will collide with
+ the barrier or its own body if it turns in the given direction.</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="StayinAliveAISnake.html#isNonCollidingTurn(ru.nsu.fit.smolyakov.snakegame.model.snake.SnakeBody,ru.nsu.fit.smolyakov.snakegame.model.snake.Snake.MovingDirection)">isNonCollidingTurn</a></code>&nbsp;in class&nbsp;<code><a href="StayinAliveAISnake.html" title="class in ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl">StayinAliveAISnake</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>snakeBody</code> - snake to check</dd>
+<dd><code>direction</code> - direction to check</dd>
+<dt>Returns:</dt>
+<dd><code>true</code> if the snake won't collide, <code>false</code> otherwise</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="thinkAboutTurn()">
 <h3>thinkAboutTurn</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">thinkAboutTurn</span>()</div>
 <div class="block">Follows the player snake's head.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../AISnake.html#thinkAboutTurn()">thinkAboutTurn</a></code>&nbsp;in class&nbsp;<code><a href="../AISnake.html" title="class in ru.nsu.fit.smolyakov.snakegame.model.snake.ai">AISnake</a></code></dd>
+<dt>Overrides:</dt>
+<dd><code><a href="StayinAliveAISnake.html#thinkAboutTurn()">thinkAboutTurn</a></code>&nbsp;in class&nbsp;<code><a href="StayinAliveAISnake.html" title="class in ru.nsu.fit.smolyakov.snakegame.model.snake.ai.impl">StayinAliveAISnake</a></code></dd>
 </dl>
 </section>
 </li>
