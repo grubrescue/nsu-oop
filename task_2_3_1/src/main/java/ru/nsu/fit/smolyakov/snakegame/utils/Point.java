@@ -83,6 +83,10 @@ public record Point(int x, int y) {
      * @return a vector that is the shortest way from the current point to the specified point
      */
     public Point shortestVector(Point to, int xLimit, int yLimit) {
+        if (xLimit <= 0 || yLimit <= 0) {
+            throw new IllegalArgumentException("Limits must be positive");
+        }
+
         if (this.x >= xLimit || this.y >= yLimit
             || to.x >= xLimit || to.y >= yLimit
             || this.x < 0 || this.y < 0

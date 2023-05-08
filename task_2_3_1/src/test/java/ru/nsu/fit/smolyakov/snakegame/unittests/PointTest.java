@@ -75,12 +75,12 @@ public class PointTest {
         assertThatThrownBy(() -> new Point(-1, -1)
             .shortestVector(new Point(4, 4), 5, 5)
         ).isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("Points must be in limits");
+            .hasMessage("Points must be within the field");
 
         assertThatThrownBy(() -> new Point(1, 1)
             .shortestVector(new Point(-4, -4), 5, 5)
         ).isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("Points must be in limits");
+            .hasMessage("Points must be within the field");
     }
 
 
