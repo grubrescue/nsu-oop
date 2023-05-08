@@ -29,7 +29,8 @@ public class StayinAliveAISnake extends AISnake {
 
     /**
      * Checks if the snake with specified {@code snakeBody} will collide with
-     * the barrier or its own body if it turns in the given direction.
+     * the barrier or its own body or other snakes' heads
+     * if it turns in the given direction.
      *
      * @param snakeBody snake to check
      * @param direction direction to check
@@ -50,8 +51,8 @@ public class StayinAliveAISnake extends AISnake {
     }
 
     /**
-     * Checks if the snake will collide with the barrier or its own body
-     * if it turns in the given direction.
+     * Calls {@link #isNonCollidingTurn(SnakeBody, MovingDirection)} with
+     * the current snake's body.
      *
      * @param direction direction to check
      * @return true if the snake will collide, false otherwise

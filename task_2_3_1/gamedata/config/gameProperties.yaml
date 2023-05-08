@@ -4,7 +4,7 @@ height: 20
 javaFxScaling: 39
 apples: 10
 level: !<CustomFile>
-  fileName: "40x20_empty.txt"
+  fileName: "nosize_trash.txt"
 aiClassNames:
 - "KamikazeAISnake"
 speed: "fastest"
