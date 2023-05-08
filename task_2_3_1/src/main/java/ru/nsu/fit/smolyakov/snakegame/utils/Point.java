@@ -74,6 +74,14 @@ public record Point(int x, int y) {
         return Math.abs(x - to.x) + Math.abs(y - to.y) <= 1;
     }
 
+    /**
+     * Returns a vector that is the shortest way from the current point to the specified point.
+     *
+     * @param to point to calculate vector to
+     * @param xLimit x-coordinate limit
+     * @param yLimit y-coordinate limit
+     * @return a vector that is the shortest way from the current point to the specified point
+     */
     public Point shortestVector(Point to, int xLimit, int yLimit) {
         if (this.x >= xLimit || this.y >= yLimit
             || to.x >= xLimit || to.y >= yLimit
@@ -100,6 +108,17 @@ public record Point(int x, int y) {
         return new Point(dx, dy);
     }
 
+    /**
+     * Returns the distance between the current point and the specified point.
+     * The distance is calculated as the sum of absolute values of the differences
+     * between the coordinates of the current point and the specified point.
+     * Ones are calculated by {@link #shortestVector(Point, int, int)}.
+     *
+     * @param to point to calculate distance to
+     * @param xLimit x-coordinate limit
+     * @param yLimit y-coordinate limit
+     * @return the cathetus distance between the current point and the specified point
+     */
     public int cathetusDistance(Point to, int xLimit, int yLimit) {
         var point = shortestVector(to, xLimit, yLimit);
         return Math.abs(point.x) + Math.abs(point.y);

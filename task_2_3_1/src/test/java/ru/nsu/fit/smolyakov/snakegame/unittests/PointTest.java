@@ -65,6 +65,26 @@ public class PointTest {
         ).isEqualTo(new Point(1, 1));
     }
 
+    @Test
+    void shortestVectorExceptionTest() {
+        assertThatThrownBy(() -> new Point(1, 1)
+            .shortestVector(new Point(4, 4), 0, 0)
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("Limits must be positive");
+
+        assertThatThrownBy(() -> new Point(-1, -1)
+            .shortestVector(new Point(4, 4), 5, 5)
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("Points must be in limits");
+
+        assertThatThrownBy(() -> new Point(1, 1)
+            .shortestVector(new Point(-4, -4), 5, 5)
+        ).isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("Points must be in limits");
+    }
+
+
+
 
 //    @Test
 //    void cathetusDistanceTest() {
