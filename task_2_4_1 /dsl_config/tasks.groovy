@@ -40,13 +40,13 @@ tasks {
         name = 'task_1_5_1'
         branch = 'task-1-5-1'
         description = 'Calculator'
+        points = 2
     }
 
     task {
         name = 'task_1_5_2'
         branch = 'task-1-5-2'
         description = 'Notebook'
-        extraPoints = 1
     }
 
     // 2nd semester
@@ -54,19 +54,20 @@ tasks {
         name = 'task_2_1_1'
         branch = 'task-2-1-1'
         description = 'Prime numbers finder'
+        runTests = false
     }
 
     task {
         name = 'task_2_2_1'
         branch = 'task-2-2-1'
         description = 'Pizzeria'
-        extraPoints = 1
+        runTests = false
     }
 
     task {
         name = 'task_2_3_1'
         branch = 'task-2-3-1'
         description = 'Javafx snake game'
-        extraPoints = 1
+        points = 2
     }
 }

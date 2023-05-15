@@ -19,7 +19,7 @@ public class Application {
 
     private GroovyShell sh;
 
-    public void init() {
+    public Application() {
         CompilerConfiguration cc = new CompilerConfiguration();
         cc.setScriptBaseClass(DelegatingScript.class.getName());
         sh = new GroovyShell(Application.class.getClassLoader(), new Binding(), cc);
@@ -33,7 +33,6 @@ public class Application {
 
     public static void main(String... args) throws IOException {
         var app = new Application();
-        app.init();
 
         var group = new Group();
         app.parseDto(group, GROUP_FILE_PATH);
