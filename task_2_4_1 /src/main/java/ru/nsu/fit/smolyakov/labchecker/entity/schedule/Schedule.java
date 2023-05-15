@@ -4,8 +4,6 @@ import groovy.lang.Closure;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import ru.nsu.fit.smolyakov.labchecker.entity.group.Student;
-import ru.nsu.fit.smolyakov.labchecker.util.DSLUtil;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,6 +17,17 @@ import static ru.nsu.fit.smolyakov.labchecker.util.DSLUtil.groovyDelegate;
 @ToString
 @EqualsAndHashCode
 public class Schedule {
+    private final AssignmentsList assignmentsList = new AssignmentsList();
+    private final Lessons lessons = new Lessons();
+
+    public void assignments(Closure<?> closure) {
+        groovyDelegate(assignmentsList, closure);
+    }
+
+    public void lessons(Closure<?> closure) {
+        groovyDelegate(lessons, closure);
+    }
+
     @Getter
     @ToString
     @EqualsAndHashCode
@@ -42,16 +51,5 @@ public class Schedule {
             Lesson lesson = new Lesson(LocalDate.parse(dateString));
             lessons.add(lesson);
         }
-    }
-
-    private AssignmentsList assignmentsList = new AssignmentsList();
-    private Lessons lessons = new Lessons();
-
-    public void assignments(Closure<?> closure) {
-        groovyDelegate(assignmentsList, closure);
-    }
-
-    public void lessons(Closure<?> closure) {
-        groovyDelegate(lessons, closure);
     }
 }

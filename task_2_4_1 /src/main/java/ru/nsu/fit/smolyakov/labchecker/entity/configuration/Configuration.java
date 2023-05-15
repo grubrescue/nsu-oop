@@ -11,8 +11,8 @@ import static ru.nsu.fit.smolyakov.labchecker.util.DSLUtil.groovyDelegate;
 @EqualsAndHashCode
 @ToString
 public class Configuration {
-    private Evaluation evaluation = new Evaluation();
-    private Git git = new Git();
+    private final Evaluation evaluation = new Evaluation();
+    private final Git git = new Git();
 
     public void evaluation(Closure<?> closure) {
         groovyDelegate(evaluation, closure);

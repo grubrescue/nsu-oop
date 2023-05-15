@@ -10,8 +10,8 @@ import lombok.ToString;
 public class Task {
     private String name;
     private String branch;
-    private String description = "no description provided";
-    private double points = 1.0;
+    private final String description = "no description provided";
+    private final double points = 1.0;
 
-    private boolean runTests = true;
+    private final boolean runTests = true;
 }
