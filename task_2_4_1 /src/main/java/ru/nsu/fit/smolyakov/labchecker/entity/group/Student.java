@@ -7,8 +7,8 @@ import lombok.ToString;
 
 @Getter
 @ToString
-@EqualsAndHashCode(callSuper = false)
-public class Student extends GroovyObjectSupport {
+@EqualsAndHashCode
+public class Student {
     private String name = "unspecified name";
     private String repo;
     private String defaultBranchName = "main";

@@ -1,5 +1,5 @@
 tasks {
-    // 1st semester
+// 1st semester
     task {
         name = 'task_1_1_1'
         branch = 'task-1-1-1'
@@ -49,7 +49,7 @@ tasks {
         description = 'Notebook'
     }
 
-    // 2nd semester
+// 2nd semester
     task {
         name = 'task_2_1_1'
         branch = 'task-2-1-1'
