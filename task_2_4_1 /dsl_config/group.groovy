@@ -53,5 +53,3 @@ students {
         repo = 'MihailCCfit/oop'
     }
 }
-
-
