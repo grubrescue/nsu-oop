@@ -8,6 +8,6 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class Git {
-    private String repoLinkPrefix = "https://github.com/";
-    private String repoLinkPostfix = ".git";
+    private final String repoLinkPrefix = "https://github.com/";
+    private final String repoLinkPostfix = ".git";
 }

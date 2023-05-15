@@ -8,8 +8,8 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class Evaluation {
-    private double defaultMaxPoints = 1.0;
-    private double taskSolvedPoints = 1.0;
-    private double softDeadlineSkipFine = -0.5;
-    private double hardDeadlineSkipFine = -0.5;
+    private final double defaultMaxPoints = 1.0;
+    private final double taskSolvedPoints = 1.0;
+    private final double softDeadlineSkipFine = -0.5;
+    private final double hardDeadlineSkipFine = -0.5;
 }
