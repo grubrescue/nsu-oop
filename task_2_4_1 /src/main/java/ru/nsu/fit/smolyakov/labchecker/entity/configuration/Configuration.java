@@ -17,4 +17,8 @@ public class Configuration {
     public void evaluation(Closure<?> closure) {
         groovyDelegate(evaluation, closure);
     }
+
+    public void git(Closure<?> closure) {
+        groovyDelegate(git, closure);
+    }
 }
