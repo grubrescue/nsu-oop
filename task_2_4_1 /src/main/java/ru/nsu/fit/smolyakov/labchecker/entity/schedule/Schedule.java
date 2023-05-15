@@ -17,11 +17,11 @@ import static ru.nsu.fit.smolyakov.labchecker.util.DSLUtil.groovyDelegate;
 @ToString
 @EqualsAndHashCode
 public class Schedule {
-    private final AssignmentsList assignmentsList = new AssignmentsList();
+    private final AssignmentMap assignments = new AssignmentMap();
     private final Lessons lessons = new Lessons();
 
     public void assignments(Closure<?> closure) {
-        groovyDelegate(assignmentsList, closure);
+        groovyDelegate(assignments, closure);
     }
 
     public void lessons(Closure<?> closure) {
@@ -31,13 +31,13 @@ public class Schedule {
     @Getter
     @ToString
     @EqualsAndHashCode
-    private static class AssignmentsList {
-        private final Map<String, Assignment> assignments = new HashMap<>();
+    private static class AssignmentMap {
+        private final Map<String, Assignment> map = new HashMap<>();
 
         public void assignment(String taskName, Closure<?> closure) {
             Assignment assignment = new Assignment();
             groovyDelegate(assignment, closure);
-            assignments.put(taskName, assignment);
+            map.put(taskName, assignment);
         }
     }
 

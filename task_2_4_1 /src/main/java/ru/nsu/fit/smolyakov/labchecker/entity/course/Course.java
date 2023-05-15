@@ -14,23 +14,23 @@ import static ru.nsu.fit.smolyakov.labchecker.util.DSLUtil.groovyDelegate;
 @EqualsAndHashCode
 @ToString
 public class Course {
-    private final TasksList tasksList = new TasksList();
+    private final TasksList tasks = new TasksList();
 
     public void tasks(Closure<?> closure) {
-        groovyDelegate(tasksList, closure);
+        groovyDelegate(tasks, closure);
     }
 
     @Getter
     @ToString
     @EqualsAndHashCode
     public static class TasksList {
-        private final List<Task> tasks = new ArrayList<>();
+        private final List<Task> list = new ArrayList<>();
 
         public void task(Closure<?> closure) {
             Task task = new Task();
             groovyDelegate(task, closure);
 
-            tasks.add(task);
+            list.add(task);
         }
     }
 }

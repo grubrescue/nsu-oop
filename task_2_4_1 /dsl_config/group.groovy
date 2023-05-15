@@ -4,6 +4,11 @@ students {
     student {
         name = 'Бадин Иван Андреевич'
         repo = 'streafy/OOP'
+
+        forTask('task_1_1_1') {
+            projectName 'Task_1_1_1'
+            branchName 'task-1-1-1'
+        }
     }
 
     student {
