@@ -38,7 +38,7 @@ public class Schedule {
     private static class Lessons {
         private final List<Lesson> lessons = new ArrayList<>();
 
-        public void lesson(String dateString) {
+        public void lessonAt(String dateString) {
             Lesson lesson = new Lesson(LocalDate.parse(dateString));
             lessons.add(lesson);
         }
