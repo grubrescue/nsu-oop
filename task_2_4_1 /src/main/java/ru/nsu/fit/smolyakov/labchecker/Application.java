@@ -4,6 +4,7 @@ import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
+import ru.nsu.fit.smolyakov.labchecker.entity.Checker;
 import ru.nsu.fit.smolyakov.labchecker.entity.course.Course;
 import ru.nsu.fit.smolyakov.labchecker.entity.schedule.Schedule;
 
@@ -17,6 +18,7 @@ public class Application {
     public static final String GROUP_FILE_PATH = DSL_FOLDER_PATH + "group.groovy";
     public static final String SCHEDULE_FILE_PATH = DSL_FOLDER_PATH + "schedule.groovy";
     public static final String COURSE_FILE_PATH = DSL_FOLDER_PATH + "course.groovy";
+    public static final String PROGRESS_FILE_PATH = DSL_FOLDER_PATH + "progress.groovy";
 
     private GroovyShell sh;
 
@@ -35,9 +37,13 @@ public class Application {
     public static void main(String... args) throws IOException {
         var app = new Application();
 
-        var group = new Schedule();
-        app.parseDto(group, SCHEDULE_FILE_PATH);
+        var checker = new Checker();
 
-        System.out.println(group);
+        app.parseDto(checker.getConfiguration(), CONFIGURATION_SCRIPT_PATH);
+        app.parseDto(checker.getGroup(), GROUP_FILE_PATH);
+        app.parseDto(checker.getSchedule(), SCHEDULE_FILE_PATH);
+        app.parseDto(checker.getCourse(), COURSE_FILE_PATH);
+
+        System.out.println(checker);
     }
 }

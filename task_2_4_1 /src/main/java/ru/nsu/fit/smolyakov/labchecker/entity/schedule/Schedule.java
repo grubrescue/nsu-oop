@@ -39,7 +39,7 @@ public class Schedule {
         private final List<Lesson> lessons = new ArrayList<>();
 
         public void lesson(String dateString) {
-            Lesson lesson = new Lesson(DSLUtil.parseDate(dateString));
+            Lesson lesson = new Lesson(LocalDate.parse(dateString));
             lessons.add(lesson);
         }
     }

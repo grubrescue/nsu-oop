@@ -1,64 +1,64 @@
 assignments {
     // 1st semester
     assignment('task_1_1_1') {
-        softDeadline = '2022-09-12'
-        hardDeadline = '2022-09-26'
+        softDeadlineAt('2022-09-12')
+        hardDeadlineAt('2022-09-26')
     }
 
     assignment('task_1_2_1') {
-        softDeadline = '2022-09-27'
-        hardDeadline = '2022-10-10'
+        softDeadlineAt('2022-09-27')
+        hardDeadlineAt('2022-10-10')
     }
 
     assignment('task_1_2_2') {
-        softDeadline = '2022-10-10'
-        hardDeadline = '2022-10-24'
+        softDeadlineAt('2022-10-10')
+        hardDeadlineAt('2022-10-24')
     }
 
     assignment('task_1_2_3') {
-        softDeadline = '2022-10-24'
-        hardDeadline = '2022-11-07'
+        softDeadlineAt('2022-10-24')
+        hardDeadlineAt('2022-11-07')
     }
 
     assignment('task_1_3_1') {
-        softDeadline = '2022-11-07'
-        hardDeadline = '2022-11-21'
+        softDeadlineAt('2022-11-07')
+        hardDeadlineAt('2022-11-21')
     }
 
     assignment('task_1_4_1') {
-        softDeadline = '2022-11-21'
-        hardDeadline = '2022-12-06'
+        softDeadlineAt('2022-11-21')
+        hardDeadlineAt('2022-12-06')
     }
 
     assignment('task_1_5_1') {
-        softDeadline = '2022-12-06'
-        hardDeadline = '2022-12-20'
+        softDeadlineAt('2022-12-06')
+        hardDeadlineAt('2022-12-20')
     }
 
     assignment('task_1_5_2') {
-        softDeadline = '2022-12-20'
-        hardDeadline = '2023-12-27'
+        softDeadlineAt('2022-12-20')
+        hardDeadlineAt('2023-12-27')
     }
 
     // 2nd semester
     assignment('task_2_1_1') {
-        softDeadline = '2023-02-14'
-        hardDeadline = '2023-03-17'
+        softDeadlineAt('2023-02-14')
+        hardDeadlineAt('2023-03-17')
     }
 
     assignment('task_2_2_1') {
-        softDeadline = '2023-03-14'
-        hardDeadline = '2023-03-28'
+        softDeadlineAt('2023-03-14')
+        hardDeadlineAt('2023-03-28')
     }
 
     assignment('task_2_3_1') {
-        softDeadline = '2023-04-18'
-        hardDeadline = '2023-05-16'
+        softDeadlineAt('2023-04-18')
+        hardDeadlineAt('2023-05-16')
     }
 
     assignment('task_2_4_1') {
-        softDeadline = '2023-05-16'
-        hardDeadline = '2023-06-01' // ???
+        softDeadlineAt('2023-05-16')
+        hardDeadlineAt('2023-06-01') // ???
     }
 }
 
