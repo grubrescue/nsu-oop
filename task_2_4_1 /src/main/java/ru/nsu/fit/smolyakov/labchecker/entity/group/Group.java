@@ -15,7 +15,7 @@ import static ru.nsu.fit.smolyakov.labchecker.util.DSLUtil.groovyDelegate;
 @EqualsAndHashCode
 public class Group {
     private final String groupName = "unspecified group name";
-    private final StudentsList students = new StudentsList();
+    private final StudentList students = new StudentList();
 
     public void students(Closure<?> closure) {
         groovyDelegate(students, closure);
@@ -24,14 +24,14 @@ public class Group {
     @ToString
     @Getter
     @EqualsAndHashCode
-    public static class StudentsList {
-        private final List<Student> students = new ArrayList<>();
+    public static class StudentList {
+        private final List<Student> list = new ArrayList<>();
 
         public void student(Closure<?> closure) {
             Student student = new Student();
             groovyDelegate(student, closure);
 
-            students.add(student);
+            list.add(student);
         }
     }
 }

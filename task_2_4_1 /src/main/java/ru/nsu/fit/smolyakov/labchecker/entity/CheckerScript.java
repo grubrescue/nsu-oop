@@ -11,7 +11,7 @@ import ru.nsu.fit.smolyakov.labchecker.entity.schedule.Schedule;
 @Getter
 @EqualsAndHashCode
 @ToString
-public class Checker {
+public class CheckerScript { // TODO rename
     private final Group group = new Group();
     private final Schedule schedule = new Schedule();
     private final Course course = new Course();

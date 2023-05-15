@@ -4,7 +4,9 @@ import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
-import ru.nsu.fit.smolyakov.labchecker.entity.Checker;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import ru.nsu.fit.smolyakov.labchecker.checker.EvaluationRunner;
+import ru.nsu.fit.smolyakov.labchecker.entity.CheckerScript;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,14 +31,15 @@ public class Application {
     public static void main(String... args) throws IOException {
         var app = new Application();
 
-        var checker = new Checker();
+        var checkerScript = new CheckerScript();
 
-        app.parseDto(checker.getConfiguration(), CONFIGURATION_SCRIPT_PATH);
-        app.parseDto(checker.getGroup(), GROUP_FILE_PATH);
-        app.parseDto(checker.getSchedule(), SCHEDULE_FILE_PATH);
-        app.parseDto(checker.getCourse(), COURSE_FILE_PATH);
+        app.parseDto(checkerScript.getConfiguration(), CONFIGURATION_SCRIPT_PATH);
+        app.parseDto(checkerScript.getGroup(), GROUP_FILE_PATH);
+        app.parseDto(checkerScript.getSchedule(), SCHEDULE_FILE_PATH);
+        app.parseDto(checkerScript.getCourse(), COURSE_FILE_PATH);
 
-        System.out.println(checker);
+        var evaluator = new EvaluationRunner(checkerScript); // TODO связности шибко много??? но мб не страшно
+        evaluator.runAll();
     }
 
     public void parseDto(Object dto, String path) throws IOException {

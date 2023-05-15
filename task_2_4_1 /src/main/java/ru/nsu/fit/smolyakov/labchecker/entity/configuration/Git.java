@@ -10,4 +10,8 @@ import lombok.ToString;
 public class Git {
     private final String repoLinkPrefix = "https://github.com/";
     private final String repoLinkPostfix = ".git";
+
+    public String getRepoLink(String repoName) {
+        return repoLinkPrefix + repoName + repoLinkPostfix;
+    }
 }
