@@ -9,6 +9,8 @@ import ru.nsu.fit.smolyakov.labchecker.entity.group.Student;
 import java.io.File;
 import java.io.IOException;
 
+
+
 @AllArgsConstructor
 public class EvaluationRunner { //  TODO todo
     public final String TMP_DIR = ".dsl_tmp/" + System.currentTimeMillis() + "/";
@@ -26,7 +28,16 @@ public class EvaluationRunner { //  TODO todo
             .setDirectory(dir)
             .setCloneAllBranches(true);
 
-        try (Git repo = repoCloneCommand.call()) {
+        try (Git masterRepo = repoCloneCommand.call()) {
+            masterRepo.checkout().setName("task-1-1-1").call();
+
+            checkerScript.getCourse()
+                .getTasks()
+                .getList()
+                .forEach((task) -> {
+//                    if (student)
+                });
+
 
         }
     }
@@ -37,5 +48,10 @@ public class EvaluationRunner { //  TODO todo
 //            } catch (GitAPIException | IOException e) {
 //            }
 //        });
+        try {
+            processStudent(checkerScript.getGroup().getStudents().getList().get(6));
+        } catch (GitAPIException | IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
