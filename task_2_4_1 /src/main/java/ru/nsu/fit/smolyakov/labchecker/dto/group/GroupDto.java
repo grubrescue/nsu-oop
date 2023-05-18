@@ -15,7 +15,7 @@ public class GroupDto {
     @NonFinal String groupName = "unspecified group name";
     StudentList students = new StudentList();
 
-    public void students(Closure<?> closure) {
+    void students(Closure<?> closure) {
         groovyDelegate(students, closure);
     }
 
@@ -24,7 +24,7 @@ public class GroupDto {
     public static class StudentList {
         List<StudentDto> list = new ArrayList<>();
 
-        public void student(String nickName, Closure<?> closure) {
+        void student(String nickName, Closure<?> closure) {
             StudentDto studentDto = new StudentDto(nickName);
             groovyDelegate(studentDto, closure);
 

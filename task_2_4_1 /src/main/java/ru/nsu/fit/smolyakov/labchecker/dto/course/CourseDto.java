@@ -13,7 +13,7 @@ import static ru.nsu.fit.smolyakov.labchecker.util.DSLUtil.groovyDelegate;
 public class CourseDto {
     TasksList tasks = new TasksList();
 
-    public void tasks(Closure<?> closure) {
+    void tasks(Closure<?> closure) {
         groovyDelegate(tasks, closure);
     }
 
@@ -22,7 +22,7 @@ public class CourseDto {
     public static class TasksList {
         List<TaskDto> list = new ArrayList<>();
 
-        public void task(Closure<?> closure) {
+        void task(Closure<?> closure) {
             TaskDto taskDto = new TaskDto();
             groovyDelegate(taskDto, closure);
 
