@@ -1,0 +1,15 @@
+package ru.nsu.fit.smolyakov.labchecker.dto.course;
+
+import lombok.*;
+import lombok.experimental.NonFinal;
+
+@Value
+@NoArgsConstructor
+public class TaskDto {
+    @NonFinal String name;
+    @NonFinal String branch;
+    @NonFinal String description = "no description provided";
+    @NonFinal double points;
+
+    @NonFinal boolean runTests;
+}

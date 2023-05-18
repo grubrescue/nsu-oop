@@ -1,17 +1,19 @@
-package ru.nsu.fit.smolyakov.labchecker.entity.schedule;
+package ru.nsu.fit.smolyakov.labchecker.dto.schedule;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.NonFinal;
 
 import java.time.LocalDate;
 
-@Getter
-@ToString
-@EqualsAndHashCode
-public class Assignment {
-    private LocalDate softDeadline;
-    private LocalDate hardDeadline;
+@Value
+public class AssignmentDto {
+    public AssignmentDto(String task) {
+        this.task = task;
+    }
+
+    String task;
+    @NonFinal LocalDate softDeadline;
+    @NonFinal LocalDate hardDeadline;
 
     private void softDeadlineAt(LocalDate date) {
         this.softDeadline = date;

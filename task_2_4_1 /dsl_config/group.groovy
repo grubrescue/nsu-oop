@@ -2,48 +2,48 @@ groupName = '21214'
 
 students {
     student('streafy') {
-        name = 'Бадин Иван Андреевич'
+        fullName = 'Бадин Иван Андреевич'
         repo = 'OOP'
     }
 
     student('Fagorym') {
-        name = 'Вебер Олег Владимирович'
+        fullName = 'Вебер Олег Владимирович'
         repo = 'OOP'
     }
 
     student('NikFive') {
-        name = 'Константинов Никита Игоревич'
+        fullName = 'Константинов Никита Игоревич'
         repo = 'OOP'
     }
 
     student('SophyaL') {
-        name = 'Лылова Софья Сергеевна'
+        fullName = 'Лылова Софья Сергеевна'
         repo = 'OOP'
     }
 
     student('rafi2002') {
-        name = 'Масуд Рофикул Ал'
+        fullName = 'Масуд Рофикул Ал'
     }
 
     student('andrey-dru-me1') {
-        name = 'Мельников Андрей Петрович'
+        fullName = 'Мельников Андрей Петрович'
     }
 
     student('evangelionexpert') {
-        name = 'Смоляков Павел Евгеньевич'
+        fullName = 'Смоляков Павел Евгеньевич'
 
         defaultBranchName = 'master'
     }
 
     student('Tretiakovv') {
-        name = 'Третьяков Артём Александрович'
+        fullName = 'Третьяков Артём Александрович'
     }
 
     student('ttrubinov') {
-        name = 'Трубинов Тимофей Андреевич'
+        fullName = 'Трубинов Тимофей Андреевич'
     }
 
     student('MihailCCfit') {
-        name = 'Цуканов Михаил Александрович'
+        fullName = 'Цуканов Михаил Александрович'
     }
 }

@@ -1,4 +1,4 @@
-package ru.nsu.fit.smolyakov.labchecker.entity.progress;
+package ru.nsu.fit.smolyakov.labchecker.dto.progress;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
