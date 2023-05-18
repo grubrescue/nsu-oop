@@ -33,13 +33,13 @@ public class Application {
 
         var checkerScript = new CheckerScript();
 
-        app.parseDto(checkerScript.getConfiguration(), CONFIGURATION_SCRIPT_PATH);
-        app.parseDto(checkerScript.getGroup(), GROUP_FILE_PATH);
-        app.parseDto(checkerScript.getSchedule(), SCHEDULE_FILE_PATH);
-        app.parseDto(checkerScript.getCourse(), COURSE_FILE_PATH);
+//        app.parseDto(checkerScript.getConfiguration(), CONFIGURATION_SCRIPT_PATH);
+//        app.parseDto(checkerScript.getGroup(), GROUP_FILE_PATH);
+//        app.parseDto(checkerScript.getSchedule(), SCHEDULE_FILE_PATH);
+//        app.parseDto(checkerScript.getCourse(), COURSE_FILE_PATH);
 
-        var evaluator = new EvaluationRunner(checkerScript); // TODO связности шибко много??? но мб не страшно
-        evaluator.runAll();
+//        var evaluator = new EvaluationRunner(checkerScript); // TODO связности шибко много??? но мб не страшно
+//        evaluator.runAll();
     }
 
     public void parseDto(Object dto, String path) throws IOException {

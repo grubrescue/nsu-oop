@@ -1,8 +1,8 @@
 academicProgress {
     forStudent('ИГОРЬ НИКОЛАЕВ') {
         forTask('task_1_1_1') {
-            noSoftDeadlineSkip
-            noHardDeadlineSkip
+            startedAt '19-01-19'
+            finishedAt '20-02-20'
             solvedWithPoints 0.666
             message = 'выпьем за ооп'
         }

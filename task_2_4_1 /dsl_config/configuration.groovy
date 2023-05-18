@@ -8,4 +8,6 @@ evaluation {
 git {
     repoLinkPrefix = 'https://github.com/' // possible to switch to ssh
     repoLinkPostfix = '.git'
+    repoName = 'oop'
 }
+
