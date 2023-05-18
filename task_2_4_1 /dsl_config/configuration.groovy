@@ -10,4 +10,3 @@ git {
     repoLinkPostfix = '.git'
     repoName = 'oop'
 }
-

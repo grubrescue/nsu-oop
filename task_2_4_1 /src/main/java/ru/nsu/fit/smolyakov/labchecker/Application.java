@@ -4,9 +4,7 @@ import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
-import org.eclipse.jgit.api.errors.GitAPIException;
-import ru.nsu.fit.smolyakov.labchecker.checker.EvaluationRunner;
-import ru.nsu.fit.smolyakov.labchecker.entity.CheckerScript;
+import ru.nsu.fit.smolyakov.labchecker.dto.CheckerScriptDto;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,12 +29,14 @@ public class Application {
     public static void main(String... args) throws IOException {
         var app = new Application();
 
-        var checkerScript = new CheckerScript();
+        var checkerScript = new CheckerScriptDto();
 
-//        app.parseDto(checkerScript.getConfiguration(), CONFIGURATION_SCRIPT_PATH);
-//        app.parseDto(checkerScript.getGroup(), GROUP_FILE_PATH);
-//        app.parseDto(checkerScript.getSchedule(), SCHEDULE_FILE_PATH);
-//        app.parseDto(checkerScript.getCourse(), COURSE_FILE_PATH);
+        app.parseDto(checkerScript.getConfiguration(), CONFIGURATION_SCRIPT_PATH);
+        app.parseDto(checkerScript.getGroupDto(), GROUP_FILE_PATH);
+        app.parseDto(checkerScript.getScheduleDto(), SCHEDULE_FILE_PATH);
+        app.parseDto(checkerScript.getCourseDto(), COURSE_FILE_PATH);
+
+        System.out.println(checkerScript);
 
 //        var evaluator = new EvaluationRunner(checkerScript); // TODO связности шибко много??? но мб не страшно
 //        evaluator.runAll();
