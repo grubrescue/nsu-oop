@@ -12,11 +12,11 @@ public class ConfigurationDto {
     @NonFinal EvaluationDto evaluationDto = new EvaluationDto();
     @NonFinal GitDto gitDto = new GitDto();
 
-    public void evaluation(Closure<?> closure) {
+    void evaluation(Closure<?> closure) {
         groovyDelegate(evaluationDto, closure);
     }
 
-    public void git(Closure<?> closure) {
+    void git(Closure<?> closure) {
         groovyDelegate(gitDto, closure);
     }
 }
