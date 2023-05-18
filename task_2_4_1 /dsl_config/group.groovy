@@ -1,59 +1,49 @@
 groupName = '21214'
 
 students {
-    student {
+    student('streafy') {
         name = 'Бадин Иван Андреевич'
-        repo = 'streafy/OOP'
-
-        forTask('task_1_1_1') {
-            name 'Task_1_1_1'
-        }
+        repo = 'OOP'
     }
 
-    student {
+    student('Fagorym') {
         name = 'Вебер Олег Владимирович'
-        repo = 'Fagorym/OOP'
+        repo = 'OOP'
     }
 
-    student {
+    student('NikFive') {
         name = 'Константинов Никита Игоревич'
-        repo = 'NikFive/OOP'
+        repo = 'OOP'
     }
 
-    student {
+    student('SophyaL') {
         name = 'Лылова Софья Сергеевна'
-        repo = 'SophyaL/OOP'
+        repo = 'OOP'
     }
 
-    student {
+    student('rafi2002') {
         name = 'Масуд Рофикул Ал'
-        repo = 'rafi2002/oop'
     }
 
-    student {
+    student('andrey-dru-me1') {
         name = 'Мельников Андрей Петрович'
-        repo = 'andrey-dru-me1/oop'
     }
 
-    student {
+    student('evangelionexpert') {
         name = 'Смоляков Павел Евгеньевич'
-        repo = 'evangelionexpert/oop'
 
         defaultBranchName = 'master'
     }
 
-    student {
+    student('Tretiakovv') {
         name = 'Третьяков Артём Александрович'
-        repo = 'Tretiakovv/oop'
     }
 
-    student {
+    student('ttrubinov') {
         name = 'Трубинов Тимофей Андреевич'
-        repo = 'ttrubinov/oop'
     }
 
-    student {
+    student('MihailCCfit') {
         name = 'Цуканов Михаил Александрович'
-        repo = 'MihailCCfit/oop'
     }
 }

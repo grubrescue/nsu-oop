@@ -1,13 +1,11 @@
 tasks {
 // 1st semester
-    task {
-        name = 'task_1_1_1'
+    task('task_1_1_1') {
         branch = 'task-1-1-1'
         description = 'Heap sort'
     }
 
-    task {
-        name = 'task_1_2_1'
+    task('task_1_2_1') {
         branch = 'task-1-2-1'
         description = 'Stack'
     }
