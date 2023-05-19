@@ -39,7 +39,7 @@ public class Application {
 
         System.out.println(checkerScript.getAcademicProgressDto());
 
-//        var evaluator = new EvaluationRunner(checkerScript); // TODO связности шибко много??? но мб не страшно
+//        var evaluator = new EvaluationRunner(checkerScript);
 //        evaluator.runAll();
     }
 

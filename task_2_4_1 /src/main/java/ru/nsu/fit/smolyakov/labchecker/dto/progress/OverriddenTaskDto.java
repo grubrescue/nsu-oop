@@ -15,7 +15,7 @@ public class OverriddenTaskDto {
 
     @NonFinal LocalDate started;
     @NonFinal LocalDate finished;
-    @NonFinal double points;
+    @NonFinal Double points;
 
     @NonFinal String message = "no message";
     @NonFinal String branch;
