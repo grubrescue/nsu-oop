@@ -19,9 +19,9 @@ public class AssignmentStatus {
 
     @NonFinal Double overriddenTaskPoints = null;
 
-    @NonFinal boolean buildOk = false;
-    @NonFinal boolean testsOk = false;
-    @NonFinal boolean javadocOk = false;
+    @Setter @NonFinal boolean buildOk = false;
+    @Setter @NonFinal boolean testsOk = false;
+    @Setter @NonFinal boolean javadocOk = false;
 
     public void overrideTaskPoints(double points) {
         this.overriddenTaskPoints = points;

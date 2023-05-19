@@ -1,5 +1,5 @@
 overrideProgress {
-    forStudent('ИГОРЬ НИКОЛАЕВ') {
+    forStudent('evangelionexpert') {
         forTask('task_1_1_1') {
             branch = 'task_1_1_1'
 

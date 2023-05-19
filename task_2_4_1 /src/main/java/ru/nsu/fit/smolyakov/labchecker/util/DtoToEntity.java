@@ -73,8 +73,6 @@ public class DtoToEntity {
             new Course.Assignments(tasksList)
         );
 
-        System.out.println(course);
-
 //        var group = new Group()
         var studentList = groupDto.getStudents()
             .getList()
@@ -145,7 +143,7 @@ public class DtoToEntity {
                         );
             });
 
-        return null; // TODO tmp
+        return new MainEntity(course, group);
     }
 
 

@@ -43,6 +43,8 @@ public class Application {
         var util = new DtoToEntity(checkerScript);
         var mainEntity = util.convert();
 
+        System.out.println(mainEntity.getGroup());
+
 //        var evaluator = new EvaluationRunner(checkerScript);
 //        evaluator.runAll();
     }
