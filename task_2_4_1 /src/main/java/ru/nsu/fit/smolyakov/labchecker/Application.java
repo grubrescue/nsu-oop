@@ -31,12 +31,13 @@ public class Application {
 
         var checkerScript = new CheckerScriptDto();
 
-        app.parseDto(checkerScript.getConfiguration(), CONFIGURATION_SCRIPT_PATH);
+        app.parseDto(checkerScript.getConfigurationDto(), CONFIGURATION_SCRIPT_PATH);
         app.parseDto(checkerScript.getGroupDto(), GROUP_FILE_PATH);
         app.parseDto(checkerScript.getScheduleDto(), SCHEDULE_FILE_PATH);
         app.parseDto(checkerScript.getCourseDto(), COURSE_FILE_PATH);
+        app.parseDto(checkerScript.getAcademicProgressDto(), PROGRESS_FILE_PATH);
 
-        System.out.println(checkerScript);
+        System.out.println(checkerScript.getAcademicProgressDto());
 
 //        var evaluator = new EvaluationRunner(checkerScript); // TODO связности шибко много??? но мб не страшно
 //        evaluator.runAll();

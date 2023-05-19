@@ -11,7 +11,7 @@ import static ru.nsu.fit.smolyakov.labchecker.util.DSLUtil.groovyDelegate;
 @Value
 @NoArgsConstructor
 public class CourseDto {
-    TasksList tasks = new TasksList();
+    TaskList tasks = new TaskList();
 
     void tasks(Closure<?> closure) {
         groovyDelegate(tasks, closure);
@@ -19,7 +19,7 @@ public class CourseDto {
 
     @Value
     @NoArgsConstructor
-    public static class TasksList {
+    public static class TaskList {
         List<TaskDto> list = new ArrayList<>();
 
         void task(Closure<?> closure) {
