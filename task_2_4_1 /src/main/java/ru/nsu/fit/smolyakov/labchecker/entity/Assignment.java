@@ -20,11 +20,11 @@ public class Assignment {
     double solvedPoints;
     boolean runTests;
 
-    public AssignmentResult assignmentResultInstance() {
+    public AssignmentStatus assignmentResultInstance() {
         return assignmentResultInstance(defaultBranch);
     }
 
-    public AssignmentResult assignmentResultInstance(String branch) {
-        return new AssignmentResult(this, branch);
+    public AssignmentStatus assignmentResultInstance(String branch) {
+        return new AssignmentStatus(this, branch);
     }
 }

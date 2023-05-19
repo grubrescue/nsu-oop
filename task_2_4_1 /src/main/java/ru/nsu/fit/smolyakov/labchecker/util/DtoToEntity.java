@@ -21,6 +21,9 @@ public class DtoToEntity {
     }
 
     public MainEntity convert() { // TODO refactor
+        // TODO НЕТ ЭТО ПРЯМ НАДО ОТРЕФАКТОРИТЬ
+        // TODO НУ ПРЯМ ОЧЕНЬ НАДО!!!
+        // TODO разбить на методы???
         var courseDto = checkerScriptDto.getCourseDto();
         var groupDto = checkerScriptDto.getGroupDto();
         var scheduleDto = checkerScriptDto.getScheduleDto();
@@ -73,7 +76,7 @@ public class DtoToEntity {
         System.out.println(course);
 
 //        var group = new Group()
-        var a = groupDto.getStudents()
+        var studentList = groupDto.getStudents()
             .getList()
             .stream()
             .map(studentDto -> {
@@ -83,7 +86,7 @@ public class DtoToEntity {
                     .repoUrl(convertToRepoUrl(studentDto.getNickName(), studentDto.getRepo()));
 
                 lessonList.forEach(
-                    lesson -> builder.newLesson(lesson.lessonResultInstance())
+                    lesson -> builder.newLesson(lesson.lessonStatusInstance())
                 );
 
                 tasksList.forEach(
@@ -92,8 +95,55 @@ public class DtoToEntity {
 
                 return builder.build();
             }
-            );
+            )
+            .toList();
 
+        var group = new Group(groupDto.getGroupName(), studentList);
+
+        academicProgressDto
+            .getOverriddenStudents()
+            .getMap()
+            .forEach((nickName, overriddenStudentDto) -> {
+                var student = group.getByNickName(nickName)
+                    .orElseThrow(() -> new RuntimeException("No student with nickName " + nickName)); // TODO custom exceptions
+
+                student.getLessonStatusList()
+                    .forEach(
+                        lessonStatus -> {
+                            Optional.ofNullable(
+                                overriddenStudentDto.getBeenOnLessonMap()
+                                    .get(lessonStatus.getLesson().getDate())
+                                ).ifPresent(lessonStatus::beenOnALesson);
+                        }
+                    );
+
+                student.getAssignmentStatusList()
+                    .forEach(
+                        assignmentStatus -> {
+                            Optional.ofNullable(
+                                overriddenStudentDto.getOverridenTaskInfoMap()
+                                    .get(assignmentStatus.getAssignment().getIdentifier()))
+                                .ifPresent(
+                                    overriddenTaskInfoDto -> {
+                                        Optional.ofNullable(overriddenTaskInfoDto.getPoints())
+                                            .ifPresent(assignmentStatus::overrideTaskPoints);
+
+                                        Optional.ofNullable(overriddenTaskInfoDto.getBranch())
+                                            .ifPresent(assignmentStatus::setBranch);
+
+                                        Optional.ofNullable(overriddenTaskInfoDto.getStarted())
+                                            .ifPresent(assignmentStatus::setStarted);
+
+                                        Optional.ofNullable(overriddenTaskInfoDto.getFinished())
+                                            .ifPresent(assignmentStatus::setFinished);
+
+                                        Optional.ofNullable(overriddenTaskInfoDto.getMessage())
+                                            .ifPresent(assignmentStatus::setMessage);
+                                        }
+                                );
+                        }
+                        );
+            });
 
         return null; // TODO tmp
     }

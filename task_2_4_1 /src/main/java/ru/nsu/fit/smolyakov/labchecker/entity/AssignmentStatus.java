@@ -8,12 +8,12 @@ import java.util.Objects;
 
 @Value
 @RequiredArgsConstructor
-public class AssignmentResult {
+public class AssignmentStatus {
     @NonNull Assignment assignment;
-    @NonNull String branch;
+    @Setter @NonFinal @NonNull String branch;
 
-    @NonNull @NonFinal LocalDate started = LocalDate.MAX;
-    @NonNull @NonFinal LocalDate finished = LocalDate.MAX;
+    @Setter @NonNull @NonFinal LocalDate started = LocalDate.MAX;
+    @Setter @NonNull @NonFinal LocalDate finished = LocalDate.MAX;
 
     @Setter @NonFinal @NonNull String message = "no message";
 
@@ -22,14 +22,6 @@ public class AssignmentResult {
     @NonFinal boolean buildOk = false;
     @NonFinal boolean testsOk = false;
     @NonFinal boolean javadocOk = false;
-
-    public void startedAt(String dateString) {
-        this.started = LocalDate.parse(dateString);
-    }
-
-    public void finishedAt(String dateString) {
-        this.finished = LocalDate.parse(dateString);
-    }
 
     public void overrideTaskPoints(double points) {
         this.overriddenTaskPoints = points;

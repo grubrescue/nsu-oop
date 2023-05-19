@@ -16,17 +16,17 @@ public class Student {
     String fullName;
     String repoUrl;
 
-    @Singular("newAssignment") List<AssignmentResult> assignmentResultList;
-    @Singular("newLesson") List<LessonResult> lessonResultList;
+    @Singular("newAssignment") List<AssignmentStatus> assignmentStatusList;
+    @Singular("newLesson") List<LessonStatus> lessonStatusList;
 
 //    private static class StudentBuilder {
-//        public StudentBuilder assignmentResultList(List<AssignmentResult> assignmentResultList) {
-//            this.assignmentResultList = new ArrayList<>(assignmentResultList);
+//        public StudentBuilder assignmentStatusList(List<AssignmentStatus> assignmentStatusList) {
+//            this.assignmentStatusList = new ArrayList<>(assignmentStatusList);
 //            return this;
 //        }
 //
-//        public StudentBuilder lessonResultList(List<LessonResult> lessonResultList) {
-//            this.lessonResultList = new ArrayList<>(lessonResultList);
+//        public StudentBuilder lessonStatusList(List<LessonStatus> lessonStatusList) {
+//            this.lessonStatusList = new ArrayList<>(lessonStatusList);
 //            return this;
 //        }
 //    }

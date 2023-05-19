@@ -10,11 +10,11 @@ import java.time.LocalDate;
 public class Lesson {
     LocalDate date;
 
-    public LessonResult lessonResultInstance(boolean beenOnALesson) {
-        return new LessonResult(this, beenOnALesson);
+    public LessonStatus lessonStatusInstance(boolean beenOnALesson) {
+        return new LessonStatus(this, beenOnALesson);
     }
 
-    public LessonResult lessonResultInstance() {
-        return new LessonResult(this, false);
+    public LessonStatus lessonStatusInstance() {
+        return new LessonStatus(this, false);
     }
 }

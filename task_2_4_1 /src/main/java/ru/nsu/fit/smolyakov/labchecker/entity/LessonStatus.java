@@ -6,15 +6,11 @@ import lombok.experimental.NonFinal;
 
 @Value
 @NonNull
-public class LessonResult {
+public class LessonStatus {
     Lesson lesson;
     @NonFinal boolean beenOnALesson = false;
 
-    public void beenOnALesson() {
-        beenOnALesson = true;
-    }
-
-    public void notBeenOnALesson() {
-        beenOnALesson = false;
+    public void beenOnALesson(boolean value) {
+        beenOnALesson = value;
     }
 }

@@ -14,20 +14,20 @@ import static ru.nsu.fit.smolyakov.labchecker.util.DSLUtil.groovyDelegate;
 public class AcademicProgressDto {
     @Value
     public class OverriddenStudentMap {
-        Map<String, OverriddenStudentDto> overrideInfoMap
+        Map<String, OverriddenStudentDto> map
             = new HashMap<>();
 
         void forStudent(String nickName, Closure<?> closure) {
             var overrideInfo = new OverriddenStudentDto();
             groovyDelegate(overrideInfo, closure);
-            overrideInfoMap.put(nickName, overrideInfo);
+            map.put(nickName, overrideInfo);
         }
     }
 
-    OverriddenStudentMap overriddenStudentMap
+    OverriddenStudentMap overriddenStudents
         = new OverriddenStudentMap();
 
     void overrideProgress(Closure<?> closure) {
-        groovyDelegate(overriddenStudentMap, closure);
+        groovyDelegate(overriddenStudents, closure);
     }
 }
