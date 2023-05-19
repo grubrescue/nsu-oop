@@ -1,8 +1,6 @@
 package ru.nsu.fit.smolyakov.labchecker.entity;
 
-import lombok.Builder;
-import lombok.NonNull;
-import lombok.Value;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -13,7 +11,7 @@ public class Task {
     String identifier;
     LocalDate softDeadline;
     LocalDate hardDeadline;
-    TaskInfo defaultTaskInfo;
+    @Getter(AccessLevel.NONE) String defaultBranch;
 
     double softDeadlineSkipFine;
     double hardDeadlineSkipFine;
@@ -21,4 +19,12 @@ public class Task {
     double maxPoints;
     double solvedPoints;
     boolean runTests;
+
+    public AssignmentResult assignmentResultInstance() {
+        return assignmentResultInstance(defaultBranch);
+    }
+
+    public AssignmentResult assignmentResultInstance(String branch) {
+        return new AssignmentResult(this, branch);
+    }
 }

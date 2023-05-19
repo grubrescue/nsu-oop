@@ -17,7 +17,7 @@ public class OverriddenTaskDto {
     @NonFinal LocalDate finished;
     @NonFinal Double points;
 
-    @NonFinal String message = "no message";
+    @NonFinal String message = "(нет сообщ в конфиге, потом убрать это)";
     @NonFinal String branch;
 
     void startedAt(String dateString) {

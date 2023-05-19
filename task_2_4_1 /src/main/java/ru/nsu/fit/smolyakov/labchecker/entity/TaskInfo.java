@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Value
 @RequiredArgsConstructor
-public class TaskInfo {
+public class AssignmentResult {
     @NonNull Task task;
     @NonNull String branch;
 

@@ -4,6 +4,7 @@ import lombok.Value;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Value
 public class Course {
@@ -11,14 +12,22 @@ public class Course {
     public static class Lessons {
         List<Lesson> lessonList
             = new ArrayList<>(); // TODO
+
+        public Lessons(List<Lesson> lessonList) {
+            this.lessonList.addAll(Objects.requireNonNull(lessonList));
+        }
    }
 
     @Value
     public static class Assignments {
         List<Task> taskList
             = new ArrayList<>();
+
+        public Assignments(List<Task> taskList) {
+            this.taskList.addAll(Objects.requireNonNull(taskList));
+        }
     }
 
-    Lessons lessons = new Lessons();
-    Assignments assignments = new Assignments();
+    Lessons lessons;
+    Assignments assignments;
 }
