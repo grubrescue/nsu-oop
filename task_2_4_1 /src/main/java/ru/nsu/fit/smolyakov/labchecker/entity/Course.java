@@ -20,11 +20,11 @@ public class Course {
 
     @Value
     public static class Assignments {
-        List<Task> taskList
+        List<Assignment> assignmentList
             = new ArrayList<>();
 
-        public Assignments(List<Task> taskList) {
-            this.taskList.addAll(Objects.requireNonNull(taskList));
+        public Assignments(List<Assignment> assignmentList) {
+            this.assignmentList.addAll(Objects.requireNonNull(assignmentList));
         }
     }
 

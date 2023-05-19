@@ -4,7 +4,6 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
-import java.beans.ConstructorProperties;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +15,8 @@ public class Student {
     String fullName;
     String repoLink;
 
-    List<TaskInfo> tasks
+    List<AssignmentResult> assignmentResults
         = new ArrayList<>();
-    List<LessonInfo> lessons
+    List<LessonResult> lessons
         = new ArrayList<>();
 }

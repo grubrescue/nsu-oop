@@ -3,14 +3,9 @@ package ru.nsu.fit.smolyakov.labchecker.util;
 import lombok.Value;
 import ru.nsu.fit.smolyakov.labchecker.dto.CheckerScriptDto;
 import ru.nsu.fit.smolyakov.labchecker.dto.schedule.LessonDto;
-import ru.nsu.fit.smolyakov.labchecker.entity.Course;
-import ru.nsu.fit.smolyakov.labchecker.entity.Lesson;
-import ru.nsu.fit.smolyakov.labchecker.entity.MainEntity;
-import ru.nsu.fit.smolyakov.labchecker.entity.Task;
+import ru.nsu.fit.smolyakov.labchecker.entity.*;
 
 import java.util.Optional;
-
-import static java.util.stream.Collectors.toList;
 
 @Value
 public class DtoToEntity {
@@ -25,17 +20,12 @@ public class DtoToEntity {
         return new Lesson(lessonDto.getDate());
     }
 
-
-    public MainEntity convert() {
+    public MainEntity convert() { // TODO refactor
         var courseDto = checkerScriptDto.getCourseDto();
         var groupDto = checkerScriptDto.getGroupDto();
         var scheduleDto = checkerScriptDto.getScheduleDto();
         var configurationDto = checkerScriptDto.getConfigurationDto();
         var academicProgressDto = checkerScriptDto.getAcademicProgressDto();
-
-        Course.Lessons lessons = new Course.Lessons()
-        var course = new Course();
-        MainEntity mainEntity = new MainEntity();
 
         var tasksList = courseDto.getTasks()
             .getList()
@@ -46,7 +36,7 @@ public class DtoToEntity {
                     throw new RuntimeException("No assignment for task " + taskDto.getName()); // TODO custom exceptions
                 }
 
-                return Task.builder()
+                return Assignment.builder()
                     .identifier(taskDto.getName())
                     .softDeadline(assignmentDto.getSoftDeadline())
                     .hardDeadline(assignmentDto.getHardDeadline())
@@ -69,17 +59,20 @@ public class DtoToEntity {
             })
             .toList(); // СПИСОК ЗАДАЧ
 
-
-        scheduleDto.getLessons()
+        var lessonList = scheduleDto.getLessons()
             .getList()
             .stream()
             .map(DtoToEntity::lessonDtoToEntity)
-            .toList(); // СПИСОК УРОКОВ. ПОКА ЧТО НЕ ОВВЕРРАЙДИЛ БЫЛ НА УРОКЕ ИЛИ НЕТ. КАК ТО ТАК
+            .toList();
 
+        var course = new Course(
+            new Course.Lessons(lessonList),
+            new Course.Assignments(tasksList)
+        );
 
+        System.out.println(course);
 
-
-
+//        var group = new Group()
 
 
         return null; // TODO tmp

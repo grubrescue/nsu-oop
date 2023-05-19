@@ -9,10 +9,12 @@ import java.time.LocalDate;
 @NonNull
 public class Lesson {
     LocalDate date;
-    LessonInfo defaultLessonInfo;
 
-    public Lesson(LocalDate date) {
-        this.date = date;
-        this.defaultLessonInfo = new LessonInfo(this, false);
+    public LessonResult lessonResultInstance(boolean beenOnALesson) {
+        return new LessonResult(this, beenOnALesson);
+    }
+
+    public LessonResult lessonResultInstance() {
+        return new LessonResult(this, false);
     }
 }

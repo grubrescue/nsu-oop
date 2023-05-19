@@ -9,7 +9,7 @@ import java.util.Objects;
 @Value
 @RequiredArgsConstructor
 public class AssignmentResult {
-    @NonNull Task task;
+    @NonNull Assignment assignment;
     @NonNull String branch;
 
     @NonNull @NonFinal LocalDate started = LocalDate.MAX;
@@ -52,11 +52,11 @@ public class AssignmentResult {
         sum += (javadocOk ? 1 : 0);
         amount++;
 
-        if (this.task.isRunTests()) {
+        if (this.assignment.isRunTests()) {
             sum += (testsOk ? 1 : 0);
             amount++;
         }
-        return this.task.getSolvedPoints() * (sum / amount);
+        return this.assignment.getSolvedPoints() * (sum / amount);
     }
 
     public double getTaskPoints() {
@@ -65,11 +65,11 @@ public class AssignmentResult {
 
     public double getFine() {
         double fine = 0;
-        if (this.started.isAfter(this.task.getSoftDeadline())) {
-            fine += this.task.getSoftDeadlineSkipFine();
+        if (this.started.isAfter(this.assignment.getSoftDeadline())) {
+            fine += this.assignment.getSoftDeadlineSkipFine();
         }
-        if (this.finished.isAfter(this.task.getHardDeadline())) {
-            fine += this.task.getHardDeadlineSkipFine();
+        if (this.finished.isAfter(this.assignment.getHardDeadline())) {
+            fine += this.assignment.getHardDeadlineSkipFine();
         }
 
         return fine;

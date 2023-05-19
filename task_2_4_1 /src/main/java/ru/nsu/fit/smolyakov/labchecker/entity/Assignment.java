@@ -7,7 +7,7 @@ import java.time.LocalDate;
 @Value
 @Builder
 @NonNull
-public class Task {
+public class Assignment {
     String identifier;
     LocalDate softDeadline;
     LocalDate hardDeadline;

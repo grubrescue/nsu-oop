@@ -5,6 +5,7 @@ import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import ru.nsu.fit.smolyakov.labchecker.dto.CheckerScriptDto;
+import ru.nsu.fit.smolyakov.labchecker.util.DtoToEntity;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +38,10 @@ public class Application {
         app.parseDto(checkerScript.getCourseDto(), COURSE_FILE_PATH);
         app.parseDto(checkerScript.getAcademicProgressDto(), PROGRESS_FILE_PATH);
 
-        System.out.println(checkerScript.getAcademicProgressDto());
+//        System.out.println(checkerScript);
+
+        var util = new DtoToEntity(checkerScript);
+        var mainEntity = util.convert();
 
 //        var evaluator = new EvaluationRunner(checkerScript);
 //        evaluator.runAll();

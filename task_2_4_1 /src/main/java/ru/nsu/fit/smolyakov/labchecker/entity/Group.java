@@ -1,6 +1,5 @@
 package ru.nsu.fit.smolyakov.labchecker.entity;
 
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
@@ -12,4 +11,9 @@ import java.util.List;
 public class Group {
     String groupName;
     List<Student> studentList = new ArrayList<>();
+
+    public Group(String groupName, List<Student> studentList) {
+        this.groupName = groupName;
+        this.studentList.addAll(studentList);
+    }
 }

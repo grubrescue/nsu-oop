@@ -31,7 +31,7 @@
 //            masterRepo.checkout().setName("task-1-1-1").call();
 //
 //            checkerScript.getCourseDto()
-//                .getTasks()
+//                .getAssignments()
 //                .getList()
 //                .forEach((task) -> {
 ////                    if (student)
