@@ -20,25 +20,7 @@ public class DtoToEntity {
         var scheduleDto = checkerScriptDto.getScheduleDto();
         var configurationDto = checkerScriptDto.getConfigurationDto();
         var academicProgressDto = checkerScriptDto.getAcademicProgressDto();
-    }
-
-    private Course.Evaluation evaluationDtoToEntity(EvaluationDto evaluationDto) {
-        return new Course.Evaluation(
-            evaluationDto.getDefaultMaxPoints(),
-            evaluationDto.getTaskSolvedPoints(),
-            evaluationDto.getSoftDeadlineSkipFine(),
-            evaluationDto.getHardDeadlineSkipFine()
-        );
-    }
-
-    private Lesson lessonDtoToEntity(LessonDto lessonDto) {
-        return new Lesson(lessonDto.getDate());
-    }
-
-    private Student studentDtoToEntity(StudentDto studentDto) {
-        return new Student(
-
-        );
+        return null; // TODO tmp
     }
 
 

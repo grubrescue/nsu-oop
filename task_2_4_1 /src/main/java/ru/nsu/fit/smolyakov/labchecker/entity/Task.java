@@ -8,11 +8,12 @@ import java.time.LocalDate;
 
 @Value
 @Builder
+@NonNull
 public class Task {
-    @NonNull String identifier;
-    @NonNull LocalDate softDeadline;
-    @NonNull LocalDate hardDeadline;
-    @NonNull TaskInfo defaultTaskInfo;
+    String identifier;
+    LocalDate softDeadline;
+    LocalDate hardDeadline;
+    TaskInfo defaultTaskInfo;
 
     double softDeadlineSkipFine;
     double hardDeadlineSkipFine;
