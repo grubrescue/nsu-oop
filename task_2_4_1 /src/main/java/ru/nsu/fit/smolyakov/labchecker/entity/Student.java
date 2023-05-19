@@ -1,22 +1,33 @@
 package ru.nsu.fit.smolyakov.labchecker.entity;
 
+import lombok.Builder;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.Singular;
 import lombok.Value;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Value
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @NonNull
+@Builder
 public class Student {
     String nickName;
     String fullName;
-    String repoLink;
+    String repoUrl;
 
-    List<AssignmentResult> assignmentResults
-        = new ArrayList<>();
-    List<LessonResult> lessons
-        = new ArrayList<>();
+    @Singular("newAssignment") List<AssignmentResult> assignmentResultList;
+    @Singular("newLesson") List<LessonResult> lessonResultList;
+
+//    private static class StudentBuilder {
+//        public StudentBuilder assignmentResultList(List<AssignmentResult> assignmentResultList) {
+//            this.assignmentResultList = new ArrayList<>(assignmentResultList);
+//            return this;
+//        }
+//
+//        public StudentBuilder lessonResultList(List<LessonResult> lessonResultList) {
+//            this.lessonResultList = new ArrayList<>(lessonResultList);
+//            return this;
+//        }
+//    }
 }

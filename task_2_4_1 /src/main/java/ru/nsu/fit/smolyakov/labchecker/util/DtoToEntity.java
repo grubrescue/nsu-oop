@@ -11,7 +11,7 @@ import java.util.Optional;
 public class DtoToEntity {
     CheckerScriptDto checkerScriptDto;
 
-    private String repoUrl(String nickName, String repoName) {
+    private String convertToRepoUrl(String nickName, String repoName) {
         var gitDto = checkerScriptDto.getConfigurationDto().getGitDto();
         return gitDto.getRepoLinkPrefix() + nickName + "/" + repoName + gitDto.getRepoLinkPostfix();
     }
@@ -73,6 +73,26 @@ public class DtoToEntity {
         System.out.println(course);
 
 //        var group = new Group()
+        var a = groupDto.getStudents()
+            .getList()
+            .stream()
+            .map(studentDto -> {
+                var builder = Student.builder()
+                    .nickName(studentDto.getNickName())
+                    .fullName(studentDto.getFullName())
+                    .repoUrl(convertToRepoUrl(studentDto.getNickName(), studentDto.getRepo()));
+
+                lessonList.forEach(
+                    lesson -> builder.newLesson(lesson.lessonResultInstance())
+                );
+
+                tasksList.forEach(
+                    task -> builder.newAssignment(task.assignmentResultInstance())
+                );
+
+                return builder.build();
+            }
+            );
 
 
         return null; // TODO tmp

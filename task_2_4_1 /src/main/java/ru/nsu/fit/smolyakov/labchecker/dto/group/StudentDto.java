@@ -9,8 +9,8 @@ public class StudentDto {
         this.nickName = nickName;
     }
 
-    @NonFinal String fullName = "unspecified name";
     String nickName;
+    @NonFinal String fullName = "unspecified name";
     @NonFinal String repo;
     @NonFinal String defaultBranchName;
 }
