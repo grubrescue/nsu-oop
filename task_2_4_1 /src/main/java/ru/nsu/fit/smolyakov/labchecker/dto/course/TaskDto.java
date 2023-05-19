@@ -9,7 +9,7 @@ public class TaskDto {
     @NonFinal String name;
     @NonFinal String branch;
     @NonFinal String description = "no description provided";
-    @NonFinal double points;
+    @NonFinal Double points;
 
-    @NonFinal boolean runTests;
+    @NonFinal boolean runTests = true;
 }

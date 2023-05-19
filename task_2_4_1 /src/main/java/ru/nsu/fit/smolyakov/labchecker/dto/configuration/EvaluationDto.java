@@ -6,8 +6,8 @@ import lombok.experimental.NonFinal;
 @Value
 @NoArgsConstructor
 public class EvaluationDto {
-    @NonFinal double defaultMaxPoints;
-    @NonFinal double taskSolvedPoints;
-    @NonFinal double softDeadlineSkipFine;
-    @NonFinal double hardDeadlineSkipFine;
+    @NonFinal Double defaultMaxPoints;
+    @NonFinal Double taskSolvedPoints;
+    @NonFinal Double softDeadlineSkipFine;
+    @NonFinal Double hardDeadlineSkipFine;
 }

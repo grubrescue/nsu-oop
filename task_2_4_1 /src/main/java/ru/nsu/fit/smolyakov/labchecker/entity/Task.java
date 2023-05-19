@@ -1,27 +1,23 @@
 package ru.nsu.fit.smolyakov.labchecker.entity;
 
+import lombok.Builder;
+import lombok.NonNull;
 import lombok.Value;
 
 import java.time.LocalDate;
 
 @Value
+@Builder
 public class Task {
-    String identifier;
-    LocalDate softDeadline;
-    LocalDate hardDeadline;
-    TaskInfo defaultTaskInfo;
+    @NonNull String identifier;
+    @NonNull LocalDate softDeadline;
+    @NonNull LocalDate hardDeadline;
+    @NonNull TaskInfo defaultTaskInfo;
 
+    double softDeadlineSkipFine;
+    double hardDeadlineSkipFine;
+
+    double maxPoints;
+    double solvedPoints;
     boolean runTests;
-
-    public Task(String identifier,
-                LocalDate softDeadline,
-                LocalDate hardDeadline,
-                String branch,
-                boolean runTests) {
-        this.identifier = identifier;
-        this.softDeadline = softDeadline;
-        this.hardDeadline = hardDeadline;
-        this.defaultTaskInfo = new TaskInfo(this, branch);
-        this.runTests = runTests;
-    }
 }

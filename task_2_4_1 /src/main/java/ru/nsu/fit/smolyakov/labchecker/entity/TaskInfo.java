@@ -1,24 +1,45 @@
 package ru.nsu.fit.smolyakov.labchecker.entity;
 
-import lombok.RequiredArgsConstructor;
-import lombok.Value;
-import lombok.With;
+import lombok.*;
+import lombok.experimental.NonFinal;
 
 import java.time.LocalDate;
 
 @Value
-@With
 @RequiredArgsConstructor
 public class TaskInfo {
-    Task task;
-    String branch;
+    @NonNull Task task;
+    @NonNull String branch;
 
-    LocalDate started
+    @NonNull @NonFinal LocalDate started
         = LocalDate.MAX;
-    LocalDate finished
+    @NonNull @NonFinal LocalDate finished
         = LocalDate.MAX;
+
+    public void startedAt(String dateString) {
+        this.started = LocalDate.parse(dateString);
+    }
+
+    public void finishedAt(String dateString) {
+        this.finished = LocalDate.parse(dateString);
+    }
 
     // TODO сделать может флаг чтобы если выставлено то поинты сами считались а иначе чтобы нет я не знаю даже
     // ЛИБО сделать чето по другому
-    double points = 0;
+    @Setter
+    @NonFinal double overridenTaskPoints = 0;
+
+    @Setter
+    @NonFinal String message = "no message";
+
+    public double getTaskPoints() {
+        return taskPoints;
+    }
+
+    public double getFine() {
+        double fine = 0;
+        if (this.started.isAfter(this.task.getSoftDeadline())) {
+            fine += this.task.getCourse()
+        }
+    }
 }
