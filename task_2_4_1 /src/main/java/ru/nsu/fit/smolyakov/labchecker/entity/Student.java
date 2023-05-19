@@ -16,5 +16,6 @@ public class Student {
 
     List<TaskInfo> tasks
         = new ArrayList<>();
-    List<LessonInfo> lessons // TODO
+    List<LessonInfo> lessons
+        = new ArrayList<>();
 }
