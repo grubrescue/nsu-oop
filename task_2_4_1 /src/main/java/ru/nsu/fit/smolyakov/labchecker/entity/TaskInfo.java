@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.NonFinal;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Value
 @RequiredArgsConstructor
@@ -11,10 +12,16 @@ public class TaskInfo {
     @NonNull Task task;
     @NonNull String branch;
 
-    @NonNull @NonFinal LocalDate started
-        = LocalDate.MAX;
-    @NonNull @NonFinal LocalDate finished
-        = LocalDate.MAX;
+    @NonNull @NonFinal LocalDate started = LocalDate.MAX;
+    @NonNull @NonFinal LocalDate finished = LocalDate.MAX;
+
+    @Setter @NonFinal @NonNull String message = "no message";
+
+    @NonFinal Double overriddenTaskPoints = null;
+
+    @NonFinal boolean buildOk = false;
+    @NonFinal boolean testsOk = false;
+    @NonFinal boolean javadocOk = false;
 
     public void startedAt(String dateString) {
         this.started = LocalDate.parse(dateString);
@@ -24,22 +31,51 @@ public class TaskInfo {
         this.finished = LocalDate.parse(dateString);
     }
 
-    // TODO сделать может флаг чтобы если выставлено то поинты сами считались а иначе чтобы нет я не знаю даже
-    // ЛИБО сделать чето по другому
-    @Setter
-    @NonFinal double overridenTaskPoints = 0;
+    public void overrideTaskPoints(double points) {
+        this.overriddenTaskPoints = points;
+    }
 
-    @Setter
-    @NonFinal String message = "no message";
+    public void notOverrideTaskPoints() {
+        this.overriddenTaskPoints = null;
+    }
+
+    public boolean isOverridden() {
+        return Objects.nonNull(this.overriddenTaskPoints);
+    }
+
+    public double getCalculatedTaskPoints() {
+        double sum = 0;
+        int amount = 0;
+
+        sum += (buildOk ? 1 : 0);
+        amount++;
+        sum += (javadocOk ? 1 : 0);
+        amount++;
+
+        if (this.task.isRunTests()) {
+            sum += (testsOk ? 1 : 0);
+            amount++;
+        }
+        return this.task.getSolvedPoints() * (sum / amount);
+    }
 
     public double getTaskPoints() {
-        return taskPoints;
+        return this.isOverridden() ? this.overriddenTaskPoints : this.getCalculatedTaskPoints();
     }
 
     public double getFine() {
         double fine = 0;
         if (this.started.isAfter(this.task.getSoftDeadline())) {
-            fine += this.task.getCourse()
+            fine += this.task.getSoftDeadlineSkipFine();
         }
+        if (this.finished.isAfter(this.task.getHardDeadline())) {
+            fine += this.task.getHardDeadlineSkipFine();
+        }
+
+        return fine;
+    }
+
+    public double getResultingPoints() {
+        return getTaskPoints() - getFine();
     }
 }
