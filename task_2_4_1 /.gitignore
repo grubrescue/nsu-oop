@@ -10,3 +10,6 @@ bin
 !gradlew
 !gradlew.bat
 !gradle
+
+#ignore tmp
+.checks_tmp/

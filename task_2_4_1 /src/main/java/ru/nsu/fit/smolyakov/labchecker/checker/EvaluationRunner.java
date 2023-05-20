@@ -1,56 +1,123 @@
-//package ru.nsu.fit.smolyakov.labchecker.checker;
+package ru.nsu.fit.smolyakov.labchecker.checker;
+
+import lombok.AllArgsConstructor;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import ru.nsu.fit.smolyakov.labchecker.entity.Student;
+
+import java.io.File;
+import java.io.IOException;
+
+
+@AllArgsConstructor
+public class EvaluationRunner {
+    public final String TMP_DIR = ".checks_tmp/" + System.currentTimeMillis() + "/";
+
+//    private final MainEntity mainEntity;
+
+    public void tmp(Student student) throws GitAPIException, IOException { // TODO todo
+        var dir = new File(TMP_DIR + student.getNickName());
+
+        var repoCloneCommand = Git.cloneRepository()
+            .setURI(student.getRepoUrl())
+            .setDirectory(dir)
+            .setCloneAllBranches(true);
+
+//        Git git = new Git(new FileRepository(".checks_tmp/1684585039294/evangelionexpert/.git"));
+//        git.fetch()
+//            .f
 //
-//import lombok.AllArgsConstructor;
-//import org.eclipse.jgit.api.Git;
-//import org.eclipse.jgit.api.errors.GitAPIException;
-//import ru.nsu.fit.smolyakov.labchecker.dto.CheckerScriptDto;
-//import ru.nsu.fit.smolyakov.labchecker.dto.group.StudentDto;
+//        var taskStatus = student.getAssignmentStatusList().get(0);
 //
-//import java.io.File;
-//import java.io.IOException;
+//        git.branchList()
+//            .call()
+//            .forEach(ref -> System.out.println(ref.getName()));
 //
+//        git.checkout().setName(taskStatus.getBranch()).call();
+
+        //        var iter = git.log().addPath(taskStatus.getTaskNameAlias()).call();
+//        iter.forEach(commit -> System.out.println(commit));
+
+
+
+//        var iter2 = git.log().addPath(taskStatus.getTaskNameAlias()).call();
+//        iter2.forEach(commit -> System.out.println(commit));
+
+
+
+        try (Git repo = repoCloneCommand.call()) {
+            var ref = repo.checkout()
+                .setName("task-1-1-1-fork")
+                .setCreateBranch(true)
+                .call();
+
+            System.out.println(ref);
+            System.out.println(repo.branchList().call());
+
+
+//            var refList = repo.branchList().setListMode(ListBranchCommand.ListMode.REMOTE).call();
 //
-//@AllArgsConstructor
-//public class EvaluationRunner { //  TODO todo
-//    public final String TMP_DIR = ".dsl_tmp/" + System.currentTimeMillis() + "/";
-//
-//    private CheckerScriptDto checkerScript;
-//
-//    private void processStudent(StudentDto student) throws GitAPIException, IOException {
-//        var repoName = student.getRepo();
-//        var uri = checkerScript.getConfiguration().getGitDto().getRepoLink(repoName);
-//
-//        var dir = new File(TMP_DIR + repoName);
-//
-//        var repoCloneCommand = Git.cloneRepository()
-//            .setURI(uri)
-//            .setDirectory(dir)
-//            .setCloneAllBranches(true);
-//
-//        try (Git masterRepo = repoCloneCommand.call()) {
-//            masterRepo.checkout().setName("task-1-1-1").call();
-//
-//            checkerScript.getCourseDto()
-//                .getAssignments()
-//                .getList()
-//                .forEach((task) -> {
-////                    if (student)
+//            refList
+//                .forEach(ref -> {
+//                    System.out.println(ref.getName());
+//                    try {
+//                        repo.fetch().setRemote(ref.getName()).call();
+//                    } catch (GitAPIException e) {
+//                        throw new RuntimeException(e);
+//                    }
 //                });
 //
+//            System.out.println("-----");
+//            repo.branchList()
+//            .call()
+//            .forEach(ref -> System.out.println(ref.getName()));
+//            var assignmentStatus = student.getAssignmentStatusList().get(0);
 //
-//        }
-//    }
+//            var branchName = assignmentStatus.getBranch();
+//            var checkoutCommand = repo.checkout().setName(branchName);
 //
+//            try {
+//                checkoutCommand.call();
+//            } catch (GitAPIException e) {
+//                throw new RuntimeException(e);
+//            }
+
+        }
+    }
+
+    private void processAssignment() {
+
+    }
+
+    private void processStudent(Student student) throws GitAPIException, IOException {
+        var dir = new File(TMP_DIR + student.getNickName());
+
+        var repoCloneCommand = Git.cloneRepository()
+            .setURI(student.getRepoUrl())
+            .setDirectory(dir)
+            .setCloneAllBranches(true);
+
+        try (Git repo = repoCloneCommand.call()) {
+            student.getAssignmentStatusList()
+                .forEach(assignmentStatus -> {
+                    var branchName = assignmentStatus.getBranch();
+                    var checkoutCommand = repo.checkout().setName(branchName);
+
+                    try {
+                        checkoutCommand.call();
+                    } catch (GitAPIException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                );
+        }
+    }
+
 //    public void runAll() {
-////        checkerScript.getGroupDto().getStudents().getList().forEach(student -> {
-////            try {
-////            } catch (GitAPIException | IOException e) {
-////            }
-////        });
 //        try {
-//            processStudent(checkerScript.getGroupDto().getStudents().getList().get(6));
+////            processStudent();
 //        } catch (GitAPIException | IOException e) {
 //            throw new RuntimeException(e);
 //        }
 //    }
-//}
+}

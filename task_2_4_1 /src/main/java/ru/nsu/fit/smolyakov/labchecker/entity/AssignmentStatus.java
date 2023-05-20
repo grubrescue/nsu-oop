@@ -12,7 +12,7 @@ public class AssignmentStatus {
     @NonNull Assignment assignment;
 
     @Setter @NonFinal @NonNull String taskNameAlias;
-    @Setter @NonFinal @NonNull String branch;
+    @Setter @NonFinal @NonNull String branch; // TODO сделать опционально, ибо ветку могли снести
 
     @Setter @NonNull @NonFinal LocalDate started = LocalDate.MAX;
     @Setter @NonNull @NonFinal LocalDate finished = LocalDate.MAX;
