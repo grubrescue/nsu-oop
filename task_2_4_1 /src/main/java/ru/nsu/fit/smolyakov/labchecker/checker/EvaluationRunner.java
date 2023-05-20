@@ -101,13 +101,13 @@ public class EvaluationRunner {
             student.getAssignmentStatusList()
                 .forEach(assignmentStatus -> {
                     var branchName = assignmentStatus.getBranch();
-                    var checkoutCommand = repo.checkout().setName(branchName);
+//                    var checkoutCommand = repo.checkout().setName(branchName);
 
-                    try {
-                        checkoutCommand.call();
-                    } catch (GitAPIException e) {
-                        throw new RuntimeException(e);
-                    }
+//                    try {
+////                        checkoutCommand.call();
+//                    } catch (GitAPIException e) {
+//                        throw new RuntimeException(e);
+//                    }
                 }
                 );
         }

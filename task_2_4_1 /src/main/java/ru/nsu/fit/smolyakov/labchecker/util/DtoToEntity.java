@@ -144,6 +144,10 @@ public class DtoToEntity {
 
                     Optional.ofNullable(overriddenTaskInfoDto.getTaskNameAlias())
                         .ifPresent(assignmentStatus::setTaskNameAlias);
+
+                    if (overriddenTaskInfoDto.isNoBranch()) {
+                        assignmentStatus.setBranch(null);
+                    }
                 }
             );
     }

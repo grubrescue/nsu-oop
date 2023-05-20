@@ -4,8 +4,6 @@ import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
-import org.eclipse.jgit.api.errors.GitAPIException;
-import ru.nsu.fit.smolyakov.labchecker.checker.EvaluationRunner;
 import ru.nsu.fit.smolyakov.labchecker.dto.CheckerScriptDto;
 import ru.nsu.fit.smolyakov.labchecker.util.DtoToEntity;
 
@@ -45,15 +43,15 @@ public class Application {
         var util = new DtoToEntity(checkerScript);
         var mainEntity = util.convert();
 
-//        System.out.println(mainEntity.getGroup());
+        System.out.println(mainEntity.getGroup().getByNickName("evangelionexpert"));
 
 
-        var evaluator = new EvaluationRunner();
-        try {
-            evaluator.tmp(mainEntity.getGroup().getStudentList().get(0));
-        } catch (GitAPIException e) {
-            throw new RuntimeException(e);
-        }
+//        var evaluator = new EvaluationRunner();
+//        try {
+//            evaluator.tmp(mainEntity.getGroup().getStudentList().get(0));
+//        } catch (GitAPIException e) {
+//            throw new RuntimeException(e);
+//        }
 //        evaluator.runAll();
     }
 

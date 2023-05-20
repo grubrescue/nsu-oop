@@ -5,25 +5,39 @@ import lombok.experimental.NonFinal;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Optional;
 
 @Value //TODO кажется я не те аннотации использую, поменять потом
-@RequiredArgsConstructor
 public class AssignmentStatus {
     @NonNull Assignment assignment;
 
     @Setter @NonFinal @NonNull String taskNameAlias;
-    @Setter @NonFinal @NonNull String branch; // TODO сделать опционально, ибо ветку могли снести
+    @Setter @NonFinal String branch;
 
     @Setter @NonNull @NonFinal LocalDate started = LocalDate.MAX;
     @Setter @NonNull @NonFinal LocalDate finished = LocalDate.MAX;
 
-    @Setter @NonFinal @NonNull String message = "no message";
+    @Setter @NonFinal @NonNull String message = "(non overridden) empty message";
 
     @NonFinal @Getter(AccessLevel.NONE) Double overriddenTaskPoints = null;
 
     @Setter @NonFinal boolean buildOk = false;
     @Setter @NonFinal boolean testsOk = false;
     @Setter @NonFinal boolean javadocOk = false;
+
+    public AssignmentStatus(@NonNull Assignment assignment, @NonNull String taskNameAlias, String branch) {
+        this.assignment = assignment;
+        this.taskNameAlias = taskNameAlias;
+        this.branch = branch;
+    }
+
+    public boolean hasBranch() {
+        return Objects.nonNull(this.branch);
+    }
+
+    public Optional<String> getBranch() {
+        return Optional.ofNullable(this.branch);
+    }
 
     public void overrideTaskPoints(double points) {
         this.overriddenTaskPoints = points;
