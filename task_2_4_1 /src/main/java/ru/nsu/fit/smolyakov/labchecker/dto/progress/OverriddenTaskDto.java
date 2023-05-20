@@ -13,6 +13,7 @@ public class OverriddenTaskDto {
 
     String taskName;
 
+    @NonFinal String taskNameAlias;
     @NonFinal LocalDate started;
     @NonFinal LocalDate finished;
     @NonFinal Double points;

@@ -1,7 +1,8 @@
 overrideProgress {
     forStudent('evangelionexpert') {
         forTask('task_1_1_1') {
-            branch = 'task_1_1_1'
+            branch = 'task_1_1_1 ANOTHER BRANCHEEEEE'
+            taskNameAlias = 'TASK NAME ALIAS'
 
             startedAt '2019-01-19'
             finishedAt '2020-02-20'
@@ -13,6 +14,6 @@ overrideProgress {
             message = 'ПУСТО'
         }
 
-        beenOnLesson '2023-05-16'
+        beenOnLesson '2022-09-26'
     }
 }

@@ -78,10 +78,18 @@ public class DtoToEntity {
     }
 
     private Student studentDtoToEntity(StudentDto studentDto, Course course) {
+        var configurationDto = checkerScriptDto.getConfigurationDto();
+
         var builder = Student.builder()
             .nickName(studentDto.getNickName())
             .fullName(studentDto.getFullName())
-            .repoUrl(convertToRepoUrl(studentDto.getNickName(), studentDto.getRepo()));
+            .repoUrl(
+                convertToRepoUrl(
+                    studentDto.getNickName(),
+                    Optional.ofNullable(studentDto.getRepo())
+                        .orElse(configurationDto.getGitDto().getDefaultRepoName())
+                )
+            );
 
         course.getLessons().getList().forEach(
             lesson -> builder.newLesson(lesson.lessonStatusInstance())
@@ -133,6 +141,9 @@ public class DtoToEntity {
 
                     Optional.ofNullable(overriddenTaskInfoDto.getMessage())
                         .ifPresent(assignmentStatus::setMessage);
+
+                    Optional.ofNullable(overriddenTaskInfoDto.getTaskNameAlias())
+                        .ifPresent(assignmentStatus::setTaskNameAlias);
                 }
             );
     }
@@ -154,8 +165,6 @@ public class DtoToEntity {
     }
 
     public MainEntity convert() {
-        var academicProgressDto = checkerScriptDto.getAcademicProgressDto();
-
         var course = generateCourseFromDtos();
         var group = generateGroupFromDtos(course);
 

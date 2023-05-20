@@ -8,4 +8,5 @@ import lombok.experimental.NonFinal;
 public class GitDto {
     @NonFinal String repoLinkPrefix;
     @NonFinal String repoLinkPostfix;
+    @NonFinal String defaultRepoName;
 }

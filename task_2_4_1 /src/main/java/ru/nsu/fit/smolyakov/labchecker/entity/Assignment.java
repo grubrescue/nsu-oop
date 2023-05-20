@@ -25,6 +25,6 @@ public class Assignment {
     }
 
     public AssignmentStatus assignmentResultInstance(String branch) {
-        return new AssignmentStatus(this, branch);
+        return new AssignmentStatus(this, identifier, branch);
     }
 }

@@ -6,10 +6,12 @@ import lombok.experimental.NonFinal;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Value //TODO кажется я не те аннотации использую
+@Value //TODO кажется я не те аннотации использую, поменять потом
 @RequiredArgsConstructor
 public class AssignmentStatus {
     @NonNull Assignment assignment;
+
+    @Setter @NonFinal @NonNull String taskNameAlias;
     @Setter @NonFinal @NonNull String branch;
 
     @Setter @NonNull @NonFinal LocalDate started = LocalDate.MAX;
@@ -17,7 +19,7 @@ public class AssignmentStatus {
 
     @Setter @NonFinal @NonNull String message = "no message";
 
-    @NonFinal Double overriddenTaskPoints = null;
+    @NonFinal @Getter(AccessLevel.NONE) Double overriddenTaskPoints = null;
 
     @Setter @NonFinal boolean buildOk = false;
     @Setter @NonFinal boolean testsOk = false;
