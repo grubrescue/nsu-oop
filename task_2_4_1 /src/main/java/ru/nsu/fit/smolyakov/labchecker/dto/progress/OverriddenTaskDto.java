@@ -19,7 +19,7 @@ public class OverriddenTaskDto {
     @NonFinal
     boolean noBranch = false;
     @NonFinal
-    String message = "(нет сообщ в конфиге, потом убрать это)";
+    String message;
     @NonFinal
     String branch;
     public OverriddenTaskDto(String taskName) {

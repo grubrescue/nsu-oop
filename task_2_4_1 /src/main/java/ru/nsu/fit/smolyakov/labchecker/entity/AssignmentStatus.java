@@ -10,7 +10,7 @@ import java.util.Optional;
  //TODO кажется я не те аннотации использую, поменять потом
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"assignment"})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AssignmentStatus {
     @NonNull
