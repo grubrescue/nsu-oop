@@ -39,10 +39,8 @@ public class EvaluationRunner {
 //        iter.forEach(commit -> System.out.println(commit));
 
 
-
 //        var iter2 = git.log().addPath(taskStatus.getTaskNameAlias()).call();
 //        iter2.forEach(commit -> System.out.println(commit));
-
 
 
         try (Git repo = repoCloneCommand.call()) {
@@ -100,7 +98,7 @@ public class EvaluationRunner {
         try (Git repo = repoCloneCommand.call()) {
             student.getAssignmentStatusList()
                 .forEach(assignmentStatus -> {
-                    var branchName = assignmentStatus.getBranch();
+                        var branchName = assignmentStatus.getBranch();
 //                    var checkoutCommand = repo.checkout().setName(branchName);
 
 //                    try {
@@ -108,7 +106,7 @@ public class EvaluationRunner {
 //                    } catch (GitAPIException e) {
 //                        throw new RuntimeException(e);
 //                    }
-                }
+                    }
                 );
         }
     }

@@ -8,7 +8,6 @@ import lombok.Value;
 import java.util.List;
 
 @Value
-//@RequiredArgsConstructor
 @NonNull
 @Builder
 public class Student {
@@ -16,8 +15,10 @@ public class Student {
     String fullName;
     String repoUrl;
 
-    @Singular("newAssignment") List<AssignmentStatus> assignmentStatusList;
-    @Singular("newLesson") List<LessonStatus> lessonStatusList;
+    @Singular("newAssignment")
+    List<AssignmentStatus> assignmentStatusList;
+    @Singular("newLesson")
+    List<LessonStatus> lessonStatusList;
 
 //    private static class StudentBuilder {
 //        public StudentBuilder assignmentStatusList(List<AssignmentStatus> assignmentStatusList) {

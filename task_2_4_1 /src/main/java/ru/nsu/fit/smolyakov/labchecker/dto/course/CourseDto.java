@@ -1,7 +1,8 @@
 package ru.nsu.fit.smolyakov.labchecker.dto.course;
 
 import groovy.lang.Closure;
-import lombok.*;
+import lombok.NoArgsConstructor;
+import lombok.Value;
 
 import java.util.ArrayList;
 import java.util.List;

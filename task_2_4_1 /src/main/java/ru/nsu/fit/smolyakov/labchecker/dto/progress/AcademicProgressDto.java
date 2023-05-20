@@ -12,6 +12,13 @@ import static ru.nsu.fit.smolyakov.labchecker.util.DSLUtil.groovyDelegate;
 @Value
 @NoArgsConstructor
 public class AcademicProgressDto {
+    OverriddenStudentMap overriddenStudents
+        = new OverriddenStudentMap();
+
+    void overrideProgress(Closure<?> closure) {
+        groovyDelegate(overriddenStudents, closure);
+    }
+
     @Value
     public class OverriddenStudentMap {
         Map<String, OverriddenStudentDto> map
@@ -22,12 +29,5 @@ public class AcademicProgressDto {
             groovyDelegate(overrideInfo, closure);
             map.put(nickName, overrideInfo);
         }
-    }
-
-    OverriddenStudentMap overriddenStudents
-        = new OverriddenStudentMap();
-
-    void overrideProgress(Closure<?> closure) {
-        groovyDelegate(overriddenStudents, closure);
     }
 }

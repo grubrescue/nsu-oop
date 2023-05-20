@@ -1,7 +1,8 @@
 package ru.nsu.fit.smolyakov.labchecker.dto.group;
 
 import groovy.lang.Closure;
-import lombok.*;
+import lombok.NoArgsConstructor;
+import lombok.Value;
 import lombok.experimental.NonFinal;
 
 import java.util.ArrayList;
@@ -12,8 +13,9 @@ import static ru.nsu.fit.smolyakov.labchecker.util.DSLUtil.groovyDelegate;
 @Value
 @NoArgsConstructor
 public class GroupDto {
-    @NonFinal String groupName = "unspecified group name";
     StudentList students = new StudentList();
+    @NonFinal
+    String groupName = "unspecified group name";
 
     void students(Closure<?> closure) {
         groovyDelegate(students, closure);

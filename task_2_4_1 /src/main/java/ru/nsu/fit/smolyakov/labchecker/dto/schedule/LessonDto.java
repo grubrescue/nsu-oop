@@ -1,6 +1,6 @@
 package ru.nsu.fit.smolyakov.labchecker.dto.schedule;
 
-import lombok.*;
+import lombok.Value;
 
 import java.time.LocalDate;
 

@@ -6,14 +6,7 @@ import ru.nsu.fit.smolyakov.labchecker.dto.course.TaskDto;
 import ru.nsu.fit.smolyakov.labchecker.dto.group.StudentDto;
 import ru.nsu.fit.smolyakov.labchecker.dto.progress.OverriddenStudentDto;
 import ru.nsu.fit.smolyakov.labchecker.dto.schedule.LessonDto;
-import ru.nsu.fit.smolyakov.labchecker.entity.Assignment;
-import ru.nsu.fit.smolyakov.labchecker.entity.AssignmentStatus;
-import ru.nsu.fit.smolyakov.labchecker.entity.Course;
-import ru.nsu.fit.smolyakov.labchecker.entity.Group;
-import ru.nsu.fit.smolyakov.labchecker.entity.Lesson;
-import ru.nsu.fit.smolyakov.labchecker.entity.LessonStatus;
-import ru.nsu.fit.smolyakov.labchecker.entity.MainEntity;
-import ru.nsu.fit.smolyakov.labchecker.entity.Student;
+import ru.nsu.fit.smolyakov.labchecker.entity.*;
 
 import java.util.Optional;
 

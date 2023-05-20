@@ -8,6 +8,9 @@ import java.util.Objects;
 
 @Value
 public class Course {
+    Lessons lessons;
+    Assignments assignments;
+
     @Value
     public static class Lessons {
         List<Lesson> list
@@ -16,7 +19,7 @@ public class Course {
         public Lessons(List<Lesson> list) {
             this.list.addAll(Objects.requireNonNull(list));
         }
-   }
+    }
 
     @Value
     public static class Assignments {
@@ -27,7 +30,4 @@ public class Course {
             this.list.addAll(Objects.requireNonNull(list));
         }
     }
-
-    Lessons lessons;
-    Assignments assignments;
 }

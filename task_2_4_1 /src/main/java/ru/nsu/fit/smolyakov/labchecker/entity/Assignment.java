@@ -11,7 +11,8 @@ public class Assignment {
     String identifier;
     LocalDate softDeadline;
     LocalDate hardDeadline;
-    @Getter(AccessLevel.NONE) String defaultBranch;
+    @Getter(AccessLevel.NONE)
+    String defaultBranch;
 
     double softDeadlineSkipFine;
     double hardDeadlineSkipFine;

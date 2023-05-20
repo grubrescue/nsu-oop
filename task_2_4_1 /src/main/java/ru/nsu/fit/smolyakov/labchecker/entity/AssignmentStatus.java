@@ -1,29 +1,55 @@
 package ru.nsu.fit.smolyakov.labchecker.entity;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
 
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Optional;
 
-@Value //TODO кажется я не те аннотации использую, поменять потом
+@Data //TODO кажется я не те аннотации использую, поменять потом
+@FieldDefaults(makeFinal=true, level=AccessLevel.PRIVATE)
+@Value
 public class AssignmentStatus {
     @NonNull Assignment assignment;
 
-    @Setter @NonFinal @NonNull String taskNameAlias;
-    @Setter @NonFinal String branch;
+    @Setter
+    @NonFinal
+    @NonNull
+    String taskNameAlias;
 
-    @Setter @NonNull @NonFinal LocalDate started = LocalDate.MAX;
-    @Setter @NonNull @NonFinal LocalDate finished = LocalDate.MAX;
+    @Setter
+    @NonFinal
+    String branch;
 
-    @Setter @NonFinal @NonNull String message = "(non overridden) empty message";
+    @Setter
+    @NonNull
+    @NonFinal
+    LocalDate started = LocalDate.MAX;
 
-    @NonFinal @Getter(AccessLevel.NONE) Double overriddenTaskPoints = null;
+    @Setter
+    @NonNull
+    @NonFinal
+    LocalDate finished = LocalDate.MAX;
 
-    @Setter @NonFinal boolean buildOk = false;
-    @Setter @NonFinal boolean testsOk = false;
-    @Setter @NonFinal boolean javadocOk = false;
+    @Setter
+    @NonFinal
+    @NonNull String message = "(non overridden) empty message";
+
+    @NonFinal
+    @Getter(AccessLevel.NONE)
+    Double overriddenTaskPoints = null;
+
+    @Setter
+    @NonFinal
+    boolean buildOk = false;
+    @Setter
+    @NonFinal
+    boolean testsOk = false;
+    @Setter
+    @NonFinal
+    boolean javadocOk = false;
 
     public AssignmentStatus(@NonNull Assignment assignment, @NonNull String taskNameAlias, String branch) {
         this.assignment = assignment;

@@ -1,7 +1,7 @@
 package ru.nsu.fit.smolyakov.labchecker.dto.schedule;
 
 import groovy.lang.Closure;
-import lombok.*;
+import lombok.Value;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
