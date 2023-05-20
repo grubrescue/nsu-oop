@@ -2,8 +2,18 @@ package ru.nsu.fit.smolyakov.labchecker.util;
 
 import lombok.Value;
 import ru.nsu.fit.smolyakov.labchecker.dto.CheckerScriptDto;
+import ru.nsu.fit.smolyakov.labchecker.dto.course.TaskDto;
+import ru.nsu.fit.smolyakov.labchecker.dto.group.StudentDto;
+import ru.nsu.fit.smolyakov.labchecker.dto.progress.OverriddenStudentDto;
 import ru.nsu.fit.smolyakov.labchecker.dto.schedule.LessonDto;
-import ru.nsu.fit.smolyakov.labchecker.entity.*;
+import ru.nsu.fit.smolyakov.labchecker.entity.Assignment;
+import ru.nsu.fit.smolyakov.labchecker.entity.AssignmentStatus;
+import ru.nsu.fit.smolyakov.labchecker.entity.Course;
+import ru.nsu.fit.smolyakov.labchecker.entity.Group;
+import ru.nsu.fit.smolyakov.labchecker.entity.Lesson;
+import ru.nsu.fit.smolyakov.labchecker.entity.LessonStatus;
+import ru.nsu.fit.smolyakov.labchecker.entity.MainEntity;
+import ru.nsu.fit.smolyakov.labchecker.entity.Student;
 
 import java.util.Optional;
 
@@ -16,89 +26,119 @@ public class DtoToEntity {
         return gitDto.getRepoLinkPrefix() + nickName + "/" + repoName + gitDto.getRepoLinkPostfix();
     }
 
-    private static Lesson lessonDtoToEntity(LessonDto lessonDto) {
+    private Lesson lessonDtoToEntity(LessonDto lessonDto) {
         return new Lesson(lessonDto.getDate());
     }
 
-    public MainEntity convert() { // TODO refactor
-        // TODO НЕТ ЭТО ПРЯМ НАДО ОТРЕФАКТОРИТЬ
-        // TODO НУ ПРЯМ ОЧЕНЬ НАДО!!!
-        // TODO разбить на методы???
-        var courseDto = checkerScriptDto.getCourseDto();
-        var groupDto = checkerScriptDto.getGroupDto();
+    private Assignment taskDtoToEntity(TaskDto taskDto) {
         var scheduleDto = checkerScriptDto.getScheduleDto();
         var configurationDto = checkerScriptDto.getConfigurationDto();
-        var academicProgressDto = checkerScriptDto.getAcademicProgressDto();
+
+        var assignmentDto = scheduleDto.getAssignments().getMap().get(taskDto.getName());
+        if (assignmentDto == null) {
+            throw new RuntimeException("No assignment for task " + taskDto.getName()); // TODO custom exceptions
+        }
+
+        return Assignment.builder()
+            .identifier(taskDto.getName())
+            .softDeadline(assignmentDto.getSoftDeadline())
+            .hardDeadline(assignmentDto.getHardDeadline())
+            .defaultBranch(taskDto.getBranch())
+            .softDeadlineSkipFine(configurationDto.getEvaluationDto().getSoftDeadlineSkipFine())
+            .hardDeadlineSkipFine(configurationDto.getEvaluationDto().getHardDeadlineSkipFine())
+            .maxPoints(
+                Optional.ofNullable(taskDto.getPoints())
+                    .orElse(configurationDto.getEvaluationDto().getDefaultMaxPoints())
+            )
+            .solvedPoints(configurationDto.getEvaluationDto().getTaskSolvedPoints())
+            .runTests(taskDto.isRunTests())
+            .build();
+    }
+
+    private Course generateCourseFromDtos() {
+        var courseDto = checkerScriptDto.getCourseDto();
+        var scheduleDto = checkerScriptDto.getScheduleDto();
 
         var tasksList = courseDto.getTasks()
             .getList()
             .stream()
-            .map(taskDto -> {
-                var assignmentDto = scheduleDto.getAssignments().getMap().get(taskDto.getName());
-                if (assignmentDto == null) {
-                    throw new RuntimeException("No assignment for task " + taskDto.getName()); // TODO custom exceptions
-                }
-
-                return Assignment.builder()
-                    .identifier(taskDto.getName())
-                    .softDeadline(assignmentDto.getSoftDeadline())
-                    .hardDeadline(assignmentDto.getHardDeadline())
-                    .defaultBranch(taskDto.getBranch())
-                    .softDeadlineSkipFine(
-                        configurationDto.getEvaluationDto().getSoftDeadlineSkipFine()
-                    )
-                    .hardDeadlineSkipFine(
-                        configurationDto.getEvaluationDto().getHardDeadlineSkipFine()
-                    )
-                    .maxPoints(
-                        Optional.ofNullable(taskDto.getPoints())
-                            .orElse(configurationDto.getEvaluationDto().getDefaultMaxPoints())
-                    )
-                    .solvedPoints(
-                        configurationDto.getEvaluationDto().getTaskSolvedPoints()
-                    )
-                    .runTests(taskDto.isRunTests())
-                    .build();
-            })
+            .map(this::taskDtoToEntity)
             .toList(); // СПИСОК ЗАДАЧ
 
         var lessonList = scheduleDto.getLessons()
             .getList()
             .stream()
-            .map(DtoToEntity::lessonDtoToEntity)
+            .map(this::lessonDtoToEntity)
             .toList();
 
-        var course = new Course(
+        return new Course(
             new Course.Lessons(lessonList),
             new Course.Assignments(tasksList)
         );
+    }
 
-//        var group = new Group()
+    private Student studentDtoToEntity(StudentDto studentDto, Course course) {
+        var builder = Student.builder()
+            .nickName(studentDto.getNickName())
+            .fullName(studentDto.getFullName())
+            .repoUrl(convertToRepoUrl(studentDto.getNickName(), studentDto.getRepo()));
+
+        course.getLessons().getList().forEach(
+            lesson -> builder.newLesson(lesson.lessonStatusInstance())
+        );
+
+        course.getAssignments().getList().forEach(
+            task -> builder.newAssignment(task.assignmentResultInstance())
+        );
+
+        return builder.build();
+    }
+
+    private Group generateGroupFromDtos(Course course) {
+        var groupDto = checkerScriptDto.getGroupDto();
+
         var studentList = groupDto.getStudents()
             .getList()
             .stream()
-            .map(studentDto -> {
-                var builder = Student.builder()
-                    .nickName(studentDto.getNickName())
-                    .fullName(studentDto.getFullName())
-                    .repoUrl(convertToRepoUrl(studentDto.getNickName(), studentDto.getRepo()));
-
-                lessonList.forEach(
-                    lesson -> builder.newLesson(lesson.lessonStatusInstance())
-                );
-
-                tasksList.forEach(
-                    task -> builder.newAssignment(task.assignmentResultInstance())
-                );
-
-                return builder.build();
-            }
-            )
+            .map(studentDto -> studentDtoToEntity(studentDto, course))
             .toList();
 
-        var group = new Group(groupDto.getGroupName(), studentList);
+        return new Group(groupDto.getGroupName(), studentList);
+    }
 
-        academicProgressDto
+    private void tryOverrideLessonStatus(LessonStatus lessonStatus, OverriddenStudentDto overriddenStudentDto) {
+        Optional.ofNullable(
+            overriddenStudentDto.getBeenOnLessonMap()
+                .get(lessonStatus.getLesson().getDate())
+        ).ifPresent(lessonStatus::beenOnALesson);
+    }
+
+    private void tryOverrideAssignmentStatus(AssignmentStatus assignmentStatus, OverriddenStudentDto overriddenStudentDto) {
+        Optional.ofNullable(
+                overriddenStudentDto.getOverridenTaskInfoMap()
+                    .get(assignmentStatus.getAssignment().getIdentifier()))
+            .ifPresent(
+                overriddenTaskInfoDto -> {
+                    Optional.ofNullable(overriddenTaskInfoDto.getPoints())
+                        .ifPresent(assignmentStatus::overrideTaskPoints);
+
+                    Optional.ofNullable(overriddenTaskInfoDto.getBranch())
+                        .ifPresent(assignmentStatus::setBranch);
+
+                    Optional.ofNullable(overriddenTaskInfoDto.getStarted())
+                        .ifPresent(assignmentStatus::setStarted);
+
+                    Optional.ofNullable(overriddenTaskInfoDto.getFinished())
+                        .ifPresent(assignmentStatus::setFinished);
+
+                    Optional.ofNullable(overriddenTaskInfoDto.getMessage())
+                        .ifPresent(assignmentStatus::setMessage);
+                }
+            );
+    }
+
+    private void overrideStudentsStatuses(Group group) {
+        checkerScriptDto.getAcademicProgressDto()
             .getOverriddenStudents()
             .getMap()
             .forEach((nickName, overriddenStudentDto) -> {
@@ -106,45 +146,21 @@ public class DtoToEntity {
                     .orElseThrow(() -> new RuntimeException("No student with nickName " + nickName)); // TODO custom exceptions
 
                 student.getLessonStatusList()
-                    .forEach(
-                        lessonStatus -> {
-                            Optional.ofNullable(
-                                overriddenStudentDto.getBeenOnLessonMap()
-                                    .get(lessonStatus.getLesson().getDate())
-                                ).ifPresent(lessonStatus::beenOnALesson);
-                        }
-                    );
+                    .forEach(lessonStatus -> tryOverrideLessonStatus(lessonStatus, overriddenStudentDto));
 
                 student.getAssignmentStatusList()
-                    .forEach(
-                        assignmentStatus -> {
-                            Optional.ofNullable(
-                                overriddenStudentDto.getOverridenTaskInfoMap()
-                                    .get(assignmentStatus.getAssignment().getIdentifier()))
-                                .ifPresent(
-                                    overriddenTaskInfoDto -> {
-                                        Optional.ofNullable(overriddenTaskInfoDto.getPoints())
-                                            .ifPresent(assignmentStatus::overrideTaskPoints);
-
-                                        Optional.ofNullable(overriddenTaskInfoDto.getBranch())
-                                            .ifPresent(assignmentStatus::setBranch);
-
-                                        Optional.ofNullable(overriddenTaskInfoDto.getStarted())
-                                            .ifPresent(assignmentStatus::setStarted);
-
-                                        Optional.ofNullable(overriddenTaskInfoDto.getFinished())
-                                            .ifPresent(assignmentStatus::setFinished);
-
-                                        Optional.ofNullable(overriddenTaskInfoDto.getMessage())
-                                            .ifPresent(assignmentStatus::setMessage);
-                                        }
-                                );
-                        }
-                        );
+                    .forEach(assignmentStatus -> tryOverrideAssignmentStatus(assignmentStatus, overriddenStudentDto));
             });
+    }
+
+    public MainEntity convert() {
+        var academicProgressDto = checkerScriptDto.getAcademicProgressDto();
+
+        var course = generateCourseFromDtos();
+        var group = generateGroupFromDtos(course);
+
+        overrideStudentsStatuses(group);
 
         return new MainEntity(course, group);
     }
-
-
 }

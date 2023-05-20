@@ -10,21 +10,21 @@ import java.util.Objects;
 public class Course {
     @Value
     public static class Lessons {
-        List<Lesson> lessonList
+        List<Lesson> list
             = new ArrayList<>(); // TODO
 
-        public Lessons(List<Lesson> lessonList) {
-            this.lessonList.addAll(Objects.requireNonNull(lessonList));
+        public Lessons(List<Lesson> list) {
+            this.list.addAll(Objects.requireNonNull(list));
         }
    }
 
     @Value
     public static class Assignments {
-        List<Assignment> assignmentList
+        List<Assignment> list
             = new ArrayList<>();
 
-        public Assignments(List<Assignment> assignmentList) {
-            this.assignmentList.addAll(Objects.requireNonNull(assignmentList));
+        public Assignments(List<Assignment> list) {
+            this.list.addAll(Objects.requireNonNull(list));
         }
     }
 

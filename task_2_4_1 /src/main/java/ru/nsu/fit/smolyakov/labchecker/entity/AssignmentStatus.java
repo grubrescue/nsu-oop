@@ -6,7 +6,7 @@ import lombok.experimental.NonFinal;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Value
+@Value //TODO кажется я не те аннотации использую
 @RequiredArgsConstructor
 public class AssignmentStatus {
     @NonNull Assignment assignment;
