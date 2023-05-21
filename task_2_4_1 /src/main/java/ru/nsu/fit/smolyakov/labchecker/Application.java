@@ -4,6 +4,7 @@ import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
+import ru.nsu.fit.smolyakov.labchecker.checker.GradleRunner;
 import ru.nsu.fit.smolyakov.labchecker.dto.CheckerScriptDto;
 import ru.nsu.fit.smolyakov.labchecker.util.DtoToEntity;
 
@@ -43,7 +44,8 @@ public class Application {
         var util = new DtoToEntity(checkerScript);
         var mainEntity = util.convert();
 
-        System.out.println(mainEntity.getGroup().getByNickName("evangelionexpert"));
+//        System.out.println(mainEntity.getGroup().getByNickName("evangelionexpert"));
+        GradleRunner.run();
 
 
 //        var evaluator = new EvaluationRunner();

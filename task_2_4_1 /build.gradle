@@ -6,6 +6,7 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven { url 'https://repo.gradle.org/gradle/libs-releases' }
 }
 
 dependencies {
@@ -18,7 +19,34 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
     testImplementation 'org.assertj:assertj-core:3.24.2'
 
-    implementation 'org.slf4j:slf4j-api:2.0.7' // indirect dependency of jgit
+    implementation 'org.gradle:gradle-tooling-api:8.1.1'
+//    implementation 'org.gradle:gradle-core:6.1.1'
+//    implementation 'org.gradle:gradle-core-api:6.1.1'
+//    implementation 'org.gradle:gradle-base-services:6.1.1'
+//    implementation 'org.gradle:gradle-base-services-groovy:6.1.1'
+//    implementation 'org.gradle:gradle-tooling-api-builders:6.1.1'
+//    implementation 'org.gradle:gradle-model-core:6.1.1'
+//    implementation 'org.gradle:gradle-native:6.1.1'
+//    implementation 'org.gradle:gradle-platform-native:6.1.1'
+//    implementation 'org.gradle:gradle-files:6.1.1'
+//    implementation 'org.gradle:gradle-logging:6.1.1'
+//    implementation 'org.gradle:gradle-cli:6.1.1'
+//    implementation 'net.rubygrapefruit:native-platform:0.22-milestone-23'
+//    implementation 'org.fusesource.jansi:jansi:2.4.0'
+//    implementation 'org.gradle:gradle-persistent-cache:6.1.1'
+//    implementation 'org.gradle:gradle-jvm-services:6.1.1'
+//    implementation 'org.gradle:gradle-process-services:6.1.1'
+//    implementation 'org.gradle:gradle-file-collections:6.1.1'
+//    implementation 'org.gradle:gradle-hashing:6.1.1'
+//    implementation 'org.gradle:gradle-execution:6.1.1'
+
+//    implementation 'org.gradle:gradle-fingerprint:6.1.1'
+
+
+
+
+
+    implementation 'org.slf4j:slf4j-api:2.0.7' // indirect dependency of jgit and gradle-tooling-api
 }
 
 mainClassName = 'ru.nsu.fit.smolyakov.labchecker.Application'
