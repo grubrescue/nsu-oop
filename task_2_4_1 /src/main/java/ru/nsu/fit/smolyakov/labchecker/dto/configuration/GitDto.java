@@ -13,4 +13,6 @@ public class GitDto {
     String repoLinkPostfix;
     @NonFinal
     String defaultRepoName;
+    @NonFinal
+    String docsBranch;
 }

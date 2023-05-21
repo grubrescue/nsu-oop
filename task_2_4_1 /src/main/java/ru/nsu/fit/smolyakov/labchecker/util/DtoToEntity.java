@@ -76,6 +76,7 @@ public class DtoToEntity {
         var builder = Student.builder()
             .nickName(studentDto.getNickName())
             .fullName(studentDto.getFullName())
+            .docsBranch(configurationDto.getGitDto().getDocsBranch())
             .repoUrl(
                 convertToRepoUrl(
                     studentDto.getNickName(),

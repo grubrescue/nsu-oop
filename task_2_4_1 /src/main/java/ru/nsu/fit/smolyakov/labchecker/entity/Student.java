@@ -14,6 +14,7 @@ public class Student {
     String nickName;
     String fullName;
     String repoUrl;
+    String docsBranch;
 
     @Singular("newAssignment")
     List<AssignmentStatus> assignmentStatusList;

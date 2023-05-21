@@ -9,4 +9,5 @@ git {
     repoLinkPrefix = 'https://github.com/' // possible to switch to ssh
     repoLinkPostfix = '.git'
     defaultRepoName = 'oop'
+    docsBranch = 'gh-pages'
 }
