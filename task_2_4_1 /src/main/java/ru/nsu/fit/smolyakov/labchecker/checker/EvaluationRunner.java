@@ -3,6 +3,7 @@ package ru.nsu.fit.smolyakov.labchecker.checker;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.PersonIdent;
 import org.eclipse.jgit.revwalk.RevCommit;
 import ru.nsu.fit.smolyakov.labchecker.entity.AssignmentStatus;
 import ru.nsu.fit.smolyakov.labchecker.entity.LessonStatus;
@@ -13,6 +14,8 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
+import java.util.TimeZone;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -30,7 +33,7 @@ public class EvaluationRunner {
 
     private void evaluateLessonAttendance(LessonStatus lessonStatus, Git git) {
         getCommitsStream(git)
-            .map(commit -> millisToLocalDateUtil(commit.getCommitTime()))
+            .map(this::getCommitLocalDate)
             .filter(commitDate ->
                 commitDate.isBefore(lessonStatus.getLesson().getDate().plusDays(DAYS_DIFF_ATTENDANCE))
             )
@@ -89,16 +92,26 @@ public class EvaluationRunner {
         }
     }
 
+    private LocalDate getCommitLocalDate(RevCommit commit) {
+        PersonIdent authorIdent = commit.getAuthorIdent();
+        Date authorDate = authorIdent.getWhen();
+        TimeZone authorTimeZone = authorIdent.getTimeZone();
+
+        return authorDate.toInstant()
+            .atZone(authorTimeZone.toZoneId())
+            .toLocalDate();
+    }
+
     private void evaluateAssignmentFinishedDate(AssignmentStatus assignmentStatus, Git git) {
         var finished = getTaskAssotiatedCommitsStream(assignmentStatus, git)
-            .map(commit -> millisToLocalDateUtil(commit.getCommitTime()))
+            .map(this::getCommitLocalDate)
             .max(LocalDate::compareTo);
         finished.ifPresent(assignmentStatus::setFinished);
     }
 
     private void evaluateAssignmentStartedDate(AssignmentStatus assignmentStatus, Git git) {
         var started = getTaskAssotiatedCommitsStream(assignmentStatus, git)
-            .map(commit -> millisToLocalDateUtil(commit.getCommitTime()))
+            .map(this::getCommitLocalDate)
             .min(LocalDate::compareTo);
         started.ifPresent(assignmentStatus::setStarted);
     }
@@ -116,14 +129,14 @@ public class EvaluationRunner {
 
             student.getAssignmentStatusList()
                 .stream()
-//                .filter(assignmentStatus -> new File(
-//                        git.getRepository().getDirectory().getPath() + assignmentStatus.getTaskNameAlias()
+//                .filter(assignmentStatus -> ФАЙЛ ЕСТЬ
 //                    ).exists()
 //                )
                 .forEach(assignmentStatus -> {
                     evaluateAssignmentStartedDate(assignmentStatus, git);
                     evaluateAssignmentFinishedDate(assignmentStatus, git);
                     buildTestDocsAssignment(assignmentStatus, git);
+
                 }
             );
 
