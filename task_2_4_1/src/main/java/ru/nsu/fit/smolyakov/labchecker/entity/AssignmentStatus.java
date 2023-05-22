@@ -107,6 +107,6 @@ public class AssignmentStatus {
     }
 
     public double getResultingPoints() {
-        return getTaskPoints() - getFine();
+        return getTaskPoints() + getFine();
     }
 }

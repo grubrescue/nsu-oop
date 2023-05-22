@@ -1,10 +1,10 @@
 groupName = '21214'
 
 students {
-//    student('streafy') {
-//        fullName = 'Бадин Иван Андреевич'
-//        repo = 'OOP'
-//    }
+    student('streafy') {
+        fullName = 'Бадин Иван Андреевич'
+        repo = 'OOP'
+    }
 //
 //    student('Fagorym') {
 //        fullName = 'Вебер Олег Владимирович'
@@ -21,9 +21,9 @@ students {
 //        repo = 'OOP'
 //    }
 //
-//    student('rafi2002') {
-//        fullName = 'Масуд Рофикул Ал'
-//    }
+    student('rafi2002') {
+        fullName = 'Масуд Рофикул Ал'
+    }
 //
 //    student('andrey-dru-me1') {
 //        fullName = 'Мельников Андрей Петрович'

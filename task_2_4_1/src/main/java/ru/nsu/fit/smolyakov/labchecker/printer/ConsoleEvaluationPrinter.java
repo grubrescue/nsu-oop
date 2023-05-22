@@ -51,6 +51,8 @@ public class ConsoleEvaluationPrinter {
                         printStream.printf(CELL_FORMAT + CELL_SEPARATOR,
                             softStr + " " + hardStr + " " + assignmentStatus.getResultingPoints());
                     });
+
+                System.out.println();
             });
     }
 }

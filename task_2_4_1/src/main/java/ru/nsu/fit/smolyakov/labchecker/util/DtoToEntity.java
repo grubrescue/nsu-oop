@@ -154,15 +154,17 @@ public class DtoToEntity {
             .getOverriddenStudents()
             .getMap()
             .forEach((nickName, overriddenStudentDto) -> {
-                var student = group.getByNickName(nickName)
-                    .orElseThrow(() -> new RuntimeException("No student with nickName " + nickName)); // TODO custom exceptions
+                group.getByNickName(nickName)
+                    .ifPresent(student -> {
+                        student.getLessonStatusList()
+                                .forEach(lessonStatus -> tryOverrideLessonStatus(lessonStatus, overriddenStudentDto));
 
-                student.getLessonStatusList()
-                    .forEach(lessonStatus -> tryOverrideLessonStatus(lessonStatus, overriddenStudentDto));
-
-                student.getAssignmentStatusList()
-                    .forEach(assignmentStatus -> tryOverrideAssignmentStatus(assignmentStatus, overriddenStudentDto));
-            });
+                        student.getAssignmentStatusList()
+                            .forEach(assignmentStatus -> tryOverrideAssignmentStatus(assignmentStatus, overriddenStudentDto));
+                    }
+                    );
+            }
+            );
     }
 
     public MainEntity convert() {

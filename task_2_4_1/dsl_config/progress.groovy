@@ -7,20 +7,12 @@ overrideProgress {
             message = 'выпьем за ооп'
         }
 
-        forTask('task_1_2_2') {
-            noBranch = true
+        forTask('task_1_5_1') {
+            solvedWithPoints 2.0
         }
 
-        forTask('task_1_2_3') {
-            noBranch = true
-        }
-
-        forTask('task_1_3_1') {
-            noBranch = true
-        }
-
-        forTask('task_1_4_1') {
-            noBranch = true
+        forTask('task_2_3_1') {
+            solvedWithPoints 2.0
         }
 
         forTask('task_2_3_1') {

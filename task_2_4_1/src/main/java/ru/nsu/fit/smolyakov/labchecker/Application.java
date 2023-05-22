@@ -48,7 +48,8 @@ public class Application {
             .map(EvaluationRunner::new)
             .forEach(EvaluationRunner::evaluate);
 
-//        System.out.println(mainEntity.getGroup().getByNickName("evangelionexpert"));
+        System.out.println(mainEntity.getGroup().getStudentList());
+
         var printer = new ConsoleEvaluationPrinter(mainEntity);
         printer.printEvaluation();
     }

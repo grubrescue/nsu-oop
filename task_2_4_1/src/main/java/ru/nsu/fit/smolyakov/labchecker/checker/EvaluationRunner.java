@@ -6,6 +6,7 @@ import org.eclipse.jgit.api.CreateBranchCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
+import org.eclipse.jgit.api.errors.RefNotFoundException;
 import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.lib.PersonIdent;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -71,22 +72,24 @@ public class EvaluationRunner {
                 false
             );
         } catch (GitAPIException e) {
-            log.error(student.getNickName() + "on getCommitsStream: " + e.getMessage());
-            return Stream.empty();
+//            log.error(student.getNickName() + "on getCommitsStream: " + e.getMessage());
+            throw new RuntimeException(e); // TODO опять кастомные исключения
         }
     }
 
     private Stream<RevCommit> getTaskAssotiatedCommitsStream(AssignmentStatus assignmentStatus, Git git) {
         try {
-            return StreamSupport.stream(
+            var stream = StreamSupport.stream(
                 git.log()
                     .addPath(assignmentStatus.getTaskNameAlias())
                     .call()
                     .spliterator(),
                 false
             );
+
+            return stream; // TODO кинуть в лог сообщение если стрим пустой
         } catch (GitAPIException e) {
-            log.error(student.getNickName() + "on getTaskAssociatedCommitsStream: " + e.getMessage());
+//            log.error(student.getNickName() + "on getTaskAssociatedCommitsStream: " + e.getMessage());
             throw new RuntimeException(e); // TODO опять кастомные исключения
         }
     }
@@ -123,7 +126,7 @@ public class EvaluationRunner {
             });
     }
 
-    private void checkoutToBranch(String branch, Git git) {
+    private boolean checkoutToBranch(String branch, Git git) {
         try {
             git.checkout()
                 .setName(branch)
@@ -132,12 +135,53 @@ public class EvaluationRunner {
                 .setStartPoint("origin/" + branch)
                 .setForced(true)
                 .call();
+            return true;
+        } catch (RefNotFoundException e) {
+            log.warn("Branch {} not found", branch);
+            return false;
         } catch (GitAPIException e) {
             throw new RuntimeException(e); // TODO ну понятно
         }
     }
 
-    public void evaluate() { // TODO todo
+
+
+    private void elevateOnMaster(Git git) {
+        evaluateAttendance(student, git);
+
+        student.getAssignmentStatusList()
+            .stream()
+            .filter(assignmentStatus -> new File(getPathToTask(assignmentStatus, git)).exists())
+            .forEach(assignmentStatus -> {
+                    log.info("Evaluating {} task", assignmentStatus.getTaskNameAlias());
+                    evaluateAssignmentStartedDate(assignmentStatus, git);
+                    evaluateAssignmentFinishedDate(assignmentStatus, git);
+                    runGradleEvaluator(assignmentStatus, git);
+                }
+            );
+    }
+
+
+    private void elevateOnDocsBranch(Git git) {
+        student.getAssignmentStatusList()
+            .stream()
+            .filter(assignmentStatus -> new File(getPathToTask(assignmentStatus, git)).exists())
+            .forEach(assignmentStatus -> evaluateAssignmentStartedDate(assignmentStatus, git));
+
+        evaluateAttendance(student, git);
+    }
+
+    private void elevateOnBranch(Git git, AssignmentStatus assignmentStatus) {
+        evaluateAssignmentStartedDate(assignmentStatus, git);
+        if (assignmentStatus.getFinished().equals(AssignmentStatus.NOT_STARTED)) {
+            runGradleEvaluator(assignmentStatus, git); // TODO сделать метод сдана ли лаба или нет
+        }
+
+        evaluateAttendance(student, git);
+    }
+
+
+    public void evaluate() { // TODO зарефакторить
         log.info("Checking {}'s repo", student.getNickName());
         var dir = new File(TMP_DIR + student.getNickName());
 
@@ -148,45 +192,25 @@ public class EvaluationRunner {
             .setCloneAllBranches(true);
 
         try (Git git = repoCloneCommand.call()) {
-            log.info("Switched to master branch");
-            evaluateAttendance(student, git);
-
-            student.getAssignmentStatusList()
-                .stream()
-                .filter(assignmentStatus -> new File(getPathToTask(assignmentStatus, git)).exists())
-                .forEach(assignmentStatus -> {
-                    log.info("Evaluating {} task", assignmentStatus.getTaskNameAlias());
-                    evaluateAssignmentStartedDate(assignmentStatus, git);
-                    evaluateAssignmentFinishedDate(assignmentStatus, git);
-                    runGradleEvaluator(assignmentStatus, git);
-                }
-            );
+            log.info("On master branch");
+            elevateOnMaster(git);
 
             // docs
-            checkoutToBranch(student.getDocsBranch(), git);
-            log.info("Switched to {} branch", student.getDocsBranch());
+            if (checkoutToBranch(student.getDocsBranch(), git)) {
+                log.info("Switched to {} branch", student.getDocsBranch());
+                elevateOnDocsBranch(git);
+            }
 
-            student.getAssignmentStatusList()
-                .stream()
-                .filter(assignmentStatus -> new File(getPathToTask(assignmentStatus, git)).exists())
-                .forEach(assignmentStatus -> evaluateAssignmentStartedDate(assignmentStatus, git));
-
-            evaluateAttendance(student, git);
 
             student.getAssignmentStatusList()
                 .stream()
                 .filter(AssignmentStatus::hasBranch)
                 .forEach(
                     assignmentStatus -> {
-                        checkoutToBranch(assignmentStatus.getBranch().get(), git);
-
-                        evaluateAssignmentStartedDate(assignmentStatus, git);
-                        if (assignmentStatus.getFinished().equals(AssignmentStatus.NOT_STARTED)) {
+                        if (checkoutToBranch(assignmentStatus.getBranch().get(), git)) {
                             log.info("Evaluating {} task", assignmentStatus.getTaskNameAlias());
-                            runGradleEvaluator(assignmentStatus, git); // TODO сделать метод сдана ли лаба или нет
+                            elevateOnBranch(git, assignmentStatus);
                         }
-
-                        evaluateAttendance(student, git);
                     }
                 );
         } catch (InvalidRemoteException e) {
