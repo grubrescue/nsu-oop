@@ -86,12 +86,20 @@ public class AssignmentStatus {
         return this.isOverridden() ? this.overriddenTaskPoints : this.getCalculatedTaskPoints();
     }
 
+    public boolean isSkippedSoftDeadline() {
+        return this.started.isAfter(this.assignment.getSoftDeadline());
+    }
+
+    public boolean isSkippedHardDeadline() {
+        return this.finished.isAfter(this.assignment.getHardDeadline());
+    }
+
     public double getFine() {
         double fine = 0;
-        if (this.started.isAfter(this.assignment.getSoftDeadline())) {
+        if (isSkippedSoftDeadline()) {
             fine += this.assignment.getSoftDeadlineSkipFine();
         }
-        if (this.finished.isAfter(this.assignment.getHardDeadline())) {
+        if (isSkippedHardDeadline()) {
             fine += this.assignment.getHardDeadlineSkipFine();
         }
 

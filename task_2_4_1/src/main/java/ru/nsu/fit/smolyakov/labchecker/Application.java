@@ -4,9 +4,10 @@ import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
-import ru.nsu.fit.smolyakov.labchecker.checker.EvaluationRunner;
 import ru.nsu.fit.smolyakov.labchecker.dto.CheckerScriptDto;
+import ru.nsu.fit.smolyakov.labchecker.printer.ConsoleEvaluationPrinter;
 import ru.nsu.fit.smolyakov.labchecker.util.DtoToEntity;
+import ru.nsu.fit.smolyakov.labchecker.checker.EvaluationRunner;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,7 +48,9 @@ public class Application {
             .map(EvaluationRunner::new)
             .forEach(EvaluationRunner::evaluate);
 
-        System.out.println(mainEntity.getGroup().getByNickName("evangelionexpert"));
+//        System.out.println(mainEntity.getGroup().getByNickName("evangelionexpert"));
+        var printer = new ConsoleEvaluationPrinter(mainEntity);
+        printer.printEvaluation();
     }
 
     public void parseDto(Object dto, String path) throws IOException {
