@@ -5,7 +5,7 @@ students {
         fullName = 'Бадин Иван Андреевич'
         repo = 'OOP'
     }
-//
+////
 //    student('Fagorym') {
 //        fullName = 'Вебер Олег Владимирович'
 //        repo = 'OOP'
@@ -24,7 +24,7 @@ students {
     student('rafi2002') {
         fullName = 'Масуд Рофикул Ал'
     }
-//
+////
 //    student('andrey-dru-me1') {
 //        fullName = 'Мельников Андрей Петрович'
 //    }

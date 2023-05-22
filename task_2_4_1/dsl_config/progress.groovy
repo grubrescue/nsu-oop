@@ -13,12 +13,8 @@ overrideProgress {
 
         forTask('task_2_3_1') {
             solvedWithPoints 2.0
-        }
-
-        forTask('task_2_3_1') {
             branch = 'task-2-3-1-9095dfa'
         }
-
 //        beenOnLesson '2022-09-26'
     }
 }
