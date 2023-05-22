@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
 import lombok.Value;
+import lombok.extern.log4j.Log4j2;
 import org.gradle.tooling.BuildException;
 import org.gradle.tooling.GradleConnector;
 import org.gradle.tooling.ProjectConnection;
@@ -20,6 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 @Value
 @Builder
+@Log4j2
 public class GradleRunner { // TODO rename
     @Getter
     String projectPath;
@@ -52,12 +54,11 @@ public class GradleRunner { // TODO rename
                 } else if (taskFinishEvent.getResult() instanceof TaskSuccessResult) {
                     result.set(true);
                 } else {
-                    throw new RuntimeException("это што спришвается выбило" + taskFinishEvent.getResult().getClass()); //TODO
+                    throw new RuntimeException("это што спрашивается такое" + taskFinishEvent.getResult().getClass());
+                    //TODO сгыещь custom exception
                 }
             }
         };
-
-        connection.newBuild().forTasks("clean").run(); // TODO настроить???? или не надо
 
         try {
             connection.newBuild()
@@ -70,30 +71,21 @@ public class GradleRunner { // TODO rename
         return result.get();
     }
 
-//    public Map<String, Boolean> run() {
-//        try (var connection = GradleConnector.newConnector()
-//            .forProjectDirectory(new File(projectPath))
-//            .connect()) {
-//
-//            var resultMap = new HashMap<String, Boolean>();
-//
-//            tasks.forEach(task -> resultMap.put(task, runTask(connection, task)));
-//
-//            return resultMap;
-//        }
-//    }
-
     public void run() {
         try (var connection = GradleConnector.newConnector()
             .forProjectDirectory(new File(projectPath))
-            .connect()) {
+            .connect()
+        ) {
+            log.info("Starting Gradle evaluator");
+            connection.newBuild().forTasks("clean").run();
+            log.info("clean successful");
 
             tasks.forEach(task -> {
-                System.out.println("running task: " + task.name());
                 if (runTask(connection, task.name())) {
                     task.runIfSuccess().run();
+                    log.info("task {} successful", task.name());
                 } else {
-                    System.err.println("task failed: " + task.name()); // TODO временно? надо логгер подключить
+                    log.info("task {} failed", task.name());
                 }
             });
         }
