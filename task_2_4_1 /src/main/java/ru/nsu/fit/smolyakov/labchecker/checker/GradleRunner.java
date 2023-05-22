@@ -1,8 +1,10 @@
 package ru.nsu.fit.smolyakov.labchecker.checker;
 
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.Singular;
+import lombok.Value;
 import org.gradle.tooling.BuildException;
 import org.gradle.tooling.GradleConnector;
 import org.gradle.tooling.ProjectConnection;
@@ -13,15 +15,21 @@ import org.gradle.tooling.events.task.TaskFinishEvent;
 import org.gradle.tooling.events.task.TaskSuccessResult;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-@RequiredArgsConstructor
+@Value
+@Builder
 public class GradleRunner { // TODO rename
     @Getter
-    private String projectPath;
+    String projectPath;
+
+    @Singular
+    @Getter
+    List<GradleTask> tasks;
+
+    public record GradleTask(String name, Runnable runIfSuccess) {
+    }
 
     /**
      *
@@ -40,16 +48,16 @@ public class GradleRunner { // TODO rename
                 }
 
                 if (taskFinishEvent.getResult() instanceof TaskFailureResult) {
-                    result.set(true);
-                } else if (taskFinishEvent.getResult() instanceof TaskSuccessResult) {
                     result.set(false);
+                } else if (taskFinishEvent.getResult() instanceof TaskSuccessResult) {
+                    result.set(true);
                 } else {
                     throw new RuntimeException("это што спришвается выбило" + taskFinishEvent.getResult().getClass()); //TODO
                 }
             }
         };
 
-        connection.newBuild().forTasks("clean").run();
+        connection.newBuild().forTasks("clean").run(); // TODO настроить???? или не надо
 
         try {
             connection.newBuild()
@@ -62,17 +70,32 @@ public class GradleRunner { // TODO rename
         return result.get();
     }
 
-    public Map<String, Boolean> run(String... tasks) {
+//    public Map<String, Boolean> run() {
+//        try (var connection = GradleConnector.newConnector()
+//            .forProjectDirectory(new File(projectPath))
+//            .connect()) {
+//
+//            var resultMap = new HashMap<String, Boolean>();
+//
+//            tasks.forEach(task -> resultMap.put(task, runTask(connection, task)));
+//
+//            return resultMap;
+//        }
+//    }
+
+    public void run() {
         try (var connection = GradleConnector.newConnector()
             .forProjectDirectory(new File(projectPath))
             .connect()) {
 
-            var resultMap = new HashMap<String, Boolean>();
-
-            Arrays.stream(tasks)
-                .forEach(task -> resultMap.put(task, runTask(connection, task)));
-
-            return resultMap;
+            tasks.forEach(task -> {
+                System.out.println("running task: " + task.name());
+                if (runTask(connection, task.name())) {
+                    task.runIfSuccess().run();
+                } else {
+                    System.err.println("task failed: " + task.name()); // TODO временно? надо логгер подключить
+                }
+            });
         }
     }
 }

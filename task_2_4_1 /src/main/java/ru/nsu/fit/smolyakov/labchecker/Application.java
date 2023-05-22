@@ -52,6 +52,8 @@ public class Application {
             throw new RuntimeException(e);
         }
 
+        System.out.println(mainEntity.getGroup().getByNickName("evangelionexpert"));
+
 
 //        var evaluator = new EvaluationRunner();
 //        try {

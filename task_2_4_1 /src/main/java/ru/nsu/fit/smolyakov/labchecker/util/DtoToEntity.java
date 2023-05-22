@@ -162,7 +162,6 @@ public class DtoToEntity {
             });
     }
 
-
     public MainEntity convert() {
         var course = generateCourseFromDtos();
         var group = generateGroupFromDtos(course);
