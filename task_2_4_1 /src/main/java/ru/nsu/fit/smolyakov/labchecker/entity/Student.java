@@ -16,20 +16,8 @@ public class Student {
     String repoUrl;
     String docsBranch;
 
-    @Singular("newAssignment")
+    @Singular("newAssignment")q
     List<AssignmentStatus> assignmentStatusList;
     @Singular("newLesson")
     List<LessonStatus> lessonStatusList;
-
-//    private static class StudentBuilder {
-//        public StudentBuilder assignmentStatusList(List<AssignmentStatus> assignmentStatusList) {
-//            this.assignmentStatusList = new ArrayList<>(assignmentStatusList);
-//            return this;
-//        }
-//
-//        public StudentBuilder lessonStatusList(List<LessonStatus> lessonStatusList) {
-//            this.lessonStatusList = new ArrayList<>(lessonStatusList);
-//            return this;
-//        }
-//    }
 }

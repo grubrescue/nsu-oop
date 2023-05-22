@@ -4,7 +4,8 @@ import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
-import ru.nsu.fit.smolyakov.labchecker.checker.GradleRunner;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import ru.nsu.fit.smolyakov.labchecker.checker.EvaluationRunner;
 import ru.nsu.fit.smolyakov.labchecker.dto.CheckerScriptDto;
 import ru.nsu.fit.smolyakov.labchecker.util.DtoToEntity;
 
@@ -39,13 +40,17 @@ public class Application {
         app.parseDto(checkerScript.getCourseDto(), COURSE_FILE_PATH);
         app.parseDto(checkerScript.getAcademicProgressDto(), PROGRESS_FILE_PATH);
 
-//        System.out.println(checkerScript);
 
         var util = new DtoToEntity(checkerScript);
         var mainEntity = util.convert();
 
 //        System.out.println(mainEntity.getGroup().getByNickName("evangelionexpert"));
-        GradleRunner.run();
+        var evaluator = new EvaluationRunner();
+        try {
+            evaluator.tmp(mainEntity.getGroup().getByNickName("evangelionexpert").get());
+        } catch (GitAPIException e) {
+            throw new RuntimeException(e);
+        }
 
 
 //        var evaluator = new EvaluationRunner();

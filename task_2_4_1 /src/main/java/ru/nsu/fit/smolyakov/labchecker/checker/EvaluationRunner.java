@@ -1,6 +1,6 @@
 package ru.nsu.fit.smolyakov.labchecker.checker;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import ru.nsu.fit.smolyakov.labchecker.entity.Student;
@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class EvaluationRunner {
     public final String TMP_DIR = ".checks_tmp/" + System.currentTimeMillis() + "/";
 
