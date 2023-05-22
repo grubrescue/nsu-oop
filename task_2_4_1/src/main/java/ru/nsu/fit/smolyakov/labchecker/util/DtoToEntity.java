@@ -139,7 +139,7 @@ public class DtoToEntity {
                     Optional.ofNullable(overriddenTaskInfoDto.getMessage())
                         .ifPresent(assignmentStatus::setMessage);
 
-                    Optional.ofNullable(overriddenTaskInfoDto.getTaskNameAlias())
+                    Optional.ofNullable(overriddenTaskInfoDto.getIdentifierAlias())
                         .ifPresent(assignmentStatus::setTaskNameAlias);
 
                     if (overriddenTaskInfoDto.isNoBranch()) {

@@ -1,15 +1,17 @@
 package ru.nsu.fit.smolyakov.labchecker.dto.progress;
 
+import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import lombok.experimental.NonFinal;
 
 import java.time.LocalDate;
 
 @Value
+@RequiredArgsConstructor
 public class OverriddenTaskDto {
     String taskName;
     @NonFinal
-    String taskNameAlias;
+    String identifierAlias;
     @NonFinal
     LocalDate started;
     @NonFinal
@@ -22,9 +24,6 @@ public class OverriddenTaskDto {
     String message;
     @NonFinal
     String branch;
-    public OverriddenTaskDto(String taskName) {
-        this.taskName = taskName;
-    }
 
     void startedAt(String dateString) {
         this.started = LocalDate.parse(dateString);

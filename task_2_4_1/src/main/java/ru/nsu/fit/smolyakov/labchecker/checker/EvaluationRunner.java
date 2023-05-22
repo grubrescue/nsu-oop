@@ -86,7 +86,7 @@ public class EvaluationRunner {
                 false
             );
         } catch (GitAPIException e) {
-            log.error(student.getNickName() + "on getTaskAssotiatedCommitsStream: " + e.getMessage());
+            log.error(student.getNickName() + "on getTaskAssociatedCommitsStream: " + e.getMessage());
             throw new RuntimeException(e); // TODO опять кастомные исключения
         }
     }

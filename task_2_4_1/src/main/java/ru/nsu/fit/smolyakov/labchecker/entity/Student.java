@@ -6,6 +6,7 @@ import lombok.Singular;
 import lombok.Value;
 
 import java.util.List;
+import java.util.Optional;
 
 @Value
 @NonNull
@@ -21,4 +22,16 @@ public class Student {
     List<AssignmentStatus> assignmentStatusList;
     @Singular("newLesson")
     List<LessonStatus> lessonStatusList;
+
+    public Optional<AssignmentStatus> getAssignmentStatusByAssignment(Assignment assignment) {
+        return assignmentStatusList.stream()
+            .filter(assignmentStatus -> assignmentStatus.getAssignment().equals(assignment))
+            .findFirst();
+    }
+
+    public Optional<LessonStatus> getLessonStatusByLesson(Lesson lesson) {
+        return lessonStatusList.stream()
+            .filter(lessonStatus -> lessonStatus.getLesson().equals(lesson))
+            .findFirst();
+    }
 }

@@ -2,9 +2,11 @@ package ru.nsu.fit.smolyakov.labchecker.entity;
 
 import lombok.Value;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Value
 public class Course {
@@ -19,6 +21,12 @@ public class Course {
         public Lessons(List<Lesson> list) {
             this.list.addAll(Objects.requireNonNull(list));
         }
+
+        public Optional<Lesson> getByDate(LocalDate date) {
+            return list.stream()
+                .filter(lesson -> lesson.getDate().equals(date))
+                .findFirst();
+        }
     }
 
     @Value
@@ -28,6 +36,12 @@ public class Course {
 
         public Assignments(List<Assignment> list) {
             this.list.addAll(Objects.requireNonNull(list));
+        }
+
+        public Optional<Assignment> getByIdentifier(String identifier) {
+            return list.stream()
+                .filter(assignment -> assignment.getIdentifier().equals(identifier))
+                .findFirst();
         }
     }
 }
