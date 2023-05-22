@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.eclipse.jgit.api.CreateBranchCommand;
 import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.api.errors.InvalidRemoteException;
-import org.eclipse.jgit.api.errors.RefNotFoundException;
-import org.eclipse.jgit.api.errors.TransportException;
+import org.eclipse.jgit.api.errors.*;
 import org.eclipse.jgit.lib.PersonIdent;
 import org.eclipse.jgit.revwalk.RevCommit;
 import ru.nsu.fit.smolyakov.labchecker.entity.AssignmentStatus;
@@ -138,6 +135,9 @@ public class EvaluationRunner {
             return true;
         } catch (RefNotFoundException e) {
             log.warn("Branch {} not found", branch);
+            return false;
+        } catch (RefAlreadyExistsException e){
+            log.error("Branch {} already exists (надо будет почитать про это)", branch); // TODO
             return false;
         } catch (GitAPIException e) {
             throw new RuntimeException(e); // TODO ну понятно

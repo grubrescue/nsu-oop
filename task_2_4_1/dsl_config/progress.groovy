@@ -38,8 +38,8 @@ overrideProgress {
         }
 
         forTask('task_1_4_1') {
-            identifierAlias = 'Task_1_5_1'
-            branch = 'Task_1_5_1'
+            identifierAlias = 'Task_1_4_1'
+            branch = 'Task_1_4_1'
         }
 
         forTask('task_1_5_1') {

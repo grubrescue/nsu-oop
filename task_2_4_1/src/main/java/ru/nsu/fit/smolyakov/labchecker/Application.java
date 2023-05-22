@@ -5,7 +5,9 @@ import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import ru.nsu.fit.smolyakov.labchecker.dto.CheckerScriptDto;
+import ru.nsu.fit.smolyakov.labchecker.printer.ConsoleEvaluationPrinter;
 import ru.nsu.fit.smolyakov.labchecker.util.DtoToEntity;
+import ru.nsu.fit.smolyakov.labchecker.checker.EvaluationRunner;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,16 +42,25 @@ public class Application {
 
         var mainEntity = new DtoToEntity(checkerScript).convert();
 
-//        mainEntity.getGroup()
-//            .getStudentList()
-//            .stream()
-//            .map(EvaluationRunner::new)
-//            .forEach(EvaluationRunner::evaluate);
+//        var a = GradleRunner.builder()
+//            .projectPath(".checks_tmp/1684779963745/streafy/task_1_1_1")
+//            .task(new GradleRunner.GradleTask("build", () -> {
+//                System.out.println("success");
+//            }))
+//            .build();
 //
-//        System.out.println(mainEntity.getGroup().getStudentList());
-//
-//        var printer = new ConsoleEvaluationPrinter(mainEntity, System.out);
-//        printer.printEvaluation();
+//        a.run();
+
+        mainEntity.getGroup()
+            .getStudentList()
+            .stream()
+            .map(EvaluationRunner::new)
+            .forEach(EvaluationRunner::evaluate);
+
+        System.out.println(mainEntity.getGroup().getStudentList());
+
+        var printer = new ConsoleEvaluationPrinter(mainEntity, System.out);
+        printer.printEvaluation();
     }
 
     public void parseDto(Object dto, String path) throws IOException {

@@ -6,11 +6,11 @@ import lombok.Getter;
 import lombok.Singular;
 import lombok.Value;
 import lombok.extern.log4j.Log4j2;
-import org.gradle.tooling.*;
+import org.gradle.tooling.GradleConnector;
+import org.gradle.tooling.ProjectConnection;
 
 import java.io.File;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @Value
 @Builder
@@ -33,49 +33,19 @@ public class GradleRunner { // TODO rename
      * @return true on success
      */
     private boolean runTask(ProjectConnection connection, String task) {
-//        AtomicBoolean result = new AtomicBoolean(false);
-//        ProgressListener listener = progressEvent -> {
-//            if (progressEvent instanceof TaskFinishEvent taskFinishEvent) {
-//                var actualTaskName = taskFinishEvent.getDescriptor().getName().substring(1);
-//
-//                if (!actualTaskName.equals(task)) {
-//                    return;
-//                }
-//
-//                if (taskFinishEvent.getResult() instanceof TaskFailureResult) {
-//                    result.set(false);
-//                    log.info("task {} failed", task);
-//                } else if (taskFinishEvent.getResult() instanceof TaskSuccessResult) {
-//                    result.set(true);
-//                    log.info("task {} successful", task);
-//                } else {
-//                    throw new RuntimeException("это што спрашивается такое" + taskFinishEvent.getResult().getClass());
-//                    //TODO сгыещь custom exception
-//                }
-//            }
-//        };
-        AtomicBoolean result = new AtomicBoolean(false);
-        var a = new ResultHandler<Void>() {
-            @Override
-            public void onComplete(Void unused) {
-                result.set(true);
-            }
-
-            @Override
-            public void onFailure(GradleConnectionException failure) {
-                log.error(failure);
-            }
-        };
+        log.info("Running task {}", task);
 
         try {
             connection.newBuild()
                 .forTasks(task)
-                .run(a);
+                .run();
         } catch (Exception e) {
-            log.error("Gradle task {} failed because of {}", task, e.getMessage());
+            log.error("Gradle task {} failed; cause: {}", task, e.getMessage());
+            return false;
         }
 
-        return result.get();
+        log.info("Task {} finished successfully", task);
+        return true;
     }
 
     public void run() {
@@ -84,8 +54,9 @@ public class GradleRunner { // TODO rename
             .connect()
         ) {
             log.info("Starting Gradle evaluator");
-
-            runTask(connection, "clean");
+//
+//            log.info("Running cleaning");
+//            runTask(connection, "build"); // TODO таймаут???
 
             tasks.forEach(task -> {
                 if (runTask(connection, task.name())) {
@@ -93,7 +64,7 @@ public class GradleRunner { // TODO rename
                 }
             });
         } catch (Exception e) {
-            log.error("Gradle evaluation failed because of {}", e.getMessage());
+            log.error("Gradle evaluation failed; cause: {}", e.getMessage());
         }
     }
 }
