@@ -77,6 +77,9 @@ public class DtoToEntity {
             .nickName(studentDto.getNickName())
             .fullName(studentDto.getFullName())
             .docsBranch(configurationDto.getGitDto().getDocsBranch())
+            .defaultBranchName(
+                Optional.ofNullable(studentDto.getDefaultBranch())
+                    .orElse(configurationDto.getGitDto().getDefaultBranch()))
             .repoUrl(
                 convertToRepoUrl(
                     studentDto.getNickName(),

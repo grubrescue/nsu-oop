@@ -32,7 +32,7 @@ students {
     student('evangelionexpert') {
         fullName = 'Смоляков Павел Евгеньевич'
 
-        defaultBranchName = 'master'
+        defaultBranch = 'master'
     }
 //
 //    student('Tretiakovv') {

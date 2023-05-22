@@ -10,4 +10,5 @@ git {
     repoLinkPostfix = '.git'
     defaultRepoName = 'oop'
     docsBranch = 'gh-pages'
+    defaultBranch = 'main'
 }

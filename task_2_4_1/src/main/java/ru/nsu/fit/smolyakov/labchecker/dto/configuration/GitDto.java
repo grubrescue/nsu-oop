@@ -15,4 +15,6 @@ public class GitDto {
     String defaultRepoName;
     @NonFinal
     String docsBranch;
+    @NonFinal
+    String defaultBranch;
 }

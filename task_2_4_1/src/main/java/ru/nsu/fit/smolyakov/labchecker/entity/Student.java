@@ -14,6 +14,7 @@ public class Student {
     String nickName;
     String fullName;
     String repoUrl;
+    String defaultBranchName;
     String docsBranch;
 
     @Singular("newAssignment")
