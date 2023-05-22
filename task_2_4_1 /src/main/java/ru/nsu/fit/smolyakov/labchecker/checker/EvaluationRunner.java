@@ -103,17 +103,25 @@ public class EvaluationRunner {
     }
 
     private void evaluateAssignmentFinishedDate(AssignmentStatus assignmentStatus, Git git) {
-        var finished = getTaskAssotiatedCommitsStream(assignmentStatus, git)
+        getTaskAssotiatedCommitsStream(assignmentStatus, git)
             .map(this::getCommitLocalDate)
-            .max(LocalDate::compareTo);
-        finished.ifPresent(assignmentStatus::setFinished);
+            .max(LocalDate::compareTo)
+            .ifPresent(newFinishedDate -> {
+                if (assignmentStatus.getFinished().isAfter(newFinishedDate)) {
+                    assignmentStatus.setFinished(newFinishedDate);
+                }
+            }); // TODO в принципе проверка лишняя, ибо это будет проверяться только в мастере
     }
 
     private void evaluateAssignmentStartedDate(AssignmentStatus assignmentStatus, Git git) {
-        var started = getTaskAssotiatedCommitsStream(assignmentStatus, git)
+        getTaskAssotiatedCommitsStream(assignmentStatus, git)
             .map(this::getCommitLocalDate)
-            .min(LocalDate::compareTo);
-        started.ifPresent(assignmentStatus::setStarted);
+            .min(LocalDate::compareTo)
+            .ifPresent(newStartedDate -> {
+                if (assignmentStatus.getStarted().isAfter(newStartedDate)) {
+                    assignmentStatus.setStarted(newStartedDate);
+                }
+            });
     }
 
     public void tmp(Student student) throws GitAPIException, IOException { // TODO todo
@@ -129,22 +137,47 @@ public class EvaluationRunner {
 
             student.getAssignmentStatusList()
                 .stream()
-//                .filter(assignmentStatus -> ФАЙЛ ЕСТЬ
-//                    ).exists()
-//                )
+                .filter(assignmentStatus -> new File(getPathToTask(assignmentStatus, git)).exists())
                 .forEach(assignmentStatus -> {
                     evaluateAssignmentStartedDate(assignmentStatus, git);
                     evaluateAssignmentFinishedDate(assignmentStatus, git);
                     buildTestDocsAssignment(assignmentStatus, git);
-
                 }
             );
 
-            // TODO
-//            var ref = git.checkout()
-//                .setName("task-1-1-1")
-//                .setCreateBranch(true)
-//                .call();
+            // docs
+            var ref = git.checkout()
+                .setName(student.getDocsBranch())
+                .setCreateBranch(true)
+                .call();
+
+            student.getAssignmentStatusList()
+                .stream()
+                .filter(assignmentStatus -> new File(getPathToTask(assignmentStatus, git)).exists())
+                .forEach(assignmentStatus -> evaluateAssignmentStartedDate(assignmentStatus, git));
+
+            evaluateAttendance(student, git);
+
+            student.getAssignmentStatusList()
+                .stream()
+                .filter(AssignmentStatus::hasBranch)
+                .forEach(
+                    assignmentStatus -> {
+                        try {
+                            git.checkout() // TODO может в метод убрать?
+                                .setName(assignmentStatus.getBranch().get()) // TODO лучше не оптионал сделать а эксептион
+                                .setCreateBranch(true)
+                                .call();
+
+                            evaluateAssignmentStartedDate(assignmentStatus, git);
+                            if (assignmentStatus.getFinished().equals(AssignmentStatus.NOT_STARTED)) {
+                                buildTestDocsAssignment(assignmentStatus, git); // TODO сделать метод сдана ли лаба или нет
+                            }
+                        } catch (GitAPIException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                );
 //
 //            System.out.println(ref);
 //            System.out.println(git.branchList().call());
