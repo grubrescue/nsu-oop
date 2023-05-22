@@ -48,7 +48,7 @@ public class EvaluationRunner {
 
     private String getPathToTask(AssignmentStatus assignmentStatus, Git git) {
         var repoPath = git.getRepository().getDirectory().getAbsolutePath();
-        return repoPath.substring(0, repoPath.length() - 4) + "/" + assignmentStatus.getTaskNameAlias();
+        return repoPath.substring(0, repoPath.length() - 4) + "/" + assignmentStatus.getIdentifierAlias();
     }
 
     private void runGradleEvaluator(AssignmentStatus assignmentStatus, Git git) {
@@ -81,7 +81,7 @@ public class EvaluationRunner {
         try {
             var stream = StreamSupport.stream(
                 git.log()
-                    .addPath(assignmentStatus.getTaskNameAlias())
+                    .addPath(assignmentStatus.getIdentifierAlias())
                     .call()
                     .spliterator(),
                 false
@@ -153,7 +153,7 @@ public class EvaluationRunner {
             .stream()
             .filter(assignmentStatus -> new File(getPathToTask(assignmentStatus, git)).exists())
             .forEach(assignmentStatus -> {
-                    log.info("Evaluating {} task", assignmentStatus.getTaskNameAlias());
+                    log.info("Evaluating {} task", assignmentStatus.getIdentifierAlias());
                     evaluateAssignmentStartedDate(assignmentStatus, git);
                     evaluateAssignmentFinishedDate(assignmentStatus, git);
                     runGradleEvaluator(assignmentStatus, git);
@@ -208,7 +208,7 @@ public class EvaluationRunner {
                 .forEach(
                     assignmentStatus -> {
                         if (checkoutToBranch(assignmentStatus.getBranch().get(), git)) {
-                            log.info("Evaluating {} task", assignmentStatus.getTaskNameAlias());
+                            log.info("Evaluating {} task", assignmentStatus.getIdentifierAlias());
                             elevateOnBranch(git, assignmentStatus);
                         }
                     }

@@ -140,7 +140,7 @@ public class DtoToEntity {
                         .ifPresent(assignmentStatus::setMessage);
 
                     Optional.ofNullable(overriddenTaskInfoDto.getIdentifierAlias())
-                        .ifPresent(assignmentStatus::setTaskNameAlias);
+                        .ifPresent(assignmentStatus::setIdentifierAlias);
 
                     if (overriddenTaskInfoDto.isNoBranch()) {
                         assignmentStatus.setBranch(null);

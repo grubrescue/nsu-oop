@@ -55,7 +55,16 @@ public class ConsoleEvaluationPrinter {
                         var buildOkCh = assignmentStatus.isBuildOk() ? 'b' : '-';
                         var testsOkCh = assignmentStatus.isTestsOk() ? 't' : '-';
 
-                        var overridenCh = assignmentStatus.isOverridden() ? '*' : ' ';
+//                        var overridenCh = assignmentStatus.isOverridden() ? '*' : ' ';
+                        char statusCh;
+                        if (assignmentStatus.isOverridden()) {
+                            statusCh = '*';
+                        } else if (!assignmentStatus.isFinished()) {
+                            statusCh = '?';
+                        } else {
+                            statusCh = ' ';
+                        }
+
 
                         String resStr =
                             String.format("%c%c %c%c%c %.1f%c",
@@ -65,13 +74,13 @@ public class ConsoleEvaluationPrinter {
                                 buildOkCh,
                                 testsOkCh,
                                 assignmentStatus.getResultingPoints(),
-                                overridenCh
+                                statusCh
                             );
 
                         printStream.printf(CELL_FORMAT + CELL_SEPARATOR, resStr);
                     });
 
-                printStream.printf(CELL_FORMAT, "/ " + student.calculateTotalPoints());
+                printStream.printf(CELL_FORMAT, " = " + student.calculateTotalPoints());
                 printStream.println();
             });
     }

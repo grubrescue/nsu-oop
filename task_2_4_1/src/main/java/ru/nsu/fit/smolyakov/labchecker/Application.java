@@ -5,7 +5,6 @@ import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import ru.nsu.fit.smolyakov.labchecker.dto.CheckerScriptDto;
-import ru.nsu.fit.smolyakov.labchecker.printer.ConsoleEvaluationPrinter;
 import ru.nsu.fit.smolyakov.labchecker.util.DtoToEntity;
 
 import java.io.File;
@@ -46,11 +45,11 @@ public class Application {
 //            .stream()
 //            .map(EvaluationRunner::new)
 //            .forEach(EvaluationRunner::evaluate);
-
-        System.out.println(mainEntity.getGroup().getStudentList());
-
-        var printer = new ConsoleEvaluationPrinter(mainEntity);
-        printer.printEvaluation();
+//
+//        System.out.println(mainEntity.getGroup().getStudentList());
+//
+//        var printer = new ConsoleEvaluationPrinter(mainEntity, System.out);
+//        printer.printEvaluation();
     }
 
     public void parseDto(Object dto, String path) throws IOException {

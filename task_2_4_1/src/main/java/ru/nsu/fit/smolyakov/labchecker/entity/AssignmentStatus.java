@@ -21,7 +21,7 @@ public class AssignmentStatus {
     final Assignment assignment;
 
     @NonNull
-    String taskNameAlias;
+    String identifierAlias;
 
     String branch;
 
@@ -41,9 +41,9 @@ public class AssignmentStatus {
     boolean testsOk = false;
     boolean javadocOk = false;
 
-    public AssignmentStatus(@NonNull Assignment assignment, @NonNull String taskNameAlias, String branch) {
+    public AssignmentStatus(@NonNull Assignment assignment, @NonNull String identifierAlias, String branch) {
         this.assignment = assignment;
-        this.taskNameAlias = taskNameAlias;
+        this.identifierAlias = identifierAlias;
         this.branch = branch;
     }
 
@@ -61,6 +61,14 @@ public class AssignmentStatus {
 
     public void notOverrideTaskPoints() {
         this.overriddenTaskPoints = null;
+    }
+
+    public boolean isStarted() {
+        return !this.started.equals(NOT_STARTED);
+    }
+
+    public boolean isFinished() {
+        return !this.finished.equals(NOT_STARTED);
     }
 
     public boolean isOverridden() {
