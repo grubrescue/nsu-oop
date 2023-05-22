@@ -1,6 +1,7 @@
 package ru.nsu.fit.smolyakov.labchecker.checker;
 
 import lombok.RequiredArgsConstructor;
+import org.eclipse.jgit.api.CreateBranchCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.PersonIdent;
@@ -54,15 +55,15 @@ public class EvaluationRunner {
     }
 
     private void buildTestDocsAssignment(AssignmentStatus assignmentStatus, Git git) {
-        var gradleRunnerBuilder = GradleRunner.builder()
-            .projectPath(getPathToTask(assignmentStatus, git))
-            .task(new GradleRunner.GradleTask("build", () -> assignmentStatus.setBuildOk(true)))
-            .task(new GradleRunner.GradleTask("javadoc", () -> assignmentStatus.setJavadocOk(true)));
-
-        if (assignmentStatus.getAssignment().isRunTests()) {
-            gradleRunnerBuilder.task(new GradleRunner.GradleTask("test", () -> assignmentStatus.setTestsOk(true)));
-        }
-        gradleRunnerBuilder.build().run();
+//        var gradleRunnerBuilder = GradleRunner.builder()
+//            .projectPath(getPathToTask(assignmentStatus, git))
+//            .task(new GradleRunner.GradleTask("build", () -> assignmentStatus.setBuildOk(true)))
+//            .task(new GradleRunner.GradleTask("javadoc", () -> assignmentStatus.setJavadocOk(true)));
+//
+//        if (assignmentStatus.getAssignment().isRunTests()) {
+//            gradleRunnerBuilder.task(new GradleRunner.GradleTask("test", () -> assignmentStatus.setTestsOk(true)));
+//        }
+//        gradleRunnerBuilder.build().run();
     }
 
     private Stream<RevCommit> getCommitsStream(Git git) {
@@ -93,7 +94,15 @@ public class EvaluationRunner {
     }
 
     private LocalDate getCommitLocalDate(RevCommit commit) {
-        PersonIdent authorIdent = commit.getAuthorIdent();
+//        PersonIdent authorIdent = commit.getAuthorIdent();
+//        Date authorDate = authorIdent.getWhen();
+//        TimeZone authorTimeZone = authorIdent.getTimeZone();
+//
+//        return authorDate.toInstant()
+//            .atZone(authorTimeZone.toZoneId())
+//            .toLocalDate();
+
+        PersonIdent authorIdent = commit.getCommitterIdent();
         Date authorDate = authorIdent.getWhen();
         TimeZone authorTimeZone = authorIdent.getTimeZone();
 
@@ -115,13 +124,28 @@ public class EvaluationRunner {
 
     private void evaluateAssignmentStartedDate(AssignmentStatus assignmentStatus, Git git) {
         getTaskAssotiatedCommitsStream(assignmentStatus, git)
+            .peek(commit -> System.out.println(commit.getFullMessage()))
             .map(this::getCommitLocalDate)
+            .peek(System.out::println)
             .min(LocalDate::compareTo)
             .ifPresent(newStartedDate -> {
                 if (assignmentStatus.getStarted().isAfter(newStartedDate)) {
                     assignmentStatus.setStarted(newStartedDate);
                 }
             });
+    }
+
+    private void checkoutToBranch(String branch, Git git) {
+        try {
+            git.checkout()
+                .setName(branch)
+                .setCreateBranch(true)
+                .setUpstreamMode(CreateBranchCommand.SetupUpstreamMode.TRACK)
+                .setStartPoint("origin/" + branch)
+                .call();
+        } catch (GitAPIException e) {
+            throw new RuntimeException(e); // TODO ну понятно
+        }
     }
 
     public void tmp(Student student) throws GitAPIException, IOException { // TODO todo
@@ -146,10 +170,7 @@ public class EvaluationRunner {
             );
 
             // docs
-            var ref = git.checkout()
-                .setName(student.getDocsBranch())
-                .setCreateBranch(true)
-                .call();
+            checkoutToBranch(student.getDocsBranch(), git);
 
             student.getAssignmentStatusList()
                 .stream()
@@ -163,24 +184,16 @@ public class EvaluationRunner {
                 .filter(AssignmentStatus::hasBranch)
                 .forEach(
                     assignmentStatus -> {
-                        try {
-                            git.checkout() // TODO может в метод убрать?
-                                .setName(assignmentStatus.getBranch().get()) // TODO лучше не оптионал сделать а эксептион
-                                .setCreateBranch(true)
-                                .call();
+                        checkoutToBranch(assignmentStatus.getBranch().get(), git);
 
-                            evaluateAssignmentStartedDate(assignmentStatus, git);
-                            if (assignmentStatus.getFinished().equals(AssignmentStatus.NOT_STARTED)) {
-                                buildTestDocsAssignment(assignmentStatus, git); // TODO сделать метод сдана ли лаба или нет
-                            }
-                        } catch (GitAPIException e) {
-                            throw new RuntimeException(e);
+                        evaluateAssignmentStartedDate(assignmentStatus, git);
+                        if (assignmentStatus.getFinished().equals(AssignmentStatus.NOT_STARTED)) {
+                            buildTestDocsAssignment(assignmentStatus, git); // TODO сделать метод сдана ли лаба или нет
                         }
+
+                        evaluateAttendance(student, git);
                     }
                 );
-//
-//            System.out.println(ref);
-//            System.out.println(git.branchList().call());
         }
     }
 }
