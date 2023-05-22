@@ -16,7 +16,7 @@ public class Student {
     String repoUrl;
     String docsBranch;
 
-    @Singular("newAssignment")q
+    @Singular("newAssignment")
     List<AssignmentStatus> assignmentStatusList;
     @Singular("newLesson")
     List<LessonStatus> lessonStatusList;
