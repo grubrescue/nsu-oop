@@ -12,6 +12,7 @@ import java.util.Optional;
 @Setter
 @ToString(exclude = {"assignment"})
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@EqualsAndHashCode
 public class AssignmentStatus {
     public static final LocalDate NOT_STARTED = LocalDate.MAX; // todo ??
 

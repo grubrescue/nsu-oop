@@ -34,4 +34,17 @@ public class Student {
             .filter(lessonStatus -> lessonStatus.getLesson().equals(lesson))
             .findFirst();
     }
+
+    public int calculateAmountOfAttendantLessons() {
+        return (int) lessonStatusList.stream()
+            .filter(LessonStatus::isBeenOnALesson)
+            .count();
+    }
+
+    public double calculateTotalPoints() {
+        return assignmentStatusList.stream()
+            .map(AssignmentStatus::getResultingPoints)
+            .reduce(Double::sum)
+            .orElse(0.0);
+    }
 }

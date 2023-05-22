@@ -8,7 +8,7 @@ import java.io.PrintStream;
 @RequiredArgsConstructor
 public class ConsoleEvaluationPrinter {
     private final MainEntity mainEntity;
-    private final PrintStream printStream = System.out; // todo tmp
+    private final PrintStream printStream;
 
     public final static String CELL_FORMAT = "%-12.12s";
     public final static String CELL_SEPARATOR = " | ";
@@ -17,11 +17,13 @@ public class ConsoleEvaluationPrinter {
 //        var a = mainEntity.get
     }
 
-    public void printEvaluation() {
+    public void printEvaluation() { // TODO написать чтобы было норм
         var students = mainEntity.getGroup();
 
-        System.out.println("Group " + mainEntity.getGroup().getGroupName());
-        System.out.println("Format: soft deadline passed/hard deadline passed/total points");
+        // draw table head
+        printStream.println("Group " + mainEntity.getGroup().getGroupName());
+        printStream.println();
+
         printStream.printf(CELL_FORMAT + CELL_SEPARATOR, "Student");
 
         mainEntity.getCourse()
@@ -31,6 +33,7 @@ public class ConsoleEvaluationPrinter {
                 printStream.printf(CELL_FORMAT + CELL_SEPARATOR, assignment.getIdentifier())
             );
 
+        printStream.printf(CELL_FORMAT, "TOTAL POINTS");
         System.out.println();
 
         mainEntity.getGroup()
@@ -45,14 +48,40 @@ public class ConsoleEvaluationPrinter {
                             assignment.assignmentResultInstance()
                         );
 
-                        var softStr = assignmentStatus.isSkippedSoftDeadline() ? "s-" : "s+";
-                        var hardStr = assignmentStatus.isSkippedHardDeadline() ? "h-" : "h+";
+                        var softCh = !assignmentStatus.isSkippedSoftDeadline() ? 'S' : '-';
+                        var hardCh = !assignmentStatus.isSkippedHardDeadline() ? 'H' : '-';
 
-                        printStream.printf(CELL_FORMAT + CELL_SEPARATOR,
-                            softStr + " " + hardStr + " " + assignmentStatus.getResultingPoints());
+                        var javadocOkCh = assignmentStatus.isJavadocOk() ? 'j' : '-';
+                        var buildOkCh = assignmentStatus.isBuildOk() ? 'b' : '-';
+                        var testsOkCh = assignmentStatus.isTestsOk() ? 't' : '-';
+
+                        var overridenCh = assignmentStatus.isOverridden() ? '*' : ' ';
+
+                        String resStr =
+                            String.format("%c%c %c%c%c %.1f%c",
+                                softCh,
+                                hardCh,
+                                javadocOkCh,
+                                buildOkCh,
+                                testsOkCh,
+                                assignmentStatus.getResultingPoints(),
+                                overridenCh
+                            );
+
+                        printStream.printf(CELL_FORMAT + CELL_SEPARATOR, resStr);
                     });
 
-                System.out.println();
+                printStream.printf(CELL_FORMAT, "/ " + student.calculateTotalPoints());
+                printStream.println();
             });
     }
 }
+
+
+
+//        System.out.println("Format: [S]oft deadline passed %n" +
+//            "[H]ard deadline passed %n" +
+//            "[b]uild ok %n" +
+//            "[j]avadoc ok %n" +
+//            "[t]ests ok %n");
+//        System.out.println("* means overriden points. %n");
