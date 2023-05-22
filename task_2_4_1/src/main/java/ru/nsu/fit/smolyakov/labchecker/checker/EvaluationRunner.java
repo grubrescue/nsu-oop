@@ -134,7 +134,6 @@ public class EvaluationRunner {
                 .call();
         } catch (GitAPIException e) {
             throw new RuntimeException(e); // TODO ну понятно
-            // тут выбивало CheckoutConflictException, надо что то придумать
         }
     }
 
