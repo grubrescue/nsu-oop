@@ -56,7 +56,7 @@ public class ConsoleEvaluationPrinter {
 
                         char testsOkCh;
 
-                        if (assignmentStatus.getAssignment().isRunTests()) {
+                        if (!assignmentStatus.getAssignment().isRunTests()) {
                             testsOkCh = ' ';
                         } else {
                             testsOkCh = assignmentStatus.isTestsOk() ? 't' : '-';
