@@ -12,6 +12,7 @@ import ru.nsu.fit.smolyakov.labchecker.entity.LessonStatus;
 import ru.nsu.fit.smolyakov.labchecker.entity.Student;
 
 import java.io.File;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.TimeZone;
@@ -22,21 +23,33 @@ import java.util.stream.StreamSupport;
 @RequiredArgsConstructor
 public class EvaluationRunner {
     public final String TMP_DIR = ".checks_tmp/" + System.currentTimeMillis() + "/";
-    public final int DAYS_DIFF_ATTENDANCE = 4; // TODO это што
+//    public final int DAYS_DIFF_ATTENDANCE = 4; // TODO это што
 
     private final Student student;
 
     private void evaluateSingleLessonAttendance(LessonStatus lessonStatus, Git git) {
         getCommitsStream(git)
             .map(this::getCommitLocalDate)
-            .filter(commitDate ->
-                commitDate.isBefore(lessonStatus.getLesson().getDate().plusDays(DAYS_DIFF_ATTENDANCE))
+            .filter(commitDate -> {
+                    var lessonDate = lessonStatus.getLesson().getDate();
+                    return commitDate.isAfter(
+                        lessonDate.minusDays(
+                            lessonDate.getDayOfWeek().getValue() - DayOfWeek.MONDAY.getValue()
+                        )
+                    );
+                }
             )
-            .filter(commitDate ->
-                commitDate.isAfter(lessonStatus.getLesson().getDate().minusDays(DAYS_DIFF_ATTENDANCE))
+            .filter(commitDate -> {
+                    var lessonDate = lessonStatus.getLesson().getDate();
+                    return commitDate.isBefore(
+                        lessonDate.plusDays(
+                            DayOfWeek.SUNDAY.getValue() - lessonDate.getDayOfWeek().getValue()
+                        )
+                    );
+                }
             )
             .findAny()
-            .ifPresent(commitDate -> lessonStatus.beenOnALesson(true));
+            .ifPresent(unused -> lessonStatus.beenOnALesson(true));
     }
 
     private void evaluateAttendance(Student student, Git git) {
@@ -137,7 +150,7 @@ public class EvaluationRunner {
             log.warn("Branch {} not found", branch);
             return false;
         } catch (RefAlreadyExistsException e){
-            log.error("Branch {} already exists (надо будет почитать про это)", branch); // TODO
+            log.error("Branch {} already exists (надо будет почитать про это)", branch); // TODO switch
             return false;
         } catch (GitAPIException e) {
             throw new RuntimeException(e); // TODO ну понятно

@@ -53,7 +53,14 @@ public class ConsoleEvaluationPrinter {
 
                         var javadocOkCh = assignmentStatus.isJavadocOk() ? 'j' : '-';
                         var buildOkCh = assignmentStatus.isBuildOk() ? 'b' : '-';
-                        var testsOkCh = assignmentStatus.isTestsOk() ? 't' : '-';
+
+                        char testsOkCh;
+
+                        if (assignmentStatus.getAssignment().isRunTests()) {
+                            testsOkCh = ' ';
+                        } else {
+                            testsOkCh = assignmentStatus.isTestsOk() ? 't' : '-';
+                        }
 
 //                        var overridenCh = assignmentStatus.isOverridden() ? '*' : ' ';
                         char statusCh;
@@ -67,7 +74,7 @@ public class ConsoleEvaluationPrinter {
 
 
                         String resStr =
-                            String.format("%c%c %c%c%c %.1f%c",
+                            String.format("%c%c %c%c%c %1.1f%c",
                                 softCh,
                                 hardCh,
                                 javadocOkCh,
