@@ -1,5 +1,5 @@
 evaluation {
-    defaultMaxPoints = 1.0
+//    defaultMaxPoints = 1.0 // uNUSED
     taskSolvedPoints = 1.0
     softDeadlineSkipFine = -0.5
     hardDeadlineSkipFine = -0.5

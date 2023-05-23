@@ -17,7 +17,7 @@ public class Assignment {
     double softDeadlineSkipFine;
     double hardDeadlineSkipFine;
 
-    double maxPoints;
+//    double maxPoints;
     double solvedPoints;
     boolean runTests;
 

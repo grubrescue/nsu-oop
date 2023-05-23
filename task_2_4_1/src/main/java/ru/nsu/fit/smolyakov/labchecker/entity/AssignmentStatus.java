@@ -6,8 +6,9 @@ import lombok.experimental.FieldDefaults;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.OptionalDouble;
 
- //TODO кажется я не те аннотации использую, поменять потом
+//TODO кажется я не те аннотации использую, поменять потом
 @Getter
 @Setter
 @ToString(exclude = {"assignment"})
@@ -91,8 +92,23 @@ public class AssignmentStatus {
         return this.assignment.getSolvedPoints() * (sum / amount);
     }
 
+    public OptionalDouble getOverriddenTaskPoints() {
+        if (overriddenTaskPoints == null) {
+            return OptionalDouble.empty();
+        } else {
+            return OptionalDouble.of(overriddenTaskPoints);
+        }
+    }
+
     public double getTaskPoints() {
-        return this.isOverridden() ? this.overriddenTaskPoints : this.getCalculatedTaskPoints();
+        double res;
+        if (!this.isFinished()) {
+            return 0;
+        } else if (this.isOverridden()) {
+            return this.overriddenTaskPoints;
+        } else {
+            return this.getCalculatedTaskPoints();
+        }
     }
 
     public boolean isSkippedSoftDeadline() {

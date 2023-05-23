@@ -64,14 +64,13 @@ public class ConsoleEvaluationPrinter {
 
 //                        var overridenCh = assignmentStatus.isOverridden() ? '*' : ' ';
                         char statusCh;
-                        if (assignmentStatus.isOverridden()) {
-                            statusCh = '*';
-                        } else if (!assignmentStatus.isFinished()) {
+                        if (!assignmentStatus.isFinished()) {
                             statusCh = '?';
+                        } else if (assignmentStatus.isOverridden()) {
+                            statusCh = '*';
                         } else {
                             statusCh = ' ';
                         }
-
 
                         String resStr =
                             String.format("%c%c %c%c%c %1.1f%c",

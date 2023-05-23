@@ -39,11 +39,12 @@ public class DtoToEntity {
             .defaultBranch(taskDto.getBranch())
             .softDeadlineSkipFine(configurationDto.getEvaluationDto().getSoftDeadlineSkipFine())
             .hardDeadlineSkipFine(configurationDto.getEvaluationDto().getHardDeadlineSkipFine())
-            .maxPoints(
-                Optional.ofNullable(taskDto.getPoints())
-                    .orElse(configurationDto.getEvaluationDto().getDefaultMaxPoints())
-            )
-            .solvedPoints(configurationDto.getEvaluationDto().getTaskSolvedPoints())
+//            .maxPoints(
+//                Optional.ofNullable(taskDto.getPoints())
+//                    .orElse(configurationDto.getEvaluationDto().getDefaultMaxPoints())
+//            )
+            .solvedPoints(Optional.ofNullable(taskDto.getPoints())
+                .orElse(configurationDto.getEvaluationDto().getTaskSolvedPoints()))
             .runTests(taskDto.isRunTests())
             .build();
     }

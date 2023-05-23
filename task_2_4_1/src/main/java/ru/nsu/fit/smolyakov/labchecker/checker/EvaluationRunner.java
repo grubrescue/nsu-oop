@@ -186,7 +186,7 @@ public class EvaluationRunner {
 
     private void elevateOnBranch(Git git, AssignmentStatus assignmentStatus) {
         evaluateAssignmentStartedDate(assignmentStatus, git);
-        if (assignmentStatus.getFinished().equals(AssignmentStatus.NOT_STARTED)) {
+        if (!assignmentStatus.isFinished()) {
             runGradleEvaluator(assignmentStatus, git); // TODO сделать метод сдана ли лаба или нет
         }
 

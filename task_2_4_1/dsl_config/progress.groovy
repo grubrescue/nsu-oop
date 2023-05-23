@@ -8,7 +8,7 @@ overrideProgress {
         }
 
         forTask('task_1_5_1') {
-            solvedWithPoints 2.0
+            solvedWithPoints 1.8
         }
 
         forTask('task_2_3_1') {
