@@ -1,4 +1,4 @@
-package ru.nsu.fit.smolyakov.labchecker.entity;
+package ru.nsu.fit.smolyakov.labchecker.entity.course.assignment;
 
 import lombok.*;
 
@@ -21,11 +21,11 @@ public class Assignment {
     double solvedPoints;
     boolean runTests;
 
-    public AssignmentStatus assignmentResultInstance() {
-        return assignmentResultInstance(defaultBranch);
+    public AssignmentStatus newAssignmentStatusInstance() {
+        return newAssignmentStatusInstance(defaultBranch);
     }
 
-    public AssignmentStatus assignmentResultInstance(String branch) {
+    public AssignmentStatus newAssignmentStatusInstance(String branch) {
         return new AssignmentStatus(this, identifier, branch);
     }
 }

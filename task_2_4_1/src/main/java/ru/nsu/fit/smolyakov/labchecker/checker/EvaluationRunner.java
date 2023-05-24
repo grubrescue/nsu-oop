@@ -7,9 +7,9 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.*;
 import org.eclipse.jgit.lib.PersonIdent;
 import org.eclipse.jgit.revwalk.RevCommit;
-import ru.nsu.fit.smolyakov.labchecker.entity.AssignmentStatus;
-import ru.nsu.fit.smolyakov.labchecker.entity.LessonStatus;
-import ru.nsu.fit.smolyakov.labchecker.entity.Student;
+import ru.nsu.fit.smolyakov.labchecker.entity.course.assignment.AssignmentStatus;
+import ru.nsu.fit.smolyakov.labchecker.entity.course.lesson.LessonStatus;
+import ru.nsu.fit.smolyakov.labchecker.entity.group.Student;
 
 import java.io.File;
 import java.time.DayOfWeek;
@@ -49,7 +49,7 @@ public class EvaluationRunner {
                 }
             )
             .findAny()
-            .ifPresent(unused -> lessonStatus.beenOnALesson(true));
+            .ifPresent(ignored -> lessonStatus.beenOnALesson(true));
     }
 
     private void evaluateAttendance(Student student, Git git) {
@@ -64,11 +64,11 @@ public class EvaluationRunner {
     private void runGradleEvaluator(AssignmentStatus assignmentStatus, Git git) {
         var gradleRunnerBuilder = GradleRunner.builder()
             .projectPath(getPathToTask(assignmentStatus, git))
-            .task(new GradleRunner.GradleTask("build", () -> assignmentStatus.setBuildOk(true)))
-            .task(new GradleRunner.GradleTask("javadoc", () -> assignmentStatus.setJavadocOk(true)));
+            .task(new GradleRunner.GradleTask("build", () -> assignmentStatus.getGrade().setBuildOk(true)))
+            .task(new GradleRunner.GradleTask("javadoc", () -> assignmentStatus.getGrade().setJavadocOk(true)));
 
         if (assignmentStatus.getAssignment().isRunTests()) {
-            gradleRunnerBuilder.task(new GradleRunner.GradleTask("test", () -> assignmentStatus.setTestsOk(true)));
+            gradleRunnerBuilder.task(new GradleRunner.GradleTask("test", () -> assignmentStatus.getGrade().setTestsOk(true)));
         }
         gradleRunnerBuilder.build().run();
     }
@@ -89,15 +89,13 @@ public class EvaluationRunner {
 
     private Stream<RevCommit> getTaskAssotiatedCommitsStream(AssignmentStatus assignmentStatus, Git git) {
         try {
-            var stream = StreamSupport.stream(
+            return StreamSupport.stream(
                 git.log()
                     .addPath(assignmentStatus.getIdentifierAlias())
                     .call()
                     .spliterator(),
                 false
             );
-
-            return stream; // TODO кинуть в лог сообщение если стрим пустой
         } catch (GitAPIException e) {
 //            log.error(student.getNickName() + "on getTaskAssociatedCommitsStream: " + e.getMessage());
             throw new RuntimeException(e); // TODO опять кастомные исключения
@@ -119,8 +117,8 @@ public class EvaluationRunner {
             .map(this::getCommitLocalDate)
             .max(LocalDate::compareTo)
             .ifPresent(newFinishedDate -> {
-                if (assignmentStatus.getFinished().isAfter(newFinishedDate)) {
-                    assignmentStatus.setFinished(newFinishedDate);
+                if (assignmentStatus.getPass().getFinished().isAfter(newFinishedDate)) {
+                    assignmentStatus.getPass().setFinished(newFinishedDate);
                 }
             }); // TODO в принципе проверка лишняя, ибо это будет проверяться только в мастере
     }
@@ -130,8 +128,8 @@ public class EvaluationRunner {
             .map(this::getCommitLocalDate)
             .min(LocalDate::compareTo)
             .ifPresent(newStartedDate -> {
-                if (assignmentStatus.getStarted().isAfter(newStartedDate)) {
-                    assignmentStatus.setStarted(newStartedDate);
+                if (assignmentStatus.getPass().getStarted().isAfter(newStartedDate)) {
+                    assignmentStatus.getPass().setStarted(newStartedDate);
                 }
             });
     }
@@ -146,7 +144,7 @@ public class EvaluationRunner {
                 .setForced(true)
                 .call();
             return true;
-        } catch (RefNotFoundException e) {
+        } catch (RefNotFoundException e) {            // docs
             log.warn("Branch {} not found", branch);
             return false;
         } catch (RefAlreadyExistsException e){
@@ -157,9 +155,7 @@ public class EvaluationRunner {
         }
     }
 
-
-
-    private void elevateOnMaster(Git git) {
+    private void evaluateOnMaster(Git git) {
         evaluateAttendance(student, git);
 
         student.getAssignmentStatusList()
@@ -174,8 +170,7 @@ public class EvaluationRunner {
             );
     }
 
-
-    private void elevateOnDocsBranch(Git git) {
+    private void evaluateOnDocsBranch(Git git) {
         student.getAssignmentStatusList()
             .stream()
             .filter(assignmentStatus -> new File(getPathToTask(assignmentStatus, git)).exists())
@@ -184,15 +179,14 @@ public class EvaluationRunner {
         evaluateAttendance(student, git);
     }
 
-    private void elevateOnBranch(Git git, AssignmentStatus assignmentStatus) {
+    private void evaluateSpecifiedTaskOnItsBranch(Git git, AssignmentStatus assignmentStatus) {
         evaluateAssignmentStartedDate(assignmentStatus, git);
-        if (!assignmentStatus.isFinished()) {
+        if (!assignmentStatus.getPass().isFinished()) {
             runGradleEvaluator(assignmentStatus, git); // TODO сделать метод сдана ли лаба или нет
         }
 
         evaluateAttendance(student, git);
     }
-
 
     public void evaluate() { // TODO зарефакторить
         log.info("Checking {}'s repo", student.getNickName());
@@ -206,24 +200,22 @@ public class EvaluationRunner {
 
         try (Git git = repoCloneCommand.call()) {
             log.info("On master branch");
-            elevateOnMaster(git);
+            evaluateOnMaster(git);
 
-            // docs
             if (checkoutToBranch(student.getDocsBranch(), git)) {
                 log.info("Switched to {} branch", student.getDocsBranch());
-                elevateOnDocsBranch(git);
+                evaluateOnDocsBranch(git);
             }
 
-
             student.getAssignmentStatusList()
-                .stream()
-                .filter(AssignmentStatus::hasBranch)
                 .forEach(
                     assignmentStatus -> {
-                        if (checkoutToBranch(assignmentStatus.getBranch().get(), git)) {
-                            log.info("Evaluating {} task", assignmentStatus.getIdentifierAlias());
-                            elevateOnBranch(git, assignmentStatus);
-                        }
+                        assignmentStatus.getBranch().ifPresent((branch) -> {
+                            if (checkoutToBranch(branch, git)) {
+                                log.info("Evaluating {} task", assignmentStatus.getIdentifierAlias());
+                                evaluateSpecifiedTaskOnItsBranch(git, assignmentStatus);
+                            }
+                        });
                     }
                 );
         } catch (InvalidRemoteException e) {

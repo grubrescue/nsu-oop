@@ -1,8 +1,6 @@
 package ru.nsu.fit.smolyakov.labchecker.checker;
 
-
 import lombok.Builder;
-import lombok.Getter;
 import lombok.Singular;
 import lombok.Value;
 import lombok.extern.log4j.Log4j2;
@@ -16,11 +14,9 @@ import java.util.List;
 @Builder
 @Log4j2
 public class GradleRunner { // TODO rename
-    @Getter
     String projectPath;
 
     @Singular
-    @Getter
     List<GradleTask> tasks;
 
     public record GradleTask(String name, Runnable runIfSuccess) {
@@ -54,9 +50,8 @@ public class GradleRunner { // TODO rename
             .connect()
         ) {
             log.info("Starting Gradle evaluator");
-//
-//            log.info("Running cleaning");
-//            runTask(connection, "build"); // TODO таймаут???
+
+//            runTask(connection, "clean"); // TODO таймаут???
 
             tasks.forEach(task -> {
                 if (runTask(connection, task.name())) {

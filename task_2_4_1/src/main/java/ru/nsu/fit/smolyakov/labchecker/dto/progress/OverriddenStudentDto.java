@@ -26,8 +26,8 @@ public class OverriddenStudentDto {
     }
 
     void forTask(String taskName, Closure<?> closure) {
-        var overridenTaskInfo = new OverriddenTaskDto(taskName);
-        groovyDelegate(overridenTaskInfo, closure);
-        overridenTaskInfoMap.put(taskName, overridenTaskInfo);
+        var overriddenTaskInfo = new OverriddenTaskDto(taskName);
+        groovyDelegate(overriddenTaskInfo, closure);
+        overridenTaskInfoMap.put(taskName, overriddenTaskInfo);
     }
 }

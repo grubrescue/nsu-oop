@@ -5,9 +5,9 @@ import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import ru.nsu.fit.smolyakov.labchecker.dto.CheckerScriptDto;
+import ru.nsu.fit.smolyakov.labchecker.entity.MainEntity;
 import ru.nsu.fit.smolyakov.labchecker.printer.ConsoleEvaluationPrinter;
 import ru.nsu.fit.smolyakov.labchecker.util.DtoToEntity;
-import ru.nsu.fit.smolyakov.labchecker.checker.EvaluationRunner;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,13 +51,16 @@ public class Application {
 //
 //        a.run();
 //
-        mainEntity.getGroup()
-            .getStudentList()
-            .stream()
-            .map(EvaluationRunner::new)
-            .forEach(EvaluationRunner::evaluate);
+//        mainEntity.getGroup()
+//            .getStudentList()
+//            .stream()
+//            .map(EvaluationRunner::new)
+//            .forEach(EvaluationRunner::evaluate);
 
-        System.out.println(mainEntity.getGroup().getStudentList());
+        mainEntity.serialize("e.json");
+        System.out.println(MainEntity.deserialize("e.json"));
+
+
 
         var printer = new ConsoleEvaluationPrinter(mainEntity, System.out);
         printer.printEvaluation();

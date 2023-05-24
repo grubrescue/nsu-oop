@@ -1,6 +1,8 @@
-package ru.nsu.fit.smolyakov.labchecker.entity;
+package ru.nsu.fit.smolyakov.labchecker.entity.course;
 
 import lombok.Value;
+import ru.nsu.fit.smolyakov.labchecker.entity.course.assignment.Assignment;
+import ru.nsu.fit.smolyakov.labchecker.entity.course.lesson.Lesson;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

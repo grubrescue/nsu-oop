@@ -1,4 +1,4 @@
-package ru.nsu.fit.smolyakov.labchecker.entity;
+package ru.nsu.fit.smolyakov.labchecker.entity.course.lesson;
 
 import lombok.NonNull;
 import lombok.Value;

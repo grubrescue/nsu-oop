@@ -1,4 +1,4 @@
-package ru.nsu.fit.smolyakov.labchecker.entity;
+package ru.nsu.fit.smolyakov.labchecker.entity.course.lesson;
 
 import lombok.NonNull;
 import lombok.Value;
@@ -10,11 +10,11 @@ import java.time.LocalDate;
 public class Lesson {
     LocalDate date;
 
-    public LessonStatus lessonStatusInstance(boolean beenOnALesson) {
+    public LessonStatus newLessonStatusInstance(boolean beenOnALesson) {
         return new LessonStatus(this, beenOnALesson);
     }
 
-    public LessonStatus lessonStatusInstance() {
+    public LessonStatus newLessonStatusInstance() {
         return new LessonStatus(this, false);
     }
 }

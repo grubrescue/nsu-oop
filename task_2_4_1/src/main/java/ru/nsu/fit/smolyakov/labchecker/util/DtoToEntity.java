@@ -7,6 +7,13 @@ import ru.nsu.fit.smolyakov.labchecker.dto.group.StudentDto;
 import ru.nsu.fit.smolyakov.labchecker.dto.progress.OverriddenStudentDto;
 import ru.nsu.fit.smolyakov.labchecker.dto.schedule.LessonDto;
 import ru.nsu.fit.smolyakov.labchecker.entity.*;
+import ru.nsu.fit.smolyakov.labchecker.entity.course.assignment.Assignment;
+import ru.nsu.fit.smolyakov.labchecker.entity.course.assignment.AssignmentStatus;
+import ru.nsu.fit.smolyakov.labchecker.entity.course.Course;
+import ru.nsu.fit.smolyakov.labchecker.entity.group.Group;
+import ru.nsu.fit.smolyakov.labchecker.entity.group.Student;
+import ru.nsu.fit.smolyakov.labchecker.entity.course.lesson.Lesson;
+import ru.nsu.fit.smolyakov.labchecker.entity.course.lesson.LessonStatus;
 
 import java.util.Optional;
 
@@ -90,11 +97,11 @@ public class DtoToEntity {
             );
 
         course.getLessons().getList().forEach(
-            lesson -> builder.newLesson(lesson.lessonStatusInstance())
+            lesson -> builder.newLesson(lesson.newLessonStatusInstance())
         );
 
         course.getAssignments().getList().forEach(
-            task -> builder.newAssignment(task.assignmentResultInstance())
+            task -> builder.newAssignment(task.newAssignmentStatusInstance())
         );
 
         return builder.build();
@@ -126,16 +133,16 @@ public class DtoToEntity {
             .ifPresent(
                 overriddenTaskInfoDto -> {
                     Optional.ofNullable(overriddenTaskInfoDto.getPoints())
-                        .ifPresent(assignmentStatus::overrideTaskPoints);
+                        .ifPresent(newTaskPoints -> assignmentStatus.getGrade().overrideTaskPoints(newTaskPoints));
 
                     Optional.ofNullable(overriddenTaskInfoDto.getBranch())
                         .ifPresent(assignmentStatus::setBranch);
 
                     Optional.ofNullable(overriddenTaskInfoDto.getStarted())
-                        .ifPresent(assignmentStatus::setStarted);
+                        .ifPresent(newStarted -> assignmentStatus.getPass().setStarted(newStarted));
 
                     Optional.ofNullable(overriddenTaskInfoDto.getFinished())
-                        .ifPresent(assignmentStatus::setFinished);
+                        .ifPresent(newFinished -> assignmentStatus.getPass().setFinished(newFinished));
 
                     Optional.ofNullable(overriddenTaskInfoDto.getMessage())
                         .ifPresent(assignmentStatus::setMessage);

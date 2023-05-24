@@ -45,28 +45,28 @@ public class ConsoleEvaluationPrinter {
                     .getList()
                     .forEach(assignment -> {
                         var assignmentStatus = student.getAssignmentStatusByAssignment(assignment).orElse(
-                            assignment.assignmentResultInstance()
+                            assignment.newAssignmentStatusInstance()
                         );
 
-                        var softCh = !assignmentStatus.isSkippedSoftDeadline() ? 'S' : '-';
-                        var hardCh = !assignmentStatus.isSkippedHardDeadline() ? 'H' : '-';
+                        var softCh = !assignmentStatus.getPass().isSkippedSoftDeadline() ? 'S' : '-';
+                        var hardCh = !assignmentStatus.getPass().isSkippedHardDeadline() ? 'H' : '-';
 
-                        var javadocOkCh = assignmentStatus.isJavadocOk() ? 'j' : '-';
-                        var buildOkCh = assignmentStatus.isBuildOk() ? 'b' : '-';
+                        var javadocOkCh = assignmentStatus.getGrade().isJavadocOk() ? 'j' : '-';
+                        var buildOkCh = assignmentStatus.getGrade().isBuildOk() ? 'b' : '-';
 
                         char testsOkCh;
 
                         if (!assignmentStatus.getAssignment().isRunTests()) {
                             testsOkCh = ' ';
                         } else {
-                            testsOkCh = assignmentStatus.isTestsOk() ? 't' : '-';
+                            testsOkCh = assignmentStatus.getGrade().isTestsOk() ? 't' : '-';
                         }
 
 //                        var overridenCh = assignmentStatus.isOverridden() ? '*' : ' ';
                         char statusCh;
-                        if (!assignmentStatus.isFinished()) {
+                        if (!assignmentStatus.getPass().isFinished()) {
                             statusCh = '?';
-                        } else if (assignmentStatus.isOverridden()) {
+                        } else if (assignmentStatus.getGrade().isOverridden()) {
                             statusCh = '*';
                         } else {
                             statusCh = ' ';
@@ -79,7 +79,7 @@ public class ConsoleEvaluationPrinter {
                                 javadocOkCh,
                                 buildOkCh,
                                 testsOkCh,
-                                assignmentStatus.getResultingPoints(),
+                                assignmentStatus.getGrade().getResultingPoints(),
                                 statusCh
                             );
 

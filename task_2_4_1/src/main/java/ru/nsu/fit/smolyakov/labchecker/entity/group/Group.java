@@ -1,4 +1,4 @@
-package ru.nsu.fit.smolyakov.labchecker.entity;
+package ru.nsu.fit.smolyakov.labchecker.entity.group;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
