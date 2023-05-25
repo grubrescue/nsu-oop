@@ -6,4 +6,5 @@ public interface TablePrinter {
     void setTitle(String title);
     void appendRow(List<String> cells);
     void print();
+    void clear();
 }

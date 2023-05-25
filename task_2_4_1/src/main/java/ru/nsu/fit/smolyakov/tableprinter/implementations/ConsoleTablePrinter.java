@@ -58,12 +58,12 @@ public class ConsoleTablePrinter implements TablePrinter {
      * [4 5]
      * [6 7 8]
      *
-     * We want to transpose it to:
+     * <p>We want to transpose it to:
      * [1 4 6]
      * [2 5 7]
      * [3   8]
      *
-     * @return
+     * @return transposed list
      */
     private static List<List<String>> transpose(List<List<String>> table) {
         var result = new ArrayList<List<String>>();
@@ -102,6 +102,7 @@ public class ConsoleTablePrinter implements TablePrinter {
     @Override
     public void print() {
         for (List<String> row : table) {
+
             for (int col = 0; col < row.size(); col++) {
                 printStream.printf(cellFormat, row.get(col));
                 if (col != row.size() - 1) {
@@ -110,5 +111,11 @@ public class ConsoleTablePrinter implements TablePrinter {
             }
             printStream.println();
         }
+    }
+
+    @Override
+    public void clear() {
+        table.clear();
+        title = "cleared title";
     }
 }

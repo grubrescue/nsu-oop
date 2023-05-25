@@ -24,4 +24,9 @@ public class HtmlTablePrinter implements TablePrinter {
     public void print() {
         // TODO
     }
+
+    @Override
+    public void clear() {
+
+    }
 }

@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.SubjectData;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.assignment.Assignment;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.assignment.AssignmentStatus;
+import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.lesson.Lesson;
 import ru.nsu.fit.smolyakov.tableprinter.TablePrinter;
 
 import java.util.ArrayList;
@@ -15,7 +16,29 @@ public class EvaluationPresenter {
     private final SubjectData subjectData;
 
     public void printAttendance(TablePrinter printer) {
-//        var a = subjectData.get
+        printer.clear();
+        printer.setTitle("Group " + subjectData.getGroup().getGroupName() + " tasks evaluation");
+
+        var lessonList = new ArrayList<String>();
+
+        lessonList.add("");
+        subjectData.getCourse()
+            .getLessons()
+            .getList()
+            .stream()
+            .map(Lesson::getDate)
+            .map(date ->
+                "%d\n%d\n%d"
+                    .formatted(
+                        date.getDayOfMonth(),
+                        date.getMonthValue(),
+                        date.getYear()
+                    )
+            )
+            .toList();
+
+
+        printer.appendRow(lessonList);
     }
 
     private String assignmentStatusToCellString(AssignmentStatus assignmentStatus) {
@@ -55,7 +78,8 @@ public class EvaluationPresenter {
     }
 
     public void printEvaluation(TablePrinter printer) { // TODO написать чтобы было норм
-        printer.setTitle("Group " + subjectData.getGroup().getGroupName());
+        printer.clear();
+        printer.setTitle("Group " + subjectData.getGroup().getGroupName() + " tasks evaluation");
 
         var heading = new ArrayList<String>();
         heading.add("Student");
@@ -82,13 +106,14 @@ public class EvaluationPresenter {
                     .getAssignments()
                     .getList()
                     .stream()
-                    .map(assignment -> {
-                        var assignmentStatus = student.getAssignmentStatusByAssignment(assignment).orElse(
-                            assignment.newAssignmentStatusInstance()
-                        );
-
-                        return assignmentStatusToCellString(assignmentStatus);
-                    }).toList()
+                    .map(assignment ->
+                        student.getAssignmentStatusByAssignment(assignment)
+                            .orElse(
+                                assignment.newAssignmentStatusInstance()
+                            )
+                    )
+                    .map(this::assignmentStatusToCellString)
+                    .toList()
                 );
 
                 newRow.add(Double.toString(student.calculateTotalPoints()));
