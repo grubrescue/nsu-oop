@@ -5,9 +5,10 @@ import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import ru.nsu.fit.smolyakov.evaluationsuite.dto.SubjectDataDto;
-import ru.nsu.fit.smolyakov.evaluationsuite.printer.ConsoleEvaluationPrinter;
+import ru.nsu.fit.smolyakov.evaluationsuite.presenter.EvaluationPresenter;
 import ru.nsu.fit.smolyakov.evaluationsuite.util.SubjectDataDtoToEntity;
 import ru.nsu.fit.smolyakov.evaluationsuite.util.SubjectDataEntitySerializer;
+import ru.nsu.fit.smolyakov.tableprinter.implementations.ConsoleTablePrinter;
 
 import java.io.File;
 import java.io.IOException;
@@ -57,8 +58,8 @@ public class Application {
 //            .forEach(Evaluator::evaluate);
 
         SubjectDataEntitySerializer.serialize(subjectData, "privet.dat");
-        var printer = new ConsoleEvaluationPrinter(SubjectDataEntitySerializer.deserialize("privet.dat"));
-        printer.printEvaluation();
+        var presenter = new EvaluationPresenter(SubjectDataEntitySerializer.deserialize("privet.dat"));
+        presenter.printEvaluation(new ConsoleTablePrinter());
     }
 
     public void parseDto(Object dto, String path) throws IOException {
