@@ -6,6 +6,7 @@ import ru.nsu.fit.smolyakov.evaluationsuite.entity.SubjectData;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.assignment.Assignment;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.assignment.AssignmentStatus;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.lesson.Lesson;
+import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.lesson.LessonStatus;
 import ru.nsu.fit.smolyakov.tableprinter.TablePrinter;
 
 import java.util.ArrayList;
@@ -17,28 +18,61 @@ public class EvaluationPresenter {
 
     public void printAttendance(TablePrinter printer) {
         printer.clear();
-        printer.setTitle("Group " + subjectData.getGroup().getGroupName() + " tasks evaluation");
+        printer.setTitle("Group " + subjectData.getGroup().getGroupName() + " attendance");
 
         var lessonList = new ArrayList<String>();
 
-        lessonList.add("");
-        subjectData.getCourse()
-            .getLessons()
-            .getList()
-            .stream()
-            .map(Lesson::getDate)
-            .map(date ->
-                "%d\n%d\n%d"
-                    .formatted(
-                        date.getDayOfMonth(),
-                        date.getMonthValue(),
-                        date.getYear()
-                    )
-            )
-            .toList();
-
+        lessonList.add("\nAttendance");
+        lessonList.addAll(
+            subjectData.getCourse()
+                .getLessons()
+                .getList()
+                .stream()
+                .map(Lesson::getDate)
+                .map(date ->
+                    "%d\n%d\n%d"
+                        .formatted(
+                            date.getDayOfMonth(),
+                            date.getMonthValue(),
+                            date.getYear() % 100
+                        )
+                )
+                .toList()
+        );
+        lessonList.add("\nTOTAL");
 
         printer.appendRow(lessonList);
+
+
+        subjectData.getGroup()
+            .getStudentList()
+            .forEach(
+                student -> {
+                    var studentAttendance = new ArrayList<String>();
+                    studentAttendance.add(student.getNickName());
+
+                    studentAttendance.addAll(
+                        subjectData.getCourse()
+                            .getLessons()
+                            .getList()
+                            .stream()
+                            .map(lesson ->
+                                student.getLessonStatusByLesson(lesson)
+                                    .orElse(
+                                        lesson.newLessonStatusInstance()
+                                    )
+                            )
+                            .map(LessonStatus::isBeenOnALesson)
+                            .map(b -> b ? "+" : " ")
+                            .toList()
+                    );
+
+                    studentAttendance.add(Integer.toString(student.calculateAmountOfAttendantLessons()));
+                    printer.appendRow(studentAttendance);
+                }
+            );
+
+        printer.print();
     }
 
     private String assignmentStatusToCellString(AssignmentStatus assignmentStatus) {

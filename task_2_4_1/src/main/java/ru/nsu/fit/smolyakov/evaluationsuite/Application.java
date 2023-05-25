@@ -60,6 +60,7 @@ public class Application {
         SubjectDataEntitySerializer.serialize(subjectData, "privet.dat");
         var presenter = new EvaluationPresenter(SubjectDataEntitySerializer.deserialize("privet.dat"));
         presenter.printEvaluation(new ConsoleTablePrinter());
+        presenter.printAttendance(new ConsoleTablePrinter());
     }
 
     public void parseDto(Object dto, String path) throws IOException {

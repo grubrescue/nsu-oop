@@ -12,10 +12,12 @@ import java.util.List;
 @NonNull
 public class ConsoleTablePrinter implements TablePrinter {
     private final PrintStream printStream;
-    private final String cellFormat;
 
-    public final static int DEFAULT_CELL_LENGTH = 12;
     public final static String CELL_SEPARATOR = " | ";
+
+    private static String getCellFormat(int width) {
+        return "%-" + width + "." + width + "s";
+    }
 
     private final List<List<String>> table
         = new ArrayList<>(); // inner are rows, outer are columns
@@ -23,30 +25,22 @@ public class ConsoleTablePrinter implements TablePrinter {
     @Setter
     private String title = "(no title)";
 
+
+
     public ConsoleTablePrinter() {
         this(System.out);
     }
 
-    public ConsoleTablePrinter(int cellWidth) {
-        this(System.out, cellWidth);
-    }
-
     public ConsoleTablePrinter(PrintStream printStream) {
-        this(printStream, DEFAULT_CELL_LENGTH);
+        this.printStream = printStream;
     }
 
     public ConsoleTablePrinter(String fileName) throws FileNotFoundException {
         this(new PrintStream(fileName));
     }
 
-    public ConsoleTablePrinter(PrintStream printStream, int cellWidth) {
-        this.printStream = printStream;
-        this.cellFormat = "%-" + cellWidth + "." + cellWidth + "s";
-    }
 
-    public ConsoleTablePrinter(String fileName, int cellWidth) throws FileNotFoundException {
-        this(new PrintStream(fileName), cellWidth);
-    }
+
 
     private static List<String> tokenizeMultilineCell(String cell) {
         return List.of(cell.split("\n"));
@@ -101,16 +95,42 @@ public class ConsoleTablePrinter implements TablePrinter {
 
     @Override
     public void print() {
-        for (List<String> row : table) {
+        printStream.println(title);
 
-            for (int col = 0; col < row.size(); col++) {
-                printStream.printf(cellFormat, row.get(col));
-                if (col != row.size() - 1) {
+        int columnsAmount = table.stream()
+            .map(List::size)
+            .max(Integer::compareTo)
+            .orElse(0);
+
+        List<Integer> columnWidths = new ArrayList<>(columnsAmount);
+
+        for (int i = 0; i < columnsAmount; i++) {
+            columnWidths.add(1);
+        }
+//
+        for (List<String> rows : table) {
+            for (int columnNo = 0; columnNo < rows.size(); columnNo++) {
+                var newWidth = rows.get(columnNo).length();
+                if (newWidth > columnWidths.get(columnNo)) {
+                    columnWidths.set(columnNo, newWidth);
+                }
+            }
+        }
+
+        for (List<String> row : table) {
+            for (int columnNo = 0; columnNo < row.size(); columnNo++) {
+                printStream.printf(
+                    getCellFormat(columnWidths.get(columnNo)),
+                    row.get(columnNo)
+                );
+                if (columnNo != row.size() - 1) {
                     printStream.print(CELL_SEPARATOR);
                 }
             }
             printStream.println();
         }
+
+        printStream.println();
     }
 
     @Override
