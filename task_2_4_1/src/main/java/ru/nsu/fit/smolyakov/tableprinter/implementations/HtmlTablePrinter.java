@@ -42,12 +42,31 @@ public class HtmlTablePrinter implements TablePrinter {
     @Override
     public void print() {
         try (var writer = new BufferedWriter(new FileWriter(file))) {
-            writer.write("<html>\n");
-            writer.write("<head>\n");
-            writer.write("<title>" + title + "</title>\n");
-            writer.write("</head>\n");
-            writer.write("<body>\n");
-            writer.write("<table border=\"1\">\n");
+            writer.write("""
+                <!DOCTYPE html>
+                <html>
+                
+                <style>
+                table {
+                    border: 3px solid purple;
+                }
+                
+
+                th, td {
+                    border: 1px solid black;
+                    padding: 3px;
+                    text-align: center;
+                }
+                </style>
+                
+                <head>
+                <title>%s</title>
+                </head>
+                
+                <body>
+                <h2>%s</h2>
+                <table style="width:90%%">
+                """.formatted(title, title));
 
             for (var row : table) {
                 writer.write("<tr>\n");
@@ -57,9 +76,11 @@ public class HtmlTablePrinter implements TablePrinter {
                 writer.write("</tr>\n");
             }
 
-            writer.write("</table>\n");
-            writer.write("</body>\n");
-            writer.write("</html>\n");
+            writer.write("""
+                </table>
+                </body>
+                </html>
+                """);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
