@@ -9,6 +9,7 @@ import ru.nsu.fit.smolyakov.evaluationsuite.presenter.EvaluationPresenter;
 import ru.nsu.fit.smolyakov.evaluationsuite.util.SubjectDataDtoToEntity;
 import ru.nsu.fit.smolyakov.evaluationsuite.util.SubjectDataEntitySerializer;
 import ru.nsu.fit.smolyakov.tableprinter.implementations.ConsoleTablePrinter;
+import ru.nsu.fit.smolyakov.evaluationsuite.evaluator.Evaluator;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,11 +52,11 @@ public class Application {
 //            .build();
 //        a.run();
 //
-//        subjectData.getGroup()
-//            .getStudentList()
-//            .stream()
-//            .map(Evaluator::new)
-//            .forEach(Evaluator::evaluate);
+        subjectData.getGroup()
+            .getStudentList()
+            .stream()
+            .map(Evaluator::new)
+            .forEach(Evaluator::evaluate);
 
 
         SubjectDataEntitySerializer.serialize(subjectData, "privet.dat");

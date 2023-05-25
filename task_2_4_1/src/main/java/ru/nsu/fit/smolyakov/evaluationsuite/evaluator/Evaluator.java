@@ -1,4 +1,4 @@
-package ru.nsu.fit.smolyakov.evaluationsuite.checker;
+package ru.nsu.fit.smolyakov.evaluationsuite.evaluator;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -150,8 +150,9 @@ public class Evaluator {
         } catch (RefAlreadyExistsException e){
             log.error("Branch {} already exists (надо будет почитать про это)", branch); // TODO switch
             return false;
-        } catch (GitAPIException e) {
-            throw new RuntimeException(e); // TODO ну понятно
+        } catch (Exception e) {
+            log.fatal("Unknown error: {}", e.getMessage());
+            return false;
         }
     }
 

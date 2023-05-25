@@ -1,4 +1,4 @@
-package ru.nsu.fit.smolyakov.evaluationsuite.checker;
+package ru.nsu.fit.smolyakov.evaluationsuite.evaluator;
 
 import lombok.Builder;
 import lombok.Singular;
