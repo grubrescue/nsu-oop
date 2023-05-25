@@ -7,6 +7,7 @@ import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.assignment.Assignment;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.assignment.AssignmentStatus;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.lesson.Lesson;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.lesson.LessonStatus;
+import ru.nsu.fit.smolyakov.evaluationsuite.entity.group.Student;
 import ru.nsu.fit.smolyakov.tableprinter.TablePrinter;
 
 import java.util.ArrayList;
@@ -155,5 +156,9 @@ public class EvaluationPresenter {
             });
 
         printer.print();
+    }
+
+    public void printStudent(Student student) {
+        // TODO
     }
 }

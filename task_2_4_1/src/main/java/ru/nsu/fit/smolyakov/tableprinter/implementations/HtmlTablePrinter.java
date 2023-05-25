@@ -27,7 +27,7 @@ public class HtmlTablePrinter implements TablePrinter {
     }
 
     private static String convertMultilineCell(String cell) {
-        return cell.replace("\n", "<p>");
+        return cell.replace("\n", "<div>");
     }
 
     @Override
@@ -48,13 +48,12 @@ public class HtmlTablePrinter implements TablePrinter {
                 
                 <style>
                 table {
-                    border: 3px solid purple;
+                    border-collapse: collapse;
                 }
                 
-
-                th, td {
+                td {
                     border: 1px solid black;
-                    padding: 3px;
+                    line-height: 1.5em;
                     text-align: center;
                 }
                 </style>
