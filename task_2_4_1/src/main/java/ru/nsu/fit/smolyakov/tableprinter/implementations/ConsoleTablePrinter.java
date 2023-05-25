@@ -25,8 +25,6 @@ public class ConsoleTablePrinter implements TablePrinter {
     @Setter
     private String title = "(no title)";
 
-
-
     public ConsoleTablePrinter() {
         this(System.out);
     }
@@ -38,9 +36,6 @@ public class ConsoleTablePrinter implements TablePrinter {
     public ConsoleTablePrinter(String fileName) throws FileNotFoundException {
         this(new PrintStream(fileName));
     }
-
-
-
 
     private static List<String> tokenizeMultilineCell(String cell) {
         return List.of(cell.split("\n"));
@@ -84,8 +79,6 @@ public class ConsoleTablePrinter implements TablePrinter {
     // trreats \n as a new row
     @Override
     public void appendRow(List<String> cells) {
-        var initialSize = table.size();
-
         var rows = cells.stream()
             .map(ConsoleTablePrinter::tokenizeMultilineCell)
             .toList();
@@ -134,8 +127,8 @@ public class ConsoleTablePrinter implements TablePrinter {
     }
 
     @Override
-    public void clear() {
+    public void clear () {
         table.clear();
-        title = "cleared title";
+        title = "(no title)";
     }
 }
