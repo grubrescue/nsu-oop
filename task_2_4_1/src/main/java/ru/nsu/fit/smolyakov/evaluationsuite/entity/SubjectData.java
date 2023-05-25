@@ -12,6 +12,4 @@ import java.io.Serializable;
 public class SubjectData implements Serializable { // TODO rename
     Course course;
     Group group;
-
-
 }

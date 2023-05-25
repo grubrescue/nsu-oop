@@ -9,7 +9,7 @@ import ru.nsu.fit.smolyakov.evaluationsuite.presenter.EvaluationPresenter;
 import ru.nsu.fit.smolyakov.evaluationsuite.util.SubjectDataDtoToEntity;
 import ru.nsu.fit.smolyakov.evaluationsuite.util.SubjectDataEntitySerializer;
 import ru.nsu.fit.smolyakov.tableprinter.implementations.ConsoleTablePrinter;
-import ru.nsu.fit.smolyakov.evaluationsuite.evaluator.Evaluator;
+import ru.nsu.fit.smolyakov.tableprinter.implementations.HtmlTablePrinter;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,20 +52,26 @@ public class Application {
 //            .build();
 //        a.run();
 //
-        subjectData.getGroup()
-            .getStudentList()
-            .stream()
-            .map(Evaluator::new)
-            .forEach(Evaluator::evaluate);
+//        subjectData.getGroup()
+//            .getStudentList()
+//            .stream()
+//            .map(Evaluator::new)
+//            .forEach(Evaluator::evaluate);
 
 
-        SubjectDataEntitySerializer.serialize(subjectData, "privet.dat");
-        var presenter = new EvaluationPresenter(SubjectDataEntitySerializer.deserialize("privet.dat"));
+
+
+//        SubjectDataEntitySerializer.serialize(subjectData, "privet.dat");
+
+        var entity = SubjectDataEntitySerializer.deserialize("privet.dat");
+        var presenter = new EvaluationPresenter(entity);
+
+
 
         presenter.printEvaluation(new ConsoleTablePrinter());
         presenter.printAttendance(new ConsoleTablePrinter());
-//        presenter.printEvaluation(new HtmlTablePrinter("privet.html"));
-//        presenter.printAttendance(new HtmlTablePrinter("privet2.html"));
+        presenter.printEvaluation(new HtmlTablePrinter("privet.html"));
+        presenter.printAttendance(new HtmlTablePrinter("privet2.html"));
     }
 
     public void parseDto(Object dto, String path) throws IOException {

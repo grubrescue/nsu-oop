@@ -32,18 +32,20 @@ public class Evaluator {
             .map(this::getCommitLocalDate)
             .filter(commitDate -> {
                     var lessonDate = lessonStatus.getLesson().getDate();
+
                     return commitDate.isAfter(
                         lessonDate.minusDays(
-                            lessonDate.getDayOfWeek().getValue() - DayOfWeek.MONDAY.getValue()
+                            lessonDate.getDayOfWeek().getValue() - DayOfWeek.MONDAY.getValue() + 1
                         )
                     );
                 }
             )
             .filter(commitDate -> {
                     var lessonDate = lessonStatus.getLesson().getDate();
+
                     return commitDate.isBefore(
                         lessonDate.plusDays(
-                            DayOfWeek.SUNDAY.getValue() - lessonDate.getDayOfWeek().getValue()
+                            DayOfWeek.SUNDAY.getValue() - lessonDate.getDayOfWeek().getValue() + 1
                         )
                     );
                 }
@@ -68,7 +70,8 @@ public class Evaluator {
             .task(new GradleRunner.GradleTask("javadoc", () -> assignmentStatus.getGrade().setJavadocOk(true)));
 
         if (assignmentStatus.getAssignment().isRunTests()) {
-            gradleRunnerBuilder.task(new GradleRunner.GradleTask("test", () -> assignmentStatus.getGrade().setTestsOk(true)));
+            gradleRunnerBuilder
+                .task(new GradleRunner.GradleTask("test", () -> assignmentStatus.getGrade().setTestsOk(true)));
         }
         gradleRunnerBuilder.build().run();
     }
@@ -97,7 +100,7 @@ public class Evaluator {
                 false
             );
         } catch (GitAPIException e) {
-//            log.error(student.getNickName() + "on getTaskAssociatedCommitsStream: " + e.getMessage());
+            log.fatal(student.getNickName() + "on getTaskAssociatedCommitsStream: " + e.getMessage());
             throw new RuntimeException(e); // TODO опять кастомные исключения
         }
     }
@@ -176,6 +179,8 @@ public class Evaluator {
             .stream()
             .filter(assignmentStatus -> new File(getPathToTask(assignmentStatus, git)).exists())
             .forEach(assignmentStatus -> evaluateAssignmentStartedDate(assignmentStatus, git));
+
+        getCommitsStream(git).forEach(revCommit -> System.out.println(getCommitLocalDate(revCommit)));
 
         evaluateAttendance(student, git);
     }

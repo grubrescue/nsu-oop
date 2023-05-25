@@ -8,7 +8,7 @@ overrideProgress {
         }
 
         forTask('task_1_5_1') {
-            solvedWithPoints 1.8
+            solvedWithPoints 1.9
         }
 
         forTask('task_2_3_1') {
@@ -71,22 +71,18 @@ overrideProgress {
     forStudent('SophyaL') {
         forTask('task_1_1_1') {
             identifierAlias = 'Task_1_1_1'
-            solvedWithPoints 1.0
         }
 
         forTask('task_1_2_1') {
             identifierAlias = 'Task_1_2_1'
-            solvedWithPoints 1.0
         }
 
         forTask('task_1_2_2') {
             identifierAlias = 'Task_1_2_2'
-            solvedWithPoints 1.0
         }
 
         forTask('task_1_2_3') {
             identifierAlias = 'Task_1_2_3'
-            solvedWithPoints 1.0
         }
 
         forTask('task_1_3_1') {
@@ -221,6 +217,7 @@ overrideProgress {
 
     forStudent('rafi2002') {
         forTask('task_1_1_1') {
+            identifierAlias = 'task_1_1_1_'
             branch = 'task_1_1_1'
         }
 

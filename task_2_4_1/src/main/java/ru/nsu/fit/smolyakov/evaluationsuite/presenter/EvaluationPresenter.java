@@ -125,7 +125,7 @@ public class EvaluationPresenter {
                 .map(Assignment::getIdentifier)
                 .toList()
         );
-        heading.add("TOTAL POINTS");
+        heading.add("TOTAL");
 
         printer.appendRow(heading);
 
@@ -150,19 +150,10 @@ public class EvaluationPresenter {
                     .toList()
                 );
 
-                newRow.add(Double.toString(student.calculateTotalPoints()));
+                newRow.add("%.2f".formatted(student.calculateTotalPoints()));
                 printer.appendRow(newRow);
             });
 
         printer.print();
     }
 }
-
-
-
-//        System.out.println("Format: [S]oft deadline passed %n" +
-//            "[H]ard deadline passed %n" +
-//            "[b]uild ok %n" +
-//            "[j]avadoc ok %n" +
-//            "[t]ests ok %n");
-//        System.out.println("* means overriden points. %n");

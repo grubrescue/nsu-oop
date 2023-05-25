@@ -48,7 +48,7 @@ public class Student implements Serializable {
 
     public double calculateTotalPoints() {
         return assignmentStatusList.stream()
-            .map(assignmentStatus -> assignmentStatus.getGrade().getCalculatedTaskPoints())
+            .map(assignmentStatus -> assignmentStatus.getGrade().getResultingPoints())
             .reduce(Double::sum)
             .orElse(0.0);
     }

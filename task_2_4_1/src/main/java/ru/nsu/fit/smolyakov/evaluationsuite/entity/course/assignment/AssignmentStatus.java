@@ -39,11 +39,11 @@ public class AssignmentStatus implements Serializable {
         LocalDate finished = LocalDate.MAX;
 
         public boolean isSkippedSoftDeadline() {
-            return this.started.isAfter(AssignmentStatus.this.assignment.getSoftDeadline());
+            return this.started.isAfter(AssignmentStatus.this.assignment.getSoftDeadline().plusDays(1));
         }
 
         public boolean isSkippedHardDeadline() {
-            return this.finished.isAfter(AssignmentStatus.this.assignment.getHardDeadline());
+            return this.finished.isAfter(AssignmentStatus.this.assignment.getHardDeadline().plusDays(1));
         }
 
         public boolean isStarted() {
@@ -121,7 +121,11 @@ public class AssignmentStatus implements Serializable {
         }
 
         public double getResultingPoints() {
-            return getEarnedPoints() + getFine();
+            if (!AssignmentStatus.this.getPass().isFinished()) {
+                return getFine();
+            } else {
+                return getEarnedPoints() + getFine();
+            }
         }
     }
 
