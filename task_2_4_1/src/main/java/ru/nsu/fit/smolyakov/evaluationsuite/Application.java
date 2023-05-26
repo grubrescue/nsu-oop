@@ -5,7 +5,6 @@ import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import ru.nsu.fit.smolyakov.evaluationsuite.dto.SubjectDataDto;
-import ru.nsu.fit.smolyakov.evaluationsuite.evaluator.JacocoReportParser;
 import ru.nsu.fit.smolyakov.evaluationsuite.util.SubjectDataDtoToEntity;
 
 import java.io.File;
@@ -70,11 +69,11 @@ public class Application {
 //        presenter.printEvaluation(new HtmlTablePrinter("privet.html"));
 //        presenter.printAttendance(new HtmlTablePrinter("privet2.html"));
 
-        var parser = JacocoReportParser.parse("../task_1_1_1/build/reports/jacoco/test/jacocoTestReport.xml");
-        parser.getCoverageByType(JacocoReportParser.CounterType.INSTRUCTION)
-            .ifPresentOrElse(
-                System.out::println,
-                () -> System.out.println("No such type"));
+//        var parser = JacocoReportParser.parse("../task_1_1_1/build/reports/jacoco/test/jacocoTestReport.xml");
+//        parser.getCoverageByType(JacocoReportParser.CounterType.INSTRUCTION)
+//            .ifPresentOrElse(
+//                System.out::println,
+//                () -> System.out.println("No such type"));
     }
 
     public void parseDto(Object dto, String path) throws IOException {

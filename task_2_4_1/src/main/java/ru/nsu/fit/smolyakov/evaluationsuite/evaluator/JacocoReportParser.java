@@ -46,9 +46,9 @@ public class JacocoReportParser {
     @JacksonXmlElementWrapper(useWrapping = false)
     private List<Counter> counterList;
 
-    public static JacocoReportParser parse(String reportPath) throws IOException {
+    public static JacocoReportParser parse(File reportXml) throws IOException {
         return xmlMapper.readValue(
-            new File(reportPath),
+            reportXml,
             JacocoReportParser.class);
     }
 

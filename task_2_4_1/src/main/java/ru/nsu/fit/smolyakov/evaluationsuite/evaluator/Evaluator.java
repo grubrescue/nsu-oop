@@ -12,6 +12,7 @@ import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.lesson.LessonStatus;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.group.Student;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Date;
@@ -23,7 +24,6 @@ import java.util.stream.StreamSupport;
 @RequiredArgsConstructor
 public class Evaluator {
     public final String TMP_DIR = ".checks_tmp/" + System.currentTimeMillis() + "/";
-//    public final int DAYS_DIFF_ATTENDANCE = 4; // TODO это што
 
     private final Student student;
 
@@ -61,18 +61,54 @@ public class Evaluator {
     private String getPathToTask(AssignmentStatus assignmentStatus, Git git) {
         var repoPath = git.getRepository().getDirectory().getAbsolutePath();
         return repoPath.substring(0, repoPath.length() - 4) + "/" + assignmentStatus.getIdentifierAlias();
+        // todo может нормально убрать .git из конца path или пойдет????
+    }
+
+    private void setJacocoCoverage(AssignmentStatus assignmentStatus, String pathToTask) {
+        var jacocoReportXml = new File(pathToTask + "/build/reports/jacoco/test/jacocoTestReport.xml");
+        if (jacocoReportXml.exists()) {
+            try {
+                var jacocoParser = JacocoReportParser.parse(jacocoReportXml);
+
+                jacocoParser.getCoverageByType(JacocoReportParser.CounterType.INSTRUCTION)
+                    .ifPresentOrElse(
+                        coverage -> {
+                            assignmentStatus.getGrade().setJacocoCoverage(coverage);
+                            log.info("Setting jacoco coverage to {}%", coverage);
+                        },
+                        () -> {
+                            assignmentStatus.getGrade().setJacocoCoverage(0.0);
+                            log.info("No INSTRUCTION counter in report file, " +
+                                "so setting jacoco coverage to 0% (sorry :<)");
+                        }
+                    );
+
+            } catch (IOException e) {
+                log.error("Failed to parse jacoco report for task {}: {}",
+                    assignmentStatus.getIdentifierAlias(),
+                    e.getMessage()
+                );
+                log.info("Setting jacoco coverage to 0% (sorry :<)");
+                assignmentStatus.getGrade().setJacocoCoverage(0.0);
+            }
+        }
     }
 
     private void runGradleEvaluator(AssignmentStatus assignmentStatus, Git git) {
+        var pathToTask = getPathToTask(assignmentStatus, git);
         var gradleRunnerBuilder = GradleRunner.builder()
-            .projectPath(getPathToTask(assignmentStatus, git))
+            .projectPath(pathToTask)
             .task(new GradleRunner.GradleTask("build", () -> assignmentStatus.getGrade().setBuildPassed(true)))
             .task(new GradleRunner.GradleTask("javadoc", () -> assignmentStatus.getGrade().setJavadocPassed(true)));
 
         if (assignmentStatus.getAssignment().isRunTests()) {
             gradleRunnerBuilder
-                .task(new GradleRunner.GradleTask("test", () -> assignmentStatus.getGrade().setTestsPassed()));
-            // TODO сделать чтобы выставлялись баллы
+                .task(
+                    new GradleRunner.GradleTask(
+                        "test",
+                        () -> setJacocoCoverage(assignmentStatus, pathToTask)
+                    )
+                );
         }
         gradleRunnerBuilder.build().run();
     }
@@ -86,8 +122,8 @@ public class Evaluator {
                 false
             );
         } catch (GitAPIException e) {
-//            log.error(student.getNickName() + "on getCommitsStream: " + e.getMessage());
-            throw new RuntimeException(e); // TODO опять кастомные исключения
+            log.fatal(student.getNickName() + "on getCommitsStream: " + e.getMessage());
+            return Stream.empty();
         }
     }
 
@@ -102,7 +138,7 @@ public class Evaluator {
             );
         } catch (GitAPIException e) {
             log.fatal(student.getNickName() + "on getTaskAssociatedCommitsStream: " + e.getMessage());
-            throw new RuntimeException(e); // TODO опять кастомные исключения
+            return Stream.empty();
         }
     }
 
@@ -152,7 +188,7 @@ public class Evaluator {
             log.warn("Branch {} not found", branch);
             return false;
         } catch (RefAlreadyExistsException e){
-            log.error("Branch {} already exists (надо будет почитать про это)", branch); // TODO switch
+            log.error("Branch {} already exists", branch); // TODO может быть, сделать switch??
             return false;
         } catch (Exception e) {
             log.fatal("Unknown error: {}", e.getMessage());
@@ -189,13 +225,13 @@ public class Evaluator {
     private void evaluateSpecifiedTaskOnItsBranch(Git git, AssignmentStatus assignmentStatus) {
         evaluateAssignmentStartedDate(assignmentStatus, git);
         if (!assignmentStatus.getPass().isFinished()) {
-            runGradleEvaluator(assignmentStatus, git); // TODO сделать метод сдана ли лаба или нет
+            runGradleEvaluator(assignmentStatus, git);
         }
 
         evaluateAttendance(student, git);
     }
 
-    public void evaluate() { // TODO зарефакторить
+    public void evaluate() {
         log.info("Checking {}'s repo", student.getNickName());
         var dir = new File(TMP_DIR + student.getNickName());
 
