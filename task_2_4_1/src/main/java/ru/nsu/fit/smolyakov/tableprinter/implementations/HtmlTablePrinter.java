@@ -54,7 +54,16 @@ public class HtmlTablePrinter implements TablePrinter {
                 td {
                     border: 1px solid black;
                     line-height: 1.5em;
+                    font-size: 16px;
+                    font-family: monospace;
                     text-align: center;
+                    font-weight: normal;
+                }
+                
+                h1 {
+                    font-family: monospace;
+                    font-size: 24px;
+                    font-weight: normal;
                 }
                 </style>
                 
@@ -63,7 +72,7 @@ public class HtmlTablePrinter implements TablePrinter {
                 </head>
                 
                 <body>
-                <h2>%s</h2>
+                <h1>%s</h1>
                 <table style="width:90%%">
                 """.formatted(title, title));
 

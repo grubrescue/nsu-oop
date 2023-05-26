@@ -100,7 +100,7 @@ public class ConsoleTablePrinter implements TablePrinter {
         for (int i = 0; i < columnsAmount; i++) {
             columnWidths.add(1);
         }
-//
+
         for (List<String> rows : table) {
             for (int columnNo = 0; columnNo < rows.size(); columnNo++) {
                 var newWidth = rows.get(columnNo).length();
@@ -129,6 +129,6 @@ public class ConsoleTablePrinter implements TablePrinter {
     @Override
     public void clear () {
         table.clear();
-        title = "(no title)";
+        title = "(title cleared)";
     }
 }

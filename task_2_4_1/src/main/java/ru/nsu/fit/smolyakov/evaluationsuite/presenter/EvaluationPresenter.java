@@ -3,7 +3,6 @@ package ru.nsu.fit.smolyakov.evaluationsuite.presenter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.SubjectData;
-import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.assignment.Assignment;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.assignment.AssignmentStatus;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.lesson.Lesson;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.lesson.LessonStatus;
@@ -23,7 +22,7 @@ public class EvaluationPresenter {
 
         var lessonList = new ArrayList<String>();
 
-        lessonList.add("\nAttendance");
+        lessonList.add("\nStudent\\Lesson");
         lessonList.addAll(
             subjectData.getCourse()
                 .getLessons()
@@ -117,16 +116,25 @@ public class EvaluationPresenter {
         printer.setTitle("Group " + subjectData.getGroup().getGroupName() + " tasks evaluation");
 
         var heading = new ArrayList<String>();
-        heading.add("Student");
+        heading.add("\n      \\Task\nStudent\\\n");
         heading.addAll(
             subjectData.getCourse()
                 .getAssignments()
                 .getList()
                 .stream()
-                .map(Assignment::getIdentifier)
+//                .map(Assignment::getIdentifier)
+                .map(assignment ->
+                    "%s\npts %.2f\ns %s\nh %s\n"
+                        .formatted(
+                            assignment.getIdentifier(),
+                            assignment.getSolvedPoints(),
+                            assignment.getSoftDeadline(),
+                            assignment.getHardDeadline()
+                        )
+                )
                 .toList()
         );
-        heading.add("TOTAL");
+        heading.add("\nTOTAL\nPOINTS\n");
 
         printer.appendRow(heading);
 
