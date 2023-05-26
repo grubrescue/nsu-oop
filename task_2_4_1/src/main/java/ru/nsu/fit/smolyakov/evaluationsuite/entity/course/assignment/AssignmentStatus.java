@@ -78,6 +78,10 @@ public class AssignmentStatus implements Serializable {
             return jacocoCoverage != null;
         }
 
+        public void setTestsCompile() {
+            this.jacocoCoverage = 0.0;
+        }
+
         public void setJacocoCoverage(double coverage) {
             this.jacocoCoverage = coverage;
         }
@@ -87,9 +91,7 @@ public class AssignmentStatus implements Serializable {
         }
 
         public void setTestsPassed() {
-            if (AssignmentStatus.this.assignment.isRunTests()) {
-                this.jacocoCoverage = 1.0;
-            }
+            this.jacocoCoverage = 1.0;
         }
 
         public void overrideTaskPoints(double points) {

@@ -65,6 +65,8 @@ public class Evaluator {
     }
 
     private void setJacocoCoverage(AssignmentStatus assignmentStatus, String pathToTask) {
+        log.info("Parsing jacoco report for task {}", assignmentStatus.getIdentifierAlias());
+
         var jacocoReportXml = new File(pathToTask + "/build/reports/jacoco/test/jacocoTestReport.xml");
         if (jacocoReportXml.exists()) {
             try {
@@ -74,7 +76,7 @@ public class Evaluator {
                     .ifPresentOrElse(
                         coverage -> {
                             assignmentStatus.getGrade().setJacocoCoverage(coverage);
-                            log.info("Setting jacoco coverage to {}%", coverage);
+                            log.info("Setting jacoco coverage to {}%", coverage * 100);
                         },
                         () -> {
                             assignmentStatus.getGrade().setJacocoCoverage(0.0);
@@ -84,13 +86,16 @@ public class Evaluator {
                     );
 
             } catch (IOException e) {
-                log.error("Failed to parse jacoco report for task {}: {}",
-                    assignmentStatus.getIdentifierAlias(),
+                log.error("Failed to parse jacoco report: {}",
                     e.getMessage()
                 );
                 log.info("Setting jacoco coverage to 0% (sorry :<)");
                 assignmentStatus.getGrade().setJacocoCoverage(0.0);
             }
+        } else {
+            assignmentStatus.getGrade().setJacocoCoverage(0.0);
+            log.info("Report file not found " +
+                "so setting jacoco coverage to 0% (sorry :<)");
         }
     }
 
@@ -106,6 +111,12 @@ public class Evaluator {
                 .task(
                     new GradleRunner.GradleTask(
                         "test",
+                        () -> assignmentStatus.getGrade().setTestsPassed()
+                    )
+                )
+                .task(
+                    new GradleRunner.GradleTask(
+                        "jacocoTestReport",
                         () -> setJacocoCoverage(assignmentStatus, pathToTask)
                     )
                 );
@@ -216,8 +227,6 @@ public class Evaluator {
             .stream()
             .filter(assignmentStatus -> new File(getPathToTask(assignmentStatus, git)).exists())
             .forEach(assignmentStatus -> evaluateAssignmentStartedDate(assignmentStatus, git));
-
-        getCommitsStream(git).forEach(revCommit -> System.out.println(getCommitLocalDate(revCommit)));
 
         evaluateAttendance(student, git);
     }

@@ -5,7 +5,12 @@ import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import ru.nsu.fit.smolyakov.evaluationsuite.dto.SubjectDataDto;
+import ru.nsu.fit.smolyakov.evaluationsuite.evaluator.Evaluator;
+import ru.nsu.fit.smolyakov.evaluationsuite.presenter.EvaluationPresenter;
 import ru.nsu.fit.smolyakov.evaluationsuite.util.SubjectDataDtoToEntity;
+import ru.nsu.fit.smolyakov.evaluationsuite.util.SubjectDataEntitySerializer;
+import ru.nsu.fit.smolyakov.tableprinter.implementations.ConsoleTablePrinter;
+import ru.nsu.fit.smolyakov.tableprinter.implementations.HtmlTablePrinter;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,40 +45,21 @@ public class Application {
 
         var subjectData = new SubjectDataDtoToEntity(checkerScript).convert();
 
-//        var a = GradleRunner.builder()
-//            .projectPath(".checks_tmp/1684779963745/streafy/task_1_1_1")
-//            .task(new GradleRunner.GradleTask("build", () -> {
-//                System.out.println("success");
-//            }))
-//            .build();
-//        a.run();
-//
-//        subjectData.getGroup()
-//            .getStudentList()
-//            .stream()
-//            .map(Evaluator::new)
-//            .forEach(Evaluator::evaluate);
+        subjectData.getGroup()
+            .getStudentList()
+            .stream()
+            .map(Evaluator::new)
+            .forEach(Evaluator::evaluate);
 
+        SubjectDataEntitySerializer.serialize(subjectData, "privet.dat");
 
+        var entity = SubjectDataEntitySerializer.deserialize("privet.dat");
+        var presenter = new EvaluationPresenter(entity);
 
-
-//        SubjectDataEntitySerializer.serialize(subjectData, "privet.dat");
-
-//        var entity = SubjectDataEntitySerializer.deserialize("privet.dat");
-//        var presenter = new EvaluationPresenter(entity);
-//
-//
-//
-//        presenter.printEvaluation(new ConsoleTablePrinter());
-//        presenter.printAttendance(new ConsoleTablePrinter());
-//        presenter.printEvaluation(new HtmlTablePrinter("privet.html"));
-//        presenter.printAttendance(new HtmlTablePrinter("privet2.html"));
-
-//        var parser = JacocoReportParser.parse("../task_1_1_1/build/reports/jacoco/test/jacocoTestReport.xml");
-//        parser.getCoverageByType(JacocoReportParser.CounterType.INSTRUCTION)
-//            .ifPresentOrElse(
-//                System.out::println,
-//                () -> System.out.println("No such type"));
+        presenter.printEvaluation(new ConsoleTablePrinter());
+        presenter.printAttendance(new ConsoleTablePrinter());
+        presenter.printEvaluation(new HtmlTablePrinter("evaluation.html"));
+        presenter.printAttendance(new HtmlTablePrinter("attendance.html"));
     }
 
     public void parseDto(Object dto, String path) throws IOException {
