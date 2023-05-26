@@ -5,11 +5,8 @@ import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import ru.nsu.fit.smolyakov.evaluationsuite.dto.SubjectDataDto;
-import ru.nsu.fit.smolyakov.evaluationsuite.presenter.EvaluationPresenter;
+import ru.nsu.fit.smolyakov.evaluationsuite.evaluator.JacocoReportParser;
 import ru.nsu.fit.smolyakov.evaluationsuite.util.SubjectDataDtoToEntity;
-import ru.nsu.fit.smolyakov.evaluationsuite.util.SubjectDataEntitySerializer;
-import ru.nsu.fit.smolyakov.tableprinter.implementations.ConsoleTablePrinter;
-import ru.nsu.fit.smolyakov.tableprinter.implementations.HtmlTablePrinter;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,15 +60,21 @@ public class Application {
 
 //        SubjectDataEntitySerializer.serialize(subjectData, "privet.dat");
 
-        var entity = SubjectDataEntitySerializer.deserialize("privet.dat");
-        var presenter = new EvaluationPresenter(entity);
+//        var entity = SubjectDataEntitySerializer.deserialize("privet.dat");
+//        var presenter = new EvaluationPresenter(entity);
+//
+//
+//
+//        presenter.printEvaluation(new ConsoleTablePrinter());
+//        presenter.printAttendance(new ConsoleTablePrinter());
+//        presenter.printEvaluation(new HtmlTablePrinter("privet.html"));
+//        presenter.printAttendance(new HtmlTablePrinter("privet2.html"));
 
-
-
-        presenter.printEvaluation(new ConsoleTablePrinter());
-        presenter.printAttendance(new ConsoleTablePrinter());
-        presenter.printEvaluation(new HtmlTablePrinter("privet.html"));
-        presenter.printAttendance(new HtmlTablePrinter("privet2.html"));
+        var parser = JacocoReportParser.parse("../task_1_1_1/build/reports/jacoco/test/jacocoTestReport.xml");
+        parser.getCoverageByType(JacocoReportParser.CounterType.INSTRUCTION)
+            .ifPresentOrElse(
+                System.out::println,
+                () -> System.out.println("No such type"));
     }
 
     public void parseDto(Object dto, String path) throws IOException {
