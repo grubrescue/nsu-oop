@@ -66,12 +66,13 @@ public class Evaluator {
     private void runGradleEvaluator(AssignmentStatus assignmentStatus, Git git) {
         var gradleRunnerBuilder = GradleRunner.builder()
             .projectPath(getPathToTask(assignmentStatus, git))
-            .task(new GradleRunner.GradleTask("build", () -> assignmentStatus.getGrade().setBuildOk(true)))
-            .task(new GradleRunner.GradleTask("javadoc", () -> assignmentStatus.getGrade().setJavadocOk(true)));
+            .task(new GradleRunner.GradleTask("build", () -> assignmentStatus.getGrade().setBuildPassed(true)))
+            .task(new GradleRunner.GradleTask("javadoc", () -> assignmentStatus.getGrade().setJavadocPassed(true)));
 
         if (assignmentStatus.getAssignment().isRunTests()) {
             gradleRunnerBuilder
-                .task(new GradleRunner.GradleTask("test", () -> assignmentStatus.getGrade().setTestsOk(true)));
+                .task(new GradleRunner.GradleTask("test", () -> assignmentStatus.getGrade().setTestsPassed()));
+            // TODO сделать чтобы выставлялись баллы
         }
         gradleRunnerBuilder.build().run();
     }

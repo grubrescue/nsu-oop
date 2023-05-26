@@ -79,15 +79,15 @@ public class EvaluationPresenter {
         var softCh = !assignmentStatus.getPass().isSkippedSoftDeadline() ? 's' : '-';
         var hardCh = !assignmentStatus.getPass().isSkippedHardDeadline() ? 'h' : '-';
 
-        var javadocOkCh = assignmentStatus.getGrade().isJavadocOk() ? 'j' : '-';
-        var buildOkCh = assignmentStatus.getGrade().isBuildOk() ? 'b' : '-';
+        var javadocOkCh = assignmentStatus.getGrade().isJavadocPassed() ? 'j' : '-';
+        var buildOkCh = assignmentStatus.getGrade().isBuildPassed() ? 'b' : '-';
 
         char testsOkCh;
 
         if (!assignmentStatus.getAssignment().isRunTests()) {
             testsOkCh = ' ';
         } else {
-            testsOkCh = assignmentStatus.getGrade().isTestsOk() ? 't' : '-';
+            testsOkCh = assignmentStatus.getGrade().isTestsPassed() ? 't' : '-';
         }
 
         char statusCh;

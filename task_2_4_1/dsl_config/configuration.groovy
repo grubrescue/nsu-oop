@@ -3,6 +3,7 @@ evaluation {
     taskSolvedPoints = 1.0
     softDeadlineSkipFine = -0.5
     hardDeadlineSkipFine = -0.5
+    jacocoPassPercentage = 80
 }
 
 git {

@@ -1,25 +1,25 @@
 package ru.nsu.fit.smolyakov.evaluationsuite.util;
 
-import lombok.Value;
+import lombok.RequiredArgsConstructor;
 import ru.nsu.fit.smolyakov.evaluationsuite.dto.SubjectDataDto;
 import ru.nsu.fit.smolyakov.evaluationsuite.dto.course.TaskDto;
 import ru.nsu.fit.smolyakov.evaluationsuite.dto.group.StudentDto;
 import ru.nsu.fit.smolyakov.evaluationsuite.dto.progress.OverriddenStudentDto;
 import ru.nsu.fit.smolyakov.evaluationsuite.dto.schedule.LessonDto;
-import ru.nsu.fit.smolyakov.evaluationsuite.entity.*;
+import ru.nsu.fit.smolyakov.evaluationsuite.entity.SubjectData;
+import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.Course;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.assignment.Assignment;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.assignment.AssignmentStatus;
-import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.Course;
-import ru.nsu.fit.smolyakov.evaluationsuite.entity.group.Group;
-import ru.nsu.fit.smolyakov.evaluationsuite.entity.group.Student;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.lesson.Lesson;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.lesson.LessonStatus;
+import ru.nsu.fit.smolyakov.evaluationsuite.entity.group.Group;
+import ru.nsu.fit.smolyakov.evaluationsuite.entity.group.Student;
 
 import java.util.Optional;
 
-@Value
+@RequiredArgsConstructor
 public class SubjectDataDtoToEntity {
-    SubjectDataDto subjectDataDto;
+    private final SubjectDataDto subjectDataDto;
 
     private String convertToRepoUrl(String nickName, String repoName) {
         var gitDto = subjectDataDto.getConfigurationDto().getGitDto();
@@ -46,10 +46,12 @@ public class SubjectDataDtoToEntity {
             .defaultBranch(taskDto.getBranch())
             .softDeadlineSkipFine(configurationDto.getEvaluationDto().getSoftDeadlineSkipFine())
             .hardDeadlineSkipFine(configurationDto.getEvaluationDto().getHardDeadlineSkipFine())
-//            .maxPoints(
-//                Optional.ofNullable(taskDto.getPoints())
-//                    .orElse(configurationDto.getEvaluationDto().getDefaultMaxPoints())
-//            )
+            .jacocoPassCoefficient(
+                Optional.ofNullable(
+                    configurationDto.getEvaluationDto().getJacocoPassPercentage()
+                ).orElse(100)
+                    / 100.0
+            )
             .solvedPoints(Optional.ofNullable(taskDto.getPoints())
                 .orElse(configurationDto.getEvaluationDto().getTaskSolvedPoints()))
             .runTests(taskDto.isRunTests())

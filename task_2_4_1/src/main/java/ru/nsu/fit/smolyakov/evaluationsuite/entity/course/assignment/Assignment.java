@@ -18,7 +18,7 @@ public class Assignment implements Serializable {
     double softDeadlineSkipFine;
     double hardDeadlineSkipFine;
 
-//    double maxPoints;
+    double jacocoPassCoefficient;
     double solvedPoints;
     boolean runTests;
 
