@@ -54,7 +54,7 @@ public class HtmlTablePrinter implements TablePrinter {
                 td {
                     border: 1px solid black;
                     line-height: 1.5em;
-                    font-size: 16px;
+                    font-size: 14px;
                     font-family: monospace;
                     text-align: center;
                     font-weight: normal;
@@ -62,7 +62,7 @@ public class HtmlTablePrinter implements TablePrinter {
                 
                 h1 {
                     font-family: monospace;
-                    font-size: 24px;
+                    font-size: 22px;
                     font-weight: normal;
                 }
                 </style>

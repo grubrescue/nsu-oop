@@ -49,9 +49,10 @@ public class Application {
             .getStudentList()
             .stream()
             .map(Evaluator::new)
-            .forEach(Evaluator::evaluate);
+//            .forEach(Evaluator::evaluate);
+            ;
 
-        SubjectDataEntitySerializer.serialize(subjectData, "privet.dat");
+//        SubjectDataEntitySerializer.serialize(subjectData, "privet.dat");
 
         var entity = SubjectDataEntitySerializer.deserialize("privet.dat");
         var presenter = new EvaluationPresenter(entity);
