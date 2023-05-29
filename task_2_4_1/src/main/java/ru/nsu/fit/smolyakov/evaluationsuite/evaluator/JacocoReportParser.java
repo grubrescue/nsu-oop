@@ -22,6 +22,31 @@ import java.util.Optional;
 public class JacocoReportParser {
     private static final XmlMapper xmlMapper
         = new XmlMapper();
+    @JacksonXmlProperty(localName = "name")
+    @Getter
+    private String name;
+    @JacksonXmlProperty(localName = "counter")
+    @JacksonXmlElementWrapper(useWrapping = false)
+    private List<Counter> counterList;
+
+    public static JacocoReportParser parse (File reportXml) throws IOException {
+        return xmlMapper.readValue(
+            reportXml,
+            JacocoReportParser.class);
+    }
+
+    public Optional<Counter> getCounterByType (CounterType counterType) {
+        return counterList.stream()
+            .filter(counter -> counter.type == counterType)
+            .findFirst();
+    }
+
+    public Optional<Double> getCoverageByType (CounterType counterType) {
+        return getCounterByType(counterType)
+            .map(counter ->
+                (double) counter.covered / (counter.covered + counter.missed)
+            );
+    }
 
     public enum CounterType {
         INSTRUCTION,
@@ -36,32 +61,5 @@ public class JacocoReportParser {
         @JsonProperty("type") CounterType type,
         @JsonProperty("missed") int missed,
         @JsonProperty("covered") int covered) {
-    }
-
-    @JacksonXmlProperty(localName = "name")
-    @Getter
-    private String name;
-
-    @JacksonXmlProperty(localName = "counter")
-    @JacksonXmlElementWrapper(useWrapping = false)
-    private List<Counter> counterList;
-
-    public static JacocoReportParser parse(File reportXml) throws IOException {
-        return xmlMapper.readValue(
-            reportXml,
-            JacocoReportParser.class);
-    }
-
-    public Optional<Counter> getCounterByType(CounterType counterType) {
-        return counterList.stream()
-            .filter(counter -> counter.type == counterType)
-            .findFirst();
-    }
-
-    public Optional<Double> getCoverageByType(CounterType counterType) {
-        return getCounterByType(counterType)
-            .map(counter ->
-                (double) counter.covered / (counter.covered + counter.missed)
-            );
     }
 }

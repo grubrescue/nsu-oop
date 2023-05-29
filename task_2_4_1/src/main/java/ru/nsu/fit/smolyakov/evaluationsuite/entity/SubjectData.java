@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @NonNull
 @Value
-public class SubjectData implements Serializable { // TODO rename
+public class SubjectData implements Serializable { // TODO rename???
     Course course;
     Group group;
 }

@@ -21,11 +21,11 @@ public class Course implements Serializable {
         List<Lesson> list
             = new ArrayList<>(); // TODO
 
-        public Lessons(List<Lesson> list) {
+        public Lessons (List<Lesson> list) {
             this.list.addAll(Objects.requireNonNull(list));
         }
 
-        public Optional<Lesson> getByDate(LocalDate date) {
+        public Optional<Lesson> getByDate (LocalDate date) {
             return list.stream()
                 .filter(lesson -> lesson.getDate().equals(date))
                 .findFirst();
@@ -37,11 +37,11 @@ public class Course implements Serializable {
         List<Assignment> list
             = new ArrayList<>();
 
-        public Assignments(List<Assignment> list) {
+        public Assignments (List<Assignment> list) {
             this.list.addAll(Objects.requireNonNull(list));
         }
 
-        public Optional<Assignment> getByIdentifier(String identifier) {
+        public Optional<Assignment> getByIdentifier (String identifier) {
             return list.stream()
                 .filter(assignment -> assignment.getIdentifier().equals(identifier))
                 .findFirst();

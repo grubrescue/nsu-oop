@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class EvaluationPresenter {
     private final SubjectData subjectData;
 
-    public void printAttendance(TablePrinter printer) {
+    public void printAttendance (TablePrinter printer) {
         printer.clear();
         printer.setTitle("Group " + subjectData.getGroup().getGroupName() + " attendance");
 
@@ -75,7 +75,7 @@ public class EvaluationPresenter {
         printer.print();
     }
 
-    private String assignmentStatusToCellString(AssignmentStatus assignmentStatus) {
+    private String assignmentStatusToCellString (AssignmentStatus assignmentStatus) {
         var softCh = !assignmentStatus.getPass().isSkippedSoftDeadline() ? 's' : '-';
         var hardCh = !assignmentStatus.getPass().isSkippedHardDeadline() ? 'h' : '-';
 
@@ -111,7 +111,7 @@ public class EvaluationPresenter {
         );
     }
 
-    public void printEvaluation(TablePrinter printer) { // TODO написать чтобы было норм
+    public void printEvaluation (TablePrinter printer) {
         printer.clear();
         printer.setTitle("Group " + subjectData.getGroup().getGroupName() + " tasks evaluation");
 
@@ -122,7 +122,6 @@ public class EvaluationPresenter {
                 .getAssignments()
                 .getList()
                 .stream()
-//                .map(Assignment::getIdentifier)
                 .map(assignment ->
                     "%s\npts %.2f\ns %s\nh %s\n"
                         .formatted(
@@ -146,17 +145,17 @@ public class EvaluationPresenter {
 
                 newRow.addAll(
                     subjectData.getCourse()
-                    .getAssignments()
-                    .getList()
-                    .stream()
-                    .map(assignment ->
-                        student.getAssignmentStatusByAssignment(assignment)
-                            .orElse(
-                                assignment.newAssignmentStatusInstance()
-                            )
-                    )
-                    .map(this::assignmentStatusToCellString)
-                    .toList()
+                        .getAssignments()
+                        .getList()
+                        .stream()
+                        .map(assignment ->
+                            student.getAssignmentStatusByAssignment(assignment)
+                                .orElse(
+                                    assignment.newAssignmentStatusInstance()
+                                )
+                        )
+                        .map(this::assignmentStatusToCellString)
+                        .toList()
                 );
 
                 newRow.add("%.2f".formatted(student.calculateTotalPoints()));
@@ -166,7 +165,7 @@ public class EvaluationPresenter {
         printer.print();
     }
 
-    public void printStudent(Student student) {
+    public void printStudent (Student student) {
         // TODO
     }
 }

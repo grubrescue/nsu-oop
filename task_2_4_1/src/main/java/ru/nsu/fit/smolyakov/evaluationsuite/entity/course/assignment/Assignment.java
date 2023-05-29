@@ -1,6 +1,10 @@
 package ru.nsu.fit.smolyakov.evaluationsuite.entity.course.assignment;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Value;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -22,11 +26,11 @@ public class Assignment implements Serializable {
     double solvedPoints;
     boolean runTests;
 
-    public AssignmentStatus newAssignmentStatusInstance() {
+    public AssignmentStatus newAssignmentStatusInstance () {
         return newAssignmentStatusInstance(defaultBranch);
     }
 
-    public AssignmentStatus newAssignmentStatusInstance(String branch) {
+    public AssignmentStatus newAssignmentStatusInstance (String branch) {
         return new AssignmentStatus(this, identifier, branch);
     }
 }

@@ -12,26 +12,25 @@ import java.util.List;
 
 public class HtmlTablePrinter implements TablePrinter {
     private final File file;
-
-    @Setter
-    private String title = "(no title)";
     private final List<List<String>> table
         = new ArrayList<>(); // inner are rows, outer are columns
+    @Setter
+    private String title = "(no title)";
 
-    public HtmlTablePrinter(String filename) {
+    public HtmlTablePrinter (String filename) {
         this(new File(filename));
     }
 
-    public HtmlTablePrinter(File file) {
+    public HtmlTablePrinter (File file) {
         this.file = file;
     }
 
-    private static String convertMultilineCell(String cell) {
+    private static String convertMultilineCell (String cell) {
         return cell.replace("\n", "<div>");
     }
 
     @Override
-    public void appendRow(List<String> cells) {
+    public void appendRow (List<String> cells) {
         var convertedRow = cells.stream()
             .map(HtmlTablePrinter::convertMultilineCell)
             .toList();
@@ -40,17 +39,17 @@ public class HtmlTablePrinter implements TablePrinter {
     }
 
     @Override
-    public void print() {
+    public void print () {
         try (var writer = new BufferedWriter(new FileWriter(file))) {
             writer.write("""
                 <!DOCTYPE html>
                 <html>
-                
+                                
                 <style>
                 table {
                     border-collapse: collapse;
                 }
-                
+                                
                 td {
                     border: 1px solid black;
                     line-height: 1.5em;
@@ -59,18 +58,18 @@ public class HtmlTablePrinter implements TablePrinter {
                     text-align: center;
                     font-weight: normal;
                 }
-                
+                                
                 h1 {
                     font-family: monospace;
                     font-size: 22px;
                     font-weight: normal;
                 }
                 </style>
-                
+                                
                 <head>
                 <title>%s</title>
                 </head>
-                
+                                
                 <body>
                 <h1>%s</h1>
                 <table style="width:90%%">

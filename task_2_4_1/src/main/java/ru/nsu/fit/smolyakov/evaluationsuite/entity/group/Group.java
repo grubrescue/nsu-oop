@@ -14,12 +14,12 @@ public class Group implements Serializable {
     String groupName;
     List<Student> studentList = new ArrayList<>();
 
-    public Group(String groupName, List<Student> studentList) {
+    public Group (String groupName, List<Student> studentList) {
         this.groupName = groupName;
         this.studentList.addAll(studentList);
     }
 
-    public Optional<Student> getByNickName(String nickName) {
+    public Optional<Student> getByNickName (String nickName) {
         return studentList.stream()
             .filter(student -> student.getNickName().equals(nickName))
             .findFirst();

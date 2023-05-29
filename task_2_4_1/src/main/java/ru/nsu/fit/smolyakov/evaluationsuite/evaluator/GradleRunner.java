@@ -19,16 +19,12 @@ public class GradleRunner { // TODO rename
     @Singular
     List<GradleTask> tasks;
 
-    public record GradleTask(String name, Runnable runIfSuccess) {
-    }
-
     /**
-     *
      * @param connection
      * @param task
      * @return true on success
      */
-    private boolean runTask(ProjectConnection connection, String task) {
+    private boolean runTask (ProjectConnection connection, String task) {
         log.info("Running task {}", task);
 
         try {
@@ -44,7 +40,7 @@ public class GradleRunner { // TODO rename
         return true;
     }
 
-    public void run() {
+    public void run () {
         try (var connection = GradleConnector.newConnector()
             .forProjectDirectory(new File(projectPath))
             .connect()
@@ -61,5 +57,8 @@ public class GradleRunner { // TODO rename
         } catch (Exception e) {
             log.error("Gradle evaluation failed; cause: {}", e.getMessage());
         }
+    }
+
+    public record GradleTask(String name, Runnable runIfSuccess) {
     }
 }

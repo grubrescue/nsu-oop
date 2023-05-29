@@ -11,11 +11,11 @@ import java.time.LocalDate;
 public class Lesson implements Serializable {
     LocalDate date;
 
-    public LessonStatus newLessonStatusInstance(boolean beenOnALesson) {
+    public LessonStatus newLessonStatusInstance (boolean beenOnALesson) {
         return new LessonStatus(this, beenOnALesson);
     }
 
-    public LessonStatus newLessonStatusInstance() {
+    public LessonStatus newLessonStatusInstance () {
         return new LessonStatus(this, false);
     }
 }

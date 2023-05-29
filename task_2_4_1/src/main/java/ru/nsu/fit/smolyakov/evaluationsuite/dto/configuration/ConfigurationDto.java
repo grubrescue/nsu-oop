@@ -1,25 +1,24 @@
 package ru.nsu.fit.smolyakov.evaluationsuite.dto.configuration;
 
 import groovy.lang.Closure;
-import lombok.NoArgsConstructor;
-import lombok.Value;
-import lombok.experimental.NonFinal;
+import lombok.Getter;
 
 import static ru.nsu.fit.smolyakov.evaluationsuite.util.DslDelegator.groovyDelegate;
 
-@Value
-@NoArgsConstructor
+/**
+ * This class is used to store data from {@code configuration.groovy} (by default)
+ * and then to pass it to the entity layer.
+ */
+@Getter
 public class ConfigurationDto {
-    @NonFinal
-    EvaluationDto evaluationDto = new EvaluationDto();
-    @NonFinal
-    GitDto gitDto = new GitDto();
+    private final EvaluationDto evaluationDto = new EvaluationDto();
+    private final GitDto gitDto = new GitDto();
 
-    void evaluation(Closure<?> closure) {
+    void evaluation (Closure<?> closure) {
         groovyDelegate(evaluationDto, closure);
     }
 
-    void git(Closure<?> closure) {
+    void git (Closure<?> closure) {
         groovyDelegate(gitDto, closure);
     }
 }

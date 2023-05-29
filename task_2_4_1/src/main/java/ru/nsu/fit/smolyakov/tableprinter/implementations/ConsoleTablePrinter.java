@@ -11,33 +11,30 @@ import java.util.List;
 
 @NonNull
 public class ConsoleTablePrinter implements TablePrinter {
-    private final PrintStream printStream;
-
     public final static String CELL_SEPARATOR = " | ";
-
-    private static String getCellFormat(int width) {
-        return "%-" + width + "." + width + "s";
-    }
-
+    private final PrintStream printStream;
     private final List<List<String>> table
         = new ArrayList<>(); // inner are rows, outer are columns
-
     @Setter
     private String title = "(no title)";
 
-    public ConsoleTablePrinter() {
+    public ConsoleTablePrinter () {
         this(System.out);
     }
 
-    public ConsoleTablePrinter(PrintStream printStream) {
+    public ConsoleTablePrinter (PrintStream printStream) {
         this.printStream = printStream;
     }
 
-    public ConsoleTablePrinter(String fileName) throws FileNotFoundException {
+    public ConsoleTablePrinter (String fileName) throws FileNotFoundException {
         this(new PrintStream(fileName));
     }
 
-    private static List<String> tokenizeMultilineCell(String cell) {
+    private static String getCellFormat (int width) {
+        return "%-" + width + "." + width + "s";
+    }
+
+    private static List<String> tokenizeMultilineCell (String cell) {
         return List.of(cell.split("\n"));
     }
 
@@ -54,7 +51,7 @@ public class ConsoleTablePrinter implements TablePrinter {
      *
      * @return transposed list
      */
-    private static List<List<String>> transpose(List<List<String>> table) {
+    private static List<List<String>> transpose (List<List<String>> table) {
         var result = new ArrayList<List<String>>();
 
         int maxRowLen = table.stream()
@@ -78,7 +75,7 @@ public class ConsoleTablePrinter implements TablePrinter {
 
     // trreats \n as a new row
     @Override
-    public void appendRow(List<String> cells) {
+    public void appendRow (List<String> cells) {
         var rows = cells.stream()
             .map(ConsoleTablePrinter::tokenizeMultilineCell)
             .toList();
@@ -87,7 +84,7 @@ public class ConsoleTablePrinter implements TablePrinter {
     }
 
     @Override
-    public void print() {
+    public void print () {
         printStream.println(title);
 
         int columnsAmount = table.stream()

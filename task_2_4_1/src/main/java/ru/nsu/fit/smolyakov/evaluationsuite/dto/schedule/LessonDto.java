@@ -1,10 +1,12 @@
 package ru.nsu.fit.smolyakov.evaluationsuite.dto.schedule;
 
-import lombok.Value;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
 
-@Value
+@Getter
+@RequiredArgsConstructor
 public class LessonDto {
-    LocalDate date;
+    private final LocalDate date;
 }

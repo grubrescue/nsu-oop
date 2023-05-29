@@ -1,26 +1,24 @@
 package ru.nsu.fit.smolyakov.evaluationsuite.dto.schedule;
 
-import lombok.Value;
-import lombok.experimental.NonFinal;
+import lombok.Getter;
 
 import java.time.LocalDate;
 
-@Value
+@Getter
 public class AssignmentDto {
-    String task;
-    @NonFinal
-    LocalDate softDeadline;
-    @NonFinal
-    LocalDate hardDeadline;
-    public AssignmentDto(String task) {
+    private final String task;
+    private LocalDate softDeadline;
+    private LocalDate hardDeadline;
+
+    public AssignmentDto (String task) {
         this.task = task;
     }
 
-    void softDeadlineAt(String dateString) {
+    void softDeadlineAt (String dateString) {
         this.softDeadline = LocalDate.parse(dateString);
     }
 
-    void hardDeadlineAt(String dateString) {
+    void hardDeadlineAt (String dateString) {
         this.hardDeadline = LocalDate.parse(dateString);
     }
 }

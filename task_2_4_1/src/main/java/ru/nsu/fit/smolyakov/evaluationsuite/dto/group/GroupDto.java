@@ -1,32 +1,31 @@
 package ru.nsu.fit.smolyakov.evaluationsuite.dto.group;
 
 import groovy.lang.Closure;
-import lombok.NoArgsConstructor;
-import lombok.Value;
-import lombok.experimental.NonFinal;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static ru.nsu.fit.smolyakov.evaluationsuite.util.DslDelegator.groovyDelegate;
 
-@Value
-@NoArgsConstructor
+/**
+ * This class is used to store data from {@code group.groovy} (by default)
+ * and then to pass it to the entity layer.
+ */
+@Getter
 public class GroupDto {
-    StudentList students = new StudentList();
-    @NonFinal
-    String groupName = "unspecified group name";
+    private final StudentList students = new StudentList();
+    private final String groupName = "unspecified group name";
 
-    void students(Closure<?> closure) {
+    void students (Closure<?> closure) {
         groovyDelegate(students, closure);
     }
 
-    @Value
-    @NoArgsConstructor
+    @Getter
     public static class StudentList {
-        List<StudentDto> list = new ArrayList<>();
+        private final List<StudentDto> list = new ArrayList<>();
 
-        void student(String nickName, Closure<?> closure) {
+        void student (String nickName, Closure<?> closure) {
             StudentDto studentDto = new StudentDto(nickName);
             groovyDelegate(studentDto, closure);
 

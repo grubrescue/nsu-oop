@@ -1,6 +1,11 @@
 package ru.nsu.fit.smolyakov.evaluationsuite.entity.course.assignment;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
 import java.io.Serializable;
@@ -8,7 +13,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Optional;
 
-//TODO кажется я не те аннотации использую, поменять потом
 @ToString(exclude = {"assignment"})
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -17,19 +21,30 @@ public class AssignmentStatus implements Serializable {
 
     @NonNull
     final Assignment assignment;
-
+    final Pass pass = new Pass();
+    final Grade grade = new Grade();
     @NonNull
     @Setter
     String identifierAlias;
-
     @Setter
     String branch;
+    @NonNull
+    @Setter
+    String message = "(non overridden) empty message";
 
-    @NonNull @Setter String message = "(non overridden) empty message";
+    public AssignmentStatus (@NonNull Assignment assignment, @NonNull String identifierAlias, String branch) {
+        this.assignment = assignment;
+        this.identifierAlias = identifierAlias;
+        this.branch = branch;
+    }
 
+    public boolean hasBranch () {
+        return Objects.nonNull(this.branch);
+    }
 
-    final Pass pass = new Pass();
-    final Grade grade = new Grade();
+    public Optional<String> getBranch () {
+        return Optional.ofNullable(this.branch);
+    }
 
     @Data
     @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -38,75 +53,73 @@ public class AssignmentStatus implements Serializable {
         LocalDate started = LocalDate.MAX;
         LocalDate finished = LocalDate.MAX;
 
-        public boolean isSkippedSoftDeadline() {
+        public boolean isSkippedSoftDeadline () {
             return this.started.isAfter(AssignmentStatus.this.assignment.getSoftDeadline().plusDays(1));
         }
 
-        public boolean isSkippedHardDeadline() {
+        public boolean isSkippedHardDeadline () {
             return this.finished.isAfter(AssignmentStatus.this.assignment.getHardDeadline().plusDays(1));
         }
 
-        public boolean isStarted() {
+        public boolean isStarted () {
             return !this.started.equals(NOT_STARTED);
         }
 
-        public boolean isFinished() {
+        public boolean isFinished () {
             return !this.finished.equals(NOT_STARTED);
         }
     }
 
-    @Data
     @FieldDefaults(level = AccessLevel.PRIVATE)
     public class Grade implements Serializable {
+        @Getter
+        @Setter
         boolean buildPassed = false;
+        @Getter
+        @Setter
         boolean javadocPassed = false;
 
-        @Setter(AccessLevel.NONE)
-        @Getter(AccessLevel.NONE)
         Double jacocoCoverage = null;
-
-        @Setter(AccessLevel.NONE)
-        @Getter(AccessLevel.NONE)
         Double overriddenTaskPoints = null;
-        
-        public boolean isTestsPassed() {
+
+        public boolean isTestsPassed () {
             return isTestsCompile() &&
                 jacocoCoverage >= AssignmentStatus.this.assignment.getJacocoPassCoefficient();
         }
 
-        public boolean isTestsCompile() {
+        public boolean isTestsCompile () {
             return jacocoCoverage != null;
         }
 
-        public void setTestsCompile() {
+        public void setTestsCompile () {
             this.jacocoCoverage = 0.0;
         }
 
-        public void setJacocoCoverage(double coverage) {
-            this.jacocoCoverage = coverage;
-        }
-
-        public Optional<Double> getJacocoCoverage() {
+        public Optional<Double> getJacocoCoverage () {
             return Optional.ofNullable(jacocoCoverage);
         }
 
-        public void setTestsPassed() {
+        public void setJacocoCoverage (double coverage) {
+            this.jacocoCoverage = coverage;
+        }
+
+        public void setTestsPassed () {
             this.jacocoCoverage = 1.0;
         }
 
-        public void overrideTaskPoints(double points) {
+        public void overrideTaskPoints (double points) {
             this.overriddenTaskPoints = points;
         }
 
-        public void notOverrideTaskPoints() {
+        public void notOverrideTaskPoints () {
             this.overriddenTaskPoints = null;
         }
 
-        public boolean isOverridden() {
+        public boolean isOverridden () {
             return Objects.nonNull(this.overriddenTaskPoints);
         }
 
-        public double getCalculatedTaskPoints() {
+        public double getCalculatedTaskPoints () {
             double sum = 0;
             int amount = 0;
 
@@ -122,11 +135,11 @@ public class AssignmentStatus implements Serializable {
             return AssignmentStatus.this.assignment.getSolvedPoints() * (sum / amount);
         }
 
-        public Optional<Double> getOverriddenTaskPoints() {
+        public Optional<Double> getOverriddenTaskPoints () {
             return Optional.ofNullable(overriddenTaskPoints);
         }
 
-        public double getEarnedPoints() {
+        public double getEarnedPoints () {
             if (!AssignmentStatus.this.getPass().isFinished()) {
                 return 0.0;
             } else if (this.isOverridden()) {
@@ -136,7 +149,7 @@ public class AssignmentStatus implements Serializable {
             }
         }
 
-        public double getFine() {
+        public double getFine () {
             double fine = 0;
             if (AssignmentStatus.this.getPass().isSkippedSoftDeadline()) {
                 fine += AssignmentStatus.this.assignment.getSoftDeadlineSkipFine();
@@ -148,26 +161,12 @@ public class AssignmentStatus implements Serializable {
             return fine;
         }
 
-        public double getResultingPoints() {
+        public double getResultingPoints () {
             if (!AssignmentStatus.this.getPass().isFinished()) {
                 return getFine();
             } else {
                 return getEarnedPoints() + getFine();
             }
         }
-    }
-
-    public AssignmentStatus(@NonNull Assignment assignment, @NonNull String identifierAlias, String branch) {
-        this.assignment = assignment;
-        this.identifierAlias = identifierAlias;
-        this.branch = branch;
-    }
-
-    public boolean hasBranch() {
-        return Objects.nonNull(this.branch);
-    }
-
-    public Optional<String> getBranch() {
-        return Optional.ofNullable(this.branch);
     }
 }

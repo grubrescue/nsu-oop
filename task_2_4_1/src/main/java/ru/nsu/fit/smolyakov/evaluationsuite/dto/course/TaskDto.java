@@ -1,21 +1,12 @@
 package ru.nsu.fit.smolyakov.evaluationsuite.dto.course;
 
-import lombok.NoArgsConstructor;
-import lombok.Value;
-import lombok.experimental.NonFinal;
+import lombok.Getter;
 
-@Value
-@NoArgsConstructor
+@Getter
 public class TaskDto {
-    @NonFinal
-    String name;
-    @NonFinal
-    String branch;
-    @NonFinal
-    String description = "no description provided";
-    @NonFinal
-    Double points;
-
-    @NonFinal
-    boolean runTests = true;
+    private final String description = "no description provided in configuration";
+    private final boolean runTests = true;
+    private String name;
+    private String branch;
+    private Double points;
 }

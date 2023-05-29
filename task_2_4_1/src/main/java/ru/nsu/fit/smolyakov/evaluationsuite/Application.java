@@ -26,13 +26,13 @@ public class Application {
 
     private final GroovyShell sh;
 
-    public Application() {
+    public Application () {
         CompilerConfiguration cc = new CompilerConfiguration();
         cc.setScriptBaseClass(DelegatingScript.class.getName());
         sh = new GroovyShell(Application.class.getClassLoader(), new Binding(), cc);
     }
 
-    public static void main(String... args) throws IOException {
+    public static void main (String... args) throws IOException {
         var app = new Application();
 
         var checkerScript = new SubjectDataDto();
@@ -50,7 +50,7 @@ public class Application {
             .stream()
             .map(Evaluator::new)
 //            .forEach(Evaluator::evaluate);
-            ;
+        ;
 
 //        SubjectDataEntitySerializer.serialize(subjectData, "privet.dat");
 
@@ -63,7 +63,7 @@ public class Application {
         presenter.printAttendance(new HtmlTablePrinter("attendance.html"));
     }
 
-    public void parseDto(Object dto, String path) throws IOException {
+    public void parseDto (Object dto, String path) throws IOException {
         DelegatingScript script = (DelegatingScript) sh.parse(new File(path));
         script.setDelegate(dto);
         script.run();

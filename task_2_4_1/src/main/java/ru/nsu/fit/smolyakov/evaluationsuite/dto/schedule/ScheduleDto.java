@@ -1,7 +1,7 @@
 package ru.nsu.fit.smolyakov.evaluationsuite.dto.schedule;
 
 import groovy.lang.Closure;
-import lombok.Value;
+import lombok.Getter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,35 +11,39 @@ import java.util.Map;
 
 import static ru.nsu.fit.smolyakov.evaluationsuite.util.DslDelegator.groovyDelegate;
 
-@Value
+/**
+ * This class is used to store data from {@code schedule.groovy} (by default)
+ * and then to pass it to the entity layer.
+ */
+@Getter
 public class ScheduleDto {
-    AssignmentMap assignments = new AssignmentMap();
-    Lessons lessons = new Lessons();
+    private final AssignmentMap assignments = new AssignmentMap();
+    private final Lessons lessons = new Lessons();
 
-    void assignments(Closure<?> closure) {
+    void assignments (Closure<?> closure) {
         groovyDelegate(assignments, closure);
     }
 
-    void lessons(Closure<?> closure) {
+    void lessons (Closure<?> closure) {
         groovyDelegate(lessons, closure);
     }
 
-    @Value
+    @Getter
     public static class AssignmentMap {
-        Map<String, AssignmentDto> map = new HashMap<>();
+        private final Map<String, AssignmentDto> map = new HashMap<>();
 
-        void assignment(String taskName, Closure<?> closure) {
+        void assignment (String taskName, Closure<?> closure) {
             AssignmentDto assignmentDto = new AssignmentDto(taskName);
             groovyDelegate(assignmentDto, closure);
             map.put(taskName, assignmentDto);
         }
     }
 
-    @Value
+    @Getter
     public static class Lessons {
-        List<LessonDto> list = new ArrayList<>();
+        private final List<LessonDto> list = new ArrayList<>();
 
-        void lessonAt(String dateString) {
+        void lessonAt (String dateString) {
             LessonDto lessonDto = new LessonDto(LocalDate.parse(dateString));
             list.add(lessonDto);
         }

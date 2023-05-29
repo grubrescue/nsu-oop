@@ -1,18 +1,11 @@
 package ru.nsu.fit.smolyakov.evaluationsuite.dto.configuration;
 
-import lombok.NoArgsConstructor;
-import lombok.Value;
-import lombok.experimental.NonFinal;
+import lombok.Getter;
 
-@Value
-@NoArgsConstructor
+@Getter
 public class EvaluationDto {
-    @NonFinal
-    Double taskSolvedPoints;
-    @NonFinal
-    Double softDeadlineSkipFine;
-    @NonFinal
-    Double hardDeadlineSkipFine;
-    @NonFinal
-    Integer jacocoPassPercentage;
+    private Double taskSolvedPoints;
+    private Double softDeadlineSkipFine;
+    private Double hardDeadlineSkipFine;
+    private Integer jacocoPassPercentage;
 }
