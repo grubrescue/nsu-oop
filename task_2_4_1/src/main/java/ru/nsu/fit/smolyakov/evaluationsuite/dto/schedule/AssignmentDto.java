@@ -10,15 +10,15 @@ public class AssignmentDto {
     private LocalDate softDeadline;
     private LocalDate hardDeadline;
 
-    public AssignmentDto (String task) {
+    public AssignmentDto(String task) {
         this.task = task;
     }
 
-    void softDeadlineAt (String dateString) {
+    void softDeadlineAt(String dateString) {
         this.softDeadline = LocalDate.parse(dateString);
     }
 
-    void hardDeadlineAt (String dateString) {
+    void hardDeadlineAt(String dateString) {
         this.hardDeadline = LocalDate.parse(dateString);
     }
 }

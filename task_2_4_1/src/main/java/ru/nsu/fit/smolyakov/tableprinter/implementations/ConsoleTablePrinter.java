@@ -18,23 +18,23 @@ public class ConsoleTablePrinter implements TablePrinter {
     @Setter
     private String title = "(no title)";
 
-    public ConsoleTablePrinter () {
+    public ConsoleTablePrinter() {
         this(System.out);
     }
 
-    public ConsoleTablePrinter (PrintStream printStream) {
+    public ConsoleTablePrinter(PrintStream printStream) {
         this.printStream = printStream;
     }
 
-    public ConsoleTablePrinter (String fileName) throws FileNotFoundException {
+    public ConsoleTablePrinter(String fileName) throws FileNotFoundException {
         this(new PrintStream(fileName));
     }
 
-    private static String getCellFormat (int width) {
+    private static String getCellFormat(int width) {
         return "%-" + width + "." + width + "s";
     }
 
-    private static List<String> tokenizeMultilineCell (String cell) {
+    private static List<String> tokenizeMultilineCell(String cell) {
         return List.of(cell.split("\n"));
     }
 
@@ -51,7 +51,7 @@ public class ConsoleTablePrinter implements TablePrinter {
      *
      * @return transposed list
      */
-    private static List<List<String>> transpose (List<List<String>> table) {
+    private static List<List<String>> transpose(List<List<String>> table) {
         var result = new ArrayList<List<String>>();
 
         int maxRowLen = table.stream()
@@ -75,7 +75,7 @@ public class ConsoleTablePrinter implements TablePrinter {
 
     // trreats \n as a new row
     @Override
-    public void appendRow (List<String> cells) {
+    public void appendRow(List<String> cells) {
         var rows = cells.stream()
             .map(ConsoleTablePrinter::tokenizeMultilineCell)
             .toList();
@@ -84,7 +84,7 @@ public class ConsoleTablePrinter implements TablePrinter {
     }
 
     @Override
-    public void print () {
+    public void print() {
         printStream.println(title);
 
         int columnsAmount = table.stream()
@@ -124,7 +124,7 @@ public class ConsoleTablePrinter implements TablePrinter {
     }
 
     @Override
-    public void clear () {
+    public void clear() {
         table.clear();
         title = "(title cleared)";
     }

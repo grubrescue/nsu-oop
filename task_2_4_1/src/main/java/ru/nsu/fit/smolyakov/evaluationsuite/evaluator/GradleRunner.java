@@ -24,7 +24,7 @@ public class GradleRunner { // TODO rename
      * @param task
      * @return true on success
      */
-    private boolean runTask (ProjectConnection connection, String task) {
+    private boolean runTask(ProjectConnection connection, String task) {
         log.info("Running task {}", task);
 
         try {
@@ -40,7 +40,7 @@ public class GradleRunner { // TODO rename
         return true;
     }
 
-    public void run () {
+    public void run() {
         try (var connection = GradleConnector.newConnector()
             .forProjectDirectory(new File(projectPath))
             .connect()

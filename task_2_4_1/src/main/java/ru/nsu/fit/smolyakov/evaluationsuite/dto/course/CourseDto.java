@@ -16,7 +16,7 @@ import static ru.nsu.fit.smolyakov.evaluationsuite.util.DslDelegator.groovyDeleg
 public class CourseDto {
     private final TaskList tasks = new TaskList();
 
-    void tasks (Closure<?> closure) {
+    void tasks(Closure<?> closure) {
         groovyDelegate(tasks, closure);
     }
 
@@ -24,7 +24,7 @@ public class CourseDto {
     public static class TaskList {
         private final List<TaskDto> list = new ArrayList<>();
 
-        void task (Closure<?> closure) {
+        void task(Closure<?> closure) {
             TaskDto taskDto = new TaskDto();
             groovyDelegate(taskDto, closure);
 

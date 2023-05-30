@@ -20,11 +20,11 @@ public class ScheduleDto {
     private final AssignmentMap assignments = new AssignmentMap();
     private final Lessons lessons = new Lessons();
 
-    void assignments (Closure<?> closure) {
+    void assignments(Closure<?> closure) {
         groovyDelegate(assignments, closure);
     }
 
-    void lessons (Closure<?> closure) {
+    void lessons(Closure<?> closure) {
         groovyDelegate(lessons, closure);
     }
 
@@ -32,7 +32,7 @@ public class ScheduleDto {
     public static class AssignmentMap {
         private final Map<String, AssignmentDto> map = new HashMap<>();
 
-        void assignment (String taskName, Closure<?> closure) {
+        void assignment(String taskName, Closure<?> closure) {
             AssignmentDto assignmentDto = new AssignmentDto(taskName);
             groovyDelegate(assignmentDto, closure);
             map.put(taskName, assignmentDto);
@@ -43,7 +43,7 @@ public class ScheduleDto {
     public static class Lessons {
         private final List<LessonDto> list = new ArrayList<>();
 
-        void lessonAt (String dateString) {
+        void lessonAt(String dateString) {
             LessonDto lessonDto = new LessonDto(LocalDate.parse(dateString));
             list.add(lessonDto);
         }

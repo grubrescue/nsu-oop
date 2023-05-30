@@ -14,11 +14,11 @@ public class ConfigurationDto {
     private final EvaluationDto evaluationDto = new EvaluationDto();
     private final GitDto gitDto = new GitDto();
 
-    void evaluation (Closure<?> closure) {
+    void evaluation(Closure<?> closure) {
         groovyDelegate(evaluationDto, closure);
     }
 
-    void git (Closure<?> closure) {
+    void git(Closure<?> closure) {
         groovyDelegate(gitDto, closure);
     }
 }

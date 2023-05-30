@@ -13,7 +13,7 @@ public class LessonStatus implements Serializable {
     @NonFinal
     boolean beenOnALesson = false;
 
-    public void setBeenOnALesson (boolean value) {
+    public void setBeenOnALesson(boolean value) {
         beenOnALesson = value;
     }
 }

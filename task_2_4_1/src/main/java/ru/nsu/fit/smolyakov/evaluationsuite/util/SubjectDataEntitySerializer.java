@@ -9,7 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class SubjectDataEntitySerializer {
-    public static SubjectData deserialize (String filename) throws IOException {
+    public static SubjectData deserialize(String filename) throws IOException {
         FileInputStream fileInputStream
             = new FileInputStream(filename);
         try (ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
@@ -21,7 +21,7 @@ public class SubjectDataEntitySerializer {
         }
     }
 
-    public static void serialize (SubjectData subjectData, String filename) throws IOException {
+    public static void serialize(SubjectData subjectData, String filename) throws IOException {
         FileOutputStream fileOutputStream
             = new FileOutputStream(filename);
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {

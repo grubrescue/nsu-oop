@@ -21,16 +21,16 @@ import java.util.Optional;
 public class SubjectDataDtoToEntity {
     private final SubjectDataDto subjectDataDto;
 
-    private String convertToRepoUrl (String nickName, String repoName) {
+    private String convertToRepoUrl(String nickName, String repoName) {
         var gitDto = subjectDataDto.getConfigurationDto().getGitDto();
         return gitDto.getRepoLinkPrefix() + nickName + "/" + repoName + gitDto.getRepoLinkPostfix();
     }
 
-    private Lesson lessonDtoToEntity (LessonDto lessonDto) {
+    private Lesson lessonDtoToEntity(LessonDto lessonDto) {
         return new Lesson(lessonDto.getDate());
     }
 
-    private Assignment taskDtoToEntity (TaskDto taskDto) {
+    private Assignment taskDtoToEntity(TaskDto taskDto) {
         var scheduleDto = subjectDataDto.getScheduleDto();
         var configurationDto = subjectDataDto.getConfigurationDto();
 
@@ -58,7 +58,7 @@ public class SubjectDataDtoToEntity {
             .build();
     }
 
-    private Course generateCourseFromDtos () {
+    private Course generateCourseFromDtos() {
         var courseDto = subjectDataDto.getCourseDto();
         var scheduleDto = subjectDataDto.getScheduleDto();
 
@@ -80,7 +80,7 @@ public class SubjectDataDtoToEntity {
         );
     }
 
-    private Student studentDtoToEntity (StudentDto studentDto, Course course) {
+    private Student studentDtoToEntity(StudentDto studentDto, Course course) {
         var configurationDto = subjectDataDto.getConfigurationDto();
 
         var builder = Student.builder()
@@ -109,7 +109,7 @@ public class SubjectDataDtoToEntity {
         return builder.build();
     }
 
-    private Group generateGroupFromDtos (Course course) {
+    private Group generateGroupFromDtos(Course course) {
         var groupDto = subjectDataDto.getGroupDto();
 
         var studentList = groupDto.getStudents()
@@ -121,14 +121,14 @@ public class SubjectDataDtoToEntity {
         return new Group(groupDto.getGroupName(), studentList);
     }
 
-    private void tryOverrideLessonStatus (LessonStatus lessonStatus, OverriddenStudentDto overriddenStudentDto) {
+    private void tryOverrideLessonStatus(LessonStatus lessonStatus, OverriddenStudentDto overriddenStudentDto) {
         Optional.ofNullable(
             overriddenStudentDto.getBeenOnLessonMap()
                 .get(lessonStatus.getLesson().getDate())
         ).ifPresent(lessonStatus::setBeenOnALesson);
     }
 
-    private void tryOverrideAssignmentStatus (AssignmentStatus assignmentStatus, OverriddenStudentDto overriddenStudentDto) {
+    private void tryOverrideAssignmentStatus(AssignmentStatus assignmentStatus, OverriddenStudentDto overriddenStudentDto) {
         Optional.ofNullable(
                 overriddenStudentDto.getOverridenTaskInfoMap()
                     .get(assignmentStatus.getAssignment().getIdentifier()))
@@ -159,7 +159,7 @@ public class SubjectDataDtoToEntity {
             );
     }
 
-    private void overrideStudentsStatuses (Group group) {
+    private void overrideStudentsStatuses(Group group) {
         subjectDataDto.getAcademicProgressDto()
             .getOverriddenStudents()
             .getMap()
@@ -177,7 +177,7 @@ public class SubjectDataDtoToEntity {
             );
     }
 
-    public SubjectData convert () {
+    public SubjectData convert() {
         var course = generateCourseFromDtos();
         var group = generateGroupFromDtos(course);
 

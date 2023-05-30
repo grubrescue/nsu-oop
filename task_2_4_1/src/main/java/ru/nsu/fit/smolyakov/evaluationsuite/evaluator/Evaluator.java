@@ -31,7 +31,7 @@ public class Evaluator {
 
     private final Student student;
 
-    private void evaluateSingleLessonAttendance (LessonStatus lessonStatus, Git git) {
+    private void evaluateSingleLessonAttendance(LessonStatus lessonStatus, Git git) {
         getCommitsStream(git)
             .map(this::getCommitLocalDate)
             .filter(commitDate -> {
@@ -58,17 +58,17 @@ public class Evaluator {
             .ifPresent(ignored -> lessonStatus.setBeenOnALesson(true));
     }
 
-    private void evaluateAttendance (Student student, Git git) {
+    private void evaluateAttendance(Student student, Git git) {
         student.getLessonStatusList().forEach(lessonStatus -> evaluateSingleLessonAttendance(lessonStatus, git));
     }
 
-    private String getPathToTask (AssignmentStatus assignmentStatus, Git git) {
+    private String getPathToTask(AssignmentStatus assignmentStatus, Git git) {
         var repoPath = git.getRepository().getDirectory().getAbsolutePath();
         return repoPath.substring(0, repoPath.length() - 4) + "/" + assignmentStatus.getIdentifierAlias();
         // todo может нормально убрать .git из конца path или пойдет????
     }
 
-    private void setJacocoCoverage (AssignmentStatus assignmentStatus, String pathToTask) {
+    private void setJacocoCoverage(AssignmentStatus assignmentStatus, String pathToTask) {
         log.info("Parsing jacoco report for task {}", assignmentStatus.getIdentifierAlias());
 
         var jacocoReportXml = new File(pathToTask + "/build/reports/jacoco/test/jacocoTestReport.xml");
@@ -103,7 +103,7 @@ public class Evaluator {
         }
     }
 
-    private void runGradleEvaluator (AssignmentStatus assignmentStatus, Git git) {
+    private void runGradleEvaluator(AssignmentStatus assignmentStatus, Git git) {
         var pathToTask = getPathToTask(assignmentStatus, git);
         var gradleRunnerBuilder = GradleRunner.builder()
             .projectPath(pathToTask)
@@ -128,7 +128,7 @@ public class Evaluator {
         gradleRunnerBuilder.build().run();
     }
 
-    private Stream<RevCommit> getCommitsStream (Git git) {
+    private Stream<RevCommit> getCommitsStream(Git git) {
         try {
             return StreamSupport.stream(
                 git.log()
@@ -142,7 +142,7 @@ public class Evaluator {
         }
     }
 
-    private Stream<RevCommit> getTaskAssotiatedCommitsStream (AssignmentStatus assignmentStatus, Git git) {
+    private Stream<RevCommit> getTaskAssotiatedCommitsStream(AssignmentStatus assignmentStatus, Git git) {
         try {
             return StreamSupport.stream(
                 git.log()
@@ -157,7 +157,7 @@ public class Evaluator {
         }
     }
 
-    private LocalDate getCommitLocalDate (RevCommit commit) {
+    private LocalDate getCommitLocalDate(RevCommit commit) {
         PersonIdent authorIdent = commit.getCommitterIdent();
         Date authorDate = authorIdent.getWhen();
         TimeZone authorTimeZone = authorIdent.getTimeZone();
@@ -167,7 +167,7 @@ public class Evaluator {
             .toLocalDate();
     }
 
-    private void evaluateAssignmentFinishedDate (AssignmentStatus assignmentStatus, Git git) {
+    private void evaluateAssignmentFinishedDate(AssignmentStatus assignmentStatus, Git git) {
         getTaskAssotiatedCommitsStream(assignmentStatus, git)
             .map(this::getCommitLocalDate)
             .max(LocalDate::compareTo)
@@ -178,7 +178,7 @@ public class Evaluator {
             }); // TODO в принципе проверка лишняя, ибо это будет проверяться только в мастере
     }
 
-    private void evaluateAssignmentStartedDate (AssignmentStatus assignmentStatus, Git git) {
+    private void evaluateAssignmentStartedDate(AssignmentStatus assignmentStatus, Git git) {
         getTaskAssotiatedCommitsStream(assignmentStatus, git)
             .map(this::getCommitLocalDate)
             .min(LocalDate::compareTo)
@@ -189,7 +189,7 @@ public class Evaluator {
             });
     }
 
-    private boolean checkoutToBranch (String branch, Git git) {
+    private boolean checkoutToBranch(String branch, Git git) {
         try {
             git.checkout()
                 .setName(branch)
@@ -211,7 +211,7 @@ public class Evaluator {
         }
     }
 
-    private void evaluateOnMaster (Git git) {
+    private void evaluateOnMaster(Git git) {
         evaluateAttendance(student, git);
 
         student.getAssignmentStatusList()
@@ -226,7 +226,7 @@ public class Evaluator {
             );
     }
 
-    private void evaluateOnDocsBranch (Git git) {
+    private void evaluateOnDocsBranch(Git git) {
         student.getAssignmentStatusList()
             .stream()
             .filter(assignmentStatus -> new File(getPathToTask(assignmentStatus, git)).exists())
@@ -235,7 +235,7 @@ public class Evaluator {
         evaluateAttendance(student, git);
     }
 
-    private void evaluateSpecifiedTaskOnItsBranch (Git git, AssignmentStatus assignmentStatus) {
+    private void evaluateSpecifiedTaskOnItsBranch(Git git, AssignmentStatus assignmentStatus) {
         evaluateAssignmentStartedDate(assignmentStatus, git);
         if (!assignmentStatus.getPass().isFinished()) {
             runGradleEvaluator(assignmentStatus, git);
@@ -244,7 +244,7 @@ public class Evaluator {
         evaluateAttendance(student, git);
     }
 
-    public void evaluate () {
+    public void evaluate() {
         log.info("Checking {}'s repo", student.getNickName());
         var dir = new File(TMP_DIR + student.getNickName());
 

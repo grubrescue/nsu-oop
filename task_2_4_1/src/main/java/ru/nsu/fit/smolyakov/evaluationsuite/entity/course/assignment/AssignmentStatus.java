@@ -32,17 +32,17 @@ public class AssignmentStatus implements Serializable {
     @Setter
     String message = "(non overridden) empty message";
 
-    public AssignmentStatus (@NonNull Assignment assignment, @NonNull String identifierAlias, String branch) {
+    public AssignmentStatus(@NonNull Assignment assignment, @NonNull String identifierAlias, String branch) {
         this.assignment = assignment;
         this.identifierAlias = identifierAlias;
         this.branch = branch;
     }
 
-    public boolean hasBranch () {
+    public boolean hasBranch() {
         return Objects.nonNull(this.branch);
     }
 
-    public Optional<String> getBranch () {
+    public Optional<String> getBranch() {
         return Optional.ofNullable(this.branch);
     }
 
@@ -53,19 +53,19 @@ public class AssignmentStatus implements Serializable {
         LocalDate started = LocalDate.MAX;
         LocalDate finished = LocalDate.MAX;
 
-        public boolean isSkippedSoftDeadline () {
+        public boolean isSkippedSoftDeadline() {
             return this.started.isAfter(AssignmentStatus.this.assignment.getSoftDeadline().plusDays(1));
         }
 
-        public boolean isSkippedHardDeadline () {
+        public boolean isSkippedHardDeadline() {
             return this.finished.isAfter(AssignmentStatus.this.assignment.getHardDeadline().plusDays(1));
         }
 
-        public boolean isStarted () {
+        public boolean isStarted() {
             return !this.started.equals(NOT_STARTED);
         }
 
-        public boolean isFinished () {
+        public boolean isFinished() {
             return !this.finished.equals(NOT_STARTED);
         }
     }
@@ -82,44 +82,44 @@ public class AssignmentStatus implements Serializable {
         Double jacocoCoverage = null;
         Double overriddenTaskPoints = null;
 
-        public boolean isTestsPassed () {
+        public boolean isTestsPassed() {
             return isTestsCompile() &&
                 jacocoCoverage >= AssignmentStatus.this.assignment.getJacocoPassCoefficient();
         }
 
-        public boolean isTestsCompile () {
+        public boolean isTestsCompile() {
             return jacocoCoverage != null;
         }
 
-        public void setTestsCompile () {
+        public void setTestsCompile() {
             this.jacocoCoverage = 0.0;
         }
 
-        public Optional<Double> getJacocoCoverage () {
+        public Optional<Double> getJacocoCoverage() {
             return Optional.ofNullable(jacocoCoverage);
         }
 
-        public void setJacocoCoverage (double coverage) {
+        public void setJacocoCoverage(double coverage) {
             this.jacocoCoverage = coverage;
         }
 
-        public void setTestsPassed () {
+        public void setTestsPassed() {
             this.jacocoCoverage = 1.0;
         }
 
-        public void overrideTaskPoints (double points) {
+        public void overrideTaskPoints(double points) {
             this.overriddenTaskPoints = points;
         }
 
-        public void notOverrideTaskPoints () {
+        public void notOverrideTaskPoints() {
             this.overriddenTaskPoints = null;
         }
 
-        public boolean isOverridden () {
+        public boolean isOverridden() {
             return Objects.nonNull(this.overriddenTaskPoints);
         }
 
-        public double getCalculatedTaskPoints () {
+        public double getCalculatedTaskPoints() {
             double sum = 0;
             int amount = 0;
 
@@ -135,11 +135,11 @@ public class AssignmentStatus implements Serializable {
             return AssignmentStatus.this.assignment.getSolvedPoints() * (sum / amount);
         }
 
-        public Optional<Double> getOverriddenTaskPoints () {
+        public Optional<Double> getOverriddenTaskPoints() {
             return Optional.ofNullable(overriddenTaskPoints);
         }
 
-        public double getEarnedPoints () {
+        public double getEarnedPoints() {
             if (!AssignmentStatus.this.getPass().isFinished()) {
                 return 0.0;
             } else if (this.isOverridden()) {
@@ -149,7 +149,7 @@ public class AssignmentStatus implements Serializable {
             }
         }
 
-        public double getFine () {
+        public double getFine() {
             double fine = 0;
             if (AssignmentStatus.this.getPass().isSkippedSoftDeadline()) {
                 fine += AssignmentStatus.this.assignment.getSoftDeadlineSkipFine();
@@ -161,7 +161,7 @@ public class AssignmentStatus implements Serializable {
             return fine;
         }
 
-        public double getResultingPoints () {
+        public double getResultingPoints() {
             if (!AssignmentStatus.this.getPass().isFinished()) {
                 return getFine();
             } else {

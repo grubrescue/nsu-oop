@@ -28,25 +28,25 @@ public class Student implements Serializable {
     @Singular("newLesson")
     List<LessonStatus> lessonStatusList;
 
-    public Optional<AssignmentStatus> getAssignmentStatusByAssignment (Assignment assignment) {
+    public Optional<AssignmentStatus> getAssignmentStatusByAssignment(Assignment assignment) {
         return assignmentStatusList.stream()
             .filter(assignmentStatus -> assignmentStatus.getAssignment().equals(assignment))
             .findFirst();
     }
 
-    public Optional<LessonStatus> getLessonStatusByLesson (Lesson lesson) {
+    public Optional<LessonStatus> getLessonStatusByLesson(Lesson lesson) {
         return lessonStatusList.stream()
             .filter(lessonStatus -> lessonStatus.getLesson().equals(lesson))
             .findFirst();
     }
 
-    public int calculateAmountOfAttendantLessons () {
+    public int calculateAmountOfAttendantLessons() {
         return (int) lessonStatusList.stream()
             .filter(LessonStatus::isBeenOnALesson)
             .count();
     }
 
-    public double calculateTotalPoints () {
+    public double calculateTotalPoints() {
         return assignmentStatusList.stream()
             .map(assignmentStatus -> assignmentStatus.getGrade().getResultingPoints())
             .reduce(Double::sum)

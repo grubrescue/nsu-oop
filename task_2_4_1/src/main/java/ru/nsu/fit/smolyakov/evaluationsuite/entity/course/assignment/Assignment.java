@@ -26,11 +26,11 @@ public class Assignment implements Serializable {
     double solvedPoints;
     boolean runTests;
 
-    public AssignmentStatus newAssignmentStatusInstance () {
+    public AssignmentStatus newAssignmentStatusInstance() {
         return newAssignmentStatusInstance(defaultBranch);
     }
 
-    public AssignmentStatus newAssignmentStatusInstance (String branch) {
+    public AssignmentStatus newAssignmentStatusInstance(String branch) {
         return new AssignmentStatus(this, identifier, branch);
     }
 }

@@ -17,15 +17,15 @@ public class OverriddenTaskDto {
     private String message;
     private String branch;
 
-    void startedAt (String dateString) {
+    void startedAt(String dateString) {
         this.started = LocalDate.parse(dateString);
     }
 
-    void finishedAt (String dateString) {
+    void finishedAt(String dateString) {
         this.finished = LocalDate.parse(dateString);
     }
 
-    void solvedWithPoints (double points) {
+    void solvedWithPoints(double points) {
         this.points = points;
     }
 }

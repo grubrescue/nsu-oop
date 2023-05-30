@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class EvaluationPresenter {
     private final SubjectData subjectData;
 
-    public void printAttendance (TablePrinter printer) {
+    public void printAttendance(TablePrinter printer) {
         printer.clear();
         printer.setTitle("Group " + subjectData.getGroup().getGroupName() + " attendance");
 
@@ -75,7 +75,7 @@ public class EvaluationPresenter {
         printer.print();
     }
 
-    private String assignmentStatusToCellString (AssignmentStatus assignmentStatus) {
+    private String assignmentStatusToCellString(AssignmentStatus assignmentStatus) {
         var softCh = !assignmentStatus.getPass().isSkippedSoftDeadline() ? 's' : '-';
         var hardCh = !assignmentStatus.getPass().isSkippedHardDeadline() ? 'h' : '-';
 
@@ -111,7 +111,7 @@ public class EvaluationPresenter {
         );
     }
 
-    public void printEvaluation (TablePrinter printer) {
+    public void printEvaluation(TablePrinter printer) {
         printer.clear();
         printer.setTitle("Group " + subjectData.getGroup().getGroupName() + " tasks evaluation");
 
@@ -165,7 +165,7 @@ public class EvaluationPresenter {
         printer.print();
     }
 
-    public void printStudent (Student student) {
+    public void printStudent(Student student) {
         // TODO
     }
 }

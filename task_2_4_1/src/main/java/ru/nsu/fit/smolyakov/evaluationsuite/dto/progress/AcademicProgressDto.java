@@ -17,7 +17,7 @@ public class AcademicProgressDto {
     private final OverriddenStudentMap overriddenStudents
         = new OverriddenStudentMap();
 
-    void overrideProgress (Closure<?> closure) {
+    void overrideProgress(Closure<?> closure) {
         groovyDelegate(overriddenStudents, closure);
     }
 
@@ -26,7 +26,7 @@ public class AcademicProgressDto {
         private final Map<String, OverriddenStudentDto> map
             = new HashMap<>();
 
-        void forStudent (String nickName, Closure<?> closure) {
+        void forStudent(String nickName, Closure<?> closure) {
             var overrideInfo = new OverriddenStudentDto();
             groovyDelegate(overrideInfo, closure);
             map.put(nickName, overrideInfo);

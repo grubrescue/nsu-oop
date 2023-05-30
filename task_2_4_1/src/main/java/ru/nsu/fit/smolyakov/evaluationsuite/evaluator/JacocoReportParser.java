@@ -29,19 +29,19 @@ public class JacocoReportParser {
     @JacksonXmlElementWrapper(useWrapping = false)
     private List<Counter> counterList;
 
-    public static JacocoReportParser parse (File reportXml) throws IOException {
+    public static JacocoReportParser parse(File reportXml) throws IOException {
         return xmlMapper.readValue(
             reportXml,
             JacocoReportParser.class);
     }
 
-    public Optional<Counter> getCounterByType (CounterType counterType) {
+    public Optional<Counter> getCounterByType(CounterType counterType) {
         return counterList.stream()
             .filter(counter -> counter.type == counterType)
             .findFirst();
     }
 
-    public Optional<Double> getCoverageByType (CounterType counterType) {
+    public Optional<Double> getCoverageByType(CounterType counterType) {
         return getCounterByType(counterType)
             .map(counter ->
                 (double) counter.covered / (counter.covered + counter.missed)
