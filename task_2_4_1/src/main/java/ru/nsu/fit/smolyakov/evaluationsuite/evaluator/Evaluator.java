@@ -120,7 +120,7 @@ public class Evaluator {
             .stream()
             .filter(assignmentStatus -> new File(getPathToTask(assignmentStatus, repo)).exists())
             .forEach(assignmentStatus -> {
-                    log.info("Evaluating {} task", assignmentStatus.getIdentifierAlias());
+                    log.info("Evaluating {} task on master", assignmentStatus.getIdentifierAlias());
                     evaluateAssignmentStartedDate(assignmentStatus, repo);
                     evaluateAssignmentFinishedDate(assignmentStatus, repo);
                     runGradleEvaluator(assignmentStatus, repo);
@@ -141,6 +141,8 @@ public class Evaluator {
         evaluateAssignmentStartedDate(assignmentStatus, repo);
         if (!assignmentStatus.getPass().isFinished()) {
             runGradleEvaluator(assignmentStatus, repo);
+        } else {
+            log.info("Already ran Gradle; no need to do it again");
         }
 
         evaluateAttendance(repo);
@@ -152,11 +154,11 @@ public class Evaluator {
 
         log.info("Cloning {}", student.getRepoUrl());
         try (StudentRepository repo = new StudentRepository(student.getRepoUrl(), dir)) {
-            log.info("On master branch");
+            log.info("Evaluating on master branch");
             evaluateOnMaster(repo);
 
             if (repo.checkoutToBranch(student.getDocsBranch())) {
-                log.info("Switched to {} branch", student.getDocsBranch());
+                log.info("Switched to {} branch, evaluating", student.getDocsBranch());
                 evaluateOnDocsBranch(repo);
             }
 
@@ -165,7 +167,10 @@ public class Evaluator {
                     assignmentStatus -> {
                         assignmentStatus.getBranch().ifPresent((branch) -> {
                             if (repo.checkoutToBranch(branch)) {
-                                log.info("Evaluating {} task", assignmentStatus.getIdentifierAlias());
+                                log.info("Evaluating {} task on {} branch",
+                                    assignmentStatus.getIdentifierAlias(),
+                                    branch
+                                );
                                 evaluateSpecifiedTaskOnItsBranch(repo, assignmentStatus);
                             }
                         });

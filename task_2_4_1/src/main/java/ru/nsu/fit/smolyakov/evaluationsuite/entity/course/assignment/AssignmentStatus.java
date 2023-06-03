@@ -121,7 +121,9 @@ public class AssignmentStatus implements Serializable {
             amount++;
 
             if (AssignmentStatus.this.assignment.isRunTests()) {
-                sum += (jacocoCoverage != null ? jacocoCoverage : 0);
+                sum += jacocoCoverage != null
+                    && jacocoCoverage >= AssignmentStatus.this.assignment.getJacocoPassCoefficient()
+                    ? jacocoCoverage : 0;
                 amount++;
             }
             return AssignmentStatus.this.assignment.getSolvedPoints() * (sum / amount);

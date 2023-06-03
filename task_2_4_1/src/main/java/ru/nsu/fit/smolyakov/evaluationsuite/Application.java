@@ -5,7 +5,6 @@ import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import ru.nsu.fit.smolyakov.evaluationsuite.dto.SubjectDataDto;
-import ru.nsu.fit.smolyakov.evaluationsuite.entity.group.Student;
 import ru.nsu.fit.smolyakov.evaluationsuite.evaluator.Evaluator;
 import ru.nsu.fit.smolyakov.evaluationsuite.presenter.EvaluationPresenter;
 import ru.nsu.fit.smolyakov.evaluationsuite.util.SubjectDataDtoToEntity;
@@ -49,7 +48,7 @@ public class Application {
         subjectData.getGroup()
             .getStudentList()
             .stream()
-            .map((Student t) -> new Evaluator(student))
+            .map(Evaluator::new)
             .forEach(Evaluator::evaluate);
         ;
 
@@ -60,8 +59,8 @@ public class Application {
 
         presenter.printEvaluation(new ConsoleTablePrinter());
         presenter.printAttendance(new ConsoleTablePrinter());
-        presenter.printEvaluation(new HtmlTablePrinter("evaluation.html"));
-        presenter.printAttendance(new HtmlTablePrinter("attendance.html"));
+        presenter.printEvaluation(new HtmlTablePrinter("examples/evaluation.html"));
+        presenter.printAttendance(new HtmlTablePrinter("examples/attendance.html"));
     }
 
     public void parseDto(Object dto, String path) throws IOException {
