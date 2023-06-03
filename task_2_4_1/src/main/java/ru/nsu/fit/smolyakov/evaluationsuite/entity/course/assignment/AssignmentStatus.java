@@ -1,12 +1,9 @@
 package ru.nsu.fit.smolyakov.evaluationsuite.entity.course.assignment;
 
-import lombok.AccessLevel;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.FieldDefaults;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -15,22 +12,18 @@ import java.util.Optional;
 
 @ToString(exclude = {"assignment"})
 @Getter
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class AssignmentStatus implements Serializable {
     public static final LocalDate NOT_STARTED = LocalDate.MAX; // todo ??
 
-    @NonNull
-    final Assignment assignment;
-    final Pass pass = new Pass();
-    final Grade grade = new Grade();
-    @NonNull
+    private final Assignment assignment;
+    private final Pass pass = new Pass();
+    private final Grade grade = new Grade();
     @Setter
-    String identifierAlias;
+    private String identifierAlias;
     @Setter
-    String branch;
-    @NonNull
+    private String branch;
     @Setter
-    String message = "(non overridden) empty message";
+    private String message = "(non overridden) empty message";
 
     public AssignmentStatus(@NonNull Assignment assignment, @NonNull String identifierAlias, String branch) {
         this.assignment = assignment;
@@ -46,12 +39,12 @@ public class AssignmentStatus implements Serializable {
         return Optional.ofNullable(this.branch);
     }
 
-    @Data
-    @FieldDefaults(level = AccessLevel.PRIVATE)
+    @Setter
+    @Getter
     @NonNull
     public class Pass implements Serializable { // todo rename
-        LocalDate started = LocalDate.MAX;
-        LocalDate finished = LocalDate.MAX;
+        private LocalDate started = LocalDate.MAX;
+        private LocalDate finished = LocalDate.MAX;
 
         public boolean isSkippedSoftDeadline() {
             return this.started.isAfter(AssignmentStatus.this.assignment.getSoftDeadline().plusDays(1));
@@ -70,17 +63,16 @@ public class AssignmentStatus implements Serializable {
         }
     }
 
-    @FieldDefaults(level = AccessLevel.PRIVATE)
     public class Grade implements Serializable {
         @Getter
         @Setter
-        boolean buildPassed = false;
+        private boolean buildPassed = false;
         @Getter
         @Setter
-        boolean javadocPassed = false;
+        private boolean javadocPassed = false;
 
-        Double jacocoCoverage = null;
-        Double overriddenTaskPoints = null;
+        private Double jacocoCoverage = null;
+        private Double overriddenTaskPoints = null;
 
         public boolean isTestsPassed() {
             return isTestsCompile() &&

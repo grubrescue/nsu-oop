@@ -26,7 +26,7 @@ public class HtmlTablePrinter implements TablePrinter {
     }
 
     private static String convertMultilineCell(String cell) {
-        return cell.replace("\n", "<div>");
+        return cell.replace("\n", "<div>").concat("</div>");
     }
 
     @Override

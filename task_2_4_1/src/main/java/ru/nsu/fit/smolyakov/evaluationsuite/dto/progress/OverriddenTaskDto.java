@@ -1,21 +1,27 @@
 package ru.nsu.fit.smolyakov.evaluationsuite.dto.progress;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NonNull;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Getter
-@RequiredArgsConstructor
+@Setter
 public class OverriddenTaskDto {
     private final String taskName;
-    private final boolean noBranch = false;
+
+    private boolean noBranch = false;
     private String identifierAlias;
     private LocalDate started;
     private LocalDate finished;
     private Double points;
     private String message;
     private String branch;
+
+    public OverriddenTaskDto(@NonNull String taskName) {
+        this.taskName = taskName;
+    }
 
     void startedAt(String dateString) {
         this.started = LocalDate.parse(dateString);

@@ -47,8 +47,6 @@ public class GradleRunner { // TODO rename
         ) {
             log.info("Starting Gradle evaluator");
 
-//            runTask(connection, "clean"); // TODO таймаут???
-
             tasks.forEach(task -> {
                 if (runTask(connection, task.name())) {
                     task.runIfSuccess().run();

@@ -5,6 +5,7 @@ import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import ru.nsu.fit.smolyakov.evaluationsuite.dto.SubjectDataDto;
+import ru.nsu.fit.smolyakov.evaluationsuite.entity.group.Student;
 import ru.nsu.fit.smolyakov.evaluationsuite.evaluator.Evaluator;
 import ru.nsu.fit.smolyakov.evaluationsuite.presenter.EvaluationPresenter;
 import ru.nsu.fit.smolyakov.evaluationsuite.util.SubjectDataDtoToEntity;
@@ -48,13 +49,13 @@ public class Application {
         subjectData.getGroup()
             .getStudentList()
             .stream()
-            .map(Evaluator::new)
-//            .forEach(Evaluator::evaluate);
+            .map((Student t) -> new Evaluator(student))
+            .forEach(Evaluator::evaluate);
         ;
 
-//        SubjectDataEntitySerializer.serialize(subjectData, "privet.dat");
+        SubjectDataEntitySerializer.serialize(subjectData, "dump");
 
-        var entity = SubjectDataEntitySerializer.deserialize("privet.dat");
+        var entity = SubjectDataEntitySerializer.deserialize("dump");
         var presenter = new EvaluationPresenter(entity);
 
         presenter.printEvaluation(new ConsoleTablePrinter());

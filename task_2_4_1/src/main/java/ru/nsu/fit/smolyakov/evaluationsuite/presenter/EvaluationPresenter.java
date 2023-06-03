@@ -6,7 +6,6 @@ import ru.nsu.fit.smolyakov.evaluationsuite.entity.SubjectData;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.assignment.AssignmentStatus;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.lesson.Lesson;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.lesson.LessonStatus;
-import ru.nsu.fit.smolyakov.evaluationsuite.entity.group.Student;
 import ru.nsu.fit.smolyakov.tableprinter.TablePrinter;
 
 import java.util.ArrayList;
@@ -165,7 +164,60 @@ public class EvaluationPresenter {
         printer.print();
     }
 
-    public void printStudent(Student student) {
-        // TODO
-    }
+//    public void printAssignmentStatus(AssignmentStatus assignmentStatus, TablePrinter printer) {
+//        printer.clear();
+//        printer.setTitle("Assignment status");
+//
+//        printer.appendRow(List.of("Task", assignmentStatus.getAssignment().getIdentifier()));
+//        printer.appendRow(
+//            List.of(
+//                "Soft deadline",
+//                (!assignmentStatus.getPass().isSkippedSoftDeadline() ? "ok" : "skip")
+//                    + " "
+//                    + assignmentStatus.getPass().getStarted()
+//                + " (" + assignmentStatus.getAssignment().getSoftDeadline() + ")"
+//            )
+//        );
+//        printer.appendRow(
+//            List.of(
+//                "Hard deadline",
+//                (!assignmentStatus.getPass().isSkippedHardDeadline() ? "ok" : "skip")
+//                    + " "
+//                    + assignmentStatus.getPass().getFinished()
+//                    + " (" + assignmentStatus.getAssignment().getHardDeadline() + ")"
+//            )
+//        );
+//
+//        printer.appendRow(
+//            List.of(
+//                "Build",
+//                (!assignmentStatus.getGrade().isBuildPassed() ? "ok" : "fail")
+//            )
+//        );
+//
+//        printer.appendRow(
+//            List.of(
+//                "Javadoc",
+//                (!assignmentStatus.getGrade().isJavadocPassed() ? "ok" : "fail")
+//            )
+//        );
+//
+//        printer.appendRow(
+//            List.of(
+//                "Tests",
+//                (assignmentStatus.getGrade().isTestsPassed() ? "ok" : "fail")
+//                    + " "
+//                    + "%.3f".formatted(assignmentStatus.getGrade().getJacocoCoverage().orElse(-666.6))
+//            )
+//        );
+//
+//        printer.appendRow(
+//            List.of(
+//                "Grade",
+//                "%.3f".formatted(assignmentStatus.getGrade().getResultingPoints())
+//            )
+//        );
+//
+//        printer.print();
+//    }
 }

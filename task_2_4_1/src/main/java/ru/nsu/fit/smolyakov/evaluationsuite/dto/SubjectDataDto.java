@@ -11,7 +11,7 @@ import ru.nsu.fit.smolyakov.evaluationsuite.dto.schedule.ScheduleDto;
  * A main DTO class, each field of which is a DTO, representing corresponding Groovy DSL block.
  */
 @Getter
-public class SubjectDataDto { // TODO rename // TODO у всех классов менять аннотации а то какой то всратыш уродился
+public class SubjectDataDto {
     private final GroupDto groupDto = new GroupDto();
     private final ScheduleDto scheduleDto = new ScheduleDto();
     private final CourseDto courseDto = new CourseDto();

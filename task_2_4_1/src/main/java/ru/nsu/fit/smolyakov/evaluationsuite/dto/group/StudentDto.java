@@ -2,13 +2,17 @@ package ru.nsu.fit.smolyakov.evaluationsuite.dto.group;
 
 import lombok.Getter;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @Getter
-@RequiredArgsConstructor
+@Setter
 public class StudentDto {
-    @NonNull String nickName;
-    String fullName = "unspecified name";
-    String repo;
-    String defaultBranch;
+    public StudentDto(@NonNull String nickName) {
+        this.nickName = nickName;
+    }
+    private final String nickName;
+
+    private String fullName = "unspecified name";
+    private String repo;
+    private String defaultBranch;
 }

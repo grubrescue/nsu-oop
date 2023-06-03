@@ -1,6 +1,6 @@
 package ru.nsu.fit.smolyakov.evaluationsuite.util;
 
-import lombok.RequiredArgsConstructor;
+import lombok.NonNull;
 import ru.nsu.fit.smolyakov.evaluationsuite.dto.SubjectDataDto;
 import ru.nsu.fit.smolyakov.evaluationsuite.dto.course.TaskDto;
 import ru.nsu.fit.smolyakov.evaluationsuite.dto.group.StudentDto;
@@ -17,9 +17,12 @@ import ru.nsu.fit.smolyakov.evaluationsuite.entity.group.Student;
 
 import java.util.Optional;
 
-@RequiredArgsConstructor
 public class SubjectDataDtoToEntity {
     private final SubjectDataDto subjectDataDto;
+
+    public SubjectDataDtoToEntity(@NonNull SubjectDataDto subjectDataDto) {
+        this.subjectDataDto = subjectDataDto;
+    }
 
     private String convertToRepoUrl(String nickName, String repoName) {
         var gitDto = subjectDataDto.getConfigurationDto().getGitDto();
@@ -36,7 +39,7 @@ public class SubjectDataDtoToEntity {
 
         var assignmentDto = scheduleDto.getAssignments().getMap().get(taskDto.getName());
         if (assignmentDto == null) {
-            throw new RuntimeException("No assignment for task " + taskDto.getName()); // TODO custom exceptions
+            throw new RuntimeException("No assignment for task " + taskDto.getName());
         }
 
         return Assignment.builder()
@@ -66,7 +69,7 @@ public class SubjectDataDtoToEntity {
             .getList()
             .stream()
             .map(this::taskDtoToEntity)
-            .toList(); // СПИСОК ЗАДАЧ
+            .toList();
 
         var lessonList = scheduleDto.getLessons()
             .getList()
