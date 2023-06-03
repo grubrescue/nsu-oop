@@ -4,13 +4,15 @@ import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
+import ru.nsu.fit.smolyakov.consoleinterpreter.command.SingleArgCommand;
+import ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.CommandProvider;
+import ru.nsu.fit.smolyakov.consoleinterpreter.interpreter.Interpreter;
 import ru.nsu.fit.smolyakov.evaluationsuite.dto.SubjectDataDto;
 import ru.nsu.fit.smolyakov.evaluationsuite.evaluator.Evaluator;
 import ru.nsu.fit.smolyakov.evaluationsuite.presenter.EvaluationPresenter;
 import ru.nsu.fit.smolyakov.evaluationsuite.util.SubjectDataDtoToEntity;
 import ru.nsu.fit.smolyakov.evaluationsuite.util.SubjectDataEntitySerializer;
 import ru.nsu.fit.smolyakov.tableprinter.implementations.ConsoleTablePrinter;
-import ru.nsu.fit.smolyakov.tableprinter.implementations.HtmlTablePrinter;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,18 +51,42 @@ public class Application {
             .getStudentList()
             .stream()
             .map(Evaluator::new)
-            .forEach(Evaluator::evaluate);
+//            .forEach(Evaluator::evaluate);
         ;
 
-        SubjectDataEntitySerializer.serialize(subjectData, "dump");
-
+//        SubjectDataEntitySerializer.serialize(subjectData, "dump");
+//
         var entity = SubjectDataEntitySerializer.deserialize("dump");
         var presenter = new EvaluationPresenter(entity);
 
-        presenter.printEvaluation(new ConsoleTablePrinter());
-        presenter.printAttendance(new ConsoleTablePrinter());
-        presenter.printEvaluation(new HtmlTablePrinter("examples/evaluation.html"));
-        presenter.printAttendance(new HtmlTablePrinter("examples/attendance.html"));
+//        presenter.printEvaluation(new HtmlTablePrinter("examples/evaluation.html"));
+//        presenter.printAttendance(new HtmlTablePrinter("examples/attendance.html"));
+
+        var rootProvider = new CommandProvider("[user123]");
+
+        var interpreter = new Interpreter(rootProvider);
+
+        var forTaskProvider = new CommandProvider("forTask");
+        var forStudentProvider = new CommandProvider("forStudent");
+
+        rootProvider.registerCommand(
+            "print",
+            new SingleArgCommand<>(
+                (what) -> {
+                    if (what.equals("evaluation")) {
+                        presenter.printEvaluation(new ConsoleTablePrinter());
+                    } else if (what.equals("attendance")) {
+                        presenter.printAttendance(new ConsoleTablePrinter());
+                    } else {
+                        interpreter.showError("Unknown argument: " + what);
+                    }
+                })
+        );
+
+        rootProvider.registerSubprocessor("forStudent", forStudentProvider);
+        forStudentProvider.registerSubprocessor("forTask", forTaskProvider);
+
+        interpreter.start();
     }
 
     public void parseDto(Object dto, String path) throws IOException {

@@ -6,6 +6,6 @@ import java.util.function.Consumer;
 
 public class SingleArgCommand<T> extends Command<T> {
     public SingleArgCommand(@NonNull Consumer<T> consumer) {
-        super(0, singleArgList -> consumer.accept(singleArgList.get(0)));
+        super(1, singleArgList -> consumer.accept(singleArgList.get(0)));
     }
 }

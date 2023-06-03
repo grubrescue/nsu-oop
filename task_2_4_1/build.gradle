@@ -48,3 +48,7 @@ jacocoTestReport {
         html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
     }
 }
+
+run {
+    standardInput = System.in
+}
