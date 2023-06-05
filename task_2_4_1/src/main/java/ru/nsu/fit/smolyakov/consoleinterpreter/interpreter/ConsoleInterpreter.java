@@ -14,6 +14,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * Console interpreter.
+ * Uses {@link System#in} for input.
+ */
 public class ConsoleInterpreter {
     /**
      * Successful exit code.
