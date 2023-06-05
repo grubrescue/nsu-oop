@@ -2,7 +2,6 @@ package ru.nsu.fit.smolyakov.consoleinterpreter.processor;
 
 import lombok.Getter;
 import lombok.NonNull;
-import ru.nsu.fit.smolyakov.consoleinterpreter.command.NoArgsCommand;
 import ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.AbstractCommandProvider;
 import ru.nsu.fit.smolyakov.consoleinterpreter.exception.EmptyInputException;
 import ru.nsu.fit.smolyakov.consoleinterpreter.exception.MismatchedAmountOfCommandArgumentsException;
@@ -18,8 +17,7 @@ public class Processor {
         = new Stack<>();
     // TODO надо бы ограничить доступ к этой штуке
 
-    public Processor(@NonNull AbstractCommandProvider rootProvider) {
-        rootProvider.registerCommand("done", new NoArgsCommand<>(providerStack::pop));
+    public void pushProvider(@NonNull AbstractCommandProvider rootProvider) {
         this.providerStack.push(rootProvider);
     }
 
