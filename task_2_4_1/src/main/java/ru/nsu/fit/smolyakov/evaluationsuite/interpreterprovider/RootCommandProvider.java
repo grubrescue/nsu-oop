@@ -1,6 +1,7 @@
 package ru.nsu.fit.smolyakov.evaluationsuite.interpreterprovider;
 
 import lombok.NonNull;
+import lombok.extern.log4j.Log4j2;
 import ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.AbstractCommandProvider;
 import ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.annotation.ConsoleCommand;
 import ru.nsu.fit.smolyakov.consoleinterpreter.exception.InternalCommandException;
@@ -19,11 +20,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.ZonedDateTime;
 
 import static ru.nsu.fit.smolyakov.evaluationsuite.Constants.DUMP_FILE_PATH;
 import static ru.nsu.fit.smolyakov.evaluationsuite.Constants.HTML_ATTENDANCE;
 import static ru.nsu.fit.smolyakov.evaluationsuite.Constants.HTML_EVALUATION;
 
+@Log4j2
 public class RootCommandProvider extends AbstractCommandProvider {
     private SubjectData subjectData;
 
@@ -63,6 +66,8 @@ public class RootCommandProvider extends AbstractCommandProvider {
             .stream()
             .map(Evaluator::new)
             .forEach(Evaluator::evaluate);
+        this.subjectData
+            .setLastUpdate(ZonedDateTime.now());
     }
 
     @ConsoleCommand(description = "prints evaluation or attendance table to console")
@@ -97,7 +102,7 @@ public class RootCommandProvider extends AbstractCommandProvider {
             .getByNickName(studentName)
             .ifPresentOrElse(
                 student -> {
-                    getConsoleProcessor().pushProvider(
+                    getConsoleProcessor().getProviderStack().push(
                         new ForStudentCommandProvider(
                             getConsoleProcessor(),
                             studentName,
@@ -114,18 +119,20 @@ public class RootCommandProvider extends AbstractCommandProvider {
 
     public RootCommandProvider(@NonNull ConsoleProcessor consoleProcessor,
                                @NonNull String username) {
-        super(consoleProcessor, "User [" + username + "]");
+        super(consoleProcessor, "" + username + ":");
         if (new File(DUMP_FILE_PATH).exists()) {
             try {
                 this.subjectData = SubjectDataEntitySerializer.deserialize(DUMP_FILE_PATH);
                 return;
             } catch (IOException ignored) {
+                log.warn("Failed to deserialize dump file, creating new one");
             }
         }
 
         try {
             this.subjectData = new SubjectDataDtoToEntity(ConfigToDtoDeserializer.deserialize()).convert();
         } catch (IOException e) {
+            log.fatal("Failed to deserialize config file");
             throw new RuntimeException(e);
         }
     }

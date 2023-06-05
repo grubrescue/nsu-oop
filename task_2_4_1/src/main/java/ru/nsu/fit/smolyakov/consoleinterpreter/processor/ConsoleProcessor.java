@@ -17,10 +17,6 @@ public class ConsoleProcessor {
         = new Stack<>();
     // TODO надо бы ограничить доступ к этой штуке
 
-    public void pushProvider(@NonNull AbstractCommandProvider rootProvider) {
-        this.providerStack.push(rootProvider);
-    }
-
     private record ParseResult(
         String instruction,
         List<String> args

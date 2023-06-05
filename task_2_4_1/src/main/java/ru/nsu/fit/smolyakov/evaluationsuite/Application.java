@@ -13,7 +13,7 @@ public class Application {
             processor,
             System.getProperty("user.name")
             );
-        processor.pushProvider(rootCommandProvider);
+        processor.getProviderStack().push(rootCommandProvider);
         System.exit(new ConsoleInterpreter(processor).start());
     }
 }

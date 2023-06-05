@@ -33,7 +33,7 @@ public class ForStudentCommandProvider extends AbstractCommandProvider {
                     student.getAssignmentStatusByAssignment(assignment)
                             .ifPresentOrElse(
                                 assignmentStatus -> {
-                                    getConsoleProcessor().pushProvider(
+                                    getConsoleProcessor().getProviderStack().push(
                                         new ForTaskCommandProvider(
                                             getConsoleProcessor(),
                                             taskName,

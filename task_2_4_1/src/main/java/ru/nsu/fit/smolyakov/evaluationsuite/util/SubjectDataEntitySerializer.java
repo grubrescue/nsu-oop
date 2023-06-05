@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.ZonedDateTime;
 
 public class SubjectDataEntitySerializer {
     public static SubjectData deserialize(String filename) throws IOException {
@@ -25,6 +26,7 @@ public class SubjectDataEntitySerializer {
         FileOutputStream fileOutputStream
             = new FileOutputStream(filename);
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
+            subjectData.setLastUpdate(ZonedDateTime.now());
             objectOutputStream.writeObject(subjectData);
             objectOutputStream.flush();
         }

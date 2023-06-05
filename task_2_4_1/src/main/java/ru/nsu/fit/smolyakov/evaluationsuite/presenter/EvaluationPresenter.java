@@ -18,7 +18,8 @@ public class EvaluationPresenter {
 
     public void printAttendance(TablePrinter printer) throws IOException {
         printer.clear();
-        printer.setTitle("Group " + subjectData.getGroup().getGroupName() + " attendance");
+        printer.setTitle("Group " + subjectData.getGroup().getGroupName()
+            + " attendance (" + subjectData.getLastUpdate() + ")");
 
         var lessonList = new ArrayList<String>();
 
@@ -113,7 +114,8 @@ public class EvaluationPresenter {
 
     public void printEvaluation(TablePrinter printer) throws IOException {
         printer.clear();
-        printer.setTitle("Group " + subjectData.getGroup().getGroupName() + " tasks evaluation");
+        printer.setTitle("Group " + subjectData.getGroup().getGroupName() +
+            " tasks evaluation (" + subjectData.getLastUpdate() + ")");
 
         var heading = new ArrayList<String>();
         heading.add("\n      \\Task\nStudent\\\n");
@@ -164,6 +166,7 @@ public class EvaluationPresenter {
 
         printer.print();
     }
+}
 
 //    public void printAssignmentStatus(AssignmentStatus assignmentStatus, TablePrinter printer) {
 //        printer.clear();
@@ -221,4 +224,4 @@ public class EvaluationPresenter {
 //
 //        printer.print();
 //    }
-}
+

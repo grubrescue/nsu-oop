@@ -15,6 +15,7 @@ import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.lesson.LessonStatus;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.group.Group;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.group.Student;
 
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 public class SubjectDataDtoToEntity {
@@ -186,6 +187,6 @@ public class SubjectDataDtoToEntity {
 
         overrideStudentsStatuses(group);
 
-        return new SubjectData(course, group);
+        return new SubjectData(course, group, ZonedDateTime.now());
     }
 }

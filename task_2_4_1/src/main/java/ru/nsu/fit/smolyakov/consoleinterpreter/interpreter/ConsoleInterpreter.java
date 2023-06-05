@@ -26,6 +26,7 @@ public class ConsoleInterpreter {
         this.consolePresenter = new ConsolePresenter(consoleProcessor);
     }
 
+
     public void showError(String message) {
         System.out.println(consolePresenter.errorString(message));
     }
@@ -33,6 +34,7 @@ public class ConsoleInterpreter {
     /**
      * Starts the interpreter.
      * @return exit code
+     * @throws IOException if an I/O error occurs
      */
     public int start() throws IOException {
         var reader = new BufferedReader(new InputStreamReader(System.in));
