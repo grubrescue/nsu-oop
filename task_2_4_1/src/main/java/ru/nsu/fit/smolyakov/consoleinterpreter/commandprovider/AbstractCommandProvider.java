@@ -4,7 +4,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;
 import ru.nsu.fit.smolyakov.consoleinterpreter.command.Command;
-import ru.nsu.fit.smolyakov.consoleinterpreter.processor.Processor;
+import ru.nsu.fit.smolyakov.consoleinterpreter.command.NoArgsCommand;
+import ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.annotation.CommandProviderAnnotationProcessor;
+import ru.nsu.fit.smolyakov.consoleinterpreter.processor.ConsoleProcessor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,26 +20,31 @@ public abstract class AbstractCommandProvider {
     @Getter
     private final String representation;
     @Getter(value = AccessLevel.PROTECTED)
-    private final Processor processor;
+    private final ConsoleProcessor consoleProcessor;
 
-    protected AbstractCommandProvider(@NonNull Processor processor,
+    protected AbstractCommandProvider(@NonNull ConsoleProcessor consoleProcessor,
                                       @NonNull String representation) {
-        this(processor, representation, Map.of());
+        this(consoleProcessor, representation, Map.of());
     }
 
-    protected AbstractCommandProvider(@NonNull Processor processor,
+    protected AbstractCommandProvider(@NonNull ConsoleProcessor consoleProcessor,
                                       @NonNull String representation,
                                       @NonNull Map<String, Command<String>> commandMap) {
-        this.processor = processor;
+        this.consoleProcessor = consoleProcessor;
         this.representation = representation;
         this.commandMap.putAll(commandMap);
+
+        this.commandMap.put("exit", new NoArgsCommand<>(() -> consoleProcessor.getProviderStack().clear()));
+        this.commandMap.put("done", new NoArgsCommand<>(() -> consoleProcessor.getProviderStack().pop()));
+
+        CommandProviderAnnotationProcessor.annotate(this);
     }
 
-    protected boolean registerCommand(String commandName, Command<String> command) {
+    public boolean registerCommand(String commandName, Command<String> command) {
         return Objects.isNull(commandMap.putIfAbsent(commandName, command));
     }
 
-    protected Optional<Command<String>> getCommand(String commandName) {
+    public Optional<Command<String>> getCommand(String commandName) {
         return Optional.ofNullable(commandMap.get(commandName));
     }
 }

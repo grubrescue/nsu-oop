@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-public class Processor {
+public class ConsoleProcessor {
     @Getter
     private final Stack<AbstractCommandProvider> providerStack
         = new Stack<>();

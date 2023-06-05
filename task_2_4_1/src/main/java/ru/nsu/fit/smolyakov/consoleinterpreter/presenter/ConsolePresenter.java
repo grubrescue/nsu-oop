@@ -1,18 +1,18 @@
 package ru.nsu.fit.smolyakov.consoleinterpreter.presenter;
 
 import lombok.NonNull;
-import ru.nsu.fit.smolyakov.consoleinterpreter.processor.Processor;
+import ru.nsu.fit.smolyakov.consoleinterpreter.processor.ConsoleProcessor;
 
-public class Presenter {
-    private final Processor processor;
+public class ConsolePresenter {
+    private final ConsoleProcessor consoleProcessor;
 
-    public Presenter(@NonNull Processor processor) {
-        this.processor = processor;
+    public ConsolePresenter(@NonNull ConsoleProcessor consoleProcessor) {
+        this.consoleProcessor = consoleProcessor;
     }
 
     public String promptString() {
         StringBuilder stringBuilder = new StringBuilder();
-        processor.getProviderStack().forEach(
+        consoleProcessor.getProviderStack().forEach(
             provider -> {
                 stringBuilder.append(" > ");
                 stringBuilder.append(provider.getRepresentation());

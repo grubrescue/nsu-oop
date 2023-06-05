@@ -4,15 +4,13 @@ import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
-import ru.nsu.fit.smolyakov.consoleinterpreter.command.SingleArgCommand;
-import ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.AbstractCommandProvider;
-import ru.nsu.fit.smolyakov.consoleinterpreter.interpreter.Interpreter;
+import ru.nsu.fit.smolyakov.consoleinterpreter.interpreter.ConsoleInterpreter;
+import ru.nsu.fit.smolyakov.consoleinterpreter.processor.ConsoleProcessor;
 import ru.nsu.fit.smolyakov.evaluationsuite.dto.SubjectDataDto;
 import ru.nsu.fit.smolyakov.evaluationsuite.evaluator.Evaluator;
-import ru.nsu.fit.smolyakov.evaluationsuite.presenter.EvaluationPresenter;
+import ru.nsu.fit.smolyakov.evaluationsuite.interpreter.provider.RootCommandProvider;
 import ru.nsu.fit.smolyakov.evaluationsuite.util.SubjectDataDtoToEntity;
 import ru.nsu.fit.smolyakov.evaluationsuite.util.SubjectDataEntitySerializer;
-import ru.nsu.fit.smolyakov.tableprinter.implementations.ConsoleTablePrinter;
 
 import java.io.File;
 import java.io.IOException;
@@ -56,34 +54,22 @@ public class Application {
 
 //        SubjectDataEntitySerializer.serialize(subjectData, "dump");
 //
-        var entity = SubjectDataEntitySerializer.deserialize("dump");
-        var presenter = new EvaluationPresenter(entity);
+        var subjectDataDeserialized = SubjectDataEntitySerializer.deserialize("dump");
+//        var presenter = new EvaluationPresenter(entity);
+
+
 
 //        presenter.printEvaluation(new HtmlTablePrinter("examples/evaluation.html"));
 //        presenter.printAttendance(new HtmlTablePrinter("examples/attendance.html"));
 
-        var rootProvider = new AbstractCommandProvider("[user123]");
-
-        var interpreter = new Interpreter(rootProvider);
-
-        var forTaskProvider = new AbstractCommandProvider("forTask");
-        var forStudentProvider = new AbstractCommandProvider("forStudent");
-
-        rootProvider.registerCommand(
-            "print",
-            new SingleArgCommand<>(
-                (what) -> {
-                    if (what.equals("evaluation")) {
-                        presenter.printEvaluation(new ConsoleTablePrinter());
-                    } else if (what.equals("attendance")) {
-                        presenter.printAttendance(new ConsoleTablePrinter());
-                    } else {
-                        interpreter.showError("Unknown argument: " + what);
-                    }
-                })
-        );
-
-        interpreter.start();
+        var processor = new ConsoleProcessor();
+        var rootCommandProvider = new RootCommandProvider(
+            processor,
+            System.getProperty("user.name"),
+            subjectDataDeserialized
+            );
+        processor.pushProvider(rootCommandProvider);
+        System.exit(new ConsoleInterpreter(processor).start());
     }
 
     public void parseDto(Object dto, String path) throws IOException {
