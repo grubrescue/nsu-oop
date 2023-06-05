@@ -6,7 +6,17 @@ import ru.nsu.fit.smolyakov.evaluationsuite.interpreterprovider.RootCommandProvi
 
 import java.io.IOException;
 
+/**
+ * Main class.
+ */
 public class Application {
+    /**
+     * Main method. Runs the {@link ConsoleInterpreter},
+     * using {@link RootCommandProvider} as the root command provider.
+     *
+     * @param args command line arguments (ignored)
+     * @throws IOException if an I/O error occurs
+     */
     public static void main(String... args) throws IOException {
         var processor = new ConsoleProcessor();
         var rootCommandProvider = new RootCommandProvider(

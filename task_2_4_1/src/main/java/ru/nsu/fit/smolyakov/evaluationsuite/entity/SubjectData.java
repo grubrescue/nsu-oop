@@ -10,6 +10,9 @@ import ru.nsu.fit.smolyakov.evaluationsuite.entity.group.Group;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 
+/**
+ * Data about a subject (course and group).
+ */
 @NonNull
 @Getter
 @AllArgsConstructor

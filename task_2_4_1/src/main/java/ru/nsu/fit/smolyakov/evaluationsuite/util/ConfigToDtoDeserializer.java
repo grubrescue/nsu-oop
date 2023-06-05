@@ -16,15 +16,27 @@ import static ru.nsu.fit.smolyakov.evaluationsuite.Constants.GROUP_FILE_PATH;
 import static ru.nsu.fit.smolyakov.evaluationsuite.Constants.PROGRESS_FILE_PATH;
 import static ru.nsu.fit.smolyakov.evaluationsuite.Constants.SCHEDULE_FILE_PATH;
 
+/**
+ * Deserializes DSL scripts to DTOs in {@link ru.nsu.fit.smolyakov.evaluationsuite.dto}.
+ */
 public class ConfigToDtoDeserializer {
     private final GroovyShell sh;
 
+    /**
+     * Constructs a new {@link ConfigToDtoDeserializer}.
+     */
     public ConfigToDtoDeserializer() {
         CompilerConfiguration cc = new CompilerConfiguration();
         cc.setScriptBaseClass(DelegatingScript.class.getName());
         sh = new GroovyShell(Application.class.getClassLoader(), new Binding(), cc);
     }
 
+    /**
+     * Deserializes DSL scripts to DTOs in {@link ru.nsu.fit.smolyakov.evaluationsuite.dto}.
+     *
+     * @return {@link SubjectDataDto} with deserialized data
+     * @throws IOException if an I/O error occurs
+     */
     public static SubjectDataDto deserialize() throws IOException {
         var deserializer = new ConfigToDtoDeserializer();
         var subjectDataDto = new SubjectDataDto();

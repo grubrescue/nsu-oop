@@ -11,6 +11,7 @@ public class StudentDto {
     private String fullName = "unspecified name";
     private String repo;
     private String defaultBranch;
+
     public StudentDto(@NonNull String nickName) {
         this.nickName = nickName;
     }

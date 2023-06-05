@@ -8,10 +8,24 @@ import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.assignment.AssignmentS
 
 import java.time.LocalDate;
 
+/**
+ * Command provider for the "forTask" command.
+ * Allows to override task status.
+ *
+ * @see ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.annotation.ConsoleCommand
+ */
 public class ForTaskCommandProvider extends AbstractCommandProvider {
     private final SubjectData subjectData;
     private final AssignmentStatus assignmentStatus;
 
+    /**
+     * Creates a new command provider for the "forTask" command.
+     *
+     * @param consoleProcessor console processor
+     * @param taskName         task name used for representation
+     * @param assignmentStatus assignment status
+     * @param subjectData      subject data
+     */
     public ForTaskCommandProvider(ConsoleProcessor consoleProcessor,
                                   String taskName,
                                   AssignmentStatus assignmentStatus,

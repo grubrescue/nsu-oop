@@ -18,9 +18,17 @@ import ru.nsu.fit.smolyakov.evaluationsuite.entity.group.Student;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
+/**
+ * Utility class for converting {@link SubjectDataDto} to {@link SubjectData}.
+ */
 public class SubjectDataDtoToEntity {
     private final SubjectDataDto subjectDataDto;
 
+    /**
+     * Creates a new {@link SubjectDataDtoToEntity}.
+     *
+     * @param subjectDataDto subject data DTO to convert
+     */
     public SubjectDataDtoToEntity(@NonNull SubjectDataDto subjectDataDto) {
         this.subjectDataDto = subjectDataDto;
     }
@@ -181,6 +189,11 @@ public class SubjectDataDtoToEntity {
             );
     }
 
+    /**
+     * Converts the DTO to the entity.
+     *
+     * @return the entity
+     */
     public SubjectData convert() {
         var course = generateCourseFromDtos();
         var group = generateGroupFromDtos(course);

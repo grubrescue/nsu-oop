@@ -19,10 +19,23 @@ import java.util.TimeZone;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+/**
+ * A class to work with student's repository.
+ *
+ * <p>Uses JGit library as a backend.
+ */
 @Log4j2
 public class StudentRepository implements AutoCloseable {
     private final Git git;
 
+    /**
+     * Creates an instance of {@link StudentRepository} and clones repository from given URI.
+     *
+     * @param uri       repository URI
+     *                  (e.g. {@code https://github.com/evangelionexpert/oop.git}). Supposed to be valid.
+     * @param directory directory to clone repository to
+     * @throws GitAPIException if an error occurs during cloning
+     */
     public StudentRepository(String uri, File directory) throws GitAPIException {
         git = Git.cloneRepository()
             .setURI(uri)
@@ -31,12 +44,23 @@ public class StudentRepository implements AutoCloseable {
             .call();
     }
 
+    /**
+     * Returns the absolute path to the repository directory.
+     *
+     * @return absolute path to the repository directory
+     */
     public String getAbsolutePath() {
         var repoPath = git.getRepository().getDirectory().getAbsolutePath();
         // substring without ".git"
         return repoPath.substring(0, repoPath.length() - 4);
     }
 
+    /**
+     * Checkouts to the latest commit on the given branch.
+     *
+     * @param branch branch name
+     * @return true on success, false otherwise
+     */
     public boolean checkoutToBranch(String branch) {
         try {
             git.checkout()
@@ -69,6 +93,12 @@ public class StudentRepository implements AutoCloseable {
             .toLocalDate();
     }
 
+    /**
+     * Returns a stream of commits on the given folder.
+     *
+     * @param folderPath path to the folder
+     * @return stream of commits; empty stream if an error occurs
+     */
     public Stream<Commit> getCommitsStream(String folderPath) {
         try {
             return StreamSupport.stream(
@@ -84,6 +114,11 @@ public class StudentRepository implements AutoCloseable {
         }
     }
 
+    /**
+     * Returns a stream of all commits in the repository.
+     *
+     * @return stream of commits; empty stream if an error occurs
+     */
     public Stream<Commit> getCommitsStream() {
         try {
             return StreamSupport.stream(
@@ -98,26 +133,63 @@ public class StudentRepository implements AutoCloseable {
         }
     }
 
+    /**
+     * Returns a last commit in the repository.
+     *
+     * @return an {@link Optional} of the last commit;
+     * {@link Optional#empty()} if there are no commits
+     * or an error occurs
+     */
     public Optional<Commit> getLastCommit() {
         return getCommitsStream()
             .max(Comparator.comparing(Commit::date));
     }
 
+    /**
+     * Returns a last commit in the given folder.
+     *
+     * @param folderPath path to the folder
+     * @return an {@link Optional} of the last commit;
+     * {@link Optional#empty()} if there are no commits
+     * or an error occurs
+     */
     public Optional<Commit> getLastCommit(String folderPath) {
         return getCommitsStream(folderPath)
             .max(Comparator.comparing(Commit::date));
     }
 
+    /**
+     * Returns a first commit in the repository.
+     *
+     * @return an {@link Optional} of the first commit;
+     * {@link Optional#empty()} if there are no commits
+     * or an error occurs
+     */
     public Optional<Commit> getFirstCommit() {
         return getCommitsStream()
             .min(Comparator.comparing(Commit::date));
     }
 
+    /**
+     * Returns a first commit in the given folder.
+     *
+     * @param folderPath path to the folder
+     * @return an {@link Optional} of the first commit;
+     * {@link Optional#empty()} if there are no commits
+     * or an error occurs
+     */
     public Optional<Commit> getFirstCommit(String folderPath) {
         return getCommitsStream(folderPath)
             .min(Comparator.comparing(Commit::date));
     }
 
+    /**
+     * Returns if there were any commits during the given period.
+     *
+     * @param after  the start of the period
+     * @param before the end of the period
+     * @return true if there were any commits during the given period, false otherwise
+     */
     public boolean isCommittedDuringPeriod(LocalDate after, LocalDate before) {
         return getCommitsStream()
             .map(Commit::date)
@@ -125,6 +197,12 @@ public class StudentRepository implements AutoCloseable {
             .anyMatch(commitDate -> commitDate.isBefore(before));
     }
 
+    /**
+     * Returns if there were any commits during the given week.
+     *
+     * @param dayOnAWeek a day of the week
+     * @return true if there were any commits during the given week, false otherwise
+     */
     public boolean isCommittedDuringWeek(LocalDate dayOnAWeek) {
         return isCommittedDuringPeriod(
             dayOnAWeek.minusDays(dayOnAWeek.getDayOfWeek().getValue() - DayOfWeek.MONDAY.getValue() + 1),
@@ -132,11 +210,24 @@ public class StudentRepository implements AutoCloseable {
         );
     }
 
+    /**
+     * Closes the repository.
+     *
+     * @throws Exception if an error occurs
+     * @see org.eclipse.jgit.api.Git#close()
+     * @see AutoCloseable
+     */
     @Override
     public void close() throws Exception {
         git.close();
     }
 
+    /**
+     * A representation of a commit.
+     *
+     * @param shortMessage short commit message
+     * @param date         commit date
+     */
     public record Commit(String shortMessage, LocalDate date) {
     }
 }

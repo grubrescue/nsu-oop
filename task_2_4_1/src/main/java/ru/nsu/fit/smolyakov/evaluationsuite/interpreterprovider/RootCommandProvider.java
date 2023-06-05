@@ -22,14 +22,28 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.ZonedDateTime;
 
+import static ru.nsu.fit.smolyakov.evaluationsuite.Constants.DUMP_FILE_BACKUP_PATH;
 import static ru.nsu.fit.smolyakov.evaluationsuite.Constants.DUMP_FILE_PATH;
 import static ru.nsu.fit.smolyakov.evaluationsuite.Constants.HTML_ATTENDANCE;
 import static ru.nsu.fit.smolyakov.evaluationsuite.Constants.HTML_EVALUATION;
 
+/**
+ * Root command provider, that is used to interact with the evaluation suite
+ * and to save the current state of the evaluation.
+ */
 @Log4j2
 public class RootCommandProvider extends AbstractCommandProvider {
     private SubjectData subjectData;
 
+    /**
+     * Creates a new root command provider. If the dump file exists, it is deserialized,
+     * otherwise the config file is deserialized and converted to the subject data.
+     * If the config file is not found, the program will crash.
+     *
+     * @param consoleProcessor console processor
+     * @param username         username of the user, that is using the program (for representation purposes)
+     * @see ConfigToDtoDeserializer for config file deserialization
+     */
     public RootCommandProvider(@NonNull ConsoleProcessor consoleProcessor,
                                @NonNull String username) {
         super(consoleProcessor, "" + username + ":");
@@ -58,7 +72,7 @@ public class RootCommandProvider extends AbstractCommandProvider {
     @ConsoleCommand(description = "copies dumps/dump into dumps/dump.bak")
     private void backupDump() throws IOException {
         var originalPath = Paths.get(DUMP_FILE_PATH);
-        var copied = Paths.get(DUMP_FILE_PATH + ".bak");
+        var copied = Paths.get(DUMP_FILE_BACKUP_PATH);
         Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
         this.subjectData = SubjectDataEntitySerializer.deserialize(DUMP_FILE_PATH);
     }
@@ -66,7 +80,7 @@ public class RootCommandProvider extends AbstractCommandProvider {
     @ConsoleCommand(description = "restores dumps/dump from dumps/dump.bak")
     private void restoreDump() throws IOException {
         var originalPath = Paths.get(DUMP_FILE_PATH);
-        var copied = Paths.get(DUMP_FILE_PATH + ".bak");
+        var copied = Paths.get(DUMP_FILE_BACKUP_PATH);
         Files.copy(copied, originalPath, StandardCopyOption.REPLACE_EXISTING);
         this.subjectData = SubjectDataEntitySerializer.deserialize(DUMP_FILE_PATH);
     }

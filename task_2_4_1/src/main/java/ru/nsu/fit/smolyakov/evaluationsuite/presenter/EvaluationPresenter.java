@@ -1,7 +1,6 @@
 package ru.nsu.fit.smolyakov.evaluationsuite.presenter;
 
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.SubjectData;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.assignment.AssignmentStatus;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.lesson.Lesson;
@@ -11,11 +10,35 @@ import ru.nsu.fit.smolyakov.tableprinter.TablePrinter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@RequiredArgsConstructor
-@NonNull
+/**
+ * Presenter for {@link SubjectData}.
+ * Prints attendance and evaluation tables.
+ *
+ * @see SubjectData
+ * @see TablePrinter
+ */
 public class EvaluationPresenter {
     private final SubjectData subjectData;
 
+    /**
+     * Creates a new presenter.
+     *
+     * @param subjectData subject data to present
+     */
+    public EvaluationPresenter(@NonNull SubjectData subjectData) {
+        this.subjectData = subjectData;
+    }
+
+    /**
+     * Prints evaluation table to given printer.
+     * The table is a matrix with students in rows and assignments in columns.
+     *
+     * <p>"+" means that the student was on a lesson,
+     * " " means that the student wasn't.
+     *
+     * @param printer printer to print to
+     * @throws IOException if an I/O error occurs
+     */
     public void printAttendance(TablePrinter printer) throws IOException {
         printer.clear();
         printer.setTitle("Group " + subjectData.getGroup().getGroupName()
@@ -43,7 +66,6 @@ public class EvaluationPresenter {
         lessonList.add("\nTOTAL");
 
         printer.appendRow(lessonList);
-
 
         subjectData.getGroup()
             .getStudentList()
@@ -112,6 +134,23 @@ public class EvaluationPresenter {
         );
     }
 
+    /**
+     * Prints evaluation table to given printer.
+     * The table is a matrix of students and assignments; every cell is a status of the assignment.
+     *
+     * <p>"s" means that the student passed the soft deadline,
+     * "h" means that the student passed the hard deadline,
+     * "j" means that the student passed the javadoc check,
+     * "b" means that the student passed the build check,
+     * "t" means that the student passed the tests check,
+     * "*" means that the student's grade was overridden,
+     * "?" means that the student didn't finish the assignment.
+     *
+     * <p>Points are calculated by corresponding {@link AssignmentStatus} methods.
+     *
+     * @param printer printer to print to
+     * @throws IOException if an I/O error occurs
+     */
     public void printEvaluation(TablePrinter printer) throws IOException {
         printer.clear();
         printer.setTitle("Group " + subjectData.getGroup().getGroupName() +
@@ -167,61 +206,3 @@ public class EvaluationPresenter {
         printer.print();
     }
 }
-
-//    public void printAssignmentStatus(AssignmentStatus assignmentStatus, TablePrinter printer) {
-//        printer.clear();
-//        printer.setTitle("Assignment status");
-//
-//        printer.appendRow(List.of("Task", assignmentStatus.getAssignment().getIdentifier()));
-//        printer.appendRow(
-//            List.of(
-//                "Soft deadline",
-//                (!assignmentStatus.getPass().isSkippedSoftDeadline() ? "ok" : "skip")
-//                    + " "
-//                    + assignmentStatus.getPass().getStarted()
-//                + " (" + assignmentStatus.getAssignment().getSoftDeadline() + ")"
-//            )
-//        );
-//        printer.appendRow(
-//            List.of(
-//                "Hard deadline",
-//                (!assignmentStatus.getPass().isSkippedHardDeadline() ? "ok" : "skip")
-//                    + " "
-//                    + assignmentStatus.getPass().getFinished()
-//                    + " (" + assignmentStatus.getAssignment().getHardDeadline() + ")"
-//            )
-//        );
-//
-//        printer.appendRow(
-//            List.of(
-//                "Build",
-//                (!assignmentStatus.getGrade().isBuildPassed() ? "ok" : "fail")
-//            )
-//        );
-//
-//        printer.appendRow(
-//            List.of(
-//                "Javadoc",
-//                (!assignmentStatus.getGrade().isJavadocPassed() ? "ok" : "fail")
-//            )
-//        );
-//
-//        printer.appendRow(
-//            List.of(
-//                "Tests",
-//                (assignmentStatus.getGrade().isTestsPassed() ? "ok" : "fail")
-//                    + " "
-//                    + "%.3f".formatted(assignmentStatus.getGrade().getJacocoCoverage().orElse(-666.6))
-//            )
-//        );
-//
-//        printer.appendRow(
-//            List.of(
-//                "Grade",
-//                "%.3f".formatted(assignmentStatus.getGrade().getResultingPoints())
-//            )
-//        );
-//
-//        printer.print();
-//    }
-

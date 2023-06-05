@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Table printer that prints to HTML file.
+ */
 public class HtmlTablePrinter implements TablePrinter {
     private final File file;
     private final List<List<String>> table
@@ -17,10 +20,22 @@ public class HtmlTablePrinter implements TablePrinter {
     @Setter
     private String title = "(no title)";
 
+    /**
+     * Creates a new HTML table printer.
+     * Prints to given file.
+     *
+     * @param filename file to print to
+     */
     public HtmlTablePrinter(String filename) {
         this(new File(filename));
     }
 
+    /**
+     * Creates a new HTML table printer.
+     * Prints to given file.
+     *
+     * @param file file to print to
+     */
     public HtmlTablePrinter(File file) {
         this.file = file;
     }
@@ -29,6 +44,13 @@ public class HtmlTablePrinter implements TablePrinter {
         return cell.replace("\n", "<div>").concat("</div>");
     }
 
+    /**
+     * Appends a row to the table.
+     * Multiline cells are supported.
+     * {@code \n} is replaced with {@code <div>} tag.
+     *
+     * @param cells cells of the row
+     */
     @Override
     public void appendRow(List<String> cells) {
         var convertedRow = cells.stream()
@@ -38,6 +60,9 @@ public class HtmlTablePrinter implements TablePrinter {
         table.add(convertedRow);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void print() throws IOException {
         try (var writer = new BufferedWriter(new FileWriter(file))) {
@@ -91,6 +116,9 @@ public class HtmlTablePrinter implements TablePrinter {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void clear() {
         table.clear();

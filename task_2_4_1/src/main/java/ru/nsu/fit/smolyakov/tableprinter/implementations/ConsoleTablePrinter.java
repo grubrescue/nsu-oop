@@ -5,27 +5,56 @@ import lombok.Setter;
 import ru.nsu.fit.smolyakov.tableprinter.TablePrinter;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Table printer that prints to console.
+ */
 @NonNull
 public class ConsoleTablePrinter implements TablePrinter {
+    /**
+     * Separator between cells.
+     */
     public final static String CELL_SEPARATOR = " | ";
+
     private final PrintStream printStream;
     private final List<List<String>> table
         = new ArrayList<>(); // inner are rows, outer are columns
+
+    @NonNull
     @Setter
     private String title = "(no title)";
 
+    /**
+     * Creates a new console table printer.
+     * Prints to {@link System#out}.
+     */
     public ConsoleTablePrinter() {
         this(System.out);
     }
 
+    /**
+     * Creates a new console table printer.
+     * Prints to given print stream.
+     *
+     * @param printStream print stream to print to
+     */
     public ConsoleTablePrinter(PrintStream printStream) {
         this.printStream = printStream;
     }
 
+    /**
+     * Creates a new console table printer.
+     * Prints to given file.
+     *
+     * @param fileName file to print to
+     * @throws FileNotFoundException if the file exists but is a directory
+     *                               rather than a regular file, does not exist but cannot be created,
+     *                               or cannot be opened for any other reason
+     */
     public ConsoleTablePrinter(String fileName) throws FileNotFoundException {
         this(new PrintStream(fileName));
     }
@@ -73,7 +102,13 @@ public class ConsoleTablePrinter implements TablePrinter {
         return result;
     }
 
-    // trreats \n as a new row
+    /**
+     * Appends a row to the table.
+     * Multiline cells are supported (lines split by {@code \n}
+     * character turns into separate rows).
+     *
+     * @param cells cells of the row
+     */
     @Override
     public void appendRow(List<String> cells) {
         var rows = cells.stream()
@@ -83,8 +118,13 @@ public class ConsoleTablePrinter implements TablePrinter {
         table.addAll(transpose(rows));
     }
 
+    /**
+     * Prints the table.
+     *
+     * @throws IOException if an I/O error occurs
+     */
     @Override
-    public void print() {
+    public void print() throws IOException {
         printStream.println(title);
 
         int columnsAmount = table.stream()
@@ -123,6 +163,9 @@ public class ConsoleTablePrinter implements TablePrinter {
         printStream.println();
     }
 
+    /**
+     * Clears the table.
+     */
     @Override
     public void clear() {
         table.clear();

@@ -8,12 +8,29 @@ import ru.nsu.fit.smolyakov.evaluationsuite.entity.group.Student;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Evaluator, that is used to evaluate the student's progress.
+ * It is used to evaluate the student's attendance and the student's tasks.
+ */
 @Log4j2
 public class Evaluator {
+    /**
+     * Relative path to jacoco report.
+     */
     public final static String JACOCO_REPORT_RELATIVE_PATH = "/build/reports/jacoco/test/jacocoTestReport.xml";
+
+    /**
+     * Relative temporary path to the directory with student's tasks (these are only
+     * used to evaluate the student's tasks once).
+     */
     public final String TMP_DIR = ".checks_tmp/" + System.currentTimeMillis() + "/";
     private final Student student;
 
+    /**
+     * Creates a new evaluator for given student.
+     *
+     * @param student student to evaluate
+     */
     public Evaluator(@NonNull Student student) {
         this.student = student;
     }
@@ -147,6 +164,9 @@ public class Evaluator {
         evaluateAttendance(repo);
     }
 
+    /**
+     * Evaluates student's repo and sets grades for each task and attendance.
+     */
     public void evaluate() {
         log.info("Checking {}'s repo", student.getNickName());
         var dir = new File(TMP_DIR + student.getNickName());

@@ -6,6 +6,9 @@ import lombok.NonNull;
 
 import java.io.Serializable;
 
+/**
+ * Lesson status.
+ */
 @Data
 @NonNull
 @AllArgsConstructor

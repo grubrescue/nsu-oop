@@ -14,6 +14,14 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Abstract class for command providers.
+ * Contains a map of commands and a method to execute them.
+ *
+ * @see Command
+ * @see ConsoleProcessor
+ * @see CommandProviderAnnotationProcessor
+ */
 public abstract class AbstractCommandProvider {
     private final Map<String, Command<String>> commandMap
         = new HashMap<>();
@@ -23,11 +31,24 @@ public abstract class AbstractCommandProvider {
     @Getter(value = AccessLevel.PROTECTED)
     private final ConsoleProcessor consoleProcessor;
 
+    /**
+     * Creates a new command provider with given processor, representation and empty map of commands.
+     *
+     * @param consoleProcessor console processor
+     * @param representation   representation of this command provider
+     */
     protected AbstractCommandProvider(@NonNull ConsoleProcessor consoleProcessor,
                                       @NonNull String representation) {
         this(consoleProcessor, representation, Map.of());
     }
 
+    /**
+     * Creates a new command provider with given processor, representation and map of commands.
+     *
+     * @param consoleProcessor console processor
+     * @param representation   representation of this command provider
+     * @param commandMap       map of commands
+     */
     protected AbstractCommandProvider(@NonNull ConsoleProcessor consoleProcessor,
                                       @NonNull String representation,
                                       @NonNull Map<String, Command<String>> commandMap) {
@@ -45,10 +66,25 @@ public abstract class AbstractCommandProvider {
         }
     }
 
+    /**
+     * Registers a command with given name and command.
+     *
+     * @param commandName name of command
+     * @param command     command
+     * @return {@code true} if the name was not associated with any command before,
+     * {@code false} otherwise
+     */
     public boolean registerCommand(String commandName, Command<String> command) {
         return Objects.isNull(commandMap.put(commandName, command));
     }
 
+    /**
+     * Returns a command with given name.
+     *
+     * @param commandName name of command
+     * @return {@link Optional} of command with given name if it exists,
+     * {@link Optional#empty()} otherwise
+     */
     public Optional<Command<String>> getCommand(String commandName) {
         return Optional.ofNullable(commandMap.get(commandName));
     }

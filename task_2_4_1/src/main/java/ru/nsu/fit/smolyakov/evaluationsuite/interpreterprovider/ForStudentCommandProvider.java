@@ -10,14 +10,28 @@ import ru.nsu.fit.smolyakov.evaluationsuite.entity.group.Student;
 
 import java.time.LocalDate;
 
+/**
+ * Command provider for the "forStudent" command.
+ * Allows to override student status. Also allows to open a new block of commands for a specified task.
+ *
+ * @see ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.annotation.ConsoleCommand
+ */
 public class ForStudentCommandProvider extends AbstractCommandProvider {
     private final Student student;
     private final SubjectData subjectData;
 
-    protected ForStudentCommandProvider(@NonNull ConsoleProcessor consoleProcessor,
-                                        @NonNull String studentName,
-                                        @NonNull Student student,
-                                        @NonNull SubjectData subjectData) {
+    /**
+     * Creates a new command provider for the "forStudent" command.
+     *
+     * @param consoleProcessor console processor
+     * @param studentName      student name used for representation
+     * @param student          student
+     * @param subjectData      subject data
+     */
+    public ForStudentCommandProvider(@NonNull ConsoleProcessor consoleProcessor,
+                                     @NonNull String studentName,
+                                     @NonNull Student student,
+                                     @NonNull SubjectData subjectData) {
         super(consoleProcessor, "student [" + studentName + "]");
         this.student = student;
         this.subjectData = subjectData;

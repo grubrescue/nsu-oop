@@ -9,7 +9,23 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
+/**
+ * Annotation processor for {@link ConsoleCommand} annotation.
+ * Registers annotated methods as commands in given command provider.
+ *
+ * <p>As an additional feature, it generates help message for given command provider,
+ * basing on the signature of annotated methods and a {@link ConsoleCommand#description()}.
+ */
 public class CommandProviderAnnotationProcessor {
+    /**
+     * Registers annotated methods as commands in given command provider.
+     * Also generates help message for given command provider. One line of help message is represented as
+     * "{@code method_name[arity]   description}".
+     *
+     * @param commandProvider command provider to register commands in
+     * @throws TypeParametersUnsupportedByAnnotationException if any of annotated methods has parameters
+     *                                                        with type other than {@link String}
+     */
     public static void registerAnnotatedCommands(AbstractCommandProvider commandProvider)
         throws TypeParametersUnsupportedByAnnotationException {
         var clazz = commandProvider.getClass();
@@ -32,7 +48,7 @@ public class CommandProviderAnnotationProcessor {
 
             if (annotation != null) {
                 helpMessage.append(
-                    "%s[%d] - %s\n"
+                    "%s[%d]   %s\n"
                         .formatted(
                             method.getName(),
                             parameterTypes.length,

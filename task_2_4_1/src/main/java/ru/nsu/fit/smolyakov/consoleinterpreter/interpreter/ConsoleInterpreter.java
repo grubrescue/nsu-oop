@@ -15,17 +15,34 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class ConsoleInterpreter {
-    public final int EXIT_SUCCESS = 0;
-    public final int EXIT_FAILURE = 1;
+    /**
+     * Successful exit code.
+     */
+    public static final int EXIT_SUCCESS = 0;
+
+    /**
+     * Unsuccessful exit code.
+     */
+    public static final int EXIT_FAILURE = 1;
+
     private final ConsoleProcessor consoleProcessor;
     private final ConsolePresenter consolePresenter;
 
+    /**
+     * Creates a new console interpreter with given processor.
+     *
+     * @param consoleProcessor console processor
+     */
     public ConsoleInterpreter(@NonNull ConsoleProcessor consoleProcessor) {
         this.consoleProcessor = consoleProcessor;
         this.consolePresenter = new ConsolePresenter(consoleProcessor);
     }
 
-
+    /**
+     * Prints an error message.
+     *
+     * @param message message
+     */
     public void showError(String message) {
         System.out.println(consolePresenter.errorString(message));
     }
