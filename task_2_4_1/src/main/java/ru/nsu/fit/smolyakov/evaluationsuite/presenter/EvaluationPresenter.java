@@ -8,6 +8,7 @@ import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.lesson.Lesson;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.lesson.LessonStatus;
 import ru.nsu.fit.smolyakov.tableprinter.TablePrinter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 @RequiredArgsConstructor
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 public class EvaluationPresenter {
     private final SubjectData subjectData;
 
-    public void printAttendance(TablePrinter printer) {
+    public void printAttendance(TablePrinter printer) throws IOException {
         printer.clear();
         printer.setTitle("Group " + subjectData.getGroup().getGroupName() + " attendance");
 
@@ -110,7 +111,7 @@ public class EvaluationPresenter {
         );
     }
 
-    public void printEvaluation(TablePrinter printer) {
+    public void printEvaluation(TablePrinter printer) throws IOException {
         printer.clear();
         printer.setTitle("Group " + subjectData.getGroup().getGroupName() + " tasks evaluation");
 

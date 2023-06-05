@@ -39,7 +39,7 @@ public class HtmlTablePrinter implements TablePrinter {
     }
 
     @Override
-    public void print() {
+    public void print() throws IOException {
         try (var writer = new BufferedWriter(new FileWriter(file))) {
             writer.write("""
                 <!DOCTYPE html>
@@ -88,8 +88,6 @@ public class HtmlTablePrinter implements TablePrinter {
                 </body>
                 </html>
                 """);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 

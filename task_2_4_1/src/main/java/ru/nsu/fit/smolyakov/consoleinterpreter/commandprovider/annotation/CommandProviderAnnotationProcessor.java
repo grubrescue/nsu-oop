@@ -2,6 +2,7 @@ package ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.annotation;
 
 import ru.nsu.fit.smolyakov.consoleinterpreter.command.Command;
 import ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.AbstractCommandProvider;
+import ru.nsu.fit.smolyakov.consoleinterpreter.exception.InternalCommandException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -35,7 +36,7 @@ public class CommandProviderAnnotationProcessor {
                                 try {
                                     method.invoke(commandProvider, (Object[]) args.toArray(new String[parameterTypes.length]));
                                 } catch (IllegalAccessException | InvocationTargetException e) {
-                                    throw new RuntimeException(e);
+                                    throw new InternalCommandException(e.getCause().getMessage());
                                 }
                             }
                         )
