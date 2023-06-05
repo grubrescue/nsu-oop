@@ -1,7 +1,6 @@
 package ru.nsu.fit.smolyakov.evaluationsuite.interpreterprovider;
 
 import lombok.NonNull;
-import lombok.SneakyThrows;
 import ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.AbstractCommandProvider;
 import ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.annotation.ConsoleCommand;
 import ru.nsu.fit.smolyakov.consoleinterpreter.exception.InternalCommandException;
@@ -28,41 +27,36 @@ import static ru.nsu.fit.smolyakov.evaluationsuite.Constants.HTML_EVALUATION;
 public class RootCommandProvider extends AbstractCommandProvider {
     private SubjectData subjectData;
 
-    @ConsoleCommand
-    @SneakyThrows
-    private void save() {
+    @ConsoleCommand(description = "saves current state of the evaluation to dumps/dump")
+    private void save() throws IOException {
         SubjectDataEntitySerializer.serialize(this.subjectData, DUMP_FILE_PATH);
     }
 
-    @ConsoleCommand
-    @SneakyThrows
-    private void backupDump() {
+    @ConsoleCommand(description = "copies dumps/dump into dumps/dump.bak")
+    private void backupDump() throws IOException {
         var originalPath = Paths.get(DUMP_FILE_PATH);
         var copied = Paths.get(DUMP_FILE_PATH + ".bak");
         Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
         this.subjectData = SubjectDataEntitySerializer.deserialize(DUMP_FILE_PATH);
     }
 
-    @ConsoleCommand
-    @SneakyThrows
-    private void restoreDump() {
+    @ConsoleCommand(description = "restores dumps/dump from dumps/dump.bak")
+    private void restoreDump() throws IOException {
         var originalPath = Paths.get(DUMP_FILE_PATH);
         var copied = Paths.get(DUMP_FILE_PATH + ".bak");
         Files.copy(copied, originalPath, StandardCopyOption.REPLACE_EXISTING);
         this.subjectData = SubjectDataEntitySerializer.deserialize(DUMP_FILE_PATH);
     }
 
-    @ConsoleCommand
-    @SneakyThrows
-    private void cleanConfigDump() {
+    @ConsoleCommand(description = "generates an empty evaluation from groovy dsl configuration")
+    private void cleanFromConfig() throws IOException {
         backupDump();
         this.subjectData = new SubjectDataDtoToEntity(ConfigToDtoDeserializer.deserialize()).convert();
-        this.subjectData = SubjectDataEntitySerializer.deserialize(DUMP_FILE_PATH);
     }
 
-    @ConsoleCommand
-    private void evaluate() {
-        cleanConfigDump();
+    @ConsoleCommand(description = "generates an empty evaluation from groovy dsl configuration and evaluates it")
+    private void evaluate() throws IOException {
+        cleanFromConfig();
         this.subjectData
             .getGroup()
             .getStudentList()
@@ -71,9 +65,8 @@ public class RootCommandProvider extends AbstractCommandProvider {
             .forEach(Evaluator::evaluate);
     }
 
-    @ConsoleCommand
-    @SneakyThrows
-    private void print(String what) {
+    @ConsoleCommand(description = "prints evaluation or attendance table to console")
+    private void print(String what) throws IOException {
         switch (what) {
             case "attendance" ->
                     new EvaluationPresenter(subjectData)
@@ -85,9 +78,8 @@ public class RootCommandProvider extends AbstractCommandProvider {
         }
     }
 
-    @ConsoleCommand
-    @SneakyThrows
-    private void html(String what) {
+    @ConsoleCommand(description = "prints evaluation or attendance table to html file (located at html/)")
+    private void html(String what) throws IOException {
         switch (what) {
             case "attendance" ->
                     new EvaluationPresenter(subjectData)
@@ -99,8 +91,8 @@ public class RootCommandProvider extends AbstractCommandProvider {
         }
     }
 
-    @ConsoleCommand
-    private void forGroup(String studentName) {
+    @ConsoleCommand(description = "opens new block of commands for student with given nickname")
+    private void forStudent(String studentName) {
         this.subjectData.getGroup()
             .getByNickName(studentName)
             .ifPresentOrElse(
@@ -109,7 +101,8 @@ public class RootCommandProvider extends AbstractCommandProvider {
                         new ForStudentCommandProvider(
                             getConsoleProcessor(),
                             studentName,
-                            student
+                            student,
+                            subjectData
                         )
                     );
                 },

@@ -6,6 +6,7 @@ import lombok.NonNull;
 import ru.nsu.fit.smolyakov.consoleinterpreter.command.Command;
 import ru.nsu.fit.smolyakov.consoleinterpreter.command.NoArgsCommand;
 import ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.annotation.CommandProviderAnnotationProcessor;
+import ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.annotation.TypeParametersUnsupportedByAnnotationException;
 import ru.nsu.fit.smolyakov.consoleinterpreter.processor.ConsoleProcessor;
 
 import java.util.HashMap;
@@ -37,11 +38,15 @@ public abstract class AbstractCommandProvider {
         this.commandMap.put("exit", new NoArgsCommand<>(() -> consoleProcessor.getProviderStack().clear()));
         this.commandMap.put("done", new NoArgsCommand<>(() -> consoleProcessor.getProviderStack().pop()));
 
-        CommandProviderAnnotationProcessor.annotate(this);
+        try {
+            CommandProviderAnnotationProcessor.registerAnnotatedCommands(this);
+        } catch (TypeParametersUnsupportedByAnnotationException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public boolean registerCommand(String commandName, Command<String> command) {
-        return Objects.isNull(commandMap.putIfAbsent(commandName, command));
+        return Objects.isNull(commandMap.put(commandName, command));
     }
 
     public Optional<Command<String>> getCommand(String commandName) {
