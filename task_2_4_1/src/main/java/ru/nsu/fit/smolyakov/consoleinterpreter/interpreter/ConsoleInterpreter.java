@@ -15,11 +15,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class ConsoleInterpreter {
-    private final ConsoleProcessor consoleProcessor;
-    private final ConsolePresenter consolePresenter;
-
     public final int EXIT_SUCCESS = 0;
     public final int EXIT_FAILURE = 1;
+    private final ConsoleProcessor consoleProcessor;
+    private final ConsolePresenter consolePresenter;
 
     public ConsoleInterpreter(@NonNull ConsoleProcessor consoleProcessor) {
         this.consoleProcessor = consoleProcessor;
@@ -33,6 +32,7 @@ public class ConsoleInterpreter {
 
     /**
      * Starts the interpreter.
+     *
      * @return exit code
      * @throws IOException if an I/O error occurs
      */
@@ -52,7 +52,7 @@ public class ConsoleInterpreter {
                      | InternalCommandException e) {
                 showError(e.getMessage());
             } catch (ConsoleInterpreterException e) {
-                showError("UNKNOWN ERROR, EXITING: "+ e.getMessage());
+                showError("UNKNOWN ERROR, EXITING: " + e.getMessage());
                 return EXIT_FAILURE;
             }
         }

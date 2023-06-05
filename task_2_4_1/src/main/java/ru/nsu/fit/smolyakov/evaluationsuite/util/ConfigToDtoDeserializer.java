@@ -25,12 +25,6 @@ public class ConfigToDtoDeserializer {
         sh = new GroovyShell(Application.class.getClassLoader(), new Binding(), cc);
     }
 
-    private void parseDto(Object dto, String path) throws IOException {
-        DelegatingScript script = (DelegatingScript) sh.parse(new File(path));
-        script.setDelegate(dto);
-        script.run();
-    }
-
     public static SubjectDataDto deserialize() throws IOException {
         var deserializer = new ConfigToDtoDeserializer();
         var subjectDataDto = new SubjectDataDto();
@@ -42,5 +36,11 @@ public class ConfigToDtoDeserializer {
         deserializer.parseDto(subjectDataDto.getAcademicProgressDto(), PROGRESS_FILE_PATH);
 
         return subjectDataDto;
+    }
+
+    private void parseDto(Object dto, String path) throws IOException {
+        DelegatingScript script = (DelegatingScript) sh.parse(new File(path));
+        script.setDelegate(dto);
+        script.run();
     }
 }

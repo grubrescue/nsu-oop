@@ -10,9 +10,8 @@ import java.io.IOException;
 
 @Log4j2
 public class Evaluator {
-    public final String TMP_DIR = ".checks_tmp/" + System.currentTimeMillis() + "/";
     public final static String JACOCO_REPORT_RELATIVE_PATH = "/build/reports/jacoco/test/jacocoTestReport.xml";
-
+    public final String TMP_DIR = ".checks_tmp/" + System.currentTimeMillis() + "/";
     private final Student student;
 
     public Evaluator(@NonNull Student student) {
@@ -127,7 +126,7 @@ public class Evaluator {
                 }
             );
     }
-    
+
     private void evaluateOnDocsBranch(StudentRepository repo) {
         student.getAssignmentStatusList()
             .stream()

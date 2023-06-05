@@ -12,7 +12,7 @@ public class Application {
         var rootCommandProvider = new RootCommandProvider(
             processor,
             System.getProperty("user.name")
-            );
+        );
         processor.getProviderStack().push(rootCommandProvider);
         System.exit(new ConsoleInterpreter(processor).start());
     }

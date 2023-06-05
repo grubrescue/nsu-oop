@@ -17,11 +17,6 @@ public class ConsoleProcessor {
         = new Stack<>();
     // TODO надо бы ограничить доступ к этой штуке
 
-    private record ParseResult(
-        String instruction,
-        List<String> args
-    ) {}
-
     private ParseResult parse(String line) {
         String[] tokens = line.split(" ");
 
@@ -52,11 +47,17 @@ public class ConsoleProcessor {
                 () -> {
                     throw new NoSuchCommandException();
                 }
-        );
+            );
     }
 
     public void execute(@NonNull String line) {
         var parseResult = parse(line); // throws exceptions (дописать в жавадоке)
         executeCommand(parseResult); // throws exceptions
+    }
+
+    private record ParseResult(
+        String instruction,
+        List<String> args
+    ) {
     }
 }

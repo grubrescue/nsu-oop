@@ -14,6 +14,15 @@ public class ForStudentCommandProvider extends AbstractCommandProvider {
     private final Student student;
     private final SubjectData subjectData;
 
+    protected ForStudentCommandProvider(@NonNull ConsoleProcessor consoleProcessor,
+                                        @NonNull String studentName,
+                                        @NonNull Student student,
+                                        @NonNull SubjectData subjectData) {
+        super(consoleProcessor, "student [" + studentName + "]");
+        this.student = student;
+        this.subjectData = subjectData;
+    }
+
     @ConsoleCommand(description = "sets student as been on a lesson")
     private void beenOnLesson(String lessonDate) {
         subjectData.getCourse()
@@ -31,35 +40,26 @@ public class ForStudentCommandProvider extends AbstractCommandProvider {
             .ifPresentOrElse(
                 assignment -> {
                     student.getAssignmentStatusByAssignment(assignment)
-                            .ifPresentOrElse(
-                                assignmentStatus -> {
-                                    getConsoleProcessor().getProviderStack().push(
-                                        new ForTaskCommandProvider(
-                                            getConsoleProcessor(),
-                                            taskName,
-                                            assignmentStatus,
-                                            subjectData
-                                        )
-                                    );
-                                },
-                                () -> {
-                                    throw new InternalCommandException("This student has no specified task (why???)");
-                                }
-                            );
+                        .ifPresentOrElse(
+                            assignmentStatus -> {
+                                getConsoleProcessor().getProviderStack().push(
+                                    new ForTaskCommandProvider(
+                                        getConsoleProcessor(),
+                                        taskName,
+                                        assignmentStatus,
+                                        subjectData
+                                    )
+                                );
+                            },
+                            () -> {
+                                throw new InternalCommandException("This student has no specified task (why???)");
+                            }
+                        );
 
                 },
                 () -> {
                     throw new InternalCommandException("No task with such identifier");
                 }
             );
-    }
-
-    protected ForStudentCommandProvider(@NonNull ConsoleProcessor consoleProcessor,
-                                        @NonNull String studentName,
-                                        @NonNull Student student,
-                                        @NonNull SubjectData subjectData) {
-        super(consoleProcessor, "student [" + studentName + "]");
-        this.student = student;
-        this.subjectData = subjectData;
     }
 }

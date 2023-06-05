@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 public class CommandProviderAnnotationProcessor {
     public static void registerAnnotatedCommands(AbstractCommandProvider commandProvider)
-        throws TypeParametersUnsupportedByAnnotationException{
+        throws TypeParametersUnsupportedByAnnotationException {
         var clazz = commandProvider.getClass();
 
         Method[] methods = clazz.getDeclaredMethods();

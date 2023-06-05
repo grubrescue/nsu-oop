@@ -30,6 +30,26 @@ import static ru.nsu.fit.smolyakov.evaluationsuite.Constants.HTML_EVALUATION;
 public class RootCommandProvider extends AbstractCommandProvider {
     private SubjectData subjectData;
 
+    public RootCommandProvider(@NonNull ConsoleProcessor consoleProcessor,
+                               @NonNull String username) {
+        super(consoleProcessor, "" + username + ":");
+        if (new File(DUMP_FILE_PATH).exists()) {
+            try {
+                this.subjectData = SubjectDataEntitySerializer.deserialize(DUMP_FILE_PATH);
+                return;
+            } catch (IOException ignored) {
+                log.warn("Failed to deserialize dump file, creating new one");
+            }
+        }
+
+        try {
+            this.subjectData = new SubjectDataDtoToEntity(ConfigToDtoDeserializer.deserialize()).convert();
+        } catch (IOException e) {
+            log.fatal("Failed to deserialize config file");
+            throw new RuntimeException(e);
+        }
+    }
+
     @ConsoleCommand(description = "saves current state of the evaluation to dumps/dump")
     private void save() throws IOException {
         SubjectDataEntitySerializer.serialize(this.subjectData, DUMP_FILE_PATH);
@@ -73,12 +93,10 @@ public class RootCommandProvider extends AbstractCommandProvider {
     @ConsoleCommand(description = "prints evaluation or attendance table to console")
     private void print(String what) throws IOException {
         switch (what) {
-            case "attendance" ->
-                    new EvaluationPresenter(subjectData)
-                        .printAttendance(new ConsoleTablePrinter());
-            case "evaluation" ->
-                    new EvaluationPresenter(subjectData)
-                        .printEvaluation(new ConsoleTablePrinter());
+            case "attendance" -> new EvaluationPresenter(subjectData)
+                .printAttendance(new ConsoleTablePrinter());
+            case "evaluation" -> new EvaluationPresenter(subjectData)
+                .printEvaluation(new ConsoleTablePrinter());
             default -> throw new InternalCommandException("only attendance and evaluation are supported");
         }
     }
@@ -86,12 +104,10 @@ public class RootCommandProvider extends AbstractCommandProvider {
     @ConsoleCommand(description = "prints evaluation or attendance table to html file (located at html/)")
     private void html(String what) throws IOException {
         switch (what) {
-            case "attendance" ->
-                    new EvaluationPresenter(subjectData)
-                        .printAttendance(new HtmlTablePrinter(new File(HTML_ATTENDANCE)));
-            case "evaluation" ->
-                    new EvaluationPresenter(subjectData)
-                        .printEvaluation(new HtmlTablePrinter(new File(HTML_EVALUATION)));
+            case "attendance" -> new EvaluationPresenter(subjectData)
+                .printAttendance(new HtmlTablePrinter(new File(HTML_ATTENDANCE)));
+            case "evaluation" -> new EvaluationPresenter(subjectData)
+                .printEvaluation(new HtmlTablePrinter(new File(HTML_EVALUATION)));
             default -> throw new InternalCommandException("only attendance and evaluation are supported");
         }
     }
@@ -115,25 +131,5 @@ public class RootCommandProvider extends AbstractCommandProvider {
                     throw new InternalCommandException("No student with such nickname");
                 }
             );
-    }
-
-    public RootCommandProvider(@NonNull ConsoleProcessor consoleProcessor,
-                               @NonNull String username) {
-        super(consoleProcessor, "" + username + ":");
-        if (new File(DUMP_FILE_PATH).exists()) {
-            try {
-                this.subjectData = SubjectDataEntitySerializer.deserialize(DUMP_FILE_PATH);
-                return;
-            } catch (IOException ignored) {
-                log.warn("Failed to deserialize dump file, creating new one");
-            }
-        }
-
-        try {
-            this.subjectData = new SubjectDataDtoToEntity(ConfigToDtoDeserializer.deserialize()).convert();
-        } catch (IOException e) {
-            log.fatal("Failed to deserialize config file");
-            throw new RuntimeException(e);
-        }
     }
 }

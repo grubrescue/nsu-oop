@@ -132,10 +132,11 @@ public class StudentRepository implements AutoCloseable {
         );
     }
 
-    public record Commit(String shortMessage, LocalDate date) {}
-
     @Override
     public void close() throws Exception {
         git.close();
+    }
+
+    public record Commit(String shortMessage, LocalDate date) {
     }
 }
