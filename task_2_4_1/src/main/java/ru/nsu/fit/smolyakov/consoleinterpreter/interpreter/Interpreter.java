@@ -1,8 +1,11 @@
 package ru.nsu.fit.smolyakov.consoleinterpreter.interpreter;
 
 import lombok.NonNull;
-import ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.CommandProvider;
+import ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.AbstractCommandProvider;
+import ru.nsu.fit.smolyakov.consoleinterpreter.exception.ConsoleInterpreterException;
 import ru.nsu.fit.smolyakov.consoleinterpreter.exception.EmptyInputException;
+import ru.nsu.fit.smolyakov.consoleinterpreter.exception.FatalInternalCommandException;
+import ru.nsu.fit.smolyakov.consoleinterpreter.exception.InternalCommandException;
 import ru.nsu.fit.smolyakov.consoleinterpreter.exception.MismatchedAmountOfCommandArgumentsException;
 import ru.nsu.fit.smolyakov.consoleinterpreter.exception.NoSuchCommandException;
 import ru.nsu.fit.smolyakov.consoleinterpreter.presenter.Presenter;
@@ -16,7 +19,10 @@ public class Interpreter {
     private final Processor processor;
     private final Presenter presenter;
 
-    public Interpreter(@NonNull CommandProvider rootProvider) {
+    public final int EXIT_SUCCESS = 0;
+    public final int EXIT_FAILURE = 1;
+
+    public Interpreter(@NonNull AbstractCommandProvider rootProvider) {
         this.processor = new Processor(rootProvider);
         this.presenter = new Presenter(processor);
     }
@@ -41,14 +47,20 @@ public class Interpreter {
             var line = reader.readLine();
             try {
                 processor.execute(line);
-            } catch (NoSuchCommandException e) {
-                showError("No such command");
             } catch (EmptyInputException ignored) {
-            } catch (MismatchedAmountOfCommandArgumentsException e) {
-                showError("Mismatched amount of command arguments");
+            } catch (FatalInternalCommandException e) {
+                showError("FATAL: " + e.getMessage());
+                return EXIT_FAILURE;
+            } catch (NoSuchCommandException
+                     | MismatchedAmountOfCommandArgumentsException
+                     | InternalCommandException e) {
+                showError(e.getMessage());
+            } catch (ConsoleInterpreterException e) {
+                showError("UNKNOWN ERROR, EXITING: "+ e.getMessage());
+                return EXIT_FAILURE;
             }
         }
 
-        return 0; // TODO
+        return EXIT_SUCCESS;
     }
 }

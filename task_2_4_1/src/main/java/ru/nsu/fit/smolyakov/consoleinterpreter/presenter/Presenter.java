@@ -16,13 +16,10 @@ public class Presenter {
             provider -> {
                 stringBuilder.append(" > ");
                 stringBuilder.append(provider.getRepresentation());
-                if (!provider.getArgsContext().isEmpty()) {
-                    stringBuilder.append(provider.getArgsContext());
-                }
             }
         );
 
-        stringBuilder.append("  $ ");
+        stringBuilder.append(" $ ");
         return stringBuilder.toString();
     }
 

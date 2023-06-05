@@ -5,7 +5,7 @@ import groovy.lang.GroovyShell;
 import groovy.util.DelegatingScript;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import ru.nsu.fit.smolyakov.consoleinterpreter.command.SingleArgCommand;
-import ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.CommandProvider;
+import ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.AbstractCommandProvider;
 import ru.nsu.fit.smolyakov.consoleinterpreter.interpreter.Interpreter;
 import ru.nsu.fit.smolyakov.evaluationsuite.dto.SubjectDataDto;
 import ru.nsu.fit.smolyakov.evaluationsuite.evaluator.Evaluator;
@@ -62,12 +62,12 @@ public class Application {
 //        presenter.printEvaluation(new HtmlTablePrinter("examples/evaluation.html"));
 //        presenter.printAttendance(new HtmlTablePrinter("examples/attendance.html"));
 
-        var rootProvider = new CommandProvider("[user123]");
+        var rootProvider = new AbstractCommandProvider("[user123]");
 
         var interpreter = new Interpreter(rootProvider);
 
-        var forTaskProvider = new CommandProvider("forTask");
-        var forStudentProvider = new CommandProvider("forStudent");
+        var forTaskProvider = new AbstractCommandProvider("forTask");
+        var forStudentProvider = new AbstractCommandProvider("forStudent");
 
         rootProvider.registerCommand(
             "print",
@@ -82,9 +82,6 @@ public class Application {
                     }
                 })
         );
-
-        rootProvider.registerSubprocessor("forStudent", forStudentProvider);
-        forStudentProvider.registerSubprocessor("forTask", forTaskProvider);
 
         interpreter.start();
     }

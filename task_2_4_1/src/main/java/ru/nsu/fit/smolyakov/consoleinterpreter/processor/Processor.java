@@ -3,7 +3,7 @@ package ru.nsu.fit.smolyakov.consoleinterpreter.processor;
 import lombok.Getter;
 import lombok.NonNull;
 import ru.nsu.fit.smolyakov.consoleinterpreter.command.NoArgsCommand;
-import ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.CommandProvider;
+import ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.AbstractCommandProvider;
 import ru.nsu.fit.smolyakov.consoleinterpreter.exception.EmptyInputException;
 import ru.nsu.fit.smolyakov.consoleinterpreter.exception.MismatchedAmountOfCommandArgumentsException;
 import ru.nsu.fit.smolyakov.consoleinterpreter.exception.NoSuchCommandException;
@@ -14,10 +14,11 @@ import java.util.Stack;
 
 public class Processor {
     @Getter
-    private final Stack<CommandProvider> providerStack
+    private final Stack<AbstractCommandProvider> providerStack
         = new Stack<>();
+    // TODO надо бы ограничить доступ к этой штуке
 
-    public Processor(@NonNull CommandProvider rootProvider) {
+    public Processor(@NonNull AbstractCommandProvider rootProvider) {
         rootProvider.registerCommand("done", new NoArgsCommand<>(providerStack::pop));
         this.providerStack.push(rootProvider);
     }
@@ -42,41 +43,26 @@ public class Processor {
         return new ParseResult(commandName, args);
     }
 
-    private boolean executeCommand(ParseResult parseResult) {
+    private void executeCommand(ParseResult parseResult) {
         var currentProvider = providerStack.peek();
 
-        var maybeCommand = currentProvider.getCommand(parseResult.instruction());
-        maybeCommand.ifPresent(command -> {
-            if (parseResult.args().size() != command.getArity()) {
-                throw new MismatchedAmountOfCommandArgumentsException();
-            } else {
-                command.execute(parseResult.args());
-            }
-        });
-        return maybeCommand.isPresent();
-    }
-
-    private boolean tryPushSubCommandProvider(ParseResult parseResult) {
-        var currentProvider = providerStack.peek();
-
-        var maybeSubCommandProvider = currentProvider.getSubCommandProvider(parseResult.instruction());
-        maybeSubCommandProvider.ifPresent(provider -> {
-            providerStack.push(provider);
-            provider.setArgsContext(parseResult.args());
-            provider.registerCommand("done", new NoArgsCommand<>(providerStack::pop));
-            // TODO ее могут перезаписать, надо придумать, как запретить :>
-        });
-        return maybeSubCommandProvider.isPresent();
+        currentProvider.getCommand(parseResult.instruction())
+            .ifPresentOrElse(
+                command -> {
+                    if (parseResult.args().size() != command.getArity()) {
+                        throw new MismatchedAmountOfCommandArgumentsException();
+                    } else {
+                        command.execute(parseResult.args());
+                    }
+                },
+                () -> {
+                    throw new NoSuchCommandException();
+                }
+        );
     }
 
     public void execute(@NonNull String line) {
-        var parseResult = parse(line);
-        if (tryPushSubCommandProvider(parseResult)) {
-            //
-        } else if (executeCommand(parseResult)) {
-            //
-        } else {
-            throw new NoSuchCommandException();
-        }
+        var parseResult = parse(line); // throws exceptions (дописать в жавадоке)
+        executeCommand(parseResult); // throws exceptions
     }
 }
