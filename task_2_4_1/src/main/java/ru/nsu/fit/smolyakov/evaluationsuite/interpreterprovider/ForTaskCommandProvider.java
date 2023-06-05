@@ -41,12 +41,12 @@ public class ForTaskCommandProvider extends AbstractCommandProvider {
     }
 
     @ConsoleCommand(description = "sets task started date to today")
-    private void started() {
+    private void startedNow() {
         assignmentStatus.getPass().setStarted(LocalDate.now());
     }
 
     @ConsoleCommand(description = "sets task finished date to today")
-    private void finished() {
+    private void finishedNow() {
         assignmentStatus.getPass().setFinished(LocalDate.now());
     }
 
