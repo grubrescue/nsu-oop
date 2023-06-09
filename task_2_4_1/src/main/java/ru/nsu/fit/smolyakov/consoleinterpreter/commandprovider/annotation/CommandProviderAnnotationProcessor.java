@@ -50,7 +50,7 @@ public class CommandProviderAnnotationProcessor {
             ConsoleCommand annotation = method.getAnnotation(ConsoleCommand.class);
 
             if (annotation == null) {
-                return;
+                continue;
             }
 
             Class<?>[] parameterTypes = method.getParameterTypes();
@@ -91,24 +91,23 @@ public class CommandProviderAnnotationProcessor {
         StringBuilder helpMessage
             = new StringBuilder();
 
-        var nameFieldLength = methodAnnotationPairList.stream()
+        int nameFieldLength = methodAnnotationPairList.stream()
             .map(MethodAnnotationPair::method)
             .map(Method::getName)
             .map(String::length)
             .max(Integer::compare)
             .orElse(0);
 
+        var formatString = "%-" + nameFieldLength + "." + nameFieldLength + "s [ %d ] :: %s\n";
+
         methodAnnotationPairList
             .forEach(methodAnnotationPair ->
                 helpMessage.append(
-                    "%%%d.%d%s[%d] :: %s\n"
-                        .formatted(
-                            nameFieldLength,
-                            nameFieldLength,
-                            methodAnnotationPair.method.getName(),
-                            methodAnnotationPair.method.getParameterTypes().length,
-                            methodAnnotationPair.annotation.description()
-                        )
+                    formatString.formatted(
+                        methodAnnotationPair.method.getName(),
+                        methodAnnotationPair.method.getParameterTypes().length,
+                        methodAnnotationPair.annotation.description()
+                    )
                 )
             );
 
@@ -126,6 +125,8 @@ public class CommandProviderAnnotationProcessor {
         methodAnnotationPairList.stream()
             .map(MethodAnnotationPair::method)
             .forEach(method -> {
+                method.setAccessible(true);
+
                 Command<String> command
                     = new Command<>(
                         method.getParameterTypes().length,
@@ -136,7 +137,10 @@ public class CommandProviderAnnotationProcessor {
                                     (Object[]) args.toArray(new String[method.getParameterTypes().length])
                                 );
                             } catch (IllegalAccessException | InvocationTargetException e) {
-                                throw new InternalCommandException(e.getCause().getMessage());
+                                var msg = e.getCause() == null
+                                    ? e.getMessage()
+                                    : e.getCause().getMessage();
+                                throw new InternalCommandException(msg);
                             }
                         }
                     );
