@@ -6,7 +6,6 @@ import lombok.NonNull;
 import ru.nsu.fit.smolyakov.consoleinterpreter.command.Command;
 import ru.nsu.fit.smolyakov.consoleinterpreter.command.NoArgsCommand;
 import ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.annotation.CommandProviderAnnotationProcessor;
-import ru.nsu.fit.smolyakov.consoleinterpreter.commandprovider.annotation.TypeParametersUnsupportedByAnnotationException;
 import ru.nsu.fit.smolyakov.consoleinterpreter.processor.ConsoleProcessor;
 
 import java.util.HashMap;
@@ -56,14 +55,19 @@ public abstract class AbstractCommandProvider {
         this.representation = representation;
         this.commandMap.putAll(commandMap);
 
+        var annotationProcessor = new CommandProviderAnnotationProcessor(this);
+        this.commandMap.putAll(annotationProcessor.generateCommandsMap());
+
+        var helpMsg = "Help message for " + representation + "\n"
+            + annotationProcessor.generateHelpMessage()
+            + "~~~~~~~~~~"
+            + "SYSTEM | help[0] :: show this message\n"
+            + "SYSTEM | done[0] :: go block down\n"
+            + "SYSTEM | exit[0] :: exit the application\n\n";
+
         this.commandMap.put("exit", new NoArgsCommand<>(() -> consoleProcessor.getProviderStack().clear()));
         this.commandMap.put("done", new NoArgsCommand<>(() -> consoleProcessor.getProviderStack().pop()));
-
-        try {
-            CommandProviderAnnotationProcessor.registerAnnotatedCommands(this);
-        } catch (TypeParametersUnsupportedByAnnotationException e) {
-            throw new RuntimeException(e);
-        }
+        this.commandMap.put("help", new NoArgsCommand<>(() -> System.out.println(helpMsg)));
     }
 
     /**
