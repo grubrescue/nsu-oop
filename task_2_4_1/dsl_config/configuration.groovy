@@ -4,6 +4,7 @@ evaluation {
     softDeadlineSkipFine = -0.5
     hardDeadlineSkipFine = -0.5
     jacocoPassPercentage = 80
+    checkstyleErrorsLimit = 100
 }
 
 git {

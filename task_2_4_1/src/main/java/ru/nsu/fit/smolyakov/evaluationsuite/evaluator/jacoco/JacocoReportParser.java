@@ -1,4 +1,4 @@
-package ru.nsu.fit.smolyakov.evaluationsuite.evaluator;
+package ru.nsu.fit.smolyakov.evaluationsuite.evaluator.jacoco;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,6 +8,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.ToString;
 
 import java.io.File;
@@ -36,7 +37,7 @@ public class JacocoReportParser {
      * Parses .xml Jacoco report and creates
      * a new instance of {@link JacocoReportParser}.
      */
-    public static JacocoReportParser parse(File reportXml) throws IOException {
+    public static JacocoReportParser parse(@NonNull File reportXml) throws IOException {
         return xmlMapper.readValue(
             reportXml,
             JacocoReportParser.class);

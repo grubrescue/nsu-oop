@@ -4,6 +4,8 @@ import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.course.assignment.AssignmentStatus;
 import ru.nsu.fit.smolyakov.evaluationsuite.entity.group.Student;
+import ru.nsu.fit.smolyakov.evaluationsuite.evaluator.checkstyle.CheckstyleRunner;
+import ru.nsu.fit.smolyakov.evaluationsuite.evaluator.jacoco.JacocoReportParser;
 
 import java.io.File;
 import java.io.IOException;
@@ -106,8 +108,20 @@ public class Evaluator {
                 );
         }
         gradleRunnerBuilder.build().run();
+
+        runCheckstyle(assignmentStatus, repo);
     }
 
+    private void runCheckstyle(AssignmentStatus assignmentStatus, StudentRepository repo) {
+        var pathToTask = getPathToTask(assignmentStatus, repo);
+        var checkstyleRunner = new CheckstyleRunner(pathToTask);
+        var result = checkstyleRunner.runCheckstyle();
+
+        log.info("Checkstyle problems: {}", result.getErrorsAmount() + result.getWarningsAmount());
+        assignmentStatus.getGrade().setCheckstyleWarnings(
+            result.getErrorsAmount() + result.getWarningsAmount()
+        );
+    }
 
     private void evaluateAssignmentFinishedDate(AssignmentStatus assignmentStatus, StudentRepository repo) {
         repo.getLastCommit(assignmentStatus.getIdentifierAlias())

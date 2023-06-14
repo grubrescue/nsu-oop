@@ -1,5 +1,6 @@
 package ru.nsu.fit.smolyakov.evaluationsuite.evaluator;
 
+import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
 import org.eclipse.jgit.api.CreateBranchCommand;
 import org.eclipse.jgit.api.Git;
@@ -36,7 +37,7 @@ public class StudentRepository implements AutoCloseable {
      * @param directory directory to clone repository to
      * @throws GitAPIException if an error occurs during cloning
      */
-    public StudentRepository(String uri, File directory) throws GitAPIException {
+    public StudentRepository(@NonNull String uri, @NonNull File directory) throws GitAPIException {
         git = Git.cloneRepository()
             .setURI(uri)
             .setDirectory(directory)

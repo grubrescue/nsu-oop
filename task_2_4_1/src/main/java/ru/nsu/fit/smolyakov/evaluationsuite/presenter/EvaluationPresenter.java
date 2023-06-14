@@ -113,6 +113,8 @@ public class EvaluationPresenter {
             testsOkCh = assignmentStatus.getGrade().isTestsPassed() ? 't' : '-';
         }
 
+        char checkCh = assignmentStatus.getGrade().isPassedCheckstyle() ? 'c' : ' ';
+
         char statusCh;
         if (!assignmentStatus.getPass().isFinished()) {
             statusCh = '?';
@@ -122,13 +124,15 @@ public class EvaluationPresenter {
             statusCh = ' ';
         }
 
+
         return String.format(
-            "%c%c %c%c%c %1.1f%c",
+            "%c%c %c%c%c%c%1.1f%c",
             softCh,
             hardCh,
             javadocOkCh,
             buildOkCh,
             testsOkCh,
+            checkCh,
             assignmentStatus.getGrade().getResultingPoints(),
             statusCh
         );

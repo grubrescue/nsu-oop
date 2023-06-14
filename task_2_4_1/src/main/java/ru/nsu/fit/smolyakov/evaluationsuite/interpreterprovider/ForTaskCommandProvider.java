@@ -79,4 +79,9 @@ public class ForTaskCommandProvider extends AbstractCommandProvider {
     private void notOverrideTaskPoints() {
         assignmentStatus.getGrade().notOverrideTaskPoints();
     }
+
+    @ConsoleCommand(description = "sets the task as checkstyle passed")
+    private void checkstylePassed() {
+        assignmentStatus.getGrade().setCheckstylePassed();
+    }
 }

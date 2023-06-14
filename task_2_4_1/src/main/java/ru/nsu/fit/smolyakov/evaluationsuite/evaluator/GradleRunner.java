@@ -2,6 +2,7 @@ package ru.nsu.fit.smolyakov.evaluationsuite.evaluator;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Singular;
 import lombok.extern.log4j.Log4j2;
 import org.gradle.tooling.GradleConnector;
@@ -16,6 +17,7 @@ import java.util.List;
 @Getter
 @Builder
 @Log4j2
+@NonNull
 public class GradleRunner { // TODO rename
     private final String projectPath;
 

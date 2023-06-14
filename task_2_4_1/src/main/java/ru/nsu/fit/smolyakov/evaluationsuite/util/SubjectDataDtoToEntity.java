@@ -64,6 +64,11 @@ public class SubjectDataDtoToEntity {
                 ).orElse(100)
                     / 100.0
             )
+            .checkstyleWarningsLimit(
+                Optional.ofNullable(
+                    configurationDto.getEvaluationDto().getCheckstyleErrorsLimit()
+                ).orElse(Integer.MAX_VALUE)
+            )
             .solvedPoints(Optional.ofNullable(taskDto.getPoints())
                 .orElse(configurationDto.getEvaluationDto().getTaskSolvedPoints()))
             .runTests(taskDto.isRunTests())

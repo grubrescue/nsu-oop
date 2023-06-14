@@ -10,4 +10,5 @@ public class EvaluationDto {
     private Double softDeadlineSkipFine;
     private Double hardDeadlineSkipFine;
     private Integer jacocoPassPercentage;
+    private Integer checkstyleErrorsLimit;
 }

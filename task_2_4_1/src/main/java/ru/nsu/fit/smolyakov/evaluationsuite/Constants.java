@@ -58,4 +58,9 @@ public class Constants {
      * Path to the HTML table with attendance information.
      */
     public static final String HTML_ATTENDANCE = HTML_TABLES_PATH + "attendance.html";
+
+    /**
+     * Path to the checkstyle configuration file.
+     */
+    public static final String CHECKSTYLE_CONFIGURATION = "checkstyle/google_checks.xml";
 }

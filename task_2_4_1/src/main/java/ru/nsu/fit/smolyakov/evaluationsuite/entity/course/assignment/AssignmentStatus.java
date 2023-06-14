@@ -124,6 +124,10 @@ public class AssignmentStatus implements Serializable {
         private Double jacocoCoverage = null;
         private Double overriddenTaskPoints = null;
 
+        @Getter
+        @Setter
+        private int checkstyleWarnings = Integer.MAX_VALUE;
+
         /**
          * Returns if a student has tests that compile and have at least the required coverage.
          *
@@ -298,6 +302,14 @@ public class AssignmentStatus implements Serializable {
             } else {
                 return getEarnedPoints() + getFine();
             }
+        }
+
+        public boolean isPassedCheckstyle() {
+            return checkstyleWarnings <= AssignmentStatus.this.assignment.getCheckstyleWarningsLimit();
+        }
+
+        public void setCheckstylePassed() {
+            this.checkstyleWarnings = 0;
         }
     }
 }
