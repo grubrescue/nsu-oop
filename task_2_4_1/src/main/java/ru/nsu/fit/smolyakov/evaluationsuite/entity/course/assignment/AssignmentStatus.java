@@ -304,10 +304,17 @@ public class AssignmentStatus implements Serializable {
             }
         }
 
+        /**
+         * Returns if this task passed checkstyle.
+         * @return true if this task passed checkstyle
+         */
         public boolean isPassedCheckstyle() {
             return checkstyleWarnings <= AssignmentStatus.this.assignment.getCheckstyleWarningsLimit();
         }
 
+        /**
+         * Sets checkstyle warnings to zero.
+         */
         public void setCheckstylePassed() {
             this.checkstyleWarnings = 0;
         }
