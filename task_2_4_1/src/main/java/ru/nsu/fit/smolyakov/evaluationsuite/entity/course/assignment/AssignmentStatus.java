@@ -187,7 +187,7 @@ public class AssignmentStatus implements Serializable {
          * If task points are overridden, the student's grade is equal to {@code points}
          * and not being calculated automatically.
          *
-         * @param points a student's overriden task points
+         * @param points a student's overridden task points
          */
         public void overrideTaskPoints(double points) {
             this.overriddenTaskPoints = points;
